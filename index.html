@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InSports 分享資料</title>
+<style>
+  :root { --bg: #fafafa; --ink: #1f2328; --soft: #59636e; --line: #d1d9e0; --card: #fff; --link: #0969da; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0d1117; --ink: #e6edf3; --soft: #9198a1; --line: #3d444d; --card: #151b23; --link: #4493f8; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.7 system-ui, -apple-system, "Noto Sans TC", "Microsoft JhengHei", sans-serif; }
+  .doc { max-width: 760px; margin: 0 auto; padding: 40px 16px 80px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  .sub { color: var(--soft); margin: 0 0 28px; }
+  a { color: var(--link); }
+  .card { display: block; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; margin: 0 0 12px; text-decoration: none; color: inherit; }
+  .card:hover { border-color: var(--link); }
+  .card b { color: var(--link); font-size: 17px; }
+  .card p { margin: 4px 0 0; color: var(--soft); }
+  .note { color: var(--soft); font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>InSports 分享資料</h1>
+<p class="sub">InSports 運動投注引擎的設計資料，供閱讀與討論。內容都是草稿與示意，以 PRD 為準。</p>
+
+<a class="card" href="wireframes/index.html">
+  <b>後台畫面示意（wireframe）</b>
+  <p>各 PRD 的後台畫面示意：運動與玩法目錄、資料來源與連接器、賽事資料與對應</p>
+</a>
+
+<a class="card" href="diagrams/index.html">
+  <b>PRD 概念圖</b>
+  <p>PRD 01 至 04 主要規則的概念圖，每張圖有固定編號「圖 NN-MM」</p>
+</a>
+
+<p class="note">頁面中連到 PRD 與 README 的連結指向私有 repo，需要存取權限才能開啟。</p>
+
+</div>
+</body>
+</html>
