@@ -1,5 +1,6 @@
 /* 概念圖共用樣式：工程藍圖（墨黑高對比：近黑底、亮青線、橘色警示）
    顏色、線寬、字級與間距都用變數，方便日後微調 */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap");
 :root {
   --bg: #070b14; --panel: #0f1626; --ink: #f4f8ff; --soft: #b9c7dc; --line: #4fd1ff; --warn: #ff9f43;
   --grid: rgba(79, 209, 255, .07); --grid-size: 32px;
@@ -9,12 +10,12 @@
   --node-w: 1.2; --line-w: 1.4;
 }
 
-/* 字體與間距（標準，2026-10-22 挑定） */
+/* 字體與間距（2026-10-22 挑定；2026-10-26 改為載入 Noto Sans TC，標題英數字用 Barlow Condensed） */
 :root {
-  --page-w: 1040px; --fs: 14px; --lh: 1.6; --h1: 24px; --h2: 18px; --cap-fs: 14px;
+  --page-w: 1040px; --fs: 14px; --lh: 1.5; --h1: 22px; --h2: 18px; --cap-fs: 14px;
   --fig-pad: 18px 20px 14px; --fig-gap: 36px; --cap-gap: 10px; --toc-gap: 2px; --h-track: .02em; --h2-weight: 700;
   --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
-  --font-head: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-head: "Barlow Condensed", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --font-cap: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
   --svg-fs: 14px; --svg-ts: 12px;
 }

@@ -1,4 +1,6 @@
 /* wireframe 共用樣式：灰階、低擬真度 */
+/* 字體：內文 Noto Sans TC；標題的英數字用 Barlow Condensed，中文落到 Noto Sans TC */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap");
 :root {
   --ink: #222; --muted: #777; --line: #bbb; --line-soft: #ddd;
   --fill: #f2f2f2; --fill-2: #e6e6e6; --paper: #fff; --bg: #fafafa;
@@ -8,6 +10,7 @@
 body { margin: 0; background: var(--bg); color: var(--ink);
        font: 14px/1.5 "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; }
 .doc { max-width: 1280px; margin: 0 auto; padding: 24px 16px 64px; }
+h1, h2 { font-family: "Barlow Condensed", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif; font-weight: 700; }
 h1 { font-size: 22px; margin: 0 0 4px; }
 h2 { font-size: 17px; margin: 40px 0 8px; padding-top: 16px; border-top: 1px solid var(--line-soft); }
 .meta { color: var(--muted); margin: 0 0 16px; }
