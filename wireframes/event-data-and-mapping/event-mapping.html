@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>賽事對應 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  .doc { max-width: 1480px; }
+  .shell { min-width: 1300px; }
+  .board { display: grid; grid-template-columns: minmax(0,1fr) 380px; gap: 12px; align-items: start; }
+  .board > div:first-child { min-width: 0; overflow-x: auto; }
+  .board table.grid td, .board table.grid th { white-space: nowrap; }
+  .board table.grid td:last-child { white-space: normal; min-width: 150px; }
+  .board .chip { white-space: nowrap; }
+  table.mm td { vertical-align: top; }
+  table.mm td:nth-child(5) { position: relative; padding-right: 70px; }
+  .grp { position: absolute; right: 8px; top: 6px; border: 1px solid var(--mark); border-radius: 10px; padding: 0 7px; font-size: 11px; font-weight: 700; }
+  .grp.since { border-style: dashed; font-weight: 400; color: var(--muted); }
+  .panel-r { border: 1px solid var(--line); background: var(--paper); padding: 10px 12px; font-size: 13px; }
+  .panel-r h4 { margin: 0 0 6px; font-size: 14px; }
+  .panel-r .kv { display: grid; grid-template-columns: 70px 1fr; gap: 2px 8px; margin: 6px 0 10px; }
+  .panel-r .kv span:nth-child(odd) { color: var(--muted); }
+  .band { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; font-size: 12px; }
+  .band .d { color: var(--muted); padding: 2px 4px; }
+  .band span.p { border: 1px solid var(--line); padding: 1px 8px; background: var(--paper); }
+  .band span.p b { margin-left: 4px; }
+  tr.sel td { background: var(--fill); outline: 2px solid var(--mark); outline-offset: -2px; }
+  td.nw { white-space: nowrap; }
+  .side-by { display: grid; grid-template-columns: 110px 1fr 1fr; gap: 4px 10px; font-size: 13px; }
+  .side-by .h { font-weight: 600; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .side-by .k { color: var(--muted); }
+  tr.mate td:first-child { border-left: 4px solid #ccc; }
+  tr.cand td:first-child { border-left: 4px dashed #bbb; }
+  .tag { display: inline-block; border: 1px solid var(--line); padding: 0 5px; font-size: 11px; white-space: nowrap; }
+  .tag.rev { border-color: var(--mark); font-weight: 700; }
+  .tag.dash { border-style: dashed; }
+  .ev-head { border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 4px; }
+  .ev-head .t { font-weight: 700; font-size: 14px; }
+  .ev-head .s { color: var(--muted); font-size: 12px; }
+  .gh { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); background: var(--fill); padding: 2px 6px; margin-top: 8px; }
+  .mem { display: grid; grid-template-columns: 1fr auto; gap: 0 8px; padding: 5px 6px; border-bottom: 1px solid var(--line-soft); }
+  .mem .a { display: flex; gap: 4px; align-items: flex-start; }
+  .mem.cur { outline: 2px solid var(--mark); outline-offset: -2px; background: var(--fill); }
+  .curmark { font-size: 11px; font-weight: 700; white-space: nowrap; }
+  .switch { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; border: 1px dashed var(--mark); padding: 4px 6px; margin-bottom: 6px; }
+  .switch .strip span { padding: 1px 8px; font-size: 12px; white-space: nowrap; }
+  .minis { display: grid; grid-template-columns: repeat(2, 380px); gap: 12px; margin-top: 14px; }
+  .mini-cap { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>賽事對應（Event Mapping）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">賽事資料與對應後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看各來源列出的賽事各自對應到哪一筆統一賽事、依據什麼、方向為何；處理有多個候選或等待證據的對應（人工確認）；更正錯誤的對應；合併疑似重複的統一紀錄；對運動的賽程來源沒列出的個別比賽，人工指定建立者</td></tr>
+  <tr><th>對應規則</th><td>R04-04 至 R04-07（統一紀錄只由建立者建立、人工指定建立者、系統不合併）、R04-08（確認依據與確立的累積）、R04-09（多個候選不猜）、R04-10（更正只能人工）、R04-19（覆核）、R04-20（虛擬不與真實對應）</td></tr>
+  <tr><th>不在本畫面</th><td>運動的賽程來源與新競賽（見 <a href="source-roles.html">來源角色</a>）；待取消與候選（見 <a href="pending-cancellation.html">待取消與待腰斬</a>）；玩法對應（R04-11，下一批）；顯示名稱與多語系（見 10）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、賽事與數字都是範例；各來源對同一支隊伍的寫法刻意不同。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：對應看板</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#" class="on">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 賽事對應</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>賽事對應</h3><div class="sub">各來源列出的賽事，各自對應到哪一筆統一賽事；一列一個來源的賽事</div></div>
+      </div>
+
+      <div class="band"><span class="d">未對應 <span class="n">1</span></span>
+        <span class="d">10-23</span><span class="p">足球<b>7</b></span><span class="p">籃球<b>2</b></span>
+        <span class="d">10-24</span><span class="p">足球<b>12</b></span><span class="p">網球<b>5</b></span><span class="p">棒球<b>1</b></span>
+        <span class="d">10-25</span><span class="p">足球<b>9</b></span>
+      </div>
+
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>日期範圍</label><span class="box wide">10-23 ～ 10-25</span></div>
+        <div class="f"><label>狀態 <span class="n">2</span></label><span class="strip"><span class="on">全部</span><span>未對應</span><span>等待證據</span><span>已對應</span></span></div>
+        <div class="f"><label>來源 <span class="n">3</span></label><span class="strip"><span class="on">A</span><span class="on">C</span><span class="on">D</span><span class="on">F</span><span class="on">G</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">隊伍、競賽或來源識別</span></div>
+      </div>
+
+      <div class="board">
+      <div>
+      <table class="grid mm">
+        <thead><tr>
+          <th>開賽</th><th>來源 <span class="n">4</span></th><th></th><th>⇄</th><th>主隊<br>客隊 <span class="n">5</span></th><th>競賽<br>來源識別</th><th><span class="n">6</span></th>
+        </tr></thead>
+        <tbody>
+          <tr class="sel"><td>10-24<div class="l2">22:00</div></td><td>來源 A<div class="l2">足球</div></td><td>○</td><td></td><td>Manchester City<br>Arsenal<span class="grp">3</span></td><td>Premier League<div class="l2">A-88213</div></td><td class="l2">✓ 2</td></tr>
+          <tr class="mate"><td>10-24<div class="l2">22:00</div></td><td>來源 C<div class="l2">足球</div></td><td>○</td><td></td><td>Man City<br>Arsenal<span class="grp">3</span></td><td>England Premier League<div class="l2">C-5520031</div></td><td class="l2">✓ 1</td></tr>
+          <tr class="mate"><td>10-24<div class="l2">22:00</div></td><td>來源 D<div class="l2">足球</div></td><td>○</td><td><b>⇄</b></td><td>Arsenal<br>Manchester City<span class="grp">3</span></td><td>EPL<div class="l2">D-77120</div></td><td class="l2">✓ 1</td></tr>
+          <tr><td>10-24<div class="l2">22:00</div></td><td>來源 G<div class="l2">足球</div></td><td>○</td><td></td><td>Man. City<br>Arsenal<span class="grp since">1 天 11 時</span></td><td>Premier League<div class="l2">G-ab12</div></td><td></td></tr>
+          <tr class="cand"><td>10-24<div class="l2">22:00</div></td><td>來源 F<div class="l2">足球</div></td><td>○</td><td></td><td>Manchester C.<br>Arsenal FC<span class="grp since">1 天 20 時</span></td><td>Premier League<div class="l2">F-9931</div></td><td class="l2">候選 2</td></tr>
+          <tr><td>10-24<div class="l2">20:00</div></td><td>來源 A<div class="l2">足球</div></td><td>○</td><td></td><td>Manchester City W<br>Arsenal W<span class="grp">2</span></td><td>Women's Super League<div class="l2">A-88301</div></td><td class="l2">✓ 1</td></tr>
+          <tr><td>10-24<div class="l2">20:00</div></td><td>來源 C<div class="l2">足球</div></td><td>○</td><td></td><td>Man City (W)<br>Arsenal (W)<span class="grp">2</span></td><td>England WSL<div class="l2">C-5520188</div></td><td class="l2">✓ 1</td></tr>
+          <tr><td>10-23<div class="l2">13:00</div></td><td>來源 A<div class="l2">足球</div></td><td>●</td><td></td><td>Suwon FC<br>Ulsan HD<span class="grp">3</span></td><td>K League 1<div class="l2">A-87001</div></td><td class="l2">✓ 2</td></tr>
+          <tr><td>10-25<div class="l2">02:30</div></td><td>來源 A<div class="l2">足球</div></td><td>○</td><td></td><td>Becamex<br>Hanoi FC<span class="grp">1</span></td><td>Vietnam V.League 1<div class="l2">A-89120</div></td><td></td></tr>
+          <tr><td>10-25<div class="l2">02:30</div></td><td>來源 D<div class="l2">足球</div></td><td>○</td><td></td><td>Binh Duong<br>Ha Noi<span class="grp since">35 分</span></td><td>V-League<div class="l2">D-77455</div></td><td class="l2">候選 1</td></tr>
+          <tr><td colspan="7" class="l2">…（其他賽事）</td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span>第 1 頁，共 6 頁</span><span>共 118 列</span></div>
+      </div>
+
+      <div class="panel-r">
+        <div class="ev-head">
+          <div class="t">EV-10234　曼城 vs 兵工廠 <span class="n">7</span></div>
+          <div class="s">英超 · 10-24 22:00 · 未開始 · 來源 3（含建立者）</div>
+          <div class="s">已對應的賠率來源 2：新出現的賠率來源可依賠率一致比對 <span class="n">8</span></div>
+        </div>
+        <div class="gh"><span>建立者 <span class="n">9</span></span></div>
+        <div class="mem cur">
+          <div><b>來源 A</b> <span class="l2">A-88213</span> <span class="tag">建立者</span><div class="l2">足球的賽程來源 · 主客與參考名稱以此為準 · 不能解除</div></div>
+          <div class="a"><span class="curmark">◀ 目前選取</span></div>
+        </div>
+        <div class="gh"><span>已對應 2</span><span>資料使用中</span></div>
+        <div class="mem">
+          <div><b>來源 C</b> <span class="l2">C-5520031</span> <span class="tag">同向</span><div class="l2">參賽方已確立（b）· 10-20 09:02 · 系統</div></div>
+          <div class="a"><span class="btn">明細</span><span class="btn danger">解除…</span></div>
+        </div>
+        <div class="mem">
+          <div><b>來源 D</b> <span class="l2">D-77120</span> <span class="tag rev">反向 ⇄</span><div class="l2">賠率一致（a）· 10-20 09:05 · 系統</div></div>
+          <div class="a"><span class="btn">明細</span><span class="btn danger">解除…</span></div>
+        </div>
+        <div class="gh"><span>候選中 1 <span class="n">10</span></span><span>資料暫不使用</span></div>
+        <div class="mem">
+          <div><b>來源 F</b> <span class="l2">F-9931</span> <span class="tag dash">方向未定</span><div class="l2">大小一致；讓分與獨贏未開出 · 另有 1 個候選 EV-10240</div></div>
+          <div class="a"><span class="btn">人工對應…</span></div>
+        </div>
+        <div class="gh"><span>可能相關，尚未對應（只供參考） <span class="n">11</span></span></div>
+        <div class="mem">
+          <div><b>來源 G</b> <span class="l2">G-ab12</span><div class="l2">只提供比分；賽後依各時段比分比對，或人工對應</div></div>
+          <div class="a"><span class="btn">人工對應…</span></div>
+        </div>
+        <p class="hint">解除對應須填原因，由另一人覆核後才生效 <span class="n">12</span>。</p>
+      </div>
+      </div>
+
+      <div class="minis">
+        <div>
+          <div class="mini-cap">改選來源 F（候選 2）時，面板頂端 <span class="n">13</span></div>
+          <div class="panel-r">
+            <div class="switch"><span>F-9931 有 2 個候選：</span><span class="strip"><span class="on">EV-10234</span><span>EV-10240</span></span></div>
+            <div class="l2">下方清單換成所選候選的來源，F 那一列標「目前選取」。</div>
+          </div>
+        </div>
+        <div>
+          <div class="mini-cap">改選來源 G（未對應、沒有候選）時，面板頂端 <span class="n">13</span></div>
+          <div class="panel-r">
+            <div class="switch"><span>G-ab12 尚未對應。依開賽時間與競賽排序：</span><span class="strip"><span class="on">EV-10234</span><span>EV-10240</span><span>…</span></span></div>
+            <div class="l2">排序不是依據，不代表系統認為是同一場。都不是同一場時：<span class="btn">指定為建立者…</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>日期 × 運動的未對應數量，點一下即套用篩選。只算未對應與等待證據的來源賽事；建立者的賽事本身不算未對應。</span></li>
+  <li><span class="n">2</span><span>未對應：尚無確認依據，也沒有候選。等待證據：有一個以上候選，但依據不足（例如兩個方向都說得通、兩個候選都符合），系統不猜（R04-09）；這些列入待處理的「對應候選」頁籤。已對應：有確認依據。已結束的賽事保留多久才不顯示，見待確認。</span></li>
+  <li><span class="n">3</span><span>可只看部分來源。來源以代稱顯示，不標示類型；各來源提供哪些資料見<a href="../sources-and-connectors/sources.html">來源</a>頁。</span></li>
+  <li><span class="n">4</span><span>來源下方是運動。第三欄是賽事狀態點：○ 未開始、● 進行中；來源已撤回該賽事時另加標示但不隱藏。第四欄 ⇄ 標示該來源的主客順序與統一紀錄相反（反向）。</span></li>
+  <li><span class="n">5</span><span>主隊在上、客隊在下，一律顯示來源自己的寫法，不顯示統一名稱，提醒名稱相似不是依據（R04-08）。右側徽章：已對應時顯示該統一賽事目前有幾個來源（含建立者）；未對應時顯示首次出現至今的時間。</span></li>
+  <li><span class="n">6</span><span>最後一欄只有兩種記號：✓ N 是這個來源賽事與其他來源之間已確認的對應數；候選 N 是尚未確認的候選數（兩個方向都說得通、多個候選都符合等，系統不猜，R04-09）。依據、方向與等待原因在右側面板與對應明細，不在列上。</span></li>
+  <li><span class="n">7</span><span>標題用統一名稱，主客與參考名稱以建立者為準（R04-06）。選取左側任一列，面板顯示該列所屬的統一賽事，以及這場比賽的所有來源；左側同一場的其他列加淺色左邊線，候選列用虛線。</span></li>
+  <li><span class="n">8</span><span>這場已有對應的賠率來源，之後出現的賠率來源可依賠率一致（a）比對。若尚無已對應的賠率來源（例如只有不提供賠率的建立者列出），這行改寫「尚無已對應的賠率來源，只能依參賽方已確立、賽後比對或人工對應」（R04-08）。</span></li>
+  <li><span class="n">9</span><span>建立者一列沒有解除操作（R04-05、R04-06）；建立者可能是運動的賽程來源，或被人工指定的來源。左側徽章的數字＝建立者＋已對應，與標題的「來源 3」一致。選取的列標「目前選取」。</span></li>
+  <li><span class="n">10</span><span>候選中：系統找到候選但依據不足，不猜，期間該來源的資料不用於該賽事（R04-09）。另有其他候選時寫出來。「人工對應…」開啟畫面 3，已帶入這筆統一賽事。</span></li>
+  <li><span class="n">11</span><span>可能相關：尚未對應、也不是候選的來源賽事，沿用畫面 3 的方式依開賽時間與競賽排序，方便 Ops 主動處理。名稱相似不是依據（R04-08）。這是新增的清單，可以不做（見待確認）。</span></li>
+  <li><span class="n">12</span><span>操作跟著各列：「明細」開啟畫面 2；「解除…」須填原因，由另一人覆核後才生效（R04-10、R04-19）。解除對應會使該賽事的狀態與賽果依剩餘來源重新整理，受影響的注單由 07 處理。</span></li>
+  <li><span class="n">13</span><span>選取有多個候選的列，面板先顯示排序第一的候選，可切換；選取沒有候選的未對應列，面板頂端寫「尚未對應」，可切換排序在前的統一賽事；都不是同一場時，按「指定為建立者…」開啟畫面 5（R04-05）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：對應明細（為什麼對應）</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:680px">
+    <div class="mh"><span>對應明細．來源 D（D-77120）↔ EV-10234</span><span>✕</span></div>
+    <div class="mb">
+      <div class="side-by">
+        <span class="h"></span><span class="h">來源 D 的寫法</span><span class="h">統一賽事 EV-10234</span>
+        <span class="k">主隊</span><span>Arsenal</span><span>曼城</span>
+        <span class="k">客隊</span><span>Manchester City</span><span>兵工廠</span>
+        <span class="k">競賽</span><span>EPL</span><span>英超</span>
+        <span class="k">開賽</span><span>10-24 22:00</span><span>10-24 22:00</span>
+      </div>
+      <p style="margin:12px 0 4px"><b>依據：賠率一致（a）</b> <span class="n">1</span>　方向：<b>反向</b>（主客對調後一致，不對調則不一致）　對應時間：10-20 09:05 · 系統</p>
+      <table class="grid">
+        <thead><tr><th>主要盤口</th><th>來源 C（已對應的賠率來源）</th><th>來源 D 原樣</th><th>D 對調後</th><th>一致</th></tr></thead>
+        <tbody>
+          <tr><td>常規時間讓分</td><td>曼城 -0.5 · 0.95／0.95</td><td>Arsenal +0.5 · 0.95／0.95</td><td>Manchester City -0.5 · 0.95／0.95</td><td>對調後一致</td></tr>
+          <tr><td>常規時間大小</td><td>2.5 · 大 0.90／小 1.00</td><td>2.5 · 大 0.90／小 1.00</td><td>（不受方向影響）</td><td>一致</td></tr>
+          <tr><td>常規時間獨贏</td><td>1.95／3.40／3.80</td><td>3.80／3.40／1.95</td><td>1.95／3.40／3.80</td><td>對調後一致</td></tr>
+        </tbody>
+      </table>
+      <p class="hint">依（a）對應的賽事不累積參賽方的確立 <span class="n">2</span>。</p>
+      <h4 style="margin:12px 0 4px">參賽方的對應狀態（來源 D） <span class="n">3</span></h4>
+      <table class="grid">
+        <thead><tr><th>對象</th><th>D 的寫法</th><th>統一紀錄</th><th>確立</th><th>累積</th></tr></thead>
+        <tbody>
+          <tr><td>參賽方</td><td>Manchester City</td><td>曼城</td><td>已確立</td><td>人工確認 1 次</td></tr>
+          <tr><td>參賽方</td><td>Arsenal</td><td>兵工廠</td><td><b>未確立</b></td><td>賽後比對 1 次</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="mf"><span class="btn">關閉</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>依據是哪一種，就顯示那一種的證據：（a）賠率一致顯示主要盤口的賠率與方向判定，比對的一方必須是已對應的賠率來源；（b）參賽方已確立顯示雙方參賽方的確立狀態與開賽時間；（c）賽後比對顯示雙方都提供的每個時段的比分；（d）人工顯示由誰、何時、原因。</span></li>
+  <li><span class="n">2</span><span>只有依（c）或（d）確認的賽事累積參賽方的確立：同一組對應累積足夠次數的賽後比對（次數見非功能需求），或一次人工確認，即為確立（R04-08）。</span></li>
+  <li><span class="n">3</span><span>顯示這個來源的雙方參賽方目前的對應狀態與累積次數，讓 Ops 看出這個來源之後的賽事能不能依（b）在賽前對應。來源的競賽不需要確立（R04-08）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 3：人工對應</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:680px">
+    <div class="mh"><span>人工對應．來源 F（F-9931）</span><span>✕</span></div>
+    <div class="mb">
+      <p>來源賽事：<b>Manchester C. vs Arsenal FC</b> · Premier League · 10-24 22:00 · 首次出現 10-21 18:40</p>
+      <h4 style="margin:10px 0 4px">候選的統一賽事 <span class="n">1</span></h4>
+      <table class="grid">
+        <thead><tr><th></th><th>統一賽事</th><th>競賽</th><th>開賽</th><th>狀態</th><th>系統的判斷 <span class="n">2</span></th></tr></thead>
+        <tbody>
+          <tr style="background:var(--fill)"><td>●</td><td>EV-10234 · 曼城 vs 兵工廠</td><td>英超</td><td>10-24 22:00</td><td>未開始</td><td>大小一致；讓分與獨贏未開出，方向無法判定</td></tr>
+          <tr><td>○</td><td>EV-10240 · 曼城女足 vs 兵工廠女足</td><td>女超</td><td>10-24 20:00</td><td>未開始</td><td>大小一致；開賽時間相差 2 小時</td></tr>
+        </tbody>
+      </table>
+      <div class="form" style="margin-top:10px">
+        <div class="f"><label>方向 <span class="n">3</span></label><div>● 同向（F 的主隊 = 曼城）<br>○ 反向（F 的主隊 = 兵工廠）</div></div>
+        <div class="f"><label>原因（必填）</label><span class="box" style="width:100%">官網賽程確認為男子組，F 主隊即曼城</span></div>
+      </div>
+      <p class="hint" style="margin-top:8px">確認後依據記為「人工」；F 的雙方參賽方各累積一次人工確認，即為確立 <span class="n">4</span>。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認對應</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>候選只能是已存在的統一賽事（由建立者建立）。候選的排序可以用名稱相似與開賽時間，但名稱不是依據；Ops 要自己確認是同一場比賽（R04-08）。虛擬競賽的賽事不會出現在真實賽事的候選中，反之亦然（R04-20）。</span></li>
+  <li><span class="n">2</span><span>顯示系統為什麼沒有自動對應，例如兩個方向都說得通、賠率差異大、來源不提供賠率，幫助 Ops 判斷。</span></li>
+  <li><span class="n">3</span><span>人工對應要指定方向；之後這個來源在該賽事的投注項與讓分依方向對調後對應（R04-11）。</span></li>
+  <li><span class="n">4</span><span>人工確認一次即確立（R04-08）。同一個位置只能有一個對應（R04-09）；若另一個來源賽事已對應到同一筆統一賽事的同一個來源位置，不能再對應。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 4：合併疑似重複的統一紀錄</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:680px">
+    <div class="mh"><span>合併參賽方．TM-5531 與 TM-8820</span><span>✕</span></div>
+    <div class="mb">
+      <p>系統只把疑似重複列入待處理，不自行合併 <span class="n">1</span>。</p>
+      <div class="side-by">
+        <span class="h"></span><span class="h">● 保留 TM-5531</span><span class="h">○ 保留 TM-8820</span>
+        <span class="k">參考名稱</span><span>曼城</span><span>Manchester City</span>
+        <span class="k">建立者</span><span>來源 A（足球的賽程來源）</span><span>來源 C（人工指定建立者，ops.lin 選擇新建）</span>
+        <span class="k">建立時間</span><span>2026-07-02</span><span>10-19 03:10</span>
+        <span class="k">所屬賽事</span><span>38 場（英超）</span><span>1 場（俱樂部友誼賽）</span>
+        <span class="k">未結算注單</span><span>1,208</span><span>36</span>
+        <span class="k">為何疑似重複</span><span colspan="2">來源 C 的 Manchester City 之後已確立對應到 TM-5531；TM-8820 是指定建立者時新建，來自 C 的同一個來源識別（R04-04）</span>
+      </div>
+      <div class="f" style="margin-top:10px"><label>原因（必填）</label><span class="box" style="width:100%">同一支隊伍；指定建立者時誤選新建</span></div>
+      <p class="hint" style="margin-top:8px">合併後，被合併的識別停用、不刪除（R04-04）；兩邊的賽事都改掛保留的參賽方。合併是對應的更正，須由另一人覆核後才生效（R04-19） <span class="n">2</span>。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">送出合併，待覆核</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>兩個不同對象被併成一筆，比同一對象出現兩筆更嚴重（R04-07），所以合併一律人工，並顯示兩邊的來歷讓 Ops 判斷。範例是參賽方。賽事不合併：確認兩筆賽事是同一場時，兩筆都停止接受投注，由人工各依原本的主客方向指定賽果（R04-07）。</span></li>
+  <li><span class="n">2</span><span>保留哪一筆識別，見待確認；畫面暫以較早建立的一筆為預設。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 5：指定建立者</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:680px">
+    <div class="mh"><span>指定建立者．來源 C（C-5540210）</span><span>✕</span></div>
+    <div class="mb">
+      <p>來源賽事：<b>Ulsan HD vs Hanoi FC</b> · Club Friendlies · 10-26 19:00 · 首次出現 10-23 08:10。足球的賽程來源（來源 A）沒有列出這場 <span class="n">1</span>。</p>
+      <h4 style="margin:10px 0 4px">系統檢查 <span class="n">2</span></h4>
+      <ul style="list-style:none;padding:0;margin:4px 0">
+        <li>✓ 來源 C 提供賽程（R04-01）</li>
+        <li>✓ 這場沒有對應到統一賽事，也不是任何統一賽事的候選（R04-05、R04-09）</li>
+        <li>✓ 來源與競賽都不是虛擬（R04-20）</li>
+      </ul>
+      <h4 style="margin:10px 0 4px">由 Ops 決定 <span class="n">3</span></h4>
+      <div class="side-by">
+        <span class="h"></span><span class="h">來源 C 的寫法</span><span class="h">統一紀錄</span>
+        <span class="k">主隊</span><span>Ulsan HD</span><span>● 既有：蔚山現代（TM-2210）　○ 新建</span>
+        <span class="k">客隊</span><span>Hanoi FC</span><span>● 既有：河內 FC（TM-3302）　○ 新建</span>
+        <span class="k">競賽</span><span>Club Friendlies</span><span>● 既有：俱樂部友誼賽（T-1988）　○ 新建</span>
+      </div>
+      <div class="f" style="margin-top:10px"><label>原因（必填）</label><span class="box" style="width:100%">蔚山現代季前赴越南的友誼賽，A 未收錄；官網已公告</span></div>
+      <p class="hint" style="margin-top:8px">建立後由來源 C 負責到結束：開賽時間依 C 更新，從 C 的清單消失時進入待取消（R04-23）。兩隊各累積一次人工確認。能否開盤另依 05 判斷 <span class="n">4</span>。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">建立統一賽事</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>只用於個別比賽，例如運動的賽程來源沒列出的友誼賽，或賽程來源中斷期間急需的賽事（R04-05、R04-16）。同一個競賽需要逐場指定很多場時，表示運動的賽程來源覆蓋不足，應檢討運動的賽程來源。</span></li>
+  <li><span class="n">2</span><span>系統當場檢查，全部通過才能建立。來源不提供賽程時不能指定，因為之後這場從它的清單消失會觸發待取消；這場已是某筆統一賽事的候選時，要先處理這個候選：判斷是同一場就在畫面 3 對應；判斷不是同一場並記錄原因後，才能指定為建立者（R04-05）。</span></li>
+  <li><span class="n">3</span><span>每個參賽方由 Ops 決定是既有的哪一筆或新建，算一次人工確認（R04-08），不會暫時另建重複的紀錄；選錯成新建時，之後依畫面 4 合併。統一競賽可選既有的或新建，新建時以來源的寫法為基準名稱（01 的 R01-30）。候選可依名稱相似與開賽時間排序，但名稱不是依據。</span></li>
+  <li><span class="n">4</span><span>主客方與參考名稱以來源 C 為準（R04-06）。之後來源 A 若也列出這場，依 R04-05 先比對，對應到這筆，不另建。這場結束前，來源 C 的賽程不能停用（R04-16）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<ol>
+  <li>對應看板上已結束的賽事保留多久才不再顯示。</li>
+  <li>合併兩筆統一紀錄時保留哪一筆識別；畫面暫以較早建立的一筆為預設。</li>
+  <li>「候選」的門檻：依開賽時間與名稱排序就算候選，還是要有部分證據（例如來源 F 的大小一致）才算？前者來源 G 也會有候選；後者 G 沒有候選，畫面 1 的「可能相關」才是新增的參考清單。</li>
+</ol>
+
+</div>
+</body>
+</html>

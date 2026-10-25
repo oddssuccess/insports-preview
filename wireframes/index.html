@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>後台畫面示意</title>
+<link rel="stylesheet" href="wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>後台畫面示意（wireframe）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>說明</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/README.md">wireframe README</a> · <b>PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md">PRD 目錄</a></p>
+
+<p class="disclaimer">各 PRD 的後台畫面示意，與 PRD 第 8 節「參考設計（非約束）」同一定位：只說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型。畫面中的名稱與數字都是範例。PRD 與各組 README 放在 GitHub 上，需要 repo 的存取權限才能開啟。</p>
+
+<h2>01 運動與玩法目錄</h2>
+<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sports-and-markets/README.md">README</a></p>
+<table class="doc-t">
+  <tr><th><a href="sports-and-markets/sports.html">運動</a></th><td>清單、多語系、變更營運狀態、排序看板</td></tr>
+  <tr><th><a href="sports-and-markets/tournaments.html">競賽</a></th><td>清單、編輯、多語系、等級看板、排序看板</td></tr>
+  <tr><th><a href="sports-and-markets/competitors.html">參賽方</a></th><td>清單、編輯；多語系與看板與競賽相同</td></tr>
+  <tr><th><a href="sports-and-markets/period-score-items.html">時段與計分項目</a></th><td>各運動的時段 × 計分項目矩陣</td></tr>
+</table>
+
+<h2>03 資料來源與連接器</h2>
+<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sources-and-connectors/README.md">README</a></p>
+<table class="doc-t">
+  <tr><th><a href="sources-and-connectors/sources.html">來源</a></th><td>清單與四類資料的狀態矩陣、來源詳情（途徑與狀態紀錄）、停用與啟用</td></tr>
+  <tr><th><a href="sources-and-connectors/connectors.html">連接器</a></th><td>清單、暫停與恢復</td></tr>
+  <tr><th><a href="sources-and-connectors/accounts.html">帳號</a></th><td>清單、更換憑證、停用與啟用</td></tr>
+  <tr><th><a href="sources-and-connectors/incidents.html">異常看板</a></th><td>中斷、途徑失效、帳號被拒絕</td></tr>
+</table>
+
+<h2>04 賽事資料與對應</h2>
+<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">README</a></p>
+<table class="doc-t">
+  <tr><th><a href="event-data-and-mapping/review-queue.html">待處理</a></th><td>總佇列，依類型分頁籤；待覆核</td></tr>
+  <tr><th><a href="event-data-and-mapping/source-roles.html">來源角色</a></th><td>運動的賽程來源與更換、其餘角色的運動預設與競賽覆寫、新競賽清單</td></tr>
+  <tr><th><a href="event-data-and-mapping/event-mapping.html">賽事對應</a></th><td>對應看板、對應明細、人工對應、疑似重複的合併、指定建立者</td></tr>
+  <tr><th><a href="event-data-and-mapping/pending-cancellation.html">待取消與待腰斬</a></th><td>清單、處置</td></tr>
+  <tr><th><a href="event-data-and-mapping/in-play-signal.html">滾球訊號與覆蓋</a></th><td>進行中賽事的監看</td></tr>
+  <tr><th><a href="event-data-and-mapping/quorum-settings.html">門檻設定</a></th><td>各運動計分項目的門檻數與最少來源數</td></tr>
+</table>
+
+</div>
+</body>
+</html>

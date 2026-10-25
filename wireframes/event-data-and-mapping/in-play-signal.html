@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>滾球訊號 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style> td.nw { white-space: nowrap; } </style>
+</head>
+<body>
+<div class="doc">
+
+<h1>滾球訊號與覆蓋（In-play Signal / Signal Coverage）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">賽事資料與對應後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 監看進行中賽事的使用中賽況來源、統一滾球訊號與訊號覆蓋狀態，以及不穩定的原因；只看，不操作</td></tr>
+  <tr><th>對應規則</th><td>R04-21（統一滾球訊號）、R04-22（訊號覆蓋狀態）、R04-02（使用中的賽況來源依固定順序）</td></tr>
+  <tr><th>不在本畫面</th><td>改用另一個賽況來源（不允許，R04-22）；訊號對應表（工程以設定維護）；兩套接受機制的限額與延遲（見 06、09）；滾球比分與門檻（賽事監看，下一批）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、賽事與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：進行中賽事的訊號與覆蓋</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#" class="on">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 滾球訊號</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>滾球訊號與覆蓋</h3><div class="sub">進行中的賽事；訊號只來自使用中的賽況來源，不能中途改用另一個來源</div></div>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
+        <div class="f"><label>覆蓋 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>有覆蓋</span><span>無覆蓋</span></span></div>
+        <div class="f"><label>訊號</label><span class="strip"><span class="on">全部</span><span>危險</span><span>無訊號</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">隊伍或競賽</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr>
+          <th>賽事</th><th>比賽時間</th><th>使用中的賽況來源 <span class="n">2</span></th><th>統一訊號 <span class="n">3</span></th><th>覆蓋 <span class="n">4</span></th><th>其他提供訊號的來源 <span class="n">5</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>曼城 vs 兵工廠<div class="l2">英超 · 進行中 2:1</div></td><td class="nw">下半場 67'</td><td>來源 A <span class="chip">事件形式</span></td><td><b>危險</b><div class="l2">可能點球 · 14:14:50 起</div></td><td>有覆蓋</td><td class="l2">來源 B（不使用）<br>來源 C 封盤（不使用）</td></tr>
+          <tr><td>熱刺 vs 紐卡索<div class="l2">英超 · 進行中 0:0</div></td><td class="nw">上半場 31'</td><td>來源 A <span class="chip">事件形式</span></td><td>安全</td><td>有覆蓋</td><td class="l2">來源 B（不使用）</td></tr>
+          <tr><td>水原 vs 蔚山<div class="l2">韓國 K 聯賽 · 比賽中斷 1:1</div></td><td class="nw">下半場 58'</td><td>來源 A <span class="chip">事件形式</span> <span class="chip">不穩定</span></td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">來源回報現場中斷 · 13:58 起</div></td><td class="l2">來源 B（連線中，不自動改用）</td></tr>
+          <tr><td>Becamex vs 峴港<div class="l2">越南 V.League 1 · 進行中 1:0</div></td><td class="nw">下半場 52'</td><td>來源 C <span class="chip">封盤形式</span></td><td><b>危險</b><div class="l2">C 封盤中 · 14:13:05 起</div></td><td><b>無覆蓋</b><div class="l2">使用中的來源為封盤形式</div></td><td class="l2">來源 D 封盤（不使用）</td></tr>
+          <tr><td>某隊 vs 某隊<div class="l2">某友誼賽 · 進行中 0:0</div></td><td class="nw">上半場 12'</td><td>來源 B <span class="chip">事件形式</span> <span class="chip">不穩定</span></td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">系統偵測：事件已停止到達 6 分</div></td><td class="l2">無</td></tr>
+          <tr><td>某隊 vs 某隊<div class="l2">某盃賽 · 進行中 2:2</div></td><td class="nw">加時賽 98'</td><td class="l2">沒有使用中的來源</td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">沒有賽況來源提供訊號</div></td><td class="l2">無</td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span></span><span>進行中共 23 場，無覆蓋 4 場</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>覆蓋狀態只有兩種（R04-22）：使用中的賽況來源為事件形式且穩定即為有覆蓋；為封盤形式、沒有使用中的來源、或使用中的來源不穩定即為無覆蓋。06 依此分成兩套接受機制，限額與延遲不在本畫面，對經銷商也是黑箱。</span></li>
+  <li><span class="n">2</span><span>使用中的賽況來源依來源角色設定的固定順序決定：有訊號的最高順位者（R04-02）。訊號形式顯示為來源的屬性。不穩定時加標示，並在覆蓋欄顯示原因。</span></li>
+  <li><span class="n">3</span><span>統一滾球訊號只有安全、危險、無訊號（R04-21）。危險顯示來源的事件（可能點球、快攻、封盤等，依訊號對應表）與開始時間；何時回到安全由訊號對應表決定。</span></li>
+  <li><span class="n">4</span><span>不穩定的原因有兩類（R04-22）：來源自己發出離線或不穩定（例如現場回報中斷），或 InSports 偵測到異常（來源中斷、事件停止到達、延遲超過容許值）。一旦無覆蓋，該場到結束都維持無覆蓋，除非原來源重新穩定；恢復的條件比失效嚴格。</span></li>
+  <li><span class="n">5</span><span>其他來源即使也提供該場的訊號，一律不使用，也不自動改用、不允許人工中途改用（R04-21、R04-22）；列出只是讓 Ops 知道有哪些來源在線。因此本頁沒有任何操作。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+
+</div>
+</body>
+</html>

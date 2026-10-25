@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源角色 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  td.nw { white-space: nowrap; } tr.inh td { color: #777; } .ord { display:inline-block; width:16px; color:var(--muted); }
+  .fixture { display: flex; align-items: center; gap: 12px; padding: 8px 10px; border: 1px solid var(--mark); background: var(--paper); margin-bottom: 10px; }
+  .fixture .l2 { margin-left: auto; }
+  .chk { list-style: none; padding: 0; margin: 6px 0; }
+  .chk li { padding: 3px 0; }
+  .chk .ok::before { content: "✓ "; font-weight: 700; }
+  .chk .warn::before { content: "! "; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>來源角色（Source Role）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">賽事資料與對應後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看與設定每個運動的來源角色：賽程來源（每個運動恰好一個，不以競賽覆寫）；賠率來源、賽況來源（含訊號形式與優先順序）、賽果來源以運動設預設、以競賽覆寫；處理運動的賽程來源列出的新競賽</td></tr>
+  <tr><th>對應規則</th><td>R04-01（四類資料與角色）、R04-02（角色由 InSports 設定；賽程來源只在運動層；其餘角色運動預設、競賽覆寫；使用中的賽況來源依固定順序）、R04-05（建立者）、R04-20（虛擬競賽的賽程來源）、第 5 節「更換某運動的賽程來源」</td></tr>
+  <tr><th>不在本畫面</th><td>來源本身的狀態、途徑與帳號（見 <a href="../sources-and-connectors/sources.html">來源</a>）；人工指定建立者（見 <a href="event-mapping.html">賽事對應</a>畫面 5）；某來源某場賽事的賠率因矛盾不採用（R04-17，下一批）；門檻數與最少來源數（見 <a href="quorum-settings.html">門檻設定</a>）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、競賽與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：來源角色設定</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#" class="on">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 來源角色</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>來源角色</h3><div class="sub">賽程來源只在運動層指定；其餘角色以運動設預設，以競賽覆寫</div></div>
+        <div class="strip"><span class="on">角色設定</span><span>新競賽（3）</span></div>
+      </div>
+
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>顯示 <span class="n">1</span></label><span class="strip"><span class="on">只看有覆寫的競賽</span><span>全部競賽</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">競賽名稱或 ID</span></div>
+      </div>
+
+      <div class="fixture"><b>足球的賽程來源</b><span>來源 A</span><span class="btn">更換…</span><span class="l2">虛擬足球的賽程來源另行指定，不在此設定 <span class="n">2</span></span></div>
+
+      <table class="grid">
+        <thead><tr>
+          <th>層級</th><th>賠率來源 <span class="n">3</span></th><th>賽況來源（依優先順序） <span class="n">4</span></th><th>賽果來源</th><th>最近變更</th><th>操作</th>
+        </tr></thead>
+        <tbody>
+          <tr style="background:var(--fill)"><td class="nw"><b>足球（運動預設）</b></td><td>來源 C、D、F</td><td><span class="ord">1</span>來源 A <span class="chip">事件形式</span><br><span class="ord">2</span>來源 B <span class="chip">事件形式</span><br><span class="ord">3</span>來源 C <span class="chip">封盤形式</span><br><span class="ord">4</span>來源 D <span class="chip">封盤形式</span></td><td>來源 A、來源 G、來源 C</td><td class="l2">10-20 · ops.chen</td><td><span class="btn">編輯</span></td></tr>
+          <tr><td class="nw">英超<div class="l2">T-1001 · 覆寫</div></td><td>來源 C、D</td><td class="l2">沿用預設</td><td class="l2">沿用預設</td><td class="l2">10-22 · ops.chen</td><td><span class="btn">編輯</span></td></tr>
+          <tr><td class="nw">越南 V.League 1<div class="l2">T-1420 · 覆寫</div></td><td>來源 C、D</td><td><span class="ord">1</span>來源 C <span class="chip">封盤形式</span></td><td>來源 C</td><td class="l2">10-19 · ops.lin</td><td><span class="btn">編輯</span></td></tr>
+          <tr><td class="nw">俱樂部友誼賽<div class="l2">T-1988 · 覆寫</div></td><td class="l2">沿用預設</td><td><span class="ord">1</span>來源 C <span class="chip">封盤形式</span></td><td class="l2">沿用預設</td><td class="l2">10-21 · ops.lin</td><td><span class="btn">編輯</span></td></tr>
+          <tr class="inh"><td class="nw">西甲<div class="l2">T-1002</div></td><td>沿用預設</td><td>沿用預設</td><td>沿用預設</td><td>—</td><td><span class="btn">覆寫</span></td></tr>
+          <tr><td colspan="6" class="l2">…（其他競賽，只在「全部競賽」顯示）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>表格第一列永遠是所選運動的預設；其下是競賽。預設顯示有覆寫的競賽，切到「全部競賽」才列出沿用預設的競賽（淡色）。賠率、賽況、賽果三種角色是運動預設加競賽覆寫，不以計分項目指定（R04-02）。這些覆寫掛在統一競賽上，不需要來源的競賽對應。</span></li>
+  <li><span class="n">2</span><span>賽程來源每個運動恰好一個，不以競賽覆寫，所以不在表格裡（R04-02）。它沒列出的個別比賽，由 Ops 在<a href="event-mapping.html">賽事對應</a>逐場指定其他來源為建立者（R04-05）。虛擬競賽的賽程來源另行指定，方式待 03 決定（R04-20）。「更換…」開啟畫面 3。</span></li>
+  <li><span class="n">3</span><span>賠率來源、賽況來源、賽果來源各一個以上。某來源某一項資料不可靠時，Ops 在該競賽把它整個拿掉（R04-02）。來源提供某類資料不代表擔任該角色：只能從提供該類資料的來源中挑。</span></li>
+  <li><span class="n">4</span><span>賽況來源有順序：有訊號的最高順位者即為使用中的賽況來源，滾球訊號只取它（R04-21）；滾球比分則用全部賽況來源（R04-14）。訊號形式（事件形式、封盤形式）是來源的屬性，唯讀，兩種形式排在同一個順序裡。Ops 不逐場指定，也不在比賽中途改用另一個來源（R04-22）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：編輯競賽覆寫</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>編輯來源角色．英超（T-1001）</span><span>✕</span></div>
+    <div class="mb">
+      <div class="form">
+        <div class="f full"><label>賠率來源</label><div>○ 沿用運動預設（C、D、F）　● 覆寫：☑ 來源 C　☑ 來源 D　☐ 來源 F</div></div>
+        <div class="f full"><label>賽況來源（依優先順序） <span class="n">1</span></label><div>● 沿用運動預設　○ 覆寫：
+          <table class="grid" style="width:420px;margin-top:4px"><thead><tr><th style="width:70px">順序</th><th>來源</th><th>訊號形式</th><th>使用</th></tr></thead><tbody>
+            <tr><td><span class="box ro" style="min-width:50px;width:50px">1</span></td><td>來源 A</td><td class="l2">事件形式</td><td>☑</td></tr>
+            <tr><td><span class="box ro" style="min-width:50px;width:50px">2</span></td><td>來源 B</td><td class="l2">事件形式</td><td>☑</td></tr>
+            <tr><td><span class="box ro" style="min-width:50px;width:50px">3</span></td><td>來源 C</td><td class="l2">封盤形式</td><td>☑</td></tr>
+            <tr><td><span class="box ro" style="min-width:50px;width:50px">4</span></td><td>來源 D</td><td class="l2">封盤形式</td><td>☑</td></tr>
+          </tbody></table></div></div>
+        <div class="f full"><label>賽果來源</label><div>● 沿用運動預設（A、G、C）　○ 覆寫</div></div>
+        <div class="f full"><label>原因（必填） <span class="n">2</span></label><span class="box" style="width:100%">F 的英超賠率近期常與其他來源矛盾</span></div>
+      </div>
+      <p class="hint" style="margin-top:8px">賽程來源不在競賽層設定；英超的賽事由足球的賽程來源（來源 A）建立 <span class="n">3</span>。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">儲存</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>每種角色各自選擇沿用預設或覆寫。覆寫賽況來源時直接改順序號，與目錄的排序看板相同的做法，不提供拖曳。訊號形式唯讀。編輯運動預設時用同一個視窗，沒有「沿用」選項。</span></li>
+  <li><span class="n">2</span><span>角色設定由 InSports 設定，不因來源的資料變動而自動改變（R04-02）。每次變更記錄由誰、何時、原因。</span></li>
+  <li><span class="n">3</span><span>競賽層沒有賽程來源的選項（R04-02）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 3：更換運動的賽程來源</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:680px">
+    <div class="mh"><span>更換足球的賽程來源．來源 A → 來源 C</span><span>✕</span></div>
+    <div class="mb">
+      <p>更換是計畫內的遷移，例如在換季時進行，不是來源中斷時的應急手段 <span class="n">1</span>。</p>
+      <h4 style="margin:10px 0 4px">系統檢查 <span class="n">2</span></h4>
+      <ul class="chk">
+        <li class="ok">來源 C 提供賽程（R04-01）</li>
+        <li class="warn">來源 C 的參賽方：已確立 1,184 筆，未確立 37 筆（<a href="#">清單</a>）。未確立的參賽方在 C 之後建立的賽事中會暫時另建一筆，確立後要人工合併（R04-04）</li>
+        <li class="warn">來源 C 的 214 個競賽會列入「新競賽」，由 Ops 新建或對應到既有競賽（R04-02）</li>
+        <li class="warn">來源 A 列出、C 沒列出的未來比賽 58 場：更換後不會建立，除非逐場指定建立者（R04-05）</li>
+        <li class="ok">已建立的 3,402 場賽事仍由來源 A 更新到結束；C 列出的比賽若已由 A 建立，對應到既有紀錄，不另建（第 5 節）</li>
+      </ul>
+      <div class="f" style="margin-top:10px"><label>原因（必填）</label><span class="box" style="width:100%">2027/28 賽季起改用 C，A 的東南亞次級聯賽覆蓋不足</span></div>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認更換</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>新來源的競賽劃分會成為之後建立的統一競賽，所以更換是遷移（PRD 04 第 5 節）。來源中斷數天時，依 R04-16 照常進行，急需的個別賽事逐場指定建立者。</span></li>
+  <li><span class="n">2</span><span>「✓」為通過，「!」為影響預覽，Ops 確認後仍可更換；來源不提供賽程時不能選。數字讓 Ops 判斷這次遷移的工作量。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 4：新競賽清單</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#" class="on">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 來源角色 › 新競賽</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>新競賽</h3><div class="sub">運動的賽程來源列出、但尚未建立或對應的競賽；系統不自行分辨是新競賽還是既有競賽的另一種寫法</div></div>
+        <div class="strip"><span>角色設定</span><span class="on">新競賽（3）</span></div>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>運動</th><th>賽程來源</th><th>來源的競賽寫法</th><th>來源識別</th><th>列出的賽事數 <span class="n">1</span></th><th>首次出現</th><th>操作 <span class="n">2</span></th></tr></thead>
+        <tbody>
+          <tr><td>足球</td><td>來源 A</td><td>Thai League 2</td><td class="l2">A-T-6610</td><td>9</td><td>10-23 09:40（4 小時）</td><td><span class="btn">新建統一競賽</span> <span class="btn">對應到既有競賽</span></td></tr>
+          <tr><td>足球</td><td>來源 A</td><td>Premier League (2027)</td><td class="l2">A-T-7001</td><td>380</td><td>10-22 03:15（1 天）</td><td><span class="btn">新建統一競賽</span> <span class="btn">對應到既有競賽</span></td></tr>
+          <tr><td>籃球</td><td>來源 G</td><td>KBL</td><td class="l2">G-T-kbl</td><td>2</td><td>10-23 11:02（3 小時）</td><td><span class="btn">新建統一競賽</span> <span class="btn">對應到既有競賽</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>處理完成之前，這些競賽的賽事不會建立統一紀錄（R04-02）。賽事數讓 Ops 判斷急迫程度。只列運動的賽程來源的競賽；其他來源的競賽不需要對應到統一競賽，只用來排序候選（R04-02、R04-08）。</span></li>
+  <li><span class="n">2</span><span>兩種處理（R04-02）：「新建統一競賽」以來源的寫法為基準名稱建立（01 的 R01-30）；「對應到既有競賽」用於同一競賽的另一種寫法，例如來源換季時改了識別（第二列），候選可依名稱相似排序，但名稱不是依據，Ops 自行確認。兩種處理都記錄由誰、何時、原因。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<ol>
+  <li>運動的賽程來源列出的新競賽，是否一律要 Ops 確認後才建立；新競賽量大時是否改為自動建立、事後檢視（PRD 04 待確認第 12 項）。</li>
+</ol>
+
+</div>
+</body>
+</html>

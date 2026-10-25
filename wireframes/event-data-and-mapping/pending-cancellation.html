@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>待取消與待腰斬 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style> td.nw { white-space: nowrap; } </style>
+</head>
+<body>
+<div class="doc">
+
+<h1>待取消與待腰斬（Pending Cancellation / Pending Abandonment）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">賽事資料與對應後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 處理賽程來源不再提供的賽事：尚未開始的賽事標記待取消後，看來源給的原因與候選（建立者列出、尚未建立的新識別），選擇作廢、重掛、暫不處理或解除；進行中的賽事標記待腰斬後，進入 06、07 的確認流程</td></tr>
+  <tr><th>對應規則</th><td>R04-23（待取消與待腰斬）、R04-05（重掛）、R04-24（候選）、R04-19（作廢與重掛須覆核）、R04-12（統一狀態）</td></tr>
+  <tr><th>不在本畫面</th><td>作廢與重掛後注單的效力（見 07）；待腰斬的確認流程與各時段賽果（見 06、07）；下架對盤口、提前兌現與風險部位的意思（見 05、08、09）；候選判定的具體條件（SPEC）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、賽事與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：待取消清單</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#" class="on">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 待取消與待腰斬</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>待取消</h3><div class="sub">賽程來源不再提供的未開始賽事；標記期間該賽事與其候選都下架，只能由人工處理</div></div>
+        <div class="strip"><span class="on">待取消（4）</span><span>待腰斬（1）</span></div>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
+        <div class="f"><label>排序 <span class="n">1</span></label><span class="box caret">已等待最久</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr>
+          <th>賽事</th><th>統一狀態 <span class="n">2</span></th><th>來源給的原因 <span class="n">3</span></th><th>進入待取消</th><th>處理時限 <span class="n">4</span></th><th>候選 <span class="n">5</span></th><th>注單 <span class="n">6</span></th><th>操作</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>EV-10198 · 熱刺 vs 切爾西<div class="l2">英超 · 原定 10-23 03:00 · 賽程來源 A</div></td><td>延後</td><td>延期，未給新時間</td><td class="nw">10-22 20:10<br><span class="l2">已等待 18 小時</span></td><td class="nw">10-25 03:00<div class="l2">足球延期規則</div></td><td>1 個</td><td>412</td><td><span class="btn pri">處理</span></td></tr>
+          <tr><td>EV-10251 · Becamex vs 河內<div class="l2">越南 V.League 1 · 原定 10-25 02:30 · 賽程來源 C</div></td><td>未開始</td><td>從清單消失 <span class="chip">已回到清單</span></td><td class="nw">10-23 13:50<br><span class="l2">已等待 25 分</span></td><td class="nw">10-27 02:30</td><td>0 個</td><td>18</td><td><span class="btn pri">處理</span></td></tr>
+          <tr><td>EV-10310 · 阪神 vs 巨人<div class="l2">日本職棒 · 原定 10-23 17:00 · 賽程來源 A</div></td><td>延後</td><td>延期，未給新時間</td><td class="nw">10-23 06:30<br><span class="l2">已等待 7 小時</span></td><td class="nw">10-24 05:00<div class="l2">棒球 12 小時規則</div></td><td>1 個<div class="l2">雙重賽的補賽</div></td><td>96</td><td><span class="btn pri">處理</span></td></tr>
+          <tr><td>EV-10333 · 某隊 vs 某隊<div class="l2">某友誼賽 · 原定 10-22 20:00 · 賽程來源 A</div></td><td>未開始</td><td>原定時間已過，來源仍凍結在賽前</td><td class="nw">10-22 20:30<br><span class="l2">已等待 17 小時</span></td><td class="nw"><b>10-23 20:00</b><div class="l2">即將到期</div></td><td>0 個</td><td>3</td><td><span class="btn pri">處理</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>佇列的排序與處理時限見待確認（04 第 10 項、11 第 4 項）；畫面暫以已等待最久在前。</span></li>
+  <li><span class="n">2</span><span>待取消是疊在統一狀態上的標記，不是狀態（R04-23）；統一狀態另欄顯示，只會是未開始或延後。</span></li>
+  <li><span class="n">3</span><span>「不再提供」的四種情況（R04-23）：從清單消失、來源標為取消、來源標延期而沒有新時間、原定時間已過仍凍結在賽前。只顯示供參考，不限制選項。賽事回到賽程來源清單上時只註記「已回到清單」，不自動解除。</span></li>
+  <li><span class="n">4</span><span>等待多久由各運動的延期規則決定（見 07），超過時由人工作廢；即將到期的列加強顯示。</span></li>
+  <li><span class="n">5</span><span>候選是建立者列出、可能與這場是同一場的新識別，系統依 R04-24 列出；人工判斷前不建立、不開盤（R04-05）。沒有候選時不能重掛，其餘處置照常。</span></li>
+  <li><span class="n">6</span><span>該賽事已接受的注單數，資料來自 06；是否顯示見待確認（11 第 4 項）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：處置待取消</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:720px">
+    <div class="mh"><span>處置待取消．EV-10198 熱刺 vs 切爾西</span><span>✕</span></div>
+    <div class="mb">
+      <p>英超 · 原定 10-23 03:00 · 統一狀態：延後 · 來源給的原因：延期，未給新時間 · 已接受注單 412 張 · 處理時限 10-25 03:00</p>
+      <h4 style="margin:10px 0 4px">候選（尚未建立） <span class="n">1</span></h4>
+      <table class="grid">
+        <thead><tr><th></th><th>候選</th><th>開賽</th><th>也符合其他賽事</th><th>可重掛</th></tr></thead>
+        <tbody>
+          <tr><td>●</td><td>A-88990 · Tottenham vs Chelsea<div class="l2">來源 A · 10-22 21:40 出現的新識別</div></td><td>10-24 03:00</td><td class="l2">無</td><td>可</td></tr>
+        </tbody>
+      </table>
+      <h4 style="margin:12px 0 4px">處置 <span class="n">2</span></h4>
+      <div>○ 取消並作廢注單（412 張依 07 作廢）<span class="chip">須覆核</span></div>
+      <div>● 重掛到候選：<span class="box caret">A-88990 · 10-24 03:00</span> <span class="chip">須覆核</span></div>
+      <div>○ 暫不處理（維持待取消與下架）</div>
+      <div class="l2">○ 解除待取消並上架（只在該賽事已回到賽程來源清單上時可選）</div>
+      <div class="f" style="margin-top:10px"><label>原因（必填）</label><span class="box" style="width:100%">聯賽官網公告改期至 10-24 03:00，對陣與場地相同</span></div>
+      <p class="hint" style="margin-top:8px">重掛後，EV-10198 改用 A-88990，開賽時間改為 10-24 03:00，解除待取消並上架；412 張注單留在原賽事，效力依足球延期規則判斷，基準仍是原定的 10-23 03:00 <span class="n">3</span>。A-88990 不另建賽事。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">送出，待覆核</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>候選是建立者列出、尚未建立的新識別；系統不認定是同一場比賽（R04-24）。寧可多列：雙重賽的另一場也可能被列為候選，由 Ops 判斷不同場後才建立。候選已開打時不能重掛，「可重掛」顯示「否」。一個新識別同時符合多筆賽事時，只能重掛到其中一筆，「也符合其他賽事」列出其餘幾筆。</span></li>
+  <li><span class="n">2</span><span>選項只有四種（R04-23）。作廢與重掛會改變注單的結算依據，須由另一人覆核後才生效（R04-19）；暫不處理與解除由一人即可。</span></li>
+  <li><span class="n">3</span><span>重掛只限同一建立者。注單留在原賽事，不轉移；效力依各運動延期規則（見 07），延期判斷基準不因重掛重設（R04-05）。舊識別保留在紀錄中，之後的更新不再寫入；已作廢的注單不因重掛恢復。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 3：待腰斬清單（入口）</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#" class="on">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 待取消與待腰斬 › 待腰斬</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>待腰斬</h3><div class="sub">進行中的賽事從賽程來源消失或被標為取消；是否腰斬與各時段賽果一律由人工確認</div></div>
+        <div class="strip"><span>待取消（4）</span><span class="on">待腰斬（1）</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>賽事</th><th>統一狀態 <span class="n">1</span></th><th>來源給的原因</th><th>進入待腰斬</th><th>最後的統一比分 <span class="n">2</span></th><th>其他來源 <span class="n">3</span></th><th>操作 <span class="n">4</span></th></tr></thead>
+        <tbody>
+          <tr><td>EV-10290 · 水原 vs 蔚山<div class="l2">韓國 K 聯賽 · 10-23 13:00 開賽 · 賽程來源 A</div></td><td>比賽中斷</td><td>來源標為取消</td><td class="nw">10-23 13:58<br><span class="l2">已等待 17 分</span></td><td>上半場 1:0（已結束）<br>下半場 0:1（第 58 分鐘）</td><td>來源 C：比賽中斷<br>來源 G：比賽中斷（暴雨）</td><td><span class="btn pri">確認腰斬與賽果</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>待腰斬同樣是標記，不是狀態；統一狀態依所有來源整理（R04-12），這裡是比賽中斷。</span></li>
+  <li><span class="n">2</span><span>顯示各時段最後的統一比分與是否已結束，供人工確認。腰斬的賽事不適用自動穩定，即使來源一致也不自動結算（R04-14、R04-23）。</span></li>
+  <li><span class="n">3</span><span>其他已對應來源回報的狀態與原因，幫助判斷是真的腰斬還是來源自己的問題。</span></li>
+  <li><span class="n">4</span><span>本頁只是入口。「確認腰斬與賽果」進入 06、07 定義的流程，包括各時段如何結算，以及中斷後續賽或以新識別接續的出口（04 待確認第 7 項）；本頁不預設結果。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<ol>
+  <li>是否顯示該賽事已接受的注單數（11 待確認第 4 項）。</li>
+  <li>佇列的排序與處理時限（04 待確認第 10 項）。</li>
+</ol>
+
+</div>
+</body>
+</html>

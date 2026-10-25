@@ -1,0 +1,1308 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 賽事資料與對應：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+svg .ico { stroke: var(--line); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .ico.w { stroke: var(--warn); }
+svg .big { font-size: 26px; font-weight: 700; }
+svg .pnl { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .num { fill: var(--line); }
+svg .numt { font-size: 13px; font-weight: 700; fill: var(--bg); }
+svg .ptitle { font-size: 13px; font-weight: 700; }
+svg .bub { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .bubw { fill: var(--panel); stroke: var(--warn); stroke-width: 1; stroke-dasharray: 4 3; }
+svg .bt { font-size: 12px; }
+svg .char { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .charw { fill: none; stroke: var(--warn); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 3; }
+svg .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+svg .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+svg .st { font-size: 13px; font-weight: 700; fill: var(--line); }
+svg .stw { font-size: 13px; font-weight: 700; fill: var(--warn); }
+svg .th { fill: var(--tag-fill); }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+
+<h1>04 賽事資料與對應：概念圖</h1>
+<p class="meta"><b>狀態</b>：草稿（示意，供挑選） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 04 的規則，不約束資料模型或架構；圖中的來源名稱、識別與比分都是範例。</p>
+<ol class="toc">
+  <li><a href="#fig-04-01">圖 04-01　來源角色：一個來源可兼多種角色</a></li>
+  <li><a href="#fig-04-02">圖 04-02　統一紀錄只由建立者建立，其他來源只能對應</a></li>
+  <li><a href="#fig-04-03">圖 04-03　對應的確認依據與「確立」的累積</a></li>
+  <li><a href="#fig-04-04">圖 04-04　統一賽事狀態：取對投注較保守的一方</a></li>
+  <li><a href="#fig-04-05">圖 04-05　滾球比分看門檻，最終賽果看共識</a></li>
+  <li><a href="#fig-04-06">圖 04-06　統一滾球訊號與訊號覆蓋狀態</a></li>
+  <li><a href="#fig-04-07">圖 04-07　整體資料流：資料類別、來源角色、統一紀錄、下游</a></li>
+  <li><a href="#fig-04-08">圖 04-08　玩法對應：結算方式完全相同才對應</a></li>
+  <li><a href="#fig-04-09">圖 04-09　資料中斷只收回該來源獨自提供的盤口</a></li>
+  <li><a href="#fig-04-10">圖 04-10　賠率與已知狀態矛盾</a></li>
+  <li><a href="#fig-04-11">圖 04-11　統一賽果的記錄方式與不一致時的暫停</a></li>
+  <li><a href="#fig-04-12">圖 04-12　賽果穩定後的重新評估與人工審核</a></li>
+  <li><a href="#fig-04-13">圖 04-13　待取消與待腰斬：系統只標記、下架、列候選，裁定一律人工</a></li>
+  <li><a href="#fig-04-14">圖 04-14　滾球比分未達門檻的影響範圍：主計分項目全停，次計分項目只停該項目</a></li>
+  <li><a href="#fig-04-15">圖 04-15　最終賽果的參考做法：以結束回報為基準，其他來源佐證</a></li>
+  <li><a href="#fig-04-16">圖 04-16　參考做法的時間軸：足球下半場最後幾分鐘</a></li>
+  <li><a href="#fig-04-17">圖 04-17　參考做法的比對：相同、較低、其他</a></li>
+  <li><a href="#fig-04-18">圖 04-18　賽況轉為賽果的六個情境</a></li>
+  <li><a href="#fig-04-19">圖 04-19　接受的兩個風險：先結算，事後依 R04-15 更正</a></li>
+</ol>
+
+<!-- ============================================================ 圖 04-01 -->
+<section class="fig" id="fig-04-01">
+<h2>圖 04-01　來源角色：一個來源可兼多種角色</h2>
+<svg viewBox="0 0 960 570" width="100%" role="img" aria-label="來源角色矩陣">
+<defs>
+  <marker id="arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+</defs>
+<!-- 角色欄標題 -->
+<text x="40" y="52" class="ts">角色（由 InSports 指定）→</text>
+<g>
+  <rect x="240" y="30" width="165" height="112" rx="6" class="node"/><rect x="243" y="33" width="159" height="106" rx="4" class="node2"/>
+  <text x="322" y="56" text-anchor="middle" class="tb">賽程來源</text>
+  <text x="322" y="80" text-anchor="middle" class="ts">建立競賽、參賽方、<tspan x="322" dy="1.3em">賽事；每個運動</tspan><tspan x="322" dy="1.3em">恰好一個</tspan></text>
+</g>
+<g>
+  <rect x="415" y="30" width="165" height="112" rx="6" class="node"/><rect x="418" y="33" width="159" height="106" rx="4" class="node2"/>
+  <text x="497" y="56" text-anchor="middle" class="tb">賠率來源</text>
+  <text x="497" y="80" text-anchor="middle" class="ts">賠率供 05 作<tspan x="497" dy="1.3em">基礎賠率；</tspan><tspan x="497" dy="1.3em">一個以上</tspan></text>
+</g>
+<g>
+  <rect x="590" y="30" width="165" height="112" rx="6" class="node"/><rect x="593" y="33" width="159" height="106" rx="4" class="node2"/>
+  <text x="672" y="56" text-anchor="middle" class="tb">賽況來源</text>
+  <text x="672" y="80" text-anchor="middle" class="ts">滾球比分與滾球訊號；<tspan x="672" dy="1.3em">一個以上，訊號只取使用中</tspan><tspan x="672" dy="1.3em">的一個（固定優先順序）</tspan></text>
+</g>
+<g>
+  <rect x="765" y="30" width="165" height="112" rx="6" class="node"/><rect x="768" y="33" width="159" height="106" rx="4" class="node2"/>
+  <text x="847" y="56" text-anchor="middle" class="tb">賽果來源</text>
+  <text x="847" y="80" text-anchor="middle" class="ts">賽果供統一賽果；<tspan x="847" dy="1.3em">一個以上</tspan></text>
+</g>
+<!-- 來源列 -->
+<text x="40" y="175" class="ts">來源 ↓</text>
+<g>
+  <rect x="40" y="190" width="190" height="64" rx="6" class="node"/><rect x="43" y="193" width="184" height="58" rx="4" class="node2"/>
+  <text x="135" y="228" text-anchor="middle" class="tb">來源 A</text>
+</g>
+<g>
+  <rect x="40" y="280" width="190" height="64" rx="6" class="node"/><rect x="43" y="283" width="184" height="58" rx="4" class="node2"/>
+  <text x="135" y="318" text-anchor="middle" class="tb">來源 B</text>
+</g>
+<g>
+  <rect x="40" y="370" width="190" height="64" rx="6" class="node"/><rect x="43" y="373" width="184" height="58" rx="4" class="node2"/>
+  <text x="135" y="408" text-anchor="middle" class="tb">來源 C</text>
+</g>
+<!-- 格線 -->
+<line x1="240" y1="160" x2="930" y2="160" class="sep"/>
+<line x1="240" y1="266" x2="930" y2="266" class="sep"/>
+<line x1="240" y1="356" x2="930" y2="356" class="sep"/>
+<line x1="240" y1="446" x2="930" y2="446" class="sep"/>
+<line x1="410" y1="160" x2="410" y2="446" class="sep"/>
+<line x1="585" y1="160" x2="585" y2="446" class="sep"/>
+<line x1="760" y1="160" x2="760" y2="446" class="sep"/>
+<!-- A：賽程（足球）、賠率、賽果 -->
+<circle cx="322" cy="212" r="7" class="dot"/><text x="322" y="240" text-anchor="middle" class="ts">賽程來源（足球）</text>
+<circle cx="497" cy="222" r="7" class="dot"/>
+<circle cx="847" cy="222" r="7" class="dot"/>
+<!-- B：賽程（籃球）、賠率、賽況 -->
+<circle cx="322" cy="296" r="7" class="dot"/><text x="322" y="322" text-anchor="middle" class="ts">賽程來源（籃球）</text>
+<circle cx="497" cy="312" r="7" class="dot"/>
+<circle cx="672" cy="312" r="7" class="dot"/>
+<!-- C：賽況、賽果 -->
+<circle cx="672" cy="402" r="7" class="dot"/>
+<circle cx="847" cy="402" r="7" class="dot"/>
+<!-- 註記 -->
+<circle cx="52" cy="482" r="4" class="dotw"/>
+<text x="66" y="487">角色由 InSports 指定，不因來源的資料變動而改變；經銷商看不到也不能改。</text>
+<circle cx="52" cy="512" r="4" class="dotw"/>
+<text x="66" y="517">來源提供某類資料，不代表它擔任對應的角色。</text>
+<circle cx="52" cy="542" r="4" class="dotw"/>
+<text x="66" y="547">賽程來源只在運動層指定；其餘角色以運動設預設、以競賽覆寫；都不以計分項目指定。</text>
+</svg>
+<p class="cap"><b>圖說</b>：角色由 InSports 設定；賽程來源每個運動恰好一個，不以競賽覆寫；其餘角色各一個以上，以運動設預設、以競賽覆寫（R04-01、R04-02）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-02 -->
+<section class="fig" id="fig-04-02">
+<h2>圖 04-02　統一紀錄只由建立者建立，其他來源只能對應</h2>
+<svg viewBox="0 0 960 620" width="100%" role="img" aria-label="統一紀錄的建立與對應">
+<defs>
+  <marker id="arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr2w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<!-- 中央統一紀錄 -->
+<rect x="320" y="150" width="320" height="96" rx="8" class="node"/><rect x="324" y="154" width="312" height="88" rx="6" class="node2"/>
+<text x="480" y="178" text-anchor="middle" class="tb">統一紀錄　甲隊 對 乙隊</text>
+<text x="480" y="204" text-anchor="middle" class="ts">識別 <tspan class="mono">#1001</tspan>（來自賽程來源 A）</text>
+<text x="480" y="228" text-anchor="middle" class="ts">主客方與參考名稱以賽程來源為準</text>
+<!-- 左上：賽程來源 A -->
+<rect x="40" y="40" width="220" height="68" rx="6" class="node"/><rect x="43" y="43" width="214" height="62" rx="4" class="node2"/>
+<text x="150" y="66" text-anchor="middle" class="tb">賽程來源 A</text>
+<text x="150" y="90" text-anchor="middle" class="ts">甲隊 對 乙隊</text>
+<path d="M260,74 L320,74 L320,150" class="ln" marker-end="url(#arr2)"/>
+<text x="290" y="130" text-anchor="middle" class="tb">建立</text>
+<!-- 左下：來源 B -->
+<rect x="40" y="290" width="220" height="68" rx="6" class="node"/><rect x="43" y="293" width="214" height="62" rx="4" class="node2"/>
+<text x="150" y="316" text-anchor="middle" class="tb">來源 B</text>
+<text x="150" y="340" text-anchor="middle" class="ts">乙隊 對 甲隊</text>
+<path d="M260,324 L340,324 L340,246" class="ln" marker-end="url(#arr2)"/>
+<text x="238" y="282" class="ts">對應（記錄 B 為反向）</text>
+<!-- 右下：來源 C -->
+<rect x="700" y="290" width="220" height="68" rx="6" class="node"/><rect x="703" y="293" width="214" height="62" rx="4" class="node2"/>
+<text x="810" y="316" text-anchor="middle" class="tb">來源 C</text>
+<text x="810" y="340" text-anchor="middle" class="ts">甲隊 對 乙隊</text>
+<path d="M700,324 L620,324 L620,246" class="ln" marker-end="url(#arr2)"/>
+<text x="650" y="282" class="ts">對應</text>
+<!-- 右上：來源 D -->
+<rect x="700" y="40" width="220" height="68" rx="6" class="node"/><rect x="703" y="43" width="214" height="62" rx="4" class="node2"/>
+<text x="810" y="66" text-anchor="middle" class="tb">來源 D</text>
+<text x="810" y="90" text-anchor="middle" class="ts">列出一場 A 沒列的比賽</text>
+<path d="M700,74 L660,74 L660,120" class="lnw dash" marker-end="url(#arr2w)"/>
+<rect x="590" y="122" width="140" height="22" rx="4" class="ghost"/>
+<text x="660" y="138" text-anchor="middle" class="ts tw">✕ 不自動建立</text>
+<!-- 下方兩格：延賽 -->
+<text x="40" y="392" class="tb">延賽時，識別以賽程來源為準</text>
+<rect x="40" y="404" width="430" height="196" rx="6" class="panel"/>
+<text x="60" y="430" class="tb">賽程來源沿用原識別</text>
+<rect x="60" y="448" width="110" height="34" rx="4" class="node"/><text x="115" y="470" text-anchor="middle" class="mono">#1001</text>
+<path d="M170,465 L250,465" class="ln" marker-end="url(#arr2)"/>
+<text x="210" y="456" text-anchor="middle" class="ts">+3 小時</text>
+<rect x="252" y="448" width="110" height="34" rx="4" class="node"/><text x="307" y="470" text-anchor="middle" class="mono">#1001</text>
+<text x="60" y="516" class="ts">→ 同一場賽事，只更新開賽時間。</text>
+<text x="60" y="540" class="ts">B、C 的對應不變。</text>
+
+<rect x="490" y="404" width="430" height="196" rx="6" class="panel"/>
+<text x="510" y="430" class="tb">賽程來源改用新識別</text>
+<rect x="510" y="448" width="110" height="34" rx="4" class="ghost"/><text x="565" y="470" text-anchor="middle" class="mono tw">#1001</text>
+<path d="M620,465 L700,465" class="lnw" marker-end="url(#arr2w)"/>
+<text x="660" y="456" text-anchor="middle" class="ts tw">新識別</text>
+<rect x="702" y="448" width="110" height="34" rx="4" class="ghost"/><text x="757" y="470" text-anchor="middle" class="mono tw">#1002</text>
+<text x="510" y="516" class="ts">→ <tspan class="mono">#1002</tspan> 列為候選、不建立；<tspan class="mono">#1001</tspan> 標記待取消並下架。</text>
+<text x="510" y="540" class="ts">人工判斷同一場：<tspan class="mono">#1001</tspan> 改用新識別（重掛），注單留在原賽事。</text>
+<text x="510" y="564" class="ts">其他來源改用新識別時，仍是同一場賽事。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一場比賽由建立者建立：運動的賽程來源，或營運團隊逐場人工指定的來源；其他來源只能對應，不自動建立。識別以建立者為準；舊識別的賽事待取消，由人工處理（R04-05、R04-10、R04-23）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-03 -->
+<section class="fig" id="fig-04-03">
+<h2>圖 04-03　對應的確認依據與「確立」的累積</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="確認依據與確立的累積">
+<defs>
+  <marker id="arr3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr3w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<text x="40" y="30" class="ts">賽事對應的確認依據（擇一即可對應）</text>
+<!-- (a) -->
+<rect x="40" y="44" width="212" height="130" rx="6" class="node"/><rect x="43" y="47" width="206" height="124" rx="4" class="node2"/>
+<text x="146" y="70" text-anchor="middle" class="tb">（a）賠率一致</text>
+<text x="146" y="96" text-anchor="middle" class="ts">主要盤口彼此一致、<tspan x="146" dy="1.3em">無套利；只用賽前賠率；</tspan><tspan x="146" dy="1.3em">須有一方是已對應的</tspan><tspan x="146" dy="1.3em">賠率來源</tspan></text>
+<!-- (b) -->
+<rect x="272" y="44" width="212" height="130" rx="6" class="node"/><rect x="275" y="47" width="206" height="124" rx="4" class="node2"/>
+<text x="378" y="70" text-anchor="middle" class="tb">（b）參賽方已確立</text>
+<text x="378" y="96" text-anchor="middle" class="ts">雙方參賽方都已確立、<tspan x="378" dy="1.3em">開賽時間一致、</tspan><tspan x="378" dy="1.3em">沒有其他候選</tspan></text>
+<!-- (c) -->
+<rect x="504" y="44" width="212" height="130" rx="6" class="node"/><rect x="507" y="47" width="206" height="124" rx="4" class="node2"/>
+<text x="610" y="70" text-anchor="middle" class="tb">（c）賽後比對</text>
+<text x="610" y="96" text-anchor="middle" class="ts">雙方都提供的每個時段<tspan x="610" dy="1.3em">比分都一致；</tspan><tspan x="610" dy="1.3em">只有全場一致不算</tspan></text>
+<!-- (d) -->
+<rect x="736" y="44" width="184" height="130" rx="6" class="node"/><rect x="739" y="47" width="178" height="124" rx="4" class="node2"/>
+<text x="828" y="70" text-anchor="middle" class="tb">（d）人工確認</text>
+<!-- 連線到計數器 -->
+<path d="M146,174 L146,230 L300,230 L300,286" class="lnw dash" marker-end="url(#arr3w)"/>
+<path d="M378,174 L378,230 L400,230 L400,286" class="lnw dash" marker-end="url(#arr3w)"/>
+<path d="M610,174 L610,230 L560,230 L560,286" class="ln" marker-end="url(#arr3)"/>
+<path d="M828,174 L828,230 L660,230 L660,286" class="ln" marker-end="url(#arr3)"/>
+<rect x="110" y="238" width="140" height="22" rx="4" class="chipw"/><text x="180" y="254" text-anchor="middle" class="ts tw">0（不累積）</text>
+<rect x="520" y="238" width="80" height="22" rx="4" class="chip"/><text x="560" y="254" text-anchor="middle" class="ts">＋1</text>
+<rect x="700" y="238" width="120" height="22" rx="4" class="chip"/><text x="760" y="254" text-anchor="middle" class="ts">一次即確立</text>
+<!-- 計數器 -->
+<rect x="250" y="288" width="460" height="92" rx="8" class="node"/><rect x="254" y="292" width="452" height="84" rx="6" class="node2"/>
+<text x="480" y="316" text-anchor="middle" class="tb">參賽方對應的累積計數</text>
+<text x="480" y="340" text-anchor="middle" class="ts">同一組對應，由（c）或（d）確認的賽事逐次累積</text>
+<text x="480" y="364" text-anchor="middle" class="ts">（c）：每次 ＋1，次數見非功能需求　｜　（d）：一次即確立</text>
+<!-- 確立 -->
+<path d="M480,380 L480,420" class="ln" marker-end="url(#arr3)"/>
+<rect x="340" y="422" width="280" height="56" rx="8" class="node"/><rect x="344" y="426" width="272" height="48" rx="6" class="node2"/>
+<text x="480" y="446" text-anchor="middle" class="tb">確立</text>
+<text x="480" y="468" text-anchor="middle" class="ts">達到：足夠次數的（c），或一次（d）</text>
+<!-- 側註 -->
+<rect x="40" y="500" width="880" height="120" rx="6" class="panel"/>
+<circle cx="60" cy="530" r="4" class="dotw"/>
+<text x="76" y="535">名稱相似與來源的競賽：只能排序候選或排除衝突（例：一邊是女子隊），不是確認依據。</text>
+<circle cx="60" cy="566" r="4" class="dotw"/>
+<text x="76" y="571">兩個以上候選：不猜，等待更多證據或人工處理；期間該來源的資料不用於該賽事（R04-09）。</text>
+<circle cx="60" cy="600" r="4" class="dotw"/>
+<text x="76" y="605">對應一經確認，系統不再自行推翻，更正只能由人工進行（R04-10）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：四種確認依據擇一即可對應；參賽方的「確立」只由（c）、（d）累積（R04-08、R04-09）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-04 -->
+<section class="fig" id="fig-04-04">
+<h2>圖 04-04　統一賽事狀態：取對投注較保守的一方</h2>
+<svg viewBox="0 0 960 690" width="100%" role="img" aria-label="統一賽事狀態轉換">
+<defs>
+  <marker id="arr4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr4w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<!-- 主線狀態 -->
+<g>
+  <rect x="40" y="130" width="120" height="48" rx="24" class="node"/><rect x="43" y="133" width="114" height="42" rx="21" class="node2"/>
+  <text x="100" y="159" text-anchor="middle" class="tb">未開始</text>
+</g>
+<g>
+  <rect x="190" y="130" width="120" height="48" rx="24" class="node"/><rect x="193" y="133" width="114" height="42" rx="21" class="node2"/>
+  <text x="250" y="159" text-anchor="middle" class="tb">延後</text>
+</g>
+<g>
+  <rect x="340" y="130" width="120" height="48" rx="24" class="node"/><rect x="343" y="133" width="114" height="42" rx="21" class="node2"/>
+  <text x="400" y="159" text-anchor="middle" class="tb">進行中</text>
+</g>
+<g>
+  <rect x="490" y="130" width="120" height="48" rx="24" class="node"/><rect x="493" y="133" width="114" height="42" rx="21" class="node2"/>
+  <text x="550" y="159" text-anchor="middle" class="tb">比賽中斷</text>
+</g>
+<g>
+  <rect x="640" y="130" width="120" height="48" rx="24" class="node"/><rect x="643" y="133" width="114" height="42" rx="21" class="node2"/>
+  <text x="700" y="159" text-anchor="middle" class="tb">已結束</text>
+</g>
+<g>
+  <rect x="790" y="130" width="130" height="48" rx="24" class="node"/><rect x="793" y="133" width="124" height="42" rx="21" class="node2"/>
+  <text x="855" y="159" text-anchor="middle" class="tb">賽果已確定</text>
+</g>
+<!-- 主線箭頭 -->
+<path d="M160,154 L188,154" class="ln" marker-end="url(#arr4)"/>
+<path d="M310,154 L338,154" class="ln" marker-end="url(#arr4)"/>
+<path d="M460,154 L488,154" class="ln" marker-end="url(#arr4)"/>
+<path d="M610,154 L638,154" class="ln" marker-end="url(#arr4)"/>
+<path d="M760,154 L788,154" class="ln" marker-end="url(#arr4)"/>
+<!-- 未開始 → 進行中（上方弧線） -->
+<path d="M100,130 C100,60 400,60 400,128" class="ln" marker-end="url(#arr4)"/>
+<text x="250" y="72" text-anchor="middle" class="ts">任一來源報開始（停止賽前投注）</text>
+<!-- 進行中 → 比賽中斷 說明 -->
+<text x="475" y="118" text-anchor="middle" class="ts">任一來源報中斷</text>
+<!-- 比賽中斷 → 進行中（下方弧線） -->
+<path d="M550,178 C550,250 400,250 400,180" class="ln" marker-end="url(#arr4)"/>
+<text x="475" y="262" text-anchor="middle" class="ts">回到較寬鬆：沒有來源仍報較嚴格的狀態，或人工裁定</text>
+<!-- 已結束 → 賽果已確定 說明 -->
+<text x="800" y="200" text-anchor="middle" class="ts">統一賽果穩定（見圖 04-05）</text>
+<text x="175" y="206" text-anchor="middle" class="ts">任一來源標延期</text>
+<text x="175" y="224" text-anchor="middle" class="ts">（照常收注；給新時間只更新時間）</text>
+<!-- 取消／腰斬：匯流排式虛線，箭頭落在節點上緣 -->
+<path d="M100,178 L100,330" class="lnw dash"/>
+<path d="M370,178 L370,330" class="lnw dash"/>
+<path d="M585,178 L585,330" class="lnw dash"/>
+<path d="M100,330 L585,330" class="lnw dash"/>
+<path d="M305,330 L305,378" class="lnw dash" marker-end="url(#arr4w)"/>
+<path d="M455,330 L455,378" class="lnw dash" marker-end="url(#arr4w)"/>
+<g>
+  <rect x="250" y="380" width="110" height="42" rx="21" class="ghost"/>
+  <text x="305" y="406" text-anchor="middle" class="tb tw">取消</text>
+</g>
+<g>
+  <rect x="400" y="380" width="110" height="42" rx="21" class="ghost"/>
+  <text x="455" y="406" text-anchor="middle" class="tb tw">腰斬</text>
+</g>
+<text x="540" y="398" class="ts tw">所有來源一致，或人工裁定</text>
+<text x="540" y="418" class="ts tw">（人工另可裁定回到較寬鬆）</text>
+<!-- 附例 -->
+<rect x="40" y="450" width="880" height="220" rx="6" class="panel"/>
+<text x="60" y="478" class="tb">附例：三個來源回報不一致</text>
+<rect x="60" y="496" width="150" height="40" rx="4" class="node"/><text x="135" y="521" text-anchor="middle" class="ts">來源 A：進行中</text>
+<rect x="230" y="496" width="150" height="40" rx="4" class="node"/><text x="305" y="521" text-anchor="middle" class="ts">來源 B：未開始</text>
+<rect x="400" y="496" width="150" height="40" rx="4" class="node"/><text x="475" y="521" text-anchor="middle" class="ts">來源 C：未開始</text>
+<path d="M560,516 L620,516" class="ln" marker-end="url(#arr4)"/>
+<rect x="624" y="496" width="240" height="40" rx="4" class="node"/><text x="744" y="521" text-anchor="middle" class="tb">統一狀態＝進行中</text>
+<text x="60" y="568" class="ts">各來源不一致時，以對投注較保守的一方為準；任一來源報開始即為進行中。</text>
+<circle cx="66" cy="606" r="4" class="dotw"/>
+<text x="80" y="611" class="ts">來源不再提供某場賽事，不代表該賽事已結束。</text>
+<circle cx="66" cy="640" r="4" class="dotw"/>
+<text x="80" y="645" class="ts">待取消、待腰斬是疊在狀態上的人工處理標記，不是狀態；延後與未開始一樣繼續收注（見圖 04-13）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：各來源不一致時以對投注較保守的一方為準；沒有來源仍報較嚴格的狀態時才自動回到較寬鬆，否則交人工；待取消與待腰斬是標記，不是狀態（R04-12、R04-23）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-05 -->
+<section class="fig" id="fig-04-05">
+<h2>圖 04-05　滾球比分看門檻，最終賽果看共識</h2>
+<svg viewBox="0 0 960 680" width="100%" role="img" aria-label="門檻與共識">
+<defs>
+  <marker id="arr5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr5w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<!-- 左欄：門檻 -->
+<rect x="40" y="30" width="430" height="330" rx="8" class="node"/><rect x="44" y="34" width="422" height="322" rx="6" class="node2"/>
+<text x="255" y="60" text-anchor="middle" class="tb">滾球比分：門檻（Quorum）</text>
+<line x1="60" y1="74" x2="450" y2="74" class="sep"/>
+<text x="60" y="100" class="ts">設定：足球進球門檻＝ <tspan class="mono">2</tspan></text>
+<!-- 情境 1 -->
+<rect x="60" y="118" width="120" height="34" rx="4" class="chip"/><text x="120" y="140" text-anchor="middle" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="190" y="118" width="120" height="34" rx="4" class="chip"/><text x="250" y="140" text-anchor="middle" class="ts">B 報 <tspan class="mono">0:0</tspan></text>
+<path d="M316,135 L346,135" class="lnw" marker-end="url(#arr5w)"/>
+<text x="352" y="140" class="ts tw">統一比分維持 <tspan class="mono">0:0</tspan></text>
+<text x="60" y="176" class="ts">未達門檻數，統一比分維持原值。</text>
+<!-- 情境 2 -->
+<rect x="60" y="196" width="120" height="34" rx="4" class="chip"/><text x="120" y="218" text-anchor="middle" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="190" y="196" width="120" height="34" rx="4" class="chip"/><text x="250" y="218" text-anchor="middle" class="ts">B 也報 <tspan class="mono">1:0</tspan></text>
+<path d="M316,213 L346,213" class="ln" marker-end="url(#arr5)"/>
+<text x="352" y="218" class="ts">統一比分更新為 <tspan class="mono">1:0</tspan></text>
+<text x="60" y="254" class="ts">達到門檻數的來源報出相同的值，才更新。</text>
+<line x1="60" y1="276" x2="450" y2="276" class="sep"/>
+<text x="60" y="300" class="ts">門檻數是固定的設定值，不自動降低；</text>
+<text x="60" y="322" class="ts">已知不足就不開滾球；兩個值都達門檻時維持原值。</text>
+<text x="60" y="344" class="ts tw">未達門檻時，受影響的滾球盤口暫停（範圍見圖 04-14）。</text>
+<!-- 右欄：共識 -->
+<rect x="490" y="30" width="430" height="330" rx="8" class="node"/><rect x="494" y="34" width="422" height="322" rx="6" class="node2"/>
+<text x="705" y="60" text-anchor="middle" class="tb">最終賽果：共識（Consensus）</text>
+<line x1="510" y1="74" x2="900" y2="74" class="sep"/>
+<text x="510" y="100" class="ts">時段已結束，證據沒有矛盾、一致的來源數夠才穩定。</text>
+<rect x="510" y="118" width="100" height="34" rx="4" class="chip"/><text x="560" y="140" text-anchor="middle" class="ts">A <tspan class="mono">2:1</tspan></text>
+<rect x="620" y="118" width="100" height="34" rx="4" class="chip"/><text x="670" y="140" text-anchor="middle" class="ts">B <tspan class="mono">2:1</tspan></text>
+<rect x="730" y="118" width="100" height="34" rx="4" class="chipw"/><text x="780" y="140" text-anchor="middle" class="ts tw">C <tspan class="mono">2:2</tspan></text>
+<path d="M780,152 L780,176" class="lnw" marker-end="url(#arr5w)"/>
+<text x="510" y="200" class="tb tw">→ 不穩定</text>
+<text x="600" y="200" class="ts">不採多數決，不以賽程來源優先，</text>
+<text x="600" y="222" class="ts">直到一致或人工裁定。</text>
+<line x1="510" y1="244" x2="900" y2="244" class="sep"/>
+<rect x="510" y="260" width="120" height="34" rx="4" class="chip"/><text x="570" y="282" text-anchor="middle" class="ts">開賽前只有 A</text>
+<path d="M636,277 L666,277" class="ln" marker-end="url(#arr5)"/>
+<text x="672" y="282" class="ts">已知不足：該玩法不開盤</text>
+<text x="510" y="322" class="ts">最少來源數是固定的要求；比賽中才不足時交人工。</text>
+<text x="510" y="344" class="ts tw">腰斬或待腰斬的賽事不自動穩定，一律人工裁定。</text>
+<!-- 下方：賽況也是賽果的證據 -->
+<rect x="40" y="390" width="880" height="270" rx="8" class="panel"/>
+<text x="60" y="420" class="tb">賽況也是賽果的證據：不浪費賽況資訊</text>
+<line x1="60" y1="434" x2="900" y2="434" class="sep"/>
+<rect x="60" y="452" width="250" height="60" rx="4" class="node"/>
+<text x="185" y="476" text-anchor="middle" class="ts">來源 C</text>
+<text x="185" y="498" text-anchor="middle" class="ts">88 分鐘以 <tspan class="mono">2:1</tspan> 關盤</text>
+<rect x="330" y="452" width="250" height="60" rx="4" class="node"/>
+<text x="455" y="476" text-anchor="middle" class="ts">賽況來源 A</text>
+<text x="455" y="498" text-anchor="middle" class="ts">報出完場 <tspan class="mono">2:1</tspan></text>
+<path d="M586,482 L626,482" class="ln" marker-end="url(#arr5)"/>
+<text x="634" y="478" class="ts">C 的最後比分也採用，與 A 一致；</text>
+<text x="634" y="500" class="ts">不必等 C 的賽果。</text>
+<rect x="60" y="532" width="250" height="60" rx="4" class="node"/>
+<text x="185" y="556" text-anchor="middle" class="ts">來源 C</text>
+<text x="185" y="578" text-anchor="middle" class="ts">88 分鐘以 <tspan class="mono">2:1</tspan> 關盤，之後又進球</text>
+<rect x="330" y="532" width="250" height="60" rx="4" class="node"/>
+<text x="455" y="556" text-anchor="middle" class="ts">賽況來源 A</text>
+<text x="455" y="578" text-anchor="middle" class="ts">報出完場 <tspan class="mono">3:1</tspan></text>
+<path d="M586,562 L626,562" class="lnw dash" marker-end="url(#arr5w)"/>
+<text x="634" y="558" class="ts">C 只是沒看到最後的進球：</text>
+<text x="634" y="580" class="ts">不算矛盾，也不算一致。</text>
+<text x="60" y="622" class="ts">停止得太早的來源不採用；比分較高（例如 VAR 改判前的值）或賽果不同是矛盾。</text>
+<text x="60" y="644" class="ts">多接近時段結束才採用、怎麼比對，由 SPEC 決定（參考做法見圖 04-15）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：滾球比分達門檻數就更新；最終賽果要證據沒有矛盾、一致的來源數夠，不採多數決；賽況來源的滾球比分也是賽果的證據（R04-14）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-06 -->
+<section class="fig" id="fig-04-06">
+<h2>圖 04-06　統一滾球訊號與訊號覆蓋狀態</h2>
+<svg viewBox="0 0 960 736" width="100%" role="img" aria-label="統一滾球訊號與訊號覆蓋狀態">
+<defs>
+  <marker id="arr6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr6w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<text x="40" y="30" class="ts">一場賽事的賽況來源</text>
+<!-- 三個來源 -->
+<rect x="40" y="44" width="260" height="76" rx="6" class="node"/><rect x="43" y="47" width="254" height="70" rx="4" class="node2"/>
+<text x="170" y="70" text-anchor="middle" class="tb">來源 A</text>
+<text x="170" y="94" text-anchor="middle" class="ts">事件形式 · 使用中（優先順序第一）</text>
+<rect x="340" y="44" width="260" height="76" rx="6" class="node"/><rect x="343" y="47" width="254" height="70" rx="4" class="node2"/>
+<text x="470" y="70" text-anchor="middle" class="tb">來源 B</text>
+<text x="470" y="94" text-anchor="middle" class="ts">事件形式</text>
+<rect x="640" y="44" width="260" height="76" rx="6" class="node"/><rect x="643" y="47" width="254" height="70" rx="4" class="node2"/>
+<text x="770" y="70" text-anchor="middle" class="tb">來源 C</text>
+<text x="770" y="94" text-anchor="middle" class="ts">封盤形式</text>
+<!-- 連線 -->
+<path d="M170,120 L170,170 L330,170 L330,196" class="ln" marker-end="url(#arr6)"/>
+<path d="M470,120 L470,196" class="lnw dash"/>
+<path d="M770,120 L770,170 L630,170 L630,196" class="lnw dash"/>
+<text x="490" y="160" class="ts tw">不使用</text>
+<text x="790" y="160" class="ts tw">不使用</text>
+<!-- 統一滾球訊號 -->
+<rect x="310" y="198" width="340" height="88" rx="8" class="node"/><rect x="314" y="202" width="332" height="80" rx="6" class="node2"/>
+<text x="480" y="226" text-anchor="middle" class="tb">統一滾球訊號</text>
+<rect x="340" y="244" width="80" height="26" rx="13" class="chip"/><text x="380" y="262" text-anchor="middle" class="ts">安全</text>
+<rect x="440" y="244" width="80" height="26" rx="13" class="chipw"/><text x="480" y="262" text-anchor="middle" class="ts tw">危險</text>
+<rect x="540" y="244" width="80" height="26" rx="13" class="chip"/><text x="580" y="262" text-anchor="middle" class="ts">無訊號</text>
+<!-- 覆蓋狀態 -->
+<rect x="690" y="198" width="230" height="88" rx="8" class="node"/><rect x="694" y="202" width="222" height="80" rx="6" class="node2"/>
+<text x="805" y="226" text-anchor="middle" class="tb">訊號覆蓋狀態</text>
+<rect x="710" y="244" width="90" height="26" rx="13" class="chip"/><text x="755" y="262" text-anchor="middle" class="ts">有覆蓋</text>
+<rect x="812" y="244" width="90" height="26" rx="13" class="chipw"/><text x="857" y="262" text-anchor="middle" class="ts tw">無覆蓋</text>
+<!-- 判定表 -->
+<rect x="40" y="310" width="880" height="164" rx="6" class="panel"/>
+<text x="60" y="334" class="ts tb">使用中的賽況來源</text>
+<text x="520" y="334" class="ts tb">覆蓋狀態</text>
+<text x="680" y="334" class="ts tb">統一滾球訊號</text>
+<line x1="60" y1="344" x2="900" y2="344" class="sep"/>
+<text x="60" y="370">事件形式且穩定</text><text x="520" y="370">有覆蓋</text><text x="680" y="370">依來源報安全／危險</text>
+<line x1="60" y1="382" x2="900" y2="382" class="sep"/>
+<text x="60" y="408">封盤形式</text><text x="520" y="408" class="tw">無覆蓋</text><text x="680" y="408">封盤時危險</text>
+<line x1="60" y1="420" x2="900" y2="420" class="sep"/>
+<text x="60" y="444">沒有使用中的來源，或使用中的來源不穩定</text><text x="520" y="444" class="tw">無覆蓋</text><text x="680" y="444">無訊號</text>
+<!-- 情境 -->
+<text x="40" y="512" class="tb">情境</text>
+<circle cx="52" cy="538" r="4" class="dot"/>
+<text x="66" y="543" class="ts">A 回報可能主隊點球 → <tspan class="tw">危險</tspan>，直到依訊號對應表回到安全。</text>
+<circle cx="52" cy="570" r="4" class="dot"/>
+<text x="66" y="575" class="ts">A 回報一切正常、C 封盤 → 安全（C 不是使用中的賽況來源，其封盤不使用）。</text>
+<circle cx="52" cy="602" r="4" class="dotw"/>
+<text x="66" y="607" class="ts">A 回報離線、B 仍連線 → 立即<tspan class="tw">無覆蓋</tspan>，不自動也不人工改用 B；回到有覆蓋的條件比失效嚴格。</text>
+<circle cx="52" cy="634" r="4" class="dot"/>
+<text x="66" y="639" class="ts">InSports 偵測到事件停止到達，即使來源沒有發出異常，同樣判定不穩定。</text>
+<circle cx="52" cy="666" r="4" class="dot"/>
+<text x="66" y="671" class="ts">06 依覆蓋狀態分兩套接受機制；覆蓋狀態與兩套機制對經銷商不可見、不可設定。</text>
+<circle cx="52" cy="698" r="4" class="dot"/>
+<text x="66" y="703" class="ts">使用中的來源依固定優先順序決定：運動預設、競賽覆寫；封盤形式的來源排在同一個順序裡（R04-02）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：訊號只來自使用中的賽況來源，依固定優先順序決定；不穩定立即轉為無覆蓋，不自動也不人工換來源（R04-21、R04-22）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-07 -->
+<section class="fig" id="fig-04-07">
+<h2>圖 04-07　整體資料流：資料類別、來源角色、統一紀錄、下游</h2>
+<svg viewBox="0 0 960 670" width="100%" role="img" aria-label="整體資料流">
+<!-- 欄標題 -->
+<text x="135" y="40" text-anchor="middle" class="ts">03 交來的資料類別</text>
+<text x="360" y="40" text-anchor="middle" class="ts">來源角色（R04-02 指定）</text>
+<text x="590" y="40" text-anchor="middle" class="ts">統一紀錄</text>
+<text x="835" y="40" text-anchor="middle" class="ts">下游 PRD</text>
+<line x1="30" y1="50" x2="930" y2="50" class="sep"/>
+<!-- 列 1：賽程 -->
+<rect x="30" y="70" width="210" height="66" rx="6" class="node"/><rect x="33" y="73" width="204" height="60" rx="4" class="node2"/>
+<text x="135" y="98" text-anchor="middle" class="tb">賽程</text>
+<text x="135" y="120" text-anchor="middle" class="ts">含參賽方、冠軍盤名單</text>
+<path d="M240,103 L274,103" class="ln" marker-end="url(#arr)"/>
+<rect x="280" y="70" width="160" height="66" rx="6" class="node"/><rect x="283" y="73" width="154" height="60" rx="4" class="node2"/>
+<text x="360" y="108" text-anchor="middle" class="tb">賽程來源</text>
+<path d="M440,103 L474,103" class="ln" marker-end="url(#arr)"/>
+<rect x="480" y="70" width="220" height="66" rx="6" class="node"/><rect x="483" y="73" width="214" height="60" rx="4" class="node2"/>
+<text x="590" y="98" text-anchor="middle" class="tb">統一賽程</text>
+<text x="590" y="120" text-anchor="middle" class="ts">競賽、參賽方、賽事</text>
+<!-- 列 2：賠率 -->
+<rect x="30" y="160" width="210" height="66" rx="6" class="node"/><rect x="33" y="163" width="204" height="60" rx="4" class="node2"/>
+<text x="135" y="198" text-anchor="middle" class="tb">賠率</text>
+<path d="M240,193 L274,193" class="ln" marker-end="url(#arr)"/>
+<rect x="280" y="160" width="160" height="66" rx="6" class="node"/><rect x="283" y="163" width="154" height="60" rx="4" class="node2"/>
+<text x="360" y="198" text-anchor="middle" class="tb">賠率來源</text>
+<path d="M440,193 L474,193" class="ln" marker-end="url(#arr)"/>
+<rect x="480" y="160" width="220" height="66" rx="6" class="node"/><rect x="483" y="163" width="214" height="60" rx="4" class="node2"/>
+<text x="590" y="188" text-anchor="middle" class="tb">來源賠率</text>
+<text x="590" y="210" text-anchor="middle" class="ts">統一版本由 05 產生</text>
+<!-- 列 3：賽況 -->
+<rect x="30" y="250" width="210" height="66" rx="6" class="node"/><rect x="33" y="253" width="204" height="60" rx="4" class="node2"/>
+<text x="135" y="278" text-anchor="middle" class="tb">賽況</text>
+<text x="135" y="300" text-anchor="middle" class="ts">滾球比分與事件、滾球訊號</text>
+<path d="M240,283 L274,283" class="ln" marker-end="url(#arr)"/>
+<rect x="280" y="250" width="160" height="66" rx="6" class="node"/><rect x="283" y="253" width="154" height="60" rx="4" class="node2"/>
+<text x="360" y="288" text-anchor="middle" class="tb">賽況來源</text>
+<path d="M440,283 L474,283" class="ln" marker-end="url(#arr)"/>
+<rect x="480" y="250" width="220" height="66" rx="6" class="node"/><rect x="483" y="253" width="214" height="60" rx="4" class="node2"/>
+<text x="590" y="278" text-anchor="middle" class="tb">統一滾球比分</text>
+<text x="590" y="300" text-anchor="middle" class="ts">統一滾球訊號與訊號覆蓋狀態</text>
+<!-- 列 4：賽果 -->
+<rect x="30" y="340" width="210" height="66" rx="6" class="node"/><rect x="33" y="343" width="204" height="60" rx="4" class="node2"/>
+<text x="135" y="378" text-anchor="middle" class="tb">賽果</text>
+<path d="M240,373 L274,373" class="ln" marker-end="url(#arr)"/>
+<rect x="280" y="340" width="160" height="66" rx="6" class="node"/><rect x="283" y="343" width="154" height="60" rx="4" class="node2"/>
+<text x="360" y="378" text-anchor="middle" class="tb">賽果來源</text>
+<path d="M440,373 L474,373" class="ln" marker-end="url(#arr)"/>
+<rect x="480" y="340" width="220" height="66" rx="6" class="node"/><rect x="483" y="343" width="214" height="60" rx="4" class="node2"/>
+<text x="590" y="368" text-anchor="middle" class="tb">統一賽果</text>
+<text x="590" y="390" text-anchor="middle" class="ts">狀態、待取消／待腰斬標記</text>
+<!-- 匯流排到下游 -->
+<path d="M700,103 L720,103 L720,470 L700,470" class="ln"/><path d="M700,373 L720,373" class="ln"/>
+<path d="M700,193 L720,193" class="ln"/><path d="M700,283 L720,283" class="ln"/>
+<path d="M720,110 L740,110" class="ln" marker-end="url(#arr)"/>
+<path d="M720,200 L740,200" class="ln" marker-end="url(#arr)"/>
+<path d="M720,290 L740,290" class="ln" marker-end="url(#arr)"/>
+<path d="M720,380 L740,380" class="ln" marker-end="url(#arr)"/>
+<path d="M720,470 L740,470" class="ln" marker-end="url(#arr)"/>
+<!-- 下游 -->
+<rect x="745" y="70" width="185" height="80" rx="6" class="node"/>
+<text x="837" y="94" text-anchor="middle" class="tb">05 賠率與操盤</text>
+<text x="837" y="116" text-anchor="middle" class="ts">來源賠率、狀態、滾球訊號、<tspan x="837" dy="1.3em">待取消／待腰斬標記</tspan></text>
+<rect x="745" y="160" width="185" height="80" rx="6" class="node"/>
+<text x="837" y="184" text-anchor="middle" class="tb">06 投注接受</text>
+<text x="837" y="206" text-anchor="middle" class="ts">狀態、滾球比分、訊號、<tspan x="837" dy="1.3em">覆蓋狀態、標記</tspan></text>
+<rect x="745" y="250" width="185" height="80" rx="6" class="node"/>
+<text x="837" y="274" text-anchor="middle" class="tb">09 風險控管</text>
+<text x="837" y="296" text-anchor="middle" class="ts">統一滾球訊號、<tspan x="837" dy="1.3em">訊號覆蓋狀態、標記</tspan></text>
+<rect x="745" y="340" width="185" height="80" rx="6" class="node"/>
+<text x="837" y="364" text-anchor="middle" class="tb">07 結算與派彩</text>
+<text x="837" y="386" text-anchor="middle" class="ts">穩定的統一賽果、賽果更正、<tspan x="837" dy="1.3em">待取消裁定、待腰斬</tspan></text>
+<rect x="745" y="430" width="185" height="80" rx="6" class="node"/>
+<text x="837" y="454" text-anchor="middle" class="tb">08 提前兌現</text>
+<text x="837" y="476" text-anchor="middle" class="ts">待取消／待腰斬標記<tspan x="837" dy="1.3em">（暫停提前兌現）</tspan></text>
+<!-- 註記 -->
+<line x1="30" y1="530" x2="930" y2="530" class="sep"/>
+<circle cx="40" cy="558" r="4" class="dot"/><text x="54" y="563" class="ts">角色由 InSports 指定，不因來源的資料變動而自動改變；來源提供某類資料，不代表它擔任對應的角色（R04-02）。</text>
+<circle cx="40" cy="588" r="4" class="dot"/><text x="54" y="593" class="ts">賽程來源每個運動恰好一個，不以競賽覆寫；其餘角色各一個以上，以運動設預設、以競賽覆寫（R04-02）。</text>
+<circle cx="40" cy="618" r="4" class="dot"/><text x="54" y="623" class="ts">04 只輸出事實：統一紀錄、狀態、標記、候選；各 PRD 對標記的反應（下架、作廢、重掛後的注單）由各該 PRD 定義（第 7 節）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：每類資料由對應的角色使用，整理成統一紀錄後交給下游（R04-01、第 7 節）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-08 -->
+<section class="fig" id="fig-04-08">
+<h2>圖 04-08　玩法對應：結算方式完全相同才對應</h2>
+<svg viewBox="0 0 960 690" width="100%" role="img" aria-label="玩法對應的決策流程">
+<!-- 起點 -->
+<rect x="180" y="24" width="300" height="46" rx="6" class="node"/><rect x="183" y="27" width="294" height="40" rx="4" class="node2"/>
+<text x="330" y="52" text-anchor="middle" class="tb">來源的玩法、盤口線與投注項</text>
+<path d="M330,70 L330,98" class="ln" marker-end="url(#arr)"/>
+<!-- 閘門 1 -->
+<rect x="180" y="100" width="300" height="46" rx="23" class="node"/>
+<text x="330" y="128" text-anchor="middle" class="tb">結算方式完全相同？</text>
+<text x="170" y="112" text-anchor="end" class="ts">比對的項目：</text>
+<text x="170" y="130" text-anchor="end" class="ts">計分項目、時段</text>
+<text x="170" y="148" text-anchor="end" class="ts">是否含加時賽與點球大戰</text>
+<text x="170" y="166" text-anchor="end" class="ts">投注項的結構、計數規則</text>
+<path d="M480,123 L598,123" class="ln" marker-end="url(#arr)"/>
+<text x="540" y="116" text-anchor="middle" class="ts">是</text>
+<rect x="605" y="100" width="200" height="46" rx="6" class="node"/><rect x="608" y="103" width="194" height="40" rx="4" class="node2"/>
+<text x="705" y="128" text-anchor="middle" class="tb">對應到 01 的目錄</text>
+<path d="M330,146 L330,208" class="ln" marker-end="url(#arr)"/>
+<text x="342" y="184" class="ts">否</text>
+<!-- 閘門 2 -->
+<rect x="150" y="210" width="360" height="46" rx="23" class="node"/>
+<text x="330" y="238" text-anchor="middle" class="tb">只差在可以確定換算的地方？</text>
+<path d="M510,233 L598,233" class="ln" marker-end="url(#arr)"/>
+<text x="555" y="226" text-anchor="middle" class="ts">是</text>
+<rect x="605" y="210" width="200" height="46" rx="6" class="node"/><rect x="608" y="213" width="194" height="40" rx="4" class="node2"/>
+<text x="705" y="238" text-anchor="middle" class="tb">換算後對應</text>
+<path d="M705,210 L705,150" class="ln" marker-end="url(#arr)"/>
+<!-- 換算的例子 -->
+<path d="M705,256 L705,270" class="ln dash"/>
+<rect x="560" y="270" width="370" height="206" rx="8" class="panel"/>
+<text x="576" y="292" class="ts">可以確定換算的地方（換算只依來源資料本身與報價當時的比分）：</text>
+<rect x="576" y="304" width="165" height="28" rx="4" class="chip"/><text x="658" y="323" text-anchor="middle" class="ts">讓分的正負號慣例</text>
+<rect x="751" y="304" width="165" height="28" rx="4" class="chip"/><text x="833" y="323" text-anchor="middle" class="ts">四分之一盤的寫法</text>
+<rect x="576" y="340" width="340" height="28" rx="4" class="chip"/><text x="746" y="359" text-anchor="middle" class="ts">滾球讓分是否計入下注之前的進球（R01-10）</text>
+<rect x="576" y="376" width="340" height="28" rx="4" class="chip"/><text x="746" y="395" text-anchor="middle" class="ts">主客方向相反時，投注項與讓分對調（R04-08）</text>
+<text x="576" y="424" class="ts">例：比分 <tspan class="mono">1:0</tspan> 時來源 X 報主隊 <tspan class="mono">-1.5</tspan></text>
+<text x="576" y="442" class="ts">→ 換算為只計下注之後進球的主隊 <tspan class="mono">-0.5</tspan></text>
+<text x="576" y="464" class="ts tw">報價當時的比分不明 → 不使用該報價</text>
+<!-- 否：不近似對應 -->
+<path d="M330,256 L330,294" class="lnw" marker-end="url(#arrw)"/>
+<text x="342" y="280" class="ts tw">否</text>
+<rect x="180" y="296" width="300" height="46" rx="6" class="ghost"/>
+<text x="330" y="324" text-anchor="middle" class="tb tw">不近似對應</text>
+<text x="330" y="364" text-anchor="middle" class="ts tw">讓分 ✕→ 三項讓分</text>
+<text x="330" y="384" text-anchor="middle" class="ts tw">含加時賽的獨贏 ✕→ 只計常規時間的獨贏</text>
+<path d="M330,394 L330,418" class="lnw" marker-end="url(#arrw)"/>
+<rect x="180" y="420" width="300" height="40" rx="6" class="ghost"/>
+<text x="330" y="445" text-anchor="middle" class="tb tw">不使用、不開盤</text>
+<path d="M330,460 L330,486" class="lnw" marker-end="url(#arrw)"/>
+<rect x="150" y="488" width="360" height="60" rx="6" class="ghost"/>
+<text x="330" y="511" text-anchor="middle" class="tb tw">列入後台的未對應清單</text>
+<text x="330" y="533" text-anchor="middle" class="ts tw">依來源列出玩法與出現次數，只顯示不推播</text>
+<!-- 底部註記 -->
+<rect x="40" y="572" width="880" height="96" rx="8" class="panel"/>
+<circle cx="60" cy="596" r="4" class="dot"/><text x="74" y="601" class="ts">對應不代表開盤：是否開盤由 05 決定（03 的 R03-10）。</text>
+<circle cx="60" cy="620" r="4" class="dot"/><text x="74" y="625" class="ts">對應後判斷為輸出玩法（05 的 R05-04）：連接器不讀取（03 的 R03-10），也不列入未對應清單。</text>
+<circle cx="60" cy="644" r="4" class="dot"/><text x="74" y="649" class="ts">名稱或代碼相近不是依據；對應表由 InSports 維護，新增來源或來源新增玩法時更新。</text>
+</svg>
+<p class="cap"><b>圖說</b>：來源的玩法只有結算方式完全相同，或可確定換算時才對應；無法對應的不使用，列入未對應清單（R04-11）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-09 -->
+<section class="fig" id="fig-04-09">
+<h2>圖 04-09　資料中斷只收回該來源獨自提供的盤口</h2>
+<svg viewBox="0 0 960 500" width="100%" role="img" aria-label="來源中斷時盤口的處理">
+<rect x="40" y="24" width="400" height="30" rx="4" class="tagw"/>
+<text x="240" y="44" text-anchor="middle" class="ts tw">情境：來源 A 的賠率中斷（中斷與恢復的判定見 03）</text>
+<!-- 盤口表 -->
+<rect x="40" y="70" width="580" height="330" rx="8" class="panel"/>
+<text x="60" y="94" class="ts">盤口</text>
+<text x="260" y="94" class="ts">提供賠率的來源</text>
+<text x="390" y="94" class="ts">結果</text>
+<line x1="60" y1="104" x2="600" y2="104" class="sep"/>
+<!-- 列 1 -->
+<text x="60" y="141" class="tb">角球大小</text>
+<rect x="260" y="124" width="44" height="26" rx="4" class="chipw"/><text x="282" y="142" text-anchor="middle" class="ts tw">A</text>
+<text x="390" y="141" class="tw">暫停：只有 A 提供</text>
+<line x1="60" y1="162" x2="600" y2="162" class="sep"/>
+<!-- 列 2 -->
+<text x="60" y="191" class="tb">常規時間讓分（可逆玩法）</text>
+<text x="60" y="211" class="ts">輸入玩法由 A、B 提供</text>
+<rect x="260" y="182" width="44" height="26" rx="4" class="chipw"/><text x="282" y="200" text-anchor="middle" class="ts tw">A</text>
+<rect x="310" y="182" width="44" height="26" rx="4" class="chip"/><text x="332" y="200" text-anchor="middle" class="ts">B</text>
+<text x="390" y="199">以 B 的輸入玩法繼續推導</text>
+<line x1="60" y1="228" x2="600" y2="228" class="sep"/>
+<text x="60" y="250" class="ts">另一場比賽：只有 A 提供輸入玩法</text>
+<line x1="60" y1="260" x2="600" y2="260" class="sep"/>
+<!-- 列 3 -->
+<text x="60" y="289" class="tb">所有可逆玩法</text>
+<text x="60" y="309" class="ts">依賴 A 的輸入玩法推導</text>
+<rect x="260" y="280" width="44" height="26" rx="4" class="chipw"/><text x="282" y="298" text-anchor="middle" class="ts tw">A</text>
+<text x="390" y="297" class="tw">全部暫停（05 的 R05-06）</text>
+<line x1="60" y1="326" x2="600" y2="326" class="sep"/>
+<!-- 列 4 -->
+<text x="60" y="355" class="tb">角球大小</text>
+<text x="60" y="375" class="ts">由 A、B 提供</text>
+<rect x="260" y="346" width="44" height="26" rx="4" class="chipw"/><text x="282" y="364" text-anchor="middle" class="ts tw">A</text>
+<rect x="310" y="346" width="44" height="26" rx="4" class="chip"/><text x="332" y="364" text-anchor="middle" class="ts">B</text>
+<text x="390" y="363">以 B 繼續</text>
+<!-- 右：賽程來源中斷 -->
+<rect x="650" y="70" width="270" height="330" rx="8" class="node"/><rect x="653" y="73" width="264" height="324" rx="6" class="node2"/>
+<text x="785" y="98" text-anchor="middle" class="tb">運動的賽程來源中斷</text>
+<line x1="670" y1="112" x2="900" y2="112" class="sep"/>
+<circle cx="676" cy="140" r="4" class="dot"/>
+<text x="690" y="145" class="ts">已建立的賽事照常，<tspan x="690" dy="1.4em">以其他來源的賠率與賽況繼續。</tspan></text>
+<circle cx="676" cy="202" r="4" class="dotw"/>
+<text x="690" y="207" class="ts tw">不建立新賽事；<tspan x="690" dy="1.4em">開賽時間等賽程資料暫不更新。</tspan></text>
+<circle cx="676" cy="264" r="4" class="dot"/>
+<text x="690" y="269" class="ts">恢復後補上賽程資料<tspan x="690" dy="1.4em">（03 的 R03-10）。</tspan></text>
+<line x1="670" y1="320" x2="900" y2="320" class="sep"/>
+<text x="690" y="348" class="ts">賽況與賽果中斷的處理，<tspan x="690" dy="1.4em">見 R04-14、R04-22。</tspan></text>
+<!-- 底部註記 -->
+<line x1="40" y1="424" x2="920" y2="424" class="sep"/>
+<circle cx="50" cy="450" r="4" class="dot"/><text x="64" y="455" class="ts">多個來源提供的盤口以其餘來源繼續（見 05）；來源恢復正常後才重新開放。</text>
+<circle cx="50" cy="478" r="4" class="dot"/><text x="64" y="483" class="ts">可逆玩法不逐一盤口判斷，而是看推導所需的輸入玩法是否仍有其他來源提供。</text>
+</svg>
+<p class="cap"><b>圖說</b>：來源中斷時只暫停它獨自提供的盤口；可逆玩法看輸入玩法是否仍有其他來源提供（R04-16）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-10 -->
+<section class="fig" id="fig-04-10">
+<h2>圖 04-10　賠率與已知狀態矛盾</h2>
+<svg viewBox="0 0 960 540" width="100%" role="img" aria-label="賠率矛盾的判定與處理">
+<text x="40" y="30" class="ts">三種矛盾（單場賽事層級）</text>
+<!-- 卡 1 -->
+<rect x="40" y="40" width="280" height="130" rx="6" class="ghost"/>
+<text x="180" y="68" text-anchor="middle" class="tb tw">比賽已結束仍有賠率</text>
+<text x="180" y="96" text-anchor="middle" class="ts">例：統一賽事狀態已結束，<tspan x="180" dy="1.4em">來源仍報出該場的讓分賠率。</tspan></text>
+<!-- 卡 2 -->
+<rect x="340" y="40" width="280" height="130" rx="6" class="ghost"/>
+<text x="480" y="68" text-anchor="middle" class="tb tw">大小的盤口線已被比分超過</text>
+<text x="480" y="96" text-anchor="middle" class="ts">例：比分 <tspan class="mono">3:0</tspan>，<tspan x="480" dy="1.4em">仍報常規時間大小 <tspan class="mono">2.5</tspan>。</tspan></text>
+<!-- 卡 3 -->
+<rect x="640" y="40" width="280" height="130" rx="6" class="ghost"/>
+<text x="780" y="68" text-anchor="middle" class="tb tw">賠率過舊或凍結</text>
+<text x="780" y="90" text-anchor="middle" class="ts">滾球中已有計分變動，<tspan x="780" dy="1.4em">該來源的賠率卻長時間未更新；</tspan><tspan x="780" dy="1.4em">即使來源狀態正常（03 的 R03-05）</tspan><tspan x="780" dy="1.4em">仍由 04 判定；時間數值見非功能需求。</tspan></text>
+<!-- 匯流到處理 -->
+<path d="M180,170 L180,190 L780,190 L780,170" class="lnw"/>
+<path d="M480,170 L480,190" class="lnw"/>
+<path d="M480,190 L480,214" class="lnw" marker-end="url(#arrw)"/>
+<rect x="160" y="216" width="640" height="96" rx="6" class="node"/><rect x="163" y="219" width="634" height="90" rx="4" class="node2"/>
+<text x="480" y="244" text-anchor="middle" class="tb">該賽事來自此來源的賠率不採用，直到人工恢復</text>
+<text x="480" y="270" text-anchor="middle" class="ts">盤口的處理與中斷相同（R04-16）：其他來源提供的盤口照常，</text>
+<text x="480" y="292" text-anchor="middle" class="ts">只有此來源獨自提供的盤口暫停；可逆玩法看輸入玩法是否仍有其他來源提供。</text>
+<!-- 對照 -->
+<text x="40" y="350" class="ts">對照：整個來源的中斷與單場賽事的矛盾是兩件事</text>
+<rect x="40" y="360" width="430" height="160" rx="8" class="panel"/>
+<text x="60" y="386" class="tb">03 的來源狀態</text>
+<line x1="60" y1="398" x2="450" y2="398" class="sep"/>
+<text x="60" y="422" class="ts">範圍：整個來源，依資料類別（賽程、賠率、賽況、賽果）</text>
+<text x="60" y="446" class="ts">判定：持續收不到有效內容（R03-05）</text>
+<text x="60" y="470" class="ts">恢復：系統自動，確認穩定後回到正常（R03-06）</text>
+<text x="60" y="494" class="ts">影響：該來源該類資料不交給 04</text>
+<rect x="490" y="360" width="430" height="160" rx="8" class="panel"/>
+<text x="510" y="386" class="tb tw">04 的矛盾</text>
+<line x1="510" y1="398" x2="900" y2="398" class="sep"/>
+<text x="510" y="422" class="ts">範圍：單場賽事，此來源在該賽事的賠率</text>
+<text x="510" y="446" class="ts">判定：賠率與已知狀態矛盾，即使來源狀態正常</text>
+<text x="510" y="470" class="ts tw">恢復：人工恢復（R04-19）</text>
+<text x="510" y="494" class="ts">影響：只有此來源獨自提供的盤口暫停</text>
+</svg>
+<p class="cap"><b>圖說</b>：單場賽事的賠率與已知狀態矛盾時不採用該來源的賠率，直到人工恢復；與整個來源的中斷分開判定（R04-17）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-11 -->
+<section class="fig" id="fig-04-11">
+<h2>圖 04-11　統一賽果的記錄方式與不一致時的暫停</h2>
+<svg viewBox="0 0 960 462" width="100%" role="img" aria-label="統一賽果的記錄方式">
+<!-- 左：逐項記錄 -->
+<rect x="40" y="24" width="540" height="414" rx="8" class="node"/><rect x="43" y="27" width="534" height="408" rx="6" class="node2"/>
+<text x="60" y="52" class="tb">統一賽果：依 01 的時段與計分項目逐項記錄</text>
+<line x1="60" y1="64" x2="560" y2="64" class="sep"/>
+<!-- 表頭 -->
+<text x="70" y="90" class="ts">時段 ＼ 計分項目</text>
+<text x="290" y="90" text-anchor="middle" class="ts">進球</text>
+<text x="440" y="90" text-anchor="middle" class="ts">角球</text>
+<line x1="60" y1="100" x2="520" y2="100" class="sep"/>
+<line x1="210" y1="76" x2="210" y2="232" class="sep"/>
+<line x1="370" y1="76" x2="370" y2="232" class="sep"/>
+<!-- 列 -->
+<text x="70" y="128">上半場</text>
+<text x="290" y="128" text-anchor="middle" class="mono">1:0</text>
+<text x="440" y="128" text-anchor="middle" class="mono">3:2</text>
+<line x1="60" y1="144" x2="520" y2="144" class="sep"/>
+<text x="70" y="172">下半場</text>
+<text x="290" y="172" text-anchor="middle" class="mono">1:1</text>
+<rect x="420" y="154" width="40" height="26" rx="4" class="tagw"/><text x="440" y="172" text-anchor="middle" class="tb tw">？</text>
+<line x1="60" y1="188" x2="520" y2="188" class="sep"/>
+<text x="70" y="216">常規時間</text>
+<text x="290" y="216" text-anchor="middle" class="mono">2:1</text>
+<text x="290" y="232" text-anchor="middle" class="ts">由各時段算出</text>
+<rect x="420" y="198" width="40" height="26" rx="4" class="tagw"/><text x="440" y="216" text-anchor="middle" class="tb tw">？</text>
+<line x1="60" y1="244" x2="520" y2="244" class="sep"/>
+<!-- 順序與時間 -->
+<text x="70" y="270" class="ts">計分的先後順序與發生時間（有玩法需要時另記錄）：</text>
+<rect x="70" y="282" width="110" height="26" rx="4" class="chip"/><text x="125" y="300" text-anchor="middle" class="ts">主隊 <tspan class="mono">12'</tspan></text>
+<rect x="190" y="282" width="110" height="26" rx="4" class="chip"/><text x="245" y="300" text-anchor="middle" class="ts">客隊 <tspan class="mono">40'</tspan></text>
+<rect x="310" y="282" width="110" height="26" rx="4" class="chip"/><text x="365" y="300" text-anchor="middle" class="ts">主隊 <tspan class="mono">78'</tspan></text>
+<line x1="60" y1="322" x2="560" y2="322" class="sep"/>
+<circle cx="70" cy="344" r="4" class="dot"/><text x="84" y="349" class="ts">保留每次變動；合計（例如常規時間）由各時段算出，不直接採用來源的合計。</text>
+<circle cx="70" cy="370" r="4" class="dotw"/><text x="84" y="375" class="ts tw">來源沒有提供的項目視為未知（？），不是 0。</text>
+<circle cx="70" cy="396" r="4" class="dot"/><text x="84" y="401" class="ts">落後反勝、第 N 個進球、時間區間需要順序或時間；<tspan x="84" dy="1.3em">來源能否提供由營運團隊 人工判斷（R01-18）。</tspan></text>
+<!-- 右：不一致 → 暫停 -->
+<rect x="610" y="24" width="310" height="392" rx="8" class="panel"/>
+<text x="765" y="52" text-anchor="middle" class="tb">多個來源的計分順序或發生時間不一致</text>
+<line x1="630" y1="64" x2="900" y2="64" class="sep"/>
+<text x="630" y="92" class="ts">來源 A 的進球順序</text>
+<rect x="630" y="102" width="60" height="26" rx="4" class="chip"/><text x="660" y="120" text-anchor="middle" class="ts">主隊</text>
+<rect x="700" y="102" width="60" height="26" rx="4" class="chip"/><text x="730" y="120" text-anchor="middle" class="ts">客隊</text>
+<text x="630" y="156" class="ts">來源 B 的進球順序</text>
+<rect x="630" y="166" width="60" height="26" rx="4" class="chipw"/><text x="660" y="184" text-anchor="middle" class="ts tw">客隊</text>
+<rect x="700" y="166" width="60" height="26" rx="4" class="chipw"/><text x="730" y="184" text-anchor="middle" class="ts tw">主隊</text>
+<path d="M765,200 L765,228" class="lnw" marker-end="url(#arrw)"/>
+<rect x="630" y="232" width="260" height="82" rx="6" class="ghost"/>
+<text x="760" y="258" text-anchor="middle" class="tb tw">依賴這些資料的玩法一律暫停</text>
+<text x="760" y="280" text-anchor="middle" class="ts tw">不產生賠率、不接受新注單，</text>
+<text x="760" y="300" text-anchor="middle" class="ts tw">直到來源一致為止。</text>
+<text x="630" y="344" class="ts">例：進球順序不一致 → 暫停該時段的</text>
+<text x="630" y="364" class="ts">第 N 個進球與落後反勝。</text>
+<text x="630" y="396" class="ts">最終計數仍依 R04-14 的門檻與共識。</text>
+</svg>
+<p class="cap"><b>圖說</b>：統一賽果逐時段逐項記錄，合計自行算出，未提供視為未知；順序或時間不一致時暫停依賴它的玩法（R04-13）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-12 -->
+<section class="fig" id="fig-04-12">
+<h2>圖 04-12　賽果穩定後的重新評估與人工審核</h2>
+<svg viewBox="0 0 960 650" width="100%" role="img" aria-label="重新評估與人工審核">
+<!-- 時間軸 -->
+<rect x="40" y="30" width="180" height="60" rx="6" class="node"/><rect x="43" y="33" width="174" height="54" rx="4" class="node2"/>
+<text x="130" y="54" text-anchor="middle" class="tb">統一賽果穩定</text>
+<text x="130" y="76" text-anchor="middle" class="ts">全場 <tspan class="mono">2:1</tspan>（R04-14）</text>
+<path d="M220,60 L254,60" class="ln" marker-end="url(#arr)"/>
+<rect x="260" y="30" width="160" height="60" rx="6" class="node"/><rect x="263" y="33" width="154" height="54" rx="4" class="node2"/>
+<text x="340" y="54" text-anchor="middle" class="tb">07 結算</text>
+<text x="340" y="76" text-anchor="middle" class="ts">已完成派彩</text>
+<path d="M420,60 L454,60" class="ln" marker-end="url(#arr)"/>
+<rect x="460" y="30" width="220" height="60" rx="6" class="node"/><rect x="463" y="33" width="214" height="54" rx="4" class="node2"/>
+<text x="570" y="54" text-anchor="middle" class="tb">來源 C 事後改報 <tspan class="mono">2:2</tspan></text>
+<text x="570" y="76" text-anchor="middle" class="ts">VAR 改判或來源更正</text>
+<path d="M680,60 L714,60" class="lnw" marker-end="url(#arrw)"/>
+<rect x="720" y="30" width="200" height="60" rx="6" class="ghost"/>
+<text x="820" y="54" text-anchor="middle" class="tb tw">進入重新評估</text>
+<text x="820" y="76" text-anchor="middle" class="ts tw">交由人工審核</text>
+<text x="480" y="122" text-anchor="middle" class="ts">穩定值 <tspan class="mono">2:1</tspan> 與已完成的結算維持不變；系統不自動改為新值（R04-15）。</text>
+<!-- 人工裁定 -->
+<line x1="40" y1="140" x2="920" y2="140" class="sep"/>
+<text x="40" y="166" class="tb">人工裁定（四種，都留下紀錄：由誰、何時、依據什麼；不提供撤銷，更正時以新裁定取代）</text>
+<rect x="40" y="180" width="140" height="40" rx="20" class="node"/><text x="110" y="205" text-anchor="middle" class="tb">維持原賽果</text>
+<rect x="200" y="180" width="140" height="40" rx="20" class="node"/><text x="270" y="205" text-anchor="middle" class="tb">指定賽果</text>
+<rect x="360" y="180" width="140" height="40" rx="20" class="ghost"/><text x="430" y="205" text-anchor="middle" class="tb tw">賽果無效</text>
+<rect x="520" y="180" width="120" height="40" rx="20" class="node"/><text x="580" y="205" text-anchor="middle" class="tb">保留</text>
+<text x="270" y="244" text-anchor="middle" class="ts">例：指定 <tspan class="mono">2:2</tspan> → 穩定值改變，</text>
+<text x="270" y="262" text-anchor="middle" class="ts">視為賽果更正，由 07 重新結算</text>
+<text x="430" y="244" text-anchor="middle" class="ts tw">唯一會退還注額的裁定</text>
+<text x="430" y="262" text-anchor="middle" class="ts tw">（規則見 07）</text>
+<!-- 覆核 -->
+<line x1="40" y1="284" x2="920" y2="284" class="sep"/>
+<text x="40" y="310" class="tb">覆核（R04-19）</text>
+<rect x="40" y="322" width="880" height="100" rx="8" class="panel"/>
+<text x="60" y="350" class="ts">會重新結算、退還注額或改變結算依據的裁定（指定賽果、賽果無效、更正對應、重掛）</text>
+<path d="M620,345 L654,345" class="lnw" marker-end="url(#arrw)"/>
+<text x="664" y="350" class="tb tw">須由另一人覆核後才生效</text>
+<line x1="60" y1="372" x2="900" y2="372" class="sep"/>
+<text x="60" y="400" class="ts">其餘裁定（維持原賽果、保留等）</text>
+<path d="M620,395 L654,395" class="ln" marker-end="url(#arr)"/>
+<text x="664" y="400" class="tb">一人即可</text>
+<!-- 其他需要人工處理的情況 -->
+<line x1="40" y1="446" x2="920" y2="446" class="sep"/>
+<text x="40" y="472" class="tb">R04-19 需要人工處理的其他情況</text>
+<circle cx="50" cy="500" r="4" class="dot"/><text x="64" y="505" class="ts">運動的賽程來源列出的新競賽（R04-02）</text>
+<circle cx="50" cy="528" r="4" class="dot"/><text x="64" y="533" class="ts">因矛盾而不採用的來源賠率的恢復（R04-17）</text>
+<circle cx="50" cy="556" r="4" class="dot"/><text x="64" y="561" class="ts">有多個候選的對應（R04-09）</text>
+<circle cx="490" cy="500" r="4" class="dot"/><text x="504" y="505" class="ts">系統只對應不合併；合併一律人工（R04-07）</text>
+<circle cx="490" cy="528" r="4" class="dot"/><text x="504" y="533" class="ts">賽果不一致超過一定時間（R04-14）</text>
+<circle cx="490" cy="556" r="4" class="dot"/><text x="504" y="561" class="ts">所有對應與賽果的更正（R04-10、R04-15）</text>
+<circle cx="50" cy="584" r="4" class="dot"/><text x="64" y="589" class="ts">待取消與待腰斬的處理（R04-23，見圖 04-13）</text>
+<text x="40" y="626" class="ts">每項裁定記錄由誰、何時、依據什麼（見非功能需求與稽核）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：穩定後的不一致不自動改值，交人工裁定；會重新結算或退還注額的裁定須另一人覆核（R04-15、R04-19）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-13 -->
+<section class="fig" id="fig-04-13">
+<h2>圖 04-13　待取消與待腰斬：系統只標記、下架、列候選，裁定一律人工</h2>
+<svg viewBox="0 0 960 760" width="100%" role="img" aria-label="待取消與待腰斬的流程">
+<!-- 觸發 -->
+<text x="40" y="30" class="ts">尚未開始的賽事（未開始或延後），賽程來源不再提供（不論原因、不論新舊識別出現的先後）</text>
+<rect x="40" y="44" width="880" height="54" rx="6" class="node"/><rect x="43" y="47" width="874" height="48" rx="4" class="node2"/>
+<text x="480" y="66" text-anchor="middle" class="tb">從清單消失　｜　標為取消　｜　標為延期而沒有新開賽時間　｜　原定開賽時間已過仍凍結在賽前</text>
+<text x="480" y="86" text-anchor="middle" class="ts">來源整體中斷不算（依 R04-16）；給出新開賽時間的延期只更新時間（R04-05）</text>
+<path d="M480,98 L480,128" class="lnw" marker-end="url(#arrw)"/>
+<!-- 標記 -->
+<rect x="330" y="130" width="300" height="46" rx="23" class="ghost"/>
+<text x="480" y="159" text-anchor="middle" class="tb tw">標記待取消（疊在狀態上，不改狀態）</text>
+<!-- 三個效果 -->
+<path d="M480,176 L480,196 L180,196 L180,214" class="lnw" marker-end="url(#arrw)"/>
+<path d="M480,196 L480,214" class="lnw" marker-end="url(#arrw)"/>
+<path d="M480,196 L780,196 L780,214" class="lnw" marker-end="url(#arrw)"/>
+<rect x="40" y="216" width="280" height="110" rx="6" class="panel"/>
+<text x="180" y="242" text-anchor="middle" class="tb tw">下架</text>
+<text x="180" y="266" text-anchor="middle" class="ts">該賽事；候選不建立、不開盤</text>
+<text x="180" y="286" text-anchor="middle" class="ts">盤口、提前兌現、風險部位</text>
+<text x="180" y="306" text-anchor="middle" class="ts">的意思由 05、08、09 定義</text>
+<rect x="340" y="216" width="280" height="110" rx="6" class="panel"/>
+<text x="480" y="242" text-anchor="middle" class="tb">列出候選（只供人工參考）</text>
+<text x="480" y="266" text-anchor="middle" class="ts">不以名稱為依據；寧可多列不可漏列；</text>
+<text x="480" y="286" text-anchor="middle" class="ts">不看出現先後；具體條件交 SPEC。</text>
+<text x="480" y="306" text-anchor="middle" class="ts">同組對戰（棒球雙重賽）會一起列入。</text>
+<rect x="640" y="216" width="280" height="110" rx="6" class="panel"/>
+<text x="780" y="242" text-anchor="middle" class="tb tw">疑似重複的新識別不建立</text>
+<text x="780" y="266" text-anchor="middle" class="ts">新識別與仍在清單上的賽事</text>
+<text x="780" y="286" text-anchor="middle" class="ts">符合候選條件時不建立，</text>
+<text x="780" y="306" text-anchor="middle" class="ts">由人工判斷同場或不同場。</text>
+<!-- 人工 -->
+<path d="M480,326 L480,356" class="ln" marker-end="url(#arr)"/>
+<line x1="40" y1="372" x2="920" y2="372" class="sep"/>
+<text x="40" y="396" class="tb">營運團隊裁定（只有這四種；系統不自行取消、作廢、重掛或恢復）</text>
+<rect x="40" y="412" width="200" height="44" rx="22" class="ghost"/><text x="140" y="440" text-anchor="middle" class="tb tw">取消並作廢注單</text>
+<rect x="260" y="412" width="220" height="44" rx="22" class="ghost"/><text x="370" y="440" text-anchor="middle" class="tb tw">重掛到候選</text>
+<rect x="500" y="412" width="180" height="44" rx="22" class="node"/><text x="590" y="440" text-anchor="middle" class="tb">暫不處理</text>
+<rect x="700" y="412" width="220" height="44" rx="22" class="node"/><text x="810" y="440" text-anchor="middle" class="tb">解除待取消並上架</text>
+<text x="140" y="478" text-anchor="middle" class="ts">作廢見 07</text>
+<text x="370" y="478" text-anchor="middle" class="ts">候選須尚未開始；</text>
+<text x="370" y="496" text-anchor="middle" class="ts">注單留在原賽事，不轉移</text>
+<text x="590" y="478" text-anchor="middle" class="ts">維持待取消與下架；</text>
+<text x="590" y="496" text-anchor="middle" class="ts">等待上限依運動延期規則</text>
+<text x="810" y="478" text-anchor="middle" class="ts">只在該賽事已回到清單上時可選</text>
+<text x="810" y="496" text-anchor="middle" class="ts">（回到清單時系統只註記）</text>
+<rect x="40" y="514" width="440" height="26" rx="4" class="chipw"/><text x="260" y="532" text-anchor="middle" class="ts tw">作廢與重掛須由另一人覆核後才生效（R04-19）</text>
+<text x="500" y="524" class="ts">候選在人工判斷前不建立、不開盤。</text><text x="500" y="544" class="ts">來源給的原因（延期、取消）一併顯示，不限制選項。</text>
+<!-- 待腰斬 -->
+<line x1="40" y1="560" x2="920" y2="560" class="sep"/>
+<text x="40" y="584" class="tb">進行中的賽事從賽程來源消失或被標取消</text>
+<path d="M400,578 L440,578" class="lnw" marker-end="url(#arrw)"/>
+<rect x="446" y="562" width="150" height="34" rx="17" class="ghost"/><text x="521" y="584" text-anchor="middle" class="tb tw">標記待腰斬</text>
+<path d="M596,578 L636,578" class="ln" marker-end="url(#arr)"/>
+<text x="644" y="574" class="ts">人工確認是否腰斬與各時段賽果；</text>
+<text x="644" y="594" class="ts">不論統一賽果是否已達共識，不自動結算（R04-14）。</text>
+<!-- 註記 -->
+<circle cx="52" cy="632" r="4" class="dotw"/>
+<text x="66" y="637" class="ts">原則：寧願少做，降低錯判風險。已知情況（先發後撤、不撤回只凍結、雙重賽、不完整清單）都走同一條路，差別只在人工看到什麼。</text>
+<circle cx="52" cy="662" r="4" class="dot"/>
+<text x="66" y="667" class="ts">其他來源對該賽事的對應不解除；已接受的注單維持原狀，直到裁定。</text>
+<circle cx="52" cy="692" r="4" class="dot"/>
+<text x="66" y="697" class="ts">賽程來源凍結但其他來源已報開始時，統一狀態是進行中，凍結不觸發任何事（R04-16）。</text>
+<circle cx="52" cy="722" r="4" class="dot"/>
+<text x="66" y="727" class="ts">凍結多久算不再提供、處理時限：非功能需求；重掛後注單的效力：07；待處理佇列：11。</text>
+</svg>
+<p class="cap"><b>圖說</b>：賽程來源不再提供尚未開始的賽事時，系統只標記待取消、下架、列候選；作廢、重掛、暫不處理、解除都由人工裁定。進行中的賽事走待腰斬，同樣一律人工（R04-23、R04-24）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-14 -->
+<section class="fig" id="fig-04-14">
+<h2>圖 04-14　滾球比分未達門檻的影響範圍：主計分項目全停，次計分項目只停該項目</h2>
+<svg viewBox="0 0 960 470" width="100%" role="img" aria-label="未達門檻的影響範圍">
+<!-- 左：主計分項目 -->
+<rect x="40" y="30" width="430" height="250" rx="8" class="node"/><rect x="44" y="34" width="422" height="242" rx="6" class="node2"/>
+<text x="255" y="60" text-anchor="middle" class="tb">主計分項目未達門檻</text>
+<text x="255" y="82" text-anchor="middle" class="ts">決定勝負的計數：進球、得分、局數與盤數、回合數、地圖數</text>
+<line x1="60" y1="96" x2="450" y2="96" class="sep"/>
+<rect x="60" y="112" width="120" height="34" rx="4" class="chip"/><text x="120" y="134" text-anchor="middle" class="ts">足球進球 A <tspan class="mono">1:0</tspan></text>
+<rect x="190" y="112" width="120" height="34" rx="4" class="chip"/><text x="250" y="134" text-anchor="middle" class="ts">B 報 <tspan class="mono">0:0</tspan></text>
+<path d="M316,129 L346,129" class="lnw" marker-end="url(#arrw)"/>
+<text x="352" y="134" class="tb tw">全部暫停</text>
+<text x="60" y="176" class="ts">該場賽事的全部滾球盤口暫停，不論盤口的計分項目，</text>
+<text x="60" y="196" class="ts">也不分可逆或不可逆玩法；直到統一比分更新或各來源一致。</text>
+<text x="60" y="232" class="ts">多層計分（網球局數與盤數、絕對武力回合與地圖數）</text>
+<text x="60" y="252" class="ts">任一層未達門檻，都視為主計分項目。</text>
+<!-- 右：次計分項目 -->
+<rect x="490" y="30" width="430" height="250" rx="8" class="node"/><rect x="494" y="34" width="422" height="242" rx="6" class="node2"/>
+<text x="705" y="60" text-anchor="middle" class="tb">次計分項目未達門檻</text>
+<text x="705" y="82" text-anchor="middle" class="ts">不決定勝負的計數：足球的角球、罰牌積分、自由球、越位等</text>
+<line x1="510" y1="96" x2="900" y2="96" class="sep"/>
+<rect x="510" y="112" width="120" height="34" rx="4" class="chip"/><text x="570" y="134" text-anchor="middle" class="ts">足球角球 A <tspan class="mono">5</tspan></text>
+<rect x="640" y="112" width="120" height="34" rx="4" class="chip"/><text x="700" y="134" text-anchor="middle" class="ts">B 報 <tspan class="mono">4</tspan></text>
+<path d="M766,129 L796,129" class="lnw" marker-end="url(#arrw)"/>
+<text x="802" y="134" class="tb tw">只停角球</text>
+<text x="510" y="176" class="ts">只暫停以角球為計分項目的滾球盤口；</text>
+<text x="510" y="196" class="ts">進球、罰牌等其他盤口照常。</text>
+<text x="510" y="232" class="ts">目前只有足球有次計分項目；其他運動新增次計分項目時，</text>
+<text x="510" y="252" class="ts">預設為「僅該項目」。</text>
+<!-- 註記 -->
+<circle cx="52" cy="316" r="4" class="dot"/>
+<text x="66" y="321" class="ts">每個運動的每個計分項目屬於哪一種，見目錄「滾球比分未達門檻的影響範圍」（live-quorum-scope）；由業務面維護，經銷商看不到。</text>
+<circle cx="52" cy="346" r="4" class="dot"/>
+<text x="66" y="351" class="ts">門檻數與最少來源數本身另由 InSports 依運動與計分項目設定（R04-14）。</text>
+<circle cx="52" cy="376" r="4" class="dotw"/>
+<text x="66" y="381" class="ts">紅牌對整場的影響走滾球訊號的危險規則（R04-21），不走本圖；本圖只管比分計數不一致。</text>
+<circle cx="52" cy="406" r="4" class="dot"/>
+<text x="66" y="411" class="ts">暫停與恢復的執行見 05 的 R05-07。</text>
+</svg>
+<p class="cap"><b>圖說</b>：未達門檻時暫停的範圍依運動加計分項目：主計分項目停整場，次計分項目只停該項目的盤口，不分可逆或不可逆（R04-14、05 的 R05-07）。</p>
+</section>
+
+<svg class="defs" aria-hidden="true"><defs>
+  <symbol id="ic-whistle" viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="5"/><path d="M12.5 10.5 L21 8.5 V12.5 L13.8 14.5"/><circle cx="9" cy="14.5" r="1.2"/></symbol>
+  <symbol id="ic-board" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M12 8 V14"/><path d="M6 9.5 H9.5 M6 12.5 H9.5 M14.5 9.5 H18 M14.5 12.5 H18"/><path d="M9 17 L8 21 M15 17 L16 21"/></symbol>
+  <symbol id="ic-scale" viewBox="0 0 24 24"><path d="M12 3 V21 M7 21 H17"/><path d="M4 7 H20"/><path d="M4 7 L1.5 13 H6.5 Z"/><path d="M20 7 L17.5 13 H22.5 Z"/></symbol>
+  <symbol id="ic-flag" viewBox="0 0 24 24"><path d="M6 21 V4"/><path d="M6 4 H18 L15 8 L18 12 H6"/></symbol>
+  <symbol id="ic-person" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 21 a7 7 0 0 1 14 0"/></symbol>
+  <symbol id="ch-src" viewBox="0 0 40 64"><path d="M20,10 L20,3"/><circle cx="20" cy="2" r="1.8"/><path d="M14,6 Q20,-1 26,6"/><circle cx="20" cy="18" r="8"/><path d="M8,62 L8,40 Q8,30 18,30 L22,30 Q32,30 32,40 L32,62"/><path d="M8,42 L2,52"/><path d="M32,42 L38,52"/></symbol>
+</defs></svg>
+
+<!-- ============================================================ 圖 04-15 -->
+<section class="fig" id="fig-04-15">
+<h2>圖 04-15　最終賽果的參考做法：以結束回報為基準，其他來源佐證</h2>
+<svg viewBox="0 0 960 540" width="100%" role="img" aria-label="S2 流程總覽">
+<!-- 步驟 1–3 -->
+<g>
+  <rect x="30" y="40" width="160" height="200" rx="8" class="node"/>
+  <use href="#ic-whistle" x="92" y="54" width="36" height="36" class="ico"/>
+  <text x="110" y="114" text-anchor="middle" class="tb">① 時段結束的基準</text>
+  <text x="110" y="142" text-anchor="middle" class="ts">第一個合格的來源</text>
+  <text x="110" y="162" text-anchor="middle" class="ts">明確報出時段結束</text>
+  <text x="110" y="182" text-anchor="middle" class="ts">與該項目的結束值</text>
+  <text x="110" y="210" text-anchor="middle" class="ts tw">關盤、消失都不算</text>
+</g>
+<path d="M190,140 L218,140" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="220" y="40" width="160" height="200" rx="8" class="node"/>
+  <use href="#ic-board" x="282" y="54" width="36" height="36" class="ico"/>
+  <text x="300" y="114" text-anchor="middle" class="tb">② 其他來源的值</text>
+  <text x="300" y="142" text-anchor="middle" class="ts">自己的賽果優先；</text>
+  <text x="300" y="162" text-anchor="middle" class="ts">沒有時取最後的滾球值，</text>
+  <text x="300" y="182" text-anchor="middle" class="ts">但最後一次更新要在</text>
+  <text x="300" y="202" text-anchor="middle" class="ts">結束回報前 N 分鐘內</text>
+</g>
+<path d="M380,140 L408,140" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="410" y="40" width="160" height="200" rx="8" class="node"/>
+  <use href="#ic-scale" x="472" y="54" width="36" height="36" class="ico"/>
+  <text x="490" y="114" text-anchor="middle" class="tb">③ 與基準比對</text>
+  <text x="490" y="142" text-anchor="middle" class="ts">逐項比較</text>
+  <text x="490" y="162" text-anchor="middle" class="ts">會累積的計數，</text>
+  <text x="490" y="182" text-anchor="middle" class="ts">分成三種結果</text>
+  <text x="490" y="202" text-anchor="middle" class="ts">（見下方）</text>
+</g>
+<!-- 分支 -->
+<path d="M570,120 L610,120 L610,88 L638,88" class="ln" marker-end="url(#arr)"/>
+<path d="M570,160 L610,160 L610,192 L638,192" class="lnw" marker-end="url(#arrw)"/>
+<g>
+  <rect x="640" y="40" width="290" height="96" rx="8" class="node"/>
+  <use href="#ic-flag" x="656" y="56" width="30" height="30" class="ico"/>
+  <text x="700" y="72" class="tb">④ 穩定</text>
+  <text x="700" y="98" class="ts">沒有阻擋，且一致的來源數</text>
+  <text x="700" y="118" class="ts">達到最少來源數（固定值）</text>
+</g>
+<g>
+  <rect x="640" y="146" width="290" height="96" rx="8" class="ghost"/>
+  <use href="#ic-person" x="656" y="162" width="30" height="30" class="ico w"/>
+  <text x="700" y="178" class="tb tw">⑤ 有阻擋或不足：等待或交人工</text>
+  <text x="700" y="204" class="ts">等新的值，例如來源的賽果頁；</text>
+  <text x="700" y="224" class="ts">等不到時由人工裁定</text>
+</g>
+<!-- 三種比對結果 -->
+<path d="M490,240 L490,262 M175,262 L785,262 M175,262 L175,280 M480,262 L480,280 M785,262 L785,280" class="ln"/>
+<g>
+  <rect x="30" y="282" width="290" height="104" rx="8" class="panel"/>
+  <rect x="46" y="296" width="64" height="24" rx="4" class="tag"/><text x="78" y="313" text-anchor="middle" class="tb">相同</text>
+  <text x="122" y="313" class="tb">計入一致的來源數</text>
+  <text x="46" y="344" class="ts">例：基準 3:1，來源 B 也是 3:1</text>
+  <text x="46" y="366" class="ts">只有相同的值才能湊最少來源數</text>
+</g>
+<g>
+  <rect x="335" y="282" width="290" height="104" rx="8" class="panel"/>
+  <rect x="351" y="296" width="64" height="24" rx="4" class="chip"/><text x="383" y="313" text-anchor="middle" class="tb">較低</text>
+  <text x="427" y="313" class="tb">不計入，也不阻擋</text>
+  <text x="351" y="344" class="ts">滾球值每一項都不高於基準、但不同：</text>
+  <text x="351" y="366" class="ts">當作它沒看到後面的得分</text>
+</g>
+<g>
+  <rect x="640" y="282" width="290" height="104" rx="8" class="panel"/>
+  <rect x="656" y="296" width="90" height="24" rx="4" class="tagw"/><text x="701" y="313" text-anchor="middle" class="tb tw">其他差異</text>
+  <text x="758" y="313" class="tb tw">阻擋</text>
+  <text x="656" y="344" class="ts">較高、一項高一項低，</text>
+  <text x="656" y="366" class="ts">或賽果之間不同（賽果不同一律阻擋）</text>
+</g>
+<!-- 註記 -->
+<circle cx="42" cy="420" r="4" class="dot"/><text x="56" y="425" class="ts">合格的來源：擔任賽況或賽果來源、已對應到該賽事、該類資料沒有停用（R04-02、R04-16）。</text>
+<circle cx="42" cy="448" r="4" class="dot"/><text x="56" y="453" class="ts">同一來源只算一次：自己的賽果取代先前的滾球值；之後的有效更正取代舊值，晚到的舊資料不覆寫。</text>
+<circle cx="42" cy="476" r="4" class="dot"/><text x="56" y="481" class="ts">已計入的值不因等待而失效；穩定之後才出現的差異，依 R04-15 交人工審核。</text>
+<circle cx="42" cy="504" r="4" class="dot"/><text x="56" y="509" class="ts">N 每個運動一個值，依各來源的實際資料在 SPEC 訂定；最少來源數是固定值（R04-14）。</text>
+<rect x="770" y="490" width="160" height="26" rx="4" class="tag"/><text x="850" y="508" text-anchor="middle" class="ts">參考設計（非約束）</text>
+</svg>
+<p class="cap"><b>圖說</b>：以第一個合格的結束回報為基準，其他來源的值與它逐項比對；相同的計入，較低的滾球值不計入也不阻擋，其他差異阻擋；一致的來源數達到固定的最少來源數即穩定（R04-14 的參考做法，見第 8 節）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-16 -->
+<section class="fig" id="fig-04-16">
+<h2>圖 04-16　參考做法的時間軸：足球下半場最後幾分鐘</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="S2 時間軸範例">
+<!-- 時間窗 -->
+<rect x="500" y="72" width="300" height="248" class="hl"/>
+<text x="650" y="62" text-anchor="middle" class="ts tw">結束回報前 N 分鐘（示意 N＝6）</text>
+<path d="M800,72 L800,320" class="lnw dash"/>
+<!-- 列 -->
+<text x="30" y="114" class="tb">來源 A</text><text x="30" y="132" class="ts">事件形式</text>
+<text x="30" y="174" class="tb">來源 B</text><text x="30" y="192" class="ts">事件形式</text>
+<text x="30" y="234" class="tb">來源 C</text><text x="30" y="252" class="ts">封盤形式</text>
+<text x="30" y="294" class="tb">來源 D</text><text x="30" y="312" class="ts">事件形式</text>
+<!-- A -->
+<path d="M150,110 L800,110" class="ln"/>
+<circle cx="700" cy="110" r="5" class="dot"/><text x="700" y="98" text-anchor="middle" class="ts">進球 3:1</text>
+<rect x="794" y="104" width="12" height="12" class="dotw" transform="rotate(45 800 110)"/>
+<text x="812" y="100" class="ts tw">完場 3:1</text><text x="812" y="128" class="tb tw">基準</text>
+<!-- B -->
+<path d="M150,170 L825,170" class="ln"/>
+<circle cx="712" cy="170" r="5" class="dot"/>
+<circle cx="825" cy="170" r="5" class="dot"/><text x="835" y="174" class="ts">完場 3:1</text>
+<!-- C -->
+<path d="M150,230 L550,230" class="ln"/>
+<path d="M550,220 L550,240" class="ln"/>
+<text x="560" y="234" class="ts">88' 關盤，停在 2:1</text>
+<!-- D -->
+<path d="M150,290 L190,290" class="lnw dash"/>
+<text x="200" y="294" class="ts">70' 起沒有更新，停在 2:1</text>
+<!-- 軸 -->
+<path d="M150,330 L910,330" class="ln"/>
+<g class="ts">
+  <path d="M150,326 V334 M250,326 V334 M350,326 V334 M450,326 V334 M550,326 V334 M650,326 V334 M750,326 V334 M850,326 V334" class="ln"/>
+  <text x="150" y="352" text-anchor="middle" class="ts">80'</text>
+  <text x="250" y="352" text-anchor="middle" class="ts">82'</text>
+  <text x="350" y="352" text-anchor="middle" class="ts">84'</text>
+  <text x="450" y="352" text-anchor="middle" class="ts">86'</text>
+  <text x="550" y="352" text-anchor="middle" class="ts">88'</text>
+  <text x="650" y="352" text-anchor="middle" class="ts">90'</text>
+  <text x="750" y="352" text-anchor="middle" class="ts">90+2'</text>
+  <text x="850" y="352" text-anchor="middle" class="ts">90+4'</text>
+</g>
+<text x="30" y="352" class="ts">比賽時間（示意）</text>
+<!-- 判定表 -->
+<line x1="30" y1="378" x2="930" y2="378" class="sep"/>
+<rect x="30" y="384" width="900" height="28" class="th"/>
+<text x="40" y="403" class="tb">來源</text><text x="120" y="403" class="tb">值</text><text x="470" y="403" class="tb">與基準比較</text><text x="700" y="403" class="tb">結果</text>
+<text x="40" y="436" class="tb">A</text><text x="120" y="436">完場 3:1，第一個結束回報</text><text x="470" y="436">基準</text><text x="700" y="436">計入</text>
+<line x1="30" y1="448" x2="930" y2="448" class="sep"/>
+<text x="40" y="472" class="tb">B</text><text x="120" y="472">完場 3:1</text><text x="470" y="472">相同</text><text x="700" y="472">計入</text>
+<line x1="30" y1="484" x2="930" y2="484" class="sep"/>
+<text x="40" y="508" class="tb">C</text><text x="120" y="508">最後滾球值 2:1（88'，在時間窗內）</text><text x="470" y="508">每一項都不高於基準</text><text x="700" y="508">不計入、不阻擋</text>
+<line x1="30" y1="520" x2="930" y2="520" class="sep"/>
+<text x="40" y="544" class="tb">D</text><text x="120" y="544">最後滾球值 2:1（70'，在時間窗外）</text><text x="470" y="544">—</text><text x="700" y="544">不採用</text>
+<line x1="30" y1="556" x2="930" y2="556" class="sep"/>
+<rect x="30" y="566" width="900" height="28" rx="4" class="tag"/>
+<text x="44" y="585" class="tb">一致 2 個（A、B），達到最少來源數 2：穩定 3:1</text>
+<text x="916" y="585" text-anchor="end" class="ts">參考設計（非約束）</text>
+</svg>
+<p class="cap"><b>圖說</b>：A 第一個報出完場，成為基準；B 的完場值相同而計入；C 在時間窗內停止，滾球值較低，不計入也不阻擋；D 停得太早，不採用。兩個一致即穩定，不必等 C（R04-14）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-17 -->
+<section class="fig" id="fig-04-17">
+<h2>圖 04-17　參考做法的比對：相同、較低、其他</h2>
+<svg viewBox="0 0 960 520" width="100%" role="img" aria-label="S2 比對規則">
+<rect x="330" y="22" width="300" height="50" rx="8" class="node"/>
+<text x="480" y="53" text-anchor="middle" class="tb">基準：完場 3:1（來源 A）</text>
+<path d="M480,72 L480,88 M175,88 L785,88" class="ln"/>
+<!-- 第一列 -->
+<g>
+  <rect x="30" y="100" width="290" height="150" rx="8" class="panel"/>
+  <text x="50" y="144" class="big mono">3:1</text>
+  <text x="50" y="170" class="ts">來源 B 的賽果</text>
+  <text x="50" y="194" class="ts">完全相同</text>
+  <rect x="50" y="210" width="80" height="26" rx="4" class="tag"/><text x="90" y="228" text-anchor="middle" class="tb">計入</text>
+</g>
+<g>
+  <rect x="335" y="100" width="290" height="150" rx="8" class="panel"/>
+  <text x="355" y="144" class="big mono">2:1</text>
+  <text x="355" y="170" class="ts">來源 C 的最後滾球值</text>
+  <text x="355" y="194" class="ts">主隊較低、客隊相同：沒看到後面的進球</text>
+  <rect x="355" y="210" width="130" height="26" rx="4" class="chip"/><text x="420" y="228" text-anchor="middle" class="tb">不計入、不阻擋</text>
+</g>
+<g>
+  <rect x="640" y="100" width="290" height="150" rx="8" class="panel"/>
+  <text x="660" y="144" class="big mono tw">4:1</text>
+  <text x="660" y="170" class="ts">來源 C 的最後滾球值</text>
+  <text x="660" y="194" class="ts">主隊較高：可能在 VAR 取消進球前就關盤</text>
+  <rect x="660" y="210" width="80" height="26" rx="4" class="tagw"/><text x="700" y="228" text-anchor="middle" class="tb tw">阻擋</text>
+</g>
+<!-- 第二列 -->
+<g>
+  <rect x="30" y="270" width="290" height="150" rx="8" class="panel"/>
+  <text x="50" y="314" class="big mono tw">3:2</text>
+  <text x="50" y="340" class="ts">來源 D 的最後滾球值</text>
+  <text x="50" y="364" class="ts">客隊較高</text>
+  <rect x="50" y="380" width="80" height="26" rx="4" class="tagw"/><text x="90" y="398" text-anchor="middle" class="tb tw">阻擋</text>
+</g>
+<g>
+  <rect x="335" y="270" width="290" height="150" rx="8" class="panel"/>
+  <text x="355" y="314" class="big mono tw">2:2</text>
+  <text x="355" y="340" class="ts">來源 E 的最後滾球值</text>
+  <text x="355" y="364" class="ts">一項較低、一項較高</text>
+  <rect x="355" y="380" width="80" height="26" rx="4" class="tagw"/><text x="395" y="398" text-anchor="middle" class="tb tw">阻擋</text>
+</g>
+<g>
+  <rect x="640" y="270" width="290" height="150" rx="8" class="panel"/>
+  <text x="660" y="314" class="big mono tw">2:1</text>
+  <text x="660" y="340" class="ts">來源 C 的賽果頁（明確的賽果）</text>
+  <text x="660" y="364" class="ts">賽果與基準不同，一律阻擋</text>
+  <rect x="660" y="380" width="80" height="26" rx="4" class="tagw"/><text x="700" y="398" text-anchor="middle" class="tb tw">阻擋</text>
+</g>
+<!-- 適用範圍 -->
+<rect x="30" y="440" width="900" height="66" rx="8" class="panel"/>
+<text x="50" y="466" class="ts">✓ 只比較會累積的計數：進球、角球、罰牌積分、得分、局數、盤數、跑分、地圖數、回合數。</text>
+<text x="50" y="492" class="ts tw">✕ 不適用：網球局內的 15／30／40／AD，以及每盤、每局歸零的值。</text>
+<rect x="770" y="34" width="160" height="26" rx="4" class="tag"/><text x="850" y="52" text-anchor="middle" class="ts">參考設計（非約束）</text>
+</svg>
+<p class="cap"><b>圖說</b>：只有滾球值才可能被當作「沒看到後面的得分」而略過；任何一項較高，或明確的賽果不同，都會阻擋，等新的值或交人工（R04-14）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-18 -->
+<section class="fig" id="fig-04-18">
+<h2>圖 04-18　賽況轉為賽果的六個情境</h2>
+<svg viewBox="0 0 960 660" width="100%" role="img" aria-label="S2 六個情境">
+<!-- P1 -->
+<g>
+  <rect x="15" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="32" r="11" class="num"/><text x="33" y="37" text-anchor="middle" class="numt">1</text>
+  <text x="52" y="37" class="ptitle">88' 關盤，比分沒再變</text>
+  <use href="#ch-src" x="27" y="60" width="26" height="42" class="char"/>
+  <rect x="64" y="64" width="232" height="32" rx="6" class="bub"/><text x="74" y="85" class="bt">A：完場 2:1（基準）</text>
+  <use href="#ch-src" x="27" y="118" width="26" height="42" class="char"/>
+  <rect x="64" y="122" width="232" height="32" rx="6" class="bub"/><text x="74" y="143" class="bt">C：88' 關盤，停在 2:1</text>
+  <text x="31" y="248" class="ts">C 與基準相同，一致 2 個</text>
+  <rect x="165" y="278" width="134" height="30" rx="4" class="stamp"/><text x="232" y="298" text-anchor="middle" class="st">穩定 2:1</text>
+</g>
+<!-- P2 -->
+<g>
+  <rect x="330" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="32" r="11" class="num"/><text x="348" y="37" text-anchor="middle" class="numt">2</text>
+  <text x="367" y="37" class="ptitle">88' 關盤後又進一球</text>
+  <use href="#ch-src" x="342" y="60" width="26" height="42" class="char"/>
+  <rect x="379" y="64" width="232" height="32" rx="6" class="bub"/><text x="389" y="85" class="bt">A：完場 3:1（基準）</text>
+  <use href="#ch-src" x="342" y="118" width="26" height="42" class="char"/>
+  <rect x="379" y="122" width="232" height="32" rx="6" class="bub"/><text x="389" y="143" class="bt">C：停在 2:1</text>
+  <text x="346" y="230" class="ts">C 較低：不計入、不阻擋</text>
+  <text x="346" y="250" class="ts">一致只有 1 個，等 C 的賽果頁 3:1</text>
+  <rect x="480" y="278" width="134" height="30" rx="4" class="stampw"/><text x="547" y="298" text-anchor="middle" class="stw">等待</text>
+</g>
+<!-- P3 -->
+<g>
+  <rect x="645" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="32" r="11" class="num"/><text x="663" y="37" text-anchor="middle" class="numt">3</text>
+  <text x="682" y="37" class="ptitle">同上，另有來源 B</text>
+  <use href="#ch-src" x="657" y="60" width="26" height="42" class="char"/>
+  <rect x="694" y="64" width="232" height="32" rx="6" class="bub"/><text x="704" y="85" class="bt">A：完場 3:1（基準）</text>
+  <use href="#ch-src" x="657" y="118" width="26" height="42" class="char"/>
+  <rect x="694" y="122" width="232" height="32" rx="6" class="bub"/><text x="704" y="143" class="bt">B：完場 3:1</text>
+  <use href="#ch-src" x="657" y="176" width="26" height="42" class="char"/>
+  <rect x="694" y="180" width="232" height="32" rx="6" class="bub"/><text x="704" y="201" class="bt">C：停在 2:1</text>
+  <text x="661" y="242" class="ts">A、B 一致 2 個；C 不阻擋</text>
+  <rect x="795" y="278" width="134" height="30" rx="4" class="stamp"/><text x="862" y="298" text-anchor="middle" class="st">立刻穩定 3:1</text>
+</g>
+<!-- P4 -->
+<g>
+  <rect x="15" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="362" r="11" class="num"/><text x="33" y="367" text-anchor="middle" class="numt">4</text>
+  <text x="52" y="367" class="ptitle">網球：C 在 5:4 時關盤</text>
+  <use href="#ch-src" x="27" y="390" width="26" height="42" class="char"/>
+  <rect x="64" y="394" width="232" height="32" rx="6" class="bub"/><text x="74" y="415" class="bt">A：第一盤 6:4 結束（基準）</text>
+  <use href="#ch-src" x="27" y="448" width="26" height="42" class="char"/>
+  <rect x="64" y="452" width="232" height="32" rx="6" class="bub"/><text x="74" y="473" class="bt">B：第一盤 6:4</text>
+  <use href="#ch-src" x="27" y="506" width="26" height="42" class="char"/>
+  <rect x="64" y="510" width="232" height="32" rx="6" class="bub"/><text x="74" y="531" class="bt">C：停在 5:4</text>
+  <text x="31" y="572" class="ts">C 較低，不阻擋；A、B 一致 2 個</text>
+  <rect x="165" y="608" width="134" height="30" rx="4" class="stamp"/><text x="232" y="628" text-anchor="middle" class="st">穩定 6:4</text>
+</g>
+<!-- P5 -->
+<g>
+  <rect x="330" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="362" r="11" class="num"/><text x="348" y="367" text-anchor="middle" class="numt">5</text>
+  <text x="367" y="367" class="ptitle">VAR 取消進球，C 已先關盤</text>
+  <use href="#ch-src" x="342" y="390" width="26" height="42" class="char"/>
+  <rect x="379" y="394" width="232" height="32" rx="6" class="bub"/><text x="389" y="415" class="bt">A：完場 3:1，進球取消（基準）</text>
+  <use href="#ch-src" x="342" y="448" width="26" height="42" class="char"/>
+  <rect x="379" y="452" width="232" height="32" rx="6" class="bub"/><text x="389" y="473" class="bt">C：停在 4:1</text>
+  <text x="346" y="572" class="ts">C 較高：阻擋</text>
+  <text x="346" y="592" class="ts">等 C 的賽果頁，或交人工</text>
+  <rect x="480" y="608" width="134" height="30" rx="4" class="stampw"/><text x="547" y="628" text-anchor="middle" class="stw">阻擋</text>
+</g>
+<!-- P6 -->
+<g>
+  <rect x="645" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="362" r="11" class="num"/><text x="663" y="367" text-anchor="middle" class="numt">6</text>
+  <text x="682" y="367" class="ptitle">比賽中來源減少</text>
+  <use href="#ch-src" x="657" y="390" width="26" height="42" class="char"/>
+  <rect x="694" y="394" width="232" height="32" rx="6" class="bub"/><text x="704" y="415" class="bt">A：完場 2:0（基準）</text>
+  <use href="#ch-src" x="657" y="448" width="26" height="42" class="charw"/>
+  <rect x="694" y="452" width="232" height="32" rx="6" class="bubw"/><text x="704" y="473" class="bt tw">B：中斷，沒有值</text>
+  <text x="661" y="572" class="ts">一致只有 1 個，最少要 2 個</text>
+  <text x="661" y="592" class="ts">開賽時足夠、賽中才不足：交人工</text>
+  <rect x="795" y="608" width="134" height="30" rx="4" class="stampw"/><text x="862" y="628" text-anchor="middle" class="stw">交人工</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：賽況來源的滾球比分也是賽果的證據。情境 1、3、4 立刻穩定；情境 2 等 C 的賽果或其他來源；情境 5 有矛盾、情境 6 來源不足，等新的證據或交人工。範例的最少來源數都是 2（R04-14）。</p>
+</section>
+
+<!-- ============================================================ 圖 04-19 -->
+<section class="fig" id="fig-04-19">
+<h2>圖 04-19　接受的兩個風險：先結算，事後依 R04-15 更正</h2>
+<svg viewBox="0 0 960 440" width="100%" role="img" aria-label="S2 殘餘風險">
+<!-- 左 -->
+<g>
+  <rect x="15" y="10" width="455" height="420" rx="8" class="pnl"/>
+  <text x="35" y="40" class="ptitle">風險 1：基準錯了，又剛好有來源相同</text>
+  <rect x="35" y="56" width="415" height="28" rx="4" class="tagw"/><text x="47" y="75" class="tw">真實情況：90+3' 進球，應為 3:1</text>
+  <use href="#ch-src" x="40" y="104" width="26" height="42" class="char"/>
+  <rect x="78" y="108" width="372" height="32" rx="6" class="bub"/><text x="88" y="129" class="bt">A：完場 2:1（漏了進球；它是基準）</text>
+  <use href="#ch-src" x="40" y="162" width="26" height="42" class="char"/>
+  <rect x="78" y="166" width="372" height="32" rx="6" class="bub"/><text x="88" y="187" class="bt">C：88' 關盤，停在 2:1</text>
+  <text x="40" y="236" class="ts">C 與基準相同，一致 2 個，達到最少來源數</text>
+  <rect x="35" y="262" width="125" height="52" rx="6" class="node"/><text x="97" y="284" text-anchor="middle" class="ts">穩定 2:1</text><text x="97" y="302" text-anchor="middle" class="ts">照此結算</text>
+  <path d="M160,288 L188,288" class="lnw" marker-end="url(#arrw)"/>
+  <rect x="190" y="262" width="125" height="52" rx="6" class="ghost"/><text x="252" y="284" text-anchor="middle" class="ts">A 的賽果頁</text><text x="252" y="302" text-anchor="middle" class="ts">之後改為 3:1</text>
+  <path d="M315,288 L343,288" class="lnw" marker-end="url(#arrw)"/>
+  <rect x="345" y="262" width="105" height="52" rx="6" class="ghost"/><text x="397" y="284" text-anchor="middle" class="ts tw">R04-15</text><text x="397" y="302" text-anchor="middle" class="ts">人工審核</text>
+  <text x="40" y="350" class="ts">人工指定 3:1 後，由 07 重新結算。</text>
+  <text x="40" y="374" class="ts">要發生，必須基準本身漏了進球，</text>
+  <text x="40" y="394" class="ts">而且另一個來源剛好停在相同的比分。</text>
+</g>
+<!-- 右 -->
+<g>
+  <rect x="490" y="10" width="455" height="420" rx="8" class="pnl"/>
+  <text x="510" y="40" class="ptitle">風險 2：正確但較低的值被略過</text>
+  <rect x="510" y="56" width="415" height="28" rx="4" class="tagw"/><text x="522" y="75" class="tw">真實情況：VAR 取消進球，應為 1:1</text>
+  <use href="#ch-src" x="515" y="104" width="26" height="42" class="char"/>
+  <rect x="553" y="108" width="372" height="32" rx="6" class="bub"/><text x="563" y="129" class="bt">A：完場 2:1（漏了改判；它是基準）</text>
+  <use href="#ch-src" x="515" y="162" width="26" height="42" class="char"/>
+  <rect x="553" y="166" width="372" height="32" rx="6" class="bub"/><text x="563" y="187" class="bt">B：完場 2:1（也漏了改判）</text>
+  <use href="#ch-src" x="515" y="220" width="26" height="42" class="char"/>
+  <rect x="553" y="224" width="372" height="32" rx="6" class="bub"/><text x="563" y="245" class="bt">C：滾球值 1:1（正確，但比基準低）</text>
+  <text x="515" y="284" class="ts">C 較低被略過；A、B 一致 2 個</text>
+  <rect x="510" y="300" width="125" height="52" rx="6" class="node"/><text x="572" y="322" text-anchor="middle" class="ts">穩定 2:1</text><text x="572" y="340" text-anchor="middle" class="ts">照此結算</text>
+  <path d="M635,326 L663,326" class="lnw" marker-end="url(#arrw)"/>
+  <rect x="665" y="300" width="125" height="52" rx="6" class="ghost"/><text x="727" y="322" text-anchor="middle" class="ts">之後收到</text><text x="727" y="340" text-anchor="middle" class="ts">更正的賽果</text>
+  <path d="M790,326 L818,326" class="lnw" marker-end="url(#arrw)"/>
+  <rect x="820" y="300" width="105" height="52" rx="6" class="ghost"/><text x="872" y="322" text-anchor="middle" class="ts tw">R04-15</text><text x="872" y="340" text-anchor="middle" class="ts">人工審核</text>
+  <text x="515" y="384" class="ts">要發生，必須基準和另一個來源都漏了改判；</text>
+  <text x="515" y="404" class="ts">若要求「新鮮度確認」來防範，規則會複雜很多。</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：兩個風險都要報出結束的來源本身出錯才會發生；處理方式是先結算，收到更正後依 R04-15 由人工重新裁定，不為此要求更嚴格的證據（R04-14）。</p>
+</section>
+
+</div>
+</body>
+</html>

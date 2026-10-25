@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>連接器 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>連接器（Connector）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sources-and-connectors/README.md">資料來源與連接器後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看 InSports 串接了哪些外部站台、每個連接器經過的途徑與涉及的來源；暫停或恢復整個連接器</td></tr>
+  <tr><th>對應規則</th><td>R03-01（入口站台與轉送商不是來源）、R03-07（連接器暫停使來源視為停用）、R03-13（控制只有兩種）、第 8 節（每個外部站台一個連接器）</td></tr>
+  <tr><th>不在本畫面</th><td>新增或刪除連接器（工程以設定建立）；連接器的實作，例如協定、輪詢或推送、出口位址（見 SPEC）；依來源與類別停用（見 <a href="sources.html">來源</a>）；帳號（見 <a href="accounts.html">帳號</a>）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、帳號與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：連接器清單</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#" class="on">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 資料來源 › 連接器</span><span>語言：繁體中文 ▾ · ops.user ▾ · 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>連接器</h3><div class="sub">每個外部站台一個連接器；暫停連接器時，經過它的途徑都不可用</div></div>
+      </div>
+
+      <div class="filters">
+        <div class="f"><label>站台類型 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>資料來源</span><span>入口站台</span><span>轉送商</span></span></div>
+        <div class="f"><label>狀態</label><span class="box caret">全部</span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">站台名稱</span></div>
+      </div>
+
+      <table class="grid">
+        <thead><tr>
+          <th>連接器 <span class="s">／ 外部站台</span></th>
+          <th>站台類型</th>
+          <th>狀態 <span class="n">2</span></th>
+          <th>途徑 <span class="n">3</span></th>
+          <th>涉及的來源與資料類別</th>
+          <th>最近變更</th>
+          <th>操作 <span class="n">4</span></th>
+        </tr></thead>
+        <tbody>
+          <tr><td>轉送商</td><td>轉送商</td><td>運作中</td><td>2／2 可用</td><td>來源 A：賽程、賽況、賽果<br>來源 B：賽況、賽果</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>入口站台甲</td><td>入口站台</td><td>運作中 <span class="chip">站台維護中</span></td><td>0／2 可用</td><td>來源 C：賽程、賠率、賽況<br>來源 F：賽程、賠率、賽況</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>入口站台乙</td><td>入口站台</td><td>運作中</td><td>1／1 可用</td><td>來源 C：賽程、賠率、賽況</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr class="off"><td>入口站台丙</td><td>入口站台</td><td><b>已暫停</b></td><td>0／1 可用</td><td>來源 H：賽程、賠率、賽況（視為停用）</td><td>10-22 16:30 · ops.chen<div class="l2">丙改版，登入流程待修</div></td><td><span class="btn pri">恢復</span></td></tr>
+          <tr><td>入口站台丁</td><td>入口站台</td><td>運作中</td><td>0／0 可用<div class="l2">1 條尚未啟用</div></td><td>來源 C：賽程、賠率、賽況（途徑尚未啟用）</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>來源 C</td><td>資料來源</td><td>運作中</td><td>0／1 可用</td><td>來源 C：賽果（直接輪詢）</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>來源 D</td><td>資料來源</td><td>運作中</td><td>1／1 可用</td><td>來源 D：賠率、賽況、賽果</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>來源 G</td><td>資料來源</td><td>運作中</td><td>1／1 可用</td><td>來源 G：賽程、賽況、賽果</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+          <tr><td>來源 E</td><td>資料來源</td><td>運作中</td><td>1／1 可用</td><td>來源 E：賽程、賠率、賽況（來源尚未啟用）</td><td class="l2">—</td><td><span class="btn danger">暫停</span></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span></span><span>共 9 個連接器</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>外部站台分三種：資料來源（直接取得）、入口站台、轉送商。入口站台與轉送商本身不是來源，經它們取得的資料仍以原始來源計（R03-01），所以「涉及的來源」欄列的是原始來源。</span></li>
+  <li><span class="n">2</span><span>連接器只有運作中與已暫停兩種，由人工切換（R03-13）。站台維護、途徑失效是途徑層的事，由系統判定，在這裡只以標記提示，明細見<a href="sources.html">來源詳情</a>與<a href="incidents.html">異常看板</a>。入口站台甲雖在維護中，連接器仍是運作中，站台恢復後自動繼續。</span></li>
+  <li><span class="n">3</span><span>可用途徑數／經過此連接器的全部途徑數。</span></li>
+  <li><span class="n">4</span><span>「暫停」是 R03-13 的第一種控制，開啟畫面 2；暫停後經過它的途徑都不可用，來源因此沒有可用途徑的類別視為停用，不是中斷（R03-07）。「恢復」用同一視窗；恢復後途徑改由系統判定，來源不會直接變回正常。連接器內不能再依運動、玩法或賽事停用。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：暫停連接器</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:600px">
+    <div class="mh"><span>暫停連接器．入口站台甲</span><span>✕</span></div>
+    <div class="mb">
+      <p>暫停後，經過入口站台甲的途徑都不可用，直到人工恢復；立即生效。受影響的範圍 <span class="n">1</span>：</p>
+      <table class="grid">
+        <thead><tr><th>來源</th><th>資料類別</th><th>其他途徑</th><th>結果</th></tr></thead>
+        <tbody>
+          <tr><td>來源 C</td><td>賽程、賠率、賽況</td><td>經入口站台乙（可用）</td><td>不受影響，只減少備援</td></tr>
+          <tr><td>來源 C</td><td>賽果</td><td>直接（不經此連接器）</td><td>不受影響</td></tr>
+          <tr><td>來源 F</td><td>賽程、賠率、賽況</td><td class="l2">沒有</td><td><b>視為停用</b></td></tr>
+        </tbody>
+      </table>
+      <p class="hint">帳號 p-jia-01、p-jia-02 的登入也會停止 <span class="n">2</span>。</p>
+      <div class="f" style="margin-top:12px"><label>原因（必填） <span class="n">3</span></label><span class="box wide" style="width:100%">甲改版後資料格式異常，先暫停</span></div>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認暫停</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>只列受影響的來源與資料類別，分成「還有其他途徑」與「沒有其他途徑」兩組；後者視為停用（R03-07）。例外是不能停用的賽程（運動的賽程來源，以及還有未結束賽事的被指定建立者）：視為中斷，並在此特別提醒影響範圍（R03-07、04 的 R04-16）。對進行中賽事與盤口的影響由下游各模組處理，不在此列出。</span></li>
+  <li><span class="n">2</span><span>經此連接器登入的帳號會跟著停止使用，帳號本身的狀態不變；恢復連接器後重新登入。</span></li>
+  <li><span class="n">3</span><span>每次暫停與恢復都記錄由誰、何時、原因（R03-13）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+
+</div>
+</body>
+</html>

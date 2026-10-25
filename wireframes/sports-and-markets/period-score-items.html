@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>時段與計分項目 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>時段與計分項目</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sports-and-markets/README.md">運動與玩法目錄後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看每個運動有哪些時段與計分項目、每個組合有多少玩法，以及每個玩法需要哪一種賽果，作為判斷資料來源能否支援的依據</td></tr>
+  <tr><th>對應規則</th><td>R01-17（每個運動的時段與計分項目清單）、R01-18（玩法需要的賽果）、R01-11（時間區間與指定事件的玩法）</td></tr>
+  <tr><th>不在本畫面</th><td>修改清單：時段、計分項目與玩法由 InSports 以設定維護（R01-08），本畫面只供查看；判斷資料來源能否提供賽果，以及關閉取不到賽果的玩法，由 Ops 在玩法設定處理（R01-18，見 05）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。矩陣的玩法數依<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球的玩法範圍</a>估算。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：時段 × 計分項目矩陣</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a>
+    <a href="#">競賽</a>
+    <a href="#">參賽方</a>
+    <a href="#" class="on">時段與計分項目</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 目錄 › 時段與計分項目</span><span>語言：繁體中文 ▾ · ops.user ▾</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>時段與計分項目</h3><div class="sub">各運動可用的時段與計分項目，以及每個組合的玩法數</div></div>
+      </div>
+      <div class="split">
+        <div>
+          <div class="f" style="margin-bottom:6px"><label>分類 <span class="n">1</span></label><span class="strip"><span class="on">正常運動</span><span>電子競技</span></span></div>
+          <div class="f" style="margin-bottom:6px"><label>搜尋運動</label><span class="box" style="width:100%">運動名稱</span></div>
+          <div class="list"><div class="on">足球</div><div>五人制足球</div><div>籃球</div><div>網球</div><div>排球</div><div>棒球</div><div>…</div></div>
+        </div>
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:center">
+            <div><b style="font-size:16px">足球</b>　<span class="l2">11 個時段．9 個計分項目．176 個玩法</span></div>
+          </div>
+          <div class="legend"><span>數字：玩法數 <span class="n">2</span></span><span>·：沒有玩法</span></div>
+          <div style="overflow-x:auto">
+          <table class="matrix">
+            <thead><tr><th class="row">計分項目 ＼ 時段</th><th>全場</th><th>常規時間</th><th>上半場</th><th>下半場</th><th>加時賽</th><th>加時賽上半場</th><th>加時賽下半場</th><th>點球大戰<br>（前 10 球）</th><th>點球大戰<br>（含一球決勝）</th><th>時間區間<br>（10 分鐘）</th><th>時間區間<br>（15 分鐘）</th></tr></thead>
+            <tbody>
+          <tr><th class="row">進球</th><td class="na">·</td><td>50</td><td>17</td><td>16</td><td>5</td><td>5</td><td>5</td><td>6</td><td>6</td><td>3</td><td>3</td></tr>
+          <tr><th class="row">角球</th><td class="na">·</td><td>18</td><td class="sel">11</td><td>12</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td>3</td></tr>
+          <tr><th class="row">罰牌積分</th><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">判給點球</th><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">罰進點球</th><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">自由球</th><td class="na">·</td><td>1</td><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">越位</th><td class="na">·</td><td>1</td><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">換人</th><td class="na">·</td><td>1</td><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">界外球</th><td class="na">·</td><td>1</td><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+          <tr><th class="row">（不需要計分項目）</th><td>4</td><td class="na">·</td><td>1</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td><td class="na">·</td></tr>
+            </tbody>
+          </table>
+          </div>
+
+          <div class="panel">
+            <div class="ph"><span>角球 × 上半場．11 個玩法 <span class="n">3</span></span><span>✕</span></div>
+            <div class="pb">
+              <table class="grid">
+                <thead><tr><th>玩法</th><th>計哪一方</th><th>需要的賽果 <span class="n">4</span></th><th>備註</th></tr></thead>
+                <tbody><tr><td>上半場角球讓分</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球大小</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場主隊角球大小</td><td>只計主隊</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場客隊角球大小</td><td>只計客隊</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球總數區間</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球三項大小</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球獨贏（三項）</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球波膽</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場角球單雙</td><td>雙方</td><td>上半場角球數</td><td class="l2"></td></tr><tr><td>上半場最後一個角球</td><td>雙方</td><td>角球的先後順序</td><td class="l2">最後一個</td></tr><tr><td>上半場先達 X 個角球</td><td>雙方</td><td>角球的先後順序</td><td class="l2">X 為盤口線</td></tr></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>先選正常運動或電子競技（R01-24），左側再依排序號列出該分類的運動（R01-28）。電子競技的每個遊戲各為一個運動，各有自己的時段與計分項目。</span></li>
+  <li><span class="n">2</span><span>列是該運動的計分項目清單，欄是時段清單（R01-17）；格子是目錄中使用這個組合的玩法數。不依計分項目判定的玩法，例如晉級、開球球隊，列在「（不需要計分項目）」。</span></li>
+  <li><span class="n">3</span><span>點選格子後，下方列出這個組合的玩法（只供查看）。只計主隊或客隊時，主隊與客隊各為一個玩法（R01-16）。</span></li>
+  <li><span class="n">4</span><span>同一個組合裡的玩法，需要的賽果可能不同（R01-18）：多數只需要時段的最終計數，例如上半場角球數；最後一個角球、先達 X 需要計分的先後順序；時間區間的玩法需要每次計分的發生時間。資料來源能否提供，由 Ops 人工判斷，系統不自動判定；判斷無法取得時，Ops 先以人工結算已成立的注單，再在玩法設定關閉該玩法（見 05），直到 InSports 確認系統可以取得。時間區間與指定事件的玩法，另須先定義結算規則才能開盤（R01-11）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+
+</div>
+</body>
+</html>

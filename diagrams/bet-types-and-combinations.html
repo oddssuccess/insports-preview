@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 注單類型與組合：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+
+<h1>02 注單類型與組合：概念圖</h1>
+<p class="meta"><b>狀態</b>：草稿（示意，供挑選） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/02-bet-types-and-combinations.md">02 注單類型與組合</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 02 的規則，不約束資料模型或架構；圖中的名稱、識別與數字都是範例。PRD 02 目前是骨架，只有三條規則；範圍說明與待確認事項以「待確認」框表示，不是規則。</p>
+<ol class="toc">
+  <li><a href="#fig-02-01">圖 02-01　注單的組成：注單、關、投注項</a></li>
+  <li><a href="#fig-02-02">圖 02-02　同一場賽事只能出現在一個關中</a></li>
+  <li><a href="#fig-02-03">圖 02-03　系統過關 3 串 3 的展開</a></li>
+  <li><a href="#fig-02-04">圖 02-04　同場過關中有投注項取消時重新計價</a></li>
+  <li><a href="#fig-02-05">圖 02-05　同場過關只剩一個或全部取消，以及待確認的組合範圍</a></li>
+</ol>
+
+<!-- ============================================================ 圖 02-01 -->
+<section class="fig" id="fig-02-01">
+<h2>圖 02-01　注單的組成：注單、關、投注項</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="注單、關、投注項的層級與四種注單類型">
+<!-- 層級：注單 → 關 → 投注項 -->
+<g>
+  <rect x="400" y="24" width="160" height="48" rx="6" class="node"/><rect x="403" y="27" width="154" height="42" rx="4" class="node2"/>
+  <text x="480" y="53" text-anchor="middle" class="tb">注單（Bet）</text>
+</g>
+<path d="M480,72 L480,92 L200,92 L200,112" class="ln" marker-end="url(#arr)"/>
+<path d="M480,72 L480,112" class="ln" marker-end="url(#arr)"/>
+<path d="M480,92 L760,92 L760,112" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="120" y="114" width="160" height="44" rx="6" class="node"/><rect x="123" y="117" width="154" height="38" rx="4" class="node2"/>
+  <text x="200" y="141" text-anchor="middle" class="tb">關 1（Leg）</text>
+</g>
+<g>
+  <rect x="400" y="114" width="160" height="44" rx="6" class="node"/><rect x="403" y="117" width="154" height="38" rx="4" class="node2"/>
+  <text x="480" y="141" text-anchor="middle" class="tb">關 2（Leg）</text>
+</g>
+<g>
+  <rect x="680" y="114" width="160" height="44" rx="6" class="node"/><rect x="683" y="117" width="154" height="38" rx="4" class="node2"/>
+  <text x="760" y="141" text-anchor="middle" class="tb">關 3（Leg）</text>
+</g>
+<path d="M200,158 L200,186" class="ln" marker-end="url(#arr)"/>
+<path d="M480,158 L480,186" class="ln" marker-end="url(#arr)"/>
+<path d="M760,158 L760,176 L705,176 L705,186" class="ln" marker-end="url(#arr)"/>
+<path d="M760,176 L815,176 L815,186" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="110" y="188" width="180" height="40" rx="6" class="node"/>
+  <text x="200" y="213" text-anchor="middle">投注項（Outcome）</text>
+</g>
+<g>
+  <rect x="390" y="188" width="180" height="40" rx="6" class="node"/>
+  <text x="480" y="213" text-anchor="middle">投注項（Outcome）</text>
+</g>
+<rect x="650" y="172" width="220" height="70" rx="6" class="tag"/>
+<g>
+  <rect x="660" y="188" width="90" height="40" rx="6" class="node"/>
+  <text x="705" y="213" text-anchor="middle" class="ts">投注項</text>
+</g>
+<g>
+  <rect x="770" y="188" width="90" height="40" rx="6" class="node"/>
+  <text x="815" y="213" text-anchor="middle" class="ts">投注項</text>
+</g>
+<text x="760" y="258" text-anchor="middle" class="ts">同場過關：同一場賽事的多個投注項組成一關</text>
+<text x="40" y="213" class="ts">投注項來自 01</text>
+<!-- 四種注單類型 -->
+<line x1="40" y1="282" x2="920" y2="282" class="sep"/>
+<text x="40" y="304" class="ts">四種注單類型</text>
+<!-- 單注 -->
+<g>
+  <rect x="40" y="316" width="205" height="176" rx="6" class="panel"/>
+  <text x="142" y="344" text-anchor="middle" class="tb">單注</text>
+  <text x="142" y="366" text-anchor="middle" class="ts">1 關，1 個投注項</text>
+  <rect x="122" y="420" width="40" height="28" rx="4" class="node"/>
+  <text x="142" y="472" text-anchor="middle" class="ts">1 關</text>
+</g>
+<!-- 過關 -->
+<g>
+  <rect x="265" y="316" width="205" height="176" rx="6" class="panel"/>
+  <text x="367" y="344" text-anchor="middle" class="tb">過關（Parlay）</text>
+  <text x="367" y="366" text-anchor="middle" class="ts">N 關，全部要贏</text>
+  <rect x="292" y="420" width="40" height="28" rx="4" class="node"/>
+  <line x1="332" y1="434" x2="347" y2="434" class="ln"/>
+  <rect x="347" y="420" width="40" height="28" rx="4" class="node"/>
+  <line x1="387" y1="434" x2="402" y2="434" class="ln"/>
+  <rect x="402" y="420" width="40" height="28" rx="4" class="node"/>
+  <text x="367" y="472" text-anchor="middle" class="ts">3 關，全部要贏</text>
+</g>
+<!-- 系統過關 -->
+<g>
+  <rect x="490" y="316" width="205" height="176" rx="6" class="panel"/>
+  <text x="592" y="344" text-anchor="middle" class="tb">系統過關（System Bet）</text>
+  <text x="592" y="366" text-anchor="middle" class="ts">N 關中取 K 關的所有組合，<tspan x="592" dy="1.3em">例如 3 串 3</tspan></text>
+  <rect x="517" y="420" width="40" height="28" rx="4" class="node"/>
+  <rect x="572" y="420" width="40" height="28" rx="4" class="node"/>
+  <rect x="627" y="420" width="40" height="28" rx="4" class="node"/>
+  <text x="592" y="472" text-anchor="middle" class="ts">3 關取 2，共 3 個組合</text>
+</g>
+<!-- 同場過關 -->
+<g>
+  <rect x="715" y="316" width="205" height="176" rx="6" class="panel"/>
+  <text x="817" y="344" text-anchor="middle" class="tb">同場過關（SGP）</text>
+  <text x="817" y="366" text-anchor="middle" class="ts">同一場賽事的多個投注項<tspan x="817" dy="1.3em">組成一關；可以是過關或</tspan><tspan x="817" dy="1.3em">系統過關中的一關</tspan></text>
+  <rect x="737" y="414" width="160" height="40" rx="6" class="tag"/>
+  <rect x="745" y="420" width="40" height="28" rx="4" class="node"/>
+  <rect x="797" y="420" width="40" height="28" rx="4" class="node"/>
+  <rect x="849" y="420" width="40" height="28" rx="4" class="node"/>
+  <text x="817" y="472" text-anchor="middle" class="ts">同一場賽事的 3 個投注項 = 1 關</text>
+</g>
+<!-- 註記 -->
+<circle cx="52" cy="528" r="4" class="dotw"/>
+<text x="66" y="533">同一場賽事只能出現在一個關中（R02-01）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：注單由關組成，關由投注項組成；同場過關是把同一場賽事的多個投注項組成一關（第 1 節、R02-01）。</p>
+</section>
+
+<!-- ============================================================ 圖 02-02 -->
+<section class="fig" id="fig-02-02">
+<h2>圖 02-02　同一場賽事只能出現在一個關中</h2>
+<svg viewBox="0 0 960 400" width="100%" role="img" aria-label="三張注單的接受與拒絕對照">
+<!-- 列 1：拒絕 -->
+<g>
+  <rect x="40" y="24" width="880" height="100" rx="6" class="panel"/>
+  <circle cx="76" cy="74" r="16" class="chipw"/>
+  <text x="76" y="80" text-anchor="middle" class="tb tw">✕</text>
+  <text x="110" y="52" class="tb">過關兩關</text>
+  <rect x="110" y="62" width="250" height="40" rx="6" class="tagw"/>
+  <text x="235" y="87" text-anchor="middle">A 對 B 主勝</text>
+  <rect x="380" y="62" width="250" height="40" rx="6" class="tagw"/>
+  <text x="505" y="87" text-anchor="middle">A 對 B 大 2.5</text>
+  <path d="M640,82 L668,82" class="lnw" marker-end="url(#arrw)"/>
+  <text x="680" y="70" class="tb tw">拒絕</text>
+  <text x="680" y="92" class="ts">同一場的兩個投注項須以同場過關<tspan x="680" dy="1.3em">組成一關</tspan></text>
+</g>
+<!-- 列 2：拒絕 -->
+<g>
+  <rect x="40" y="144" width="880" height="100" rx="6" class="panel"/>
+  <circle cx="76" cy="194" r="16" class="chipw"/>
+  <text x="76" y="200" text-anchor="middle" class="tb tw">✕</text>
+  <text x="110" y="172" class="tb">過關兩關</text>
+  <rect x="110" y="182" width="290" height="40" rx="6" class="tagw"/>
+  <text x="255" y="207" text-anchor="middle">A 對 B 的同場過關（主勝 + 大 2.5）</text>
+  <rect x="420" y="182" width="210" height="40" rx="6" class="tagw"/>
+  <text x="525" y="207" text-anchor="middle">A 對 B 讓分 -0.5</text>
+  <path d="M640,202 L668,202" class="lnw" marker-end="url(#arrw)"/>
+  <text x="680" y="190" class="tb tw">拒絕</text>
+  <text x="680" y="212" class="ts">A 對 B 出現在兩個關中</text>
+</g>
+<!-- 列 3：接受 -->
+<g>
+  <rect x="40" y="264" width="880" height="100" rx="6" class="panel"/>
+  <circle cx="76" cy="314" r="16" class="chip"/>
+  <text x="76" y="320" text-anchor="middle" class="tb">✓</text>
+  <text x="110" y="292" class="tb">過關兩關</text>
+  <rect x="110" y="302" width="290" height="40" rx="6" class="tag"/>
+  <text x="255" y="327" text-anchor="middle">A 對 B 的同場過關（主勝 + 大 2.5）</text>
+  <rect x="420" y="302" width="210" height="40" rx="6" class="tag"/>
+  <text x="525" y="327" text-anchor="middle">C 對 D 主勝</text>
+  <path d="M640,322 L668,322" class="ln" marker-end="url(#arr)"/>
+  <text x="680" y="310" class="tb">接受</text>
+  <text x="680" y="332" class="ts">A 對 B 只出現在一個關中</text>
+</g>
+<text x="40" y="388" class="ts">琥珀色的關：同一場賽事（A 對 B）出現在不只一個關中。</text>
+</svg>
+<p class="cap"><b>圖說</b>：要組合同一場賽事的多個投注項，只能透過同場過關；一張注單中同一場賽事只能在一關（R02-01）。</p>
+</section>
+
+<!-- ============================================================ 圖 02-03 -->
+<section class="fig" id="fig-02-03">
+<h2>圖 02-03　系統過關 3 串 3 的展開</h2>
+<svg viewBox="0 0 960 420" width="100%" role="img" aria-label="三關展開為三個二串一組合">
+<text x="40" y="40" class="ts">系統過關「3 串 3」的三關</text>
+<!-- 關 1：同場過關 -->
+<g>
+  <rect x="40" y="52" width="300" height="70" rx="6" class="node"/><rect x="43" y="55" width="294" height="64" rx="4" class="node2"/>
+  <text x="190" y="78" text-anchor="middle" class="tb">關 1　A 對 B 的同場過關</text>
+  <text x="190" y="102" text-anchor="middle" class="ts">主勝 + 大 2.5（同一場賽事的兩個投注項）</text>
+</g>
+<!-- 關 2 -->
+<g>
+  <rect x="370" y="52" width="220" height="70" rx="6" class="node"/><rect x="373" y="55" width="214" height="64" rx="4" class="node2"/>
+  <text x="480" y="78" text-anchor="middle" class="tb">關 2</text>
+  <text x="480" y="102" text-anchor="middle" class="ts">C 對 D 主勝</text>
+</g>
+<!-- 關 3 -->
+<g>
+  <rect x="620" y="52" width="300" height="70" rx="6" class="node"/><rect x="623" y="55" width="294" height="64" rx="4" class="node2"/>
+  <text x="770" y="78" text-anchor="middle" class="tb">關 3</text>
+  <text x="770" y="102" text-anchor="middle" class="ts">E 對 F 大 2.5</text>
+</g>
+<text x="480" y="168" text-anchor="middle">展開為 3 個二串一組合（3 關取 2）</text>
+<!-- 連線：關 → 組合 -->
+<path d="M160,122 L160,222" class="ln" marker-end="url(#arrs)"/>
+<path d="M440,122 L230,222" class="ln" marker-end="url(#arrs)"/>
+<path d="M220,122 L440,222" class="ln" marker-end="url(#arrs)"/>
+<path d="M740,122 L520,222" class="ln" marker-end="url(#arrs)"/>
+<path d="M520,122 L730,222" class="ln" marker-end="url(#arrs)"/>
+<path d="M800,122 L800,222" class="ln" marker-end="url(#arrs)"/>
+<!-- 組合 1：含同場過關 -->
+<g>
+  <rect x="60" y="224" width="260" height="82" rx="6" class="tag"/>
+  <text x="190" y="252" text-anchor="middle" class="tb">組合 1：{關 1，關 2}</text>
+  <text x="190" y="276" text-anchor="middle" class="ts">A 對 B 的同場過關 + C 對 D 主勝</text>
+  <text x="190" y="296" text-anchor="middle" class="ts">含同場過關</text>
+</g>
+<!-- 組合 2：含同場過關 -->
+<g>
+  <rect x="350" y="224" width="260" height="82" rx="6" class="tag"/>
+  <text x="480" y="252" text-anchor="middle" class="tb">組合 2：{關 1，關 3}</text>
+  <text x="480" y="276" text-anchor="middle" class="ts">A 對 B 的同場過關 + E 對 F 大 2.5</text>
+  <text x="480" y="296" text-anchor="middle" class="ts">含同場過關</text>
+</g>
+<!-- 組合 3 -->
+<g>
+  <rect x="640" y="224" width="260" height="82" rx="6" class="node"/><rect x="643" y="227" width="254" height="76" rx="4" class="node2"/>
+  <text x="770" y="252" text-anchor="middle" class="tb">組合 3：{關 2，關 3}</text>
+  <text x="770" y="276" text-anchor="middle" class="ts">C 對 D 主勝 + E 對 F 大 2.5</text>
+</g>
+<!-- 註記 -->
+<circle cx="52" cy="350" r="4" class="dot"/>
+<text x="66" y="355">接受；共 3 個二串一組合，其中 2 個包含該同場過關（填色的兩個）。</text>
+<circle cx="52" cy="380" r="4" class="dotw"/>
+<text x="66" y="385">同場過關作為一關，與單一投注項的關地位相同。</text>
+</svg>
+<p class="cap"><b>圖說</b>：系統過關把 N 關展開成所有 K 關組合，同場過關作為其中一關計算（R02-01）。</p>
+</section>
+
+<!-- ============================================================ 圖 02-04 -->
+<section class="fig" id="fig-02-04">
+<h2>圖 02-04　同場過關中有投注項取消時重新計價</h2>
+<svg viewBox="0 0 960 460" width="100%" role="img" aria-label="同場過關重新計價的時間軸">
+<!-- 階段標題 -->
+<text x="180" y="36" text-anchor="middle" class="tb">下注時</text>
+<text x="480" y="36" text-anchor="middle" class="tb">事件</text>
+<text x="780" y="36" text-anchor="middle" class="tb">處理</text>
+<line x1="40" y1="48" x2="920" y2="48" class="sep"/>
+<!-- 下注時：同場過關一關 -->
+<rect x="60" y="68" width="240" height="190" rx="6" class="tag"/>
+<text x="180" y="92" text-anchor="middle" class="ts">同場過關（一關）</text>
+<g>
+  <rect x="90" y="104" width="180" height="36" rx="6" class="node"/>
+  <text x="180" y="127" text-anchor="middle">主勝</text>
+</g>
+<g>
+  <rect x="90" y="150" width="180" height="36" rx="6" class="node"/>
+  <text x="180" y="173" text-anchor="middle">大 2.5</text>
+</g>
+<g>
+  <rect x="90" y="196" width="180" height="36" rx="6" class="node"/>
+  <text x="180" y="219" text-anchor="middle">角球大 9.5</text>
+</g>
+<rect x="60" y="272" width="240" height="44" rx="6" class="chip"/>
+<text x="180" y="291" text-anchor="middle" class="ts">下注當時的定價資訊保存</text>
+<text x="180" y="307" text-anchor="middle" class="ts">（見 05）</text>
+<!-- 箭頭到事件 -->
+<path d="M300,163 L350,163" class="ln" marker-end="url(#arr)"/>
+<!-- 事件：作廢 -->
+<g>
+  <rect x="360" y="130" width="240" height="66" rx="6" class="ghost"/>
+  <text x="480" y="158" text-anchor="middle" class="tb tw">✕ 角球大 9.5 作廢</text>
+  <text x="480" y="180" text-anchor="middle" class="ts">例如走盤或作廢</text>
+</g>
+<!-- 箭頭到處理 -->
+<path d="M600,163 L650,163" class="ln" marker-end="url(#arr)"/>
+<!-- 處理：重新計價 -->
+<rect x="660" y="68" width="240" height="144" rx="6" class="tag"/>
+<text x="780" y="92" text-anchor="middle" class="ts">該關以「主勝 + 大 2.5」重新計價</text>
+<g>
+  <rect x="690" y="104" width="180" height="36" rx="6" class="node"/>
+  <text x="780" y="127" text-anchor="middle">主勝</text>
+</g>
+<g>
+  <rect x="690" y="150" width="180" height="36" rx="6" class="node"/>
+  <text x="780" y="173" text-anchor="middle">大 2.5</text>
+</g>
+<text x="660" y="240" class="ts">採用下注當時的定價，</text>
+<text x="660" y="258" class="ts">重算剩下投注項組合的價格；</text>
+<text x="660" y="276" class="ts">不整關取消（結算見 07）。</text>
+<!-- 兩種錯誤讀法 -->
+<line x1="40" y1="336" x2="920" y2="336" class="sep"/>
+<text x="40" y="358" class="ts">不是這樣處理：</text>
+<g>
+  <rect x="120" y="370" width="340" height="60" rx="6" class="ghost"/>
+  <text x="290" y="396" text-anchor="middle" class="tb tw">✕ 不是用現在的賠率</text>
+  <text x="290" y="418" text-anchor="middle" class="ts">重新計價採用下注當時的定價</text>
+</g>
+<g>
+  <rect x="500" y="370" width="340" height="60" rx="6" class="ghost"/>
+  <text x="670" y="396" text-anchor="middle" class="tb tw">✕ 不是整關取消</text>
+  <text x="670" y="418" text-anchor="middle" class="ts">以剩下的投注項重新計價</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：同場過關有投注項取消時，以剩下的投注項依下注當時的定價重新計價，不整關取消（R02-02）。</p>
+</section>
+
+<!-- ============================================================ 圖 02-05 -->
+<section class="fig" id="fig-02-05">
+<h2>圖 02-05　同場過關只剩一個或全部取消，以及待確認的組合範圍</h2>
+<svg viewBox="0 0 960 480" width="100%" role="img" aria-label="同場過關取消後的兩種情況與待確認事項">
+<!-- 欄 1：只剩一個 -->
+<rect x="40" y="24" width="280" height="420" rx="6" class="panel"/>
+<text x="180" y="52" text-anchor="middle" class="tb">大 2.5 作廢，只剩主勝</text>
+<rect x="60" y="68" width="240" height="110" rx="6" class="tag"/>
+<text x="180" y="90" text-anchor="middle" class="ts">同場過關（主勝 + 大 2.5）</text>
+<g>
+  <rect x="90" y="100" width="180" height="32" rx="6" class="node"/>
+  <text x="180" y="121" text-anchor="middle">主勝</text>
+</g>
+<g>
+  <rect x="90" y="138" width="180" height="32" rx="6" class="ghost"/>
+  <text x="180" y="159" text-anchor="middle" class="tw">✕ 大 2.5 作廢</text>
+</g>
+<path d="M180,178 L180,206" class="ln" marker-end="url(#arr)"/>
+<rect x="60" y="208" width="240" height="70" rx="6" class="tag"/>
+<text x="180" y="230" text-anchor="middle" class="ts">仍記為同場過關</text>
+<g>
+  <rect x="90" y="238" width="180" height="32" rx="6" class="node"/>
+  <text x="180" y="259" text-anchor="middle">主勝</text>
+</g>
+<text x="60" y="310" class="ts">仍記為同場過關；</text>
+<text x="60" y="330" class="ts">以主勝下注當時的賠率計算，</text>
+<text x="60" y="350" class="ts">與一般單一投注項相同。</text>
+<!-- 欄 2：全部取消 -->
+<rect x="340" y="24" width="280" height="420" rx="6" class="panel"/>
+<text x="480" y="52" text-anchor="middle" class="tb">兩個投注項都作廢</text>
+<rect x="360" y="68" width="240" height="110" rx="6" class="tag"/>
+<text x="480" y="90" text-anchor="middle" class="ts">同場過關（主勝 + 大 2.5）</text>
+<g>
+  <rect x="390" y="100" width="180" height="32" rx="6" class="ghost"/>
+  <text x="480" y="121" text-anchor="middle" class="tw">✕ 主勝作廢</text>
+</g>
+<g>
+  <rect x="390" y="138" width="180" height="32" rx="6" class="ghost"/>
+  <text x="480" y="159" text-anchor="middle" class="tw">✕ 大 2.5 作廢</text>
+</g>
+<path d="M480,178 L480,206" class="ln" marker-end="url(#arr)"/>
+<rect x="360" y="208" width="240" height="70" rx="6" class="tag"/>
+<text x="480" y="230" text-anchor="middle" class="ts">仍記為同場過關</text>
+<rect x="390" y="238" width="180" height="32" rx="6" class="chip"/>
+<text x="480" y="259" text-anchor="middle" class="ts">沒有投注項</text>
+<text x="360" y="310" class="ts">仍記為同場過關；</text>
+<text x="360" y="330" class="ts">與一般單一投注項取消的</text>
+<text x="360" y="350" class="ts">處理相同（見 07）。</text>
+<!-- 欄 3：待確認 -->
+<rect x="640" y="24" width="280" height="420" rx="6" class="ghost"/>
+<text x="780" y="52" text-anchor="middle" class="tb tw">待確認（第 9 節，暫緩）</text>
+<text x="660" y="90" class="ts">同場過關可以組合哪些投注項：</text>
+<circle cx="668" cy="124" r="4" class="dotw"/>
+<text x="680" y="128" class="ts">可逆玩法之間的相關性可由</text>
+<text x="680" y="146" class="ts">推導取得（05 的 R05-03）；</text>
+<circle cx="668" cy="180" r="4" class="dotw"/>
+<text x="680" y="184" class="ts">含不可逆玩法的組合（例如</text>
+<text x="680" y="202" class="ts">進球加角球）如何反映相關性</text>
+<text x="680" y="220" class="ts">尚未決定。</text>
+<text x="660" y="270" class="ts">深入 02 與 05 時再定；</text>
+<text x="660" y="288" class="ts">組合的定價規則由 05 產生。</text>
+<!-- 底註 -->
+<text x="40" y="468" class="ts">兩種情況在注單紀錄與報表中都記為同場過關；其餘處理與一般單一投注項相同。</text>
+</svg>
+<p class="cap"><b>圖說</b>：取消後只剩一個或沒有投注項的同場過關，在注單紀錄與報表中仍記為同場過關（R02-03）；組合範圍待確認。</p>
+</section>
+
+</div>
+</body>
+</html>

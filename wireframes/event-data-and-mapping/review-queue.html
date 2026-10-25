@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>待處理 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style> td.nw { white-space: nowrap; } .tabs2 { display:flex; flex-wrap:wrap; border-bottom:1px solid var(--line); margin-bottom:10px; } .tabs2 span { padding:6px 10px; color:var(--muted); font-size:13px; } .tabs2 span.on { color:var(--ink); border-bottom:3px solid var(--mark); font-weight:600; } .tabs2 b { margin-left:4px; } </style>
+</head>
+<body>
+<div class="doc">
+
+<h1>待處理（Review Queue）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">賽事資料與對應後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 在一個地方看到所有需要人工處理的項目，依類型分頁籤，每個項目點進各自的畫面處理；覆核別人送出的裁定</td></tr>
+  <tr><th>對應規則</th><td>R04-19（需要人工處理的情況、覆核）、R04-02、R04-09、R04-07、R04-23、R04-14、R04-15、R04-17</td></tr>
+  <tr><th>不在本畫面</th><td>各類項目的處理本身（在各自的畫面）；賽果不一致、賽果重新評估、矛盾賠率的處理頁（下一批）；佇列的排序規則與處理時限（待確認）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的賽事與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：總佇列</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#" class="on">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 待處理</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>待處理</h3><div class="sub">所有需要人工處理的項目；只在這裡顯示，不另行推播</div></div>
+      </div>
+      <div class="tabs2">
+        <span>新競賽<b>3</b></span><span class="on">對應候選<b>5</b></span><span>疑似重複<b>2</b></span><span>待取消<b>4</b></span><span>待腰斬<b>1</b></span><span>賽果不一致<b>6</b></span><span>賽果重新評估<b>2</b></span><span>矛盾賠率<b>1</b></span><span>待覆核<b>3</b></span> <span class="n">1</span>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
+        <div class="f"><label>排序 <span class="n">2</span></label><span class="box caret">已等待最久</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>項目</th><th>來源賽事</th><th>情況 <span class="n">3</span></th><th>進入佇列</th><th>開賽</th><th>處理</th></tr></thead>
+        <tbody>
+          <tr><td>來源 F · F-9931</td><td>Manchester C. vs Arsenal FC<div class="l2">Premier League</div></td><td>2 個候選；讓分與獨贏未開出，方向無法判定</td><td class="nw">10-21 18:40<br><span class="l2">已等待 1 天 20 小時</span></td><td class="nw">10-24 22:00</td><td><span class="btn pri">人工對應</span></td></tr>
+          <tr><td>來源 D · D-77455</td><td>Binh Duong vs Ha Noi<div class="l2">V-League</div></td><td>讓分為 0，賠率相近，方向不唯一</td><td class="nw">10-23 13:40<br><span class="l2">已等待 35 分</span></td><td class="nw">10-25 02:30</td><td><span class="btn pri">人工對應</span></td></tr>
+          <tr><td colspan="6" class="l2">…（其他 3 項）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>頁籤依 R04-19 列的情況：新競賽（R04-02，運動的賽程來源列出的新競賽，處理頁在<a href="source-roles.html">來源角色</a>）、對應候選（R04-09，<a href="event-mapping.html">賽事對應</a>）、疑似重複（R04-07，賽事對應的合併視窗）、待取消與待腰斬（R04-23，<a href="pending-cancellation.html">待取消與待腰斬</a>）、賽果不一致超過一定時間（R04-14）、賽果重新評估（R04-15）、矛盾賠率的恢復（R04-17），以及待覆核（畫面 2）。賽果與矛盾賠率三類的處理頁屬下一批，本頁只列出項目。</span></li>
+  <li><span class="n">2</span><span>排序與處理時限見待確認（04 第 10 項、11 第 4 項）；畫面暫以已等待最久在前，並顯示開賽時間讓 Ops 判斷急迫程度。</span></li>
+  <li><span class="n">3</span><span>每個項目顯示系統為什麼沒有自行處理，幫助 Ops 決定。各頁籤的欄位依類型不同，範例是「對應候選」。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：待覆核</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#" class="on">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賽事資料 › 待處理 › 待覆核</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>待覆核</h3><div class="sub">別人送出、尚未生效的裁定；覆核通過才生效，退回則不生效</div></div>
+      </div>
+      <div class="tabs2">
+        <span>新競賽<b>3</b></span><span>對應候選<b>5</b></span><span>疑似重複<b>2</b></span><span>待取消<b>4</b></span><span>待腰斬<b>1</b></span><span>賽果不一致<b>6</b></span><span>賽果重新評估<b>2</b></span><span>矛盾賠率<b>1</b></span><span class="on">待覆核<b>3</b></span>
+      </div>
+      <table class="grid">
+        <thead><tr><th>裁定 <span class="n">1</span></th><th>對象</th><th>影響 <span class="n">2</span></th><th>送出者</th><th>原因</th><th>覆核 <span class="n">3</span></th></tr></thead>
+        <tbody>
+          <tr><td>重掛到候選</td><td>EV-10198 熱刺 vs 切爾西 → A-88990</td><td>412 張注單留在原賽事；開賽改為 10-24 03:00</td><td class="nw">ops.lin<br><span class="l2">10-23 14:02</span></td><td>聯賽官網公告改期至 10-24 03:00，對陣與場地相同</td><td><span class="btn">查看</span> <span class="btn pri">通過</span> <span class="btn danger">退回</span></td></tr>
+          <tr><td>合併參賽方</td><td>TM-8820 併入 TM-5531</td><td>1 場賽事改掛；36 張未結算注單</td><td class="nw">ops.lin<br><span class="l2">10-23 13:48</span></td><td>同一支隊伍；指定建立者時誤選新建</td><td><span class="btn">查看</span> <span class="btn pri">通過</span> <span class="btn danger">退回</span></td></tr>
+          <tr><td>指定賽果</td><td>EV-10177 全場進球 2:2（原 2:1）</td><td>重新結算 1,840 張注單</td><td class="nw">ops.chen<br><span class="l2">10-23 11:20</span></td><td>來源更正，官方紀錄為 2:2</td><td><span class="btn">查看</span> <span class="btn pri">通過</span> <span class="btn danger">退回</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>須覆核的裁定（R04-19）：會使已結算注單重新結算或退還注額的，例如指定賽果、賽果無效、更正對應（含解除對應與參賽方合併），以及重掛；待取消的作廢也在內。其餘裁定一人即可，不會出現在這裡。</span></li>
+  <li><span class="n">2</span><span>顯示這個裁定生效後會影響多少注單或賽事，數字來自 06、07。</span></li>
+  <li><span class="n">3</span><span>覆核者不能是送出者。「查看」開啟該裁定的原畫面（唯讀）；通過後生效，退回則記錄原因並通知送出者。每項裁定與覆核都記錄由誰、何時、依據什麼。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>待確認事項</h2>
+<ol>
+  <li>總佇列的排序與各類型的處理時限（04 待確認第 10 項、11 待確認第 4 項）。</li>
+</ol>
+
+</div>
+</body>
+</html>

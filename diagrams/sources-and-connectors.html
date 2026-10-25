@@ -1,0 +1,765 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 資料來源與連接器：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+
+<h1>03 資料來源與連接器：概念圖</h1>
+<p class="meta"><b>狀態</b>：草稿（示意，供挑選） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 03 的規則，不約束資料模型或架構；圖中的名稱、識別與數字都是範例。</p>
+<ol class="toc">
+  <li><a href="#fig-03-01">圖 03-01　三層結構：連接器、統一層、對應層</a></li>
+  <li><a href="#fig-03-02">圖 03-02　取得途徑：資料以原始來源計</a></li>
+  <li><a href="#fig-03-03">圖 03-03　途徑互為備援，來源不互為備援</a></li>
+  <li><a href="#fig-03-04">圖 03-04　來源狀態依資料類別分開判定</a></li>
+  <li><a href="#fig-03-05">圖 03-05　什麼算有效內容：中斷與恢復的判定</a></li>
+  <li><a href="#fig-03-06">圖 03-06　中斷與停用是不同的狀態</a></li>
+  <li><a href="#fig-03-07">圖 03-07　連接器讀什麼、不讀什麼、何時補取</a></li>
+  <li><a href="#fig-03-08">圖 03-08　連接器只回報事實</a></li>
+  <li><a href="#fig-03-09">圖 03-09　帳號與營運控制</a></li>
+</ol>
+
+<!-- ============================================================ 圖 03-01 -->
+<section class="fig" id="fig-03-01">
+<h2>圖 03-01　三層結構：連接器、統一層、對應層</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="三層結構">
+<rect x="800" y="564" width="130" height="24" rx="4" class="tag"/><text x="865" y="581" text-anchor="middle" class="ts">參考設計（非約束）</text>
+<!-- 欄標題 -->
+<text x="130" y="44" text-anchor="middle" class="tb">外部站台</text>
+<text x="360" y="44" text-anchor="middle" class="tb">連接器（03）</text>
+<text x="580" y="44" text-anchor="middle" class="tb">統一層</text>
+<text x="800" y="44" text-anchor="middle" class="ts" class="tb">對應層（04）</text>
+<!-- 外部站台 -->
+<g>
+  <rect x="40" y="70" width="180" height="54" rx="6" class="node"/><rect x="43" y="73" width="174" height="48" rx="4" class="node2"/>
+  <text x="130" y="92" text-anchor="middle" class="tb">資料來源</text><text x="130" y="112" text-anchor="middle" class="ts">來源 A、來源 C</text>
+</g>
+<g>
+  <rect x="40" y="140" width="180" height="46" rx="6" class="node"/><rect x="43" y="143" width="174" height="40" rx="4" class="node2"/>
+  <text x="130" y="168" text-anchor="middle">入口站台甲</text>
+</g>
+<g>
+  <rect x="40" y="202" width="180" height="46" rx="6" class="node"/><rect x="43" y="205" width="174" height="40" rx="4" class="node2"/>
+  <text x="130" y="230" text-anchor="middle">轉送商</text>
+</g>
+<text x="130" y="276" text-anchor="middle" class="ts">每個外部站台一個連接器</text>
+<!-- 連接器 -->
+<g>
+  <rect x="270" y="70" width="180" height="178" rx="6" class="node"/><rect x="273" y="73" width="174" height="172" rx="4" class="node2"/>
+  <text x="360" y="96" text-anchor="middle" class="tb">連接器</text>
+  <text x="360" y="120" text-anchor="middle" class="ts">只回報來源提供的事實，<tspan x="360" dy="1.3em">不做業務判斷</tspan></text>
+  <line x1="286" y1="156" x2="434" y2="156" class="sep"/>
+  <text x="360" y="176" text-anchor="middle" class="ts">每筆資料帶：<tspan x="360" dy="1.3em">來源與來源自己的識別</tspan><tspan x="360" dy="1.3em">InSports 收到的時間</tspan><tspan x="360" dy="1.3em">來源提供的時間</tspan></text>
+</g>
+<!-- 統一層 -->
+<g>
+  <rect x="490" y="70" width="180" height="178" rx="6" class="node"/><rect x="493" y="73" width="174" height="172" rx="4" class="node2"/>
+  <text x="580" y="96" text-anchor="middle" class="tb">統一層</text>
+  <text x="580" y="120" text-anchor="middle" class="ts">轉成統一表示</text>
+  <line x1="506" y1="134" x2="654" y2="134" class="sep"/>
+  <text x="580" y="156" text-anchor="middle" class="ts">例如：<tspan x="580" dy="1.3em">賠率 0 表示關盤</tspan><tspan x="580" dy="1.3em">時區</tspan><tspan x="580" dy="1.3em">讓分正負號</tspan><tspan x="580" dy="1.3em">賠率格式</tspan></text>
+</g>
+<!-- 對應層 -->
+<g>
+  <rect x="710" y="70" width="180" height="178" rx="6" class="node"/><rect x="713" y="73" width="174" height="172" rx="4" class="node2"/>
+  <text x="800" y="96" text-anchor="middle" class="tb">對應層</text>
+  <text x="800" y="120" text-anchor="middle" class="ts">建立統一紀錄</text>
+  <line x1="726" y1="134" x2="874" y2="134" class="sep"/>
+  <text x="800" y="156" text-anchor="middle" class="ts">多個來源的資料<tspan x="800" dy="1.3em">對應到同一筆</tspan><tspan x="800" dy="1.3em">統一紀錄（見 04）</tspan></text>
+</g>
+<!-- 橫向箭頭 -->
+<path d="M220,97 L268,118" class="ln" marker-end="url(#arr)"/>
+<path d="M220,163 L268,150" class="ln" marker-end="url(#arr)"/>
+<path d="M220,225 L268,180" class="ln" marker-end="url(#arr)"/>
+<path d="M450,159 L488,159" class="ln" marker-end="url(#arr)"/>
+<path d="M670,159 L708,159" class="ln" marker-end="url(#arr)"/>
+<!-- 向下存放 -->
+<path d="M360,248 L360,330" class="ln dash" marker-end="url(#arrs)"/>
+<path d="M580,248 L580,330" class="ln dash" marker-end="url(#arrs)"/>
+<path d="M800,248 L800,330" class="ln dash" marker-end="url(#arrs)"/>
+<text x="360" y="300" text-anchor="middle" class="ts">保存</text>
+<text x="580" y="300" text-anchor="middle" class="ts">保存</text>
+<text x="800" y="300" text-anchor="middle" class="ts">保存</text>
+<!-- 三個資料庫 -->
+<g>
+  <rect x="270" y="346" width="180" height="120" class="node" rx="0"/>
+  <ellipse cx="360" cy="346" rx="90" ry="14" class="node"/>
+  <ellipse cx="360" cy="466" rx="90" ry="14" class="node"/>
+  <rect x="271.5" y="346" width="177" height="120" class="fillpanel" stroke="none"/>
+  <line x1="270" y1="346" x2="270" y2="466" class="ln"/><line x1="450" y1="346" x2="450" y2="466" class="ln"/>
+  <ellipse cx="360" cy="346" rx="90" ry="14" class="node"/>
+  <text x="360" y="386" text-anchor="middle" class="tb">原始資料</text>
+  <text x="360" y="408" text-anchor="middle" class="ts">只供重新處理與除錯<tspan x="360" dy="1.3em">短期保存</tspan><tspan x="360" dy="1.3em">不作為賽果爭議的依據</tspan></text>
+</g>
+<g>
+  <rect x="490" y="346" width="180" height="120" class="node" rx="0"/>
+  <ellipse cx="580" cy="466" rx="90" ry="14" class="node"/>
+  <rect x="491.5" y="346" width="177" height="120" class="fillpanel" stroke="none"/>
+  <line x1="490" y1="346" x2="490" y2="466" class="ln"/><line x1="670" y1="346" x2="670" y2="466" class="ln"/>
+  <ellipse cx="580" cy="346" rx="90" ry="14" class="node"/>
+  <text x="580" y="386" text-anchor="middle" class="tb">各來源的資料</text>
+  <text x="580" y="408" text-anchor="middle" class="ts">每個來源各自一份<tspan x="580" dy="1.3em">統一表示</tspan></text>
+</g>
+<g>
+  <rect x="710" y="346" width="180" height="120" class="node" rx="0"/>
+  <ellipse cx="800" cy="466" rx="90" ry="14" class="node"/>
+  <rect x="711.5" y="346" width="177" height="120" class="fillpanel" stroke="none"/>
+  <line x1="710" y1="346" x2="710" y2="466" class="ln"/><line x1="890" y1="346" x2="890" y2="466" class="ln"/>
+  <ellipse cx="800" cy="346" rx="90" ry="14" class="node"/>
+  <text x="800" y="386" text-anchor="middle" class="tb">統一紀錄</text>
+  <text x="800" y="408" text-anchor="middle" class="ts">InSports 自己持有的<tspan x="800" dy="1.3em">一份資料</tspan></text>
+</g>
+<text x="130" y="410" text-anchor="middle" class="ts">三者分開保存</text>
+<text x="130" y="430" text-anchor="middle" class="tb">互不覆蓋</text>
+<path d="M190,418 L262,418" class="ln" marker-end="url(#arr)"/>
+<!-- 註記 -->
+<circle cx="52" cy="528" r="4" class="dotw"/>
+<text x="66" y="533">原始資料只供重新處理與除錯；爭議以統一賽果與人工裁定的紀錄為準（R03-11）。</text>
+<circle cx="52" cy="558" r="4" class="dotw"/>
+<text x="66" y="563">來源特有的表示方式在連接器或統一層轉成統一表示，04 之後就不需要知道各來源的特性。</text>
+</svg>
+<p class="cap"><b>圖說</b>：連接器取得原始資料，統一層轉成統一格式，對應層建立統一紀錄；三者分開保存（第 8 節、R03-08、R03-11）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-02 -->
+<section class="fig" id="fig-03-02">
+<h2>圖 03-02　取得途徑：資料以原始來源計</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="取得途徑">
+<text x="150" y="40" text-anchor="middle" class="tb">資料來源</text>
+<text x="500" y="40" text-anchor="middle" class="tb">取得途徑</text>
+<text x="850" y="40" text-anchor="middle" class="tb">InSports</text>
+<!-- 來源 -->
+<g>
+  <rect x="60" y="64" width="180" height="56" rx="6" class="node"/><rect x="63" y="67" width="174" height="50" rx="4" class="node2"/>
+  <text x="150" y="88" text-anchor="middle" class="tb">來源 A</text><text x="150" y="108" text-anchor="middle" class="ts">直接取得；另經轉送商</text>
+</g>
+<g>
+  <rect x="60" y="150" width="180" height="56" rx="6" class="node"/><rect x="63" y="153" width="174" height="50" rx="4" class="node2"/>
+  <text x="150" y="174" text-anchor="middle" class="tb">來源 B</text><text x="150" y="194" text-anchor="middle" class="ts">經同一轉送商</text>
+</g>
+<g>
+  <rect x="60" y="236" width="180" height="56" rx="6" class="node"/><rect x="63" y="239" width="174" height="50" rx="4" class="node2"/>
+  <text x="150" y="260" text-anchor="middle" class="tb">來源 C</text><text x="150" y="280" text-anchor="middle" class="ts">經入口站台甲或乙</text>
+</g>
+<g>
+  <rect x="60" y="322" width="180" height="56" rx="6" class="node"/><rect x="63" y="325" width="174" height="50" rx="4" class="node2"/>
+  <text x="150" y="346" text-anchor="middle" class="tb">來源 D</text><text x="150" y="366" text-anchor="middle" class="ts">直接取得</text>
+</g>
+<!-- 途徑 -->
+<g>
+  <rect x="400" y="64" width="200" height="46" rx="6" class="node"/><rect x="403" y="67" width="194" height="40" rx="4" class="node2"/>
+  <text x="500" y="84" text-anchor="middle">直接取得</text><text x="500" y="101" text-anchor="middle" class="ts">匿名公開</text>
+</g>
+<g>
+  <rect x="400" y="140" width="200" height="46" rx="6" class="node"/><rect x="403" y="143" width="194" height="40" rx="4" class="node2"/>
+  <text x="500" y="160" text-anchor="middle">轉送商</text><text x="500" y="177" text-anchor="middle" class="ts">轉送 A 與 B 的資料</text>
+</g>
+<g>
+  <rect x="400" y="216" width="200" height="46" rx="6" class="node"/><rect x="403" y="219" width="194" height="40" rx="4" class="node2"/>
+  <text x="500" y="236" text-anchor="middle">入口站台甲</text><text x="500" y="253" text-anchor="middle" class="ts">以玩家帳號進入</text>
+</g>
+<g>
+  <rect x="400" y="292" width="200" height="46" rx="6" class="node"/><rect x="403" y="295" width="194" height="40" rx="4" class="node2"/>
+  <text x="500" y="312" text-anchor="middle">入口站台乙</text><text x="500" y="329" text-anchor="middle" class="ts">以玩家帳號進入</text>
+</g>
+<g>
+  <rect x="400" y="368" width="200" height="46" rx="6" class="node"/><rect x="403" y="371" width="194" height="40" rx="4" class="node2"/>
+  <text x="500" y="388" text-anchor="middle">直接取得</text><text x="500" y="405" text-anchor="middle" class="ts">以帳號登入</text>
+</g>
+<!-- InSports -->
+<g>
+  <rect x="770" y="64" width="160" height="350" rx="6" class="node"/><rect x="773" y="67" width="154" height="344" rx="4" class="node2"/>
+  <text x="850" y="220" text-anchor="middle" class="tb">連接器</text>
+  <text x="850" y="244" text-anchor="middle" class="ts">每個外部站台一個</text>
+  <text x="850" y="268" text-anchor="middle" class="ts">資料以原始來源計：<tspan x="850" dy="1.3em">A、B、C、D</tspan><tspan x="850" dy="1.3em">各算一個來源</tspan></text>
+</g>
+<!-- 來源 → 途徑 -->
+<path d="M240,80 L398,87" class="ln" marker-end="url(#arr)"/>
+<path d="M240,100 L398,158" class="ln" marker-end="url(#arr)"/>
+<path d="M240,178 L398,166" class="ln" marker-end="url(#arr)"/>
+<path d="M240,254 L398,239" class="ln" marker-end="url(#arr)"/>
+<path d="M240,272 L398,312" class="ln" marker-end="url(#arr)"/>
+<path d="M240,350 L398,391" class="ln" marker-end="url(#arr)"/>
+<!-- 途徑 → InSports -->
+<path d="M600,87 L768,87" class="ln" marker-end="url(#arr)"/>
+<path d="M600,163 L768,163" class="ln" marker-end="url(#arr)"/>
+<path d="M600,239 L768,239" class="ln" marker-end="url(#arr)"/>
+<path d="M600,315 L768,315" class="ln" marker-end="url(#arr)"/>
+<path d="M600,391 L768,391" class="ln" marker-end="url(#arr)"/>
+<!-- 標籤 -->
+<text x="684" y="80" text-anchor="middle" class="ts">A 的資料</text>
+<text x="684" y="156" text-anchor="middle" class="ts">A 的資料、B 的資料</text>
+<text x="684" y="232" text-anchor="middle" class="ts">C 的資料</text>
+<text x="684" y="308" text-anchor="middle" class="ts">C 的資料</text>
+<text x="684" y="384" text-anchor="middle" class="ts">D 的資料</text>
+<!-- 註記 -->
+<rect x="40" y="440" width="890" height="130" rx="6" class="panel"/>
+<circle cx="60" cy="466" r="4" class="dotw"/>
+<text x="74" y="471">經入口站台或轉送商取得的資料，仍是原始來源的資料；入口站台與轉送商本身不是資料來源。</text>
+<circle cx="60" cy="498" r="4" class="dotw"/>
+<text x="74" y="503">A、B 各算一個來源，即使共用同一轉送商或價格疑似互為鏡像；不想採用時由 04 的來源角色排除（R04-02）。</text>
+<circle cx="60" cy="530" r="4" class="dotw"/>
+<text x="74" y="535">各種取得方式都可以接受，含依賴對方未限制存取的方式，可能隨時失效（R03-03）。</text>
+<text x="74" y="560" class="ts">是否串接某個來源，由 InSports 逐一決定；付費資料服務同樣會採用，是否採用某一家依價格決定。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一個來源可以有多條取得途徑；資料以原始來源計，04 不需要知道經過哪條途徑（R03-01）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-03 -->
+<section class="fig" id="fig-03-03">
+<h2>圖 03-03　途徑互為備援，來源不互為備援</h2>
+<svg viewBox="0 0 960 520" width="100%" role="img" aria-label="備援對照">
+<!-- 左：途徑互為備援 -->
+<rect x="30" y="30" width="440" height="400" rx="6" class="panel"/>
+<text x="250" y="60" text-anchor="middle" class="tb">✓ 途徑互為備援（R03-02）</text>
+<g>
+  <rect x="60" y="150" width="130" height="56" rx="6" class="node"/><rect x="63" y="153" width="124" height="50" rx="4" class="node2"/>
+  <text x="125" y="174" text-anchor="middle" class="tb">來源 C</text><text x="125" y="194" text-anchor="middle" class="ts">仍為正常</text>
+</g>
+<g>
+  <rect x="230" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <text x="295" y="112" text-anchor="middle" class="tw">入口站台甲</text><text x="295" y="130" text-anchor="middle" class="ts tw">維護中</text>
+</g>
+<g>
+  <rect x="230" y="210" width="130" height="50" rx="6" class="node"/><rect x="233" y="213" width="124" height="44" rx="4" class="node2"/>
+  <text x="295" y="232" text-anchor="middle">入口站台乙</text><text x="295" y="250" text-anchor="middle" class="ts">改經乙取得</text>
+</g>
+<g>
+  <rect x="390" y="150" width="60" height="56" rx="6" class="node"/><rect x="393" y="153" width="54" height="50" rx="4" class="node2"/>
+  <text x="420" y="184" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M190,165 L228,125" class="lnw dash"/>
+<path d="M360,115 L388,160" class="lnw dash"/>
+<text x="200" y="118" text-anchor="middle" class="tw">✕</text>
+<path d="M190,190 L228,228" class="ln" marker-end="url(#arr)"/>
+<path d="M360,230 L388,195" class="ln" marker-end="url(#arr)"/>
+<circle cx="60" cy="300" r="4" class="dot"/>
+<text x="74" y="305" class="ts">一條途徑失效時，改由其他途徑取得同一來源的資料。</text>
+<circle cx="60" cy="330" r="4" class="dot"/>
+<text x="74" y="335" class="ts">C 的賠率、賽果都照常；C 仍為正常（R03-06）。</text>
+<circle cx="60" cy="360" r="4" class="dot"/>
+<text x="74" y="365" class="ts">甲的維護在後台顯示原因與持續時間（R03-14）。</text>
+<circle cx="60" cy="390" r="4" class="dot"/>
+<text x="74" y="395" class="ts">部分途徑失效只減少備援，不算中斷。</text>
+<!-- 右：來源不互為備援 -->
+<rect x="490" y="30" width="440" height="400" rx="6" class="panel"/>
+<text x="710" y="60" text-anchor="middle" class="tb tw">✕ 來源不互為備援（R03-02）</text>
+<g>
+  <rect x="520" y="90" width="130" height="56" rx="6" class="ghost"/>
+  <text x="585" y="114" text-anchor="middle" class="tw">來源 C</text><text x="585" y="134" text-anchor="middle" class="ts tw">賠率中斷</text>
+</g>
+<g>
+  <rect x="520" y="210" width="130" height="56" rx="6" class="node"/><rect x="523" y="213" width="124" height="50" rx="4" class="node2"/>
+  <text x="585" y="234" text-anchor="middle" class="tb">來源 D</text><text x="585" y="254" text-anchor="middle" class="ts">也提供同一場比賽</text>
+</g>
+<g>
+  <rect x="690" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <text x="755" y="112" text-anchor="middle" class="tw">入口站台甲</text><text x="755" y="130" text-anchor="middle" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="690" y="150" width="130" height="50" rx="6" class="ghost"/>
+  <text x="755" y="172" text-anchor="middle" class="tw">入口站台乙</text><text x="755" y="190" text-anchor="middle" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="850" y="120" width="60" height="56" rx="6" class="node"/><rect x="853" y="123" width="54" height="50" rx="4" class="node2"/>
+  <text x="880" y="154" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M650,108 L688,112" class="lnw dash"/>
+<path d="M650,128 L688,170" class="lnw dash"/>
+<path d="M820,115 L848,140" class="lnw dash"/>
+<path d="M820,175 L848,155" class="lnw dash"/>
+<text x="755" y="80" text-anchor="middle" class="tw">賠率沒有可用途徑</text>
+<path d="M650,238 C720,238 760,200 848,165" class="lnw dash"/>
+<text x="740" y="262" text-anchor="middle" class="tw">✕ 不以 D 的資料頂替 C</text>
+<circle cx="520" cy="300" r="4" class="dotw"/>
+<text x="534" y="305" class="ts">一類資料沒有任何可用途徑，該類資料才算中斷（R03-06）。</text>
+<circle cx="520" cy="330" r="4" class="dotw"/>
+<text x="534" y="335" class="ts">一個來源中斷時，不以另一個來源的資料頂替。</text>
+<circle cx="520" cy="360" r="4" class="dotw"/>
+<text x="534" y="365" class="ts">只有 C 提供賠率的盤口如何處理，見 04 的 R04-16。</text>
+<circle cx="520" cy="390" r="4" class="dotw"/>
+<text x="534" y="395" class="ts">中斷以類別計：C 的賽果經直接輪詢取得，仍為正常。</text>
+<!-- 底註 -->
+<text x="480" y="470" text-anchor="middle">途徑之間互為備援，來源之間不互為備援；多個來源如何一起使用，由 04 的來源角色決定。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一條途徑失效改由其他途徑取得同一來源；一個來源中斷時不以另一個來源頂替（R03-02）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-04 -->
+<section class="fig" id="fig-03-04">
+<h2>圖 03-04　來源狀態依資料類別分開判定</h2>
+<svg viewBox="0 0 960 520" width="100%" role="img" aria-label="來源狀態矩陣">
+<text x="40" y="52" class="ts">資料類別（與 04 的 R04-01 相同）→</text>
+<!-- 欄標題 -->
+<g>
+  <rect x="260" y="30" width="160" height="70" rx="6" class="node"/><rect x="263" y="33" width="154" height="64" rx="4" class="node2"/>
+  <text x="340" y="56" text-anchor="middle" class="tb">賽程</text>
+  <text x="340" y="76" text-anchor="middle" class="ts">含參賽方與<tspan x="340" dy="1.3em">冠軍盤名單</tspan></text>
+</g>
+<g>
+  <rect x="430" y="30" width="160" height="70" rx="6" class="node"/><rect x="433" y="33" width="154" height="64" rx="4" class="node2"/>
+  <text x="510" y="56" text-anchor="middle" class="tb">賠率</text>
+  <text x="510" y="76" text-anchor="middle" class="ts">常用推送</text>
+</g>
+<g>
+  <rect x="600" y="30" width="160" height="70" rx="6" class="node"/><rect x="603" y="33" width="154" height="64" rx="4" class="node2"/>
+  <text x="680" y="56" text-anchor="middle" class="tb">賽況</text>
+  <text x="680" y="76" text-anchor="middle" class="ts">比分、事件與滾球訊號</text>
+</g>
+<g>
+  <rect x="770" y="30" width="160" height="70" rx="6" class="node"/><rect x="773" y="33" width="154" height="64" rx="4" class="node2"/>
+  <text x="850" y="56" text-anchor="middle" class="tb">賽果</text>
+  <text x="850" y="76" text-anchor="middle" class="ts">常用輪詢</text>
+</g>
+<!-- 列 -->
+<text x="40" y="135" class="ts">來源 ↓</text>
+<g>
+  <rect x="40" y="150" width="200" height="60" rx="6" class="node"/><rect x="43" y="153" width="194" height="54" rx="4" class="node2"/>
+  <text x="140" y="185" text-anchor="middle" class="tb">來源 A</text>
+</g>
+<g>
+  <rect x="40" y="240" width="200" height="60" rx="6" class="node"/><rect x="43" y="243" width="194" height="54" rx="4" class="node2"/>
+  <text x="140" y="268" text-anchor="middle" class="tb">來源 C</text><text x="140" y="288" text-anchor="middle" class="ts">賽果因速率限制取不到</text>
+</g>
+<g>
+  <rect x="40" y="330" width="200" height="60" rx="6" class="node"/><rect x="43" y="333" width="194" height="54" rx="4" class="node2"/>
+  <text x="140" y="358" text-anchor="middle" class="tb">來源 D</text><text x="140" y="378" text-anchor="middle" class="ts">營運停用 D 的賽果</text>
+</g>
+<!-- 格線 -->
+<line x1="260" y1="130" x2="930" y2="130" class="sep"/>
+<line x1="260" y1="220" x2="930" y2="220" class="sep"/>
+<line x1="260" y1="310" x2="930" y2="310" class="sep"/>
+<line x1="260" y1="400" x2="930" y2="400" class="sep"/>
+<line x1="425" y1="130" x2="425" y2="400" class="sep"/>
+<line x1="595" y1="130" x2="595" y2="400" class="sep"/>
+<line x1="765" y1="130" x2="765" y2="400" class="sep"/>
+<!-- A 列：賽程 正常、賠率 —、賽況 正常、賽果 正常 -->
+<rect x="305" y="164" width="70" height="26" rx="13" class="chip"/><text x="340" y="182" text-anchor="middle" class="ts">正常</text>
+<text x="510" y="182" text-anchor="middle" class="ts">—（不提供）</text>
+<rect x="645" y="164" width="70" height="26" rx="13" class="chip"/><text x="680" y="182" text-anchor="middle" class="ts">正常</text>
+<rect x="815" y="164" width="70" height="26" rx="13" class="chip"/><text x="850" y="182" text-anchor="middle" class="ts">正常</text>
+<!-- C 列：賽程 正常、賠率 正常、賽況 正常、賽果 中斷 -->
+<rect x="305" y="254" width="70" height="26" rx="13" class="chip"/><text x="340" y="272" text-anchor="middle" class="ts">正常</text>
+<rect x="475" y="254" width="70" height="26" rx="13" class="chip"/><text x="510" y="272" text-anchor="middle" class="ts">正常</text>
+<rect x="645" y="254" width="70" height="26" rx="13" class="chip"/><text x="680" y="272" text-anchor="middle" class="ts">正常</text>
+<rect x="815" y="254" width="70" height="26" rx="13" class="chipw"/><text x="850" y="272" text-anchor="middle" class="ts tw">中斷</text>
+<!-- D 列：賽程 —、賠率 正常、賽況 正常、賽果 停用 -->
+<text x="340" y="362" text-anchor="middle" class="ts">—（不提供）</text>
+<rect x="475" y="344" width="70" height="26" rx="13" class="chip"/><text x="510" y="362" text-anchor="middle" class="ts">正常</text>
+<rect x="645" y="344" width="70" height="26" rx="13" class="chip"/><text x="680" y="362" text-anchor="middle" class="ts">正常</text>
+<rect x="815" y="344" width="70" height="26" rx="13" class="ghost"/><text x="850" y="362" text-anchor="middle" class="ts tw">停用</text>
+<!-- 註記 -->
+<circle cx="52" cy="432" r="4" class="dotw"/>
+<text x="66" y="437">C 的賽果中斷、賠率正常：C 的賠率照常交給 04；一類資料中斷或停用，不影響同一來源其他類資料的使用。</text>
+<circle cx="52" cy="462" r="4" class="dotw"/>
+<text x="66" y="467">各類資料常經不同管道取得（賠率用推送、賽果用輪詢），因此狀態依資料類別分開判定。</text>
+<circle cx="52" cy="492" r="4" class="dotw"/>
+<text x="66" y="497">途徑以它提供的資料類別計：C 的賽果途徑失效、賠率途徑仍可用，所以只有賽果中斷（R03-06）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：每個來源依資料類別各有一個狀態；一類中斷不影響其他類（R03-05）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-05 -->
+<section class="fig" id="fig-03-05">
+<h2>圖 03-05　什麼算有效內容：中斷與恢復的判定</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="有效內容與中斷恢復">
+<!-- 左：正常 -->
+<rect x="30" y="30" width="440" height="260" rx="6" class="panel"/>
+<text x="250" y="58" text-anchor="middle" class="tb">✓ 正常：有效內容，或對探測的有效回應</text>
+<line x1="50" y1="70" x2="450" y2="70" class="sep"/>
+<circle cx="56" cy="96" r="4" class="dot"/>
+<text x="70" y="101" class="ts">持續收到有效內容，即使來源沒有變動。</text>
+<circle cx="56" cy="128" r="4" class="dot"/>
+<text x="70" y="133" class="ts">凌晨沒有賽事，來源對查詢回報空的賽事清單。</text>
+<circle cx="56" cy="160" r="4" class="dot"/>
+<text x="70" y="165" class="ts">資料延遲數十分鐘才到；<tspan x="70" dy="1.4em">是否太舊由下游依時間判斷（R03-08）。</tspan></text>
+<circle cx="56" cy="212" r="4" class="dot"/>
+<text x="70" y="217" class="ts">部分途徑失效：只減少備援，仍為正常，在後台顯示。</text>
+<!-- 右：中斷 -->
+<rect x="490" y="30" width="440" height="260" rx="6" class="panel"/>
+<text x="710" y="58" text-anchor="middle" class="tb tw">✕ 不是證據：判定為中斷</text>
+<line x1="510" y1="70" x2="910" y2="70" class="sep"/>
+<circle cx="516" cy="96" r="4" class="dotw"/>
+<text x="530" y="101" class="ts">連線仍在，但只送出心跳與時鐘，對查詢不再回應。</text>
+<circle cx="516" cy="128" r="4" class="dotw"/>
+<text x="530" y="133" class="ts">以成功狀態回傳的錯誤。</text>
+<circle cx="516" cy="160" r="4" class="dotw"/>
+<text x="530" y="165" class="ts">工作階段被登出後，來源改回傳訪客模式的賠率；<tspan x="530" dy="1.4em">這些賠率不交給 04。</tspan></text>
+<circle cx="516" cy="212" r="4" class="dotw"/>
+<text x="530" y="217" class="ts">來源改版，資料格式改變、無法轉換。</text>
+<circle cx="516" cy="244" r="4" class="dotw"/>
+<text x="530" y="249" class="ts">推送式來源靜默數小時：靜默本身不是證據，<tspan x="530" dy="1.4em">須對探測有有效回應；探測方式由 SPEC 定。</tspan></text>
+<!-- 時間軸 -->
+<text x="40" y="310" class="ts">一類資料的狀態（時間 →）</text>
+<line x1="40" y1="380" x2="930" y2="380" class="sep"/>
+<g>
+  <rect x="60" y="356" width="120" height="48" rx="24" class="node"/><rect x="63" y="359" width="114" height="42" rx="21" class="node2"/>
+  <text x="120" y="385" text-anchor="middle" class="tb">正常</text>
+</g>
+<g>
+  <rect x="400" y="356" width="120" height="48" rx="24" class="ghost"/>
+  <text x="460" y="385" text-anchor="middle" class="tb tw">中斷</text>
+</g>
+<g>
+  <rect x="800" y="356" width="120" height="48" rx="24" class="node"/><rect x="803" y="359" width="114" height="42" rx="21" class="node2"/>
+  <text x="860" y="385" text-anchor="middle" class="tb">正常</text>
+</g>
+<path d="M180,380 L398,380" class="lnw" marker-end="url(#arrw)"/>
+<text x="290" y="344" text-anchor="middle" class="tw">沒有任何可用途徑</text>
+<text x="290" y="424" text-anchor="middle" class="ts">由系統判定</text>
+<path d="M520,380 L798,380" class="ln" marker-end="url(#arr)"/>
+<text x="660" y="344" text-anchor="middle">持續收到有效內容，確認穩定</text>
+<text x="660" y="424" text-anchor="middle" class="ts">恢復是自動的，不需要人工確認；條件比中斷嚴格</text>
+<!-- 註記 -->
+<circle cx="52" cy="472" r="4" class="dotw"/>
+<text x="66" y="477">一類資料沒有任何可用途徑，該類資料才算中斷；部分途徑失效只減少備援（R03-06）。</text>
+<circle cx="52" cy="502" r="4" class="dotw"/>
+<text x="66" y="507">恢復須持續收到有效內容，確認穩定後才回到正常。時間數值見非功能需求。</text>
+<circle cx="52" cy="532" r="4" class="dotw"/>
+<text x="66" y="537">中斷與部分途徑失效都在後台顯示原因與持續時間，不另行推播（R03-14）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：正常須有正面證據，即有效內容或對探測的有效回應，靜默不是證據；恢復自動但比中斷嚴格（R03-05、R03-06）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-06 -->
+<section class="fig" id="fig-03-06">
+<h2>圖 03-06　中斷與停用是不同的狀態</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="來源狀態機">
+<text x="40" y="40" class="ts">每個「來源 + 資料類別」各有一個狀態</text>
+<!-- 狀態 -->
+<g>
+  <rect x="80" y="110" width="140" height="52" rx="26" class="node"/><rect x="83" y="113" width="134" height="46" rx="23" class="node2"/>
+  <text x="150" y="141" text-anchor="middle" class="tb">正常</text>
+</g>
+<g>
+  <rect x="440" y="110" width="140" height="52" rx="26" class="ghost"/>
+  <text x="510" y="141" text-anchor="middle" class="tb tw">中斷</text>
+</g>
+<g>
+  <rect x="260" y="290" width="140" height="52" rx="26" class="ghost"/>
+  <text x="330" y="321" text-anchor="middle" class="tb tw">停用</text>
+</g>
+<!-- 正常 ⇄ 中斷 -->
+<path d="M220,124 L438,124" class="lnw" marker-end="url(#arrw)"/>
+<text x="330" y="100" text-anchor="middle" class="tw">系統判定：沒有任何可用途徑</text>
+<path d="M440,150 L222,150" class="ln" marker-end="url(#arr)"/>
+<text x="330" y="180" text-anchor="middle" class="ts">自動恢復；不改變啟用設定</text>
+<!-- 正常 → 停用、中斷 → 停用 -->
+<path d="M150,162 C150,250 200,290 258,305" class="lnw" marker-end="url(#arrw)"/>
+<path d="M510,162 C510,250 460,290 402,305" class="lnw" marker-end="url(#arrw)"/>
+<text x="128" y="240" text-anchor="end" class="tw">人工設定</text>
+<text x="128" y="258" text-anchor="end" class="ts tw">立即生效</text>
+<text x="536" y="240" class="tw">人工設定</text>
+<text x="536" y="258" class="ts tw">立即生效</text>
+<!-- 停用 → 正常 -->
+<path d="M300,290 C230,230 160,210 120,162" class="ln" marker-end="url(#arr)"/>
+<text x="340" y="226" text-anchor="middle" class="ts">↖ 人工解除設定，改依 R03-05 判定</text>
+<!-- 新來源 -->
+<rect x="150" y="372" width="360" height="64" rx="6" class="ghost"/>
+<text x="330" y="392" text-anchor="middle" class="ts tw">停用＝因人工設定而不使用或取不到，以「來源 + 資料類別」計：</text><text x="330" y="410" text-anchor="middle" class="ts tw">來源＋類別停用、連接器暫停、途徑或帳號被人工停用、</text><text x="330" y="428" text-anchor="middle" class="ts tw">新串接的來源尚未啟用</text>
+<path d="M330,372 L330,344" class="lnw dash" marker-end="url(#arrw)"/>
+<text x="330" y="456" text-anchor="middle" class="ts">串接完成後由人工啟用，不需要試運轉（R03-12）</text>
+<!-- 右：連接器被暫停的例子 -->
+<rect x="620" y="60" width="310" height="380" rx="6" class="panel"/>
+<text x="775" y="88" text-anchor="middle" class="tb">例：入口站台甲的連接器被暫停</text>
+<line x1="640" y1="100" x2="910" y2="100" class="sep"/>
+<g>
+  <rect x="640" y="116" width="120" height="44" rx="6" class="node"/><rect x="643" y="119" width="114" height="38" rx="4" class="node2"/>
+  <text x="700" y="143" text-anchor="middle">來源 C</text>
+</g>
+<g>
+  <rect x="640" y="236" width="120" height="44" rx="6" class="node"/><rect x="643" y="239" width="114" height="38" rx="4" class="node2"/>
+  <text x="700" y="263" text-anchor="middle">來源 F</text>
+</g>
+<g>
+  <rect x="800" y="150" width="110" height="40" rx="6" class="ghost"/>
+  <text x="855" y="169" text-anchor="middle" class="ts tw">入口站台甲</text><text x="855" y="183" text-anchor="middle" class="ts tw">連接器暫停</text>
+</g>
+<g>
+  <rect x="800" y="210" width="110" height="40" rx="6" class="node"/><rect x="803" y="213" width="104" height="34" rx="4" class="node2"/>
+  <text x="855" y="235" text-anchor="middle" class="ts">入口站台乙</text>
+</g>
+<path d="M760,138 L798,165" class="lnw dash"/>
+<path d="M760,146 L798,226" class="ln" marker-end="url(#arr)"/>
+<path d="M760,258 L798,175" class="lnw dash"/>
+<text x="700" y="178" text-anchor="middle" class="ts">經乙繼續 → 仍正常</text>
+<text x="700" y="300" text-anchor="middle" class="ts tw">只能經甲 → 沒有可用途徑</text>
+<text x="700" y="318" text-anchor="middle" class="tw">視為停用，不是中斷</text>
+<circle cx="646" cy="352" r="4" class="dotw"/>
+<text x="658" y="357" class="ts">連接器被暫停時，經過它的途徑都不可用。</text>
+<circle cx="646" cy="382" r="4" class="dotw"/>
+<text x="658" y="387" class="ts">連接器恢復後，F 的停用解除，</text>
+<text x="658" y="405" class="ts">改依 R03-05 判定；對進行中賽事</text>
+<text x="658" y="423" class="ts">的影響，由下游各模組自行處理。</text>
+<!-- 底註對照 -->
+<line x1="40" y1="470" x2="930" y2="470" class="sep"/>
+<text x="40" y="500" class="tb">中斷</text><text x="110" y="500">由系統判定；恢復後自動回到正常；不改變啟用設定。</text>
+<text x="40" y="530" class="tb tw">停用</text><text x="110" y="530">因人工設定而不使用或取不到，以「來源 + 資料類別」計（R03-13）；立即生效；人工解除後才恢復。</text>
+<text x="40" y="560" class="ts">停用後，該類資料只供後台查看，不用於任何判定；運動的賽程來源的賽程不能停用，只能更換。</text>
+</svg>
+<p class="cap"><b>圖說</b>：中斷由系統判定並自動恢復；停用是因人工設定而不使用或取不到，人工解除後改依 R03-05 判定；連接器暫停使來源沒有可用途徑時視為停用（R03-07）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-07 -->
+<section class="fig" id="fig-03-07">
+<h2>圖 03-07　連接器讀什麼、不讀什麼、何時補取</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="連接器讀取範圍與補取">
+<!-- 左：讀取 -->
+<rect x="30" y="30" width="400" height="330" rx="6" class="panel"/>
+<text x="230" y="58" text-anchor="middle" class="tb">讀取：所串接的全部資料</text>
+<line x1="50" y1="70" x2="410" y2="70" class="sep"/>
+<text x="50" y="94" class="ts">不提供依運動、玩法或賽事設定的讀取範圍。</text>
+<text x="50" y="118" class="ts">例：來源 C 開出的玩法</text>
+<g>
+  <rect x="50" y="132" width="360" height="40" rx="6" class="node"/><rect x="53" y="135" width="354" height="34" rx="4" class="node2"/>
+  <text x="66" y="157">常規時間讓分</text><text x="400" y="157" text-anchor="end" class="ts">輸入玩法 → 讀取</text>
+</g>
+<g>
+  <rect x="50" y="180" width="360" height="40" rx="6" class="node"/><rect x="53" y="183" width="354" height="34" rx="4" class="node2"/>
+  <text x="66" y="205">角球大小</text><text x="400" y="205" text-anchor="end" class="ts">不可逆玩法 → 讀取</text>
+</g>
+<g>
+  <rect x="50" y="228" width="360" height="40" rx="6" class="ghost"/>
+  <text x="66" y="253" class="tw">波膽</text><text x="400" y="253" text-anchor="end" class="ts tw">對應後判定為輸出玩法 → 不再交給 04</text>
+</g>
+<rect x="50" y="280" width="360" height="76" rx="6" class="tagw"/>
+<text x="66" y="300" class="tw">唯一例外：賠率的輸出玩法（05 的 R05-04）</text>
+<text x="66" y="318" class="ts">InSports 能自行推導。對應前照常交給 04（R04-11）；</text>
+<text x="66" y="334" class="ts">判定後不再交給 04，能分開讀取時也不再讀取；</text>
+<text x="66" y="350" class="ts">無法分開讀取時照常接收，只是不交給 04。</text>
+<!-- 中間說明 -->
+<text x="480" y="392" text-anchor="middle" class="ts">讀取不代表開盤（見 05）；用不到的資料由下游忽略，例如無法對應到 01 目錄的玩法不開盤（R04-11）。</text>
+<!-- 右：時間軸一：賽後 -->
+<rect x="450" y="30" width="480" height="160" rx="6" class="panel"/>
+<text x="690" y="58" text-anchor="middle" class="tb">比賽結束後繼續讀取賽果</text>
+<line x1="470" y1="70" x2="910" y2="70" class="sep"/>
+<line x1="480" y1="120" x2="900" y2="120" class="ln" marker-end="url(#arr)"/>
+<line x1="500" y1="110" x2="500" y2="130" class="ln"/><text x="500" y="152" text-anchor="middle" class="ts">比賽結束</text>
+<line x1="690" y1="110" x2="690" y2="130" class="ln"/><text x="690" y="152" text-anchor="middle" class="ts">三天後來源 C 更正賽果</text>
+<line x1="860" y1="110" x2="860" y2="130" class="ln"/><text x="860" y="152" text-anchor="middle" class="ts">來源不再提供</text>
+<text x="595" y="100" text-anchor="middle" class="ts">持續讀取</text>
+<text x="690" y="176" text-anchor="middle" class="ts">更正交給 04，依 R04-15 處理</text>
+<!-- 右：時間軸二：中斷後恢復 -->
+<rect x="450" y="206" width="480" height="154" rx="6" class="panel"/>
+<text x="690" y="234" text-anchor="middle" class="tb">中斷後恢復時補取</text>
+<line x1="470" y1="246" x2="910" y2="246" class="sep"/>
+<line x1="480" y1="296" x2="900" y2="296" class="ln" marker-end="url(#arr)"/>
+<line x1="520" y1="286" x2="520" y2="306" class="lnw"/><text x="520" y="328" text-anchor="middle" class="ts tw">中斷</text>
+<rect x="520" y="290" width="200" height="12" class="hl"/>
+<line x1="720" y1="286" x2="720" y2="306" class="ln"/><text x="720" y="328" text-anchor="middle" class="ts">恢復</text>
+<text x="620" y="276" text-anchor="middle" class="ts tw">期間有比賽結束</text>
+<text x="820" y="276" text-anchor="middle" class="ts">補取賽程、賽況與賽果</text>
+<text x="820" y="328" text-anchor="middle" class="ts tw">已經過時的賠率不補</text>
+<text x="690" y="350" text-anchor="middle" class="ts">若來源有提供，補取中斷期間的賽程、賽況與賽果（R03-10）</text>
+<!-- 底：價格等級 -->
+<rect x="30" y="416" width="900" height="100" rx="6" class="panel"/>
+<text x="50" y="444" class="tb">同一來源的賠率只採用一個指定的價格等級，不換算（R03-09）</text>
+<rect x="50" y="460" width="150" height="40" rx="6" class="ghost"/>
+<text x="125" y="485" text-anchor="middle" class="ts tw">帳號乙：等級 2</text>
+<g>
+  <rect x="220" y="460" width="150" height="40" rx="6" class="node"/><rect x="223" y="463" width="144" height="34" rx="4" class="node2"/>
+  <text x="295" y="485" text-anchor="middle" class="ts">帳號甲：等級 1（指定）</text>
+</g>
+<path d="M370,480 L448,480" class="ln" marker-end="url(#arr)"/>
+<text x="409" y="470" text-anchor="middle" class="ts">只取等級 1</text>
+<g>
+  <rect x="450" y="460" width="170" height="40" rx="6" class="node"/><rect x="453" y="463" width="164" height="34" rx="4" class="node2"/>
+  <text x="535" y="485" text-anchor="middle" class="ts">採用的賠率</text>
+</g>
+<text x="650" y="478" class="ts tw">等級 2 的賠率不採用，其他類資料照用；</text>
+<text x="650" y="496" class="ts">等級不明或改變時停用，人工重新確認。</text>
+<!-- 底註 -->
+<circle cx="52" cy="552" r="4" class="dotw"/>
+<text x="66" y="557">哪些是輸出玩法由 05 決定，營運團隊不能設定（R03-13）。</text>
+<circle cx="52" cy="582" r="4" class="dotw"/>
+<text x="66" y="587">連接器內不能再依運動、玩法或賽事動態停用；要在某個範圍內不採用某來源，由 04 的來源角色或下游處理（R04-02）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：連接器讀取全部資料，唯一例外是判定為輸出玩法後不再交給 04；賽後持續讀取賽果；恢復時補賽程、賽況與賽果，不補賠率（R03-10）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-08 -->
+<section class="fig" id="fig-03-08">
+<h2>圖 03-08　連接器只回報事實</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="連接器只回報事實">
+<!-- 欄標題 -->
+<text x="170" y="44" text-anchor="middle" class="tb">來源發生的事</text>
+<text x="480" y="44" text-anchor="middle" class="tb">連接器回報（03）</text>
+<text x="790" y="44" text-anchor="middle" class="tb">由誰判斷</text>
+<line x1="40" y1="60" x2="930" y2="60" class="sep"/>
+<!-- 列 1 -->
+<g>
+  <rect x="40" y="80" width="260" height="64" rx="6" class="node"/><rect x="43" y="83" width="254" height="58" rx="4" class="node2"/>
+  <text x="170" y="106" text-anchor="middle">某場賽事從來源 C 的清單消失</text>
+</g>
+<path d="M300,112 L338,112" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="340" y="80" width="280" height="64" rx="6" class="node"/><rect x="343" y="83" width="274" height="58" rx="4" class="node2"/>
+  <text x="480" y="106" text-anchor="middle">「已不在來源上」</text>
+  <text x="480" y="128" text-anchor="middle" class="ts tw">不代表已結束或取消</text>
+</g>
+<path d="M620,112 L658,112" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="660" y="80" width="270" height="64" rx="6" class="node"/><rect x="663" y="83" width="264" height="58" rx="4" class="node2"/>
+  <text x="795" y="106" text-anchor="middle">04：賽事狀態依所有來源整理</text>
+  <text x="795" y="128" text-anchor="middle" class="ts">R04-12</text>
+</g>
+<!-- 列 2 -->
+<g>
+  <rect x="40" y="164" width="260" height="64" rx="6" class="node"/><rect x="43" y="167" width="254" height="58" rx="4" class="node2"/>
+  <text x="170" y="190" text-anchor="middle">轉送鏈路變慢</text>
+  <text x="170" y="212" text-anchor="middle" class="ts">資料延遲數十分鐘才到</text>
+</g>
+<path d="M300,196 L338,196" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="340" y="164" width="280" height="64" rx="6" class="node"/><rect x="343" y="167" width="274" height="58" rx="4" class="node2"/>
+  <text x="480" y="190" text-anchor="middle">原樣回報，帶兩個時間</text>
+  <text x="480" y="212" text-anchor="middle" class="ts">InSports 收到的時間、來源提供的時間</text>
+</g>
+<path d="M620,196 L658,196" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="660" y="164" width="270" height="64" rx="6" class="node"/><rect x="663" y="167" width="264" height="58" rx="4" class="node2"/>
+  <text x="795" y="190" text-anchor="middle">下游：是否太舊依時間判斷</text>
+  <text x="795" y="212" text-anchor="middle" class="ts">來源狀態仍為正常（R03-05）</text>
+</g>
+<!-- 列 3 -->
+<g>
+  <rect x="40" y="248" width="260" height="64" rx="6" class="node"/><rect x="43" y="251" width="254" height="58" rx="4" class="node2"/>
+  <text x="170" y="274" text-anchor="middle">賠率與已知狀態矛盾</text>
+  <text x="170" y="296" text-anchor="middle" class="ts">例如比賽已結束仍有賠率</text>
+</g>
+<path d="M300,280 L338,280" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="340" y="248" width="280" height="64" rx="6" class="node"/><rect x="343" y="251" width="274" height="58" rx="4" class="node2"/>
+  <text x="480" y="274" text-anchor="middle">原樣回報</text>
+  <text x="480" y="296" text-anchor="middle" class="ts tw">不判斷資料是否合理</text>
+</g>
+<path d="M620,280 L658,280" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="660" y="248" width="270" height="64" rx="6" class="node"/><rect x="663" y="251" width="264" height="58" rx="4" class="node2"/>
+  <text x="795" y="274" text-anchor="middle">04：判定不採用該來源的賠率</text>
+  <text x="795" y="296" text-anchor="middle" class="ts">R04-17</text>
+</g>
+<!-- 列 4 -->
+<g>
+  <rect x="40" y="332" width="260" height="64" rx="6" class="node"/><rect x="43" y="335" width="254" height="58" rx="4" class="node2"/>
+  <text x="170" y="358" text-anchor="middle">延賽、VAR、賽果更正</text>
+</g>
+<path d="M300,364 L338,364" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="340" y="332" width="280" height="64" rx="6" class="node"/><rect x="343" y="335" width="274" height="58" rx="4" class="node2"/>
+  <text x="480" y="358" text-anchor="middle">原樣回報</text>
+  <text x="480" y="380" text-anchor="middle" class="ts tw">不從時間推論賽果或賽事狀態</text>
+</g>
+<path d="M620,364 L658,364" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="660" y="332" width="270" height="64" rx="6" class="node"/><rect x="663" y="335" width="264" height="58" rx="4" class="node2"/>
+  <text x="795" y="358" text-anchor="middle">04 與 07</text>
+  <text x="795" y="380" text-anchor="middle" class="ts">對應、賽事狀態、賽果與結算</text>
+</g>
+<!-- 琥珀總結 -->
+<rect x="40" y="424" width="890" height="56" rx="6" class="tagw"/>
+<text x="60" y="447" class="tw">✕ 連接器不做對應、不判斷資料是否合理、不從時間推論賽果或賽事狀態（R03-08）。</text>
+<text x="60" y="469" class="ts">每筆資料帶有 InSports 收到的時間，以及來源提供的時間（來源有提供時），供下游判斷資料是否太舊。</text>
+<!-- 底註 -->
+<circle cx="52" cy="516" r="4" class="dotw"/>
+<text x="66" y="521">原始資料只供重新處理與除錯，不作為賽果爭議的依據；爭議以統一賽果與人工裁定的紀錄為準（R03-11）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：連接器只回報來源提供的事實與時間戳，業務判斷都在下游（R03-08）。</p>
+</section>
+
+<!-- ============================================================ 圖 03-09 -->
+<section class="fig" id="fig-03-09">
+<h2>圖 03-09　帳號與營運控制</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="帳號與營運控制">
+<!-- 左：帳號 -->
+<rect x="30" y="30" width="290" height="440" rx="6" class="panel"/>
+<text x="175" y="58" text-anchor="middle" class="tb">帳號（R03-04）</text>
+<line x1="50" y1="70" x2="300" y2="70" class="sep"/>
+<text x="50" y="94" class="ts">由 InSports 營運團隊以公司指定的</text>
+<text x="50" y="112" class="ts">身分統一申請與保管。</text>
+<text x="50" y="140" class="tb">只用於取得資料</text>
+<text x="50" y="168" class="tw">✕ 不下注</text>
+<text x="50" y="194" class="tw">✕ 不存提款</text>
+<text x="50" y="220" class="tw">✕ 不更改帳號設定</text>
+<text x="50" y="246" class="tw">✕ 營運人員不得以此帳號登入</text>
+<text x="66" y="266" class="ts">多數站台的同一帳號只允許一個登入，</text>
+<text x="66" y="284" class="ts">人員登入會使該途徑失效。</text>
+<line x1="50" y1="304" x2="300" y2="304" class="sep"/>
+<text x="50" y="328" class="ts">對餘額沒有要求；InSports 不使用帳號</text>
+<text x="50" y="346" class="ts">內的金額，進入莊家盤口時的錢包轉移</text>
+<text x="50" y="364" class="ts">等資金移動不另設規則。</text>
+<line x1="50" y1="384" x2="300" y2="384" class="sep"/>
+<text x="50" y="408" class="ts">正式與測試環境不共用帳號；憑證只有</text>
+<text x="50" y="426" class="ts">特定權限可以檢視，每次檢視都留下紀錄</text>
+<text x="50" y="444" class="ts">（參考設計，非約束）。</text>
+<!-- 中：控制只有兩種 -->
+<rect x="340" y="30" width="290" height="440" rx="6" class="panel"/>
+<text x="485" y="58" text-anchor="middle" class="tb">營運團隊的控制只有兩種（R03-13）</text>
+<line x1="360" y1="70" x2="610" y2="70" class="sep"/>
+<g>
+  <rect x="360" y="86" width="250" height="56" rx="6" class="node"/><rect x="363" y="89" width="244" height="50" rx="4" class="node2"/>
+  <text x="485" y="110" text-anchor="middle" class="tb">（1）暫停整個連接器</text>
+  <text x="485" y="130" text-anchor="middle" class="ts">經過它的途徑都不可用</text>
+</g>
+<g>
+  <rect x="360" y="154" width="250" height="56" rx="6" class="node"/><rect x="363" y="157" width="244" height="50" rx="4" class="node2"/>
+  <text x="485" y="178" text-anchor="middle" class="tb">（2）依「來源 + 資料類別」停用</text>
+  <text x="485" y="198" text-anchor="middle" class="ts">例如停用某來源的賽果</text>
+</g>
+<rect x="360" y="226" width="250" height="110" rx="6" class="tagw"/>
+<text x="372" y="248" class="tw">✕ 不能依運動、玩法或賽事停用</text>
+<text x="372" y="270" class="ts">例：想排除來源 C 的籃球賠率</text>
+<text x="372" y="288" class="ts">→ 只能停用 C 的全部賠率，</text>
+<text x="372" y="306" class="ts">或由 04 的來源角色、下游排除</text>
+<text x="372" y="324" class="ts">（R04-02）。</text>
+<line x1="360" y1="352" x2="610" y2="352" class="sep"/>
+<text x="360" y="376" class="ts">每項變更記錄由誰、何時、原因</text>
+<text x="360" y="394" class="ts">（見非功能需求與稽核）。</text>
+<text x="360" y="422" class="ts">帳號啟停、憑證更換、途徑啟停是</text>
+<text x="360" y="440" class="ts">串接維運，不是控制：只改變備援數；</text>
+<text x="360" y="458" class="ts">沒有可用途徑時依 R03-07 視為停用。</text>
+<!-- 右：後台顯示 -->
+<rect x="650" y="30" width="280" height="440" rx="6" class="panel"/>
+<text x="790" y="58" text-anchor="middle" class="tb">後台顯示，不推播（R03-14）</text>
+<line x1="670" y1="70" x2="910" y2="70" class="sep"/>
+<text x="670" y="94" class="ts">顯示原因與持續時間，由營運團隊查看：</text>
+<circle cx="676" cy="124" r="4" class="dotw"/>
+<text x="688" y="129" class="ts">來源某類資料中斷</text>
+<circle cx="676" cy="152" r="4" class="dotw"/>
+<text x="688" y="157" class="ts">部分途徑失效，包括維護</text>
+<circle cx="676" cy="180" r="4" class="dotw"/>
+<text x="688" y="185" class="ts">帳號被站台拒絕：</text>
+<text x="688" y="203" class="ts">密碼錯誤、停用、封號或限制</text>
+<rect x="670" y="222" width="240" height="70" rx="6" class="ghost"/>
+<text x="690" y="246" class="tw">帳號被拒絕時：</text>
+<text x="690" y="266" class="ts tw">停止嘗試登入，</text>
+<text x="690" y="284" class="ts tw">交由人工處理。</text>
+<line x1="670" y1="312" x2="910" y2="312" class="sep"/>
+<text x="670" y="336" class="ts">封號與限制：同一來源還有其他</text>
+<text x="670" y="354" class="ts">帳號或途徑時繼續取得。</text>
+<text x="670" y="382" class="ts">憑證外洩：人工停用相關帳號並更換</text>
+<text x="670" y="400" class="ts">憑證，屬於串接維運（R03-13）。</text>
+<text x="670" y="428" class="ts">同一來源的帳號分散在多個入口</text>
+<text x="670" y="446" class="ts">站台，避免一次封號就失去該來源。</text>
+<!-- 底 -->
+<rect x="30" y="490" width="900" height="84" rx="6" class="panel"/>
+<text x="50" y="518" class="tb">各層設定（第 6 節）</text>
+<text x="50" y="542" class="ts">InSports 固定：取得途徑與帳號的維運、來源狀態的判定、連接器的暫停、依來源與資料類別的啟用與停用。</text>
+<text x="50" y="562" class="tw">經銷商可設定：無。經銷商看不到、也不能設定任何來源、途徑與帳號。</text>
+</svg>
+<p class="cap"><b>圖說</b>：帳號只用於取得資料；營運控制只有兩種；帳號與途徑的啟停是維運，不是控制；異常在後台顯示不推播（R03-04、R03-13、R03-14）。</p>
+</section>
+
+</div>
+</body>
+</html>

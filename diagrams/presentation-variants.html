@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>概念圖表現方式變體</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+.sheet { padding: 8px 0 24px; border-bottom: 6px solid var(--line); }
+.nav { position: fixed; top: 8px; right: 8px; z-index: 9; display: flex; gap: 8px; padding: 6px 8px; background: #000; color: #fff; font-size: 12px; }
+.nav a { color: #fff; }
+</style>
+</head>
+<body>
+<div class="nav">跳到：<a href="#p0">p0</a><a href="#p1">p1</a><a href="#p2">p2</a><a href="#p5">p5</a></div>
+<div class="sheet" id="p0">
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr-p0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw-p0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs-p0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+<h1>p0 現行：方塊與箭頭</h1>
+<p class="meta">目前的畫法。方塊、箭頭、表格與藥丸形狀態，沒有圖示或插畫。</p>
+<section class="fig" id="fig-04-05-p0">
+<h2>圖 04-05　滾球比分看門檻，最終賽果看共識</h2>
+<svg viewBox="0 0 960 660" width="100%" role="img" aria-label="門檻與共識">
+<defs>
+  <marker id="arr5-p0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arr5w-p0" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs>
+<!-- 左欄：門檻 -->
+<rect x="40" y="30" width="430" height="330" rx="8" class="node"/><rect x="44" y="34" width="422" height="322" rx="6" class="node2"/>
+<text x="255" y="60" text-anchor="middle" class="tb">滾球比分：門檻（Quorum）</text>
+<line x1="60" y1="74" x2="450" y2="74" class="sep"/>
+<text x="60" y="100" class="ts">設定：足球進球門檻＝ <tspan class="mono">2</tspan></text>
+<!-- 情境 1 -->
+<rect x="60" y="118" width="120" height="34" rx="4" class="chip"/><text x="120" y="140" text-anchor="middle" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="190" y="118" width="120" height="34" rx="4" class="chip"/><text x="250" y="140" text-anchor="middle" class="ts">B 報 <tspan class="mono">0:0</tspan></text>
+<path d="M316,135 L346,135" class="lnw" marker-end="url(#arr5w-p0)"/>
+<text x="352" y="140" class="ts tw">統一比分維持 <tspan class="mono">0:0</tspan></text>
+<text x="60" y="176" class="ts">未達門檻數，統一比分維持原值。</text>
+<!-- 情境 2 -->
+<rect x="60" y="196" width="120" height="34" rx="4" class="chip"/><text x="120" y="218" text-anchor="middle" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="190" y="196" width="120" height="34" rx="4" class="chip"/><text x="250" y="218" text-anchor="middle" class="ts">B 也報 <tspan class="mono">1:0</tspan></text>
+<path d="M316,213 L346,213" class="ln" marker-end="url(#arr5-p0)"/>
+<text x="352" y="218" class="ts">統一比分更新為 <tspan class="mono">1:0</tspan></text>
+<text x="60" y="254" class="ts">達到門檻數的來源報出相同的值，才更新。</text>
+<line x1="60" y1="276" x2="450" y2="276" class="sep"/>
+<text x="60" y="300" class="ts">門檻數由 InSports 依運動與計分項目設定；</text>
+<text x="60" y="322" class="ts">提供的來源少於門檻數時，以實際的來源數為準。</text>
+<!-- 右欄：共識 -->
+<rect x="490" y="30" width="430" height="330" rx="8" class="node"/><rect x="494" y="34" width="422" height="322" rx="6" class="node2"/>
+<text x="705" y="60" text-anchor="middle" class="tb">最終賽果：共識（Consensus）</text>
+<line x1="510" y1="74" x2="900" y2="74" class="sep"/>
+<text x="510" y="100" class="ts">時段已結束，且所有提供的來源完全一致才穩定。</text>
+<rect x="510" y="118" width="100" height="34" rx="4" class="chip"/><text x="560" y="140" text-anchor="middle" class="ts">A <tspan class="mono">2:1</tspan></text>
+<rect x="620" y="118" width="100" height="34" rx="4" class="chip"/><text x="670" y="140" text-anchor="middle" class="ts">B <tspan class="mono">2:1</tspan></text>
+<rect x="730" y="118" width="100" height="34" rx="4" class="chipw"/><text x="780" y="140" text-anchor="middle" class="ts tw">C <tspan class="mono">2:2</tspan></text>
+<path d="M780,152 L780,176" class="lnw" marker-end="url(#arr5w-p0)"/>
+<text x="510" y="200" class="tb tw">→ 不穩定</text>
+<text x="600" y="200" class="ts">不採多數決，不以賽程來源優先，</text>
+<text x="600" y="222" class="ts">直到一致或人工裁定。</text>
+<line x1="510" y1="244" x2="900" y2="244" class="sep"/>
+<rect x="510" y="260" width="120" height="34" rx="4" class="chip"/><text x="570" y="282" text-anchor="middle" class="ts">只有 A 提供</text>
+<path d="M636,277 L666,277" class="ln" marker-end="url(#arr5-p0)"/>
+<text x="672" y="282" class="ts">該來源即可穩定</text>
+<text x="510" y="322" class="ts">最少來源數取「設定值」與「提供的來源數」中較小者。</text>
+<!-- 下方：升級 -->
+<rect x="40" y="390" width="880" height="250" rx="8" class="panel"/>
+<text x="60" y="420" class="tb">升級：時段結束前最後幾分鐘停止提供的來源</text>
+<line x1="60" y1="434" x2="900" y2="434" class="sep"/>
+<!-- 升級情境 1 -->
+<rect x="60" y="452" width="250" height="60" rx="4" class="node"/>
+<text x="185" y="476" text-anchor="middle" class="ts">來源 C</text>
+<text x="185" y="498" text-anchor="middle" class="ts">88 分鐘以 <tspan class="mono">2:1</tspan> 關盤</text>
+<rect x="330" y="452" width="250" height="60" rx="4" class="node"/>
+<text x="455" y="476" text-anchor="middle" class="ts">賽況來源 A</text>
+<text x="455" y="498" text-anchor="middle" class="ts">報出完場 <tspan class="mono">2:1</tspan></text>
+<path d="M586,482 L626,482" class="ln" marker-end="url(#arr5-p0)"/>
+<text x="634" y="478" class="ts">C 的 <tspan class="mono">2:1</tspan> 升級為賽果，</text>
+<text x="634" y="500" class="ts">計入共識與最少來源數。</text>
+<!-- 升級情境 2 -->
+<rect x="60" y="532" width="250" height="60" rx="4" class="ghost"/>
+<text x="185" y="556" text-anchor="middle" class="ts tw">來源 C</text>
+<text x="185" y="578" text-anchor="middle" class="ts tw">第 30 分鐘停止提供</text>
+<rect x="330" y="532" width="250" height="60" rx="4" class="node"/>
+<text x="455" y="556" text-anchor="middle" class="ts">賽況來源 A</text>
+<text x="455" y="578" text-anchor="middle" class="ts">報出完場</text>
+<path d="M586,562 L626,562" class="lnw dash" marker-end="url(#arr5w-p0)"/>
+<text x="634" y="558" class="ts tw">不升級；不計入共識，</text>
+<text x="634" y="580" class="ts tw">也不阻擋。</text>
+<text x="60" y="624" class="ts">之後 C 自己報出的賽果，取代升級的比分。</text>
+</svg>
+<p class="cap"><b>圖說</b>：滾球比分達門檻數就更新；最終賽果要所有提供的來源一致，不採多數決（R04-14）。</p>
+</section>
+<section class="fig" id="fig-03-03-p0">
+<h2>圖 03-03　途徑互為備援，來源不互為備援</h2>
+<svg viewBox="0 0 960 520" width="100%" role="img" aria-label="備援對照">
+<!-- 左：途徑互為備援 -->
+<rect x="30" y="30" width="440" height="400" rx="6" class="panel"/>
+<text x="250" y="60" text-anchor="middle" class="tb">✓ 途徑互為備援（R03-02）</text>
+<g>
+  <rect x="60" y="150" width="130" height="56" rx="6" class="node"/><rect x="63" y="153" width="124" height="50" rx="4" class="node2"/>
+  <text x="125" y="174" text-anchor="middle" class="tb">來源 C</text><text x="125" y="194" text-anchor="middle" class="ts">仍為正常</text>
+</g>
+<g>
+  <rect x="230" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <text x="295" y="112" text-anchor="middle" class="tw">入口站台甲</text><text x="295" y="130" text-anchor="middle" class="ts tw">維護中</text>
+</g>
+<g>
+  <rect x="230" y="210" width="130" height="50" rx="6" class="node"/><rect x="233" y="213" width="124" height="44" rx="4" class="node2"/>
+  <text x="295" y="232" text-anchor="middle">入口站台乙</text><text x="295" y="250" text-anchor="middle" class="ts">改經乙取得</text>
+</g>
+<g>
+  <rect x="390" y="150" width="60" height="56" rx="6" class="node"/><rect x="393" y="153" width="54" height="50" rx="4" class="node2"/>
+  <text x="420" y="184" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M190,165 L228,125" class="lnw dash"/>
+<path d="M360,115 L388,160" class="lnw dash"/>
+<text x="200" y="118" text-anchor="middle" class="tw">✕</text>
+<path d="M190,190 L228,228" class="ln" marker-end="url(#arr-p0)"/>
+<path d="M360,230 L388,195" class="ln" marker-end="url(#arr-p0)"/>
+<circle cx="60" cy="300" r="4" class="dot"/>
+<text x="74" y="305" class="ts">一條途徑失效時，改由其他途徑取得同一來源的資料。</text>
+<circle cx="60" cy="330" r="4" class="dot"/>
+<text x="74" y="335" class="ts">C 的賠率、賽果都照常；C 仍為正常（R03-06）。</text>
+<circle cx="60" cy="360" r="4" class="dot"/>
+<text x="74" y="365" class="ts">甲的維護在後台顯示原因與持續時間（R03-14）。</text>
+<circle cx="60" cy="390" r="4" class="dot"/>
+<text x="74" y="395" class="ts">部分途徑失效只減少備援，不算中斷。</text>
+<!-- 右：來源不互為備援 -->
+<rect x="490" y="30" width="440" height="400" rx="6" class="panel"/>
+<text x="710" y="60" text-anchor="middle" class="tb tw">✕ 來源不互為備援（R03-02）</text>
+<g>
+  <rect x="520" y="90" width="130" height="56" rx="6" class="ghost"/>
+  <text x="585" y="114" text-anchor="middle" class="tw">來源 C</text><text x="585" y="134" text-anchor="middle" class="ts tw">賠率中斷</text>
+</g>
+<g>
+  <rect x="520" y="210" width="130" height="56" rx="6" class="node"/><rect x="523" y="213" width="124" height="50" rx="4" class="node2"/>
+  <text x="585" y="234" text-anchor="middle" class="tb">來源 D</text><text x="585" y="254" text-anchor="middle" class="ts">也提供同一場比賽</text>
+</g>
+<g>
+  <rect x="690" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <text x="755" y="112" text-anchor="middle" class="tw">入口站台甲</text><text x="755" y="130" text-anchor="middle" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="690" y="150" width="130" height="50" rx="6" class="ghost"/>
+  <text x="755" y="172" text-anchor="middle" class="tw">入口站台乙</text><text x="755" y="190" text-anchor="middle" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="850" y="120" width="60" height="56" rx="6" class="node"/><rect x="853" y="123" width="54" height="50" rx="4" class="node2"/>
+  <text x="880" y="154" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M650,108 L688,112" class="lnw dash"/>
+<path d="M650,128 L688,170" class="lnw dash"/>
+<path d="M820,115 L848,140" class="lnw dash"/>
+<path d="M820,175 L848,155" class="lnw dash"/>
+<text x="755" y="80" text-anchor="middle" class="tw">所有途徑都失效</text>
+<path d="M650,238 C720,238 760,200 848,165" class="lnw dash"/>
+<text x="740" y="262" text-anchor="middle" class="tw">✕ 不以 D 的資料頂替 C</text>
+<circle cx="520" cy="300" r="4" class="dotw"/>
+<text x="534" y="305" class="ts">一類資料的所有取得途徑都失效，該類資料才算中斷（R03-06）。</text>
+<circle cx="520" cy="330" r="4" class="dotw"/>
+<text x="534" y="335" class="ts">一個來源中斷時，不以另一個來源的資料頂替。</text>
+<circle cx="520" cy="360" r="4" class="dotw"/>
+<text x="534" y="365" class="ts">只有 C 提供賠率的盤口如何處理，見 04 的 R04-16。</text>
+<circle cx="520" cy="390" r="4" class="dotw"/>
+<text x="534" y="395" class="ts">多個來源如何一起使用，由 04 決定。</text>
+<!-- 底註 -->
+<text x="480" y="470" text-anchor="middle">途徑之間互為備援，來源之間不互為備援；多個來源如何一起使用，由 04 的來源角色決定。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一條途徑失效改由其他途徑取得同一來源；一個來源中斷時不以另一個來源頂替（R03-02）。</p>
+</section>
+</div>
+</div>
+<div class="sheet" id="p1">
+<div class="doc">
+<style>
+#p1 svg .ico { stroke: var(--line); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#p1 svg .ico.w { stroke: var(--warn); }
+#p1 svg .ico.s { stroke: var(--soft); }
+#p1 svg .legend text { font-size: 11px; fill: var(--soft); }
+</style>
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="p1-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4fd1ff"/></marker>
+  <marker id="p1-arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff9f43"/></marker>
+  <!-- 莊家盤口：店面＋賠率牌 -->
+  <symbol id="p1-ico-shop" viewBox="0 0 24 24"><path d="M3 9 L5 4 H19 L21 9 Z"/><path d="M4 9 V20 H20 V9"/><rect x="8" y="12" width="8" height="5" rx="1"/><path d="M10 14.5 H14"/></symbol>
+  <!-- 賽況來源／即時數據商：天線 -->
+  <symbol id="p1-ico-dish" viewBox="0 0 24 24"><path d="M12 21 V12"/><circle cx="12" cy="11" r="1.6"/><path d="M7.5 7.5 a6.4 6.4 0 0 1 9 0"/><path d="M4.5 4.5 a10.6 10.6 0 0 1 15 0"/><path d="M8 21 H16"/></symbol>
+  <!-- 入口站台：拱門 -->
+  <symbol id="p1-ico-gate" viewBox="0 0 24 24"><path d="M4 21 V11 a8 8 0 0 1 16 0 V21"/><path d="M8 21 V13 a4 4 0 0 1 8 0 V21"/><path d="M2 21 H22"/></symbol>
+  <!-- InSports：齒輪 -->
+  <symbol id="p1-ico-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.5"/><path d="M12 2.5 V5.5 M12 18.5 V21.5 M2.5 12 H5.5 M18.5 12 H21.5 M5.3 5.3 L7.4 7.4 M16.6 16.6 L18.7 18.7 M5.3 18.7 L7.4 16.6 M16.6 7.4 L18.7 5.3"/></symbol>
+  <!-- 記分板 -->
+  <symbol id="p1-ico-board" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M12 8 V14"/><path d="M6 9.5 H9.5 M6 12.5 H9.5 M14.5 9.5 H18 M14.5 12.5 H18"/><path d="M9 17 L8 21 M15 17 L16 21"/></symbol>
+  <!-- 時段結束：哨子 -->
+  <symbol id="p1-ico-whistle" viewBox="0 0 24 24"><circle cx="9" cy="14.5" r="5"/><path d="M12.5 10.5 L21 8.5 V12.5 L13.8 14.5"/><circle cx="9" cy="14.5" r="1.2"/></symbol>
+  <!-- 完場：旗子 -->
+  <symbol id="p1-ico-flag" viewBox="0 0 24 24"><path d="M6 21 V4"/><path d="M6 4 H18 L15 8 L18 12 H6"/></symbol>
+  <!-- 人工 -->
+  <symbol id="p1-ico-person" viewBox="0 0 24 24"><circle cx="12" cy="7.5" r="3.5"/><path d="M5 21 a7 7 0 0 1 14 0"/></symbol>
+  <!-- 維護：扳手 -->
+  <symbol id="p1-ico-wrench" viewBox="0 0 24 24"><path d="M14.5 3.5 a5 5 0 0 0 -5.3 6.8 L3 16.5 L7.5 21 L13.7 14.8 a5 5 0 0 0 6.8 -5.3 L17.5 12.5 L11.5 6.5 Z"/></symbol>
+  <!-- 中斷：拔掉的插頭 -->
+  <symbol id="p1-ico-unplug" viewBox="0 0 24 24"><path d="M6 8 V4 M10 8 V4"/><path d="M3.5 8 H12.5 V11 a4.5 4.5 0 0 1 -9 0 Z"/><path d="M8 15.5 V19"/><path d="M15 12 L17 10 L16 12.5 L18 10.5"/><path d="M19.5 9 L21.5 7 V12 H19"/></symbol>
+  <!-- 備援：兩條平行管線 -->
+  <symbol id="p1-ico-pipes" viewBox="0 0 24 24"><path d="M3 7 H21 M3 10 H21"/><path d="M3 15 H21 M3 18 H21"/><path d="M7 5 V12 M17 5 V12 M7 13 V20 M17 13 V20"/></symbol>
+</defs></svg>
+<h1>p1 圖示化（Pictogram）</h1>
+<p class="meta">每個實體配一個線條圖示（來源、入口站台、記分板、哨子、人工、扳手、插頭），排版仍是方塊與箭頭，文字縮成標籤；圖示在每張圖的角落附一列圖例。適合所有層級圖與對照圖。</p>
+
+<section class="fig" id="fig-04-05-p1">
+<h2>圖 04-05　滾球比分看門檻，最終賽果看共識</h2>
+<svg viewBox="0 0 960 720" width="100%" role="img" aria-label="門檻與共識（圖示化）">
+<!-- 左欄：門檻 -->
+<rect x="40" y="30" width="430" height="340" rx="8" class="node"/><rect x="44" y="34" width="422" height="332" rx="6" class="node2"/>
+<use href="#p1-ico-board" x="60" y="42" width="24" height="24" class="ico"/>
+<text x="94" y="60" class="tb">滾球比分：門檻（Quorum）</text>
+<line x1="60" y1="76" x2="450" y2="76" class="sep"/>
+<use href="#p1-ico-gear" x="60" y="88" width="18" height="18" class="ico s"/>
+<text x="86" y="102" class="ts">設定：足球進球門檻＝ <tspan class="mono">2</tspan></text>
+<!-- 情境 1 -->
+<rect x="60" y="120" width="128" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="68" y="127" width="22" height="22" class="ico"/><text x="98" y="143" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="198" y="120" width="128" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="206" y="127" width="22" height="22" class="ico"/><text x="236" y="143" class="ts">B 報 <tspan class="mono">0:0</tspan></text>
+<path d="M332,138 L358,138" class="lnw" marker-end="url(#p1-arrw)"/>
+<use href="#p1-ico-board" x="364" y="126" width="24" height="24" class="ico w"/>
+<text x="394" y="143" class="ts tw">維持 <tspan class="mono">0:0</tspan></text>
+<text x="60" y="180" class="ts">未達門檻數，統一比分維持原值。</text>
+<!-- 情境 2 -->
+<rect x="60" y="200" width="128" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="68" y="207" width="22" height="22" class="ico"/><text x="98" y="223" class="ts">A 報 <tspan class="mono">1:0</tspan></text>
+<rect x="198" y="200" width="128" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="206" y="207" width="22" height="22" class="ico"/><text x="236" y="223" class="ts">B 也報 <tspan class="mono">1:0</tspan></text>
+<path d="M332,218 L358,218" class="ln" marker-end="url(#p1-arr)"/>
+<use href="#p1-ico-board" x="364" y="206" width="24" height="24" class="ico"/>
+<text x="394" y="223" class="ts">更新為 <tspan class="mono">1:0</tspan></text>
+<text x="60" y="260" class="ts">達到門檻數的來源報出相同的值，才更新。</text>
+<line x1="60" y1="284" x2="450" y2="284" class="sep"/>
+<text x="60" y="310" class="ts">門檻數由 InSports 依運動與計分項目設定；</text>
+<text x="60" y="332" class="ts">提供的來源少於門檻數時，以實際的來源數為準。</text>
+<!-- 右欄：共識 -->
+<rect x="490" y="30" width="430" height="340" rx="8" class="node"/><rect x="494" y="34" width="422" height="332" rx="6" class="node2"/>
+<use href="#p1-ico-flag" x="510" y="42" width="24" height="24" class="ico"/>
+<text x="544" y="60" class="tb">最終賽果：共識（Consensus）</text>
+<line x1="510" y1="76" x2="900" y2="76" class="sep"/>
+<use href="#p1-ico-whistle" x="510" y="88" width="20" height="20" class="ico s"/>
+<text x="538" y="103" class="ts">時段已結束，且所有提供的來源完全一致才穩定。</text>
+<rect x="510" y="120" width="110" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="518" y="127" width="22" height="22" class="ico"/><text x="548" y="143" class="ts">A <tspan class="mono">2:1</tspan></text>
+<rect x="630" y="120" width="110" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="638" y="127" width="22" height="22" class="ico"/><text x="668" y="143" class="ts">B <tspan class="mono">2:1</tspan></text>
+<rect x="750" y="120" width="110" height="36" rx="4" class="chipw"/><use href="#p1-ico-dish" x="758" y="127" width="22" height="22" class="ico w"/><text x="788" y="143" class="ts tw">C <tspan class="mono">2:2</tspan></text>
+<path d="M805,158 L805,182" class="lnw" marker-end="url(#p1-arrw)"/>
+<text x="510" y="206" class="tb tw">✕ 不穩定</text>
+<text x="600" y="206" class="ts">不採多數決，不以賽程來源優先，</text>
+<use href="#p1-ico-person" x="600" y="214" width="18" height="18" class="ico s"/>
+<text x="624" y="228" class="ts">直到一致或人工裁定。</text>
+<line x1="510" y1="250" x2="900" y2="250" class="sep"/>
+<rect x="510" y="266" width="140" height="36" rx="4" class="chip"/><use href="#p1-ico-dish" x="518" y="273" width="22" height="22" class="ico"/><text x="548" y="289" class="ts">只有 A 提供</text>
+<path d="M656,284 L682,284" class="ln" marker-end="url(#p1-arr)"/>
+<use href="#p1-ico-board" x="688" y="272" width="24" height="24" class="ico"/>
+<text x="718" y="289" class="ts">該來源即可穩定</text>
+<text x="510" y="332" class="ts">最少來源數取「設定值」與「提供的來源數」中較小者。</text>
+<!-- 下方：升級 -->
+<rect x="40" y="396" width="880" height="262" rx="8" class="panel"/>
+<use href="#p1-ico-whistle" x="60" y="412" width="24" height="24" class="ico"/>
+<text x="94" y="430" class="tb">升級：時段結束前最後幾分鐘停止提供的來源</text>
+<line x1="60" y1="446" x2="900" y2="446" class="sep"/>
+<!-- 升級情境 1 -->
+<rect x="60" y="462" width="250" height="64" rx="4" class="node"/>
+<use href="#p1-ico-shop" x="72" y="480" width="28" height="28" class="ico"/>
+<text x="112" y="486" class="ts">來源 C</text>
+<text x="112" y="508" class="ts">88 分鐘以 <tspan class="mono">2:1</tspan> 關盤</text>
+<rect x="330" y="462" width="250" height="64" rx="4" class="node"/>
+<use href="#p1-ico-dish" x="342" y="480" width="28" height="28" class="ico"/>
+<text x="382" y="486" class="ts">賽況來源 A</text>
+<use href="#p1-ico-flag" x="382" y="494" width="16" height="16" class="ico s"/>
+<text x="404" y="508" class="ts">完場 <tspan class="mono">2:1</tspan></text>
+<path d="M586,494 L626,494" class="ln" marker-end="url(#p1-arr)"/>
+<use href="#p1-ico-board" x="632" y="470" width="22" height="22" class="ico"/>
+<text x="660" y="486" class="ts">C 的 <tspan class="mono">2:1</tspan> 升級為賽果，</text>
+<text x="660" y="508" class="ts">計入共識與最少來源數。</text>
+<!-- 升級情境 2 -->
+<rect x="60" y="546" width="250" height="64" rx="4" class="ghost"/>
+<use href="#p1-ico-unplug" x="72" y="564" width="28" height="28" class="ico w"/>
+<text x="112" y="570" class="ts tw">來源 C</text>
+<text x="112" y="592" class="ts tw">第 30 分鐘停止提供</text>
+<rect x="330" y="546" width="250" height="64" rx="4" class="node"/>
+<use href="#p1-ico-dish" x="342" y="564" width="28" height="28" class="ico"/>
+<text x="382" y="570" class="ts">賽況來源 A</text>
+<use href="#p1-ico-flag" x="382" y="578" width="16" height="16" class="ico s"/>
+<text x="404" y="592" class="ts">完場</text>
+<path d="M586,578 L626,578" class="lnw dash" marker-end="url(#p1-arrw)"/>
+<text x="634" y="574" class="ts tw">不升級；不計入共識，</text>
+<text x="634" y="596" class="ts tw">也不阻擋。</text>
+<text x="60" y="642" class="ts">之後 C 自己報出的賽果，取代升級的比分。</text>
+<!-- 圖例 -->
+<g class="legend">
+  <use href="#p1-ico-dish" x="60" y="680" width="18" height="18" class="ico s"/><text x="84" y="693">賽況來源</text>
+  <use href="#p1-ico-shop" x="160" y="680" width="18" height="18" class="ico s"/><text x="184" y="693">莊家盤口</text>
+  <use href="#p1-ico-board" x="260" y="680" width="18" height="18" class="ico s"/><text x="284" y="693">統一比分／賽果</text>
+  <use href="#p1-ico-whistle" x="400" y="680" width="18" height="18" class="ico s"/><text x="424" y="693">時段結束</text>
+  <use href="#p1-ico-flag" x="500" y="680" width="18" height="18" class="ico s"/><text x="524" y="693">完場</text>
+  <use href="#p1-ico-person" x="580" y="680" width="18" height="18" class="ico s"/><text x="604" y="693">人工裁定</text>
+  <use href="#p1-ico-unplug" x="680" y="680" width="18" height="18" class="ico s"/><text x="704" y="693">停止提供</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：滾球比分達門檻數就更新；最終賽果要所有提供的來源一致，不採多數決（R04-14）。</p>
+</section>
+
+<section class="fig" id="fig-03-03-p1">
+<h2>圖 03-03　途徑互為備援，來源不互為備援</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="備援對照（圖示化）">
+<!-- 左：途徑互為備援 -->
+<rect x="30" y="30" width="440" height="420" rx="6" class="panel"/>
+<use href="#p1-ico-pipes" x="50" y="42" width="24" height="24" class="ico"/>
+<text x="84" y="60" class="tb">✓ 途徑互為備援（R03-02）</text>
+<g>
+  <rect x="60" y="150" width="140" height="56" rx="6" class="node"/><rect x="63" y="153" width="134" height="50" rx="4" class="node2"/>
+  <use href="#p1-ico-shop" x="68" y="164" width="28" height="28" class="ico"/>
+  <text x="104" y="174" class="tb">來源 C</text><text x="104" y="194" class="ts">仍為正常</text>
+</g>
+<g>
+  <rect x="240" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <use href="#p1-ico-gate" x="248" y="103" width="24" height="24" class="ico w"/>
+  <text x="280" y="112" class="tw">入口站台甲</text>
+  <use href="#p1-ico-wrench" x="280" y="118" width="14" height="14" class="ico w"/><text x="298" y="130" class="ts tw">維護中</text>
+</g>
+<g>
+  <rect x="240" y="210" width="130" height="50" rx="6" class="node"/><rect x="243" y="213" width="124" height="44" rx="4" class="node2"/>
+  <use href="#p1-ico-gate" x="248" y="223" width="24" height="24" class="ico"/>
+  <text x="280" y="232">入口站台乙</text><text x="280" y="250" class="ts">改經乙取得</text>
+</g>
+<g>
+  <rect x="390" y="140" width="64" height="76" rx="6" class="node"/><rect x="393" y="143" width="58" height="70" rx="4" class="node2"/>
+  <use href="#p1-ico-gear" x="408" y="150" width="28" height="28" class="ico"/>
+  <text x="422" y="200" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M200,165 L238,125" class="lnw dash"/>
+<path d="M370,115 L388,160" class="lnw dash"/>
+<text x="212" y="118" text-anchor="middle" class="tw">✕</text>
+<path d="M200,190 L238,228" class="ln" marker-end="url(#p1-arr)"/>
+<path d="M370,230 L388,198" class="ln" marker-end="url(#p1-arr)"/>
+<circle cx="60" cy="300" r="4" class="dot"/>
+<text x="74" y="305" class="ts">一條途徑失效時，改由其他途徑取得同一來源的資料。</text>
+<circle cx="60" cy="330" r="4" class="dot"/>
+<text x="74" y="335" class="ts">C 的賠率、賽果都照常；C 仍為正常（R03-06）。</text>
+<circle cx="60" cy="360" r="4" class="dot"/>
+<text x="74" y="365" class="ts">甲的維護在後台顯示原因與持續時間（R03-14）。</text>
+<circle cx="60" cy="390" r="4" class="dot"/>
+<text x="74" y="395" class="ts">部分途徑失效只減少備援，不算中斷。</text>
+<!-- 右：來源不互為備援 -->
+<rect x="490" y="30" width="440" height="420" rx="6" class="panel"/>
+<use href="#p1-ico-unplug" x="510" y="42" width="24" height="24" class="ico w"/>
+<text x="544" y="60" class="tb tw">✕ 來源不互為備援（R03-02）</text>
+<g>
+  <rect x="520" y="90" width="140" height="56" rx="6" class="ghost"/>
+  <use href="#p1-ico-shop" x="528" y="104" width="28" height="28" class="ico w"/>
+  <text x="564" y="114" class="tw">來源 C</text><text x="564" y="134" class="ts tw">賠率中斷</text>
+</g>
+<g>
+  <rect x="520" y="210" width="140" height="56" rx="6" class="node"/><rect x="523" y="213" width="134" height="50" rx="4" class="node2"/>
+  <use href="#p1-ico-shop" x="528" y="224" width="28" height="28" class="ico"/>
+  <text x="564" y="234" class="tb">來源 D</text><text x="564" y="254" class="ts">也提供同一場比賽</text>
+</g>
+<g>
+  <rect x="700" y="90" width="130" height="50" rx="6" class="ghost"/>
+  <use href="#p1-ico-gate" x="708" y="103" width="24" height="24" class="ico w"/>
+  <text x="740" y="112" class="tw">入口站台甲</text><text x="740" y="130" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="700" y="150" width="130" height="50" rx="6" class="ghost"/>
+  <use href="#p1-ico-gate" x="708" y="163" width="24" height="24" class="ico w"/>
+  <text x="740" y="172" class="tw">入口站台乙</text><text x="740" y="190" class="ts tw">失效</text>
+</g>
+<g>
+  <rect x="856" y="110" width="64" height="76" rx="6" class="node"/><rect x="859" y="113" width="58" height="70" rx="4" class="node2"/>
+  <use href="#p1-ico-gear" x="874" y="120" width="28" height="28" class="ico"/>
+  <text x="888" y="170" text-anchor="middle" class="ts">InSports</text>
+</g>
+<path d="M660,108 L698,112" class="lnw dash"/>
+<path d="M660,128 L698,170" class="lnw dash"/>
+<path d="M830,115 L854,140" class="lnw dash"/>
+<path d="M830,175 L854,160" class="lnw dash"/>
+<text x="765" y="80" text-anchor="middle" class="tw">所有途徑都失效</text>
+<path d="M660,238 C730,238 780,205 854,170" class="lnw dash"/>
+<text x="750" y="264" text-anchor="middle" class="tw">✕ 不以 D 的資料頂替 C</text>
+<circle cx="520" cy="300" r="4" class="dotw"/>
+<text x="534" y="305" class="ts">一類資料的所有取得途徑都失效，該類資料才算中斷（R03-06）。</text>
+<circle cx="520" cy="330" r="4" class="dotw"/>
+<text x="534" y="335" class="ts">一個來源中斷時，不以另一個來源的資料頂替。</text>
+<circle cx="520" cy="360" r="4" class="dotw"/>
+<text x="534" y="365" class="ts">只有 C 提供賠率的盤口如何處理，見 04 的 R04-16。</text>
+<circle cx="520" cy="390" r="4" class="dotw"/>
+<text x="534" y="395" class="ts">多個來源如何一起使用，由 04 決定。</text>
+<!-- 底註 -->
+<text x="480" y="486" text-anchor="middle">途徑之間互為備援，來源之間不互為備援；多個來源如何一起使用，由 04 的來源角色決定。</text>
+<!-- 圖例 -->
+<g class="legend">
+  <use href="#p1-ico-shop" x="60" y="518" width="18" height="18" class="ico s"/><text x="84" y="531">莊家盤口（來源）</text>
+  <use href="#p1-ico-gate" x="200" y="518" width="18" height="18" class="ico s"/><text x="224" y="531">入口站台（途徑）</text>
+  <use href="#p1-ico-gear" x="340" y="518" width="18" height="18" class="ico s"/><text x="364" y="531">InSports</text>
+  <use href="#p1-ico-pipes" x="440" y="518" width="18" height="18" class="ico s"/><text x="464" y="531">備援</text>
+  <use href="#p1-ico-wrench" x="520" y="518" width="18" height="18" class="ico s"/><text x="544" y="531">維護</text>
+  <use href="#p1-ico-unplug" x="600" y="518" width="18" height="18" class="ico s"/><text x="624" y="531">中斷／失效</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：一條途徑失效改由其他途徑取得同一來源；一個來源中斷時不以另一個來源頂替（R03-02）。</p>
+</section>
+</div>
+</div>
+<div class="sheet" id="p2">
+<style>
+#p2 .pnl { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+#p2 .num { fill: var(--line); }
+#p2 .numt { font-size: 13px; font-weight: 700; fill: var(--bg); }
+#p2 .ptitle { font-size: 13px; font-weight: 700; fill: var(--ink); }
+#p2 .bub { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+#p2 .bubw { fill: var(--panel); stroke: var(--warn); stroke-width: 1; }
+#p2 .bubfix { stroke: none; }
+#p2 .bt { font-size: 12px; fill: var(--ink); font-family: var(--font-body); }
+#p2 .btw { font-size: 12px; fill: var(--warn); }
+#p2 .char { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#p2 .charw { fill: none; stroke: var(--warn); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 3; }
+#p2 .lbl { font-size: 11px; fill: var(--soft); }
+#p2 .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+#p2 .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+#p2 .st { font-size: 13px; font-weight: 700; fill: var(--line); }
+#p2 .stw { font-size: 13px; font-weight: 700; fill: var(--warn); }
+#p2 .sb { fill: var(--bg); stroke: var(--line); stroke-width: 1.2; }
+#p2 .sbw { fill: var(--bg); stroke: var(--warn); stroke-width: 1.2; }
+#p2 .sbt { font-size: 12px; fill: var(--line); font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+#p2 .sbtw { font-size: 12px; fill: var(--warn); font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; }
+#p2 .cp { font-size: 11.5px; fill: var(--soft); }
+#p2 .big { font-size: 20px; font-weight: 700; }
+</style>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="p2-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+  <marker id="p2-arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z"/></marker>
+  <symbol id="p2-fig" viewBox="0 0 40 64"><circle cx="20" cy="18" r="8"/><path d="M8,62 L8,40 Q8,30 18,30 L22,30 Q32,30 32,40 L32,62"/><path d="M8,42 L2,52"/><path d="M32,42 L38,52"/></symbol>
+  <symbol id="p2-ant" viewBox="0 0 40 64"><path d="M20,10 L20,3"/><circle cx="20" cy="2" r="1.8"/><path d="M14,6 Q20,-1 26,6"/><circle cx="20" cy="18" r="8"/><path d="M8,62 L8,40 Q8,30 18,30 L22,30 Q32,30 32,40 L32,62"/><path d="M8,42 L2,52"/><path d="M32,42 L38,52"/></symbol>
+  <symbol id="p2-ref" viewBox="0 0 40 64"><circle cx="20" cy="18" r="8"/><path d="M8,62 L8,40 Q8,30 18,30 L22,30 Q32,30 32,40 L32,62"/><path d="M8,38 L32,38 M8,46 L32,46 M8,54 L32,54"/><path d="M32,42 L38,36"/><circle cx="39.5" cy="34.5" r="2.5"/><path d="M8,42 L2,52"/></symbol>
+  <symbol id="p2-gate" viewBox="0 0 56 56"><rect x="8" y="22" width="9" height="30" rx="1"/><rect x="39" y="22" width="9" height="30" rx="1"/><path d="M8,24 A20,20 0 0 1 48,24"/><path d="M17,34 L39,34" stroke-dasharray="3 3"/></symbol>
+  <symbol id="p2-flag" viewBox="0 0 40 40"><path d="M10,4 L10,38" stroke="var(--line)" stroke-width="1.5" fill="none" stroke-linecap="round"/><polygon points="10,4 32,10 10,17" fill="var(--line)" opacity=".85"/></symbol>
+</defs></svg>
+<h1>p2 場景劇情（Storyboard）</h1>
+<p class="meta">每張圖畫成分格漫畫：每格一個時間點，角色（帶天線的賽況來源、拿招牌的莊家盤口、裁判打扮的 InSports）用對話框報資料，格末蓋一個判定章；適合「情境 → 判定」型的規則與範例。</p>
+<section class="fig" id="fig-04-05-p2"><h2>圖 04-05　滾球比分看門檻，最終賽果看共識</h2>
+<svg viewBox="0 0 960 672" width="100%" role="img" aria-label="門檻與共識的場景劇情">
+<text x="20" y="10" class="ts" opacity="0">.</text>
+<rect x="20" y="16" width="298" height="312" rx="8" class="pnl"/><circle cx="40" cy="36" r="11" class="num"/><text x="40" y="40.5" text-anchor="middle" class="numt">1</text><text x="58" y="41" class="ptitle">門檻＝2：A 先報進球</text>
+<rect x="42" y="64" width="76" height="24" rx="6" class="bub"/><polygon points="56,88 51,97 68,88" class="bub"/><rect x="44" y="86" width="72" height="3" class="bubfix bub"/><text x="80.0" y="80.5" text-anchor="middle" class="bt">A：1:0</text>
+<rect x="128" y="64" width="76" height="24" rx="6" class="bub"/><polygon points="142,88 137,97 154,88" class="bub"/><rect x="130" y="86" width="72" height="3" class="bubfix bub"/><text x="166.0" y="80.5" text-anchor="middle" class="bt">B：0:0</text>
+<use href="#p2-ant" x="60" y="116" width="40.0" height="64" class="char"/><text x="80.0" y="196" text-anchor="middle" class="lbl">賽況來源 A</text>
+<use href="#p2-ant" x="146" y="116" width="40.0" height="64" class="char"/><text x="166.0" y="196" text-anchor="middle" class="lbl">賽況來源 B</text>
+<rect x="226" y="74" width="80" height="26" rx="3" class="sb"/><text x="266.0" y="92" text-anchor="middle" class="sbt">統一 0:0</text>
+<use href="#p2-ref" x="246" y="116" width="40.0" height="64" class="char"/><text x="266.0" y="196" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 216.0 245)"><rect x="170" y="230" width="92" height="30" rx="4" class="stamp"/><text x="216.0" y="250" text-anchor="middle" class="st">維持 0:0</text></g>
+<text x="34" y="284" class="cp">只有 1 個來源報出，未達門檻 2，</text><text x="34" y="302" class="cp">統一比分維持原值。</text>
+<rect x="331" y="16" width="298" height="312" rx="8" class="pnl"/><circle cx="351" cy="36" r="11" class="num"/><text x="351" y="40.5" text-anchor="middle" class="numt">2</text><text x="369" y="41" class="ptitle">B 也報了</text>
+<rect x="353" y="64" width="76" height="24" rx="6" class="bub"/><polygon points="367,88 362,97 379,88" class="bub"/><rect x="355" y="86" width="72" height="3" class="bubfix bub"/><text x="391.0" y="80.5" text-anchor="middle" class="bt">A：1:0</text>
+<rect x="439" y="64" width="76" height="24" rx="6" class="bub"/><polygon points="453,88 448,97 465,88" class="bub"/><rect x="441" y="86" width="72" height="3" class="bubfix bub"/><text x="477.0" y="80.5" text-anchor="middle" class="bt">B：1:0</text>
+<use href="#p2-ant" x="371" y="116" width="40.0" height="64" class="char"/><text x="391.0" y="196" text-anchor="middle" class="lbl">賽況來源 A</text>
+<use href="#p2-ant" x="457" y="116" width="40.0" height="64" class="char"/><text x="477.0" y="196" text-anchor="middle" class="lbl">賽況來源 B</text>
+<rect x="537" y="74" width="80" height="26" rx="3" class="sb"/><text x="577.0" y="92" text-anchor="middle" class="sbt">統一 1:0</text>
+<use href="#p2-ref" x="557" y="116" width="40.0" height="64" class="char"/><text x="577.0" y="196" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 527.0 245)"><rect x="481" y="230" width="92" height="30" rx="4" class="stamp"/><text x="527.0" y="250" text-anchor="middle" class="st">更新 1:0</text></g>
+<text x="345" y="284" class="cp">達門檻數的來源報出相同值才更新；</text><text x="345" y="302" class="cp">來源少於門檻數時，以實際來源數為準。</text>
+<rect x="642" y="16" width="298" height="312" rx="8" class="pnl"/><circle cx="662" cy="36" r="11" class="num"/><text x="662" y="40.5" text-anchor="middle" class="numt">3</text><text x="680" y="41" class="ptitle">完場了，三個來源報賽果</text>
+<rect x="652" y="64" width="66" height="24" rx="6" class="bub"/><polygon points="666,88 661,97 678,88" class="bub"/><rect x="654" y="86" width="62" height="3" class="bubfix bub"/><text x="685.0" y="80.5" text-anchor="middle" class="bt">A：2:1</text>
+<rect x="726" y="64" width="66" height="24" rx="6" class="bub"/><polygon points="740,88 735,97 752,88" class="bub"/><rect x="728" y="86" width="62" height="3" class="bubfix bub"/><text x="759.0" y="80.5" text-anchor="middle" class="bt">B：2:1</text>
+<rect x="800" y="64" width="66" height="24" rx="6" class="bubw"/><polygon points="814,88 809,97 826,88" class="bubw"/><rect x="802" y="86" width="62" height="3" class="bubfix bubw"/><text x="833.0" y="80.5" text-anchor="middle" class="btw">C：2:2</text>
+<use href="#p2-ant" x="665" y="116" width="35.0" height="56" class="char"/><text x="682.5" y="188" text-anchor="middle" class="lbl">A</text>
+<use href="#p2-ant" x="739" y="116" width="35.0" height="56" class="char"/><text x="756.5" y="188" text-anchor="middle" class="lbl">B</text>
+<use href="#p2-fig" x="813" y="116" width="35.0" height="56" class="charw"/><text x="830.5" y="188" text-anchor="middle" class="lbl tw">C</text>
+<use href="#p2-flag" x="886" y="56" width="40" height="40"/><text x="906" y="108" text-anchor="middle" class="lbl">完場</text>
+<use href="#p2-ref" x="878" y="116" width="35.0" height="56" class="char"/><text x="895.5" y="188" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 846.0 245)"><rect x="814" y="230" width="64" height="30" rx="4" class="stampw"/><text x="846.0" y="250" text-anchor="middle" class="stw">不穩定</text></g>
+<text x="656" y="284" class="cp">任一來源不同即不穩定：不採多數決，</text><text x="656" y="302" class="cp">不以賽程來源優先，直到一致或人工裁定。</text>
+<rect x="20" y="344" width="298" height="312" rx="8" class="pnl"/><circle cx="40" cy="364" r="11" class="num"/><text x="40" y="368.5" text-anchor="middle" class="numt">4</text><text x="58" y="369" class="ptitle">只有一個來源提供</text>
+<rect x="60" y="392" width="80" height="24" rx="6" class="bub"/><polygon points="74,416 69,425 86,416" class="bub"/><rect x="62" y="414" width="76" height="3" class="bubfix bub"/><text x="100.0" y="408.5" text-anchor="middle" class="bt">A：2:1</text>
+<use href="#p2-ant" x="80" y="444" width="40.0" height="64" class="char"/><text x="100.0" y="524" text-anchor="middle" class="lbl">賽況來源 A</text>
+<use href="#p2-flag" x="170" y="384" width="40" height="40"/><text x="190" y="436" text-anchor="middle" class="lbl">完場</text>
+<rect x="226" y="402" width="80" height="26" rx="3" class="sb"/><text x="266.0" y="420" text-anchor="middle" class="sbt">統一 2:1</text>
+<use href="#p2-ref" x="246" y="444" width="40.0" height="64" class="char"/><text x="266.0" y="524" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 221.0 573)"><rect x="196" y="558" width="50" height="30" rx="4" class="stamp"/><text x="221.0" y="578" text-anchor="middle" class="st">穩定</text></g>
+<text x="34" y="612" class="cp">要求的來源數取「設定值」與</text><text x="34" y="630" class="cp">「提供的來源數」中較小者，A 即可穩定。</text>
+<rect x="331" y="344" width="298" height="312" rx="8" class="pnl"/><circle cx="351" cy="364" r="11" class="num"/><text x="351" y="368.5" text-anchor="middle" class="numt">5</text><text x="369" y="369" class="ptitle">升級：C 在 88 分鐘關盤</text>
+<rect x="337" y="392" width="100" height="24" rx="6" class="bub"/><polygon points="351,416 346,425 363,416" class="bub"/><rect x="339" y="414" width="96" height="3" class="bubfix bub"/><text x="387.0" y="408.5" text-anchor="middle" class="bt">C：88′ 2:1 關盤</text>
+<rect x="447" y="392" width="92" height="24" rx="6" class="bub"/><polygon points="461,416 456,425 473,416" class="bub"/><rect x="449" y="414" width="88" height="3" class="bubfix bub"/><text x="493.0" y="408.5" text-anchor="middle" class="bt">A：完場 2:1</text>
+<use href="#p2-fig" x="367" y="444" width="40.0" height="64" class="char"/><text x="387.0" y="524" text-anchor="middle" class="lbl">來源 C</text>
+<use href="#p2-ant" x="473" y="444" width="40.0" height="64" class="char"/><text x="493.0" y="524" text-anchor="middle" class="lbl">賽況來源 A</text>
+<use href="#p2-flag" x="575" y="384" width="40" height="40"/><text x="595" y="436" text-anchor="middle" class="lbl">完場</text>
+<use href="#p2-ref" x="567" y="444" width="35.0" height="56" class="char"/><text x="584.5" y="516" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 548.0 573)"><rect x="523" y="558" width="50" height="30" rx="4" class="stamp"/><text x="548.0" y="578" text-anchor="middle" class="st">升級</text></g>
+<text x="345" y="612" class="cp">C 的 2:1 升級為賽果，計入共識；</text><text x="345" y="630" class="cp">之後 C 自己報出的賽果，取代升級的比分。</text>
+<rect x="642" y="344" width="298" height="312" rx="8" class="pnl"/><circle cx="662" cy="364" r="11" class="num"/><text x="662" y="368.5" text-anchor="middle" class="numt">6</text><text x="680" y="369" class="ptitle">C 在第 30 分鐘就停了</text>
+<rect x="648" y="392" width="100" height="24" rx="6" class="bubw"/><polygon points="662,416 657,425 674,416" class="bubw"/><rect x="650" y="414" width="96" height="3" class="bubfix bubw"/><text x="698.0" y="408.5" text-anchor="middle" class="btw">C：30′ 停止</text>
+<rect x="758" y="392" width="92" height="24" rx="6" class="bub"/><polygon points="772,416 767,425 784,416" class="bub"/><rect x="760" y="414" width="88" height="3" class="bubfix bub"/><text x="804.0" y="408.5" text-anchor="middle" class="bt">A：完場</text>
+<use href="#p2-fig" x="678" y="444" width="40.0" height="64" class="charw"/><text x="698.0" y="524" text-anchor="middle" class="lbl tw">來源 C</text>
+<use href="#p2-ant" x="784" y="444" width="40.0" height="64" class="char"/><text x="804.0" y="524" text-anchor="middle" class="lbl">賽況來源 A</text>
+<use href="#p2-flag" x="886" y="384" width="40" height="40"/><text x="906" y="436" text-anchor="middle" class="lbl">完場</text>
+<use href="#p2-ref" x="878" y="444" width="35.0" height="56" class="char"/><text x="895.5" y="516" text-anchor="middle" class="lbl">InSports</text>
+<g transform="rotate(-6 850.0 573)"><rect x="818" y="558" width="64" height="30" rx="4" class="stampw"/><text x="850.0" y="578" text-anchor="middle" class="stw">不升級</text></g>
+<text x="656" y="612" class="cp">時段中途就停止的來源沒有賽果：</text><text x="656" y="630" class="cp">不計入共識，也不阻擋。</text>
+</svg>
+<p class="cap"><b>圖說</b>：滾球比分達門檻數就更新；最終賽果要所有提供的來源一致，不採多數決（R04-14）。</p></section>
+<section class="fig" id="fig-03-03-p2"><h2>圖 03-03　途徑互為備援，來源不互為備援</h2>
+<svg viewBox="0 0 960 646" width="100%" role="img" aria-label="途徑備援的場景劇情">
+<rect x="20" y="16" width="450" height="300" rx="8" class="pnl"/><circle cx="40" cy="36" r="11" class="num"/><text x="40" y="40.5" text-anchor="middle" class="numt">1</text><text x="58" y="41" class="ptitle">平時：來源 C 有兩條途徑</text>
+<use href="#p2-fig" x="60" y="126" width="40.0" height="64" class="char"/><text x="80.0" y="206" text-anchor="middle" class="lbl">來源 C</text>
+<use href="#p2-gate" x="210" y="70" width="56" height="56" class="char"/><text x="238" y="140" text-anchor="middle" class="lbl">入口站台甲</text>
+<use href="#p2-gate" x="210" y="182" width="56" height="56" class="char"/><text x="238" y="252" text-anchor="middle" class="lbl">入口站台乙</text>
+<use href="#p2-ref" x="370" y="126" width="40.0" height="64" class="char"/><text x="390.0" y="206" text-anchor="middle" class="lbl">InSports</text>
+<path d="M104,152 L206,102" class="ln" marker-end="url(#p2-arr)"/>
+<path d="M104,166 L206,214" class="ln" marker-end="url(#p2-arr)"/>
+<path d="M270,98 L366,152" class="ln" marker-end="url(#p2-arr)"/>
+<path d="M270,212 L366,166" class="ln" marker-end="url(#p2-arr)"/>
+<rect x="50" y="76" width="96" height="24" rx="6" class="bub"/><polygon points="64,100 59,109 76,100" class="bub"/><rect x="52" y="98" width="92" height="3" class="bubfix bub"/><text x="98.0" y="92.5" text-anchor="middle" class="bt">甲、乙都能進</text>
+<text x="34" y="274" class="cp">一個來源可以有多條取得途徑，途徑之間互為備援。</text>
+<rect x="490" y="16" width="450" height="300" rx="8" class="pnl"/><circle cx="510" cy="36" r="11" class="num"/><text x="510" y="40.5" text-anchor="middle" class="numt">2</text><text x="528" y="41" class="ptitle">入口站台甲維護中</text>
+<use href="#p2-fig" x="530" y="126" width="40.0" height="64" class="char"/><text x="550.0" y="206" text-anchor="middle" class="lbl">來源 C</text>
+<use href="#p2-gate" x="680" y="70" width="56" height="56" class="charw"/><text x="708" y="140" text-anchor="middle" class="lbl tw">入口站台甲</text>
+<text x="708" y="111" text-anchor="middle" class="tw big">✕</text>
+<use href="#p2-gate" x="680" y="182" width="56" height="56" class="char"/><text x="708" y="252" text-anchor="middle" class="lbl">入口站台乙</text>
+<use href="#p2-ref" x="840" y="126" width="40.0" height="64" class="char"/><text x="860.0" y="206" text-anchor="middle" class="lbl">InSports</text>
+<path d="M574,152 L676,102" class="lnw dash"/>
+<path d="M740,98 L836,152" class="lnw dash"/>
+<path d="M574,166 L676,214" class="ln" marker-end="url(#p2-arr)"/>
+<path d="M740,212 L836,166" class="ln" marker-end="url(#p2-arr)"/>
+<rect x="830" y="68" width="108" height="24" rx="6" class="bub"/><polygon points="844,92 839,101 856,92" class="bub"/><rect x="832" y="90" width="104" height="3" class="bubfix bub"/><text x="884.0" y="84.5" text-anchor="middle" class="bt">後台顯示：甲維護</text>
+<g transform="rotate(-6 822.0 241)"><rect x="790" y="226" width="64" height="30" rx="4" class="stamp"/><text x="822.0" y="246" text-anchor="middle" class="st">改經乙</text></g>
+<text x="504" y="274" class="cp">C 的賠率、賽果都照常，C 仍為正常（R03-06）；</text><text x="504" y="292" class="cp">部分途徑失效只減少備援，不算中斷；甲的維護在後台顯示（R03-14）。</text>
+<rect x="20" y="330" width="450" height="300" rx="8" class="pnl"/><circle cx="40" cy="350" r="11" class="num"/><text x="40" y="354.5" text-anchor="middle" class="numt">3</text><text x="58" y="355" class="ptitle">甲、乙都失效了</text>
+<use href="#p2-fig" x="60" y="440" width="40.0" height="64" class="charw"/><text x="80.0" y="520" text-anchor="middle" class="lbl tw">來源 C</text>
+<use href="#p2-gate" x="210" y="384" width="56" height="56" class="charw"/><text x="238" y="454" text-anchor="middle" class="lbl tw">入口站台甲</text>
+<text x="238" y="425" text-anchor="middle" class="tw big">✕</text>
+<use href="#p2-gate" x="210" y="496" width="56" height="56" class="charw"/><text x="238" y="566" text-anchor="middle" class="lbl tw">入口站台乙</text>
+<text x="238" y="537" text-anchor="middle" class="tw big">✕</text>
+<use href="#p2-ref" x="370" y="440" width="40.0" height="64" class="char"/><text x="390.0" y="520" text-anchor="middle" class="lbl">InSports</text>
+<path d="M104,466 L206,416" class="lnw dash"/>
+<path d="M104,480 L206,528" class="lnw dash"/>
+<path d="M270,412 L366,466" class="lnw dash"/>
+<path d="M270,526 L366,480" class="lnw dash"/>
+<rect x="360" y="382" width="108" height="24" rx="6" class="bubw"/><polygon points="374,406 369,415 386,406" class="bubw"/><rect x="362" y="404" width="104" height="3" class="bubfix bubw"/><text x="414.0" y="398.5" text-anchor="middle" class="btw">收不到 C 的賠率</text>
+<g transform="rotate(-6 339.0 555)"><rect x="300" y="540" width="78" height="30" rx="4" class="stampw"/><text x="339.0" y="560" text-anchor="middle" class="stw">賠率中斷</text></g>
+<text x="34" y="588" class="cp">一類資料的所有取得途徑都失效，該類資料才算中斷（R03-06）。</text>
+<rect x="490" y="330" width="450" height="300" rx="8" class="pnl"/><circle cx="510" cy="350" r="11" class="num"/><text x="510" y="354.5" text-anchor="middle" class="numt">4</text><text x="528" y="355" class="ptitle">來源 D 也有同一場比賽</text>
+<use href="#p2-fig" x="530" y="390" width="35.0" height="56" class="charw"/><text x="547.5" y="462" text-anchor="middle" class="lbl tw">來源 C</text>
+<use href="#p2-fig" x="530" y="490" width="35.0" height="56" class="char"/><text x="547.5" y="562" text-anchor="middle" class="lbl">來源 D</text>
+<rect x="572" y="448" width="110" height="24" rx="6" class="bub"/><polygon points="586,472 581,481 598,472" class="bub"/><rect x="574" y="470" width="106" height="3" class="bubfix bub"/><text x="627.0" y="464.5" text-anchor="middle" class="bt">D：我來頂替？</text>
+<use href="#p2-ref" x="840" y="440" width="40.0" height="64" class="char"/><text x="860.0" y="520" text-anchor="middle" class="lbl">InSports</text>
+<path d="M568,420 L836,466" class="lnw dash"/>
+<path d="M568,520 C690,530 750,500 836,480" class="ln dash"/>
+<text x="720" y="448" text-anchor="middle" class="tw big">✕</text>
+<rect x="820" y="382" width="116" height="24" rx="6" class="bubw"/><polygon points="834,406 829,415 846,406" class="bubw"/><rect x="822" y="404" width="112" height="3" class="bubfix bubw"/><text x="878.0" y="398.5" text-anchor="middle" class="btw">不以 D 頂替 C</text>
+<g transform="rotate(-6 822.0 555)"><rect x="790" y="540" width="64" height="30" rx="4" class="stampw"/><text x="822.0" y="560" text-anchor="middle" class="stw">不頂替</text></g>
+<text x="504" y="588" class="cp">一個來源中斷時，不以另一個來源頂替；只有 C 提供賠率的盤口</text><text x="504" y="606" class="cp">如何處理見 04 的 R04-16；多個來源如何一起使用，由 04 決定。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一條途徑失效改由其他途徑取得同一來源；一個來源中斷時不以另一個來源頂替（R03-02、R03-06）。</p></section>
+</div>
+</div>
+<div class="sheet" id="p5">
+<style>
+#p5 svg .card { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+#p5 svg .hdr { fill: rgba(79, 209, 255, .08); stroke: none; }
+#p5 svg .rowline { stroke: rgba(79, 209, 255, .18); stroke-width: 1; }
+#p5 svg .light { fill: var(--line); stroke: none; }
+#p5 svg .lightw { fill: var(--warn); stroke: none; }
+#p5 svg .lighto { fill: none; stroke: var(--soft); stroke-width: 1.2; }
+#p5 svg .meter-bg { fill: rgba(79, 209, 255, .1); stroke: var(--soft); stroke-width: .8; }
+#p5 svg .meter-fill { fill: var(--line); stroke: none; }
+#p5 svg .badge { fill: rgba(79, 209, 255, .16); stroke: var(--line); stroke-width: 1; }
+#p5 svg .badgew { fill: rgba(255, 159, 67, .16); stroke: var(--warn); stroke-width: 1; }
+#p5 svg .lane { stroke: rgba(79, 209, 255, .35); stroke-width: 2; }
+#p5 svg .lanew { stroke: var(--warn); stroke-width: 2; stroke-dasharray: 5 4; }
+#p5 svg .ico { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#p5 svg .icow { fill: none; stroke: var(--warn); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+#p5 svg .tiny { font-size: 11px; fill: var(--soft); }
+</style>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="p5-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4fd1ff"/></marker>
+  <marker id="p5-arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff9f43"/></marker>
+  <symbol id="p5-ico-link" viewBox="0 0 24 24"><path class="ico" d="M10 14 L14 10 M8.5 15.5 l-2 2 a3.2 3.2 0 0 1 -4.5 -4.5 l4 -4 a3.2 3.2 0 0 1 3 -0.8 M15.5 8.5 l2 -2 a3.2 3.2 0 0 1 4.5 4.5 l-4 4 a3.2 3.2 0 0 1 -3 0.8"/></symbol>
+  <symbol id="p5-ico-link-off" viewBox="0 0 24 24"><path class="ico" d="M8.5 15.5 l-2 2 a3.2 3.2 0 0 1 -4.5 -4.5 l4 -4 a3.2 3.2 0 0 1 3 -0.8 M15.5 8.5 l2 -2 a3.2 3.2 0 0 1 4.5 4.5 l-4 4 a3.2 3.2 0 0 1 -3 0.8"/><path class="icow" d="M4 20 L20 4"/></symbol>
+  <symbol id="p5-ico-ban" viewBox="0 0 24 24"><circle class="icow" cx="12" cy="12" r="9"/><path class="icow" d="M5.6 5.6 L18.4 18.4"/></symbol>
+  <symbol id="p5-ico-wrench" viewBox="0 0 24 24"><path class="icow" d="M14.5 4.5 a5 5 0 0 0 -5.3 6.8 L3 17.5 L6.5 21 l6.2 -6.2 a5 5 0 0 0 6.8 -5.3 l-3 3 l-3 -3 z"/></symbol>
+  <symbol id="p5-ico-flag" viewBox="0 0 24 24"><path class="ico" d="M5 21 V4 M5 4 h12 l-3 4 l3 4 H5"/></symbol>
+  <symbol id="p5-ico-clock" viewBox="0 0 24 24"><circle class="ico" cx="12" cy="12" r="9"/><path class="ico" d="M12 7 V12 L15.5 14"/></symbol>
+</defs></svg>
+<h1>p5 後台儀表板（Dashboard）</h1>
+<p class="meta">把規則畫成營運後台常見的元件：卡片、狀態燈、徽章、進度條、時間軸標記，讓讀者用「看監看畫面」的直覺理解規則。只是示意，不是 11 的畫面；沒有側欄與導覽，只有元件。適合有狀態、有門檻、有時間順序的規則。</p>
+
+<section class="fig" id="fig-04-05-p5">
+<h2>圖 04-05　滾球比分看門檻，最終賽果看共識</h2>
+<svg viewBox="0 0 960 740" width="100%" role="img" aria-label="賽事監看卡片：門檻、共識與升級">
+<!-- ===== 卡片 1：滾球比分（門檻） ===== -->
+<rect x="40" y="20" width="430" height="320" rx="8" class="card"/>
+<rect x="40" y="20" width="430" height="40" rx="8" class="hdr"/>
+<text x="60" y="46" class="tb">賽事監看：滾球比分</text>
+<text x="450" y="46" text-anchor="end" class="ts">門檻＝<tspan class="mono">2</tspan></text>
+<!-- 表頭 -->
+<text x="60" y="84" class="tiny">來源</text>
+<text x="265" y="84" text-anchor="middle" class="tiny">最新比分</text>
+<text x="390" y="84" text-anchor="middle" class="tiny">門檻　→　統一比分</text>
+<line x1="60" y1="92" x2="450" y2="92" class="rowline"/>
+<!-- 狀態 1 -->
+<circle cx="68" cy="112" r="5" class="light"/><text x="82" y="116" class="ts">賽況來源 A</text>
+<rect x="230" y="99" width="70" height="26" rx="4" class="chip"/><text x="265" y="117" text-anchor="middle" class="mono ts">1:0</text>
+<circle cx="68" cy="146" r="5" class="light"/><text x="82" y="150" class="ts">賽況來源 B</text>
+<rect x="230" y="133" width="70" height="26" rx="4" class="chip"/><text x="265" y="151" text-anchor="middle" class="mono ts">0:0</text>
+<rect x="330" y="107" width="120" height="10" rx="5" class="meter-bg"/><rect x="330" y="107" width="60" height="10" rx="5" class="meter-fill"/>
+<text x="390" y="134" text-anchor="middle" class="tiny">1／2　未達門檻</text>
+<rect x="330" y="142" width="120" height="26" rx="13" class="chip"/><text x="390" y="160" text-anchor="middle" class="ts">統一比分 <tspan class="mono">0:0</tspan></text>
+<text x="390" y="186" text-anchor="middle" class="tiny tw">維持原值</text>
+<line x1="60" y1="196" x2="450" y2="196" class="rowline"/>
+<!-- 狀態 2 -->
+<circle cx="68" cy="216" r="5" class="light"/><text x="82" y="220" class="ts">賽況來源 A</text>
+<rect x="230" y="203" width="70" height="26" rx="4" class="chip"/><text x="265" y="221" text-anchor="middle" class="mono ts">1:0</text>
+<circle cx="68" cy="250" r="5" class="light"/><text x="82" y="254" class="ts">賽況來源 B</text>
+<rect x="230" y="237" width="70" height="26" rx="4" class="chip"/><text x="265" y="255" text-anchor="middle" class="mono ts">1:0</text>
+<rect x="330" y="211" width="120" height="10" rx="5" class="meter-bg"/><rect x="330" y="211" width="120" height="10" rx="5" class="meter-fill"/>
+<text x="390" y="238" text-anchor="middle" class="tiny">2／2　達到門檻</text>
+<rect x="330" y="246" width="120" height="26" rx="13" class="badge"/><text x="390" y="264" text-anchor="middle" class="ts">統一比分 <tspan class="mono">1:0</tspan></text>
+<text x="390" y="290" text-anchor="middle" class="tiny">更新</text>
+<line x1="60" y1="300" x2="450" y2="300" class="rowline"/>
+<text x="60" y="318" class="tiny">門檻數由 InSports 依運動與計分項目設定；<tspan x="60" dy="1.4em">提供的來源少於門檻數時，以實際的來源數為準。</tspan></text>
+
+<!-- ===== 卡片 2：最終賽果（共識） ===== -->
+<rect x="490" y="20" width="430" height="320" rx="8" class="card"/>
+<rect x="490" y="20" width="430" height="40" rx="8" class="hdr"/>
+<text x="510" y="46" class="tb">最終賽果：共識</text>
+<use href="#p5-ico-flag" x="806" y="30" width="20" height="20"/><text x="900" y="46" text-anchor="end" class="ts">時段已結束</text>
+<text x="510" y="84" class="tiny">提供該項目的來源</text>
+<text x="715" y="84" text-anchor="middle" class="tiny">賽果</text>
+<text x="845" y="84" text-anchor="middle" class="tiny">穩定？</text>
+<line x1="510" y1="92" x2="900" y2="92" class="rowline"/>
+<circle cx="518" cy="112" r="5" class="light"/><text x="532" y="116" class="ts">來源 A</text>
+<rect x="680" y="99" width="70" height="26" rx="4" class="chip"/><text x="715" y="117" text-anchor="middle" class="mono ts">2:1</text>
+<circle cx="518" cy="146" r="5" class="light"/><text x="532" y="150" class="ts">來源 B</text>
+<rect x="680" y="133" width="70" height="26" rx="4" class="chip"/><text x="715" y="151" text-anchor="middle" class="mono ts">2:1</text>
+<circle cx="518" cy="180" r="5" class="lightw"/><text x="532" y="184" class="ts tw">來源 C</text>
+<rect x="680" y="167" width="70" height="26" rx="4" class="chipw"/><text x="715" y="185" text-anchor="middle" class="mono ts tw">2:2</text>
+<rect x="800" y="133" width="90" height="26" rx="13" class="badgew"/><text x="845" y="151" text-anchor="middle" class="ts tw">✕ 不穩定</text>
+<text x="510" y="210" class="tiny">任一來源不同即不穩定：不採多數決，不以賽程來源優先，<tspan x="510" dy="1.3em">直到一致或人工裁定。</tspan></text>
+<line x1="510" y1="234" x2="900" y2="234" class="rowline"/>
+<circle cx="518" cy="254" r="5" class="light"/><text x="532" y="258" class="ts">只有來源 A 提供</text>
+<rect x="680" y="241" width="70" height="26" rx="4" class="chip"/><text x="715" y="259" text-anchor="middle" class="mono ts">2:1</text>
+<rect x="800" y="241" width="90" height="26" rx="13" class="badge"/><text x="845" y="259" text-anchor="middle" class="ts">✓ 穩定</text>
+<text x="510" y="288" class="tiny">最少來源數取「設定值」與「提供的來源數」較小者；<tspan x="510" dy="1.3em">只有一個來源提供時，該來源即可穩定。</tspan></text>
+<line x1="510" y1="312" x2="900" y2="312" class="rowline"/>
+<text x="510" y="330" class="tiny">門檻管滾球比分的更新，共識管最終賽果的穩定。</text>
+
+<!-- ===== 卡片 3：升級（時間軸） ===== -->
+<rect x="40" y="360" width="880" height="320" rx="8" class="card"/>
+<rect x="40" y="360" width="880" height="40" rx="8" class="hdr"/>
+<text x="60" y="386" class="tb">升級：時段結束前最後幾分鐘停止提供的來源</text>
+<use href="#p5-ico-clock" x="870" y="370" width="20" height="20"/>
+<!-- 時間軸 -->
+<line x1="180" y1="590" x2="600" y2="590" class="rowline"/>
+<line x1="180" y1="586" x2="180" y2="594" class="sep"/><text x="180" y="612" text-anchor="middle" class="tiny mono">0'</text>
+<line x1="320" y1="586" x2="320" y2="594" class="sep"/><text x="320" y="612" text-anchor="middle" class="tiny mono">30'</text>
+<line x1="591" y1="586" x2="591" y2="594" class="sep"/><text x="584" y="612" text-anchor="middle" class="tiny mono">88'</text>
+<line x1="600" y1="586" x2="600" y2="594" class="sep"/><text x="612" y="612" text-anchor="middle" class="tiny mono">90'</text>
+<!-- 車道 A -->
+<text x="60" y="444" class="ts">賽況來源 A</text>
+<line x1="180" y1="440" x2="600" y2="440" class="lane"/>
+<circle cx="600" cy="440" r="6" class="light"/>
+<rect x="540" y="412" width="100" height="22" rx="4" class="chip"/><text x="590" y="427" text-anchor="middle" class="tiny">完場 <tspan class="mono">2:1</tspan></text>
+<!-- 車道 C（情境 1） -->
+<text x="60" y="504" class="ts">來源 C</text>
+<line x1="180" y1="500" x2="591" y2="500" class="lane"/>
+<circle cx="591" cy="500" r="6" class="light"/>
+<rect x="500" y="472" width="100" height="22" rx="4" class="chip"/><text x="550" y="487" text-anchor="middle" class="tiny">關盤 <tspan class="mono">2:1</tspan></text>
+<rect x="640" y="486" width="64" height="26" rx="13" class="badge"/><text x="672" y="504" text-anchor="middle" class="ts">升級</text>
+<text x="714" y="496" class="tiny">C 的 <tspan class="mono">2:1</tspan> 升級為賽果，</text>
+<text x="714" y="512" class="tiny">計入共識與最少來源數。</text>
+<!-- 車道 C（情境 2） -->
+<text x="60" y="564" class="ts">來源 C</text>
+<line x1="180" y1="560" x2="320" y2="560" class="lane"/>
+<line x1="320" y1="560" x2="600" y2="560" class="lanew"/>
+<circle cx="320" cy="560" r="6" class="lightw"/>
+<rect x="270" y="532" width="100" height="22" rx="4" class="chipw"/><text x="320" y="547" text-anchor="middle" class="tiny tw">停止提供</text>
+<rect x="640" y="546" width="64" height="26" rx="13" class="badgew"/><text x="672" y="564" text-anchor="middle" class="ts tw">不升級</text>
+<text x="714" y="556" class="tiny tw">不計入共識，</text>
+<text x="714" y="572" class="tiny tw">也不阻擋。</text>
+<line x1="60" y1="628" x2="900" y2="628" class="rowline"/>
+<text x="60" y="648" class="tiny">升級：來源在時段結束前最後幾分鐘停止提供，另一個來源明確報出時段結束時，它最後的滾球比分升級為賽果。</text>
+<text x="60" y="666" class="tiny">之後 C 自己報出的賽果，取代升級的比分。「最後幾分鐘」依運動與時段設定。</text>
+<!-- 狀態燈圖例 -->
+<text x="60" y="716" class="tiny">狀態燈：</text>
+<circle cx="120" cy="712" r="5" class="light"/><text x="130" y="716" class="tiny">正常</text>
+<circle cx="180" cy="712" r="5" class="lightw"/><text x="190" y="716" class="tiny">維護／失效／中斷／不穩定</text>
+<circle cx="350" cy="712" r="5" class="lighto"/><text x="360" y="716" class="tiny">停用</text>
+</svg>
+<p class="cap"><b>圖說</b>：滾球比分達門檻數就更新；最終賽果要所有提供的來源一致，不採多數決（R04-14）。</p>
+</section>
+
+<section class="fig" id="fig-03-03-p5">
+<h2>圖 03-03　途徑互為備援，來源不互為備援</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="來源與途徑卡片：備援對照">
+<!-- ===== 左卡：途徑互為備援 ===== -->
+<rect x="40" y="20" width="430" height="450" rx="8" class="card"/>
+<rect x="40" y="20" width="430" height="40" rx="8" class="hdr"/>
+<text x="60" y="46" class="tb">來源與途徑：來源 C</text>
+<rect x="330" y="29" width="120" height="22" rx="11" class="badge"/><text x="390" y="44" text-anchor="middle" class="tiny">✓ 途徑互為備援</text>
+<text x="60" y="84" class="tiny">途徑</text>
+<text x="290" y="84" text-anchor="middle" class="tiny">狀態</text>
+<text x="420" y="84" text-anchor="middle" class="tiny">連線</text>
+<line x1="60" y1="92" x2="450" y2="92" class="rowline"/>
+<!-- 途徑甲 -->
+<circle cx="68" cy="112" r="5" class="lightw"/><text x="82" y="116" class="ts">經入口站台甲</text>
+<rect x="250" y="99" width="80" height="26" rx="13" class="badgew"/><text x="290" y="117" text-anchor="middle" class="ts tw">維護</text>
+<use href="#p5-ico-link-off" x="408" y="100" width="24" height="24"/>
+<line x1="60" y1="132" x2="450" y2="132" class="rowline"/>
+<!-- 途徑乙 -->
+<circle cx="68" cy="152" r="5" class="light"/><text x="82" y="156" class="ts">經入口站台乙</text>
+<rect x="250" y="139" width="80" height="26" rx="13" class="badge"/><text x="290" y="157" text-anchor="middle" class="ts">正常</text>
+<use href="#p5-ico-link" x="408" y="140" width="24" height="24"/>
+<text x="420" y="182" text-anchor="middle" class="tiny">使用中</text>
+<line x1="60" y1="192" x2="450" y2="192" class="sep"/>
+<!-- 彙整列 -->
+<text x="60" y="214" class="tiny">彙整（依資料類別）</text>
+<circle cx="68" cy="238" r="5" class="light"/><text x="82" y="242" class="ts tb">C 的賠率</text>
+<rect x="250" y="225" width="80" height="26" rx="13" class="badge"/><text x="290" y="243" text-anchor="middle" class="ts">正常</text>
+<text x="420" y="243" text-anchor="middle" class="tiny">改經乙取得</text>
+<line x1="60" y1="262" x2="450" y2="262" class="rowline"/>
+<!-- 備援量 -->
+<text x="60" y="288" class="tiny">可用途徑</text>
+<rect x="150" y="279" width="120" height="10" rx="5" class="meter-bg"/><rect x="150" y="279" width="60" height="10" rx="5" class="meter-fill"/>
+<text x="280" y="288" class="tiny">1／2　只減少備援，不算中斷</text>
+<line x1="60" y1="306" x2="450" y2="306" class="rowline"/>
+<!-- 說明 -->
+<circle cx="64" cy="330" r="3" class="dot"/><text x="74" y="334" class="tiny">一條途徑失效時，改由其他途徑取得同一來源的資料。</text>
+<circle cx="64" cy="356" r="3" class="dot"/><text x="74" y="360" class="tiny">C 的賠率、賽果都照常；C 仍為正常（R03-06）。</text>
+<circle cx="64" cy="382" r="3" class="dot"/><text x="74" y="386" class="tiny">甲的維護在後台顯示原因與持續時間（R03-14）。</text>
+<use href="#p5-ico-wrench" x="60" y="404" width="20" height="20"/><text x="88" y="418" class="tiny tw">入口站台甲：維護中，持續 00:42</text>
+<text x="60" y="450" class="tiny">示意：後台只顯示，不推播。</text>
+
+<!-- ===== 右卡：來源不互為備援 ===== -->
+<rect x="490" y="20" width="430" height="450" rx="8" class="card"/>
+<rect x="490" y="20" width="430" height="40" rx="8" class="hdr"/>
+<text x="510" y="46" class="tb">來源與途徑：來源 C、D</text>
+<rect x="780" y="29" width="120" height="22" rx="11" class="badgew"/><text x="840" y="44" text-anchor="middle" class="tiny tw">✕ 來源不互為備援</text>
+<text x="510" y="84" class="tiny">途徑</text>
+<text x="740" y="84" text-anchor="middle" class="tiny">狀態</text>
+<text x="870" y="84" text-anchor="middle" class="tiny">連線</text>
+<line x1="510" y1="92" x2="900" y2="92" class="rowline"/>
+<circle cx="518" cy="112" r="5" class="lightw"/><text x="532" y="116" class="ts">C 經入口站台甲</text>
+<rect x="700" y="99" width="80" height="26" rx="13" class="badgew"/><text x="740" y="117" text-anchor="middle" class="ts tw">失效</text>
+<use href="#p5-ico-link-off" x="858" y="100" width="24" height="24"/>
+<line x1="510" y1="132" x2="900" y2="132" class="rowline"/>
+<circle cx="518" cy="152" r="5" class="lightw"/><text x="532" y="156" class="ts">C 經入口站台乙</text>
+<rect x="700" y="139" width="80" height="26" rx="13" class="badgew"/><text x="740" y="157" text-anchor="middle" class="ts tw">失效</text>
+<use href="#p5-ico-link-off" x="858" y="140" width="24" height="24"/>
+<line x1="510" y1="172" x2="900" y2="172" class="sep"/>
+<text x="510" y="194" class="tiny">彙整（依資料類別）</text>
+<circle cx="518" cy="218" r="5" class="lightw"/><text x="532" y="222" class="ts tb tw">C 的賠率</text>
+<rect x="700" y="205" width="80" height="26" rx="13" class="badgew"/><text x="740" y="223" text-anchor="middle" class="ts tw">中斷</text>
+<text x="870" y="223" text-anchor="middle" class="tiny tw">所有途徑都失效</text>
+<line x1="510" y1="242" x2="900" y2="242" class="rowline"/>
+<!-- D -->
+<circle cx="518" cy="266" r="5" class="light"/><text x="532" y="270" class="ts">來源 D</text>
+<text x="532" y="288" class="tiny">也提供同一場比賽</text>
+<rect x="700" y="253" width="80" height="26" rx="13" class="badge"/><text x="740" y="271" text-anchor="middle" class="ts">正常</text>
+<use href="#p5-ico-ban" x="858" y="254" width="24" height="24"/>
+<rect x="700" y="292" width="200" height="24" rx="12" class="badgew"/><text x="800" y="309" text-anchor="middle" class="ts tw">✕ 不以 D 的資料頂替 C</text>
+<line x1="510" y1="330" x2="900" y2="330" class="rowline"/>
+<circle cx="514" cy="354" r="3" class="dotw"/><text x="524" y="358" class="tiny">所有取得途徑都失效，該類資料才算中斷（R03-06）。</text>
+<circle cx="514" cy="380" r="3" class="dotw"/><text x="524" y="384" class="tiny">一個來源中斷時，不以另一個來源的資料頂替。</text>
+<circle cx="514" cy="406" r="3" class="dotw"/><text x="524" y="410" class="tiny">只有 C 提供賠率的盤口如何處理，見 04 的 R04-16。</text>
+<circle cx="514" cy="432" r="3" class="dotw"/><text x="524" y="436" class="tiny">多個來源如何一起使用，由 04 決定。</text>
+<!-- 底註與圖例 -->
+<text x="480" y="500" text-anchor="middle" class="ts">途徑之間互為備援，來源之間不互為備援；多個來源如何一起使用，由 04 的來源角色決定。</text>
+<text x="60" y="536" class="tiny">狀態燈：</text>
+<circle cx="120" cy="532" r="5" class="light"/><text x="130" y="536" class="tiny">正常</text>
+<circle cx="180" cy="532" r="5" class="lightw"/><text x="190" y="536" class="tiny">維護／失效／中斷</text>
+<circle cx="310" cy="532" r="5" class="lighto"/><text x="320" y="536" class="tiny">停用</text>
+</svg>
+<p class="cap"><b>圖說</b>：一條途徑失效改由其他途徑取得同一來源；一個來源中斷時不以另一個來源頂替（R03-02）。</p>
+</section>
+</div>
+</div>
+</body>
+</html>

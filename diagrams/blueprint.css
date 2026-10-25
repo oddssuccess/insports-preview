@@ -1,0 +1,68 @@
+/* 概念圖共用樣式：工程藍圖（墨黑高對比：近黑底、亮青線、橘色警示）
+   顏色、線寬、字級與間距都用變數，方便日後微調 */
+:root {
+  --bg: #070b14; --panel: #0f1626; --ink: #f4f8ff; --soft: #b9c7dc; --line: #4fd1ff; --warn: #ff9f43;
+  --grid: rgba(79, 209, 255, .07); --grid-size: 32px;
+  --fig-bg: rgba(7, 11, 20, .7); --fig-border: rgba(79, 209, 255, .4); --disc-bg: rgba(15, 22, 38, .9);
+  --sep: rgba(79, 209, 255, .3); --panel-fill: rgba(15, 22, 38, .7); --panel-stroke: rgba(79, 209, 255, .45);
+  --tag-fill: rgba(79, 209, 255, .14); --tagw-fill: rgba(255, 159, 67, .14); --hl-fill: rgba(255, 159, 67, .2);
+  --node-w: 1.2; --line-w: 1.4;
+}
+
+/* 字體與間距（標準，2026-10-22 挑定） */
+:root {
+  --page-w: 1040px; --fs: 14px; --lh: 1.6; --h1: 24px; --h2: 18px; --cap-fs: 14px;
+  --fig-pad: 18px 20px 14px; --fig-gap: 36px; --cap-gap: 10px; --toc-gap: 2px; --h-track: .02em; --h2-weight: 700;
+  --font-body: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-head: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --font-cap: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+  --svg-fs: 14px; --svg-ts: 12px;
+}
+* { box-sizing: border-box; }
+body, .sheet {
+  margin: 0; color: var(--ink); background-color: var(--bg);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  font-size: var(--fs); line-height: var(--lh); font-family: var(--font-body);
+}
+.doc { max-width: var(--page-w); margin: 0 auto; padding: 32px 16px 80px; }
+h1 { font-size: var(--h1); margin: 0 0 6px; letter-spacing: var(--h-track); font-family: var(--font-head); }
+h2 { font-size: var(--h2); font-weight: var(--h2-weight); margin: 0 0 10px; color: var(--soft); letter-spacing: var(--h-track); font-family: var(--font-head); }
+a { color: var(--line); }
+.meta { color: var(--soft); margin: 0 0 14px; }
+.meta b { color: var(--ink); font-weight: 600; }
+.disclaimer { border: 1px solid var(--line); border-left: 4px solid var(--warn); background: var(--disc-bg); padding: 10px 14px; margin: 0 0 16px; }
+.toc { margin: 0 0 32px; padding: 0 0 0 20px; color: var(--soft); }
+.toc li { margin: var(--toc-gap) 0; }
+.fig { border: 1px solid var(--fig-border); background: var(--fig-bg); padding: var(--fig-pad); margin: 0 0 var(--fig-gap); }
+.fig svg { display: block; width: 100%; height: auto; }
+.cap { margin: var(--cap-gap) 0 0; color: var(--soft); border-top: 1px dashed var(--sep); padding-top: 8px; font-size: var(--cap-fs); font-family: var(--font-cap); }
+.cap b { color: var(--ink); }
+/* SVG 共用樣式 */
+svg text { fill: var(--ink); font-family: var(--font-body); font-size: var(--svg-fs); }
+svg .ts { font-size: var(--svg-ts); fill: var(--soft); }
+svg .tb { font-weight: 700; }
+svg .tw { fill: var(--warn); }
+svg .mono { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; }
+svg .node { fill: var(--panel); stroke: var(--line); stroke-width: var(--node-w); }
+svg .node2 { fill: none; stroke: var(--line); stroke-width: .6; opacity: .75; }
+svg .ghost { fill: none; stroke: var(--warn); stroke-width: 1.2; stroke-dasharray: 5 4; }
+svg .panel { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .ln { fill: none; stroke: var(--line); stroke-width: var(--line-w); }
+svg .dash { stroke-dasharray: 6 4; }
+svg .lnw { fill: none; stroke: var(--warn); stroke-width: var(--line-w); }
+svg .dot { fill: var(--line); }
+svg .dotw { fill: var(--warn); }
+svg .chip { fill: none; stroke: var(--soft); stroke-width: 1; }
+svg .chipw { fill: none; stroke: var(--warn); stroke-width: 1; }
+svg .sep { stroke: var(--sep); stroke-width: 1; }
+svg .tag { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1; }
+svg .tagw { fill: var(--tagw-fill); stroke: var(--warn); stroke-width: 1; }
+svg .hl { fill: var(--hl-fill); stroke: none; }
+svg .fillpanel { fill: var(--panel); }
+/* 箭頭：覆蓋 marker 內寫死的顏色，跟著主題走 */
+svg marker path { fill: var(--line); }
+svg marker[id$="w"] path { fill: var(--warn); }
+svg marker[id="arrs"], svg marker[id^="arrs-"] { }
+svg marker[id="arrs"] path, svg marker[id^="arrs-"] path { fill: var(--soft); }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }

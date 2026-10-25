@@ -1,0 +1,885 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 運動與玩法目錄：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+
+<h1>01 運動與玩法目錄：概念圖</h1>
+<p class="meta"><b>狀態</b>：草稿（示意，供挑選） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 01 的規則，不約束資料模型或架構；圖中的名稱、識別與數字都是範例。</p>
+<ol class="toc">
+  <li><a href="#fig-01-01">圖 01-01　目錄的層級：運動、競賽、賽事、參賽方、玩法</a></li>
+  <li><a href="#fig-01-02">圖 01-02　玩法的拆解：投注規則、時段、計分項目與其他參數</a></li>
+  <li><a href="#fig-01-03">圖 01-03　玩法、盤口線、投注項三層</a></li>
+  <li><a href="#fig-01-04">圖 01-04　四分之一盤與結算結果</a></li>
+  <li><a href="#fig-01-05">圖 01-05　足球的時段結構</a></li>
+  <li><a href="#fig-01-06">圖 01-06　時段與計分項目清單是白名單</a></li>
+  <li><a href="#fig-01-07">圖 01-07　賽前與滾球是同一個玩法；滾球的計分基準</a></li>
+  <li><a href="#fig-01-08">圖 01-08　主隊與客隊只是順序，以賽程來源為準</a></li>
+  <li><a href="#fig-01-09">圖 01-09　冠軍盤：參賽方名單、排名依據與並列</a></li>
+  <li><a href="#fig-01-10">圖 01-10　電子競技與虛擬運動的歸屬</a></li>
+  <li><a href="#fig-01-11">圖 01-11　運動的營運狀態</a></li>
+  <li><a href="#fig-01-12">圖 01-12　競賽與參賽方的屬性：誰能改什麼</a></li>
+  <li><a href="#fig-01-13">圖 01-13　開盤前的條件鏈</a></li>
+  <li><a href="#fig-01-14">圖 01-14　投注規則目錄的處置：獨立、併入、只計一隊、拆分</a></li>
+</ol>
+
+<!-- ============================================================ 圖 01-01 -->
+<section class="fig" id="fig-01-01">
+<h2>圖 01-01　目錄的層級：運動、競賽、賽事、參賽方、玩法</h2>
+<svg viewBox="0 0 960 580" width="100%" role="img" aria-label="目錄的層級">
+<!-- 運動 -->
+<g>
+  <rect x="40" y="30" width="200" height="56" rx="6" class="node"/><rect x="43" y="33" width="194" height="50" rx="4" class="node2"/>
+  <text x="140" y="52" text-anchor="middle" class="tb">運動</text><text x="140" y="74" text-anchor="middle" class="ts">足球</text>
+</g>
+<path d="M140,86 L140,118" class="ln" marker-end="url(#arr)"/>
+<!-- 競賽 -->
+<g>
+  <rect x="40" y="120" width="200" height="56" rx="6" class="node"/><rect x="43" y="123" width="194" height="50" rx="4" class="node2"/>
+  <text x="140" y="142" text-anchor="middle" class="tb">競賽</text><text x="140" y="164" text-anchor="middle" class="ts">英超</text>
+</g>
+<!-- 競賽 → 兩種賽事 -->
+<path d="M140,176 L140,198 L385,198 L385,218" class="ln" marker-end="url(#arr)"/>
+<path d="M140,198 L140,218" class="ln" marker-end="url(#arr)"/>
+<text x="268" y="192" text-anchor="middle" class="ts">賽事</text>
+<!-- 單場比賽 -->
+<g>
+  <rect x="40" y="220" width="200" height="56" rx="6" class="node"/><rect x="43" y="223" width="194" height="50" rx="4" class="node2"/>
+  <text x="140" y="242" text-anchor="middle" class="tb">單場比賽</text><text x="140" y="264" text-anchor="middle" class="ts">甲隊 對 乙隊</text>
+</g>
+<!-- 冠軍盤賽事 -->
+<g>
+  <rect x="270" y="220" width="230" height="56" rx="6" class="node"/><rect x="273" y="223" width="224" height="50" rx="4" class="node2"/>
+  <text x="385" y="242" text-anchor="middle" class="tb">冠軍盤賽事</text><text x="385" y="264" text-anchor="middle" class="ts">英超 2026/27 冠軍</text>
+</g>
+<!-- 參賽方 -->
+<path d="M500,248 L548,248" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="550" y="220" width="120" height="56" rx="6" class="node"/><rect x="553" y="223" width="114" height="50" rx="4" class="node2"/>
+  <text x="610" y="242" text-anchor="middle" class="tb">參賽方</text><text x="610" y="264" text-anchor="middle" class="ts">甲隊</text>
+</g>
+<g>
+  <rect x="690" y="220" width="120" height="56" rx="6" class="node"/><rect x="693" y="223" width="114" height="50" rx="4" class="node2"/>
+  <text x="750" y="242" text-anchor="middle" class="tb">參賽方</text><text x="750" y="264" text-anchor="middle" class="ts">乙隊</text>
+</g>
+<text x="840" y="252" class="ts">……</text>
+<text x="700" y="300" text-anchor="middle" class="ts">參加賽事的隊伍或個人；單場比賽有兩個，冠軍盤來自名單</text>
+<!-- 玩法 → 盤口線 → 投注項 -->
+<path d="M140,276 L140,318" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="40" y="320" width="200" height="56" rx="6" class="node"/><rect x="43" y="323" width="194" height="50" rx="4" class="node2"/>
+  <text x="140" y="342" text-anchor="middle" class="tb">玩法</text><text x="140" y="364" text-anchor="middle" class="ts">常規時間讓分</text>
+</g>
+<path d="M140,376 L140,408" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="40" y="410" width="200" height="56" rx="6" class="node"/><rect x="43" y="413" width="194" height="50" rx="4" class="node2"/>
+  <text x="140" y="432" text-anchor="middle" class="tb">盤口線</text><text x="140" y="454" text-anchor="middle" class="ts mono">-0.75</text>
+</g>
+<path d="M140,466 L140,488 L90,488 L90,498" class="ln" marker-end="url(#arr)"/>
+<path d="M140,488 L190,488 L190,498" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="40" y="500" width="95" height="50" rx="6" class="node"/><rect x="43" y="503" width="89" height="44" rx="4" class="node2"/>
+  <text x="87" y="520" text-anchor="middle" class="tb">投注項</text><text x="87" y="540" text-anchor="middle" class="ts mono">主隊 -0.75</text>
+</g>
+<g>
+  <rect x="145" y="500" width="95" height="50" rx="6" class="node"/><rect x="148" y="503" width="89" height="44" rx="4" class="node2"/>
+  <text x="192" y="520" text-anchor="middle" class="tb">投注項</text><text x="192" y="540" text-anchor="middle" class="ts mono">客隊 +0.75</text>
+</g>
+<!-- 註記 -->
+<rect x="300" y="330" width="630" height="220" rx="6" class="panel"/>
+<text x="320" y="360" class="tb">註記</text>
+<circle cx="326" cy="392" r="4" class="dot"/><text x="340" y="397" class="ts">電子競技的每個遊戲各為一個運動（R01-24）</text>
+<circle cx="326" cy="428" r="4" class="dot"/><text x="340" y="433" class="ts">競賽跨賽季、跨屆沿用，不依賽季或屆次分開；可標記為虛擬（R01-27）</text>
+<circle cx="326" cy="464" r="4" class="dot"/><text x="340" y="469" class="ts">冠軍盤賽事以一個賽季或一屆，或其中的階段、分組為對象</text>
+<circle cx="326" cy="500" r="4" class="dot"/><text x="340" y="505" class="ts">不新增其他賽事種類：兩回合對戰的晉級掛在次回合的單場比賽上（R01-12）</text>
+</svg>
+<p class="cap"><b>圖說</b>：賽事分為單場比賽與冠軍盤賽事，玩法在賽事上開出盤口線，盤口線下是投注項（R01-12）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-02 -->
+<section class="fig" id="fig-01-02">
+<h2>圖 01-02　玩法的拆解：投注規則、時段、計分項目與其他參數</h2>
+<svg viewBox="0 0 960 470" width="100%" role="img" aria-label="玩法的拆解">
+<!-- 玩法方塊 -->
+<rect x="40" y="30" width="220" height="250" rx="6" class="node"/><rect x="43" y="33" width="214" height="244" rx="4" class="node2"/>
+<text x="150" y="56" text-anchor="middle" class="tb">玩法</text>
+<line x1="52" y1="66" x2="248" y2="66" class="sep"/>
+<text x="60" y="92">運動</text>
+<line x1="52" y1="102" x2="248" y2="102" class="sep"/>
+<text x="60" y="128">投注規則</text>
+<line x1="52" y1="138" x2="248" y2="138" class="sep"/>
+<text x="60" y="164">時段</text>
+<line x1="52" y1="174" x2="248" y2="174" class="sep"/>
+<text x="60" y="200">計分項目</text>
+<line x1="52" y1="210" x2="248" y2="210" class="sep"/>
+<text x="60" y="236">其他參數</text>
+<text x="60" y="256" class="ts">只計哪一隊、指定的球隊、條件、<tspan x="60" dy="1.3em">階段、排名依據</tspan></text>
+<!-- 實例表 -->
+<text x="300" y="56" class="ts">運動</text><text x="350" y="56" class="ts">投注規則</text><text x="425" y="56" class="ts">時段</text><text x="505" y="56" class="ts">計分項目</text><text x="575" y="56" class="ts">計哪一方</text><text x="690" y="56" class="ts">玩法</text>
+<line x1="290" y1="66" x2="930" y2="66" class="sep"/>
+<text x="300" y="96">足球</text><text x="350" y="96">讓分</text><text x="425" y="96">常規時間</text><text x="505" y="96">進球</text><text x="575" y="96">雙方</text>
+<path d="M645,91 L678,91" class="ln" marker-end="url(#arr)"/><text x="690" y="96" class="tb">足球常規時間讓分</text>
+<line x1="290" y1="110" x2="930" y2="110" class="sep"/>
+<text x="300" y="140">足球</text><text x="350" y="140">讓分</text><text x="425" y="140">上半場</text><text x="505" y="140">角球</text><text x="575" y="140">雙方</text>
+<path d="M645,135 L678,135" class="ln" marker-end="url(#arr)"/><text x="690" y="140" class="tb">足球上半場角球讓分</text>
+<line x1="290" y1="154" x2="930" y2="154" class="sep"/>
+<text x="300" y="184">籃球</text><text x="350" y="184">讓分</text><text x="425" y="184">第 1 節</text><text x="505" y="184">得分</text><text x="575" y="184">雙方</text>
+<path d="M645,179 L678,179" class="ln" marker-end="url(#arr)"/><text x="690" y="184" class="tb">籃球第 1 節得分讓分</text>
+<line x1="290" y1="198" x2="930" y2="198" class="sep"/>
+<text x="300" y="214" class="ts">同一個投注規則「讓分」用於不同的運動、時段與計分項目（R01-03）</text>
+<line x1="290" y1="226" x2="930" y2="226" class="sep"/>
+<text x="300" y="256">足球</text><text x="350" y="256">大小</text><text x="425" y="256">常規時間</text><text x="505" y="256">進球</text><text x="575" y="256">只計主隊</text>
+<path d="M645,251 L678,251" class="ln" marker-end="url(#arr)"/><text x="690" y="256" class="tb">足球常規時間主隊進球大小</text>
+<text x="690" y="274" class="ts">只計哪一隊（R01-16）</text>
+<line x1="290" y1="284" x2="930" y2="284" class="sep"/>
+<!-- 公式 -->
+<rect x="40" y="306" width="100" height="30" rx="4" class="tag"/><text x="90" y="326" text-anchor="middle">投注規則</text>
+<text x="152" y="326" class="tb">+</text>
+<rect x="170" y="306" width="80" height="30" rx="4" class="tag"/><text x="210" y="326" text-anchor="middle">時段</text>
+<text x="262" y="326" class="tb">+</text>
+<rect x="280" y="306" width="100" height="30" rx="4" class="tag"/><text x="330" y="326" text-anchor="middle">計分項目</text>
+<text x="392" y="326" class="tb">+</text>
+<rect x="410" y="306" width="100" height="30" rx="4" class="tag"/><text x="460" y="326" text-anchor="middle">其他參數</text>
+<text x="524" y="326" class="tb">=</text>
+<rect x="544" y="306" width="90" height="30" rx="4" class="node"/><text x="589" y="326" text-anchor="middle" class="tb">玩法</text>
+<text x="650" y="326" class="ts">（屬於某個運動）</text>
+<!-- 註記 -->
+<circle cx="52" cy="372" r="4" class="dotw"/><text x="66" y="377">結算只依這些定義，不依玩法名稱的文字（R01-01）</text>
+<circle cx="52" cy="402" r="4" class="dotw"/><text x="66" y="407">新增這類玩法只需設定（R01-08）</text>
+<circle cx="52" cy="432" r="4" class="dotw"/><text x="66" y="437">比較雙方的投注規則（讓分、獨贏）不能只計一隊（R01-16）</text>
+</svg>
+<p class="cap"><b>圖說</b>：一個玩法 = 投注規則 + 時段 + 計分項目 + 其他參數；同一投注規則可用於不同運動、時段與計分項目（R01-01、R01-03）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-03 -->
+<section class="fig" id="fig-01-03">
+<h2>圖 01-03　玩法、盤口線、投注項三層</h2>
+<svg viewBox="0 0 960 480" width="100%" role="img" aria-label="玩法、盤口線、投注項三層">
+<!-- 層標籤 -->
+<text x="40" y="70" class="ts">玩法</text>
+<text x="40" y="176" class="ts">盤口線</text>
+<text x="40" y="272" class="ts">投注項</text>
+<line x1="40" y1="120" x2="930" y2="120" class="sep"/>
+<line x1="40" y1="220" x2="930" y2="220" class="sep"/>
+<!-- 左欄：讓分 -->
+<g>
+  <rect x="95" y="36" width="270" height="56" rx="6" class="node"/><rect x="98" y="39" width="264" height="50" rx="4" class="node2"/>
+  <text x="230" y="58" text-anchor="middle" class="tb">足球常規時間讓分</text><text x="230" y="80" text-anchor="middle" class="ts">同時開多條盤口線（R01-04）</text>
+</g>
+<path d="M230,92 L230,112 L140,112 L140,148" class="ln" marker-end="url(#arr)"/>
+<path d="M230,112 L230,148" class="ln" marker-end="url(#arr)"/>
+<path d="M230,112 L320,112 L320,148" class="ln" marker-end="url(#arr)"/>
+<rect x="102" y="150" width="76" height="36" rx="6" class="node"/><text x="140" y="174" text-anchor="middle" class="mono">-0.5</text>
+<rect x="192" y="150" width="76" height="36" rx="6" class="node"/><text x="230" y="174" text-anchor="middle" class="mono">-0.75</text>
+<rect x="282" y="150" width="76" height="36" rx="6" class="node"/><text x="320" y="174" text-anchor="middle" class="mono">-1</text>
+<path d="M140,186 L140,244" class="ln" marker-end="url(#arrs)"/><path d="M230,186 L230,244" class="ln" marker-end="url(#arrs)"/><path d="M320,186 L320,244" class="ln" marker-end="url(#arrs)"/>
+<rect x="110" y="246" width="60" height="26" rx="4" class="chip"/><text x="140" y="264" text-anchor="middle" class="ts">主隊</text>
+<rect x="110" y="282" width="60" height="26" rx="4" class="chip"/><text x="140" y="300" text-anchor="middle" class="ts">客隊</text>
+<rect x="200" y="246" width="60" height="26" rx="4" class="chip"/><text x="230" y="264" text-anchor="middle" class="ts">主隊</text>
+<rect x="200" y="282" width="60" height="26" rx="4" class="chip"/><text x="230" y="300" text-anchor="middle" class="ts">客隊</text>
+<rect x="290" y="246" width="60" height="26" rx="4" class="chip"/><text x="320" y="264" text-anchor="middle" class="ts">主隊</text>
+<rect x="290" y="282" width="60" height="26" rx="4" class="chip"/><text x="320" y="300" text-anchor="middle" class="ts">客隊</text>
+<!-- 中欄：第 N 個角球 -->
+<g>
+  <rect x="380" y="36" width="270" height="56" rx="6" class="node"/><rect x="383" y="39" width="264" height="50" rx="4" class="node2"/>
+  <text x="515" y="58" text-anchor="middle" class="tb">足球常規時間第 N 個角球</text><text x="515" y="80" text-anchor="middle" class="ts">事件球隊；N 是盤口線</text>
+</g>
+<path d="M515,92 L515,112 L450,112 L450,148" class="ln" marker-end="url(#arr)"/>
+<path d="M515,112 L580,112 L580,148" class="ln" marker-end="url(#arr)"/>
+<rect x="405" y="150" width="90" height="36" rx="6" class="node"/><text x="450" y="174" text-anchor="middle">第 5 個</text>
+<rect x="535" y="150" width="90" height="36" rx="6" class="node"/><text x="580" y="174" text-anchor="middle">第 7 個</text>
+<path d="M450,186 L450,244" class="ln" marker-end="url(#arrs)"/><path d="M580,186 L580,244" class="ln" marker-end="url(#arrs)"/>
+<rect x="420" y="246" width="60" height="26" rx="4" class="chip"/><text x="450" y="264" text-anchor="middle" class="ts">主隊</text>
+<rect x="420" y="282" width="60" height="26" rx="4" class="chip"/><text x="450" y="300" text-anchor="middle" class="ts">客隊</text>
+<rect x="420" y="318" width="60" height="26" rx="4" class="chip"/><text x="450" y="336" text-anchor="middle" class="ts">無</text>
+<rect x="550" y="246" width="60" height="26" rx="4" class="chip"/><text x="580" y="264" text-anchor="middle" class="ts">主隊</text>
+<rect x="550" y="282" width="60" height="26" rx="4" class="chip"/><text x="580" y="300" text-anchor="middle" class="ts">客隊</text>
+<rect x="550" y="318" width="60" height="26" rx="4" class="chip"/><text x="580" y="336" text-anchor="middle" class="ts">無</text>
+<!-- 右欄：波膽 -->
+<g>
+  <rect x="665" y="36" width="270" height="56" rx="6" class="node"/><rect x="668" y="39" width="264" height="50" rx="4" class="node2"/>
+  <text x="800" y="58" text-anchor="middle" class="tb">足球常規時間波膽</text><text x="800" y="80" text-anchor="middle" class="ts">投注項逐一列舉（R01-07）</text>
+</g>
+<path d="M800,92 L800,148" class="ln dash"/>
+<path d="M800,186 L800,244" class="ln dash" marker-end="url(#arrs)"/>
+<rect x="705" y="150" width="190" height="36" rx="6" class="ghost"/><text x="800" y="174" text-anchor="middle" class="ts tw">沒有盤口線參數</text>
+<rect x="672" y="246" width="50" height="26" rx="4" class="chip"/><text x="697" y="264" text-anchor="middle" class="ts mono">0:0</text>
+<rect x="730" y="246" width="50" height="26" rx="4" class="chip"/><text x="755" y="264" text-anchor="middle" class="ts mono">1:0</text>
+<rect x="788" y="246" width="50" height="26" rx="4" class="chip"/><text x="813" y="264" text-anchor="middle" class="ts mono">2:1</text>
+<rect x="846" y="246" width="50" height="26" rx="4" class="chip"/><text x="871" y="264" text-anchor="middle" class="ts mono">……</text>
+<rect x="745" y="282" width="110" height="26" rx="4" class="tagw"/><text x="800" y="300" text-anchor="middle" class="ts tw">其他比分</text>
+<text x="800" y="330" text-anchor="middle" class="ts">數量依開盤而定；「其他比分」的<tspan x="800" dy="1.3em">涵蓋範圍於開盤時定義，之後不變（R01-21）</tspan></text>
+<!-- 註記 -->
+<line x1="40" y1="380" x2="930" y2="380" class="sep"/>
+<circle cx="52" cy="412" r="4" class="dotw"/><text x="66" y="417">每個投注項都必須能被單獨識別與結算（R01-06），以支援投注項層級結算、同場過關與提前兌現。</text>
+<circle cx="52" cy="442" r="4" class="dotw"/><text x="66" y="447">只計下注之後計分的滾球玩法，結算另須依下注當時的計分（R01-19）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：同一玩法可同時開多條盤口線；逐一列舉的玩法投注項數量依開盤而定（R01-04、R01-07）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-04 -->
+<section class="fig" id="fig-01-04">
+<h2>圖 01-04　四分之一盤與結算結果</h2>
+<svg viewBox="0 0 960 470" width="100%" role="img" aria-label="四分之一盤與結算結果">
+<text x="40" y="30" class="ts">注單</text>
+<g>
+  <rect x="40" y="60" width="220" height="60" rx="6" class="node"/><rect x="43" y="63" width="214" height="54" rx="4" class="node2"/>
+  <text x="150" y="84" text-anchor="middle" class="tb">主隊 -0.75，注額 100</text><text x="150" y="106" text-anchor="middle" class="ts">四分之一盤（R01-05）</text>
+</g>
+<text x="300" y="30" class="ts">拆成兩半，分別以相鄰的盤口線結算</text>
+<path d="M260,90 L300,90 L300,56 L338,56" class="ln" marker-end="url(#arr)"/>
+<path d="M300,90 L300,124 L338,124" class="ln" marker-end="url(#arr)"/>
+<rect x="340" y="36" width="160" height="40" rx="6" class="node"/><text x="420" y="61" text-anchor="middle" class="mono">-0.5，注額 50</text>
+<rect x="340" y="104" width="160" height="40" rx="6" class="node"/><text x="420" y="129" text-anchor="middle" class="mono">-1，注額 50</text>
+<text x="600" y="30" class="ts">賽果：常規時間 2:1（主隊淨勝 1）</text>
+<path d="M500,56 L538,56" class="ln" marker-end="url(#arr)"/>
+<path d="M500,124 L538,124" class="ln" marker-end="url(#arr)"/>
+<rect x="540" y="36" width="120" height="40" rx="4" class="tag"/><text x="600" y="61" text-anchor="middle">-0.5 → 贏</text>
+<rect x="540" y="104" width="120" height="40" rx="4" class="tag"/><text x="600" y="129" text-anchor="middle">-1 → 走盤</text>
+<path d="M660,56 L700,56 L700,90 L738,90" class="ln" marker-end="url(#arr)"/>
+<path d="M660,124 L700,124 L700,90" class="ln"/>
+<g>
+  <rect x="740" y="62" width="190" height="56" rx="6" class="node"/><rect x="743" y="65" width="184" height="50" rx="4" class="node2"/>
+  <text x="835" y="84" text-anchor="middle" class="tb">整張為「贏半」</text><text x="835" y="106" text-anchor="middle" class="ts">一半贏、一半退還注額</text>
+</g>
+<!-- 五種結算結果 -->
+<line x1="40" y1="170" x2="930" y2="170" class="sep"/>
+<text x="40" y="200" class="ts">讓分的結算結果只適用於有效注單（R01-23）</text>
+<rect x="40" y="220" width="130" height="44" rx="22" class="node"/><text x="105" y="248" text-anchor="middle" class="tb">贏</text>
+<rect x="190" y="220" width="130" height="44" rx="22" class="node"/><text x="255" y="248" text-anchor="middle" class="tb">贏半</text>
+<rect x="340" y="220" width="130" height="44" rx="22" class="node"/><text x="405" y="248" text-anchor="middle" class="tb">走盤</text>
+<rect x="490" y="220" width="130" height="44" rx="22" class="node"/><text x="555" y="248" text-anchor="middle" class="tb">輸半</text>
+<rect x="640" y="220" width="130" height="44" rx="22" class="node"/><text x="705" y="248" text-anchor="middle" class="tb">輸</text>
+<text x="405" y="290" text-anchor="middle" class="ts">走盤＝平手，退還注額；<tspan x="405" dy="1.3em">是投注規則的結算結果</tspan></text>
+<text x="40" y="336" class="ts">投注規則內因條件未分出勝負而退還注額的情況，例如讓分平手、兩個半場計分相同，一律稱為走盤。</text>
+<!-- 作廢對照 -->
+<rect x="40" y="366" width="890" height="76" rx="6" class="ghost"/>
+<text x="60" y="394" class="tb tw">作廢（Void）不是結算結果</text>
+<text x="60" y="420" class="ts">因賽事取消或中止等原因退還注額，屬於作廢，不是投注規則的結算結果，由 07 定義（R01-23）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：四分之一盤注額各半，分別以相鄰的盤口線結算；走盤是結算結果，作廢不是（R01-05、R01-23）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-05 -->
+<section class="fig" id="fig-01-05">
+<h2>圖 01-05　足球的時段結構</h2>
+<svg viewBox="0 60 960 440" width="100%" role="img" aria-label="足球的時段結構">
+<!-- 全場 -->
+<path d="M60,120 L60,132 M60,126 L880,126 M880,120 L880,132" class="ln"/>
+<text x="470" y="112" text-anchor="middle" class="tb">全場 = 整場比賽，含加時賽與點球大戰；兩回合的對戰另含首回合（R01-12）</text>
+<!-- 第二層 -->
+<path d="M60,180 L60,192 M60,186 L380,186 M380,180 L380,192" class="ln"/>
+<text x="220" y="172" text-anchor="middle">常規時間</text>
+<text x="220" y="156" text-anchor="middle" class="ts">含傷停補時，不含加時賽與點球大戰</text>
+<path d="M400,180 L400,192 M400,186 L640,186 M640,180 L640,192" class="ln"/>
+<text x="520" y="172" text-anchor="middle">加時賽</text>
+<text x="520" y="156" text-anchor="middle" class="ts">不含點球大戰</text>
+<path d="M660,180 L660,192 M660,186 L880,186 M880,180 L880,192" class="ln"/>
+<text x="770" y="172" text-anchor="middle">點球大戰（含一球決勝）</text>
+<!-- 第三層 -->
+<path d="M660,232 L660,244 M660,238 L800,238 M800,232 L800,244" class="ln"/>
+<text x="730" y="226" text-anchor="middle" class="ts">點球大戰（前 10 球）</text>
+<!-- 時間軸方塊 -->
+<rect x="60" y="270" width="160" height="48" rx="4" class="node"/><text x="140" y="299" text-anchor="middle" class="tb">上半場</text>
+<rect x="220" y="270" width="160" height="48" rx="4" class="node"/><text x="300" y="299" text-anchor="middle" class="tb">下半場</text>
+<rect x="400" y="270" width="120" height="48" rx="4" class="node"/><text x="460" y="299" text-anchor="middle" class="tb">加時賽上半場</text>
+<rect x="520" y="270" width="120" height="48" rx="4" class="node"/><text x="580" y="299" text-anchor="middle" class="tb">加時賽下半場</text>
+<rect x="660" y="270" width="220" height="48" rx="4" class="node"/>
+<line x1="800" y1="270" x2="800" y2="318" class="sep"/>
+<text x="730" y="299" text-anchor="middle" class="tb">前 10 球</text><text x="840" y="299" text-anchor="middle" class="tb">一球決勝</text>
+<text x="770" y="336" text-anchor="middle" class="ts">點球大戰</text>
+<text x="60" y="336" class="ts">0′</text><text x="214" y="336" text-anchor="middle" class="ts">45′</text><text x="380" y="336" text-anchor="middle" class="ts">90′</text>
+<!-- 時間區間 -->
+<rect x="113" y="346" width="54" height="22" rx="3" class="hl"/>
+<path d="M113,352 L113,362 M113,357 L167,357 M167,352 L167,362" class="lnw"/>
+<text x="140" y="386" text-anchor="middle" class="ts tw">第 15 至 30 分鐘</text>
+<text x="200" y="406" class="ts">時間區間（15 分鐘）：常規時間內的指定區間，例如第 15 至 30 分鐘；開盤前須符合 R01-11</text>
+<!-- 註記 -->
+<line x1="40" y1="426" x2="930" y2="426" class="sep"/>
+<circle cx="52" cy="452" r="4" class="dotw"/><text x="66" y="457">足球讓分開在常規時間，不是全場；籃球的全場含加時賽（結算範例：主隊 -3.5，加時後 110:105 → 贏）。</text>
+<circle cx="52" cy="480" r="4" class="dotw"/><text x="66" y="485">不是每種運動都有相同的時段，例如網球沒有上半場；各運動的時段依 R01-17 定義。</text>
+</svg>
+<p class="cap"><b>圖說</b>：全場指整場賽事含加時賽與點球大戰；常規時間等不含這些階段的時段由各運動在時段清單中定義（R01-17）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-06 -->
+<section class="fig" id="fig-01-06">
+<h2>圖 01-06　時段與計分項目清單是白名單</h2>
+<svg viewBox="0 0 960 520" width="100%" role="img" aria-label="時段與計分項目清單是白名單">
+<!-- 左：清單 -->
+<rect x="40" y="30" width="480" height="300" rx="6" class="panel"/>
+<text x="60" y="58" class="tb">InSports 維護的足球清單（示意）</text>
+<text x="60" y="78" class="ts">時段 × 計分項目；打勾的格子可以開玩法（R01-17）</text>
+<text x="300" y="112" text-anchor="middle" class="ts">進球</text>
+<text x="390" y="112" text-anchor="middle" class="ts">角球</text>
+<text x="470" y="112" text-anchor="middle" class="ts">罰牌積分</text>
+<line x1="60" y1="122" x2="500" y2="122" class="sep"/>
+<text x="70" y="156">常規時間</text>
+<text x="300" y="158" text-anchor="middle">✓</text><text x="390" y="158" text-anchor="middle">✓</text><text x="470" y="158" text-anchor="middle">✓</text>
+<line x1="60" y1="172" x2="500" y2="172" class="sep"/>
+<text x="70" y="206">上半場</text>
+<text x="300" y="208" text-anchor="middle">✓</text><text x="390" y="208" text-anchor="middle">✓</text><text x="470" y="208" text-anchor="middle" class="ts">—</text>
+<line x1="60" y1="222" x2="500" y2="222" class="sep"/>
+<text x="70" y="256">下半場</text>
+<text x="300" y="258" text-anchor="middle">✓</text><text x="390" y="258" text-anchor="middle">✓</text><text x="470" y="258" text-anchor="middle" class="ts">—</text>
+<line x1="60" y1="272" x2="500" y2="272" class="sep"/>
+<line x1="250" y1="98" x2="250" y2="272" class="sep"/>
+<text x="60" y="300" class="ts">玩法只能使用清單內的時段與計分項目；清單由 InSports 決定。</text>
+<!-- 右：來源的新項目 -->
+<g>
+  <rect x="580" y="40" width="350" height="76" rx="6" class="node"/><rect x="583" y="43" width="344" height="70" rx="4" class="node2"/>
+  <text x="755" y="66" text-anchor="middle" class="tb">資料來源出現清單沒有的項目</text>
+  <text x="755" y="90" text-anchor="middle" class="ts">例如時段「第 3 節」、計分項目「射正」</text>
+</g>
+<path d="M755,116 L755,166" class="lnw dash" marker-end="url(#arrw)"/>
+<rect x="580" y="170" width="350" height="76" rx="6" class="ghost"/>
+<text x="755" y="200" text-anchor="middle" class="tb tw">✕ 不自動擴充清單</text>
+<text x="755" y="226" text-anchor="middle" class="ts">該資料不使用（見 04 的 R04-03）</text>
+<path d="M580,208 L540,208 L540,200" class="lnw dash"/>
+<text x="755" y="290" text-anchor="middle" class="ts">要新增時段或計分項目，由 InSports 更新清單，<tspan x="755" dy="1.3em">不因來源而自動改變（R01-17）</tspan></text>
+<!-- 下：同一個詞 -->
+<rect x="40" y="360" width="890" height="130" rx="6" class="panel"/>
+<text x="60" y="390" class="tb">同一個詞不得同時當作計分項目與時段</text>
+<rect x="60" y="410" width="80" height="26" rx="4" class="tag"/><text x="100" y="428" text-anchor="middle" class="ts">時段</text>
+<text x="152" y="428">點球大戰：其中計算的是進球</text>
+<rect x="60" y="450" width="80" height="26" rx="4" class="tag"/><text x="100" y="468" text-anchor="middle" class="ts">計分項目</text>
+<text x="152" y="468">判給點球：常規時間內判給的點球數，不是點球大戰</text>
+</svg>
+<p class="cap"><b>圖說</b>：玩法只能使用清單內的時段與計分項目；清單不因來源出現新項目而自動擴充（R01-17）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-07 -->
+<section class="fig" id="fig-01-07">
+<h2>圖 01-07　賽前與滾球是同一個玩法；滾球的計分基準</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="賽前與滾球是同一個玩法；滾球的計分基準">
+<!-- 上：同一玩法 -->
+<rect x="40" y="30" width="890" height="150" rx="6" class="panel"/>
+<text x="60" y="58" class="tb">同一條盤口線「常規時間讓分 0」：賽前與滾球是同一個玩法的不同狀態（R01-09）</text>
+<g>
+  <rect x="60" y="80" width="210" height="56" rx="6" class="node"/><rect x="63" y="83" width="204" height="50" rx="4" class="node2"/>
+  <text x="165" y="102" text-anchor="middle" class="tb">賽前注單</text><text x="165" y="124" text-anchor="middle" class="ts">下注當時的計分為 0:0</text>
+</g>
+<g>
+  <rect x="300" y="80" width="230" height="56" rx="6" class="node"/><rect x="303" y="83" width="224" height="50" rx="4" class="node2"/>
+  <text x="415" y="102" text-anchor="middle" class="tb">滾球注單</text><text x="415" y="124" text-anchor="middle" class="ts">比分 1:0 時下注</text>
+</g>
+<path d="M270,108 L298,108" class="ln" marker-end="url(#arr)"/>
+<path d="M530,108 L598,108" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="600" y="80" width="310" height="56" rx="6" class="node"/><rect x="603" y="83" width="304" height="50" rx="4" class="node2"/>
+  <text x="755" y="102" text-anchor="middle" class="tb">依同一個賽果結算</text><text x="755" y="124" text-anchor="middle" class="ts">並合併計算曝險（見 09）</text>
+</g>
+<text x="60" y="164" class="ts">利潤率、限額與延遲等設定可以依狀態不同（見 05、06）。</text>
+<!-- 左下：預設 -->
+<rect x="40" y="210" width="430" height="300" rx="6" class="panel"/>
+<text x="60" y="238" class="tb">預設：計入下注之前的計分（R01-10）</text>
+<rect x="60" y="256" width="150" height="30" rx="4" class="tag"/><text x="135" y="276" text-anchor="middle" class="ts">比分 1:0 時下注</text>
+<path d="M210,271 L238,271" class="ln" marker-end="url(#arrs)"/>
+<rect x="240" y="256" width="210" height="30" rx="4" class="tag"/><text x="345" y="276" text-anchor="middle" class="ts">常規時間大小 2.5，大</text>
+<path d="M135,286 L135,310" class="ln" marker-end="url(#arrs)"/>
+<rect x="60" y="312" width="150" height="30" rx="4" class="tag"/><text x="135" y="332" text-anchor="middle" class="ts">賽果 2:1</text>
+<path d="M210,327 L238,327" class="ln" marker-end="url(#arrs)"/>
+<rect x="240" y="312" width="210" height="30" rx="4" class="tag"/><text x="345" y="332" text-anchor="middle" class="ts">總數 3（計入下注前的 1 球）</text>
+<path d="M345,342 L345,366" class="ln" marker-end="url(#arrs)"/>
+<rect x="290" y="368" width="110" height="34" rx="17" class="node"/><text x="345" y="390" text-anchor="middle" class="tb">贏</text>
+<text x="60" y="436" class="ts">這三個運動的大小類、獨贏（三項）與三項讓分，</text>
+<text x="60" y="456" class="ts">以及籃球等其他運動的所有玩法，都計入下注之前的計分。</text>
+<text x="60" y="484" class="ts">未列為例外的一律計入，不得由其他玩法、運動或計分項目類推。</text>
+<!-- 右下：例外 -->
+<rect x="490" y="210" width="440" height="300" rx="6" class="panel"/>
+<text x="510" y="238" class="tb tw">例外：只計下注之後的計分（R01-10、R01-19）</text>
+<text x="510" y="260" class="ts">只有足球、五人制足球、沙灘足球的進球讓分類：</text>
+<text x="510" y="278" class="ts">讓分、比分框讓分、亞洲獨贏（三項）；在規則文件逐一列出</text>
+<rect x="510" y="292" width="150" height="30" rx="4" class="tagw"/><text x="585" y="312" text-anchor="middle" class="ts">比分 1:0 時下注</text>
+<path d="M660,307 L688,307" class="lnw" marker-end="url(#arrw)"/>
+<rect x="690" y="292" width="220" height="30" rx="4" class="tagw"/><text x="800" y="312" text-anchor="middle" class="ts">常規時間讓分 0，主隊</text>
+<path d="M585,322 L585,346" class="lnw" marker-end="url(#arrw)"/>
+<rect x="510" y="348" width="150" height="30" rx="4" class="tagw"/><text x="585" y="368" text-anchor="middle" class="ts">賽果 2:1</text>
+<path d="M660,363 L688,363" class="lnw" marker-end="url(#arrw)"/>
+<rect x="690" y="348" width="220" height="30" rx="4" class="tagw"/><text x="800" y="368" text-anchor="middle" class="ts">下注後 1:1（只計下注後進球）</text>
+<path d="M800,378 L800,402" class="lnw" marker-end="url(#arrw)"/>
+<rect x="745" y="404" width="110" height="34" rx="17" class="node"/><text x="800" y="426" text-anchor="middle" class="tb">走盤</text>
+<text x="510" y="470" class="ts">注單必須記錄下注當時的計分；結算依「盤口線 + 下注當時的計分」</text>
+<text x="510" y="490" class="ts">賽前注單的計分為雙方 0，因此賽前與滾球仍是同一個玩法。</text>
+<!-- 底 -->
+<circle cx="52" cy="548" r="4" class="dotw"/><text x="66" y="553">這三個運動的滾球讓分一律採用只計下注之後的做法，不另立計入下注之前計分的滾球讓分玩法（R01-10）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：賽前與滾球是同一玩法的不同狀態；滾球預設計入下注前的計分，只計下注後的例外必須逐一列出（R01-09、R01-10）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-08 -->
+<section class="fig" id="fig-01-08">
+<h2>圖 01-08　主隊與客隊只是順序，以賽程來源為準</h2>
+<svg viewBox="0 0 960 480" width="100%" role="img" aria-label="主隊與客隊只是順序">
+<!-- 左：賽程來源甲 -->
+<rect x="40" y="30" width="280" height="300" rx="6" class="panel"/>
+<text x="60" y="58" class="tb">賽程來源甲建立賽事</text>
+<g>
+  <rect x="60" y="80" width="240" height="56" rx="6" class="node"/><rect x="63" y="83" width="234" height="50" rx="4" class="node2"/>
+  <text x="180" y="102" text-anchor="middle" class="tb">賽程來源甲</text><text x="180" y="124" text-anchor="middle" class="ts">列「乙隊 對 甲隊」</text>
+</g>
+<path d="M180,136 L180,166" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="60" y="170" width="240" height="72" rx="6" class="node"/><rect x="63" y="173" width="234" height="66" rx="4" class="node2"/>
+  <text x="180" y="194" text-anchor="middle" class="tb">統一紀錄</text>
+  <text x="180" y="216" text-anchor="middle" class="ts">主隊＝乙隊（列在前面的參賽方）</text>
+  <text x="180" y="232" text-anchor="middle" class="ts">客隊＝甲隊</text>
+</g>
+<text x="180" y="276" text-anchor="middle" class="ts">主隊只表示順序，與實際主場無關，</text>
+<text x="180" y="294" text-anchor="middle" class="ts">中立場地亦同（R01-25）</text>
+<!-- 中：來源乙 -->
+<rect x="340" y="30" width="280" height="300" rx="6" class="panel"/>
+<text x="360" y="58" class="tb">其他來源的順序相反</text>
+<g>
+  <rect x="360" y="80" width="240" height="56" rx="6" class="node"/><rect x="363" y="83" width="234" height="50" rx="4" class="node2"/>
+  <text x="480" y="102" text-anchor="middle" class="tb">來源乙</text><text x="480" y="124" text-anchor="middle" class="ts">列「甲隊 對 乙隊」</text>
+</g>
+<path d="M480,136 L480,166" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="360" y="170" width="240" height="72" rx="6" class="node"/><rect x="363" y="173" width="234" height="66" rx="4" class="node2"/>
+  <text x="480" y="194" text-anchor="middle" class="tb">由 04 在對應時處理</text>
+  <text x="480" y="216" text-anchor="middle" class="ts">記錄來源乙為反向（R04-08）</text>
+  <text x="480" y="232" text-anchor="middle" class="ts">投注項與讓分依方向對調後對應</text>
+</g>
+<text x="480" y="276" text-anchor="middle" class="ts">賽事建立後順序不得變更；</text>
+<text x="480" y="294" text-anchor="middle" class="ts">不得在建立後對調主客</text>
+<!-- 右：若對調 -->
+<rect x="640" y="30" width="290" height="300" rx="6" class="ghost"/>
+<text x="660" y="58" class="tb tw">✕ 若在建立後對調主客</text>
+<text x="785" y="100" text-anchor="middle" class="ts">所有主隊、客隊投注項</text>
+<text x="785" y="118" text-anchor="middle" class="ts">與讓分數都會翻轉</text>
+<rect x="665" y="140" width="110" height="34" rx="4" class="chip"/><text x="720" y="162" text-anchor="middle" class="ts mono">主隊 -0.5</text>
+<path d="M780,157 L808,157" class="lnw" marker-end="url(#arrw)"/>
+<rect x="810" y="140" width="110" height="34" rx="4" class="chipw"/><text x="865" y="162" text-anchor="middle" class="ts mono tw">客隊 -0.5</text>
+<rect x="665" y="190" width="110" height="34" rx="4" class="chip"/><text x="720" y="212" text-anchor="middle" class="ts">主隊獨贏</text>
+<path d="M780,207 L808,207" class="lnw" marker-end="url(#arrw)"/>
+<rect x="810" y="190" width="110" height="34" rx="4" class="chipw"/><text x="865" y="212" text-anchor="middle" class="ts tw">客隊獨贏</text>
+<text x="785" y="262" text-anchor="middle" class="ts">已成立的注單意義全部改變，</text>
+<text x="785" y="280" text-anchor="middle" class="ts">因此順序以賽程來源為準且不再變更</text>
+<!-- 範例 -->
+<line x1="40" y1="356" x2="930" y2="356" class="sep"/>
+<text x="40" y="384" class="ts">結算範例（R01-25）</text>
+<rect x="40" y="398" width="300" height="40" rx="4" class="tag"/><text x="190" y="423" text-anchor="middle" class="ts">注單：常規時間讓分，主隊 -0.5</text>
+<rect x="360" y="398" width="300" height="40" rx="4" class="tag"/><text x="510" y="423" text-anchor="middle" class="ts">賽果：甲隊 1:0（主隊乙隊 0:1）</text>
+<path d="M660,418 L698,418" class="ln" marker-end="url(#arr)"/>
+<rect x="700" y="398" width="100" height="40" rx="20" class="node"/><text x="750" y="423" text-anchor="middle" class="tb">輸</text>
+<text x="40" y="464" class="ts">主隊以賽程來源為準，因此為乙隊；乙隊 0:1 落後，主隊 -0.5 為輸。</text>
+</svg>
+<p class="cap"><b>圖說</b>：主隊為賽事中列在前面的參賽方，順序以賽程來源為準，建立後不得變更（R01-25）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-09 -->
+<section class="fig" id="fig-01-09">
+<h2>圖 01-09　冠軍盤：參賽方名單、排名依據與並列</h2>
+<svg viewBox="0 0 960 540" width="100%" role="img" aria-label="冠軍盤的名單、排名依據與並列">
+<!-- 上：名單 -->
+<g>
+  <rect x="40" y="36" width="240" height="60" rx="6" class="node"/><rect x="43" y="39" width="234" height="54" rx="4" class="node2"/>
+  <text x="160" y="60" text-anchor="middle" class="tb">冠軍盤賽事</text><text x="160" y="82" text-anchor="middle" class="ts">英超 2026/27 冠軍</text>
+</g>
+<path d="M280,66 L318,66" class="ln" marker-end="url(#arr)"/>
+<rect x="320" y="30" width="310" height="72" rx="6" class="panel"/>
+<text x="475" y="54" text-anchor="middle" class="tb">投注項來自參賽方名單（R01-13）</text>
+<rect x="335" y="64" width="56" height="24" rx="4" class="chip"/><text x="363" y="81" text-anchor="middle" class="ts">甲隊</text>
+<rect x="399" y="64" width="56" height="24" rx="4" class="chip"/><text x="427" y="81" text-anchor="middle" class="ts">乙隊</text>
+<rect x="463" y="64" width="56" height="24" rx="4" class="chip"/><text x="491" y="81" text-anchor="middle" class="ts">丙隊</text>
+<text x="545" y="81" class="ts">……共 20 隊</text>
+<path d="M630,66 L668,66" class="lnw dash" marker-end="url(#arrw)"/>
+<rect x="670" y="30" width="260" height="72" rx="6" class="ghost"/>
+<text x="800" y="54" text-anchor="middle" class="tb tw">開盤後名單可能變動</text>
+<text x="800" y="74" text-anchor="middle" class="ts">參賽方退出、被淘汰、新增；</text>
+<text x="800" y="90" text-anchor="middle" class="ts">已成立注單的處理見 07</text>
+<!-- 決策 -->
+<path d="M160,96 L160,150" class="ln" marker-end="url(#arr)"/>
+<g>
+  <rect x="40" y="152" width="240" height="56" rx="28" class="node"/><rect x="43" y="155" width="234" height="50" rx="25" class="node2"/>
+  <text x="160" y="176" text-anchor="middle" class="tb">投注規則定義的排名依據？</text><text x="160" y="196" text-anchor="middle" class="ts">R01-22</text>
+</g>
+<path d="M160,208 L160,232 L255,232 L255,258" class="ln" marker-end="url(#arr)"/>
+<path d="M160,232 L710,232 L710,258" class="ln" marker-end="url(#arr)"/>
+<!-- 左：官方名次 -->
+<rect x="40" y="260" width="430" height="230" rx="6" class="panel"/>
+<text x="60" y="290" class="tb">依官方名次</text><text x="160" y="290" class="ts">例：聯賽冠軍</text>
+<circle cx="66" cy="320" r="4" class="dot"/><text x="80" y="325" class="ts">以官方結果為準，例如聯賽冠軍依官方積分榜</text>
+<circle cx="66" cy="350" r="4" class="dot"/><text x="80" y="355" class="ts">同積分依聯賽的排名規則（例如淨勝球）決定，不算並列</text>
+<circle cx="66" cy="380" r="4" class="dot"/><text x="80" y="385" class="ts">只有官方宣布兩名以上參賽方並列時，才是並列（R01-14）</text>
+<circle cx="66" cy="410" r="4" class="dot"/><text x="80" y="415" class="ts">此時玩法不需要計分項目</text>
+<rect x="60" y="440" width="390" height="32" rx="4" class="tag"/>
+<text x="255" y="461" text-anchor="middle" class="ts">結果：單一第一名，依官方名次結算</text>
+<!-- 右：數量 -->
+<rect x="490" y="260" width="440" height="230" rx="6" class="panel"/>
+<text x="510" y="290" class="tb">依計分項目的數量</text><text x="640" y="290" class="ts">例：射手王，只計進球數</text>
+<circle cx="516" cy="320" r="4" class="dot"/><text x="530" y="325" class="ts">計分項目是玩法定義的一部分（例如進球）</text>
+<circle cx="516" cy="350" r="4" class="dot"/><text x="530" y="355" class="ts">數量相同即為並列（Dead Heat）（R01-14、R01-22）</text>
+<circle cx="516" cy="380" r="4" class="dot"/><text x="530" y="385" class="ts">投注規則必須定義並列時的結算方式（見 07）</text>
+<rect x="510" y="440" width="400" height="32" rx="4" class="tagw"/>
+<text x="710" y="461" text-anchor="middle" class="ts tw">結果：可能兩名以上並列，依 07 的並列方式結算</text>
+<text x="40" y="520" class="ts">冠軍盤的時段即為該競賽、階段或分組（R01-12）；以球員為參賽方的冠軍盤（例如射手王）也在範圍內。</text>
+</svg>
+<p class="cap"><b>圖說</b>：冠軍盤的投注項來自會變動的參賽方名單；排名依據決定何時算並列（R01-13、R01-14、R01-22）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-10 -->
+<section class="fig" id="fig-01-10">
+<h2>圖 01-10　電子競技與虛擬運動的歸屬</h2>
+<svg viewBox="0 0 960 580" width="100%" role="img" aria-label="電子競技與虛擬運動的歸屬">
+<!-- 左：電子競技 -->
+<rect x="40" y="30" width="430" height="400" rx="6" class="panel"/>
+<text x="60" y="58" class="tb">電子競技是分類，不是運動（R01-24）</text>
+<rect x="60" y="76" width="390" height="34" rx="4" class="tag"/><text x="255" y="98" text-anchor="middle">分類：電子競技</text>
+<text x="60" y="134" class="ts">其下每個遊戲各為一個運動，與足球、籃球同一層級：</text>
+<path d="M255,110 L255,142" class="ln" marker-end="url(#arr)"/>
+<rect x="60" y="146" width="120" height="40" rx="6" class="node"/><text x="120" y="171" text-anchor="middle">英雄聯盟</text>
+<rect x="190" y="146" width="130" height="40" rx="6" class="node"/><text x="255" y="166" text-anchor="middle" class="ts">絕對武力</text><text x="255" y="180" text-anchor="middle" class="ts">（Counter-Strike）</text>
+<rect x="330" y="146" width="120" height="40" rx="6" class="node"/><text x="390" y="171" text-anchor="middle">Dota 2</text>
+<rect x="60" y="196" width="190" height="40" rx="6" class="node"/><text x="155" y="221" text-anchor="middle">電競足球（E-Soccer）</text>
+<rect x="260" y="196" width="190" height="40" rx="6" class="node"/><text x="355" y="221" text-anchor="middle">NBA 2K</text>
+<text x="60" y="262" class="ts">每個運動屬於正常運動或電子競技其中一類；清單依遊戲定義</text>
+<rect x="60" y="284" width="390" height="50" rx="6" class="ghost"/>
+<text x="255" y="305" text-anchor="middle" class="tb tw">✕ 不得設立涵蓋所有遊戲的「電子競技」運動</text>
+<text x="255" y="324" text-anchor="middle" class="ts">以免誤以為各遊戲共用同一個運動</text>
+<text x="60" y="362" class="ts">以真實運動為題材、由真人操作的遊戲（電競足球、NBA 2K）</text>
+<text x="60" y="380" class="ts">屬於電子競技，各為一個運動，不屬於足球、籃球，也不是虛擬運動。</text>
+<text x="60" y="408" class="ts">來源以「電子競技」為運動時，必須對應到該遊戲的運動（見 04）。</text>
+<!-- 右：虛擬運動 -->
+<rect x="490" y="30" width="440" height="400" rx="6" class="panel"/>
+<text x="510" y="58" class="tb">虛擬運動屬於對應的真實運動（R01-27）</text>
+<g>
+  <rect x="510" y="76" width="400" height="40" rx="6" class="node"/><rect x="513" y="79" width="394" height="34" rx="4" class="node2"/>
+  <text x="710" y="101" text-anchor="middle" class="tb">運動：足球</text>
+</g>
+<path d="M710,116 L710,136 L610,136 L610,152" class="ln" marker-end="url(#arr)"/>
+<path d="M710,136 L810,136 L810,152" class="ln" marker-end="url(#arr)"/>
+<rect x="510" y="154" width="190" height="56" rx="6" class="node"/>
+<text x="605" y="176" text-anchor="middle" class="tb">競賽：英超</text><text x="605" y="198" text-anchor="middle" class="ts">真實</text>
+<rect x="720" y="154" width="190" height="56" rx="6" class="node"/>
+<text x="815" y="176" text-anchor="middle" class="tb">競賽：虛擬足球聯賽</text><text x="815" y="198" text-anchor="middle" class="ts tw">標記為虛擬，由 RNG 產生</text>
+<path d="M815,210 L815,232" class="ln" marker-end="url(#arrs)"/>
+<rect x="720" y="234" width="190" height="56" rx="6" class="node"/>
+<text x="815" y="256" text-anchor="middle" class="ts">其下的賽事與參賽方</text><text x="815" y="276" text-anchor="middle" class="ts tw">都是虛擬</text>
+<circle cx="516" cy="246" r="4" class="dot"/><text x="530" y="251" class="ts">使用足球的投注規則、</text>
+<text x="530" y="268" class="ts">時段與計分項目</text>
+<circle cx="516" cy="292" r="4" class="dot"/><text x="530" y="297" class="ts">可以只開部分玩法</text>
+<circle cx="516" cy="322" r="4" class="dot"/><text x="530" y="327" class="ts">開賽前停止接受投注，</text>
+<text x="530" y="344" class="ts">沒有滾球</text>
+<text x="510" y="380" class="ts">虛擬足球不是另一個運動；虛擬籃球、虛擬網球等亦同。</text>
+<text x="510" y="400" class="ts">只納入有對應真實運動的虛擬運動。</text>
+<!-- 底 -->
+<circle cx="52" cy="462" r="4" class="dotw"/><text x="66" y="467">電競足球屬於電子競技，不是虛擬運動，也不屬於足球。</text>
+<circle cx="52" cy="494" r="4" class="dotw"/><text x="66" y="499">虛擬參賽方即使名稱與真實隊伍相同，也是不同的參賽方，不得與真實參賽方對應（見 04 的 R04-20）。</text>
+<circle cx="52" cy="526" r="4" class="dotw"/><text x="66" y="531">競賽是否為虛擬，在賽程來源建立競賽時依 InSports 設定的競賽名稱規則判定；之後不變，Ops 不能修改。</text>
+<circle cx="52" cy="558" r="4" class="dotw"/><text x="66" y="563">依虛擬與否區分的經銷商開關、過關限制與作廢條件，見 10、02、07。</text>
+</svg>
+<p class="cap"><b>圖說</b>：電子競技的每個遊戲各為一個運動；虛擬足球屬於足球，差別只在競賽與參賽方標記為虛擬（R01-24、R01-27）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-11 -->
+<section class="fig" id="fig-01-11">
+<h2>圖 01-11　運動的營運狀態</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="運動的營運狀態">
+<text x="40" y="36" class="ts">每個運動有一個營運狀態，由 Ops 在後台變更（R01-29）</text>
+<!-- 狀態 -->
+<g>
+  <rect x="60" y="80" width="220" height="50" rx="25" class="node"/><rect x="63" y="83" width="214" height="44" rx="22" class="node2"/>
+  <text x="170" y="110" text-anchor="middle" class="tb">正常（ACTIVE）</text>
+</g>
+<g>
+  <rect x="370" y="80" width="220" height="50" rx="25" class="node"/><rect x="373" y="83" width="214" height="44" rx="22" class="node2"/>
+  <text x="480" y="110" text-anchor="middle" class="tb">暫停（SUSPENDED）</text>
+</g>
+<g>
+  <rect x="680" y="80" width="250" height="50" rx="25" class="node"/><rect x="683" y="83" width="244" height="44" rx="22" class="node2"/>
+  <text x="805" y="110" text-anchor="middle" class="tb">不支援（DISCONTINUED）</text>
+</g>
+<path d="M282,105 L368,105" class="ln" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="325" y="96" text-anchor="middle" class="ts">Ops、經銷商</text>
+<path d="M592,105 L678,105" class="ln" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="635" y="96" text-anchor="middle" class="ts">Ops</text>
+<path d="M170,130 C170,180 805,180 805,132" class="ln" marker-start="url(#arr)" marker-end="url(#arr)"/>
+<text x="487" y="188" text-anchor="middle" class="ts">Ops</text>
+<text x="40" y="214" class="ts">Ops 可在三者間變更；經銷商只能在正常與暫停之間設定（見 10）。通常：暫停用於短期的風控原因，不支援用於長期不再支援的運動。</text>
+<!-- 影響表 -->
+<line x1="40" y1="236" x2="930" y2="236" class="sep"/>
+<text x="60" y="262" class="ts">影響</text>
+<text x="400" y="262" text-anchor="middle" class="ts">正常</text>
+<text x="610" y="262" text-anchor="middle" class="ts">暫停</text>
+<text x="825" y="262" text-anchor="middle" class="ts">不支援</text>
+<line x1="40" y1="272" x2="930" y2="272" class="sep"/>
+<text x="60" y="302">建立賽程</text>
+<text x="400" y="302" text-anchor="middle">✓</text>
+<text x="610" y="302" text-anchor="middle">✓ 照常建立</text>
+<text x="825" y="302" text-anchor="middle" class="tw">✕ 不再建立</text>
+<line x1="40" y1="318" x2="930" y2="318" class="sep"/>
+<text x="60" y="348">產生賠率</text>
+<text x="400" y="348" text-anchor="middle">✓</text>
+<text x="610" y="348" text-anchor="middle" class="tw">✕ 不產生</text>
+<text x="825" y="348" text-anchor="middle" class="tw">✕</text>
+<line x1="40" y1="364" x2="930" y2="364" class="sep"/>
+<text x="60" y="390">接受新注單</text>
+<text x="60" y="408" class="ts">賽前與滾球</text>
+<text x="400" y="394" text-anchor="middle">✓</text>
+<text x="610" y="388" text-anchor="middle" class="tw">✕ 不接受</text>
+<text x="610" y="406" text-anchor="middle" class="ts">進行中的滾球賽事亦同</text>
+<text x="825" y="388" text-anchor="middle" class="tw">✕</text>
+<text x="825" y="406" text-anchor="middle" class="ts">玩家不能對該運動的任何賽事投注</text>
+<line x1="40" y1="420" x2="930" y2="420" class="sep"/>
+<text x="60" y="450">已成立注單結算</text>
+<text x="400" y="450" text-anchor="middle">✓</text>
+<text x="610" y="450" text-anchor="middle">✓ 照常結算</text>
+<text x="825" y="450" text-anchor="middle">✓ 照常結算</text>
+<line x1="40" y1="466" x2="930" y2="466" class="sep"/>
+<line x1="300" y1="246" x2="300" y2="466" class="sep"/>
+<line x1="500" y1="246" x2="500" y2="466" class="sep"/>
+<line x1="720" y1="246" x2="720" y2="466" class="sep"/>
+<!-- 註記 -->
+<circle cx="52" cy="504" r="4" class="dotw"/><text x="66" y="509">競賽與參賽方沒有營運狀態，後台也不能停用；不開盤只會是風控原因（見 09）。</text>
+<circle cx="52" cy="536" r="4" class="dotw"/><text x="66" y="541">每次變更都記錄操作者與時間。</text>
+<circle cx="52" cy="568" r="4" class="dotw"/><text x="66" y="573">狀態只有運動有；競賽、賽事、玩法與盤口的開關是經銷商設定（見 10），不是營運狀態。</text>
+</svg>
+<p class="cap"><b>圖說</b>：暫停仍建立賽程但不產生賠率、不接受新注單；不支援連賽程都停止；已成立注單都照常結算（R01-29）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-12 -->
+<section class="fig" id="fig-01-12">
+<h2>圖 01-12　競賽與參賽方的屬性：誰能改什麼</h2>
+<svg viewBox="0 0 960 740" width="100%" role="img" aria-label="競賽與參賽方的屬性責任矩陣">
+<text x="40" y="34" class="ts">第 6 節各層設定；運動、競賽與參賽方的名稱、屬性、等級、排序與圖示（R01-28 至 R01-33）</text>
+<!-- 表頭 -->
+<text x="50" y="66" class="ts">項目</text>
+<text x="365" y="66" text-anchor="middle" class="tb">InSports 固定</text>
+<text x="595" y="66" text-anchor="middle" class="tb">Ops 可設定</text>
+<text x="820" y="66" text-anchor="middle" class="tb">經銷商可設定</text>
+<line x1="40" y1="78" x2="930" y2="78" class="sep"/>
+<!-- 列 1 基準名稱 -->
+<text x="50" y="104">基準名稱</text>
+<text x="260" y="100" class="ts">來自建立它的賽程來源<tspan x="260" dy="1.3em">（運動由 InSports 設定）</tspan></text>
+<text x="490" y="104" class="ts">後台不能修改</text>
+<text x="820" y="106" text-anchor="middle" class="tw">✕</text>
+<line x1="40" y1="128" x2="930" y2="128" class="sep"/>
+<!-- 列 2 各語言名稱 -->
+<text x="50" y="154">各語言名稱</text>
+<text x="365" y="156" text-anchor="middle" class="ts">—</text>
+<text x="490" y="150" class="ts">Ops 修改（含英文；<tspan x="490" dy="1.3em">基準名稱不等於英文名稱）</tspan></text>
+<text x="720" y="150" class="ts">經銷商自訂顯示名稱<tspan x="720" dy="1.3em">（見 10）</tspan></text>
+<line x1="40" y1="178" x2="930" y2="178" class="sep"/>
+<!-- 列 3 屬性 -->
+<text x="50" y="200">屬性</text>
+<text x="50" y="218" class="ts" font-size="10.5">國家／地區、性別、年齡層、組別、類型</text>
+<text x="260" y="204" class="ts">新建為「未定」（組別除外）</text>
+<text x="490" y="204" class="ts">Ops 修改</text>
+<text x="820" y="206" text-anchor="middle" class="tw">✕</text>
+<line x1="40" y1="228" x2="930" y2="228" class="sep"/>
+<!-- 列 4 屬性清單的值 -->
+<text x="50" y="254">屬性清單的值</text>
+<text x="260" y="254" class="ts">InSports 定義初始值</text>
+<text x="490" y="254" class="ts">Ops 維護</text>
+<text x="820" y="256" text-anchor="middle" class="tw">✕</text>
+<line x1="40" y1="278" x2="930" y2="278" class="sep"/>
+<!-- 列 5 等級 -->
+<text x="50" y="304">等級（1 至 10）</text>
+<text x="260" y="304" class="ts">新建為「未分級」</text>
+<text x="490" y="304" class="ts">Ops 設定</text>
+<text x="820" y="306" text-anchor="middle" class="tw">✕</text>
+<line x1="40" y1="328" x2="930" y2="328" class="sep"/>
+<!-- 列 6 排序號 -->
+<text x="50" y="354">排序號</text>
+<text x="260" y="350" class="ts">運動的初始排序<tspan x="260" dy="1.3em">由 InSports 決定</tspan></text>
+<text x="490" y="354" class="ts">Ops 調整</text>
+<text x="720" y="350" class="ts">可變更，<tspan x="720" dy="1.3em">也可重置回系統排序</tspan></text>
+<line x1="40" y1="378" x2="930" y2="378" class="sep"/>
+<!-- 列 7 圖示 -->
+<text x="50" y="404">圖示</text>
+<text x="260" y="404" class="ts">系統預設圖示</text>
+<text x="490" y="404" class="ts">Ops 上傳或更換</text>
+<text x="720" y="404" class="ts">經銷商預設圖示</text>
+<line x1="40" y1="428" x2="930" y2="428" class="sep"/>
+<!-- 列 8 運動的營運狀態 -->
+<text x="50" y="454">運動的營運狀態</text>
+<text x="365" y="456" text-anchor="middle" class="ts">—</text>
+<text x="490" y="454" class="ts">正常、暫停、不支援</text>
+<text x="720" y="454" class="ts">只能正常或暫停</text>
+<line x1="40" y1="478" x2="930" y2="478" class="sep"/>
+<!-- 列 9 投注規則、玩法與投注項 -->
+<text x="50" y="500">投注規則、玩法</text>
+<text x="50" y="518">與投注項的定義</text>
+<text x="260" y="508" class="ts">InSports 固定</text>
+<text x="595" y="510" text-anchor="middle" class="tw">✕</text>
+<text x="720" y="504" class="ts tw">✕<tspan class="ts" x="736" dy="0">（不能自訂顯示名稱）</tspan></text>
+<line x1="40" y1="528" x2="930" y2="528" class="sep"/>
+<!-- 直線 -->
+<line x1="250" y1="50" x2="250" y2="528" class="sep"/>
+<line x1="480" y1="50" x2="480" y2="528" class="sep"/>
+<line x1="710" y1="50" x2="710" y2="528" class="sep"/>
+<!-- 註記 -->
+<circle cx="52" cy="566" r="4" class="dotw"/><text x="66" y="571">等級只影響玩法設定的模板、風控監控級別與報表分類，不影響顯示的先後；顯示只依排序號（R01-28、R01-32）。</text>
+<circle cx="52" cy="598" r="4" class="dotw"/><text x="66" y="603">某個語言沒有名稱時，顯示基準名稱；支援哪些語言見 10（R01-30）。</text>
+<circle cx="52" cy="630" r="4" class="dotw"/><text x="66" y="635">年齡層的清單依運動而定；個人類型的參賽方沒有年齡層；組別沒有填寫表示沒有組別（R01-31）。</text>
+<circle cx="52" cy="662" r="4" class="dotw"/><text x="66" y="667">沒有圖示時：經銷商有設定預設圖示時用經銷商的，否則用 InSports 的系統預設圖示（R01-33）。</text>
+<circle cx="52" cy="694" r="4" class="dotw"/><text x="66" y="699">經銷商另可設定競賽、賽事、玩法與盤口的開關，以及虛擬運動整體的開關（見 10）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：目錄的定義由 InSports 固定，名稱、屬性、等級與排序由 Ops 維護，經銷商只能在排序、營運狀態與顯示名稱上調整（第 6 節）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-13 -->
+<section class="fig" id="fig-01-13">
+<h2>圖 01-13　開盤前的條件鏈</h2>
+<svg viewBox="0 0 960 660" width="100%" role="img" aria-label="開盤前的條件鏈">
+<!-- 閘門 1 -->
+<g>
+  <rect x="60" y="30" width="560" height="80" rx="6" class="node"/><rect x="63" y="33" width="554" height="74" rx="4" class="node2"/>
+  <text x="80" y="56" class="tb">1　玩法在該運動的清單內</text>
+  <text x="80" y="80" class="ts">時段與計分項目都在清單內（R01-17）</text>
+</g>
+<path d="M340,110 L340,128" class="ln" marker-end="url(#arr)"/><text x="352" y="124" class="ts">通過</text>
+<!-- 閘門 2 -->
+<g>
+  <rect x="60" y="130" width="560" height="80" rx="6" class="node"/><rect x="63" y="133" width="554" height="74" rx="4" class="node2"/>
+  <text x="80" y="156" class="tb">2　玩法需要的賽果能取得（R01-18）</text>
+  <text x="80" y="178" class="ts">不只最終計數，有些另需計分的先後順序或發生時間（落後反勝、第 N 個進球、時間區間）</text>
+  <text x="80" y="196" class="ts">由 Ops 人工判斷，系統不自動判定</text>
+</g>
+<path d="M340,210 L340,228" class="ln" marker-end="url(#arr)"/><text x="352" y="224" class="ts">通過</text>
+<!-- 閘門 3 -->
+<g>
+  <rect x="60" y="230" width="560" height="80" rx="6" class="node"/><rect x="63" y="233" width="554" height="74" rx="4" class="node2"/>
+  <text x="80" y="256" class="tb">3　時間區間與指定事件的玩法已定義結算規則（R01-11）</text>
+  <text x="80" y="280" class="ts">區間邊界是否包含、傷停補時如何計算、哪些事件算數（寫在該運動的運動特有規則）</text>
+</g>
+<path d="M340,310 L340,328" class="ln" marker-end="url(#arr)"/><text x="352" y="324" class="ts">通過</text>
+<!-- 閘門 4 -->
+<g>
+  <rect x="60" y="330" width="560" height="80" rx="6" class="node"/><rect x="63" y="333" width="554" height="74" rx="4" class="node2"/>
+  <text x="80" y="356" class="tb">4　需分別判定多個時段的玩法，每個時段都符合 2（R01-20）</text>
+  <text x="80" y="380" class="ts">例如半全場需要上半場與常規時間兩個結果，兩個時段的賽果都要能取得</text>
+</g>
+<path d="M340,410 L340,428" class="ln" marker-end="url(#arr)"/><text x="352" y="424" class="ts">通過</text>
+<!-- 閘門 5 -->
+<g>
+  <rect x="60" y="430" width="560" height="80" rx="6" class="node"/><rect x="63" y="433" width="554" height="74" rx="4" class="node2"/>
+  <text x="80" y="456" class="tb">5　不可逆玩法須有來源提供所有投注項的賠率（R01-26）</text>
+  <text x="80" y="478" class="ts">只提供部分（例如角球讓分只有主隊）不得開盤；逐一列舉的投注項亦須全部取得賠率；</text>
+  <text x="80" y="496" class="ts">可逆玩法由 InSports 推導，不需要來源提供（05 的 R05-03）</text>
+</g>
+<path d="M340,510 L340,548" class="ln" marker-end="url(#arr)"/><text x="352" y="536" class="ts">通過</text>
+<!-- 可以開盤 -->
+<g>
+  <rect x="60" y="550" width="560" height="56" rx="28" class="node"/><rect x="63" y="553" width="554" height="50" rx="25" class="node2"/>
+  <text x="340" y="574" text-anchor="middle" class="tb">可以開盤</text>
+  <text x="340" y="594" text-anchor="middle" class="ts">是否開盤仍由 05 決定；各層開關見 10</text>
+</g>
+<!-- 右：不得開盤 -->
+<rect x="700" y="30" width="230" height="480" rx="6" class="ghost"/>
+<text x="815" y="262" text-anchor="middle" class="tb tw">✕ 不得開盤</text>
+<text x="815" y="284" text-anchor="middle" class="ts">任一閘門不通過</text>
+<path d="M620,70 L698,70" class="lnw dash" marker-end="url(#arrw)"/>
+<path d="M620,170 L698,170" class="lnw dash" marker-end="url(#arrw)"/>
+<path d="M620,270 L698,270" class="lnw dash" marker-end="url(#arrw)"/>
+<path d="M620,370 L698,370" class="lnw dash" marker-end="url(#arrw)"/>
+<path d="M620,470 L698,470" class="lnw dash" marker-end="url(#arrw)"/>
+<text x="660" y="62" text-anchor="middle" class="ts tw">否</text>
+<text x="660" y="162" text-anchor="middle" class="ts tw">否</text>
+<text x="660" y="262" text-anchor="middle" class="ts tw">否</text>
+<text x="660" y="362" text-anchor="middle" class="ts tw">否</text>
+<text x="660" y="462" text-anchor="middle" class="ts tw">否</text>
+<!-- 旁註 -->
+<text x="700" y="548" class="ts tw">判斷無法取得賽果時（R01-18）：</text>
+<text x="700" y="568" class="ts">Ops 先以人工指定賽果結算已成立</text>
+<text x="700" y="586" class="ts">注單（覆核依 04 的 R04-19），再在</text>
+<text x="700" y="604" class="ts">玩法設定關閉該玩法，直到 InSports</text>
+<text x="700" y="622" class="ts">確認系統可以取得為止。</text>
+<text x="60" y="640" class="ts">無法對應到目錄的來源玩法同樣不開盤（見 04 的 R04-11）；比賽中斷等使單場賽事取不到賽果，依 04 的賽事狀態與 07 的作廢處理。</text>
+</svg>
+<p class="cap"><b>圖說</b>：玩法要在清單內、賽果可取得、結算規則已定義、所有投注項有賠率，才能開盤（R01-11、R01-18、R01-26）。</p>
+</section>
+
+<!-- ============================================================ 圖 01-14 -->
+<section class="fig" id="fig-01-14">
+<h2>圖 01-14　投注規則目錄的處置：獨立、併入、只計一隊、拆分</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="投注規則目錄的處置">
+<text x="40" y="34" class="ts">市場上常見的玩法類型各由哪個投注規則提供（投注規則目錄的處置表）</text>
+<!-- 欄 1 獨立 -->
+<rect x="40" y="50" width="190" height="440" rx="6" class="panel"/>
+<g>
+  <rect x="55" y="64" width="160" height="44" rx="6" class="node"/><rect x="58" y="67" width="154" height="38" rx="4" class="node2"/>
+  <text x="135" y="91" text-anchor="middle" class="tb">獨立</text>
+</g>
+<text x="135" y="130" text-anchor="middle" class="ts">自成一個投注規則，</text>
+<text x="135" y="146" text-anchor="middle" class="ts">一份規則文件</text>
+<rect x="55" y="166" width="160" height="30" rx="4" class="tag"/><text x="135" y="186" text-anchor="middle" class="ts">讓分（HDP）</text>
+<rect x="55" y="206" width="160" height="30" rx="4" class="tag"/><text x="135" y="226" text-anchor="middle" class="ts">大小（OU）</text>
+<rect x="55" y="246" width="160" height="30" rx="4" class="tag"/><text x="135" y="266" text-anchor="middle" class="ts">獨贏（三項）（1X2）</text>
+<rect x="55" y="286" width="160" height="30" rx="4" class="tag"/><text x="135" y="306" text-anchor="middle" class="ts">波膽（CS）</text>
+<text x="135" y="340" text-anchor="middle" class="ts">……多數類型</text>
+<!-- 欄 2 併入 -->
+<rect x="245" y="50" width="225" height="440" rx="6" class="panel"/>
+<g>
+  <rect x="260" y="64" width="195" height="44" rx="6" class="node"/><rect x="263" y="67" width="189" height="38" rx="4" class="node2"/>
+  <text x="357" y="91" text-anchor="middle" class="tb">併入</text>
+</g>
+<text x="357" y="130" text-anchor="middle" class="ts">投注項與結算結果相同，</text>
+<text x="357" y="146" text-anchor="middle" class="ts">共用該類型的規則文件</text>
+<rect x="260" y="166" width="195" height="30" rx="4" class="chip"/><text x="357" y="186" text-anchor="middle" class="ts">平局退款</text>
+<path d="M357,196 L357,214" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="216" width="195" height="30" rx="4" class="tag"/><text x="357" y="236" text-anchor="middle" class="ts">讓分（HDP）</text>
+<text x="357" y="262" text-anchor="middle" class="ts">讓分數固定為 0</text>
+<rect x="260" y="282" width="195" height="30" rx="4" class="chip"/><text x="357" y="302" text-anchor="middle" class="ts">精確總數</text>
+<path d="M357,312 L357,330" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="332" width="195" height="30" rx="4" class="tag"/><text x="357" y="352" text-anchor="middle" class="ts">總數區間（RT）</text>
+<rect x="260" y="378" width="195" height="30" rx="4" class="chip"/><text x="357" y="398" text-anchor="middle" class="ts">最先／最後事件</text>
+<path d="M357,408 L357,426" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="428" width="195" height="30" rx="4" class="tag"/><text x="357" y="448" text-anchor="middle" class="ts">事件球隊（EVT）</text>
+<!-- 欄 3 只計一隊 -->
+<rect x="485" y="50" width="205" height="440" rx="6" class="panel"/>
+<g>
+  <rect x="500" y="64" width="175" height="44" rx="6" class="node"/><rect x="503" y="67" width="169" height="38" rx="4" class="node2"/>
+  <text x="587" y="91" text-anchor="middle" class="tb">只計一隊</text>
+</g>
+<text x="587" y="130" text-anchor="middle" class="ts">以「只計一隊」（R01-16）</text>
+<text x="587" y="146" text-anchor="middle" class="ts">區分主隊與客隊的版本</text>
+<rect x="500" y="166" width="175" height="30" rx="4" class="chip"/><text x="587" y="186" text-anchor="middle" class="ts">零失球（CLS）</text>
+<path d="M587,196 L587,214" class="ln" marker-end="url(#arrs)"/>
+<rect x="500" y="216" width="175" height="30" rx="4" class="tag"/><text x="587" y="236" text-anchor="middle" class="ts">主隊零失球</text>
+<rect x="500" y="252" width="175" height="30" rx="4" class="tag"/><text x="587" y="272" text-anchor="middle" class="ts">客隊零失球</text>
+<text x="587" y="302" text-anchor="middle" class="ts">兩個玩法，不另立投注項</text>
+<rect x="500" y="326" width="175" height="30" rx="4" class="chip"/><text x="587" y="346" text-anchor="middle" class="ts">首個事件所在半場（FEH）</text>
+<path d="M587,356 L587,374" class="ln" marker-end="url(#arrs)"/>
+<rect x="500" y="376" width="175" height="30" rx="4" class="tag"/><text x="587" y="396" text-anchor="middle" class="ts">只計主隊／只計客隊</text>
+<!-- 欄 4 拆分 -->
+<rect x="705" y="50" width="225" height="440" rx="6" class="panel"/>
+<g>
+  <rect x="720" y="64" width="195" height="44" rx="6" class="node"/><rect x="723" y="67" width="189" height="38" rx="4" class="node2"/>
+  <text x="817" y="91" text-anchor="middle" class="tb">拆分</text>
+</g>
+<text x="817" y="130" text-anchor="middle" class="ts">問題只寫在玩法名稱中，</text>
+<text x="817" y="146" text-anchor="middle" class="ts">依問題拆成數個投注規則</text>
+<rect x="720" y="166" width="195" height="30" rx="4" class="chip"/><text x="817" y="186" text-anchor="middle" class="ts">是否（Yes/No）</text>
+<path d="M817,196 L817,214" class="ln" marker-end="url(#arrs)"/>
+<rect x="720" y="216" width="195" height="26" rx="4" class="tag"/><text x="817" y="234" text-anchor="middle" class="ts">是否發生（OCC）</text>
+<rect x="720" y="248" width="195" height="26" rx="4" class="tag"/><text x="817" y="266" text-anchor="middle" class="ts">兩個半場（HLF）</text>
+<rect x="720" y="280" width="195" height="26" rx="4" class="tag"/><text x="817" y="298" text-anchor="middle" class="ts">進入加時賽或點球大戰（EXP）</text>
+<rect x="720" y="326" width="195" height="30" rx="4" class="chip"/><text x="817" y="346" text-anchor="middle" class="ts">哪一隊（Which Team）</text>
+<path d="M817,356 L817,374" class="ln" marker-end="url(#arrs)"/>
+<rect x="720" y="376" width="195" height="26" rx="4" class="tag"/><text x="817" y="394" text-anchor="middle" class="ts">晉級（QLF）</text>
+<rect x="720" y="408" width="195" height="26" rx="4" class="tag"/><text x="817" y="426" text-anchor="middle" class="ts">開球的球隊（KO）</text>
+<rect x="720" y="440" width="195" height="26" rx="4" class="tag"/><text x="817" y="458" text-anchor="middle" class="ts">事件球隊（EVT）</text>
+<!-- 註記 -->
+<circle cx="52" cy="526" r="4" class="dotw"/><text x="66" y="531">「併入」只代表共用同一個投注規則與規則文件，不是移出範圍；所有類型都在終局範圍內，每一個都必須能開盤。</text>
+<circle cx="52" cy="558" r="4" class="dotw"/><text x="66" y="563">「拆分」是因為問題只寫在玩法名稱中，不符 R01-01 與 R01-02。</text>
+</svg>
+<p class="cap"><b>圖說</b>：市場上常見的玩法類型各由一個投注規則提供；併入與拆分都不改變終局範圍（投注規則目錄）。</p>
+</section>
+
+</div>
+</body>
+</html>
