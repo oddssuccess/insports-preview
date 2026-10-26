@@ -614,7 +614,7 @@ svg .th { fill: var(--tag-fill); }
 <!-- 底部註記 -->
 <rect x="40" y="572" width="880" height="96" rx="8" class="panel"/>
 <circle cx="60" cy="596" r="4" class="dot"/><text x="74" y="601" class="ts">對應不代表開盤：是否開盤由 05 決定（03 的 R03-10）。</text>
-<circle cx="60" cy="620" r="4" class="dot"/><text x="74" y="625" class="ts">對應後判斷為輸出玩法（05 的 R05-04）：連接器不讀取（03 的 R03-10），也不列入未對應清單。</text>
+<circle cx="60" cy="620" r="4" class="dot"/><text x="74" y="625" class="ts">對應後判斷為衍生玩法（05 的 R05-04）：連接器不讀取（03 的 R03-10），也不列入未對應清單。</text>
 <circle cx="60" cy="644" r="4" class="dot"/><text x="74" y="649" class="ts">名稱或代碼相近不是依據；對應表由 InSports 維護，新增來源或來源新增玩法時更新。</text>
 </svg>
 <p class="cap"><b>圖說</b>：來源的玩法只有結算方式完全相同，或可確定換算時才對應；無法對應的不使用，列入未對應清單（R04-11）。</p>
@@ -638,17 +638,17 @@ svg .th { fill: var(--tag-fill); }
 <text x="390" y="141" class="tw">暫停：只有 A 提供</text>
 <line x1="60" y1="162" x2="600" y2="162" class="sep"/>
 <!-- 列 2 -->
-<text x="60" y="191" class="tb">常規時間讓分（可逆玩法）</text>
-<text x="60" y="211" class="ts">輸入玩法由 A、B 提供</text>
+<text x="60" y="191" class="tb">常規時間讓分</text>
+<text x="60" y="211" class="ts">模型定價玩法；錨定玩法由 A、B 提供</text>
 <rect x="260" y="182" width="44" height="26" rx="4" class="chipw"/><text x="282" y="200" text-anchor="middle" class="ts tw">A</text>
 <rect x="310" y="182" width="44" height="26" rx="4" class="chip"/><text x="332" y="200" text-anchor="middle" class="ts">B</text>
-<text x="390" y="199">以 B 的輸入玩法繼續推導</text>
+<text x="390" y="199">以 B 的錨定玩法繼續推導</text>
 <line x1="60" y1="228" x2="600" y2="228" class="sep"/>
-<text x="60" y="250" class="ts">另一場比賽：只有 A 提供輸入玩法</text>
+<text x="60" y="250" class="ts">另一場比賽：只有 A 提供錨定玩法</text>
 <line x1="60" y1="260" x2="600" y2="260" class="sep"/>
 <!-- 列 3 -->
-<text x="60" y="289" class="tb">所有可逆玩法</text>
-<text x="60" y="309" class="ts">依賴 A 的輸入玩法推導</text>
+<text x="60" y="289" class="tb">所有模型定價玩法</text>
+<text x="60" y="309" class="ts">依賴 A 的錨定玩法推導</text>
 <rect x="260" y="280" width="44" height="26" rx="4" class="chipw"/><text x="282" y="298" text-anchor="middle" class="ts tw">A</text>
 <text x="390" y="297" class="tw">全部暫停（05 的 R05-06）</text>
 <line x1="60" y1="326" x2="600" y2="326" class="sep"/>
@@ -673,9 +673,9 @@ svg .th { fill: var(--tag-fill); }
 <!-- 底部註記 -->
 <line x1="40" y1="424" x2="920" y2="424" class="sep"/>
 <circle cx="50" cy="450" r="4" class="dot"/><text x="64" y="455" class="ts">多個來源提供的盤口以其餘來源繼續（見 05）；來源恢復正常後才重新開放。</text>
-<circle cx="50" cy="478" r="4" class="dot"/><text x="64" y="483" class="ts">可逆玩法不逐一盤口判斷，而是看推導所需的輸入玩法是否仍有其他來源提供。</text>
+<circle cx="50" cy="478" r="4" class="dot"/><text x="64" y="483" class="ts">模型定價玩法不逐一盤口判斷，而是看推導所需的錨定玩法是否仍有其他來源提供。</text>
 </svg>
-<p class="cap"><b>圖說</b>：來源中斷時只暫停它獨自提供的盤口；可逆玩法看輸入玩法是否仍有其他來源提供（R04-16）。</p>
+<p class="cap"><b>圖說</b>：來源中斷時只暫停它獨自提供的盤口；模型定價玩法看錨定玩法是否仍有其他來源提供（R04-16）。</p>
 </section>
 
 <!-- ============================================================ 圖 04-10 -->
@@ -702,7 +702,7 @@ svg .th { fill: var(--tag-fill); }
 <rect x="160" y="216" width="640" height="96" rx="6" class="node"/><rect x="163" y="219" width="634" height="90" rx="4" class="node2"/>
 <text x="480" y="244" text-anchor="middle" class="tb">該賽事來自此來源的賠率不採用，直到人工恢復</text>
 <text x="480" y="270" text-anchor="middle" class="ts">盤口的處理與中斷相同（R04-16）：其他來源提供的盤口照常，</text>
-<text x="480" y="292" text-anchor="middle" class="ts">只有此來源獨自提供的盤口暫停；可逆玩法看輸入玩法是否仍有其他來源提供。</text>
+<text x="480" y="292" text-anchor="middle" class="ts">只有此來源獨自提供的盤口暫停；模型定價玩法看錨定玩法是否仍有其他來源提供。</text>
 <!-- 對照 -->
 <text x="40" y="350" class="ts">對照：整個來源的中斷與單場賽事的矛盾是兩件事</text>
 <rect x="40" y="360" width="430" height="160" rx="8" class="panel"/>
@@ -925,7 +925,7 @@ svg .th { fill: var(--tag-fill); }
 <path d="M316,129 L346,129" class="lnw" marker-end="url(#arrw)"/>
 <text x="352" y="134" class="tb tw">全部暫停</text>
 <text x="60" y="176" class="ts">該場賽事的全部滾球盤口暫停，不論盤口的計分項目，</text>
-<text x="60" y="196" class="ts">也不分可逆或不可逆玩法；直到統一比分更新或各來源一致。</text>
+<text x="60" y="196" class="ts">也不分模型定價或共識定價玩法；直到統一比分更新或各來源一致。</text>
 <text x="60" y="232" class="ts">多層計分（網球局數與盤數、絕對武力回合與地圖數）</text>
 <text x="60" y="252" class="ts">任一層未達門檻，都視為主計分項目。</text>
 <!-- 右：次計分項目 -->
@@ -951,7 +951,7 @@ svg .th { fill: var(--tag-fill); }
 <circle cx="52" cy="406" r="4" class="dot"/>
 <text x="66" y="411" class="ts">暫停與恢復的執行見 05 的 R05-07。</text>
 </svg>
-<p class="cap"><b>圖說</b>：未達門檻時暫停的範圍依運動加計分項目：主計分項目停整場，次計分項目只停該項目的盤口，不分可逆或不可逆（R04-14、05 的 R05-07）。</p>
+<p class="cap"><b>圖說</b>：未達門檻時暫停的範圍依運動加計分項目：主計分項目停整場，次計分項目只停該項目的盤口，不分模型定價或共識定價（R04-14、05 的 R05-07）。</p>
 </section>
 
 <svg class="defs" aria-hidden="true"><defs>
