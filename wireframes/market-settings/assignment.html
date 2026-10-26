@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模板指定 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.nw { white-space: nowrap; }
+  tr.grp td { background: var(--fill-2); font-weight: 600; }
+  tr.grp td .l2 { font-weight: 400; margin-left: 8px; }
+  tr.pin td { background: var(--fill); }
+  tr.chg td { background: var(--fill); }
+  tr.det td { background: var(--paper); border-bottom: 2px solid var(--line); }
+  .box.inh { border-style: dashed; color: var(--muted); }
+  .mode { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .mode .sep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+  .tiers { display: grid; grid-template-columns: repeat(4, auto); gap: 6px 14px; justify-content: start; padding: 6px 0; }
+  .tiers label { font-size: 12px; color: var(--muted); margin-right: 4px; }
+  .chip { white-space: nowrap; }
+  table.grid td.l2:first-child { white-space: nowrap; }
+  .mark { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--mark); margin: 0 4px 1px 6px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>模板指定</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md">玩法設定後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>（1）設定各運動的預設模板，以及競賽等級與模板的對應；（2）逐一或批次為競賽指定模板，處理等級變更後要不要改指；（3）看出每場賽事實際適用哪份模板、來自哪一層，只改一場時為賽事指定模板</td></tr>
+  <tr><th>對應規則</th><td>12 的 R12-05（指定與優先順序、預設模板、參照）、R12-06（等級與模板的對應）、R12-07（封存）；01 的 R01-32（競賽等級）；11 的 R11-02（權限）</td></tr>
+  <tr><th>不在本畫面</th><td>模板的內容（見<a href="templates.html">模板</a>）；競賽等級的設定（見 01 的<a href="../sports-and-markets/tournaments.html">競賽</a>）；三層的玩法開關（見<a href="market-switches.html">玩法開關</a>）；經銷商的模板指定（見 10）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的競賽、賽事、模板與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：運動</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="templates.html">模板</a><a href="assignment.html" class="on">模板指定</a><a href="market-switches.html">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 玩法設定 › 模板指定 › 運動</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>模板指定</h3><div class="sub">運動必須指向一份模板，即預設模板；競賽與賽事可以不指向，沿用上一層。較具體的一層優先：賽事 → 競賽 → 運動</div></div>
+      </div>
+      <div class="mode"><span class="strip"><span class="on">運動</span><span>競賽</span><span>賽事</span></span><span class="sep"></span><a class="btn" href="templates.html">模板 →</a></div>
+      <table class="grid">
+        <thead><tr><th>運動</th><th>預設模板 <span class="n">1</span></th><th>等級與模板的對應 <span class="n">2</span></th><th class="num">未結束賽事</th><th>最近變更</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr class="chg"><td><b>足球</b></td><td><span class="box caret wide">足球．預設</span></td><td>1 級 → 足球．一級 · 2 級 → 足球．二級 · 3 至 10 級 → 足球．三級以下</td><td class="num">1,532</td><td class="l2">10-20 · ops.chen</td><td><span class="btn pri">收合</span></td></tr>
+          <tr class="det"><td></td><td colspan="5">
+            <div class="tiers">
+              <span><label>1 級</label><span class="box caret">足球．一級</span></span>
+              <span><label>2 級</label><span class="box caret">足球．二級</span></span>
+              <span><label>3 級</label><span class="box caret">足球．三級以下</span></span>
+              <span><label>4 級</label><span class="box caret">足球．三級以下</span></span>
+              <span><label>5 至 10 級</label><span class="box caret">足球．三級以下</span></span>
+              <span><label>未分級</label><span class="box ro">不指向（使用預設模板）</span></span>
+            </div>
+            <div class="l2">對應只用於 Ops 第一次為競賽設定等級時；之後改這張表，不會改動已有的指定 <span class="n">3</span></div>
+          </td></tr>
+          <tr><td><b>籃球</b></td><td><span class="box caret wide">籃球．預設</span></td><td>1 級 → 籃球．一級 · 其他等級沿用預設模板</td><td class="num">684</td><td class="l2">10-18 · ops.chen</td><td><span class="btn">展開</span></td></tr>
+          <tr><td><b>網球</b></td><td><span class="box caret wide">網球．預設</span></td><td class="l2">未設定（全部沿用預設模板）</td><td class="num">912</td><td class="l2">10-15 · ops.wang</td><td><span class="btn">展開</span></td></tr>
+          <tr><td><b>英雄聯盟</b></td><td><span class="box caret wide">英雄聯盟．預設</span></td><td class="l2">未設定（全部沿用預設模板）</td><td class="num">57</td><td class="l2">10-12 · ops.wang</td><td><span class="btn">展開</span></td></tr>
+          <tr><td colspan="6" class="l2">…（其餘運動）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>每個運動必須指向一份模板，稱為預設模板，作為沒有指向的競賽與賽事的依據；選單沒有「不指向」（R12-05）。更換預設模板立即影響所有沿用它的競賽與賽事，儲存前顯示影響範圍。</span></li>
+  <li><span class="n">2</span><span>等級與模板的對應依運動設定；沒有對應模板的等級沿用預設模板（R12-06）。只看競賽等級，參賽方等級不用於模板。</span></li>
+  <li><span class="n">3</span><span>新建立的競賽為未分級，不指向，使用預設模板；Ops 第一次為競賽設定等級時，依這張表指向該等級的模板（R12-06、01 的 R01-32）。等級的設定在 01 的<a href="../sports-and-markets/tournaments.html">競賽</a>畫面。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：競賽</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="templates.html">模板</a><a href="assignment.html" class="on">模板指定</a><a href="market-switches.html">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 玩法設定 › 模板指定 › 競賽</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="mode"><span class="strip"><span>運動</span><span class="on">競賽</span><span>賽事</span></span><span class="sep"></span><a class="btn" href="templates.html">模板 →</a></div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>等級</label><span class="box caret">全部</span></div>
+        <div class="f"><label>模板</label><span class="box caret">全部模板</span></div>
+        <div class="f"><label>顯示</label><span class="strip"><span class="on">全部</span><span>等級已變更（1）</span><span>沿用預設模板</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">競賽名稱或 ID</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>ID</th><th>競賽</th><th>等級</th><th>模板 <span class="n">1</span></th><th>怎麼來的 <span class="n">2</span></th><th class="num">未結束賽事</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr class="pin"><td class="l2">—</td><td><b>足球（運動）</b></td><td class="l2">—</td><td><span class="box ro wide">足球．預設</span></td><td class="l2">預設模板，在「運動」設定</td><td class="num">412</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+          <tr><td class="l2">T-1001</td><td>英超</td><td>1 級</td><td><span class="box caret wide">英超專用</span></td><td class="l2">人工改指 · ops.chen 10-24（1 級對應的模板是 足球．一級）</td><td class="num">20</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+          <tr><td class="l2">T-1002</td><td>西甲</td><td>1 級</td><td><span class="box caret wide">足球．一級</span></td><td class="l2">依等級</td><td class="num">18</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+          <tr class="chg"><td class="l2">T-1310</td><td>某聯賽</td><td>1 級 <span class="chip">10-25 由 2 級改</span></td><td><span class="box caret wide">足球．二級</span></td><td class="l2">依等級（變更前）· 等級變更後不自動改指 <span class="n">3</span></td><td class="num">9</td><td><span class="btn pri">改指為 足球．一級</span> <span class="btn">維持</span></td></tr>
+          <tr><td class="l2">T-1420</td><td>越南 V.League 1</td><td>3 級</td><td><span class="box caret wide">足球．三級以下</span></td><td class="l2">依等級</td><td class="num">7</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+          <tr><td class="l2">T-1988</td><td>俱樂部友誼賽</td><td>未分級</td><td><span class="box caret wide inh">（沿用）足球．預設</span><span style="white-space:nowrap"><span class="mark"></span><span class="l2">運動預設</span></span></td><td class="l2">不指向</td><td class="num">6</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+          <tr><td class="l2">T-2051</td><td>某盃賽 <span class="chip">新建立</span></td><td>未分級</td><td><span class="box caret wide inh">（沿用）足球．預設</span><span style="white-space:nowrap"><span class="mark"></span><span class="l2">運動預設</span></span></td><td class="l2">不指向；第一次設定等級時依對應指向 <span class="n">4</span></td><td class="num">2</td><td><a class="btn" href="templates.html">檢視模板</a></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span><span class="btn">把篩選出的 6 個競賽指向…</span> <span class="btn">取消篩選出的指定…</span> <span class="n">5</span></span><span>足球競賽 210 個：指向模板的 208 個，沿用預設模板的 2 個</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>在列上直接選模板即儲存；在沿用的列（虛線框）選模板，就是為該競賽指定模板；選「（沿用）」則取消指定，改回沿用運動的預設模板（R12-05）。指向是參照：之後修改該模板，這些競賽立即套用。</span></li>
+  <li><span class="n">2</span><span>「依等級」是 Ops 第一次設定等級時依對應指向的；「人工改指」是之後由 Ops 選的；「不指向」沿用運動的預設模板（R12-06）。</span></li>
+  <li><span class="n">3</span><span>等級變更後，已有的指定不自動改變，由 Ops 決定是否改指（R12-06、01 的 R01-32）；「等級已變更」篩選列出這些競賽，讓 Ops 逐一決定。</span></li>
+  <li><span class="n">4</span><span>新建立的競賽為未分級，不指向，使用預設模板（R12-06）。</span></li>
+  <li><span class="n">5</span><span>批次指定只作用於目前篩選出的競賽，儲存前顯示受影響的未結束賽事數。修改立即生效，不需另一人覆核；每次變更記錄由誰、何時、原因（R12-05、11 的 R11-02）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 3：賽事</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="templates.html">模板</a><a href="assignment.html" class="on">模板指定</a><a href="market-switches.html">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 玩法設定 › 模板指定 › 賽事</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="mode"><span class="strip"><span>運動</span><span>競賽</span><span class="on">賽事</span></span><span class="sep"></span><a class="btn" href="templates.html">模板 →</a></div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>開賽日期</label><span class="box caret">2026-10-26 至 2026-10-27</span></div>
+        <div class="f"><label>顯示</label><span class="strip"><span class="on">全部</span><span>賽事自己指定（1）</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">隊伍或競賽</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>賽事</th><th>模板 <span class="n">1</span></th><th>來自 <span class="n">2</span></th><th>操作</th></tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="4">英超 <span class="l2">競賽 → 英超專用</span></td></tr>
+          <tr><td>曼城 vs 兵工廠<div class="l2">10-26 20:00 · E-50211</div></td><td><span class="box caret wide inh">（沿用）英超專用</span></td><td class="l2">沿用競賽的模板</td><td></td></tr>
+          <tr class="chg"><td>熱刺 vs 紐卡索 <span class="chip">滾球中</span><div class="l2">10-26 13:45 · E-50209</div></td><td><span class="box caret wide">英超專用（熱刺 vs 紐卡索）</span></td><td>賽事自己指定 <div class="l2">ops.lin · 10-26 13:55 · 來源 C 本場賠率延遲，本場關閉 C <span class="n">3</span></div></td><td><span class="btn">取消指定</span></td></tr>
+          <tr class="grp"><td colspan="4">西甲 <span class="l2">競賽 → 足球．一級</span></td></tr>
+          <tr><td>某隊 vs 某隊<div class="l2">10-26 22:00 · E-50377</div></td><td><span class="box caret wide inh">（沿用）足球．一級</span></td><td class="l2">沿用競賽的模板</td><td></td></tr>
+          <tr class="grp"><td colspan="4">俱樂部友誼賽 <span class="l2">競賽不指向 → 運動的預設模板 足球．預設</span></td></tr>
+          <tr><td>某隊 vs 某隊<div class="l2">10-26 18:30 · E-50420</div></td><td><span class="box caret wide inh">（沿用）足球．預設</span><span style="white-space:nowrap"><span class="mark"></span><span class="l2">運動預設</span></span></td><td class="l2">沿用運動的預設模板</td><td></td></tr>
+          <tr><td colspan="4" class="l2">…（其餘賽事）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>每場賽事顯示實際適用的模板。在沿用的列選模板，就是為該賽事指定模板；賽事的模板優先於競賽與運動（R12-05）。通常的做法是在<a href="templates.html">模板</a>畫面複製出一份、修改後在這裡指定，只影響這一場。</span></li>
+  <li><span class="n">2</span><span>標示模板來自哪一層：賽事自己指定、沿用競賽的模板、沿用運動的預設模板。</span></li>
+  <li><span class="n">3</span><span>只被賽事指向的模板，在該賽事的注單全部結算完成後滿 30 天自動封存（R12-07）。取消指定後改回沿用競賽的模板。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md#待確認事項">README</a>。</p>
+
+</div>
+</body>
+</html>

@@ -124,3 +124,36 @@ table.matrix td.sel { outline: 3px solid var(--mark); outline-offset: -3px; }
 .panel { border: 2px solid var(--mark); background: var(--paper); margin-top: 12px; }
 .panel .ph { display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid var(--line); font-weight: 600; }
 .panel .pb { padding: 10px 12px; }
+
+/* 階段列與「玩法 × 階段」表（12 玩法設定） */
+.phs { display: flex; align-items: flex-end; flex-wrap: nowrap; }
+.phg { display: flex; flex-direction: column; margin-right: 4px; }
+.phg > .phgl { font-size: 10px; letter-spacing: .08em; color: var(--muted); text-align: center;
+               border-bottom: 2px solid var(--line); margin: 0 8px 4px 0; padding-bottom: 2px; }
+.phg > .phr { display: flex; }
+.phb { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 28px;
+       padding: 0 10px 0 15px; margin-right: -5px; background: var(--fill-2); font-size: 12px; white-space: nowrap;
+       clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%, 9px 50%); }
+.phb.first { padding-left: 10px; clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 50%, calc(100% - 9px) 100%, 0 100%); }
+.phb.live { background: var(--fill); }
+.phb.on { background: var(--mark); color: #fff; font-weight: 600; }
+.phb.has::after, .pill.has::after { content: "●"; font-size: 8px; margin-left: 3px; }
+.layers { display: flex; gap: 8px; align-items: center; margin: 6px 0 0 4px; }
+.layers .lk { color: var(--muted); font-size: 12px; }
+.pill { border: 1px solid var(--line); border-radius: 12px; padding: 1px 10px; font-size: 12px; background: var(--paper); white-space: nowrap; }
+.pill.on { background: var(--mark); color: #fff; border-color: var(--mark); }
+table.cube { border-collapse: collapse; font-size: 12px; }
+table.cube th, table.cube td { border-bottom: 1px solid var(--line-soft); padding: 3px 3px; text-align: center; white-space: nowrap; }
+table.cube th { background: var(--fill-2); font-weight: 600; font-size: 11px; }
+table.cube th.gh { border-bottom: 1px solid var(--line); border-left: 1px solid var(--paper); }
+table.cube .mk { text-align: left; padding-left: 6px; }
+table.cube tr.all td { background: var(--fill); font-weight: 600; }
+table.cube tr.sel td { background: var(--fill-2); }
+.cv { display: inline-block; min-width: 44px; padding: 0 5px; border: 1px solid var(--mark); background: var(--paper); text-align: left; font-weight: 400; }
+.cv.b { min-width: 24px; text-align: center; }
+.cv.inh { border: 1px dashed var(--line); color: var(--muted); }
+.cv.no { border: 1px dashed var(--line-soft); color: #aaa; background: transparent; }
+.cv.na { border: 1px dashed var(--line-soft); color: #bbb; background: var(--fill); }
+.cv.hi { outline: 2px solid var(--mark); outline-offset: 1px; }
+a.btn { color: var(--ink); text-decoration: none; }
+a.btn.pri { color: #fff; }

@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>操盤台 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  td.nw { white-space: nowrap; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  tr.grp td { background: var(--fill-2); font-weight: 600; }
+  tr.bal td { background: var(--fill); }
+  tr.inh td { color: #888; }
+  .sec { font-weight: 700; margin: 16px 0 6px; }
+  .sec .l2 { font-weight: 400; margin-left: 8px; }
+  .kv { display: flex; flex-wrap: wrap; gap: 6px 24px; padding: 8px 10px; border: 1px solid var(--line-soft); background: var(--fill); margin: 6px 0 10px; }
+  .kv b { margin-right: 6px; }
+  .tabs.page { padding: 0; margin: 10px 0 0; }
+  .grpbox { border: 1px solid var(--line); padding: 10px 12px; margin-top: 10px; }
+  .grpbox > .gt { font-weight: 700; margin-bottom: 6px; }
+  .grpbox.dim { color: #999; border-style: dashed; }
+  .warn { border: 1px dashed var(--mark); background: var(--fill); padding: 6px 10px; margin: 8px 0; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>操盤台</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/odds-and-trading/README.md">賠率與操盤後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>看出哪些賽事有暫停或關閉、原因與出處；在競賽層暫停；進入單場的賽事操盤</td></tr>
+  <tr><th>對應規則</th><td>R05-06（錨定玩法取不到）、R05-07（滾球）、R05-11（操盤手的暫停）、R05-16（待取消）；12 的 R12-03（階段）、R12-05（適用的模板）、R12-09（開出）、R12-10（玩法開關）；01 的 R01-29（運動的營運狀態）</td></tr>
+  <tr><th>不在本畫面</th><td>玩法設定模板、模板指定與玩法開關（見 12 的<a href="../market-settings/templates.html">模板</a>、<a href="../market-settings/assignment.html">模板指定</a>、<a href="../market-settings/market-switches.html">玩法開關</a>）；經銷商的模板、定價流程第 4 至 7 步、經銷商的開關與偏移（見 10）；冠軍盤（暫緩）；同場過關定價（暫緩）；虛擬運動；待取消的處置（見 04 的<a href="../event-data-and-mapping/pending-cancellation.html">待取消與待腰斬</a>）；來源本身的狀態與停用（見 03 的<a href="../sources-and-connectors/sources.html">來源</a>）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、賽事與數字都是範例；價格依 05 第 8.3 節的算例（λ = 1.20、0.90、0.20）算出。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：操盤台（賽事清單）</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="trading-desk.html" class="on">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="../market-settings/templates.html">模板</a><a href="../market-settings/assignment.html">模板指定</a><a href="../market-settings/market-switches.html">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 賠率與操盤 › 操盤台</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>操盤台</h3><div class="sub">未結束的賽事，依競賽分組；每個模型範圍一欄，顯示開盤、暫停或關閉與原因</div></div>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>階段</label><span class="strip"><span class="on">全部</span><span>賽前</span><span>滾球</span></span></div>
+        <div class="f"><label>狀態 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>有暫停或關閉</span><span>有偏移</span></span></div>
+        <div class="f"><label>開賽時間</label><span class="box caret">今天與明天</span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">隊伍或競賽</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr>
+          <th>賽事</th><th>開賽／比賽時間</th><th>常規時間 <span class="n">2</span></th><th>上半場</th><th>下半場</th><th>共識定價玩法</th><th>偏移 <span class="n">3</span></th><th>操作</th>
+        </tr></thead>
+        <tbody>
+          <tr class="grp"><td colspan="7">英超 <span class="l2">1 級 · 模板：英超專用</span></td><td><span class="btn">暫停整個競賽</span> <span class="n">4</span></td></tr>
+          <tr><td>曼城 vs 兵工廠</td><td class="nw">賽前 · 比賽當天 · 10-26 20:00</td><td>開盤</td><td><b>暫停</b><div class="l2">必要的錨定玩法「上半場大小」沒有來源開出</div></td><td>開盤</td><td>開盤 18 · 關閉 1</td><td>1</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr><td>熱刺 vs 紐卡索 <span class="chip">賽事專用模板</span></td><td class="nw">滾球 · 上半場 31' · 0:0</td><td>開盤</td><td>開盤</td><td>開盤</td><td>開盤 12</td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr class="grp"><td colspan="7">西甲 <span class="l2">1 級 · 模板：足球．一級</span></td><td><span class="btn">暫停整個競賽</span></td></tr>
+          <tr><td>某隊 vs 某隊</td><td class="nw">賽前 · 10-26 22:00</td><td colspan="4"><b>暫停</b><span class="l2">（人工暫停此賽事 · ops.wang 13:50 · 先發名單有疑問）</span></td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr class="grp"><td colspan="7">韓國 K 聯賽 <span class="l2">2 級 · 模板：足球．二級</span></td><td><span class="btn">暫停整個競賽</span></td></tr>
+          <tr><td>水原 vs 蔚山</td><td class="nw">滾球 · 下半場 58' · 1:1</td><td colspan="4"><b>暫停</b><span class="l2">（全部滾球盤口：滾球比分未達門檻，計分項目為進球）</span></td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr class="grp"><td colspan="7">越南 V.League 1 <span class="l2">3 級 · 模板：足球．三級以下</span></td><td><span class="btn">暫停整個競賽</span></td></tr>
+          <tr><td>Becamex vs 峴港</td><td class="nw">賽前 · 10-26 19:00</td><td colspan="3"><b>暫停</b><span class="l2">（模型定價玩法：唯一提供錨定玩法的來源 F 賠率中斷）</span></td><td>開盤 6</td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr class="grp"><td colspan="7">俱樂部友誼賽 <span class="l2">未分級 · 模板：預設模板（足球．預設）</span></td><td><span class="btn">暫停整個競賽</span></td></tr>
+          <tr><td>某隊 vs 某隊</td><td class="nw">賽前 · 10-26 18:30</td><td colspan="3"><b>關閉</b><span class="l2">（模型定價玩法：賽事層的玩法開關，特殊賽制）</span></td><td>開盤 4</td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+          <tr class="grp"><td colspan="7">某盃賽 <span class="l2">4 級 · 模板：足球．三級以下</span></td><td><span class="btn">暫停整個競賽</span></td></tr>
+          <tr><td>某隊 vs 某隊 <span class="chip">待取消</span></td><td class="nw">賽前 · 10-26 16:00</td><td colspan="4"><b>關閉</b><span class="l2">（全部盤口：待取消，由 04 處置）</span></td><td>0</td><td><a class="btn" href="event-trading.html">操盤</a></td></tr>
+        </tbody>
+      </table>
+      <div class="pager"><span></span><span>足球未結束賽事 1,532 場，有暫停或關閉 41 場</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>「有暫停或關閉」列出至少一個模型範圍或共識定價玩法沒有開盤的賽事，方便操盤手先看出問題。</span></li>
+  <li><span class="n">2</span><span>每個模型範圍一欄，因為暫停與否以模型範圍為單位（R05-06、R05-07）。原因有六種，都標明出處：必要的錨定玩法取不到（R05-06）；滾球中提供的來源全部封盤（R05-07）；滾球比分未達門檻（R05-07，主計分項目全停、次計分項目只停該項目）；待取消或待腰斬（R05-16）；模板的開出為否（12 的 R12-09）；玩法開關關閉，並標示是哪一層（12 的 R12-10）；人工暫停（R05-11）。</span></li>
+  <li><span class="n">3</span><span>該賽事目前生效的偏移筆數。賽前的賽事同時顯示所在的階段，例如「比賽當天」，模板中依階段設定的值以此為準（12 的 R12-03）。偏移只由人工移除，賽事結束自然失效（R05-11）。</span></li>
+  <li><span class="n">4</span><span>操盤手的暫停有盤口線、玩法、賽事、競賽四個層級（R05-11）：競賽在分組列暫停，賽事、玩法與盤口線在<a href="event-trading.html">賽事操盤</a>。運動的暫停是 01 的營運狀態（R01-29），不在這裡。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/odds-and-trading/README.md#待確認事項">README</a>。</p>
+
+</div>
+</body>
+</html>

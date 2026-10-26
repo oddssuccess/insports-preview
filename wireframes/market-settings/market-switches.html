@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>玩法開關 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>玩法開關</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md">玩法設定後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>（1）看出目前在哪一層關閉了哪些玩法、為什麼、影響多少賽事；（2）在運動、競賽或賽事層關閉玩法，不必修改或複製模板；（3）重新開啟</td></tr>
+  <tr><th>對應規則</th><td>12 的 R12-09（開出）、R12-10（玩法開關）；01 的 R01-18（取不到賽果）；05 的 R05-05（推導不適用）、R05-11（操盤手的關閉）；11 的 R11-02（權限）</td></tr>
+  <tr><th>不在本畫面</th><td>模板的「開出」欄位（見<a href="templates.html">模板</a>畫面 2）；操盤手的暫停（見 05 的<a href="../odds-and-trading/event-trading.html">賽事操盤</a>）；經銷商的開關（見 10）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的競賽、賽事與數字都是範例。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：關閉中的玩法</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="templates.html">模板</a><a href="assignment.html">模板指定</a><a href="market-switches.html" class="on">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 玩法設定 › 玩法開關</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>玩法開關</h3><div class="sub">運動、競賽、賽事三層，任一層關閉即不開盤；只列出關閉中的項目</div></div>
+        <div><span class="btn pri">關閉玩法…</span></div>
+      </div>
+      <div class="filters">
+        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
+        <div class="f"><label>層級</label><span class="strip"><span class="on">全部</span><span>運動</span><span>競賽</span><span>賽事</span></span></div>
+        <div class="f"><label>搜尋</label><span class="box wide">玩法、競賽或隊伍</span></div>
+      </div>
+      <table class="grid">
+        <thead><tr><th>層級</th><th>對象</th><th>關閉的玩法</th><th>原因</th><th class="num">受影響的未結束賽事</th><th>由誰／何時</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr><td>運動</td><td>足球</td><td>落後反勝</td><td>取不到賽果：資料來源沒有進球的先後順序（01 的 R01-18）</td><td class="num">1,532</td><td class="l2">ops.chen · 10-20</td><td><span class="btn">開啟</span></td></tr>
+          <tr><td>運動</td><td>足球</td><td>獨贏（三項）：時間區間（10 分鐘）</td><td>取不到賽果：資料來源沒有進球時間（01 的 R01-18）</td><td class="num">1,532</td><td class="l2">ops.chen · 10-20</td><td><span class="btn">開啟</span></td></tr>
+          <tr><td>競賽</td><td>越南 V.League 1</td><td>角球大小、角球讓分（全部時段）</td><td>賽果來源不提供角球數</td><td class="num">7</td><td class="l2">ops.lin · 10-22</td><td><span class="btn">開啟</span></td></tr>
+          <tr><td>賽事</td><td>某隊 vs 某隊<div class="l2">俱樂部友誼賽 · 10-26 18:30</div></td><td>模型定價玩法（常規時間、上半場、下半場）</td><td>特殊賽制，每半場 30 分鐘，推導不適用（05 的 R05-05）</td><td class="num">1</td><td class="l2">ops.lin · 10-26</td><td><span class="btn">開啟</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>玩法開關分運動、競賽、賽事三層，任一層關閉，其下賽事的該玩法就不開盤，已開盤的關閉，已成立的注單照常結算（R12-10）。開啟只表示不擋，能否開盤仍依其他規則，包括模板的「開出」（R12-09）。</span></li>
+  <li><span class="n">2</span><span>開關用於臨時的關閉，或只針對一個運動、競賽、賽事的關閉；常態的設定，例如某等級的競賽在滾球不開角球，用模板的「開出」（R12-09）。兩者任一關閉就不開盤（R12-10）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2>畫面 2：關閉玩法</h2>
+
+<div class="frame"><div class="backdrop">
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>關閉玩法</span><span>✕</span></div>
+    <div class="mb">
+      <div class="form">
+        <div class="f full"><label>在哪一層關閉 <span class="n">1</span></label><div>○ 運動：足球（未結束賽事 1,532 場）　○ 競賽：英超（20 場）　● 賽事：曼城 vs 兵工廠（1 場）</div></div>
+        <div class="f full"><label>玩法</label><span class="box caret" style="width:100%">波膽（常規時間）</span></div>
+        <div class="f full"><label>原因（必填）</label><span class="box" style="width:100%">本場改在中立場地，模型的主客優勢不適用</span></div>
+      </div>
+      <p class="hint" style="margin-top:8px">關閉後，已開盤的盤口立即關閉，已成立的注單照常結算。不必修改或複製模板 <span class="n">2</span>。</p>
+    </div>
+    <div class="mf"><span class="btn">取消</span><span class="btn pri">關閉</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>從 05 的<a href="../odds-and-trading/event-trading.html">賽事操盤</a>開啟時，預先帶入該賽事與玩法。選項列出各層的未結束賽事數，作為影響範圍。</span></li>
+  <li><span class="n">2</span><span>開關不是模板的欄位（R12-10）。經銷商的開關另在 10，只影響該經銷商，不列在這裡（10 的 R10-03）。每次關閉與開啟都記錄由誰、何時、原因。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md#待確認事項">README</a>。</p>
+
+</div>
+</body>
+</html>

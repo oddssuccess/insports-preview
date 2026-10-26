@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>階段一覽 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+<style>
+  .ro-note { border: 1px solid var(--line); background: var(--fill); padding: 6px 10px; margin-bottom: 10px; }
+  table.life { border-collapse: collapse; width: 100%; }
+  table.life td { border-bottom: 1px solid var(--line-soft); padding: 8px 6px; vertical-align: middle; }
+  table.life td.sp { width: 90px; font-weight: 600; }
+  table.life tr.det td { background: var(--fill); padding: 6px 10px; font-size: 13px; }
+  .phb.pick { outline: 2px solid var(--mark); outline-offset: 2px; }
+  .pill.pick { outline: 2px solid var(--mark); outline-offset: 1px; }
+</style>
+</head>
+<body>
+<div class="doc">
+
+<h1>階段一覽</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>所屬</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md">玩法設定後台 wireframe</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>查看各運動有哪些階段、依什麼順序經過、何時生效，供設定模板時對照；不能修改</td></tr>
+  <tr><th>對應規則</th><td>12 的 R12-03（階段）、R12-04（取值）；01 的 R01-17（時段清單）；非功能需求（比賽日的換日、熱門時段的時長）</td></tr>
+  <tr><th>不在本畫面</th><td>各階段的值（見<a href="templates.html">模板</a>畫面 2）</td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。時間軸階段依 12 的 R12-03；各運動有哪些疊加階段是示意（見 README 的待確認事項）。</p>
+
+<!-- ============================================================ -->
+<h2>畫面 1：各運動的階段</h2>
+
+<div class="frame">
+<div class="shell">
+  <nav class="side">
+    <div class="brand">InSports 後台</div>
+    <div class="group">目錄</div>
+    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
+    <div class="group">資料來源</div>
+    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
+    <div class="group">賽事資料</div>
+    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
+    <div class="group">賠率與操盤</div>
+    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
+    <div class="group">玩法設定</div>
+    <a href="templates.html" class="on">模板</a><a href="assignment.html">模板指定</a><a href="market-switches.html">玩法開關</a>
+    <div class="group">其他功能</div>
+    <div class="later">（之後依各 PRD 補上）</div>
+  </nav>
+  <div>
+    <div class="top"><span>首頁 › 玩法設定 › 模板 › 階段一覽</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="main">
+      <div class="page-head">
+        <div><h3>階段一覽</h3><div class="sub">從模板畫面的「階段一覽 →」進入，不在選單上 <span class="n">1</span></div></div>
+        <div><a class="btn" href="templates.html">← 模板</a></div>
+      </div>
+      <div class="ro-note">唯讀：各運動的階段由 InSports 固定，Ops 與經銷商都不能增減，只能在模板中為各階段設定值。點選任一階段看它何時生效 <span class="n">2</span></div>
+      <table class="life">
+        <tr><td class="sp">足球</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">1 個月</span><span class="phb">14 天</span><span class="phb">7 天</span><span class="phb">6 天</span><span class="phb">5 天</span><span class="phb">4 天</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live">上半場</span><span class="phb live">下半場</span></div></div>
+            <div class="phg"><div class="phgl">加時賽</div><div class="phr"><span class="phb live">上半場</span><span class="phb live">下半場</span></div></div>
+            <div class="phg"><div class="phgl">點球大戰</div><div class="phr"><span class="phb live">含一球決勝</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill pick">熱門時段</span><span class="pill">中場休息</span><span class="pill">紅牌後 3 分鐘</span><span class="pill">比賽中斷</span></div>
+        </td></tr>
+        <tr class="det"><td></td><td><b>熱門時段</b>　疊加階段 · 比賽當天，自開賽前 4 小時起到開賽為止（時長見非功能需求）· 生效時覆蓋「比賽當天」的值 <span class="n">3</span></td></tr>
+        <tr><td class="sp">籃球</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">1 個月</span><span class="phb">14 天</span><span class="phb">7 天</span><span class="phb">6 天</span><span class="phb">5 天</span><span class="phb">4 天</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live">第 1 節</span><span class="phb live">第 2 節</span><span class="phb live">第 3 節</span><span class="phb live">第 4 節</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill">熱門時段</span><span class="pill">節間休息</span><span class="pill">比賽中斷</span></div>
+        </td></tr>
+        <tr><td class="sp">網球</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live">第 1 盤</span><span class="phb live">第 2 盤</span><span class="phb live">第 3 盤</span><span class="phb live">第 4 盤</span><span class="phb live">第 5 盤</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill">熱門時段</span><span class="pill">比賽中斷（雨停）</span></div>
+        </td></tr>
+        <tr class="det"><td></td><td><b>網球的賽前</b>　對陣通常要到比賽前 3 天內才確定，只分早盤、3 天、2 天、比賽當天；桌球、羽球與電子競技的各遊戲相同 <span class="n">4</span></td></tr>
+        <tr><td class="sp">冰球</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">1 個月</span><span class="phb">14 天</span><span class="phb">7 天</span><span class="phb">6 天</span><span class="phb">5 天</span><span class="phb">4 天</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live">第 1 節</span><span class="phb live">第 2 節</span><span class="phb live">第 3 節</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill">熱門時段</span><span class="pill">節間休息</span></div>
+        </td></tr>
+        <tr><td class="sp">英雄聯盟</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live">第 1 張地圖</span><span class="phb live">第 2 張地圖</span><span class="phb live">第 3 張地圖</span><span class="phb live">第 4 張地圖</span><span class="phb live">第 5 張地圖</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill">熱門時段</span><span class="pill">比賽中斷（技術暫停）</span></div>
+        </td></tr>
+        <tr><td class="sp">司諾克</td><td>
+          <div class="phs">
+            <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb first">早盤</span><span class="phb">1 個月</span><span class="phb">14 天</span><span class="phb">7 天</span><span class="phb">6 天</span><span class="phb">5 天</span><span class="phb">4 天</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb">比賽當天</span></div></div>
+            <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live pick">滾球</span></div></div>
+          </div>
+          <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill">熱門時段</span></div>
+        </td></tr>
+        <tr class="det"><td></td><td><b>滾球</b>　時間軸階段 · 局數多且依賽事而定，滾球只有一個階段；飛鏢（時段只有全場）、棒球（前 3 局、前 5 局是累計的時段）相同 <span class="n">5</span></td></tr>
+        <tr><td></td><td class="l2">…（其餘運動）</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>階段不能在後台修改，所以不放在選單上；從<a href="templates.html">模板</a>畫面的「階段一覽 →」進入。</span></li>
+  <li><span class="n">2</span><span>上排是時間軸階段：賽前依距比賽日的天數分段，以日計，不以距開賽的時數計，天數含比賽當天；比賽日在 GMT-4 的 00:00 換日，即臺灣時間 12:00（R12-03、非功能需求）。滾球依 01 的時段清單中依序進行、互不重疊的時段（01 的 R01-17），沒有進行的時段不會進入。下排是疊加階段，在特定時間或狀況下才生效。</span></li>
+  <li><span class="n">3</span><span>疊加階段共四種：熱門時段、中場或節間休息、事件後的一段時間、比賽中斷（R12-03）。熱門時段的時長：足球 4 小時、其他運動 2 小時（非功能需求）。生效時有設定值的欄位覆蓋時間軸的值（R12-04）。</span></li>
+  <li><span class="n">4</span><span>對陣通常要到比賽前 3 天內才確定的運動，賽前只分四段（R12-03）。</span></li>
+  <li><span class="n">5</span><span>時段清單沒有依序進行的時段的運動，以及局數多且依賽事而定的運動，滾球只有一個階段（R12-03）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md#待確認事項">README</a>。</p>
+
+</div>
+</body>
+</html>
