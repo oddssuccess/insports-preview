@@ -28,161 +28,161 @@
 <!-- ============================================================ -->
 <h2>畫面 1：來源清單與狀態矩陣</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#" class="on">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#" class="on">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 資料來源 › 來源</span><span>語言：繁體中文 ▾ · ops.user ▾ · 14:15</span></div>
+    <div class="top"><span>Home › Data Sources › Sources</span><span>Language: English ▾ · ops.user ▾ · 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>來源</h3><div class="sub">每個來源的四類資料各有一個狀態；一類中斷或停用不影響其他類</div></div>
+        <div><h3>Sources</h3><div class="sub">Each of a source's four data types has its own status; one type being interrupted or disabled does not affect the others</div></div>
       </div>
 
       <div class="filters">
-        <div class="f"><label>狀態 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>有中斷</span><span>有停用</span></span></div>
-        <div class="f"><label>搜尋</label><span class="box wide">來源名稱或 ID</span></div>
+        <div class="f"><label>Status <span class="n">1</span></label><span class="strip"><span class="on">All</span><span>Has interrupted</span><span>Has disabled</span></span></div>
+        <div class="f"><label>Search</label><span class="box wide">Source name or ID</span></div>
       </div>
 
       <table class="grid">
         <thead><tr>
-          <th>來源 <span class="s">／ ID</span></th>
-          <th>可用途徑 <span class="n">2</span></th>
-          <th>賽程 <span class="n">3</span></th>
-          <th>賠率</th>
-          <th>賽況</th>
-          <th>賽果</th>
-          <th>操作</th>
+          <th>Source <span class="s">/ ID</span></th>
+          <th>Available paths <span class="n">2</span></th>
+          <th>Fixtures <span class="n">3</span></th>
+          <th>Odds</th>
+          <th>Live data</th>
+          <th>Results</th>
+          <th>Actions</th>
         </tr></thead>
         <tbody>
           <tr>
-            <td>來源 A<div class="l2">SRC-A</div></td><td>1／1</td>
-            <td class="st">正常</td><td class="st cell-off">—</td><td class="st">正常</td><td class="st">正常</td>
-            <td><span class="btn">詳情</span></td>
+            <td>Source A<div class="l2">SRC-A</div></td><td>1/1</td>
+            <td class="st">Normal</td><td class="st cell-off">—</td><td class="st">Normal</td><td class="st">Normal</td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr>
-            <td>來源 B<div class="l2">SRC-B</div></td><td>1／1</td>
-            <td class="st cell-off">—</td><td class="st cell-off">—</td><td class="st">正常</td><td class="st">正常</td>
-            <td><span class="btn">詳情</span></td>
+            <td>Source B<div class="l2">SRC-B</div></td><td>1/1</td>
+            <td class="st cell-off">—</td><td class="st cell-off">—</td><td class="st">Normal</td><td class="st">Normal</td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr>
-            <td>來源 C<div class="l2">SRC-C</div></td><td>1／3 <span class="chip">備援減少</span></td>
-            <td class="st">正常</td><td class="st">正常</td><td class="st">正常</td>
-            <td class="st"><b>中斷</b> <span class="n">4</span><div class="l2">2 小時 12 分 · 速率限制</div></td>
-            <td><span class="btn">詳情</span></td>
+            <td>Source C<div class="l2">SRC-C</div></td><td>1/3 <span class="chip">Less redundancy</span></td>
+            <td class="st">Normal</td><td class="st">Normal</td><td class="st">Normal</td>
+            <td class="st"><b>Interrupted</b> <span class="n">4</span><div class="l2">2 h 12 min · rate limited</div></td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr>
-            <td>來源 D<div class="l2">SRC-D</div></td><td>1／1</td>
-            <td class="st cell-off">—</td><td class="st">正常</td><td class="st">正常</td>
-            <td class="st cell-off">停用 <span class="n">5</span><div class="l2">人工 · ops.chen · 10-21</div></td>
-            <td><span class="btn">詳情</span></td>
+            <td>Source D<div class="l2">SRC-D</div></td><td>1/1</td>
+            <td class="st cell-off">—</td><td class="st">Normal</td><td class="st">Normal</td>
+            <td class="st cell-off">Disabled <span class="n">5</span><div class="l2">Manual · ops.chen · 10-21</div></td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr>
-            <td>來源 F<div class="l2">SRC-F</div></td><td>0／1</td>
-            <td class="st"><b>中斷</b><div class="l2">40 分 · 入口站台甲維護</div></td>
-            <td class="st"><b>中斷</b><div class="l2">40 分 · 入口站台甲維護</div></td>
-            <td class="st"><b>中斷</b><div class="l2">40 分 · 入口站台甲維護</div></td>
+            <td>Source F<div class="l2">SRC-F</div></td><td>0/1</td>
+            <td class="st"><b>Interrupted</b><div class="l2">40 min · Portal Alpha maintenance</div></td>
+            <td class="st"><b>Interrupted</b><div class="l2">40 min · Portal Alpha maintenance</div></td>
+            <td class="st"><b>Interrupted</b><div class="l2">40 min · Portal Alpha maintenance</div></td>
             <td class="st cell-off">—</td>
-            <td><span class="btn">詳情</span></td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr>
-            <td>來源 G<div class="l2">SRC-G</div></td><td>1／1</td>
-            <td class="st">正常</td><td class="st cell-off">—</td><td class="st">正常</td><td class="st">正常</td>
-            <td><span class="btn">詳情</span></td>
+            <td>Source G<div class="l2">SRC-G</div></td><td>1/1</td>
+            <td class="st">Normal</td><td class="st cell-off">—</td><td class="st">Normal</td><td class="st">Normal</td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr class="off">
-            <td>來源 H<div class="l2">SRC-H</div></td><td>0／1</td>
-            <td class="st">停用<div class="l2">連接器暫停 · 入口站台丙</div></td>
-            <td class="st">停用<div class="l2">連接器暫停 · 入口站台丙</div></td>
-            <td class="st">停用<div class="l2">連接器暫停 · 入口站台丙</div></td>
+            <td>Source H<div class="l2">SRC-H</div></td><td>0/1</td>
+            <td class="st">Disabled<div class="l2">Connector paused · Portal Gamma</div></td>
+            <td class="st">Disabled<div class="l2">Connector paused · Portal Gamma</div></td>
+            <td class="st">Disabled<div class="l2">Connector paused · Portal Gamma</div></td>
             <td class="st">—</td>
-            <td><span class="btn">詳情</span></td>
+            <td><span class="btn">Details</span></td>
           </tr>
           <tr class="off">
-            <td>來源 E<div class="l2">SRC-E</div></td><td>1／1</td>
-            <td class="st">停用<div class="l2">尚未啟用</div></td>
-            <td class="st">停用<div class="l2">尚未啟用</div></td>
-            <td class="st">停用<div class="l2">尚未啟用</div></td>
+            <td>Source E<div class="l2">SRC-E</div></td><td>1/1</td>
+            <td class="st">Disabled<div class="l2">Not yet enabled</div></td>
+            <td class="st">Disabled<div class="l2">Not yet enabled</div></td>
+            <td class="st">Disabled<div class="l2">Not yet enabled</div></td>
             <td class="st">—</td>
-            <td><span class="btn">詳情</span> <span class="btn pri">啟用</span> <span class="n">6</span></td>
+            <td><span class="btn">Details</span> <span class="btn pri">Enable</span> <span class="n">6</span></td>
           </tr>
         </tbody>
       </table>
-      <div class="pager"><span></span><span>共 8 個來源</span></div>
+      <div class="pager"><span></span><span>8 sources</span></div>
     </div>
   </div>
 </div>
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>「有中斷」列出任一類資料中斷的來源，「有停用」列出任一類資料停用的來源（含連接器暫停與尚未啟用）。入口站台與轉送商不是來源，不在本清單（R03-01）；它們在<a href="connectors.html">連接器</a>頁。</span></li>
-  <li><span class="n">2</span><span>可用途徑數／已啟用的途徑數，尚未啟用的途徑不計入（例如來源 C 的入口站台丁）。部分途徑失效只減少備援，來源仍為正常（R03-06），例如來源 C 的三條途徑只剩一條可用，但賠率仍正常。途徑的明細在詳情頁。</span></li>
+  <li><span class="n">1</span><span>「Has interrupted」列出任一類資料中斷的來源，「Has disabled」列出任一類資料停用的來源（含連接器暫停與尚未啟用）。入口站台與轉送商不是來源，不在本清單（R03-01）；它們在<a href="connectors.html">連接器</a>頁。</span></li>
+  <li><span class="n">2</span><span>可用途徑數／已啟用的途徑數，尚未啟用的途徑不計入（例如來源 C 的入口站台 Delta）。部分途徑失效只減少備援，來源仍為正常（R03-06），例如來源 C 的三條途徑只剩一條可用，但賠率仍正常。途徑的明細在詳情頁。</span></li>
   <li><span class="n">3</span><span>四類資料與 04 的 R04-01 相同：賽程（含參賽方與冠軍盤名單）、賠率、賽況、賽果。賽程指能單獨成立的完整賽事清單；只隨賠率附帶的賽事資料不算，所以來源 D 有賠率，賽程仍是「—」。每格一個狀態：正常、中斷、停用、—（來源不提供）。狀態由系統判定，正常須有正面證據：收到有效內容，或對探測有有效回應；連線存在、只有心跳、來源靜默都不算（R03-05）。</span></li>
-  <li><span class="n">4</span><span>中斷顯示持續時間與原因（R03-14）。中斷由系統判定、自動恢復，Ops 不能手動恢復；恢復條件比中斷嚴格，時間數值見非功能需求（R03-06）。來源 C 的賽果只經直接輪詢取得，該途徑因速率限制失效，沒有其他途徑，所以賽果中斷；賠率經入口站台乙仍可用，所以正常。</span></li>
+  <li><span class="n">4</span><span>中斷顯示持續時間與原因（R03-14）。中斷由系統判定、自動恢復，Ops 不能手動恢復；恢復條件比中斷嚴格，時間數值見非功能需求（R03-06）。來源 C 的賽果只經直接輪詢取得，該途徑因速率限制失效，沒有其他途徑，所以賽果中斷；賠率經入口站台 Beta 仍可用，所以正常。</span></li>
   <li><span class="n">5</span><span>停用一律標明原因（R03-07）：人工（依來源與類別停用，顯示操作者與日期）、連接器暫停（顯示哪個連接器）、尚未啟用。停用立即生效，人工解除後改由系統判定。整列淡色表示該來源所有提供的類別都停用，仍可查詢。</span></li>
-  <li><span class="n">6</span><span>新串接的來源在工程以設定建立後出現在清單，啟用前為停用（R03-12）。「啟用」開啟畫面 3，不需要試運轉。沒有新增與刪除。</span></li>
+  <li><span class="n">6</span><span>新串接的來源在工程以設定建立後出現在清單，啟用前為停用（R03-12）。「Enable」開啟畫面 3，不需要試運轉。沒有新增與刪除。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>畫面 2：來源詳情</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#" class="on">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#" class="on">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 資料來源 › 來源 › 來源 C</span><span>語言：繁體中文 ▾ · ops.user ▾ · 14:15</span></div>
+    <div class="top"><span>Home › Data Sources › Sources › Source C</span><span>Language: English ▾ · ops.user ▾ · 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>來源 C <span class="l2">SRC-C</span></h3><div class="sub">四類資料的狀態、取得途徑與最近的狀態變化</div></div>
-        <div class="strip"><span class="on">狀態與途徑</span><span>狀態紀錄</span></div>
+        <div><h3>Source C <span class="l2">SRC-C</span></h3><div class="sub">Status of the four data types, access paths, and recent status changes</div></div>
+        <div class="strip"><span class="on">Status &amp; paths</span><span>Status history</span></div>
       </div>
 
-      <h4 style="margin:12px 0 6px">各類資料的狀態 <span class="n">1</span></h4>
+      <h4 style="margin:12px 0 6px">Status by data type <span class="n">1</span></h4>
       <table class="grid">
-        <thead><tr><th>資料類別</th><th>狀態</th><th>自何時</th><th>原因</th><th>最後收到有效內容</th><th>可用途徑</th><th>操作 <span class="n">2</span></th></tr></thead>
+        <thead><tr><th>Data type</th><th>Status</th><th>Since</th><th>Reason</th><th>Last valid content</th><th>Available paths</th><th>Actions <span class="n">2</span></th></tr></thead>
         <tbody>
-          <tr><td>賽程</td><td>正常</td><td class="l2">—</td><td class="l2">—</td><td>14:14</td><td>1／2</td><td><span class="btn" style="color:#aaa;border-color:#ccc">停用</span><div class="l2">C 是 1 場未結束賽事的建立者</div></td></tr>
-          <tr><td>賠率</td><td>正常</td><td class="l2">—</td><td class="l2">—</td><td>14:15</td><td>1／2</td><td><span class="btn danger">停用</span></td></tr>
-          <tr><td>賽況</td><td>正常</td><td class="l2">—</td><td class="l2">—</td><td>14:15</td><td>1／2</td><td><span class="btn danger">停用</span></td></tr>
-          <tr><td>賽果</td><td><b>中斷</b></td><td>12:03（2 小時 12 分）</td><td>直接輪詢途徑失效：速率限制</td><td>11:58</td><td>0／1</td><td><span class="btn danger">停用</span></td></tr>
+          <tr><td>Fixtures</td><td>Normal</td><td class="l2">—</td><td class="l2">—</td><td>14:14</td><td>1/2</td><td><span class="btn" style="color:#aaa;border-color:#ccc">Disable</span><div class="l2">C is the creator of 1 open event</div></td></tr>
+          <tr><td>Odds</td><td>Normal</td><td class="l2">—</td><td class="l2">—</td><td>14:15</td><td>1/2</td><td><span class="btn danger">Disable</span></td></tr>
+          <tr><td>Live data</td><td>Normal</td><td class="l2">—</td><td class="l2">—</td><td>14:15</td><td>1/2</td><td><span class="btn danger">Disable</span></td></tr>
+          <tr><td>Results</td><td><b>Interrupted</b></td><td>12:03 (2 h 12 min)</td><td>Direct polling path unavailable: rate limited</td><td>11:58</td><td>0/1</td><td><span class="btn danger">Disable</span></td></tr>
         </tbody>
       </table>
 
-      <h4 style="margin:16px 0 6px">取得途徑 <span class="n">3</span></h4>
+      <h4 style="margin:16px 0 6px">Access paths <span class="n">3</span></h4>
       <table class="grid">
-        <thead><tr><th>途徑</th><th>取得方式</th><th>連接器</th><th>帳號</th><th>提供的資料類別</th><th>途徑狀態 <span class="n">4</span></th><th>操作 <span class="n">5</span></th></tr></thead>
+        <thead><tr><th>Access path</th><th>Method</th><th>Connector</th><th>Account</th><th>Data types provided</th><th>Path status <span class="n">4</span></th><th>Actions <span class="n">5</span></th></tr></thead>
         <tbody>
-          <tr><td>經入口站台甲</td><td>以入口站台的玩家帳號進入</td><td>入口站台甲</td><td>p-jia-01</td><td>賽程、賠率、賽況</td><td><b>失效</b><div class="l2">40 分 · 入口站台甲維護（整個入口站台）</div></td><td></td></tr>
-          <tr><td>經入口站台乙</td><td>以入口站台的玩家帳號進入</td><td>入口站台乙</td><td>p-yi-01</td><td>賽程、賠率、賽況</td><td>可用</td><td></td></tr>
-          <tr><td>直接</td><td>匿名公開（輪詢賽果頁）</td><td>來源 C</td><td class="l2">不需要</td><td>賽果</td><td><b>失效</b><div class="l2">2 小時 12 分 · 速率限制</div></td><td></td></tr>
-          <tr class="off"><td>經入口站台丁</td><td>以入口站台的玩家帳號進入</td><td>入口站台丁</td><td>p-ding-01</td><td>賽程、賠率、賽況</td><td>尚未啟用</td><td><span class="btn pri">啟用</span></td></tr>
+          <tr><td>Via Portal Alpha</td><td>Logs in with a portal player account</td><td>Portal Alpha</td><td>p-jia-01</td><td>Fixtures, Odds, Live data</td><td><b>Unavailable</b><div class="l2">40 min · Portal Alpha maintenance (whole portal)</div></td><td></td></tr>
+          <tr><td>Via Portal Beta</td><td>Logs in with a portal player account</td><td>Portal Beta</td><td>p-yi-01</td><td>Fixtures, Odds, Live data</td><td>Available</td><td></td></tr>
+          <tr><td>Direct</td><td>Anonymous public (polls results page)</td><td>Source C</td><td class="l2">Not needed</td><td>Results</td><td><b>Unavailable</b><div class="l2">2 h 12 min · rate limited</div></td><td></td></tr>
+          <tr class="off"><td>Via Portal Delta</td><td>Logs in with a portal player account</td><td>Portal Delta</td><td>p-ding-01</td><td>Fixtures, Odds, Live data</td><td>Not yet enabled</td><td><span class="btn pri">Enable</span></td></tr>
         </tbody>
       </table>
 
-      <h4 style="margin:16px 0 6px">最近的狀態變化 <span class="n">6</span></h4>
+      <h4 style="margin:16px 0 6px">Recent status changes <span class="n">6</span></h4>
       <table class="grid">
-        <thead><tr><th>時間</th><th>對象</th><th>變化</th><th>由誰</th><th>原因</th></tr></thead>
+        <thead><tr><th>Time</th><th>Target</th><th>Change</th><th>By</th><th>Reason</th></tr></thead>
         <tbody>
-          <tr><td>13:35</td><td>途徑：經入口站台甲</td><td>可用 → 失效</td><td>系統</td><td>入口站台甲維護</td></tr>
-          <tr><td>12:03</td><td>賽果</td><td>正常 → 中斷</td><td>系統</td><td>直接輪詢途徑失效：速率限制</td></tr>
-          <tr><td>10-21 09:40</td><td>賠率</td><td>停用 → 由系統判定（正常）</td><td>ops.chen</td><td>已確認各帳號都屬於指定的價格等級</td></tr>
-          <tr><td>10-20 18:02</td><td>賠率</td><td>正常 → 停用</td><td>ops.chen</td><td>有帳號的價格等級與指定等級不一致</td></tr>
-          <tr><td colspan="5" class="l2">…（「狀態紀錄」頁可查更早的紀錄）</td></tr>
+          <tr><td>13:35</td><td>Path: via Portal Alpha</td><td>Available → Unavailable</td><td>System</td><td>Portal Alpha maintenance</td></tr>
+          <tr><td>12:03</td><td>Results</td><td>Normal → Interrupted</td><td>System</td><td>Direct polling path unavailable: rate limited</td></tr>
+          <tr><td>10-21 09:40</td><td>Odds</td><td>Disabled → determined by system (Normal)</td><td>ops.chen</td><td>Confirmed all accounts belong to the assigned price tier</td></tr>
+          <tr><td>10-20 18:02</td><td>Odds</td><td>Normal → Disabled</td><td>ops.chen</td><td>An account's price tier differs from the assigned tier</td></tr>
+          <tr><td colspan="5" class="l2">… (older entries on the “Status history” tab)</td></tr>
         </tbody>
       </table>
     </div>
@@ -191,9 +191,9 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>每類資料一列。「最後收到有效內容」是 InSports 收到的時間（R03-08），供 Ops 判斷資料多久沒更新；資料延遲不影響狀態，只要持續收到有效內容即為正常（R03-05）。</span></li>
-  <li><span class="n">2</span><span>「停用」是 R03-13 的第二種控制，開啟畫面 3；停用後該類資料不用於任何判定，仍可讀取供後台查看；其他類不受影響。運動的賽程來源的賽程沒有停用按鈕，只能在<a href="../event-data-and-mapping/source-roles.html">來源角色</a>更換（04 的 R04-02）；被人工指定為建立者、還有未結束賽事的來源，其賽程的停用按鈕不可按並說明原因（範例中的來源 C，04 的 R04-05）。停用中的類別顯示「啟用」。中斷沒有手動恢復的按鈕（R03-06）。</span></li>
-  <li><span class="n">3</span><span>一個來源可以有多條途徑，每條途徑提供該來源的一類或多類資料，途徑之間互為備援（R03-02）。一類資料沒有任何可用途徑才算中斷（R03-06）：賽果只有「直接」一條途徑，失效即中斷；賽程、賠率、賽況還有乙可用，仍為正常。</span></li>
+  <li><span class="n">1</span><span>每類資料一列。「Last valid content」是 InSports 收到的時間（R03-08），供 Ops 判斷資料多久沒更新；資料延遲不影響狀態，只要持續收到有效內容即為正常（R03-05）。</span></li>
+  <li><span class="n">2</span><span>「Disable」是 R03-13 的第二種控制，開啟畫面 3；停用後該類資料不用於任何判定，仍可讀取供後台查看；其他類不受影響。運動的賽程來源的賽程沒有停用按鈕，只能在<a href="../event-data-and-mapping/source-roles.html">來源角色</a>更換（04 的 R04-02）；被人工指定為建立者、還有未結束賽事的來源，其賽程的停用按鈕不可按並說明原因（範例中的來源 C，04 的 R04-05）。停用中的類別顯示「Enable」。中斷沒有手動恢復的按鈕（R03-06）。</span></li>
+  <li><span class="n">3</span><span>一個來源可以有多條途徑，每條途徑提供該來源的一類或多類資料，途徑之間互為備援（R03-02）。一類資料沒有任何可用途徑才算中斷（R03-06）：賽果只有「Direct」一條途徑，失效即中斷；賽程、賠率、賽況還有乙可用，仍為正常。</span></li>
   <li><span class="n">4</span><span>途徑狀態：可用、失效（顯示持續時間與原因，含維護的影響範圍：整個入口站台，或某來源在某入口站台的入口）、連接器暫停、帳號停用、尚未啟用。失效由系統判定；暫停與停用由人工在連接器頁與帳號頁操作。</span></li>
   <li><span class="n">5</span><span>新串接的途徑啟用前不可用（尚未啟用），不影響這個來源其他途徑與各類資料的狀態；由 Ops 在此啟用（R03-12）。沒有逐一途徑停用：要使途徑失效，只能停用它的帳號或暫停它的連接器（見本頁待確認第 1 項）。</span></li>
   <li><span class="n">6</span><span>系統判定的變化與人工的變更都在同一份紀錄，人工變更記錄由誰、何時、原因（R03-13、非功能需求）。</span></li>
@@ -202,27 +202,27 @@
 <!-- ============================================================ -->
 <h2>畫面 3：停用與啟用</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:560px">
-    <div class="mh"><span>停用．來源 C 的賽果</span><span>✕</span></div>
+    <div class="mh"><span>Disable · Source C results</span><span>✕</span></div>
     <div class="mb">
-      <p>停用後，來源 C 的賽果不再使用，直到人工啟用；立即生效。受影響的範圍 <span class="n">1</span>：</p>
+      <p>Once disabled, Source C results are not used until manually enabled; takes effect immediately. Affected scope <span class="n">1</span>:</p>
       <table class="grid">
-        <thead><tr><th>來源</th><th>資料類別</th><th>結果</th></tr></thead>
+        <thead><tr><th>Source</th><th>Data type</th><th>Result</th></tr></thead>
         <tbody>
-          <tr><td>來源 C</td><td>賽果</td><td><b>停用</b>（目前為中斷）</td></tr>
-          <tr><td>來源 C</td><td>賽程、賠率、賽況</td><td>不受影響</td></tr>
+          <tr><td>Source C</td><td>Results</td><td><b>Disabled</b>(currently interrupted)</td></tr>
+          <tr><td>Source C</td><td>Fixtures, Odds, Live data</td><td>Not affected</td></tr>
         </tbody>
       </table>
-      <div class="f" style="margin-top:12px"><label>原因（必填） <span class="n">2</span></label><span class="box wide" style="width:100%">來源賽果連續出錯，待查</span></div>
+      <div class="f" style="margin-top:12px"><label>Reason (required) <span class="n">2</span></label><span class="box wide" style="width:100%">Source results repeatedly wrong, under investigation</span></div>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認停用</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Confirm disable</span></div>
   </div>
 </div></div>
 
 <ol class="notes">
   <li><span class="n">1</span><span>只列 03 自己知道的範圍：受影響的來源與資料類別。對進行中賽事與盤口的影響由下游各模組處理（R03-07），不在此列出。</span></li>
-  <li><span class="n">2</span><span>每次停用與啟用都記錄由誰、何時、原因（R03-13）。啟用用同一個視窗，標題改為「啟用」，結果欄顯示「改由系統判定」：啟用後不會直接變成正常，要持續收到有效內容才會回到正常（R03-06、R03-07）。新來源的啟用也是這個視窗，一次列出它提供的全部類別，不需要試運轉（R03-12）。</span></li>
+  <li><span class="n">2</span><span>每次停用與啟用都記錄由誰、何時、原因（R03-13）。啟用用同一個視窗，標題改為「Enable」，結果欄顯示「Determined by system」：啟用後不會直接變成正常，要持續收到有效內容才會回到正常（R03-06、R03-07）。新來源的啟用也是這個視窗，一次列出它提供的全部類別，不需要試運轉（R03-12）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -231,6 +231,33 @@
   <li>是否需要逐一途徑停用。目前畫面只有帳號停用與連接器暫停會使途徑失效，與 R03-13「控制只有兩種」一致。</li>
   <li>中斷的持續時間從何時起算：最後一次收到有效內容（上例 11:58），或系統判定中斷的時間（12:03）。畫面暫以判定時間起算。</li>
 </ol>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>途徑</td><td lang="en">Access path</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>賽程</td><td lang="en">Fixtures</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>賠率</td><td lang="en">Odds</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>賽況</td><td lang="en">Live data</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>賽果</td><td lang="en">Results</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>正常</td><td lang="en">Normal</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>備援</td><td lang="en">Redundancy</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>入口站台</td><td lang="en">Portal</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>啟用</td><td lang="en">Enable</td></tr>
+  <tr><td>連接器</td><td lang="en">Connector</td><td>資料類別</td><td lang="en">Data type</td></tr>
+  <tr><td>帳號</td><td lang="en">Account</td><td>建立者</td><td lang="en">Creator</td></tr>
+  <tr><td>中斷</td><td lang="en">Interrupted</td><td>失效</td><td lang="en">Unavailable</td></tr>
+  <tr><td>停用</td><td lang="en">Disable</td><td>價格等級</td><td lang="en">Price tier</td></tr>
+  <tr><td>可用</td><td lang="en">Available</td><td>等級</td><td lang="en">Tier</td></tr>
+</table>
 
 </div>
 </body>

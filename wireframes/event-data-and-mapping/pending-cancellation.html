@@ -24,39 +24,39 @@
 <!-- ============================================================ -->
 <h2>畫面 1：待取消清單</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#" class="on">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#" class="on">Pending Cancellation &amp; Abandonment</a><a href="#">In-play Signal</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 賽事資料 › 待取消與待腰斬</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="top"><span>Home › Event Data › Pending Cancellation &amp; Abandonment</span><span>Language: English ▾ · ops.user ▾ · 10-23 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>待取消</h3><div class="sub">賽程來源不再提供的未開始賽事；標記期間該賽事與其候選都下架，只能由人工處理</div></div>
-        <div class="strip"><span class="on">待取消（4）</span><span>待腰斬（1）</span></div>
+        <div><h3>Pending cancellation</h3><div class="sub">Not-started events the fixture source no longer provides; while flagged, the event and its candidates are delisted and can only be handled manually</div></div>
+        <div class="strip"><span class="on">Pending cancellation (4)</span><span>Pending abandonment (1)</span></div>
       </div>
       <div class="filters">
-        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
-        <div class="f"><label>排序 <span class="n">1</span></label><span class="box caret">已等待最久</span></div>
+        <div class="f"><label>Sports</label><span class="box caret">All</span></div>
+        <div class="f"><label>Sort <span class="n">1</span></label><span class="box caret">Longest waiting</span></div>
       </div>
       <table class="grid">
         <thead><tr>
-          <th>賽事</th><th>統一狀態 <span class="n">2</span></th><th>來源給的原因 <span class="n">3</span></th><th>進入待取消</th><th>處理時限 <span class="n">4</span></th><th>候選 <span class="n">5</span></th><th>注單 <span class="n">6</span></th><th>操作</th>
+          <th>Event</th><th>Canonical status <span class="n">2</span></th><th>Reason from source <span class="n">3</span></th><th>Flagged at</th><th>Deadline <span class="n">4</span></th><th>Candidates <span class="n">5</span></th><th>Bets <span class="n">6</span></th><th>Actions</th>
         </tr></thead>
         <tbody>
-          <tr><td>EV-10198 · 熱刺 vs 切爾西<div class="l2">英超 · 原定 10-23 03:00 · 賽程來源 A</div></td><td>延後</td><td>延期，未給新時間</td><td class="nw">10-22 20:10<br><span class="l2">已等待 18 小時</span></td><td class="nw">10-25 03:00<div class="l2">足球延期規則</div></td><td>1 個</td><td>412</td><td><span class="btn pri">處理</span></td></tr>
-          <tr><td>EV-10251 · Becamex vs 河內<div class="l2">越南 V.League 1 · 原定 10-25 02:30 · 賽程來源 C</div></td><td>未開始</td><td>從清單消失 <span class="chip">已回到清單</span></td><td class="nw">10-23 13:50<br><span class="l2">已等待 25 分</span></td><td class="nw">10-27 02:30</td><td>0 個</td><td>18</td><td><span class="btn pri">處理</span></td></tr>
-          <tr><td>EV-10310 · 阪神 vs 巨人<div class="l2">日本職棒 · 原定 10-23 17:00 · 賽程來源 A</div></td><td>延後</td><td>延期，未給新時間</td><td class="nw">10-23 06:30<br><span class="l2">已等待 7 小時</span></td><td class="nw">10-24 05:00<div class="l2">棒球 12 小時規則</div></td><td>1 個<div class="l2">雙重賽的補賽</div></td><td>96</td><td><span class="btn pri">處理</span></td></tr>
-          <tr><td>EV-10333 · 某隊 vs 某隊<div class="l2">某友誼賽 · 原定 10-22 20:00 · 賽程來源 A</div></td><td>未開始</td><td>原定時間已過，來源仍凍結在賽前</td><td class="nw">10-22 20:30<br><span class="l2">已等待 17 小時</span></td><td class="nw"><b>10-23 20:00</b><div class="l2">即將到期</div></td><td>0 個</td><td>3</td><td><span class="btn pri">處理</span></td></tr>
+          <tr><td>EV-10198 · Tottenham vs Chelsea<div class="l2">Premier League · originally 10-23 03:00 · fixture source A</div></td><td>Delayed</td><td>Postponed, no new time given</td><td class="nw">10-22 20:10<br><span class="l2">Waiting 18 h</span></td><td class="nw">10-25 03:00<div class="l2">Soccer postponement rule</div></td><td>1</td><td>412</td><td><span class="btn pri">Handle</span></td></tr>
+          <tr><td>EV-10251 · Becamex vs Hanoi<div class="l2">V.League 1 · originally 10-25 02:30 · fixture source C</div></td><td>Not started</td><td>Dropped from list <span class="chip">Back on list</span></td><td class="nw">10-23 13:50<br><span class="l2">Waiting 25 min</span></td><td class="nw">10-27 02:30</td><td>0</td><td>18</td><td><span class="btn pri">Handle</span></td></tr>
+          <tr><td>EV-10310 · Hanshin vs Yomiuri<div class="l2">NPB · originally 10-23 17:00 · fixture source A</div></td><td>Delayed</td><td>Postponed, no new time given</td><td class="nw">10-23 06:30<br><span class="l2">Waiting 7 h</span></td><td class="nw">10-24 05:00<div class="l2">Baseball 12-hour rule</div></td><td>1<div class="l2">Doubleheader make-up game</div></td><td>96</td><td><span class="btn pri">Handle</span></td></tr>
+          <tr><td>EV-10333 · Team X vs Team Y<div class="l2">Friendly X · originally 10-22 20:00 · fixture source A</div></td><td>Not started</td><td>Scheduled time passed; source still frozen at pre-match</td><td class="nw">10-22 20:30<br><span class="l2">Waiting 17 h</span></td><td class="nw"><b>10-23 20:00</b><div class="l2">Due soon</div></td><td>0</td><td>3</td><td><span class="btn pri">Handle</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -67,7 +67,7 @@
 <ol class="notes">
   <li><span class="n">1</span><span>佇列的排序與處理時限見待確認（04 第 10 項、11 第 4 項）；畫面暫以已等待最久在前。</span></li>
   <li><span class="n">2</span><span>待取消是疊在統一狀態上的標記，不是狀態（R04-23）；統一狀態另欄顯示，只會是未開始或延後。</span></li>
-  <li><span class="n">3</span><span>「不再提供」的四種情況（R04-23）：從清單消失、來源標為取消、來源標延期而沒有新時間、原定時間已過仍凍結在賽前。只顯示供參考，不限制選項。賽事回到賽程來源清單上時只註記「已回到清單」，不自動解除。</span></li>
+  <li><span class="n">3</span><span>「不再提供」的四種情況（R04-23）：從清單消失、來源標為取消、來源標延期而沒有新時間、原定時間已過仍凍結在賽前。只顯示供參考，不限制選項。賽事回到賽程來源清單上時只註記「Back on list」，不自動解除。</span></li>
   <li><span class="n">4</span><span>等待多久由各運動的延期規則決定（見 07），超過時由人工作廢；即將到期的列加強顯示。</span></li>
   <li><span class="n">5</span><span>候選是建立者列出、可能與這場是同一場的新識別，系統依 R04-24 列出；人工判斷前不建立、不開盤（R04-05）。沒有候選時不能重掛，其餘處置照常。</span></li>
   <li><span class="n">6</span><span>該賽事已接受的注單數，資料來自 06；是否顯示見待確認（11 第 4 項）。</span></li>
@@ -76,32 +76,32 @@
 <!-- ============================================================ -->
 <h2>畫面 2：處置待取消</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:720px">
-    <div class="mh"><span>處置待取消．EV-10198 熱刺 vs 切爾西</span><span>✕</span></div>
+    <div class="mh"><span>Resolve pending cancellation · EV-10198 Tottenham vs Chelsea</span><span>✕</span></div>
     <div class="mb">
-      <p>英超 · 原定 10-23 03:00 · 統一狀態：延後 · 來源給的原因：延期，未給新時間 · 已接受注單 412 張 · 處理時限 10-25 03:00</p>
-      <h4 style="margin:10px 0 4px">候選（尚未建立） <span class="n">1</span></h4>
+      <p>Premier League · originally 10-23 03:00 · Canonical status: Delayed · Reason from source: postponed, no new time given · 412 bets accepted · Deadline 10-25 03:00</p>
+      <h4 style="margin:10px 0 4px">Candidates (not yet created) <span class="n">1</span></h4>
       <table class="grid">
-        <thead><tr><th></th><th>候選</th><th>開賽</th><th>也符合其他賽事</th><th>可重掛</th></tr></thead>
+        <thead><tr><th></th><th>Candidates</th><th>Kick-off</th><th>Also matches other events</th><th>Can re-link</th></tr></thead>
         <tbody>
-          <tr><td>●</td><td>A-88990 · Tottenham vs Chelsea<div class="l2">來源 A · 10-22 21:40 出現的新識別</div></td><td>10-24 03:00</td><td class="l2">無</td><td>可</td></tr>
+          <tr><td>●</td><td>A-88990 · Tottenham vs Chelsea<div class="l2">Source A · new ID seen 10-22 21:40</div></td><td>10-24 03:00</td><td class="l2">None</td><td>Yes</td></tr>
         </tbody>
       </table>
-      <h4 style="margin:12px 0 4px">處置 <span class="n">2</span></h4>
-      <div>○ 取消並作廢注單（412 張依 07 作廢）<span class="chip">須覆核</span></div>
-      <div>● 重掛到候選：<span class="box caret">A-88990 · 10-24 03:00</span> <span class="chip">須覆核</span></div>
-      <div>○ 暫不處理（維持待取消與下架）</div>
-      <div class="l2">○ 解除待取消並上架（只在該賽事已回到賽程來源清單上時可選）</div>
-      <div class="f" style="margin-top:10px"><label>原因（必填）</label><span class="box" style="width:100%">聯賽官網公告改期至 10-24 03:00，對陣與場地相同</span></div>
-      <p class="hint" style="margin-top:8px">重掛後，EV-10198 改用 A-88990，開賽時間改為 10-24 03:00，解除待取消並上架；412 張注單留在原賽事，效力依足球延期規則判斷，基準仍是原定的 10-23 03:00 <span class="n">3</span>。A-88990 不另建賽事。</p>
+      <h4 style="margin:12px 0 4px">Resolution <span class="n">2</span></h4>
+      <div>○ Cancel and void bets (412 voided under 07)<span class="chip">Needs review</span></div>
+      <div>● Re-link to candidate:<span class="box caret">A-88990 · 10-24 03:00</span> <span class="chip">Needs review</span></div>
+      <div>○ Leave for now (stays pending cancellation and delisted)</div>
+      <div class="l2">○ Clear pending cancellation and relist (only when the event is back on the fixture source's list)</div>
+      <div class="f" style="margin-top:10px"><label>Reason (required)</label><span class="box" style="width:100%">League website announced rescheduling to 10-24 03:00, same matchup and venue</span></div>
+      <p class="hint" style="margin-top:8px">After re-linking, EV-10198 uses A-88990, kick-off changes to 10-24 03:00, pending cancellation is cleared and the event is relisted; the 412 bets stay on the original event, and their validity follows the soccer postponement rule, still measured from the original 10-23 03:00 <span class="n">3</span>. A-88990 does not create a separate event.</p>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">送出，待覆核</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Submit for review</span></div>
   </div>
 </div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>候選是建立者列出、尚未建立的新識別；系統不認定是同一場比賽（R04-24）。寧可多列：雙重賽的另一場也可能被列為候選，由 Ops 判斷不同場後才建立。候選已開打時不能重掛，「可重掛」顯示「否」。一個新識別同時符合多筆賽事時，只能重掛到其中一筆，「也符合其他賽事」列出其餘幾筆。</span></li>
+  <li><span class="n">1</span><span>候選是建立者列出、尚未建立的新識別；系統不認定是同一場比賽（R04-24）。寧可多列：雙重賽的另一場也可能被列為候選，由 Ops 判斷不同場後才建立。候選已開打時不能重掛，「Can re-link」顯示「No」。一個新識別同時符合多筆賽事時，只能重掛到其中一筆，「Also matches other events」列出其餘幾筆。</span></li>
   <li><span class="n">2</span><span>選項只有四種（R04-23）。作廢與重掛會改變注單的結算依據，須由另一人覆核後才生效（R04-19）；暫不處理與解除由一人即可。</span></li>
   <li><span class="n">3</span><span>重掛只限同一建立者。注單留在原賽事，不轉移；效力依各運動延期規則（見 07），延期判斷基準不因重掛重設（R04-05）。舊識別保留在紀錄中，之後的更新不再寫入；已作廢的注單不因重掛恢復。</span></li>
 </ol>
@@ -109,30 +109,30 @@
 <!-- ============================================================ -->
 <h2>畫面 3：待腰斬清單（入口）</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#" class="on">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#" class="on">Pending Cancellation &amp; Abandonment</a><a href="#">In-play Signal</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 賽事資料 › 待取消與待腰斬 › 待腰斬</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="top"><span>Home › Event Data › Pending Cancellation &amp; Abandonment › Pending abandonment</span><span>Language: English ▾ · ops.user ▾ · 10-23 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>待腰斬</h3><div class="sub">進行中的賽事從賽程來源消失或被標為取消；是否腰斬與各時段賽果一律由人工確認</div></div>
-        <div class="strip"><span>待取消（4）</span><span class="on">待腰斬（1）</span></div>
+        <div><h3>Pending abandonment</h3><div class="sub">In-progress events that dropped from the fixture source or were marked cancelled; abandonment and period results are always confirmed manually</div></div>
+        <div class="strip"><span>Pending cancellation (4)</span><span class="on">Pending abandonment (1)</span></div>
       </div>
       <table class="grid">
-        <thead><tr><th>賽事</th><th>統一狀態 <span class="n">1</span></th><th>來源給的原因</th><th>進入待腰斬</th><th>最後的統一比分 <span class="n">2</span></th><th>其他來源 <span class="n">3</span></th><th>操作 <span class="n">4</span></th></tr></thead>
+        <thead><tr><th>Event</th><th>Canonical status <span class="n">1</span></th><th>Reason from source</th><th>Flagged at</th><th>Last canonical score <span class="n">2</span></th><th>Other sources <span class="n">3</span></th><th>Actions <span class="n">4</span></th></tr></thead>
         <tbody>
-          <tr><td>EV-10290 · 水原 vs 蔚山<div class="l2">韓國 K 聯賽 · 10-23 13:00 開賽 · 賽程來源 A</div></td><td>比賽中斷</td><td>來源標為取消</td><td class="nw">10-23 13:58<br><span class="l2">已等待 17 分</span></td><td>上半場 1:0（已結束）<br>下半場 0:1（第 58 分鐘）</td><td>來源 C：比賽中斷<br>來源 G：比賽中斷（暴雨）</td><td><span class="btn pri">確認腰斬與賽果</span></td></tr>
+          <tr><td>EV-10290 · Suwon vs Ulsan<div class="l2">K League 1 · kick-off 10-23 13:00 · fixture source A</div></td><td>Interrupted</td><td>Marked cancelled by source</td><td class="nw">10-23 13:58<br><span class="l2">Waiting 17 min</span></td><td>1st half 1:0 (ended)<br>2nd half 0:1 (58th minute)</td><td>Source C: Interrupted<br>Source G: Interrupted (heavy rain)</td><td><span class="btn pri">Confirm abandonment and results</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -144,7 +144,7 @@
   <li><span class="n">1</span><span>待腰斬同樣是標記，不是狀態；統一狀態依所有來源整理（R04-12），這裡是比賽中斷。</span></li>
   <li><span class="n">2</span><span>顯示各時段最後的統一比分與是否已結束，供人工確認。腰斬的賽事不適用自動穩定，即使來源一致也不自動結算（R04-14、R04-23）。</span></li>
   <li><span class="n">3</span><span>其他已對應來源回報的狀態與原因，幫助判斷是真的腰斬還是來源自己的問題。</span></li>
-  <li><span class="n">4</span><span>本頁只是入口。「確認腰斬與賽果」進入 06、07 定義的流程，包括各時段如何結算，以及中斷後續賽或以新識別接續的出口（04 待確認第 7 項）；本頁不預設結果。</span></li>
+  <li><span class="n">4</span><span>本頁只是入口。「Confirm abandonment and results」進入 06、07 定義的流程，包括各時段如何結算，以及中斷後續賽或以新識別接續的出口（04 待確認第 7 項）；本頁不預設結果。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -153,6 +153,40 @@
   <li>是否顯示該賽事已接受的注單數（11 待確認第 4 項）。</li>
   <li>佇列的排序與處理時限（04 待確認第 10 項）。</li>
 </ol>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>訊號</td><td lang="en">Signal</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>賽程來源</td><td lang="en">Fixture source</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>未開始</td><td lang="en">Not started</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>候選</td><td lang="en">Candidates</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>下架</td><td lang="en">Delisted</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>統一狀態</td><td lang="en">Canonical status</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>注單</td><td lang="en">Bets</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>延後</td><td lang="en">Delayed</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>延期</td><td lang="en">Postponed</td></tr>
+  <tr><td>連接器</td><td lang="en">Connectors</td><td>足球</td><td lang="en">Soccer</td></tr>
+  <tr><td>帳號</td><td lang="en">Accounts</td><td>棒球</td><td lang="en">Baseball</td></tr>
+  <tr><td>賽事</td><td lang="en">Event</td><td>賽前</td><td lang="en">Pre-match</td></tr>
+  <tr><td>待處理</td><td lang="en">Work Queue</td><td>開賽</td><td lang="en">Kick-off</td></tr>
+  <tr><td>來源角色</td><td lang="en">Source Roles</td><td>重掛</td><td lang="en">Re-link</td></tr>
+  <tr><td>賽事對應</td><td lang="en">Event Mapping</td><td>作廢</td><td lang="en">Void</td></tr>
+  <tr><td>對應</td><td lang="en">Mapping</td><td>覆核</td><td lang="en">Review</td></tr>
+  <tr><td>待取消</td><td lang="en">Pending cancellation</td><td>上架</td><td lang="en">Relist</td></tr>
+  <tr><td>待腰斬</td><td lang="en">Pending abandonment</td><td>賽果</td><td lang="en">Results</td></tr>
+  <tr><td>腰斬</td><td lang="en">Abandonment</td><td>中斷</td><td lang="en">Interrupted</td></tr>
+  <tr><td>滾球</td><td lang="en">In-play</td><td>上半場</td><td lang="en">1st half</td></tr>
+  <tr><td>滾球訊號</td><td lang="en">In-play Signal</td><td>下半場</td><td lang="en">2nd half</td></tr>
+</table>
 
 </div>
 </body>

@@ -23,154 +23,182 @@
 <!-- ============================================================ -->
 <h2>畫面 1：參賽方清單</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a>
-    <a href="#">競賽</a>
-    <a href="#" class="on">參賽方</a>
-    <a href="#">時段與計分項目</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a>
+    <a href="#">Tournaments</a>
+    <a href="#" class="on">Competitors</a>
+    <a href="#">Periods &amp; Score Items</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 目錄 › 參賽方</span><span>語言：繁體中文 ▾ · ops.user ▾</span></div>
+    <div class="top"><span>Home › Catalog › Competitors</span><span>Language: English ▾ · ops.user ▾</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>參賽方</h3><div class="sub">參加賽事的隊伍或個人，例如俱樂部、國家隊、球員、選手</div></div>
-        <div class="strip"><span class="on">參賽方清單</span><span>多語系</span><span>等級看板</span><span>排序看板</span></div>
+        <div><h3>Competitors</h3><div class="sub">Teams or individuals taking part in events, e.g. clubs, national teams, players, athletes</div></div>
+        <div class="strip"><span class="on">Competitor list</span><span>Translations</span><span>Tier board</span><span>Ordering board</span></div>
       </div>
 
       <div class="filters">
-        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
-        <div class="f"><label>競賽 <span class="n">1</span></label><span class="box caret">全部</span></div>
-        <div class="f"><label>國家／地區</label><span class="box caret">全部</span></div>
-        <div class="f"><label>類型 <span class="n">2</span></label><span class="box caret">全部</span></div>
-        <div class="f"><label>等級</label><span class="box caret">全部</span></div>
-        <div class="f"><label>性別</label><span class="box caret">全部</span></div>
-        <div class="f"><label>年齡層</label><span class="box caret">全部</span></div>
-        <div class="f"><label>組別</label><span class="box caret">全部</span></div>
-        <div class="f"><label>真實／虛擬</label><span class="box caret">全部</span></div>
-        <div class="f"><label>搜尋</label><span class="box wide">參賽方名稱或 ID</span></div>
-        <span class="btn">清除篩選</span>
+        <div class="f"><label>Sports</label><span class="box caret">Soccer</span></div>
+        <div class="f"><label>Tournaments <span class="n">1</span></label><span class="box caret">All</span></div>
+        <div class="f"><label>Country/Region</label><span class="box caret">All</span></div>
+        <div class="f"><label>Type <span class="n">2</span></label><span class="box caret">All</span></div>
+        <div class="f"><label>Tier</label><span class="box caret">All</span></div>
+        <div class="f"><label>Gender</label><span class="box caret">All</span></div>
+        <div class="f"><label>Age group</label><span class="box caret">All</span></div>
+        <div class="f"><label>Division</label><span class="box caret">All</span></div>
+        <div class="f"><label>Real/Virtual</label><span class="box caret">All</span></div>
+        <div class="f"><label>Search</label><span class="box wide">Competitor name or ID</span></div>
+        <span class="btn">Clear filters</span>
       </div>
 
       <table class="grid">
         <thead><tr>
-          <th>名稱 <span class="s">／ ID</span></th>
-          <th>參加的競賽 <span class="n">3</span></th>
-          <th>類型</th>
-          <th>國家／地區 <span class="s">／ 性別．年齡層</span></th>
-          <th>等級 <span class="s">／ 排序號</span></th>
-          <th>下一場賽事 <span class="n">5</span></th>
-          <th>建立 <span class="s">／ 更新</span></th>
-          <th>操作</th>
+          <th>Name <span class="s">/ ID</span></th>
+          <th>Tournaments <span class="n">3</span></th>
+          <th>Type</th>
+          <th>Country/Region <span class="s">/ Gender · Age group</span></th>
+          <th>Tier <span class="s">/ Sort order</span></th>
+          <th>Next event <span class="n">5</span></th>
+          <th>Created <span class="s">/ Updated</span></th>
+          <th>Actions</th>
         </tr></thead>
         <tbody>
           <tr>
-            <td>A 隊<div class="l2">C-50012</div></td>
-            <td>英超<div class="l2">另 2 個：英格蘭聯賽盃、歐冠</div></td>
-            <td>俱樂部</td>
-            <td>英格蘭<div class="l2">男子．成年</div></td>
-            <td>1<div class="l2">排序號 3</div></td>
-            <td>10/24 22:00<div class="l2">對 B 隊（英超）</div></td>
+            <td>Team A<div class="l2">C-50012</div></td>
+            <td>Premier League<div class="l2">+2 more: EFL Cup, UEFA Champions League</div></td>
+            <td>Club</td>
+            <td>England<div class="l2">Men · Senior</div></td>
+            <td>1<div class="l2">Sort order 3</div></td>
+            <td>10/24 22:00<div class="l2">vs Team B (Premier League)</div></td>
             <td>2024-07-02<div class="l2">2026-10-18</div></td>
-            <td><span class="btn">賽事</span> <span class="btn">編輯</span></td>
+            <td><span class="btn">Events</span> <span class="btn">Edit</span></td>
           </tr>
           <tr>
-            <td>某國國家隊<div class="l2">C-50980</div></td>
-            <td>世界盃<div class="l2">另 1 個：國際友誼賽</div></td>
-            <td>國家隊</td>
-            <td>某國<div class="l2">男子．成年</div></td>
-            <td>2<div class="l2">排序號 15</div></td>
-            <td>11/13 03:00<div class="l2">對 另一國國家隊（國際友誼賽）</div></td>
+            <td>Country X national team<div class="l2">C-50980</div></td>
+            <td>FIFA World Cup<div class="l2">+1 more: International Friendlies</div></td>
+            <td>National team</td>
+            <td>Country X<div class="l2">Men · Senior</div></td>
+            <td>2<div class="l2">Sort order 15</div></td>
+            <td>11/13 03:00<div class="l2">vs Country Y national team (International Friendlies)</div></td>
             <td>2022-03-11<div class="l2">2026-09-30</div></td>
-            <td><span class="btn">賽事</span> <span class="btn">編輯</span></td>
+            <td><span class="btn">Events</span> <span class="btn">Edit</span></td>
           </tr>
           <tr>
-            <td>某球員<div class="l2">C-71203</div></td>
-            <td>世界盃<div class="l2">射手王冠軍盤的投注項</div></td>
-            <td>個人</td>
-            <td>某國<div class="l2">男子</div></td>
-            <td>未分級<div class="l2">未排序</div></td>
+            <td>Player X<div class="l2">C-71203</div></td>
+            <td>FIFA World Cup<div class="l2">Outcome of the top-goalscorer outright</div></td>
+            <td>Individual</td>
+            <td>Country X<div class="l2">Men</div></td>
+            <td>Untiered<div class="l2">Unsorted</div></td>
             <td>—</td>
             <td>2026-05-20<div class="l2">2026-07-19</div></td>
-            <td><span class="btn">賽事</span> <span class="btn">編輯</span></td>
+            <td><span class="btn">Events</span> <span class="btn">Edit</span></td>
           </tr>
           <tr>
-            <td>A 隊<span class="chip">虛擬</span> <span class="n">4</span><div class="l2">C-90001</div></td>
-            <td>虛擬足球聯賽</td>
-            <td>俱樂部</td>
-            <td>未定<div class="l2">未定．未定</div></td>
-            <td>5<div class="l2">排序號 1</div></td>
-            <td>10/21 15:03<div class="l2">對 虛擬 B 隊</div></td>
+            <td>Team A<span class="chip">Virtual</span> <span class="n">4</span><div class="l2">C-90001</div></td>
+            <td>Virtual Soccer League</td>
+            <td>Club</td>
+            <td>Unspecified<div class="l2">Unspecified · Unspecified</div></td>
+            <td>5<div class="l2">Sort order 1</div></td>
+            <td>10/21 15:03<div class="l2">vs Virtual Team B</div></td>
             <td>2026-01-05<div class="l2">2026-01-05</div></td>
-            <td><span class="btn">賽事</span> <span class="btn">編輯</span></td>
+            <td><span class="btn">Events</span> <span class="btn">Edit</span></td>
           </tr>
           <tr>
-            <td>A 隊<span class="chip">疑似重複</span> <span class="n">6</span><div class="l2">C-61544</div></td>
-            <td>俱樂部友誼賽</td>
-            <td>俱樂部</td>
-            <td>英格蘭<div class="l2">男子．成年</div></td>
-            <td>未分級<div class="l2">未排序</div></td>
+            <td>Team A<span class="chip">Possible duplicate</span> <span class="n">6</span><div class="l2">C-61544</div></td>
+            <td>Club Friendlies</td>
+            <td>Club</td>
+            <td>England<div class="l2">Men · Senior</div></td>
+            <td>Untiered<div class="l2">Unsorted</div></td>
             <td>—</td>
             <td>2026-09-12<div class="l2">2026-09-13</div></td>
-            <td><span class="btn">賽事</span> <span class="btn">編輯</span></td>
+            <td><span class="btn">Events</span> <span class="btn">Edit</span></td>
           </tr>
         </tbody>
       </table>
-      <div class="pager"><span>‹ 上一頁　1　2　3　…　下一頁 ›</span><span>第 1／216 頁．共 21,530 個參賽方．每頁 100 個</span></div>
+      <div class="pager"><span>‹ Prev  1  2  3  …  Next ›</span><span>Page 1/216 · 21,530 competitors · 100 per page</span></div>
     </div>
   </div>
 </div>
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>從<a href="tournaments.html">競賽清單</a>按「參賽方」進入時，這個篩選已選好該競賽。</span></li>
-  <li><span class="n">2</span><span>類型：俱樂部、國家隊、個人、其他，初始值為「未定」。值的清單見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>（R01-31）。</span></li>
+  <li><span class="n">1</span><span>從<a href="tournaments.html">競賽清單</a>按「Competitors」進入時，這個篩選已選好該競賽。</span></li>
+  <li><span class="n">2</span><span>類型：俱樂部、國家隊、個人、其他，初始值為「Unspecified」。值的清單見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>（R01-31）。</span></li>
   <li><span class="n">3</span><span>同一個參賽方可以參加多個競賽，例如聯賽、盃賽與洲際賽。冠軍盤以參賽方為投注項（R01-13），例如射手王的球員。</span></li>
-  <li><span class="n">4</span><span>參賽方在虛擬競賽的賽事中建立時，即為虛擬參賽方（R01-27）。虛擬參賽方即使名稱與真實隊伍相同，也是不同的參賽方，例如上表的兩個「A 隊」。</span></li>
-  <li><span class="n">5</span><span>「下一場賽事」的定義與<a href="tournaments.html">競賽清單</a>相同。國家／地區、性別、年齡層的初始值都是「未定」，組別預設為「無」；類型為個人時沒有年齡層（R01-31）。</span></li>
-  <li><span class="n">6</span><span>同一個參賽方可能暫時有兩筆紀錄：賽事由不同的建立者建立時（例如更換運動的賽程來源後，或人工指定建立者時誤選新建），建立者的參賽方對應尚未確立，就會另建一筆，確立後列入疑似重複、由人工合併（R04-04、R04-07），例如上表俱樂部友誼賽中的「A 隊」。疑似重複的紀錄由 04 的人工審核合併（R04-19），本畫面只標示，不提供停用。參賽方沒有營運狀態（R01-29），不開盤只會是風控原因，見 09。</span></li>
+  <li><span class="n">4</span><span>參賽方在虛擬競賽的賽事中建立時，即為虛擬參賽方（R01-27）。虛擬參賽方即使名稱與真實隊伍相同，也是不同的參賽方，例如上表的兩個「Team A」。</span></li>
+  <li><span class="n">5</span><span>「Next event」的定義與<a href="tournaments.html">競賽清單</a>相同。國家／地區、性別、年齡層的初始值都是「Unspecified」，組別預設為「None」；類型為個人時沒有年齡層（R01-31）。</span></li>
+  <li><span class="n">6</span><span>同一個參賽方可能暫時有兩筆紀錄：賽事由不同的建立者建立時（例如更換運動的賽程來源後，或人工指定建立者時誤選新建），建立者的參賽方對應尚未確立，就會另建一筆，確立後列入疑似重複、由人工合併（R04-04、R04-07），例如上表俱樂部友誼賽中的「Team A」。疑似重複的紀錄由 04 的人工審核合併（R04-19），本畫面只標示，不提供停用。參賽方沒有營運狀態（R01-29），不開盤只會是風控原因，見 09。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>畫面 2：編輯參賽方</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal">
-    <div class="mh"><span>編輯參賽方．A 隊（C-50012）</span><span>✕</span></div>
+    <div class="mh"><span>Edit competitor · Team A (C-50012)</span><span>✕</span></div>
     <div class="mb">
       <div class="form">
-        <div class="f full"><label>基準名稱 <span class="n">2</span></label><span class="box ro" style="width:100%">Team A</span></div>
-        <div class="f"><label>運動</label><span class="box ro">足球</span></div>
-        <div class="f"><label>類型</label><span class="box caret">俱樂部</span></div>
-        <div class="f"><label>國家／地區</label><span class="box caret">英格蘭</span></div>
-        <div class="f"><label>性別</label><span class="box caret">男子</span></div>
-        <div class="f"><label>年齡層</label><span class="box caret">成年</span></div>
-        <div class="f"><label>組別</label><span class="box caret">無</span></div>
-        <div class="f"><label>等級 <span class="n">3</span></label><span class="box caret">1</span></div>
-        <div class="f"><label>排序號</label><span class="box">3</span></div>
-        <div class="f"><label>虛擬 <span class="n">1</span></label><span class="box ro">否（真實參賽方）</span></div>
-        <div class="f"><label>圖示 <span class="n">4</span></label><span class="box">（無）</span><div class="hint">上傳</div></div>
+        <div class="f full"><label>Base name <span class="n">2</span></label><span class="box ro" style="width:100%">Team A</span></div>
+        <div class="f"><label>Sports</label><span class="box ro">Soccer</span></div>
+        <div class="f"><label>Type</label><span class="box caret">Club</span></div>
+        <div class="f"><label>Country/Region</label><span class="box caret">England</span></div>
+        <div class="f"><label>Gender</label><span class="box caret">Men</span></div>
+        <div class="f"><label>Age group</label><span class="box caret">Senior</span></div>
+        <div class="f"><label>Division</label><span class="box caret">None</span></div>
+        <div class="f"><label>Tier <span class="n">3</span></label><span class="box caret">1</span></div>
+        <div class="f"><label>Sort order</label><span class="box">3</span></div>
+        <div class="f"><label>Virtual <span class="n">1</span></label><span class="box ro">No (real competitor)</span></div>
+        <div class="f"><label>Logo <span class="n">4</span></label><span class="box">(none)</span><div class="hint">Upload</div></div>
       </div>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">儲存</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
   </div>
 </div></div>
 
 <ol class="notes">
   <li><span class="n">1</span><span>虛擬與否在建立時決定，之後不變，在後台唯讀，與競賽相同（R01-27）。</span></li>
-  <li><span class="n">2</span><span>基準名稱來自賽程來源，唯讀，不等於英文名稱（R01-30）。英文與其他語言的名稱在「多語系」頁修改，版面與<a href="tournaments.html">競賽的畫面 3</a> 相同，不另外畫。</span></li>
-  <li><span class="n">3</span><span>等級的用途與競賽相同，分為 1 至 10 級與「未分級」（R01-32）。排序號是系統排序（R01-28），例如用於冠軍盤投注項的顯示順序；「未排序」表示尚未設定排序號，顯示在最後。經銷商可以在系統排序的基礎上變更，也可以重置（見 10）。</span></li>
+  <li><span class="n">2</span><span>基準名稱來自賽程來源，唯讀，不等於英文名稱（R01-30）。英文與其他語言的名稱在「Translations」頁修改，版面與<a href="tournaments.html">競賽的畫面 3</a> 相同，不另外畫。</span></li>
+  <li><span class="n">3</span><span>等級的用途與競賽相同，分為 1 至 10 級與「Untiered」（R01-32）。排序號是系統排序（R01-28），例如用於冠軍盤投注項的顯示順序；「Unsorted」表示尚未設定排序號，顯示在最後。經銷商可以在系統排序的基礎上變更，也可以重置（見 10）。</span></li>
   <li><span class="n">4</span><span>圖示與競賽相同：由 Ops 上傳或更換，沒有圖示時顯示預設圖示（R01-33）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>畫面 3、4、5：多語系、等級看板、排序看板</h2>
-<p>與<a href="tournaments.html">競賽的畫面 3、4、5</a> 相同；等級看板與排序看板的篩選條件另加「類型」。</p>
+<p>與<a href="tournaments.html">競賽的畫面 3、4、5</a> 相同；等級看板與排序看板的篩選條件另加「Type」。</p>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>足球</td><td lang="en">Soccer</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>國家／地區</td><td lang="en">Country/Region</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>類型</td><td lang="en">Type</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>性別</td><td lang="en">Gender</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitor</td><td>年齡層</td><td lang="en">Age group</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>組別</td><td lang="en">Division</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>虛擬</td><td lang="en">Virtual</td></tr>
+  <tr><td>賽事</td><td lang="en">Events</td><td>排序號</td><td lang="en">Sort order</td></tr>
+  <tr><td>個人</td><td lang="en">Individual</td><td>冠軍盤</td><td lang="en">Outright</td></tr>
+  <tr><td>俱樂部</td><td lang="en">Club</td><td>投注項</td><td lang="en">Outcome</td></tr>
+  <tr><td>國家隊</td><td lang="en">National team</td><td>未分級</td><td lang="en">Untiered</td></tr>
+  <tr><td>多語系</td><td lang="en">Translations</td><td>未定</td><td lang="en">Unspecified</td></tr>
+  <tr><td>等級</td><td lang="en">Tier</td><td>疑似重複</td><td lang="en">Possible duplicate</td></tr>
+  <tr><td>等級看板</td><td lang="en">Tier board</td><td>基準名稱</td><td lang="en">Base name</td></tr>
+  <tr><td>排序看板</td><td lang="en">Ordering board</td><td></td><td lang="en"></td></tr>
+</table>
 
 </div>
 </body>

@@ -24,45 +24,45 @@
 <!-- ============================================================ -->
 <h2>畫面 1：進行中賽事的訊號與覆蓋</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#" class="on">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#">Pending Cancellation &amp; Abandonment</a><a href="#" class="on">In-play Signal</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 賽事資料 › 滾球訊號</span><span>語言：繁體中文 ▾ · ops.user ▾ · 10-23 14:15</span></div>
+    <div class="top"><span>Home › Event Data › In-play Signal</span><span>Language: English ▾ · ops.user ▾ · 10-23 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>滾球訊號與覆蓋</h3><div class="sub">進行中的賽事；訊號只來自使用中的賽況來源，不能中途改用另一個來源</div></div>
+        <div><h3>In-play signal &amp; coverage</h3><div class="sub">Events in progress; the signal comes only from the live data source in use and cannot switch to another source mid-match</div></div>
       </div>
       <div class="filters">
-        <div class="f"><label>運動</label><span class="box caret">全部</span></div>
-        <div class="f"><label>覆蓋 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>有覆蓋</span><span>無覆蓋</span></span></div>
-        <div class="f"><label>訊號</label><span class="strip"><span class="on">全部</span><span>危險</span><span>無訊號</span></span></div>
-        <div class="f"><label>搜尋</label><span class="box wide">隊伍或競賽</span></div>
+        <div class="f"><label>Sports</label><span class="box caret">All</span></div>
+        <div class="f"><label>Coverage <span class="n">1</span></label><span class="strip"><span class="on">All</span><span>Covered</span><span>No coverage</span></span></div>
+        <div class="f"><label>Signal</label><span class="strip"><span class="on">All</span><span>Danger</span><span>No signal</span></span></div>
+        <div class="f"><label>Search</label><span class="box wide">Team or tournament</span></div>
       </div>
       <table class="grid">
         <thead><tr>
-          <th>賽事</th><th>比賽時間</th><th>使用中的賽況來源 <span class="n">2</span></th><th>統一訊號 <span class="n">3</span></th><th>覆蓋 <span class="n">4</span></th><th>其他提供訊號的來源 <span class="n">5</span></th>
+          <th>Event</th><th>Match time</th><th>Live data source in use <span class="n">2</span></th><th>Canonical signal <span class="n">3</span></th><th>Coverage <span class="n">4</span></th><th>Other sources with signal <span class="n">5</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>曼城 vs 兵工廠<div class="l2">英超 · 進行中 2:1</div></td><td class="nw">下半場 67'</td><td>來源 A <span class="chip">事件形式</span></td><td><b>危險</b><div class="l2">可能點球 · 14:14:50 起</div></td><td>有覆蓋</td><td class="l2">來源 B（不使用）<br>來源 C 封盤（不使用）</td></tr>
-          <tr><td>熱刺 vs 紐卡索<div class="l2">英超 · 進行中 0:0</div></td><td class="nw">上半場 31'</td><td>來源 A <span class="chip">事件形式</span></td><td>安全</td><td>有覆蓋</td><td class="l2">來源 B（不使用）</td></tr>
-          <tr><td>水原 vs 蔚山<div class="l2">韓國 K 聯賽 · 比賽中斷 1:1</div></td><td class="nw">下半場 58'</td><td>來源 A <span class="chip">事件形式</span> <span class="chip">不穩定</span></td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">來源回報現場中斷 · 13:58 起</div></td><td class="l2">來源 B（連線中，不自動改用）</td></tr>
-          <tr><td>Becamex vs 峴港<div class="l2">越南 V.League 1 · 進行中 1:0</div></td><td class="nw">下半場 52'</td><td>來源 C <span class="chip">封盤形式</span></td><td><b>危險</b><div class="l2">C 封盤中 · 14:13:05 起</div></td><td><b>無覆蓋</b><div class="l2">使用中的來源為封盤形式</div></td><td class="l2">來源 D 封盤（不使用）</td></tr>
-          <tr><td>某隊 vs 某隊<div class="l2">某友誼賽 · 進行中 0:0</div></td><td class="nw">上半場 12'</td><td>來源 B <span class="chip">事件形式</span> <span class="chip">不穩定</span></td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">系統偵測：事件已停止到達 6 分</div></td><td class="l2">無</td></tr>
-          <tr><td>某隊 vs 某隊<div class="l2">某盃賽 · 進行中 2:2</div></td><td class="nw">加時賽 98'</td><td class="l2">沒有使用中的來源</td><td><b>無訊號</b></td><td><b>無覆蓋</b><div class="l2">沒有賽況來源提供訊號</div></td><td class="l2">無</td></tr>
+          <tr><td>Man City vs Arsenal<div class="l2">Premier League · in progress 2:1</div></td><td class="nw">2nd half 67'</td><td>Source A <span class="chip">Event-based</span></td><td><b>Danger</b><div class="l2">Possible penalty · since 14:14:50</div></td><td>Covered</td><td class="l2">Source B (not used)<br>Source C suspended (not used)</td></tr>
+          <tr><td>Tottenham vs Newcastle<div class="l2">Premier League · in progress 0:0</div></td><td class="nw">1st half 31'</td><td>Source A <span class="chip">Event-based</span></td><td>Safe</td><td>Covered</td><td class="l2">Source B (not used)</td></tr>
+          <tr><td>Suwon vs Ulsan<div class="l2">K League 1 · interrupted 1:1</div></td><td class="nw">2nd half 58'</td><td>Source A <span class="chip">Event-based</span> <span class="chip">Unstable</span></td><td><b>No signal</b></td><td><b>No coverage</b><div class="l2">Source reports stoppage at venue · since 13:58</div></td><td class="l2">Source B (connected, no automatic switch)</td></tr>
+          <tr><td>Becamex vs Da Nang<div class="l2">V.League 1 · in progress 1:0</div></td><td class="nw">2nd half 52'</td><td>Source C <span class="chip">Suspension-based</span></td><td><b>Danger</b><div class="l2">C suspended · since 14:13:05</div></td><td><b>No coverage</b><div class="l2">Source in use is suspension-based</div></td><td class="l2">Source D suspended (not used)</td></tr>
+          <tr><td>Team X vs Team Y<div class="l2">Friendly X · in progress 0:0</div></td><td class="nw">1st half 12'</td><td>Source B <span class="chip">Event-based</span> <span class="chip">Unstable</span></td><td><b>No signal</b></td><td><b>No coverage</b><div class="l2">System detected: events stopped arriving 6 min ago</div></td><td class="l2">None</td></tr>
+          <tr><td>Team X vs Team Y<div class="l2">Cup X · in progress 2:2</div></td><td class="nw">Overtime 98'</td><td class="l2">No source in use</td><td><b>No signal</b></td><td><b>No coverage</b><div class="l2">No live data source provides a signal</div></td><td class="l2">None</td></tr>
         </tbody>
       </table>
-      <div class="pager"><span></span><span>進行中共 23 場，無覆蓋 4 場</span></div>
+      <div class="pager"><span></span><span>23 in progress, 4 without coverage</span></div>
     </div>
   </div>
 </div>
@@ -79,6 +79,36 @@
 <!-- ============================================================ -->
 <h2>待確認事項</h2>
 <p>目前沒有。</p>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>滾球</td><td lang="en">In-play</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>滾球訊號</td><td lang="en">In-play Signal</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>訊號</td><td lang="en">Signal</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>覆蓋</td><td lang="en">Coverage</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>進行中</td><td lang="en">In progress</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>賽況</td><td lang="en">Live data</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>賽況來源</td><td lang="en">Live data source</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>危險</td><td lang="en">Danger</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>下半場</td><td lang="en">2nd half</td></tr>
+  <tr><td>連接器</td><td lang="en">Connectors</td><td>事件形式</td><td lang="en">Event-based</td></tr>
+  <tr><td>帳號</td><td lang="en">Accounts</td><td>封盤</td><td lang="en">Suspended</td></tr>
+  <tr><td>賽事</td><td lang="en">Event</td><td>上半場</td><td lang="en">1st half</td></tr>
+  <tr><td>待處理</td><td lang="en">Work Queue</td><td>中斷</td><td lang="en">Interrupted</td></tr>
+  <tr><td>來源角色</td><td lang="en">Source Roles</td><td>不穩定</td><td lang="en">Unstable</td></tr>
+  <tr><td>賽事對應</td><td lang="en">Event Mapping</td><td>封盤形式</td><td lang="en">Suspension-based</td></tr>
+  <tr><td>對應</td><td lang="en">Mapping</td><td>加時賽</td><td lang="en">Overtime</td></tr>
+  <tr><td>腰斬</td><td lang="en">Abandonment</td><td></td><td lang="en"></td></tr>
+</table>
 
 </div>
 </body>

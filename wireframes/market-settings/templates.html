@@ -35,44 +35,44 @@
 <!-- ============================================================ -->
 <h2>畫面 1：模板清單</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">賠率與操盤</div>
-    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
-    <div class="group">玩法設定</div>
-    <a href="templates.html" class="on">模板</a><a href="assignment.html">模板指定</a><a href="market-switches.html">玩法開關</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#">Pending Cancellation &amp; Abandonment</a><a href="#">In-play Signal</a>
+    <div class="group">Odds &amp; Trading</div>
+    <a href="../odds-and-trading/trading-desk.html">Trading Desk</a>
+    <div class="group">Market Settings</div>
+    <a href="templates.html" class="on">Templates</a><a href="assignment.html">Template Assignment</a><a href="market-switches.html">Market Switches</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 玩法設定 › 模板</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="top"><span>Home › Market Settings › Templates</span><span>Language: English ▾ · ops.lin ▾ · 10-26 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>模板</h3><div class="sub">模板是共用、具名的設定，依運動分開；運動、競賽、賽事指向模板，修改模板立即影響所有指向它的地方</div></div>
-        <div><span class="btn">新增模板</span> <span class="btn">複製選取的模板</span></div>
+        <div><h3>Templates</h3><div class="sub">A template is a shared, named set of settings, per sport; sports, tournaments and events point to templates, and editing a template immediately affects everything pointing to it</div></div>
+        <div><span class="btn">New template</span> <span class="btn">Copy selected template</span></div>
       </div>
       <div class="filters">
-        <div class="f"><label>運動</label><span class="box caret">足球</span></div>
-        <div class="f"><label>狀態</label><span class="strip"><span class="on">使用中</span><span>已封存（3）</span></span></div>
-        <div class="f"><label>搜尋</label><span class="box wide">模板名稱</span></div>
+        <div class="f"><label>Sports</label><span class="box caret">Soccer</span></div>
+        <div class="f"><label>Status</label><span class="strip"><span class="on">In use</span><span>Archived (3)</span></span></div>
+        <div class="f"><label>Search</label><span class="box wide">Template name</span></div>
       </div>
       <table class="grid">
-        <thead><tr><th>模板</th><th>指向它的 <span class="n">1</span></th><th class="num">未結束賽事</th><th>有設定的階段 <span class="n">2</span></th><th>最近變更</th><th>操作</th></tr></thead>
+        <thead><tr><th>Templates</th><th>Assigned to <span class="n">1</span></th><th class="num">Open events</th><th>Phases with values <span class="n">2</span></th><th>Last change</th><th>Actions</th></tr></thead>
         <tbody>
-          <tr><td>足球．預設 <span class="chip">預設模板</span></td><td>運動 1（足球）</td><td class="num">412</td><td class="l2">基本值 · 比賽當天 · 熱門時段</td><td class="l2">10-20 · ops.chen</td><td><span class="btn">編輯</span></td></tr>
-          <tr><td>足球．一級</td><td>競賽 12</td><td class="num">214</td><td class="l2">基本值 · 7 天 · 比賽當天 · 下半場 · 熱門時段 · 紅牌後 3 分鐘</td><td class="l2">10-24 · ops.chen</td><td><span class="btn">編輯</span></td></tr>
-          <tr><td>足球．二級</td><td>競賽 37</td><td class="num">488</td><td class="l2">基本值 · 比賽當天 · 下半場</td><td class="l2">10-24 · ops.chen</td><td><span class="btn">編輯</span></td></tr>
-          <tr><td>足球．三級以下</td><td>競賽 160</td><td class="num">397</td><td class="l2">基本值 · 上半場 · 下半場</td><td class="l2">10-22 · ops.lin</td><td><span class="btn">編輯</span></td></tr>
-          <tr style="background:var(--fill)"><td><b>英超專用</b></td><td>競賽 1（英超）</td><td class="num">19</td><td class="l2">基本值 · 7 天 · 比賽當天 · 上半場 · 下半場 · 熱門時段 · 中場休息 · 紅牌後 3 分鐘</td><td class="l2">10-25 · ops.chen</td><td><span class="btn pri">編輯</span></td></tr>
-          <tr><td>英超專用（熱刺 vs 紐卡索）<div class="l2">複製自 英超專用 · 只被賽事指向，賽事的注單全部結算完成後滿 30 天自動封存 <span class="n">3</span></div></td><td>賽事 1</td><td class="num">1</td><td class="l2">同 英超專用</td><td class="l2">10-26 · ops.lin</td><td><span class="btn">編輯</span></td></tr>
+          <tr><td>Soccer · Default <span class="chip">Default template</span></td><td>1 sport (Soccer)</td><td class="num">412</td><td class="l2">Base value · Match day · Peak hours</td><td class="l2">10-20 · ops.chen</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Soccer · Tier 1</td><td>12 tournaments</td><td class="num">214</td><td class="l2">Base value · 7 days · Match day · 2nd half · Peak hours · 3 min after red card</td><td class="l2">10-24 · ops.chen</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Soccer · Tier 2</td><td>37 tournaments</td><td class="num">488</td><td class="l2">Base value · Match day · 2nd half</td><td class="l2">10-24 · ops.chen</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Soccer · Tier 3+</td><td>160 tournaments</td><td class="num">397</td><td class="l2">Base value · 1st half · 2nd half</td><td class="l2">10-22 · ops.lin</td><td><span class="btn">Edit</span></td></tr>
+          <tr style="background:var(--fill)"><td><b>Premier League custom</b></td><td>1 tournament (Premier League)</td><td class="num">19</td><td class="l2">Base value · 7 days · Match day · 1st half · 2nd half · Peak hours · Half-time · 3 min after red card</td><td class="l2">10-25 · ops.chen</td><td><span class="btn pri">Edit</span></td></tr>
+          <tr><td>Premier League custom (Tottenham vs Newcastle)<div class="l2">Copied from Premier League custom · assigned only by an event; archived automatically 30 days after all its bets are settled <span class="n">3</span></div></td><td>1 event</td><td class="num">1</td><td class="l2">Same as Premier League custom</td><td class="l2">10-26 · ops.lin</td><td><span class="btn">Edit</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -81,89 +81,89 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>指向是參照，不是複製：修改模板立即影響所有指向它的運動、競賽與賽事（R12-05）。「指向它的」只數直接指向的；「未結束賽事」數目前實際適用這份模板的賽事，包括沿用上層的，用來判斷影響範圍。每個運動必須指向一份，即預設模板。</span></li>
+  <li><span class="n">1</span><span>指向是參照，不是複製：修改模板立即影響所有指向它的運動、競賽與賽事（R12-05）。「Assigned to」只數直接指向的；「Open events」數目前實際適用這份模板的賽事，包括沿用上層的，用來判斷影響範圍。每個運動必須指向一份，即預設模板。</span></li>
   <li><span class="n">2</span><span>列出這份模板在哪些階段有值，方便比對模板之間的差別。階段由 InSports 依運動固定（R12-03），見<a href="phases.html">階段一覽</a>。</span></li>
-  <li><span class="n">3</span><span>只被賽事指向的模板，在指向它的賽事注單全部結算完成後滿 30 天自動封存；「已封存」可以查詢，不能再指定（R12-07）。</span></li>
+  <li><span class="n">3</span><span>只被賽事指向的模板，在指向它的賽事注單全部結算完成後滿 30 天自動封存；「Archived」可以查詢，不能再指定（R12-07）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>畫面 2：模板設定：玩法 × 階段</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">賠率與操盤</div>
-    <a href="../odds-and-trading/trading-desk.html">操盤台</a>
-    <div class="group">玩法設定</div>
-    <a href="templates.html" class="on">模板</a><a href="assignment.html">模板指定</a><a href="market-switches.html">玩法開關</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#">Pending Cancellation &amp; Abandonment</a><a href="#">In-play Signal</a>
+    <div class="group">Odds &amp; Trading</div>
+    <a href="../odds-and-trading/trading-desk.html">Trading Desk</a>
+    <div class="group">Market Settings</div>
+    <a href="templates.html" class="on">Templates</a><a href="assignment.html">Template Assignment</a><a href="market-switches.html">Market Switches</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 玩法設定 › 模板 › 英超專用</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="top"><span>Home › Market Settings › Templates › Premier League custom</span><span>Language: English ▾ · ops.lin ▾ · 10-26 14:15</span></div>
     <div class="main">
       <div class="sel-row">
-        <span class="box caret">足球</span><span class="box caret wide">英超專用</span><span class="btn">重新命名</span><span class="btn">新增模板</span><span class="btn">複製模板</span>
-        <span class="sp"></span><span class="box caret">狀態：使用中</span><a class="btn" href="phases.html">階段一覽 →</a>
+        <span class="box caret">Soccer</span><span class="box caret wide">Premier League custom</span><span class="btn">Rename</span><span class="btn">New template</span><span class="btn">Copy template</span>
+        <span class="sp"></span><span class="box caret">Status: In use</span><a class="btn" href="phases.html">Phase overview →</a>
       </div>
       <div class="kv">
-        <span><b>指向它的</b>競賽 1（英超） <a href="assignment.html">模板指定</a></span>
-        <span><b>未結束賽事</b>19 場（另有 1 場指向賽事專用模板）</span>
-        <span><b>最近變更</b>10-25 · ops.chen · 版本 15</span>
+        <span><b>Assigned to</b>1 tournament (Premier League) <a href="assignment.html">Template Assignment</a></span>
+        <span><b>Open events</b>19 (plus 1 pointing to an event-specific template)</span>
+        <span><b>Last change</b>10-25 · ops.chen · version 15</span>
       </div>
-      <div class="tabs page"><span class="on">玩法 × 階段</span><span>來源與校正</span><span>變更紀錄</span></div>
+      <div class="tabs page"><span class="on">Market × Phase</span><span>Sources &amp; calibration</span><span>Change log</span></div>
 
       <div class="card">
-        <div class="ct">階段　● 有設定值的階段 · 點選切換下方的表 <span class="n">1</span></div>
+        <div class="ct">Phases   ● phase with values · click to switch the table below <span class="n">1</span></div>
         <div class="phs">
-          <div class="phg"><div class="phgl">&nbsp;</div><div class="phr"><span class="phb first has">基本值</span></div></div>
-          <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb">早盤</span><span class="phb">1 個月</span><span class="phb">14 天</span><span class="phb has">7 天</span><span class="phb">6 天</span><span class="phb">5 天</span><span class="phb">4 天</span><span class="phb">3 天</span><span class="phb">2 天</span><span class="phb on has">比賽當天</span></div></div>
-          <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live has">上半場</span><span class="phb live has">下半場</span></div></div>
-          <div class="phg"><div class="phgl">加時賽</div><div class="phr"><span class="phb live">上半場</span><span class="phb live">下半場</span></div></div>
-          <div class="phg"><div class="phgl">點球大戰</div><div class="phr"><span class="phb live">含一球決勝</span></div></div>
+          <div class="phg"><div class="phgl">&nbsp;</div><div class="phr"><span class="phb first has">Base value</span></div></div>
+          <div class="phg"><div class="phgl">Pre-match</div><div class="phr"><span class="phb">Early</span><span class="phb">1 mo</span><span class="phb">14d</span><span class="phb has">7d</span><span class="phb">6d</span><span class="phb">5d</span><span class="phb">4d</span><span class="phb">3d</span><span class="phb">2d</span><span class="phb on has">Match day</span></div></div>
+          <div class="phg"><div class="phgl">In-play</div><div class="phr"><span class="phb live has">1st half</span><span class="phb live has">2nd half</span></div></div>
+          <div class="phg"><div class="phgl">Overtime</div><div class="phr"><span class="phb live">1st half</span><span class="phb live">2nd half</span></div></div>
+          <div class="phg"><div class="phgl">Penalty shootout</div><div class="phr"><span class="phb live">incl. sudden death</span></div></div>
         </div>
-        <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill has">熱門時段</span><span class="pill has">中場休息</span><span class="pill has">紅牌後 3 分鐘</span><span class="pill">比賽中斷</span></div>
+        <div class="layers"><span class="lk">Overlay ⋯</span><span class="pill has">Peak hours</span><span class="pill has">Half-time</span><span class="pill has">3 min after red card</span><span class="pill">Interrupted</span></div>
       </div>
 
-      <div class="l2" style="margin-bottom:6px">本階段：<b>比賽當天</b> · 顯示生效的值：實線框是本階段設定的，虛線框是沿用前面階段的 <span class="n">2</span></div>
-      <div class="bulk">已選 2 個玩法 × 1 個欄位（利潤率）　值 <span class="box" style="min-width:60px">4.0%</span> <span class="btn pri">套用到比賽當天</span> <span class="btn">清除比賽當天的值</span> <span class="l2">清除後改為沿用 7 天的值</span> <span class="n">3</span></div>
+      <div class="l2" style="margin-bottom:6px">This phase:<b>Match day</b> · Showing effective values: solid border = set in this phase, dashed border = inherited from an earlier phase <span class="n">2</span></div>
+      <div class="bulk">2 markets × 1 field selected (Margin)   Value <span class="box" style="min-width:60px">4.0%</span> <span class="btn pri">Apply to Match day</span> <span class="btn">Clear Match day values</span> <span class="l2">After clearing, the 7 days values are inherited</span> <span class="n">3</span></div>
       <table class="cube">
         <thead>
-          <tr><th rowspan="2">☐</th><th rowspan="2" class="mk"><span class="box caret" style="min-width:150px;height:24px">全部玩法</span></th>
-              <th class="gh" colspan="2">InSports 欄位 <span class="n">4</span></th><th class="gh" colspan="11">經銷商欄位（此處為預設值） <span class="n">5</span></th></tr>
-          <tr><th>☐ 開出</th><th>☐ 拉近比例</th><th>☑ 利潤率</th><th>☐ 盤口線</th><th>☐ 跳水門檻</th><th>☐ 每步</th><th>☐ 上限</th><th>☐ 歸零時間</th><th>☐ 單注上限 <span class="l2">06</span></th><th>☐ 過關 <span class="l2">02</span></th><th>☐ 同場過關</th><th>☐ 提前兌現 <span class="l2">08</span></th><th>☐ 兌現折扣</th></tr>
+          <tr><th rowspan="2">☐</th><th rowspan="2" class="mk"><span class="box caret" style="min-width:150px;height:24px">All markets</span></th>
+              <th class="gh" colspan="2">InSports fields <span class="n">4</span></th><th class="gh" colspan="11">Distributor fields (defaults here) <span class="n">5</span></th></tr>
+          <tr><th>☐ Offered</th><th>☐ Pull ratio</th><th>☑ Margin</th><th>☐ Lines</th><th>☐ Price-drop threshold</th><th>☐ Step</th><th>☐ Cap</th><th>☐ Reset time</th><th>☐ Max stake <span class="l2">06</span></th><th>☐ Parlay <span class="l2">02</span></th><th>☐ Same-game parlay</th><th>☐ Cash out <span class="l2">08</span></th><th>☐ Cash-out discount</th></tr>
         </thead>
         <tbody>
-          <tr class="all"><td>☐</td><td class="mk">全部玩法 <span class="n">6</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">6.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr class="sel"><td>☑</td><td class="mk">讓分（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv hi">4.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr class="sel"><td>☑</td><td class="mk">大小（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv hi">4.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td>☐</td><td class="mk">獨贏（三項）（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">6.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">40%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.03</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td>☐</td><td class="mk">讓分（上半場）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">5.0%</span></td><td><span class="cv inh">2</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td>☐</td><td class="mk">波膽（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv na">—</span></td><td><span class="cv">14.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td>☐</td><td class="mk">角球大小（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">7.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td>☐</td><td class="mk">角球讓分（常規時間）</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">6.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 分</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
-          <tr><td colspan="15" class="mk l2">…（其餘玩法，依投注規則分組；左上的選單只看某一組）</td></tr>
+          <tr class="all"><td>☐</td><td class="mk">All markets <span class="n">6</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">6.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr class="sel"><td>☑</td><td class="mk">Handicap (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv hi">4.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr class="sel"><td>☑</td><td class="mk">Total (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv hi">4.0%</span></td><td><span class="cv inh">3</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td>☐</td><td class="mk">1X2 (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">6.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">40%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.03</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td>☐</td><td class="mk">Handicap (1st half)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">5.0%</span></td><td><span class="cv inh">2</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td>☐</td><td class="mk">Correct Score (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv na">—</span></td><td><span class="cv">14.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td>☐</td><td class="mk">Corner Total (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv">7.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td>☐</td><td class="mk">Corner Handicap (regular time)</td><td><span class="cv b inh">☑</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">6.0%</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">50%</span></td><td><span class="cv inh">0.01</span></td><td><span class="cv inh">0.02</span></td><td><span class="cv inh">30 min</span></td><td><span class="cv na">—</span></td><td><span class="cv b inh">☑</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv inh">5.0%</span></td></tr>
+          <tr><td colspan="15" class="mk l2">… (other markets, grouped by betting rule; the menu at top left shows one group)</td></tr>
         </tbody>
       </table>
-      <p class="hint">實線框＝本階段設定　虛線框＝沿用，滑鼠移上顯示來自哪一個階段，例如讓分的盤口線「3」來自基本值　灰底「—」＝不適用，例如獨贏沒有盤口線、衍生玩法沒有校正 <span class="n">7</span></p>
-      <p style="margin-top:8px"><span class="btn">另存為新模板</span> <span class="btn pri">儲存…</span></p>
+      <p class="hint">Solid border = set in this phase   Dashed border = inherited; hover to see which phase, e.g. Handicap lines “3” comes from Base value   Grey “—” = not applicable, e.g. 1X2 has no lines, derived markets have no calibration <span class="n">7</span></p>
+      <p style="margin-top:8px"><span class="btn">Save as new template</span> <span class="btn pri">Save…</span></p>
     </div>
   </div>
 </div>
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>階段由 InSports 依運動固定，Ops 與經銷商不能增減（R12-03），各運動的清單見<a href="phases.html">階段一覽</a>。上排是時間軸階段，賽前以比賽日計，不以距開賽的時數計；下排是疊加階段。「基本值」不屬於任何階段，一路沒有階段設定時使用（R12-04）。● 表示本模板在該階段有設定值。</span></li>
+  <li><span class="n">1</span><span>階段由 InSports 依運動固定，Ops 與經銷商不能增減（R12-03），各運動的清單見<a href="phases.html">階段一覽</a>。上排是時間軸階段，賽前以比賽日計，不以距開賽的時數計；下排是疊加階段。「Base value」不屬於任何階段，一路沒有階段設定時使用（R12-04）。● 表示本模板在該階段有設定值。</span></li>
   <li><span class="n">2</span><span>每一格顯示這個玩法在本階段生效的值（R12-04）：從基本值開始，依序套用到本階段為止經過的時間軸階段，同一階段中個別玩法的值優先於全部玩法的值；後面的階段覆蓋前面的。本例比賽當天的讓分利潤率 4.0% 是本階段設定的；7 天設定的 4.5% 被它覆蓋。</span></li>
   <li><span class="n">3</span><span>勾選玩法（列）與欄位（欄）後一次設定本階段的值，或清除本階段的值改為沿用。修改立即生效，不需另一人覆核（R12-05、11 的 R11-02）。</span></li>
-  <li><span class="n">4</span><span>InSports 欄位只在 InSports 的模板中，所有經銷商共用（R12-01）。「開出」為否時，該玩法在該階段不開盤；為是只表示不擋（R12-09）。臨時關閉或只針對一個競賽、一場賽事時，用<a href="market-switches.html">玩法開關</a>，不必改模板（R12-10）。拉近比例是校正的強度（05 的 R05-21）；校正來源在「來源與校正」頁籤（畫面 4）。</span></li>
+  <li><span class="n">4</span><span>InSports 欄位只在 InSports 的模板中，所有經銷商共用（R12-01）。「Offered」為否時，該玩法在該階段不開盤；為是只表示不擋（R12-09）。臨時關閉或只針對一個競賽、一場賽事時，用<a href="market-switches.html">玩法開關</a>，不必改模板（R12-10）。拉近比例是校正的強度（05 的 R05-21）；校正來源在「Sources & calibration」頁籤（畫面 4）。</span></li>
   <li><span class="n">5</span><span>經銷商欄位在 InSports 模板中的值是給經銷商的預設值，InSports 本身不加水、不跳水（05 的 R05-20）。經銷商可以用自己的整份模板取代，值可以比預設寬鬆或嚴格，盤口線數量最多兩邊各 3 條除外（R12-08、05 的 R05-13）。欄位的意思由各 PRD 定義：利潤率、盤口線數量、跳水見 05；單注上限等盤口限額見 06（待撰寫，先以「—」表示）；過關見 02；提前兌現見 08。</span></li>
   <li><span class="n">6</span><span>每個欄位可以為全部玩法設定，也可以為個別玩法設定；模板必須為每個欄位設定全部玩法的基本值，因此任何玩法在任何階段都有值，目錄新增的玩法也是（R12-02）。</span></li>
   <li><span class="n">7</span><span>每步與上限以基準格式的 0.01 為單位：兩項玩法為馬來盤，三項以上為歐洲盤；跳水門檻以單注上限的百分比表示；歸零時間的預設值見非功能需求（05 的 R05-17）。</span></li>
@@ -172,30 +172,30 @@
 <!-- ============================================================ -->
 <h2>畫面 3：疊加階段的值（紅牌後 3 分鐘）</h2>
 
-<div class="frame"><div class="main">
+<div lang="en" class="frame"><div class="main">
   <div class="card">
-    <div class="ct">階段</div>
+    <div class="ct">Phase</div>
     <div class="phs">
-      <div class="phg"><div class="phgl">&nbsp;</div><div class="phr"><span class="phb first has">基本值</span></div></div>
-      <div class="phg"><div class="phgl">賽前</div><div class="phr"><span class="phb">早盤</span><span class="phb">⋯</span><span class="phb has">7 天</span><span class="phb">⋯</span><span class="phb has">比賽當天</span></div></div>
-      <div class="phg"><div class="phgl">滾球</div><div class="phr"><span class="phb live has">上半場</span><span class="phb live has">下半場</span></div></div>
-      <div class="phg"><div class="phgl">加時賽</div><div class="phr"><span class="phb live">上半場</span><span class="phb live">下半場</span></div></div>
-      <div class="phg"><div class="phgl">點球大戰</div><div class="phr"><span class="phb live">含一球決勝</span></div></div>
+      <div class="phg"><div class="phgl">&nbsp;</div><div class="phr"><span class="phb first has">Base value</span></div></div>
+      <div class="phg"><div class="phgl">Pre-match</div><div class="phr"><span class="phb">Early</span><span class="phb">⋯</span><span class="phb has">7d</span><span class="phb">⋯</span><span class="phb has">Match day</span></div></div>
+      <div class="phg"><div class="phgl">In-play</div><div class="phr"><span class="phb live has">1st half</span><span class="phb live has">2nd half</span></div></div>
+      <div class="phg"><div class="phgl">Overtime</div><div class="phr"><span class="phb live">1st half</span><span class="phb live">2nd half</span></div></div>
+      <div class="phg"><div class="phgl">Penalty shootout</div><div class="phr"><span class="phb live">incl. sudden death</span></div></div>
     </div>
-    <div class="layers"><span class="lk">疊加 ⋯</span><span class="pill has">熱門時段</span><span class="pill has">中場休息</span><span class="pill on has">紅牌後 3 分鐘</span><span class="pill">比賽中斷</span></div>
+    <div class="layers"><span class="lk">Overlay ⋯</span><span class="pill has">Peak hours</span><span class="pill has">Half-time</span><span class="pill on has">3 min after red card</span><span class="pill">Interrupted</span></div>
   </div>
-  <div class="l2" style="margin-bottom:6px">本階段：<b>紅牌後 3 分鐘</b>（疊加）· 有值的格子在生效時覆蓋時間軸的值；「—」表示不覆蓋 <span class="n">1</span></div>
+  <div class="l2" style="margin-bottom:6px">This phase:<b>3 min after red card</b>(overlay) · cells with values override timeline values while active; “—” means no override <span class="n">1</span></div>
   <table class="cube">
-    <thead><tr><th class="mk">玩法</th><th>開出</th><th>拉近比例</th><th>利潤率</th><th>盤口線</th><th>跳水門檻</th><th>每步</th><th>上限</th><th>歸零時間</th><th>單注上限</th><th>過關</th><th>同場過關</th><th>提前兌現</th><th>兌現折扣</th></tr></thead>
+    <thead><tr><th class="mk">Market</th><th>Offered</th><th>Pull ratio</th><th>Margin</th><th>Lines</th><th>Price-drop threshold</th><th>Step</th><th>Cap</th><th>Reset time</th><th>Max stake</th><th>Parlay</th><th>Same-game parlay</th><th>Cash out</th><th>Cash-out discount</th></tr></thead>
     <tbody>
-      <tr class="all"><td class="mk">全部玩法</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b">☐</span></td><td><span class="cv no">—</span></td></tr>
-      <tr><td class="mk">讓分（常規時間）</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">8.0%</span></td><td><span class="cv">1</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
-      <tr><td class="mk">大小（常規時間）</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">8.0%</span></td><td><span class="cv">1</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
-      <tr><td class="mk">波膽（常規時間）</td><td><span class="cv b">☐</span></td><td><span class="cv na">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
-      <tr><td colspan="14" class="mk l2">…（其餘玩法都是「—」：紅牌後 3 分鐘內沿用時間軸的值）</td></tr>
+      <tr class="all"><td class="mk">All markets</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b">☐</span></td><td><span class="cv no">—</span></td></tr>
+      <tr><td class="mk">Handicap (regular time)</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">8.0%</span></td><td><span class="cv">1</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
+      <tr><td class="mk">Total (regular time)</td><td><span class="cv b no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv">8.0%</span></td><td><span class="cv">1</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
+      <tr><td class="mk">Correct Score (regular time)</td><td><span class="cv b">☐</span></td><td><span class="cv na">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv inh">30%</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv no">—</span></td><td><span class="cv na">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b no">—</span></td><td><span class="cv b inh">☐</span></td><td><span class="cv no">—</span></td></tr>
+      <tr><td colspan="14" class="mk l2">… (all other markets are “—”: timeline values apply within 3 min after a red card)</td></tr>
     </tbody>
   </table>
-  <p class="hint">同時有兩個以上疊加階段生效且都有值時，利潤率取最高的值，例如紅牌後 3 分鐘延續到中場休息 <span class="n">2</span></p>
+  <p class="hint">When two or more overlay phases are active and all have values, Margin takes the highest, e.g. 3 min after red card running into half-time <span class="n">2</span></p>
 </div></div>
 
 <ol class="notes">
@@ -206,20 +206,20 @@
 <!-- ============================================================ -->
 <h2>畫面 4：來源與校正</h2>
 
-<div class="frame"><div class="main">
-  <div class="tabs page"><span>玩法 × 階段</span><span class="on">來源與校正</span><span>變更紀錄</span></div>
-  <p class="l2" style="margin:0 0 6px">英超專用 · 這一頁的欄位不分玩法與階段，整份模板一組（R12-02） <span class="n">1</span></p>
+<div lang="en" class="frame"><div class="main">
+  <div class="tabs page"><span>Market × Phase</span><span class="on">Sources &amp; calibration</span><span>Change log</span></div>
+  <p class="l2" style="margin:0 0 6px">Premier League custom · fields on this tab are not per market or phase; one set for the whole template (R12-02) <span class="n">1</span></p>
   <table class="grid">
-    <thead><tr><th>來源</th><th>來源的賠率狀態（03）</th><th>賠率開關</th><th>權重</th><th>校正來源</th><th>校正權重</th></tr></thead>
+    <thead><tr><th>Source</th><th>Source odds status (03)</th><th>Odds on/off</th><th>Weight</th><th>Calibration source</th><th>Calibration weight</th></tr></thead>
     <tbody>
-      <tr><td>來源 C</td><td>正常</td><td>☑</td><td><span class="box" style="min-width:50px">2</span></td><td>☐</td><td class="l2">—</td></tr>
-      <tr><td>來源 D</td><td>正常</td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td></tr>
-      <tr><td>來源 F</td><td><b>中斷</b> <span class="l2">40 分</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☐</td><td class="l2">—</td></tr>
-      <tr><td>來源 H</td><td>停用 <span class="l2">連接器暫停</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☐</td><td class="l2">—</td></tr>
-      <tr class="inh"><td>來源 E <span class="chip">新來源</span></td><td>尚未啟用</td><td>☐</td><td class="l2">—</td><td>☐</td><td class="l2">—</td></tr>
+      <tr><td>Source C</td><td>Normal</td><td>☑</td><td><span class="box" style="min-width:50px">2</span></td><td>☐</td><td class="l2">—</td></tr>
+      <tr><td>Source D</td><td>Normal</td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td></tr>
+      <tr><td>Source F</td><td><b>Interrupted</b> <span class="l2">40 min</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☐</td><td class="l2">—</td></tr>
+      <tr><td>Source H</td><td>Disabled <span class="l2">Connector paused</span></td><td>☑</td><td><span class="box" style="min-width:50px">1</span></td><td>☐</td><td class="l2">—</td></tr>
+      <tr class="inh"><td>Source E <span class="chip">New source</span></td><td>Not yet enabled</td><td>☐</td><td class="l2">—</td><td>☐</td><td class="l2">—</td></tr>
     </tbody>
   </table>
-  <p class="hint">校正只對校正來源有開出的玩法與盤口線；衍生玩法不讀來源，不校正。拉近比例依玩法與階段設定，在「玩法 × 階段」頁籤 <span class="n">2</span></p>
+  <p class="hint">Calibration applies only to markets and lines the calibration source offers; derived markets read no sources and are not calibrated. Pull ratio is set per market and phase on the “Market × Phase” tab <span class="n">2</span></p>
 </div></div>
 
 <ol class="notes">
@@ -230,30 +230,82 @@
 <!-- ============================================================ -->
 <h2>畫面 5：儲存</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:680px">
-    <div class="mh"><span>儲存變更．英超專用</span><span>✕</span></div>
+    <div class="mh"><span>Save changes · Premier League custom</span><span>✕</span></div>
     <div class="mb">
       <table class="grid">
-        <thead><tr><th>階段</th><th>玩法</th><th>欄位</th><th class="num">原值</th><th class="num">新值</th></tr></thead>
+        <thead><tr><th>Phase</th><th>Market</th><th>Field</th><th class="num">Old value</th><th class="num">New value</th></tr></thead>
         <tbody>
-          <tr><td>比賽當天</td><td>讓分（常規時間）</td><td>利潤率</td><td class="num l2">沿用 7 天 4.5%</td><td class="num"><b>4.0%</b></td></tr>
-          <tr><td>比賽當天</td><td>大小（常規時間）</td><td>利潤率</td><td class="num l2">沿用 7 天 4.5%</td><td class="num"><b>4.0%</b></td></tr>
+          <tr><td>Match day</td><td>Handicap (regular time)</td><td>Margin</td><td class="num l2">Inherited 7 days 4.5%</td><td class="num"><b>4.0%</b></td></tr>
+          <tr><td>Match day</td><td>Total (regular time)</td><td>Margin</td><td class="num l2">Inherited 7 days 4.5%</td><td class="num"><b>4.0%</b></td></tr>
         </tbody>
       </table>
-      <div class="warn"><b>儲存後立即影響</b>：競賽 1（英超）· 未結束賽事 19 場，其中 3 場今天開賽，正在「比賽當天」階段。英超另有 1 場指向賽事專用模板，不受影響 <span class="n">1</span></div>
-      <div class="f"><label>原因（必填）</label><span class="box" style="width:100%">英超流動性高，比賽當天的讓分、大小利潤率由 4.5% 降為 4.0%</span></div>
+      <div class="warn"><b>Takes effect immediately on save</b>: 1 tournament (Premier League) · 19 open events, 3 of them kicking off today and now in the “Match day” phase. 1 other Premier League event points to an event-specific template and is not affected <span class="n">1</span></div>
+      <div class="f"><label>Reason (required)</label><span class="box" style="width:100%">Premier League liquidity is high; lower match-day Handicap and Total margin from 4.5% to 4.0%</span></div>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn">另存為新模板…</span><span class="btn pri">儲存</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn">Save as new template…</span><span class="btn pri">Save</span></div>
   </div>
 </div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>儲存前列出改了哪些格子與影響範圍。只想改英超的某一場時，不在這裡改，而是「另存為新模板」後到<a href="assignment.html">模板指定</a>指定給該賽事（R12-05）。修改立即生效，不需另一人覆核；每次變更記錄由誰、何時、原因（R12-05、11 的 R11-02）。</span></li>
+  <li><span class="n">1</span><span>儲存前列出改了哪些格子與影響範圍。只想改英超的某一場時，不在這裡改，而是「Save as new template」後到<a href="assignment.html">模板指定</a>指定給該賽事（R12-05）。修改立即生效，不需另一人覆核；每次變更記錄由誰、何時、原因（R12-05、11 的 R11-02）。</span></li>
 </ol>
 
 <h2>待確認事項</h2>
 <p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md#待確認事項">README</a>。</p>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>注單</td><td lang="en">Bets</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>階段一覽</td><td lang="en">Phase overview</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>校正</td><td lang="en">Calibration</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>賽前</td><td lang="en">Pre-match</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>早盤</td><td lang="en">Early</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>加時賽</td><td lang="en">Overtime</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>點球大戰</td><td lang="en">Penalty shootout</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>一球決勝</td><td lang="en">Sudden death</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>中斷</td><td lang="en">Interrupted</td></tr>
+  <tr><td>連接器</td><td lang="en">Connector</td><td>沿用</td><td lang="en">Inherited</td></tr>
+  <tr><td>帳號</td><td lang="en">Accounts</td><td>利潤率</td><td lang="en">Margin</td></tr>
+  <tr><td>賽事</td><td lang="en">Event</td><td>經銷商</td><td lang="en">Distributor</td></tr>
+  <tr><td>待處理</td><td lang="en">Work Queue</td><td>開出</td><td lang="en">Offered</td></tr>
+  <tr><td>來源角色</td><td lang="en">Source Roles</td><td>拉近比例</td><td lang="en">Pull ratio</td></tr>
+  <tr><td>賽事對應</td><td lang="en">Event Mapping</td><td>盤口</td><td lang="en">Market</td></tr>
+  <tr><td>對應</td><td lang="en">Mapping</td><td>盤口線</td><td lang="en">Lines</td></tr>
+  <tr><td>腰斬</td><td lang="en">Abandonment</td><td>跳水</td><td lang="en">Price-drop</td></tr>
+  <tr><td>滾球</td><td lang="en">In-play</td><td>每步</td><td lang="en">Step</td></tr>
+  <tr><td>滾球訊號</td><td lang="en">In-play Signal</td><td>上限</td><td lang="en">Cap</td></tr>
+  <tr><td>訊號</td><td lang="en">Signal</td><td>歸零時間</td><td lang="en">Reset time</td></tr>
+  <tr><td>賠率</td><td lang="en">Odds</td><td>單注上限</td><td lang="en">Max stake</td></tr>
+  <tr><td>操盤</td><td lang="en">Trading</td><td>過關</td><td lang="en">Parlay</td></tr>
+  <tr><td>操盤台</td><td lang="en">Trading Desk</td><td>同場過關</td><td lang="en">Same-game parlay</td></tr>
+  <tr><td>玩法</td><td lang="en">Market</td><td>提前兌現</td><td lang="en">Cash out</td></tr>
+  <tr><td>玩法設定</td><td lang="en">Market Settings</td><td>兌現折扣</td><td lang="en">Cash-out discount</td></tr>
+  <tr><td>模板</td><td lang="en">Template</td><td>讓分</td><td lang="en">Handicap</td></tr>
+  <tr><td>模板指定</td><td lang="en">Template Assignment</td><td>常規時間</td><td lang="en">Regular time</td></tr>
+  <tr><td>玩法開關</td><td lang="en">Market Switches</td><td>大小</td><td lang="en">Total</td></tr>
+  <tr><td>指向</td><td lang="en">Assigned to</td><td>獨贏（三項）</td><td lang="en">1X2</td></tr>
+  <tr><td>足球</td><td lang="en">Soccer</td><td>波膽</td><td lang="en">Correct Score</td></tr>
+  <tr><td>封存</td><td lang="en">Archived</td><td>角球</td><td lang="en">Corner</td></tr>
+  <tr><td>階段</td><td lang="en">Phase</td><td>衍生玩法</td><td lang="en">Derived markets</td></tr>
+  <tr><td>預設模板</td><td lang="en">Default template</td><td>疊加階段</td><td lang="en">Overlay phases</td></tr>
+  <tr><td>基本值</td><td lang="en">Base value</td><td>權重</td><td lang="en">Weight</td></tr>
+  <tr><td>比賽當天</td><td lang="en">Match day</td><td>校正來源</td><td lang="en">Calibration source</td></tr>
+  <tr><td>熱門時段</td><td lang="en">Peak hours</td><td>正常</td><td lang="en">Normal</td></tr>
+  <tr><td>下半場</td><td lang="en">2nd half</td><td>停用</td><td lang="en">Disabled</td></tr>
+  <tr><td>上半場</td><td lang="en">1st half</td><td>啟用</td><td lang="en">Enabled</td></tr>
+  <tr><td>中場休息</td><td lang="en">Half-time</td><td></td><td lang="en"></td></tr>
+</table>
 
 </div>
 </body>

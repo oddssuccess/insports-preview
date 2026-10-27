@@ -23,51 +23,51 @@
 <!-- ============================================================ -->
 <h2>畫面 1：帳號清單</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#" class="on">帳號</a><a href="#">異常看板</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#" class="on">Accounts</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 資料來源 › 帳號</span><span>語言：繁體中文 ▾ · ops.user ▾ · 14:15</span></div>
+    <div class="top"><span>Home › Data Sources › Accounts</span><span>Language: English ▾ · ops.user ▾ · 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>帳號</h3><div class="sub">取得資料用的帳號，只用於取得資料；憑證不顯示，只能更換</div></div>
+        <div><h3>Accounts</h3><div class="sub">Accounts used only to obtain data; credentials are never shown, only replaced</div></div>
       </div>
 
       <div class="filters">
-        <div class="f"><label>站台</label><span class="box caret">全部</span></div>
-        <div class="f"><label>狀態 <span class="n">1</span></label><span class="strip"><span class="on">全部</span><span>被拒絕</span><span>已停用</span></span></div>
-        <div class="f"><label>搜尋</label><span class="box wide">帳號名稱</span></div>
+        <div class="f"><label>Site</label><span class="box caret">All</span></div>
+        <div class="f"><label>Status <span class="n">1</span></label><span class="strip"><span class="on">All</span><span>Rejected</span><span>Disabled</span></span></div>
+        <div class="f"><label>Search</label><span class="box wide">Account name</span></div>
       </div>
 
       <table class="grid">
         <thead><tr>
-          <th>帳號</th>
-          <th>站台 <span class="n">2</span></th>
-          <th>用於途徑</th>
-          <th>狀態</th>
-          <th>自何時</th>
-          <th>操作 <span class="n">3</span></th>
+          <th>Account</th>
+          <th>Site <span class="n">2</span></th>
+          <th>Used by paths</th>
+          <th>Status</th>
+          <th>Since</th>
+          <th>Actions <span class="n">3</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>p-jia-01</td><td>入口站台甲</td><td>來源 C 經甲<br>來源 F 經甲</td><td>正常</td><td class="l2">—</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr><td>p-jia-02</td><td>入口站台甲</td><td class="l2">備用</td><td><b>被拒絕：封號</b><div class="l2">已停止嘗試登入</div></td><td>10-22 21:40（16 小時）</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr><td>p-yi-01</td><td>入口站台乙</td><td>來源 C 經乙</td><td>正常</td><td class="l2">—</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr><td>p-ding-01</td><td>入口站台丁</td><td>來源 C 經丁<div class="l2">途徑尚未啟用</div></td><td>正常</td><td class="l2">—</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr class="off"><td>p-bing-01</td><td>入口站台丙</td><td>來源 H 經丙</td><td>已停用（人工）<div class="l2">ops.chen · 丙改版，登入流程待修</div></td><td>10-22 16:28</td><td><span class="btn">更換憑證</span> <span class="btn pri">啟用</span></td></tr>
-          <tr><td>d-acc-01</td><td>來源 D</td><td>來源 D 直接</td><td>正常</td><td class="l2">—</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr><td>d-acc-02</td><td>來源 D</td><td class="l2">備用</td><td><b>被拒絕：密碼錯誤</b><div class="l2">已停止嘗試登入</div></td><td>09:12（5 小時 3 分）</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
-          <tr><td>e-acc-01</td><td>來源 E</td><td>來源 E 直接<div class="l2">來源尚未啟用</div></td><td>正常</td><td class="l2">—</td><td><span class="btn">更換憑證</span> <span class="btn danger">停用</span></td></tr>
+          <tr><td>p-jia-01</td><td>Portal Alpha</td><td>Source C via Alpha<br>Source F via Alpha</td><td>Normal</td><td class="l2">—</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr><td>p-jia-02</td><td>Portal Alpha</td><td class="l2">Standby</td><td><b>Rejected: account banned</b><div class="l2">Stopped retrying login</div></td><td>10-22 21:40 (16 h)</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr><td>p-yi-01</td><td>Portal Beta</td><td>Source C via Beta</td><td>Normal</td><td class="l2">—</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr><td>p-ding-01</td><td>Portal Delta</td><td>Source C via Delta<div class="l2">Path not yet enabled</div></td><td>Normal</td><td class="l2">—</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr class="off"><td>p-bing-01</td><td>Portal Gamma</td><td>Source H via Gamma</td><td>Disabled (manual)<div class="l2">ops.chen · Gamma redesigned; login flow needs fixing</div></td><td>10-22 16:28</td><td><span class="btn">Replace credential</span> <span class="btn pri">Enable</span></td></tr>
+          <tr><td>d-acc-01</td><td>Source D</td><td>Source D direct</td><td>Normal</td><td class="l2">—</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr><td>d-acc-02</td><td>Source D</td><td class="l2">Standby</td><td><b>Rejected: wrong password</b><div class="l2">Stopped retrying login</div></td><td>09:12 (5 h 3 min)</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
+          <tr><td>e-acc-01</td><td>Source E</td><td>Source E direct<div class="l2">Source not yet enabled</div></td><td>Normal</td><td class="l2">—</td><td><span class="btn">Replace credential</span> <span class="btn danger">Disable</span></td></tr>
         </tbody>
       </table>
-      <div class="pager"><span></span><span>共 8 個帳號</span></div>
+      <div class="pager"><span></span><span>8 accounts</span></div>
     </div>
   </div>
 </div>
@@ -75,27 +75,27 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>狀態：正常；被拒絕（站台拒絕登入：密碼錯誤、停用、封號或限制，此時系統停止嘗試登入，交由人工處理，R03-14）；已停用（人工）。被拒絕顯示自何時與持續時間。</span></li>
-  <li><span class="n">2</span><span>帳號屬於資料來源（直接取得）或入口站台。入口站台的玩家帳號可以用來進入多個來源，所以一個帳號可能用於多條途徑。匿名公開的途徑不需要帳號，不在本清單。「備用」表示同一站台還有其他帳號在用，這個帳號目前沒有途徑使用它。</span></li>
+  <li><span class="n">2</span><span>帳號屬於資料來源（直接取得）或入口站台。入口站台的玩家帳號可以用來進入多個來源，所以一個帳號可能用於多條途徑。匿名公開的途徑不需要帳號，不在本清單。「Standby」表示同一站台還有其他帳號在用，這個帳號目前沒有途徑使用它。</span></li>
   <li><span class="n">3</span><span>更換憑證與停用、啟用都是串接維運，不是 R03-13 的控制：只改變途徑的可用數；某類資料因此沒有可用途徑時視為停用（R03-07）；不能停用的賽程（運動的賽程來源，以及還有未結束賽事的被指定建立者）例外，視為中斷，並在操作前提醒。憑證不顯示，也不提供檢視。帳號只用於取得資料：不下注、不存提款、不更改帳號設定；Ops 不得用這些帳號自行登入，多數站台同一帳號只允許一個登入，人員登入會使途徑失效（R03-04）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>畫面 2：更換憑證</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:520px">
-    <div class="mh"><span>更換憑證．d-acc-02（來源 D）</span><span>✕</span></div>
+    <div class="mh"><span>Replace credential · d-acc-02 (Source D)</span><span>✕</span></div>
     <div class="mb">
       <div class="form">
-        <div class="f"><label>帳號</label><span class="box ro" style="width:100%">d-acc-02</span></div>
-        <div class="f"><label>目前狀態</label><span class="box ro" style="width:100%">被拒絕：密碼錯誤</span></div>
-        <div class="f full"><label>新憑證 <span class="n">1</span></label><span class="box" style="width:100%">••••••••••••</span></div>
-        <div class="f full"><label>再輸入一次</label><span class="box" style="width:100%">••••••••••••</span></div>
-        <div class="f full"><label>原因（必填） <span class="n">2</span></label><span class="box" style="width:100%">站台要求定期改密碼</span></div>
+        <div class="f"><label>Accounts</label><span class="box ro" style="width:100%">d-acc-02</span></div>
+        <div class="f"><label>Current status</label><span class="box ro" style="width:100%">Rejected: wrong password</span></div>
+        <div class="f full"><label>New credential <span class="n">1</span></label><span class="box" style="width:100%">••••••••••••</span></div>
+        <div class="f full"><label>Enter again</label><span class="box" style="width:100%">••••••••••••</span></div>
+        <div class="f full"><label>Reason (required) <span class="n">2</span></label><span class="box" style="width:100%">Site requires periodic password changes</span></div>
       </div>
-      <p class="hint" style="margin-top:10px">舊憑證不會顯示。更換後，連接器以新憑證重新登入 <span class="n">3</span>。</p>
+      <p class="hint" style="margin-top:10px">The old credential is not shown. After replacement, the connector logs in again with the new one <span class="n">3</span>.</p>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認更換</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Confirm replace</span></div>
   </div>
 </div></div>
 
@@ -108,21 +108,21 @@
 <!-- ============================================================ -->
 <h2>畫面 3：停用帳號</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:600px">
-    <div class="mh"><span>停用帳號．p-jia-01（入口站台甲）</span><span>✕</span></div>
+    <div class="mh"><span>Disable account · p-jia-01 (Portal Alpha)</span><span>✕</span></div>
     <div class="mb">
-      <p>停用後，使用這個帳號的途徑都不可用，直到人工啟用；立即生效。受影響的範圍 <span class="n">1</span>：</p>
+      <p>Once disabled, every path using this account is unavailable until manually enabled; takes effect immediately. Affected scope <span class="n">1</span>:</p>
       <table class="grid">
-        <thead><tr><th>途徑</th><th>資料類別</th><th>其他途徑</th><th>結果</th></tr></thead>
+        <thead><tr><th>Access path</th><th>Data type</th><th>Other paths</th><th>Result</th></tr></thead>
         <tbody>
-          <tr><td>來源 C 經甲</td><td>賽程、賠率、賽況</td><td>經入口站台乙（可用）</td><td>不受影響，只減少備援</td></tr>
-          <tr><td>來源 F 經甲</td><td>賽程、賠率、賽況</td><td class="l2">沒有</td><td><b>視為停用</b></td></tr>
+          <tr><td>Source C via Alpha</td><td>Fixtures, Odds, Live data</td><td>Via Portal Beta (available)</td><td>Not affected, only less redundancy</td></tr>
+          <tr><td>Source F via Alpha</td><td>Fixtures, Odds, Live data</td><td class="l2">None</td><td><b>Treated as disabled</b></td></tr>
         </tbody>
       </table>
-      <div class="f" style="margin-top:12px"><label>原因（必填）</label><span class="box wide" style="width:100%">憑證疑似外洩，先停用再更換</span></div>
+      <div class="f" style="margin-top:12px"><label>Reason (required)</label><span class="box wide" style="width:100%">Credential possibly leaked; disable first, then replace</span></div>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">確認停用</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Confirm disable</span></div>
   </div>
 </div></div>
 
@@ -136,6 +136,32 @@
   <li>帳號被拒絕後，更換憑證是否自動恢復嘗試登入，還是要另按「恢復嘗試」。封號或限制通常不是換憑證能解決的，是否需要「人工確認已處理」的操作。</li>
   <li>帳號頁是否要顯示帳號的價格等級（R03-09），方便 Ops 看出同一來源的帳號是否同一等級。</li>
 </ol>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>被拒絕</td><td lang="en">Rejected</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>停用</td><td lang="en">Disable</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>途徑</td><td lang="en">Access path</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>入口站台</td><td lang="en">Portal</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>正常</td><td lang="en">Normal</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>備用</td><td lang="en">Standby</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>啟用</td><td lang="en">Enable</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>可用</td><td lang="en">Available</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>資料類別</td><td lang="en">Data type</td></tr>
+  <tr><td>連接器</td><td lang="en">Connectors</td><td>賽程</td><td lang="en">Fixtures</td></tr>
+  <tr><td>帳號</td><td lang="en">Account</td><td>賠率</td><td lang="en">Odds</td></tr>
+  <tr><td>憑證</td><td lang="en">Credential</td><td>賽況</td><td lang="en">Live data</td></tr>
+  <tr><td>站台</td><td lang="en">Site</td><td>備援</td><td lang="en">Redundancy</td></tr>
+</table>
 
 </div>
 </body>

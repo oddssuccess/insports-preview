@@ -39,81 +39,81 @@
 <!-- ============================================================ -->
 <h2>畫面 1：賽事操盤</h2>
 
-<div class="frame">
+<div lang="en" class="frame">
 <div class="shell">
   <nav class="side">
-    <div class="brand">InSports 後台</div>
-    <div class="group">目錄</div>
-    <a href="#">運動</a><a href="#">競賽</a><a href="#">參賽方</a><a href="#">時段與計分項目</a>
-    <div class="group">資料來源</div>
-    <a href="#">來源</a><a href="#">連接器</a><a href="#">帳號</a><a href="#">異常看板</a>
-    <div class="group">賽事資料</div>
-    <a href="#">待處理</a><a href="#">來源角色</a><a href="#">賽事對應</a><a href="#">待取消與待腰斬</a><a href="#">滾球訊號</a><a href="#">門檻設定</a>
-    <div class="group">賠率與操盤</div>
-    <a href="trading-desk.html" class="on">操盤台</a>
-    <div class="group">玩法設定</div>
-    <a href="../market-settings/templates.html">模板</a><a href="../market-settings/assignment.html">模板指定</a><a href="../market-settings/market-switches.html">玩法開關</a>
-    <div class="group">其他功能</div>
-    <div class="later">（之後依各 PRD 補上）</div>
+    <div class="brand">InSports Back Office</div>
+    <div class="group">Catalog</div>
+    <a href="#">Sports</a><a href="#">Tournaments</a><a href="#">Competitors</a><a href="#">Periods &amp; Score Items</a>
+    <div class="group">Data Sources</div>
+    <a href="#">Sources</a><a href="#">Connectors</a><a href="#">Accounts</a>
+    <div class="group">Event Data</div>
+    <a href="#">Work Queue</a><a href="#">Source Roles</a><a href="#">Event Mapping</a><a href="#">Pending Cancellation &amp; Abandonment</a><a href="#">In-play Signal</a>
+    <div class="group">Odds &amp; Trading</div>
+    <a href="trading-desk.html" class="on">Trading Desk</a>
+    <div class="group">Market Settings</div>
+    <a href="../market-settings/templates.html">Templates</a><a href="../market-settings/assignment.html">Template Assignment</a><a href="../market-settings/market-switches.html">Market Switches</a>
+    <div class="group">Other</div>
+    <div class="later">(added per PRD later)</div>
   </nav>
   <div>
-    <div class="top"><span>首頁 › 賠率與操盤 › 操盤台 › 曼城 vs 兵工廠</span><span>語言：繁體中文 ▾ · ops.lin ▾ · 10-26 14:15</span></div>
+    <div class="top"><span>Home › Odds &amp; Trading › Trading Desk › Man City vs Arsenal</span><span>Language: English ▾ · ops.lin ▾ · 10-26 14:15</span></div>
     <div class="main">
       <div class="page-head">
-        <div><h3>曼城 vs 兵工廠</h3><div class="sub">英超 · 賽前 · 10-26 20:00 · 價格是 InSports 價格（無水，不含利潤率）</div></div>
-        <div><span class="btn">暫停此賽事</span> <span class="btn">變更紀錄</span></div>
+        <div><h3>Man City vs Arsenal</h3><div class="sub">Premier League · Pre-match · 10-26 20:00 · Prices are InSports prices (fair, no margin)</div></div>
+        <div><span class="btn">Suspend this event</span> <span class="btn">Change log</span></div>
       </div>
       <div class="kv">
-        <span><b>適用模板</b>英超專用（競賽層指定） <span class="n">1</span> <a href="../market-settings/assignment.html">模板指定</a> · <a href="../market-settings/templates.html">檢視模板</a></span>
-        <span><b>目前階段</b>比賽當天 · 16:00 起熱門時段</span>
-        <span><b>關閉的玩法</b>2（落後反勝、獨贏（三項）：時間區間（10 分鐘）：運動層） <a href="../market-settings/market-switches.html">玩法開關</a></span>
-        <span><b>顯示</b><span class="strip" style="display:inline-flex"><span class="on">基準格式</span><span>歐洲盤</span></span> <span class="n">2</span></span>
+        <span><b>Template in effect</b>Premier League custom (assigned at tournament level) <span class="n">1</span> <a href="../market-settings/assignment.html">Template Assignment</a> · <a href="../market-settings/templates.html">View template</a></span>
+        <span><b>Current phase</b>Match day · Peak hours from 16:00</span>
+        <span><b>Closed markets</b>2 (Win From Behind, 1X2: Time interval (10 minutes): sport level) <a href="../market-settings/market-switches.html">Market Switches</a></span>
+        <span><b>Show</b><span class="strip" style="display:inline-flex"><span class="on">Base format</span><span>Decimal</span></span> <span class="n">2</span></span>
       </div>
 
-      <div class="tabs page"><span class="on">常規時間 · 開盤</span><span>上半場 · 暫停</span><span>下半場 · 開盤</span><span>共識定價玩法（19）</span></div>
+      <div class="tabs page"><span class="on">Regular time · Open</span><span>1st half · Suspended</span><span>2nd half · Open</span><span>Consensus-priced markets (19)</span></div>
 
-      <div class="sec">錨定玩法與共識價 <span class="l2">足球進球模型；共識價只用來反推模型參數 <span class="n">3</span></span></div>
+      <div class="sec">Anchor markets &amp; consensus price <span class="l2">Soccer goals model; the consensus price is used only to back-solve model parameters <span class="n">3</span></span></div>
       <table class="grid">
-        <thead><tr><th>錨定玩法</th><th>平衡線</th><th class="num">來源 C <span class="s">權重 2</span></th><th class="num">來源 D <span class="s">權重 1</span></th><th>來源 F <span class="s">權重 1</span></th><th class="num">共識價</th></tr></thead>
+        <thead><tr><th>Anchor markets</th><th>Balanced line</th><th class="num">Source C <span class="s">Weight 2</span></th><th class="num">Source D <span class="s">Weight 1</span></th><th>Source F <span class="s">Weight 1</span></th><th class="num">Consensus price</th></tr></thead>
         <tbody>
-          <tr><td>讓分（必要）</td><td>主 −0.25</td><td class="num">0.979 / −0.978</td><td class="num">1.000 / 1.000</td><td class="l2">賠率中斷，不參與</td><td class="num"><b>0.986 / −0.986</b></td></tr>
-          <tr><td>大小（必要）</td><td>2.25</td><td class="num">0.953 / −0.954</td><td class="num">0.983 / −0.981</td><td class="l2">賠率中斷，不參與</td><td class="num"><b>0.963 / −0.963</b></td></tr>
-          <tr><td>獨贏（三項，輔助）</td><td>—</td><td class="num">2.32 / 3.40 / 3.65</td><td class="num">2.35 / 3.37 / 3.59</td><td class="l2">賠率中斷，不參與</td><td class="num"><b>2.33 / 3.39 / 3.63</b></td></tr>
+          <tr><td>Handicap (required)</td><td>Home −0.25</td><td class="num">0.979 / −0.978</td><td class="num">1.000 / 1.000</td><td class="l2">Odds interrupted, not included</td><td class="num"><b>0.986 / −0.986</b></td></tr>
+          <tr><td>Total (required)</td><td>2.25</td><td class="num">0.953 / −0.954</td><td class="num">0.983 / −0.981</td><td class="l2">Odds interrupted, not included</td><td class="num"><b>0.963 / −0.963</b></td></tr>
+          <tr><td>1X2 (auxiliary)</td><td>—</td><td class="num">2.32 / 3.40 / 3.65</td><td class="num">2.35 / 3.37 / 3.59</td><td class="l2">Odds interrupted, not included</td><td class="num"><b>2.33 / 3.39 / 3.63</b></td></tr>
         </tbody>
       </table>
-      <div class="kv"><span><b>模型參數（唯讀）</b>λ1 1.20 · λ2 0.90 · λ3 0.20</span><span class="l2">主隊預期進球 1.40、客隊 1.10 · 14:15:02 反推</span> <span class="n">4</span></div>
+      <div class="kv"><span><b>Model parameters (read-only)</b>λ1 1.20 · λ2 0.90 · λ3 0.20</span><span class="l2">Home expected goals 1.40, away 1.10 · back-solved 14:15:02</span> <span class="n">4</span></div>
 
-      <div class="sec">讓分（常規時間）<span class="l2">InSports 一律算出 7 條；各經銷商開幾條由其模板決定 <span class="n">5</span></span></div>
+      <div class="sec">Handicap (regular time)<span class="l2">InSports always computes 7 lines; how many each distributor offers is set by its template <span class="n">5</span></span></div>
       <table class="grid">
-        <thead><tr><th>盤口線（主隊）</th><th class="num">基礎賠率</th><th class="num">2 校正</th><th class="num">3 偏移</th><th class="num">InSports 價格</th><th>狀態</th><th>操作 <span class="n">6</span></th></tr></thead>
+        <thead><tr><th>Line (home)</th><th class="num">Base odds</th><th class="num">2 Calibration</th><th class="num">3 Offset</th><th class="num">InSports price</th><th>Status</th><th>Actions <span class="n">6</span></th></tr></thead>
         <tbody>
-          <tr><td>+0.5</td><td class="num">0.381 / −0.381</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.381 / −0.381</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>+0.25</td><td class="num">0.478 / −0.478</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.478 / −0.478</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>0</td><td class="num">0.643 / −0.643</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.643 / −0.643</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr class="bal"><td><b>−0.25</b> <span class="chip">平衡線</span></td><td class="num">0.986 / −0.986</td><td class="num l2">—</td><td class="num">主 −0.02</td><td class="num"><b>0.966 / −0.966</b></td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>−0.5</td><td class="num">−0.752 / 0.752</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">−0.752 / 0.752</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>−0.75</td><td class="num">−0.540 / 0.540</td><td class="num">拉向 D 50%</td><td class="num l2">—</td><td class="num"><b>−0.555 / 0.555</b></td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>−1</td><td class="num">−0.328 / 0.328</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">−0.328 / 0.328</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
+          <tr><td>+0.5</td><td class="num">0.381 / −0.381</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.381 / −0.381</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>+0.25</td><td class="num">0.478 / −0.478</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.478 / −0.478</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>0</td><td class="num">0.643 / −0.643</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">0.643 / −0.643</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr class="bal"><td><b>−0.25</b> <span class="chip">Balanced line</span></td><td class="num">0.986 / −0.986</td><td class="num l2">—</td><td class="num">Home −0.02</td><td class="num"><b>0.966 / −0.966</b></td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>−0.5</td><td class="num">−0.752 / 0.752</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">−0.752 / 0.752</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>−0.75</td><td class="num">−0.540 / 0.540</td><td class="num">Pulled 50% toward D</td><td class="num l2">—</td><td class="num"><b>−0.555 / 0.555</b></td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>−1</td><td class="num">−0.328 / 0.328</td><td class="num l2">—</td><td class="num l2">—</td><td class="num">−0.328 / 0.328</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
         </tbody>
       </table>
-      <p class="l2">整個盤口：<span class="btn">偏移（整個盤口）</span> <span class="btn">暫停整個盤口</span> <span class="btn">關閉玩法…</span> <span class="n">7</span></p>
+      <p class="l2">Whole market:<span class="btn">Offset (whole market)</span> <span class="btn">Suspend whole market</span> <span class="btn">Close market…</span> <span class="n">7</span></p>
 
-      <div class="sec">大小（常規時間）<span class="l2">7 條，平衡線 2.25；收合顯示</span></div>
+      <div class="sec">Total (regular time)<span class="l2">7 lines, balanced line 2.25; collapsed</span></div>
       <table class="grid">
-        <thead><tr><th>盤口線</th><th class="num">1.5</th><th class="num">1.75</th><th class="num">2</th><th class="num">2.25 <span class="chip">平衡線</span></th><th class="num">2.5</th><th class="num">2.75</th><th class="num">3</th></tr></thead>
-        <tbody><tr><td>InSports 價格（大／小）</td><td class="num">0.451 / −0.451</td><td class="num">0.547 / −0.547</td><td class="num">0.694 / −0.694</td><td class="num">0.963 / −0.963</td><td class="num">−0.812 / 0.812</td><td class="num">−0.633 / 0.633</td><td class="num">−0.455 / 0.455</td></tr></tbody>
+        <thead><tr><th>Lines</th><th class="num">1.5</th><th class="num">1.75</th><th class="num">2</th><th class="num">2.25 <span class="chip">Balanced line</span></th><th class="num">2.5</th><th class="num">2.75</th><th class="num">3</th></tr></thead>
+        <tbody><tr><td>InSports price (Over/Under)</td><td class="num">0.451 / −0.451</td><td class="num">0.547 / −0.547</td><td class="num">0.694 / −0.694</td><td class="num">0.963 / −0.963</td><td class="num">−0.812 / 0.812</td><td class="num">−0.633 / 0.633</td><td class="num">−0.455 / 0.455</td></tr></tbody>
       </table>
 
-      <div class="sec">其他模型定價玩法（常規時間）<span class="l2">獨贏與衍生玩法；衍生玩法不讀取來源，沒有來源欄 <span class="n">8</span></span></div>
+      <div class="sec">Other model-priced markets (regular time)<span class="l2">1X2 and derived markets; derived markets read no sources, so there are no source columns <span class="n">8</span></span></div>
       <table class="grid">
-        <thead><tr><th>玩法</th><th>類別</th><th>InSports 價格</th><th>狀態</th><th>操作</th></tr></thead>
+        <thead><tr><th>Market</th><th>Kind</th><th>InSports price</th><th>Status</th><th>Actions</th></tr></thead>
         <tbody>
-          <tr><td>獨贏（三項）</td><td>錨定玩法</td><td class="num" style="text-align:left">2.33 / 3.39 / 3.63 <span class="l2">歐洲盤</span></td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>波膽</td><td>衍生玩法</td><td>1:0 8.31 · 0:0 9.97 · 1:1 7.79 · 2:1 11.23 · … <a href="#">全部</a></td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>雙重機會</td><td>衍生玩法</td><td>1X 1.38 · X2 1.75 · 12 1.42</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr><td>單雙</td><td>衍生玩法</td><td>單 −0.970 / 雙 0.970</td><td>開盤</td><td><span class="btn">偏移</span> <span class="btn">暫停</span></td></tr>
-          <tr class="inh"><td>落後反勝</td><td>衍生玩法</td><td>—</td><td><b>關閉</b><div class="l2">玩法開關：運動層（足球）· 取不到賽果</div></td><td><a href="../market-settings/market-switches.html">玩法開關</a></td></tr>
-          <tr><td colspan="5" class="l2">…（其餘模型定價玩法，見足球目錄的「賠率的產生方式」）</td></tr>
+          <tr><td>1X2</td><td>Anchor</td><td class="num" style="text-align:left">2.33 / 3.39 / 3.63 <span class="l2">Decimal</span></td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>Correct Score</td><td>Derived</td><td>1:0 8.31 · 0:0 9.97 · 1:1 7.79 · 2:1 11.23 · … <a href="#">All</a></td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>Double Chance</td><td>Derived</td><td>1X 1.38 · X2 1.75 · 12 1.42</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr><td>Odd/Even</td><td>Derived</td><td>Odd −0.970 / Even 0.970</td><td>Open</td><td><span class="btn">Offset</span> <span class="btn">Suspend</span></td></tr>
+          <tr class="inh"><td>Win From Behind</td><td>Derived</td><td>—</td><td><b>Closed</b><div class="l2">Market switch: sport level (Soccer) · result unavailable</div></td><td><a href="../market-settings/market-switches.html">Market Switches</a></td></tr>
+          <tr><td colspan="5" class="l2">… (other model-priced markets; see “How odds are produced” in the soccer catalog)</td></tr>
         </tbody>
       </table>
     </div>
@@ -125,31 +125,31 @@
   <li><span class="n">1</span><span>操盤頁只顯示適用的是哪份模板、由哪一層指定，以及賽事目前的階段，不在這裡改模板；要改到 12 的<a href="../market-settings/assignment.html">模板指定</a>或<a href="../market-settings/templates.html">模板</a>。來源的賠率開關與權重屬於模板，參與定價的來源因此依模板而定（R05-09、12 的 R12-01）。模板中依階段設定的利潤率、跳水等經銷商欄位，在經銷商的步驟才套用，不在本頁的 InSports 價格中（R05-20）。</span></li>
   <li><span class="n">2</span><span>預設以基準格式顯示：兩項玩法為馬來盤，三項以上為歐洲盤（R05-18），因為偏移也以基準格式的 0.01 為步進（R05-11）。InSports 價格是無水價，還沒有捨入；兩項玩法的無水價在馬來盤兩邊數值相同、正負相反。可切換成歐洲盤只為方便閱讀。</span></li>
   <li><span class="n">3</span><span>讓分與大小以平衡線反推：所有來源的所有盤口線放在一起各算共識價，最接近兩邊各半的那一條就是平衡線（R05-04）。來源中斷、停用、因矛盾不採用、沒開出平衡線，或在模板中關閉、權重為 0 時，這一輪不參與（R05-04、R05-09）。來源的數值是去水後的無水價；去水前的原始賠率在來源明細。共識價平均後不歸一（R05-09）。</span></li>
-  <li><span class="n">4</span><span>模型參數只能看，不能改（R05-11）。沒有獨贏時 λ3 為 0，此處顯示「沒有獨贏，λ3 = 0」（R05-10）。</span></li>
+  <li><span class="n">4</span><span>模型參數只能看，不能改（R05-11）。沒有獨贏時 λ3 為 0，此處顯示「No 1X2, λ3 = 0」（R05-10）。</span></li>
   <li><span class="n">5</span><span>InSports 一律以平衡線為中心算出 7 條線，價格都由模型算出，不管來源開了哪些線；平衡線移動時這 7 條跟著移動（R05-13）。操盤手不能移動盤口線，所以本頁沒有這個操作（R05-11）。</span></li>
   <li><span class="n">6</span><span>欄位依定價流程 InSports 的三步排列：1 基礎賠率 → 2 校正 → 3 偏移，結果是 InSports 價格（R05-20）。校正只出現在校正來源有開出的線（R05-21）；本例 −0.75 這條線拉向來源 D 的無水共識價（−0.570 / 0.570），拉近比例 50%。經銷商的加水、跳水、偏移與捨入不在本頁（見 10）。</span></li>
-  <li><span class="n">7</span><span>「關閉玩法…」開啟 12 的<a href="../market-settings/market-switches.html">玩法開關</a>的關閉視窗，預先帶入本賽事與玩法，選擇在哪一層關閉。暫停與關閉在系統中處理相同，都不產生賠率、不接受新注單；差別只在玩家端：暫停保留盤口的顯示框，關閉不顯示（R05-11）。每條線的「暫停」只暫停該線，其餘線照常（R05-11）。</span></li>
-  <li><span class="n">8</span><span>衍生玩法只由模型參數算出，不讀取來源，也不與來源的價格比對（R05-04）；上半場的模型範圍暫停時，它的衍生玩法一起暫停（R05-06）。關閉的玩法以淡色列出並標示是哪一層關閉（12 的 R12-10）；模板的開出為否時標示「模板不開出」（12 的 R12-09）。</span></li>
+  <li><span class="n">7</span><span>「Close market…」開啟 12 的<a href="../market-settings/market-switches.html">玩法開關</a>的關閉視窗，預先帶入本賽事與玩法，選擇在哪一層關閉。暫停與關閉在系統中處理相同，都不產生賠率、不接受新注單；差別只在玩家端：暫停保留盤口的顯示框，關閉不顯示（R05-11）。每條線的「Suspend」只暫停該線，其餘線照常（R05-11）。</span></li>
+  <li><span class="n">8</span><span>衍生玩法只由模型參數算出，不讀取來源，也不與來源的價格比對（R05-04）；上半場的模型範圍暫停時，它的衍生玩法一起暫停（R05-06）。關閉的玩法以淡色列出並標示是哪一層關閉（12 的 R12-10）；模板的開出為否時標示「Not offered by template」（12 的 R12-09）。</span></li>
 </ol>
 
 <h2>畫面 2：加偏移</h2>
 
-<div class="frame"><div class="backdrop">
+<div lang="en" class="frame"><div class="backdrop">
   <div class="modal" style="width:640px">
-    <div class="mh"><span>加偏移．曼城 vs 兵工廠．常規時間讓分</span><span>✕</span></div>
+    <div class="mh"><span>Add offset · Man City vs Arsenal · Regular time Handicap</span><span>✕</span></div>
     <div class="mb">
       <div class="form">
-        <div class="f full"><label>對象 <span class="n">1</span></label><div>○ 整個盤口（7 條線）　● 單條盤口線 <span class="box caret" style="min-width:80px">−0.25</span></div></div>
-        <div class="f"><label>調低哪一方</label><div>● 主隊（客隊同步調高）　○ 客隊</div></div>
-        <div class="f"><label>幅度（馬來盤，步進 0.01） <span class="n">2</span></label><div><span class="btn">−</span> <span class="box" style="min-width:60px">0.02</span> <span class="btn">+</span></div></div>
-        <div class="f full"><label>預覽</label>
-          <table class="grid" style="width:460px"><thead><tr><th>盤口線</th><th class="num">偏移前</th><th class="num">偏移後</th></tr></thead>
+        <div class="f full"><label>Target <span class="n">1</span></label><div>○ Whole market (7 lines)   ● Single line <span class="box caret" style="min-width:80px">−0.25</span></div></div>
+        <div class="f"><label>Side to lower</label><div>● Home (away raised accordingly)   ○ Away</div></div>
+        <div class="f"><label>Amount (Malay, step 0.01) <span class="n">2</span></label><div><span class="btn">−</span> <span class="box" style="min-width:60px">0.02</span> <span class="btn">+</span></div></div>
+        <div class="f full"><label>Preview</label>
+          <table class="grid" style="width:460px"><thead><tr><th>Lines</th><th class="num">Before offset</th><th class="num">After offset</th></tr></thead>
           <tbody><tr><td>−0.25</td><td class="num">0.986 / −0.986</td><td class="num"><b>0.966 / −0.966</b></td></tr></tbody></table></div>
-        <div class="f full"><label>原因（必填）</label><span class="box" style="width:100%">主隊先發名單消息，市場預期偏客隊</span></div>
+        <div class="f full"><label>Reason (required)</label><span class="box" style="width:100%">News on the home line-up; market leaning toward away</span></div>
       </div>
-      <p class="hint" style="margin-top:8px">偏移加在校正之後；基礎賠率更新時照加。只由人工移除，賽事結束自然失效，賽前加的偏移在滾球中仍然有效 <span class="n">3</span>。</p>
+      <p class="hint" style="margin-top:8px">The offset applies after calibration and stays on when base odds update. Removed only manually; lapses when the event ends; a pre-match offset stays in effect in-play <span class="n">3</span>.</p>
     </div>
-    <div class="mf"><span class="btn">取消</span><span class="btn pri">加上偏移</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Add offset</span></div>
   </div>
 </div></div>
 
@@ -161,6 +161,54 @@
 
 <h2>待確認事項</h2>
 <p>見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/odds-and-trading/README.md#待確認事項">README</a>。</p>
+
+
+
+
+
+
+<!-- glossary -->
+<!-- ============================================================ -->
+<h2>關鍵字中英對照</h2>
+<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
+<table class="doc-t">
+  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
+  <tr><td>後台</td><td lang="en">Back Office</td><td>關閉</td><td lang="en">Close</td></tr>
+  <tr><td>目錄</td><td lang="en">Catalog</td><td>落後反勝</td><td lang="en">Win From Behind</td></tr>
+  <tr><td>運動</td><td lang="en">Sports</td><td>獨贏（三項）</td><td lang="en">1X2</td></tr>
+  <tr><td>競賽</td><td lang="en">Tournaments</td><td>時間區間</td><td lang="en">Time interval</td></tr>
+  <tr><td>參賽方</td><td lang="en">Competitors</td><td>基準格式</td><td lang="en">Base format</td></tr>
+  <tr><td>時段</td><td lang="en">Periods</td><td>歐洲盤</td><td lang="en">Decimal</td></tr>
+  <tr><td>計分項目</td><td lang="en">Score Items</td><td>常規時間</td><td lang="en">Regular time</td></tr>
+  <tr><td>資料來源</td><td lang="en">Data Sources</td><td>開盤</td><td lang="en">Open</td></tr>
+  <tr><td>來源</td><td lang="en">Source</td><td>上半場</td><td lang="en">1st half</td></tr>
+  <tr><td>連接器</td><td lang="en">Connectors</td><td>下半場</td><td lang="en">2nd half</td></tr>
+  <tr><td>帳號</td><td lang="en">Accounts</td><td>共識定價玩法</td><td lang="en">Consensus-priced markets</td></tr>
+  <tr><td>賽事</td><td lang="en">Event</td><td>錨定玩法</td><td lang="en">Anchor markets</td></tr>
+  <tr><td>待處理</td><td lang="en">Work Queue</td><td>共識價</td><td lang="en">Consensus price</td></tr>
+  <tr><td>來源角色</td><td lang="en">Source Roles</td><td>足球</td><td lang="en">Soccer</td></tr>
+  <tr><td>賽事對應</td><td lang="en">Event Mapping</td><td>進球</td><td lang="en">Goals</td></tr>
+  <tr><td>對應</td><td lang="en">Mapping</td><td>反推</td><td lang="en">Back-solve</td></tr>
+  <tr><td>腰斬</td><td lang="en">Abandonment</td><td>模型參數</td><td lang="en">Model parameters</td></tr>
+  <tr><td>滾球</td><td lang="en">In-play</td><td>平衡線</td><td lang="en">Balanced line</td></tr>
+  <tr><td>滾球訊號</td><td lang="en">In-play Signal</td><td>權重</td><td lang="en">Weight</td></tr>
+  <tr><td>訊號</td><td lang="en">Signal</td><td>讓分</td><td lang="en">Handicap</td></tr>
+  <tr><td>賠率</td><td lang="en">Odds</td><td>中斷</td><td lang="en">Interrupted</td></tr>
+  <tr><td>操盤</td><td lang="en">Trading</td><td>大小</td><td lang="en">Total / Over/Under</td></tr>
+  <tr><td>操盤台</td><td lang="en">Trading Desk</td><td>經銷商</td><td lang="en">Distributor</td></tr>
+  <tr><td>玩法</td><td lang="en">Market</td><td>盤口</td><td lang="en">Market</td></tr>
+  <tr><td>玩法設定</td><td lang="en">Market Settings</td><td>盤口線</td><td lang="en">Line</td></tr>
+  <tr><td>模板</td><td lang="en">Template</td><td>基礎賠率</td><td lang="en">Base odds</td></tr>
+  <tr><td>模板指定</td><td lang="en">Template Assignment</td><td>校正</td><td lang="en">Calibration</td></tr>
+  <tr><td>玩法開關</td><td lang="en">Market Switches</td><td>偏移</td><td lang="en">Offset</td></tr>
+  <tr><td>賽前</td><td lang="en">Pre-match</td><td>模型定價玩法</td><td lang="en">Model-priced markets</td></tr>
+  <tr><td>無水</td><td lang="en">Fair</td><td>衍生玩法</td><td lang="en">Derived</td></tr>
+  <tr><td>利潤率</td><td lang="en">Margin</td><td>波膽</td><td lang="en">Correct Score</td></tr>
+  <tr><td>暫停</td><td lang="en">Suspend</td><td>雙重機會</td><td lang="en">Double Chance</td></tr>
+  <tr><td>階段</td><td lang="en">Phase</td><td>單雙</td><td lang="en">Odd/Even</td></tr>
+  <tr><td>比賽當天</td><td lang="en">Match day</td><td>賽果</td><td lang="en">Result</td></tr>
+  <tr><td>熱門時段</td><td lang="en">Peak hours</td><td>馬來盤</td><td lang="en">Malay</td></tr>
+</table>
 
 </div>
 </body>
