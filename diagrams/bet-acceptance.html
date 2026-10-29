@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 投注接受：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+/* 場景劇情與儀表板的補充樣式（與 event-data-and-mapping.html 相同） */
+svg .ico { stroke: var(--line); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .ico.w { stroke: var(--warn); }
+svg .big { font-size: 26px; font-weight: 700; }
+svg .pnl { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .num { fill: var(--line); }
+svg .numt { font-size: 13px; font-weight: 700; fill: var(--bg); }
+svg .ptitle { font-size: 13px; font-weight: 700; }
+svg .bub { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .bubw { fill: var(--panel); stroke: var(--warn); stroke-width: 1; stroke-dasharray: 4 3; }
+svg .bt { font-size: 12px; }
+svg .char { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .charw { fill: none; stroke: var(--warn); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 3; }
+svg .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+svg .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+svg .st { font-size: 13px; font-weight: 700; fill: var(--line); }
+svg .stw { font-size: 13px; font-weight: 700; fill: var(--warn); }
+svg .th { fill: var(--tag-fill); }
+/* 本頁新增：範圍外（錢包、營運商層）用灰色虛線，不用橘色；儀表板的量表與燈號 */
+svg .ext { fill: var(--panel); stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+svg .extlane { fill: none; stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+svg .nodew { fill: var(--panel); stroke: var(--warn); stroke-width: 1.2; }
+svg .track { fill: none; stroke: var(--sep); stroke-width: 1; }
+svg .bar { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1; }
+svg .barw { fill: var(--tagw-fill); stroke: var(--warn); stroke-width: 1; }
+svg .lamp { fill: var(--line); }
+svg .lampw { fill: var(--warn); }
+svg .n20 { font-size: 20px; font-weight: 700; font-family: var(--font-head); }
+svg .n26 { font-size: 26px; font-weight: 700; font-family: var(--font-head); }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+  <symbol id="ch-src" viewBox="0 0 40 64"><path d="M20,10 L20,3"/><circle cx="20" cy="2" r="1.8"/><path d="M14,6 Q20,-1 26,6"/><circle cx="20" cy="18" r="8"/><path d="M8,62 L8,40 Q8,30 18,30 L22,30 Q32,30 32,40 L32,62"/><path d="M8,42 L2,52"/><path d="M32,42 L38,52"/></symbol>
+  <symbol id="ch-ply" viewBox="0 0 40 64"><circle cx="20" cy="14" r="9"/><path d="M6,62 L6,40 Q6,29 17,29 L23,29 Q34,29 34,40 L34,62"/><path d="M6,42 L1,54"/><path d="M34,42 L39,54"/><path d="M14,10 Q20,4 26,10"/></symbol>
+  <symbol id="ch-sys" viewBox="0 0 40 64"><rect x="3" y="12" width="34" height="26" rx="3"/><path d="M20,38 L20,48"/><path d="M10,50 L30,50"/><path d="M9,20 L21,20"/><path d="M9,26 L27,26"/><path d="M9,32 L17,32"/></symbol>
+</defs></svg>
+
+<h1>06 投注接受：概念圖</h1>
+<p class="meta"><b>狀態</b>：草稿（示意，供挑選） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06 投注接受</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 06 的規則，不約束資料模型、架構或介面；圖中的名稱、金額、秒數與匯率都是範例，取自 PRD 第 4 節。畫成後台或玩家端樣式的圖只是示意，不是 11 的畫面。第 9 節原本的 8 項待確認事項已於 2026-10-30 決定，圖依決定後的規則畫；灰色虛線代表範圍外（錢包、營運商層）。</p>
+<ol class="toc">
+  <li><a href="#fig-06-01">圖 06-01　接受流程全貌：從下注請求到已確認或已拒絕</a></li>
+  <li><a href="#fig-06-02">圖 06-02　下注請求必帶的六項資訊，各用在哪一步</a></li>
+  <li><a href="#fig-06-03">圖 06-03　接受前的四道檢查與滾球比分核對</a></li>
+  <li><a href="#fig-06-04">圖 06-04　三種接受模式，以及「更好」的方向</a></li>
+  <li><a href="#fig-06-05">圖 06-05　重報不是注單狀態：請求結束、退款、玩家重送</a></li>
+  <li><a href="#fig-06-06">圖 06-06　投注金額與風險金額：三張注單的對照</a></li>
+  <li><a href="#fig-06-07">圖 06-07　限額的層次：誰設定、誰看得到、取較低者</a></li>
+  <li><a href="#fig-06-08">圖 06-08　動態最大淨虧損：怎麼算、三層上限</a></li>
+  <li><a href="#fig-06-09">圖 06-09　滾球等待的兩套機制：有覆蓋與無覆蓋</a></li>
+  <li><a href="#fig-06-10">圖 06-10　等待期間的時間線：六種結局</a></li>
+  <li><a href="#fig-06-11">圖 06-11　過關中的滾球等待：各關各自等，整張一起定</a></li>
+  <li><a href="#fig-06-12">圖 06-12　投注延遲與滾球等待是兩回事</a></li>
+  <li><a href="#fig-06-13">圖 06-13　注單在接受階段的三個狀態與拒絕原因</a></li>
+  <li><a href="#fig-06-14">圖 06-14　待取消與待腰斬：等待中拒絕，已確認維持</a></li>
+  <li><a href="#fig-06-15">圖 06-15　各層能設定什麼</a></li>
+  <li><a href="#fig-06-16">圖 06-16　六個下注情境與判定</a></li>
+</ol>
+
+<!-- ============================================================ 圖 06-01 -->
+<section class="fig" id="fig-06-01">
+<h2>圖 06-01　接受流程全貌：從下注請求到已確認或已拒絕</h2>
+<svg viewBox="0 0 960 536" width="100%" role="img" aria-label="接受流程全貌">
+<!-- 賽前直達 -->
+<path d="M630,70 L630,48 L880,48 L880,68" class="ln dash" marker-end="url(#arr)"/>
+<text x="755" y="40" text-anchor="middle" class="ts">賽前關、冠軍盤關：不等待，直接確認（R06-12）</text>
+<!-- 階段 -->
+<rect x="35" y="70" width="110" height="160" rx="6" class="node"/>
+<text x="90" y="96" text-anchor="middle" class="tb">下注請求</text>
+<text x="90" y="122" text-anchor="middle" class="ts">營運商端送達</text>
+<text x="90" y="140" text-anchor="middle" class="ts">一次請求一張注單</text>
+<text x="90" y="158" text-anchor="middle" class="ts">欄位見圖 06-02</text>
+<text x="90" y="176" text-anchor="middle" class="ts">（R06-01）</text>
+<path d="M145,100 L163,100" class="ln" marker-end="url(#arr)"/>
+<rect x="165" y="70" width="110" height="160" rx="6" class="ext"/>
+<text x="220" y="96" text-anchor="middle" class="tb">錢包扣款</text>
+<text x="220" y="122" text-anchor="middle" class="ts">錢包在範圍外</text>
+<text x="220" y="140" text-anchor="middle" class="ts">扣的是風險金額</text>
+<text x="220" y="158" text-anchor="middle" class="ts">成功才進流程</text>
+<text x="220" y="176" text-anchor="middle" class="ts">（R06-18）</text>
+<path d="M275,100 L293,100" class="ln" marker-end="url(#arr)"/>
+<rect x="295" y="70" width="110" height="160" rx="6" class="node"/>
+<text x="350" y="96" text-anchor="middle" class="tb">投注延遲</text>
+<text x="350" y="122" text-anchor="middle" class="ts">被 09 標記的玩家</text>
+<text x="350" y="140" text-anchor="middle" class="ts">每筆先延遲</text>
+<text x="350" y="158" text-anchor="middle" class="ts">沒標記：直接過</text>
+<text x="350" y="176" text-anchor="middle" class="ts">（R06-17）</text>
+<path d="M405,100 L423,100" class="ln" marker-end="url(#arr)"/>
+<rect x="425" y="70" width="130" height="160" rx="6" class="node"/>
+<text x="490" y="96" text-anchor="middle" class="tb">檢查</text>
+<text x="490" y="122" text-anchor="middle" class="ts">賽事統一狀態</text>
+<text x="490" y="140" text-anchor="middle" class="ts">盤口狀態</text>
+<text x="490" y="158" text-anchor="middle" class="ts">組合規則</text>
+<text x="490" y="176" text-anchor="middle" class="ts">限額</text>
+<text x="490" y="194" text-anchor="middle" class="ts">依賴比分：比分核對</text>
+<text x="490" y="212" text-anchor="middle" class="ts">（R06-02、R06-03）</text>
+<path d="M555,100 L573,100" class="ln" marker-end="url(#arr)"/>
+<rect x="575" y="70" width="110" height="160" rx="6" class="node"/>
+<text x="630" y="96" text-anchor="middle" class="tb">價格比較</text>
+<text x="630" y="122" text-anchor="middle" class="ts">依接受模式</text>
+<text x="630" y="140" text-anchor="middle" class="ts">逐關比較</text>
+<text x="630" y="158" text-anchor="middle" class="ts">以基準格式比</text>
+<text x="630" y="176" text-anchor="middle" class="ts">（R06-04）</text>
+<path d="M685,100 L703,100" class="ln" marker-end="url(#arr)"/>
+<rect x="705" y="70" width="110" height="160" rx="6" class="node"/><rect x="708" y="73" width="104" height="154" rx="4" class="node2"/>
+<text x="760" y="96" text-anchor="middle" class="tb">滾球等待</text>
+<text x="760" y="122" text-anchor="middle" class="ts">只有滾球關</text>
+<text x="760" y="140" text-anchor="middle" class="ts">注單狀態＝等待中</text>
+<text x="760" y="158" text-anchor="middle" class="ts">有／無覆蓋兩套</text>
+<text x="760" y="176" text-anchor="middle" class="ts">（R06-12 至 16）</text>
+<path d="M815,100 L833,100" class="ln" marker-end="url(#arr)"/>
+<rect x="835" y="70" width="90" height="160" rx="6" class="node"/><rect x="838" y="73" width="84" height="154" rx="4" class="node2"/>
+<text x="880" y="96" text-anchor="middle" class="tb">已確認</text>
+<text x="880" y="122" text-anchor="middle" class="ts">交 07 結算</text>
+<text x="880" y="140" text-anchor="middle" class="ts">接受階段結束</text>
+<text x="880" y="158" text-anchor="middle" class="ts">（R06-19）</text>
+<!-- 往下的分支 -->
+<path d="M220,230 L220,266" class="lnw" marker-end="url(#arrw)"/><text x="228" y="252" class="ts tw">扣款失敗</text>
+<path d="M490,230 L490,266" class="lnw" marker-end="url(#arrw)"/><text x="498" y="252" class="ts tw">不通過</text>
+<path d="M630,230 L630,266" class="lnw" marker-end="url(#arrw)"/><text x="638" y="252" class="ts tw">不符合模式</text>
+<path d="M760,230 L760,266" class="lnw" marker-end="url(#arrw)"/><text x="768" y="252" class="ts tw">拒絕條件</text>
+<!-- 左下：注單不成立 -->
+<rect x="35" y="270" width="265" height="220" rx="6" class="ext"/>
+<text x="50" y="294" class="tb">扣款失敗（餘額不足、錢包逾時…）</text>
+<text x="50" y="318" class="ts">注單不成立，不進入接受流程，</text>
+<text x="50" y="336" class="ts">玩家端不留下注單（R06-18）。</text>
+<text x="50" y="364" class="ts">錢包在檢查之前或之後扣款、</text>
+<text x="50" y="382" class="ts">退款的時效與失敗處理，</text>
+<text x="50" y="400" class="ts">屬錢包整合與非功能需求。</text>
+<!-- 右下：已拒絕 -->
+<rect x="320" y="270" width="605" height="220" rx="6" class="panel"/>
+<text x="336" y="294" class="tb">已拒絕：這次請求結束，InSports 通知錢包退還風險金額（R06-18、R06-19）</text>
+<rect x="430" y="306" width="120" height="22" rx="4" class="tagw"/><text x="490" y="322" text-anchor="middle" class="ts tw">賽事狀態不符</text>
+<rect x="430" y="332" width="120" height="22" rx="4" class="tagw"/><text x="490" y="348" text-anchor="middle" class="ts tw">盤口暫停或關閉</text>
+<rect x="430" y="358" width="120" height="22" rx="4" class="tagw"/><text x="490" y="374" text-anchor="middle" class="ts tw">組合不符</text>
+<rect x="430" y="384" width="120" height="22" rx="4" class="tagw"/><text x="490" y="400" text-anchor="middle" class="ts tw">超過限額</text>
+<rect x="430" y="410" width="120" height="22" rx="4" class="tagw"/><text x="490" y="426" text-anchor="middle" class="ts tw">比分不符</text>
+<rect x="430" y="436" width="120" height="22" rx="4" class="tagw"/><text x="490" y="452" text-anchor="middle" class="ts tw">低於最低投注額</text>
+<rect x="570" y="306" width="120" height="22" rx="4" class="tagw"/><text x="630" y="322" text-anchor="middle" class="ts tw">價格變動</text>
+<text x="630" y="348" text-anchor="middle" class="ts">＝重報（R06-05）</text>
+<text x="630" y="366" text-anchor="middle" class="ts">回傳目前價格</text>
+<text x="630" y="384" text-anchor="middle" class="ts">不是另一種狀態</text>
+<text x="630" y="402" text-anchor="middle" class="ts">玩家重送才成立</text>
+<rect x="700" y="306" width="120" height="22" rx="4" class="tagw"/><text x="760" y="322" text-anchor="middle" class="ts tw">危險訊號</text>
+<rect x="700" y="332" width="120" height="22" rx="4" class="tagw"/><text x="760" y="348" text-anchor="middle" class="ts tw">比分改變</text>
+<rect x="700" y="358" width="120" height="22" rx="4" class="tagw"/><text x="760" y="374" text-anchor="middle" class="ts tw">訊號中斷</text>
+<rect x="700" y="384" width="120" height="22" rx="4" class="tagw"/><text x="760" y="400" text-anchor="middle" class="ts tw">盤口暫停或關閉</text>
+<rect x="700" y="410" width="120" height="22" rx="4" class="tagw"/><text x="760" y="426" text-anchor="middle" class="ts tw">逾時</text>
+<text x="760" y="452" text-anchor="middle" class="ts">含待取消、待腰斬</text>
+<text x="336" y="478" class="ts">三個狀態與拒絕原因對經銷商、營運商與玩家都可見；等待中的注單玩家不能取消（R06-19）。</text>
+<circle cx="47" cy="514" r="4" class="dotw"/><text x="60" y="519" class="ts">參考設計（非約束）：階段的拆法與順序只是說明；重複送達的辨識、同一投注項的依序處理屬 SPEC（第 8 節）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：下注請求（R06-01）經過錢包扣款、投注延遲（只對被標記的玩家）、檢查、價格比較；賽前關與冠軍盤關直接確認，滾球關進入滾球等待（R06-02、R06-04、R06-12、R06-17）。任何一步不通過都是已拒絕並退還風險金額，重報是其中原因為「價格變動」的一種（R06-05、R06-18、R06-19）。階段的劃分是參考設計（非約束）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-02 -->
+<section class="fig" id="fig-06-02">
+<h2>圖 06-02　下注請求必帶的六項資訊，各用在哪一步</h2>
+<svg viewBox="0 0 960 500" width="100%" role="img" aria-label="下注請求的欄位">
+<rect x="40" y="20" width="440" height="404" rx="6" class="panel"/>
+<text x="56" y="44" class="tb">下注請求（Bet Request）：營運商端送來，一次一張注單</text>
+<rect x="56" y="60" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="80" class="tb">① 注單類型與組成</text>
+<text x="68" y="98" class="ts">單注、過關、系統過關；同場過關作為一關（02）</text>
+<rect x="56" y="116" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="136" class="tb">② 每個投注項：識別＋玩家看到的價格</text>
+<text x="68" y="154" class="ts">價格以該經銷商提供的賠率格式表示（10 的 R10-01）</text>
+<rect x="56" y="172" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="192" class="tb">③ 依賴比分的滾球投注項：玩家看到的比分</text>
+<text x="68" y="210" class="ts">只有賠率生成依賴滾球比分的玩法才帶（05 的 R05-07）</text>
+<rect x="56" y="228" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="248" class="tb">④ 投注金額與幣別</text>
+<text x="68" y="266" class="ts">負數賠率時，投注金額是贏時淨贏的金額（R06-06）</text>
+<rect x="56" y="284" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="304" class="tb">⑤ 接受模式</text>
+<text x="68" y="322" class="ts">只接受原價／接受原價或更好／接受任何價（R06-04）</text>
+<rect x="56" y="340" width="408" height="46" rx="6" class="node"/>
+<text x="68" y="360" class="tb">⑥ 玩家價格等級</text>
+<text x="68" y="378" class="ts">營運商替每位玩家指定，A 到 J 十級（R06-21）</text>
+<rect x="56" y="392" width="408" height="24" rx="4" class="tagw"/>
+<text x="260" y="409" text-anchor="middle" class="ts tw">缺少應帶的任一項：請求拒絕（R06-01）</text>
+<!-- 箭頭與用途 -->
+<path d="M464,83 L578,83" class="ln" marker-end="url(#arr)"/>
+<path d="M464,139 L578,139" class="ln" marker-end="url(#arr)"/>
+<path d="M464,195 L578,195" class="ln" marker-end="url(#arr)"/>
+<path d="M464,251 L578,251" class="ln" marker-end="url(#arr)"/>
+<path d="M464,307 L578,307" class="ln" marker-end="url(#arr)"/>
+<path d="M464,363 L578,363" class="ln" marker-end="url(#arr)"/>
+<text x="520" y="30" text-anchor="middle" class="ts">用在哪一步</text>
+<rect x="580" y="60" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="80" class="tb">組合規則檢查（R06-02）</text>
+<text x="596" y="98" class="ts">02 的規則＋模板的可否過關、可否同場過關</text>
+<rect x="580" y="116" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="136" class="tb">價格比較（R06-04）</text>
+<text x="596" y="154" class="ts">請求帶的價格與目前價格，換成基準格式比</text>
+<rect x="580" y="172" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="192" class="tb">比分核對（R06-03）</text>
+<text x="596" y="210" class="ts">不等於統一滾球比分就拒絕；其他投注項不核對</text>
+<rect x="580" y="228" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="248" class="tb">算出風險金額（R06-06）</text>
+<text x="596" y="266" class="ts">扣款與所有限額都以風險金額計，見圖 06-06</text>
+<rect x="580" y="284" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="304" class="tb">決定價格比較的方式（R06-04）</text>
+<text x="596" y="322" class="ts">三種模式，見圖 06-04</text>
+<rect x="580" y="340" width="340" height="46" rx="6" class="node"/>
+<text x="596" y="360" class="tb">決定比較用哪一個等級的價格（R06-21）</text>
+<text x="596" y="378" class="ts">只影響兩項玩法的水位；三項以上一律 A 級（05、10）</text>
+<rect x="580" y="392" width="340" height="32" rx="6" class="node"/>
+<text x="596" y="412" class="ts">InSports 回傳：注單的識別（InSports 產生）與結果</text>
+<circle cx="47" cy="456" r="4" class="dot"/><text x="60" y="461" class="ts">重複送達（營運商端逾時重送、網路重試）的辨識屬 SPEC：同一識別只成立一張注單並回傳同一結果（第 8 節）。</text>
+<circle cx="47" cy="482" r="4" class="dot"/><text x="60" y="487" class="ts">玩家端的介面、重報時的畫面流程屬營運商端，不在本 PRD（第 8 節）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：下注請求必須帶六項資訊，其中第 3 項只限賠率生成依賴滾球比分的滾球投注項，缺少應帶的一項就拒絕（R06-01）；每一項各對應接受流程中的一步：組合規則、價格比較、比分核對、風險金額、接受模式、玩家價格等級（R06-02 至 R06-04、R06-06、R06-21）。注單的識別由 InSports 產生並回傳。</p>
+</section>
+
+<!-- ============================================================ 圖 06-03 -->
+<section class="fig" id="fig-06-03">
+<h2>圖 06-03　接受前的四道檢查與滾球比分核對</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="接受前的檢查">
+<text x="40" y="44" class="tb">下注請求</text>
+<path d="M110,40 L938,40" class="ln" marker-end="url(#arr)"/>
+<text x="935" y="30" text-anchor="end" class="ts">全部通過 → 價格比較（圖 06-04）</text>
+<!-- ① 賽事統一狀態 -->
+<rect x="40" y="60" width="160" height="410" rx="6" class="node"/>
+<text x="52" y="84" class="tb">① 賽事統一狀態</text>
+<text x="52" y="102" class="ts">（04 的 R04-12）</text>
+<text x="52" y="130" class="ts tb">狀態</text><text x="146" y="130" text-anchor="middle" class="ts tb">賽前</text><text x="180" y="130" text-anchor="middle" class="ts tb">滾球</text>
+<line x1="52" y1="136" x2="188" y2="136" class="sep"/>
+<text x="52" y="156" class="ts">未開始</text><text x="146" y="156" text-anchor="middle" class="ts">✓</text><text x="180" y="156" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="176" class="ts">延後</text><text x="146" y="176" text-anchor="middle" class="ts">✓</text><text x="180" y="176" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="196" class="ts">進行中</text><text x="146" y="196" text-anchor="middle" class="ts tw">✗</text><text x="180" y="196" text-anchor="middle" class="ts">✓</text>
+<text x="52" y="216" class="ts">比賽中斷</text><text x="146" y="216" text-anchor="middle" class="ts tw">✗</text><text x="180" y="216" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="236" class="ts">已結束</text><text x="146" y="236" text-anchor="middle" class="ts tw">✗</text><text x="180" y="236" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="256" class="ts">賽果已確定</text><text x="146" y="256" text-anchor="middle" class="ts tw">✗</text><text x="180" y="256" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="276" class="ts">取消、腰斬</text><text x="146" y="276" text-anchor="middle" class="ts tw">✗</text><text x="180" y="276" text-anchor="middle" class="ts tw">✗</text>
+<text x="52" y="304" class="ts">延後照常接受賽前；</text>
+<text x="52" y="322" class="ts">只有待取消標記才停</text>
+<text x="52" y="340" class="ts">（R04-23、R06-20）</text>
+<text x="52" y="368" class="ts">比賽中斷視同盤口暫停，</text>
+<text x="52" y="386" class="ts">也不接受滾球（R06-02）</text>
+<rect x="52" y="430" width="136" height="24" rx="4" class="tagw"/><text x="120" y="447" text-anchor="middle" class="ts tw">賽事狀態不符</text>
+<!-- ② 盤口狀態 -->
+<rect x="220" y="60" width="160" height="410" rx="6" class="node"/>
+<text x="232" y="84" class="tb">② 盤口狀態</text>
+<text x="232" y="104" class="ts">每個投注項的盤口線都要</text>
+<text x="232" y="122" class="ts">開盤、未暫停、未關閉</text>
+<text x="232" y="148" class="ts">暫停或關閉的來源：</text>
+<rect x="232" y="158" width="136" height="32" rx="4" class="chip"/><text x="300" y="171" text-anchor="middle" class="ts">操盤手暫停／關閉</text><text x="300" y="185" text-anchor="middle" class="ts">（05 的 R05-11）</text>
+<rect x="232" y="194" width="136" height="32" rx="4" class="chip"/><text x="300" y="207" text-anchor="middle" class="ts">模型範圍、比分不一致</text><text x="300" y="221" text-anchor="middle" class="ts">（R05-06、R05-07）</text>
+<rect x="232" y="230" width="136" height="32" rx="4" class="chip"/><text x="300" y="243" text-anchor="middle" class="ts">模板開出為否、玩法開關</text><text x="300" y="257" text-anchor="middle" class="ts">（12 的 R12-09、10）</text>
+<rect x="232" y="266" width="136" height="32" rx="4" class="chip"/><text x="300" y="279" text-anchor="middle" class="ts">經銷商自己暫停／關閉</text><text x="300" y="293" text-anchor="middle" class="ts">（10 的 R10-03）</text>
+<rect x="232" y="302" width="136" height="32" rx="4" class="chip"/><text x="300" y="315" text-anchor="middle" class="ts">待取消、待腰斬</text><text x="300" y="329" text-anchor="middle" class="ts">（05 的 R05-16）</text>
+<text x="232" y="358" class="ts">暫停與關閉的分別只影響</text>
+<text x="232" y="376" class="ts">玩家端顯示；對接受來說</text>
+<text x="232" y="394" class="ts">都一樣：不接受新注單</text>
+<rect x="232" y="430" width="136" height="24" rx="4" class="tagw"/><text x="300" y="447" text-anchor="middle" class="ts tw">盤口暫停或關閉</text>
+<!-- ③ 組合規則 -->
+<rect x="400" y="60" width="160" height="410" rx="6" class="node"/>
+<text x="412" y="84" class="tb">③ 組合規則</text>
+<text x="412" y="104" class="ts">02 的組合規則，例如</text>
+<text x="412" y="122" class="ts">同一場賽事只能在一關</text>
+<text x="412" y="148" class="ts">模板中該玩法在該階段：</text>
+<rect x="412" y="158" width="136" height="22" rx="4" class="tag"/><text x="480" y="174" text-anchor="middle" class="ts">可否過關</text>
+<rect x="412" y="186" width="136" height="22" rx="4" class="tag"/><text x="480" y="202" text-anchor="middle" class="ts">可否同場過關</text>
+<text x="412" y="228" class="ts">（12 的 R12-01）</text>
+<rect x="412" y="430" width="136" height="24" rx="4" class="tagw"/><text x="480" y="447" text-anchor="middle" class="ts tw">組合不符</text>
+<!-- ④ 限額 -->
+<rect x="580" y="60" width="160" height="410" rx="6" class="node"/>
+<text x="592" y="84" class="tb">④ 限額</text>
+<text x="592" y="104" class="ts">一律以風險金額比對</text>
+<text x="592" y="122" class="ts">（R06-06）</text>
+<rect x="592" y="138" width="136" height="32" rx="4" class="tag"/><text x="660" y="151" text-anchor="middle" class="ts">盤口限額</text><text x="660" y="165" text-anchor="middle" class="ts">（R06-07）</text>
+<rect x="592" y="174" width="136" height="32" rx="4" class="tag"/><text x="660" y="187" text-anchor="middle" class="ts">系統單注上限</text><text x="660" y="201" text-anchor="middle" class="ts">（R06-08）</text>
+<rect x="592" y="210" width="136" height="32" rx="4" class="tag"/><text x="660" y="223" text-anchor="middle" class="ts">無覆蓋百分比</text><text x="660" y="237" text-anchor="middle" class="ts">（R06-09）</text>
+<rect x="592" y="246" width="136" height="32" rx="4" class="tag"/><text x="660" y="259" text-anchor="middle" class="ts">動態最大淨虧損</text><text x="660" y="273" text-anchor="middle" class="ts">（R06-10）</text>
+<rect x="592" y="282" width="136" height="32" rx="4" class="tag"/><text x="660" y="295" text-anchor="middle" class="ts">經銷商最低投注額</text><text x="660" y="309" text-anchor="middle" class="ts">（R06-07、R10-04）</text>
+<text x="592" y="340" class="ts">任一層超過即拒絕，</text>
+<text x="592" y="358" class="ts">原因都只是「超過限額」</text>
+<text x="592" y="384" class="ts">見圖 06-07、06-08</text>
+<rect x="592" y="400" width="136" height="24" rx="4" class="tagw"/><text x="660" y="417" text-anchor="middle" class="ts tw">超過限額</text>
+<rect x="592" y="430" width="136" height="24" rx="4" class="tagw"/><text x="660" y="447" text-anchor="middle" class="ts tw">低於最低投注額</text>
+<!-- ⑤ 比分核對 -->
+<rect x="760" y="60" width="160" height="410" rx="6" class="node"/>
+<text x="772" y="84" class="tb">⑤ 滾球比分核對</text>
+<text x="772" y="104" class="ts">只有依賴比分的玩法</text>
+<text x="772" y="122" class="ts">（R06-03）</text>
+<text x="772" y="148" class="ts">請求帶的比分</text>
+<text x="772" y="166" class="ts tb">＝ 統一滾球比分？</text>
+<text x="772" y="192" class="ts">不論接受模式，連</text>
+<text x="772" y="210" class="ts">「接受任何價」也核對</text>
+<text x="772" y="236" class="ts">比分不同＝玩家看到的</text>
+<text x="772" y="254" class="ts">價格已經過期</text>
+<text x="772" y="280" class="ts">不依賴比分的玩法、</text>
+<text x="772" y="298" class="ts">賽前與冠軍盤不核對</text>
+<rect x="772" y="430" width="136" height="24" rx="4" class="tagw"/><text x="840" y="447" text-anchor="middle" class="ts tw">比分不符</text>
+<!-- 匯流到拒絕 -->
+<path d="M120,454 L120,498" class="lnw" marker-end="url(#arrw)"/>
+<path d="M300,454 L300,498" class="lnw" marker-end="url(#arrw)"/>
+<path d="M480,454 L480,498" class="lnw" marker-end="url(#arrw)"/>
+<path d="M660,454 L660,498" class="lnw" marker-end="url(#arrw)"/>
+<path d="M840,454 L840,498" class="lnw" marker-end="url(#arrw)"/>
+<rect x="40" y="500" width="880" height="40" rx="6" class="tagw"/>
+<text x="480" y="525" text-anchor="middle" class="tb tw">任一項不通過：整張注單拒絕並回傳原因；過關與系統過關也是整張（R06-02）</text>
+</svg>
+<p class="cap"><b>圖說</b>：接受前的四道檢查（賽事統一狀態、盤口狀態、組合規則、限額），賠率生成依賴滾球比分的投注項另核對比分；任一項不通過就整張拒絕並回傳原因（R06-02、R06-03）。延後的賽事照常接受賽前投注；比賽中斷視同盤口暫停，不接受滾球投注（2026-10-30 確認）。低於經銷商的最低投注額另有原因（R06-07）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-04 -->
+<section class="fig" id="fig-06-04">
+<h2>圖 06-04　三種接受模式，以及「更好」的方向</h2>
+<svg viewBox="0 0 960 500" width="100%" role="img" aria-label="接受模式">
+<rect x="40" y="30" width="200" height="36" rx="4" class="panel"/><text x="140" y="53" text-anchor="middle" class="tb">接受模式</text>
+<rect x="250" y="30" width="210" height="36" rx="4" class="panel"/><text x="355" y="53" text-anchor="middle" class="tb">目前價格與請求相同</text>
+<rect x="470" y="30" width="210" height="36" rx="4" class="panel"/><text x="575" y="53" text-anchor="middle" class="tb">目前價格對玩家更好</text>
+<rect x="690" y="30" width="230" height="36" rx="4" class="panel"/><text x="805" y="53" text-anchor="middle" class="tb">目前價格對玩家更差</text>
+<!-- 只接受原價 -->
+<rect x="40" y="76" width="200" height="42" rx="4" class="node"/><text x="140" y="102" text-anchor="middle" class="tb">只接受原價</text>
+<rect x="258" y="82" width="194" height="30" rx="4" class="tag"/><text x="355" y="102" text-anchor="middle" class="ts">接受，以原價成立</text>
+<rect x="478" y="82" width="194" height="30" rx="4" class="tagw"/><text x="575" y="102" text-anchor="middle" class="ts tw">重報</text>
+<rect x="698" y="82" width="214" height="30" rx="4" class="tagw"/><text x="805" y="102" text-anchor="middle" class="ts tw">重報</text>
+<!-- 接受原價或更好 -->
+<rect x="40" y="126" width="200" height="42" rx="4" class="node"/><text x="140" y="152" text-anchor="middle" class="tb">接受原價或更好</text>
+<rect x="258" y="132" width="194" height="30" rx="4" class="tag"/><text x="355" y="152" text-anchor="middle" class="ts">接受，以原價成立</text>
+<rect x="478" y="132" width="194" height="30" rx="4" class="tag"/><text x="575" y="152" text-anchor="middle" class="ts">接受，以目前價格成立</text>
+<rect x="698" y="132" width="214" height="30" rx="4" class="tagw"/><text x="805" y="152" text-anchor="middle" class="ts tw">重報</text>
+<!-- 接受任何價 -->
+<rect x="40" y="176" width="200" height="42" rx="4" class="node"/><text x="140" y="202" text-anchor="middle" class="tb">接受任何價</text>
+<rect x="258" y="182" width="194" height="30" rx="4" class="tag"/><text x="355" y="202" text-anchor="middle" class="ts">接受</text>
+<rect x="478" y="182" width="194" height="30" rx="4" class="tag"/><text x="575" y="202" text-anchor="middle" class="ts">接受，以目前價格成立</text>
+<rect x="698" y="182" width="214" height="30" rx="4" class="tag"/><text x="805" y="202" text-anchor="middle" class="ts">接受，以目前價格成立</text>
+<circle cx="47" cy="238" r="4" class="dot"/><text x="60" y="243" class="ts">重報：這次請求結束，回傳每個投注項的目前價格，原因「價格變動」；玩家重送一次才成立（R06-05，見圖 06-05）。</text>
+<circle cx="47" cy="260" r="4" class="dot"/><text x="60" y="265" class="ts">過關與系統過關逐關比較，任一關不符合模式就整張重報；「接受任何價」仍要通過比分核對與其他檢查（R06-03）。</text>
+<circle cx="47" cy="282" r="4" class="dot"/><text x="60" y="287" class="ts">目前價格＝該經銷商的玩家看到的價格（05 的 R05-20 第 8 步），含跳水、經銷商的偏移與該玩家的價格等級（R06-21）。</text>
+<!-- 尺 -->
+<rect x="40" y="304" width="880" height="180" rx="6" class="panel"/>
+<text x="56" y="328" class="tb">「更好」以 05 的基準格式比，不比玩家看到的數值（R05-18）：兩項玩法用馬來盤，三項以上用歐洲盤；下圖只標順序，不按比例</text>
+<text x="300" y="354" text-anchor="middle" class="ts">正數（歐洲盤 2.00 以下）：數值越大越好</text>
+<text x="710" y="354" text-anchor="middle" class="ts">負數（歐洲盤 2.00 以上）：都比正數好；越接近 0 越好</text>
+<text x="80" y="392" class="ts">對玩家較差</text>
+<text x="900" y="392" text-anchor="end" class="ts">對玩家更好</text>
+<path d="M80,400 L898,400" class="ln" marker-end="url(#arr)"/>
+<line x1="500" y1="340" x2="500" y2="440" class="sep dash"/>
+<g class="ts">
+<line x1="110" y1="394" x2="110" y2="406" class="sep"/><text x="110" y="424" text-anchor="middle" class="ts">0.50</text>
+<line x1="230" y1="394" x2="230" y2="406" class="sep"/><text x="230" y="424" text-anchor="middle" class="ts">0.83</text>
+<line x1="300" y1="394" x2="300" y2="406" class="sep"/><text x="300" y="424" text-anchor="middle" class="ts">0.85</text>
+<line x1="370" y1="394" x2="370" y2="406" class="sep"/><text x="370" y="424" text-anchor="middle" class="ts">0.88</text>
+<line x1="440" y1="394" x2="440" y2="406" class="sep"/><text x="440" y="424" text-anchor="middle" class="ts">0.99</text>
+<text x="500" y="424" text-anchor="middle" class="ts">1.00 ＝ −1.00</text>
+<text x="500" y="456" text-anchor="middle" class="ts">（歐洲盤 2.00）</text>
+<line x1="560" y1="394" x2="560" y2="406" class="sep"/><text x="560" y="424" text-anchor="middle" class="ts">−0.99</text>
+<line x1="640" y1="394" x2="640" y2="406" class="sep"/><text x="640" y="424" text-anchor="middle" class="ts">−0.95</text>
+<line x1="740" y1="394" x2="740" y2="406" class="sep"/><text x="740" y="424" text-anchor="middle" class="ts">−0.80</text>
+<line x1="860" y1="394" x2="860" y2="406" class="sep"/><text x="860" y="424" text-anchor="middle" class="ts">−0.50</text>
+</g>
+<circle cx="300" cy="400" r="6" class="dot"/><text x="300" y="380" text-anchor="middle" class="ts">請求帶的價格 0.85</text>
+<circle cx="230" cy="400" r="5" class="dotw"/><text x="230" y="462" text-anchor="middle" class="ts tw">目前 0.83 → 更差</text>
+<circle cx="370" cy="400" r="5" class="dot"/><text x="370" y="462" text-anchor="middle" class="ts">目前 0.88 → 更好</text>
+<circle cx="640" cy="400" r="5" class="dot"/><text x="640" y="462" text-anchor="middle" class="ts">目前 −0.95 → 更好</text>
+</svg>
+<p class="cap"><b>圖說</b>：三種接受模式對「相同、更好、更差」的處理（R06-04）。更好或更差以 05 的基準格式換算後比，不比數值大小：馬來盤任何負數都比任何正數好（0.85 是歐洲盤 1.85、0.88 是 1.88、−0.95 是 2.05），所以 0.85 變成 −0.95 是變好，不是變差。數字是第 4 節的範例。</p>
+</section>
+
+<!-- ============================================================ 圖 06-05 -->
+<section class="fig" id="fig-06-05">
+<h2>圖 06-05　重報不是注單狀態：請求結束、退款、玩家重送</h2>
+<svg viewBox="0 0 960 420" width="100%" role="img" aria-label="重報的時間線">
+<rect x="40" y="30" width="900" height="96" rx="6" class="panel"/><text x="56" y="54" class="tb">玩家</text><text x="56" y="72" class="ts">（營運商端）</text>
+<rect x="40" y="140" width="900" height="96" rx="6" class="panel"/><text x="56" y="164" class="tb">InSports</text>
+<rect x="40" y="250" width="900" height="96" rx="6" class="extlane"/><text x="56" y="274" class="tb">錢包</text><text x="56" y="292" class="ts">（範圍外）</text>
+<!-- ① -->
+<rect x="190" y="50" width="170" height="56" rx="6" class="node"/>
+<text x="275" y="72" text-anchor="middle" class="tb">① 送出請求</text>
+<text x="275" y="92" text-anchor="middle" class="ts">馬來盤 0.85，只接受原價</text>
+<path d="M275,106 L275,158" class="ln" marker-end="url(#arr)"/>
+<rect x="190" y="160" width="170" height="56" rx="6" class="node"/>
+<text x="275" y="182" text-anchor="middle" class="tb">收到請求</text>
+<text x="275" y="202" text-anchor="middle" class="ts">通過其他檢查</text>
+<path d="M275,216 L275,268" class="ln" marker-end="url(#arr)"/>
+<rect x="190" y="270" width="170" height="56" rx="6" class="ext"/>
+<text x="275" y="292" text-anchor="middle" class="tb">扣風險金額 100</text>
+<text x="275" y="312" text-anchor="middle" class="ts">成功才進流程（R06-18）</text>
+<!-- ② -->
+<path d="M360,188 L398,188" class="ln" marker-end="url(#arr)"/>
+<rect x="400" y="160" width="190" height="56" rx="6" class="nodew"/>
+<text x="495" y="182" text-anchor="middle" class="tb tw">② 價格比較：目前 0.83</text>
+<text x="495" y="202" text-anchor="middle" class="ts tw">≠ 0.85 → 重報，請求結束</text>
+<path d="M495,216 L495,268" class="lnw" marker-end="url(#arrw)"/>
+<rect x="400" y="270" width="190" height="56" rx="6" class="ext"/>
+<text x="495" y="292" text-anchor="middle" class="tb">退還風險金額 100</text>
+<text x="495" y="312" text-anchor="middle" class="ts">（R06-18）</text>
+<path d="M495,160 L495,108" class="lnw" marker-end="url(#arrw)"/>
+<rect x="400" y="50" width="190" height="56" rx="6" class="node"/>
+<text x="495" y="72" text-anchor="middle" class="tb">收到：目前價格 0.83</text>
+<text x="495" y="92" text-anchor="middle" class="ts">原因「價格變動」（R06-05）</text>
+<!-- ③ -->
+<path d="M590,78 L618,78" class="ln" marker-end="url(#arr)"/>
+<rect x="620" y="50" width="170" height="56" rx="6" class="node"/>
+<text x="705" y="72" text-anchor="middle" class="tb">③ 重送一次：0.83</text>
+<text x="705" y="92" text-anchor="middle" class="ts">視為新的下注</text>
+<text x="718" y="122" class="ts">或不下注：到此結束</text>
+<path d="M705,106 L705,158" class="ln" marker-end="url(#arr)"/>
+<rect x="620" y="160" width="170" height="56" rx="6" class="node"/>
+<text x="705" y="182" text-anchor="middle" class="tb">新請求：全部檢查重做</text>
+<text x="705" y="202" text-anchor="middle" class="ts">再比價格、再扣款</text>
+<path d="M705,216 L705,268" class="ln" marker-end="url(#arr)"/>
+<rect x="620" y="270" width="170" height="56" rx="6" class="ext"/>
+<text x="705" y="292" text-anchor="middle" class="tb">扣風險金額 100</text>
+<text x="705" y="312" text-anchor="middle" class="ts">新的注單</text>
+<path d="M790,188 L818,188" class="ln" marker-end="url(#arr)"/>
+<rect x="820" y="160" width="110" height="56" rx="6" class="node"/><rect x="823" y="163" width="104" height="50" rx="4" class="node2"/>
+<text x="875" y="182" text-anchor="middle" class="tb">已確認</text>
+<text x="875" y="202" text-anchor="middle" class="ts">交 07（R06-19）</text>
+<circle cx="47" cy="368" r="4" class="dotw"/><text x="60" y="373" class="ts">重報不是注單的狀態：InSports 不替玩家保留原請求、不自動以新價成立注單；重報的注單記為已拒絕，原因「價格變動」（R06-05、R06-19）。</text>
+<circle cx="47" cy="394" r="4" class="dot"/><text x="60" y="399" class="ts">錢包在檢查之前或之後扣款、退款的時效與失敗處理，屬錢包整合與非功能需求（R06-18）；本圖畫成先扣款只是其中一種。</text>
+</svg>
+<p class="cap"><b>圖說</b>：價格不符合接受模式時，這次請求結束，回傳目前價格，已扣的風險金額退還；玩家要以新價下注就重送一次，視為新的下注，全部檢查重做（R06-05、R06-18）。InSports 不保留原請求、不自動以新價成立注單。</p>
+</section>
+
+<!-- ============================================================ 圖 06-06 -->
+<section class="fig" id="fig-06-06">
+<h2>圖 06-06　投注金額與風險金額：三張注單的對照</h2>
+<svg viewBox="0 0 960 492" width="100%" role="img" aria-label="投注金額與風險金額">
+<rect x="40" y="16" width="880" height="58" rx="6" class="panel"/>
+<text x="56" y="40" class="tb">投注金額（Stake）是玩家輸入的數字；風險金額（Stake at Risk）是輸時失去的金額。價格為負時兩者不同（R06-06）</text>
+<text x="56" y="62" class="ts">歐洲盤、香港盤、正數的馬來盤與印尼盤：投注金額＝風險金額　　負數的馬來盤與印尼盤：投注金額＝贏時淨贏，風險金額＝投注金額 × |價格|</text>
+<!-- 注單 1 -->
+<rect x="40" y="90" width="280" height="290" rx="6" class="node"/>
+<rect x="40" y="90" width="280" height="28" rx="6" class="th"/><text x="180" y="110" text-anchor="middle" class="tb">A 對 B　常規時間讓分 −0.5　主隊</text>
+<text x="56" y="144" class="ts">價格</text><text x="304" y="148" text-anchor="end" class="n20">馬來盤 −0.80</text>
+<text x="56" y="178" class="ts">玩家輸入：投注金額</text><text x="304" y="182" text-anchor="end" class="n20">100</text>
+<line x1="56" y1="196" x2="304" y2="196" class="sep"/>
+<text x="56" y="222" class="tb">風險金額（輸時失去）</text><text x="304" y="228" text-anchor="end" class="n26">80</text>
+<text x="56" y="242" class="ts">＝ 100 × |−0.80|</text>
+<text x="56" y="272" class="tb">贏時淨贏</text><text x="304" y="278" text-anchor="end" class="n26">100</text>
+<text x="56" y="292" class="ts">＝ 投注金額</text>
+<rect x="56" y="314" width="110" height="24" rx="4" class="tag"/><text x="111" y="331" text-anchor="middle" class="ts">錢包扣 80</text>
+<rect x="176" y="314" width="128" height="24" rx="4" class="tag"/><text x="240" y="331" text-anchor="middle" class="ts">限額以 80 比對</text>
+<text x="56" y="364" class="ts">輸時扣的 80 不會再多扣</text>
+<!-- 注單 2 -->
+<rect x="340" y="90" width="280" height="290" rx="6" class="node"/>
+<rect x="340" y="90" width="280" height="28" rx="6" class="th"/><text x="480" y="110" text-anchor="middle" class="tb">A 對 B　常規時間讓分 −0.5　主隊</text>
+<text x="356" y="144" class="ts">價格</text><text x="604" y="148" text-anchor="end" class="n20">馬來盤 0.80</text>
+<text x="356" y="178" class="ts">玩家輸入：投注金額</text><text x="604" y="182" text-anchor="end" class="n20">100</text>
+<line x1="356" y1="196" x2="604" y2="196" class="sep"/>
+<text x="356" y="222" class="tb">風險金額（輸時失去）</text><text x="604" y="228" text-anchor="end" class="n26">100</text>
+<text x="356" y="242" class="ts">＝ 投注金額</text>
+<text x="356" y="272" class="tb">贏時淨贏</text><text x="604" y="278" text-anchor="end" class="n26">80</text>
+<text x="356" y="292" class="ts">＝ 100 × 0.80</text>
+<rect x="356" y="314" width="110" height="24" rx="4" class="tag"/><text x="411" y="331" text-anchor="middle" class="ts">錢包扣 100</text>
+<rect x="476" y="314" width="128" height="24" rx="4" class="tag"/><text x="540" y="331" text-anchor="middle" class="ts">限額以 100 比對</text>
+<text x="356" y="364" class="ts">正數：與香港盤相同</text>
+<!-- 注單 3 -->
+<rect x="640" y="90" width="280" height="290" rx="6" class="node"/>
+<rect x="640" y="90" width="280" height="28" rx="6" class="th"/><text x="780" y="110" text-anchor="middle" class="tb">A 對 B　常規時間讓分 −0.5　主隊</text>
+<text x="656" y="144" class="ts">價格</text><text x="904" y="148" text-anchor="end" class="n20">印尼盤 −1.25</text>
+<text x="656" y="178" class="ts">玩家輸入：投注金額</text><text x="904" y="182" text-anchor="end" class="n20">100</text>
+<line x1="656" y1="196" x2="904" y2="196" class="sep"/>
+<text x="656" y="222" class="tb">風險金額（輸時失去）</text><text x="904" y="228" text-anchor="end" class="n26">125</text>
+<text x="656" y="242" class="ts">＝ 100 × |−1.25|</text>
+<text x="656" y="272" class="tb">贏時淨贏</text><text x="904" y="278" text-anchor="end" class="n26">100</text>
+<text x="656" y="292" class="ts">＝ 投注金額</text>
+<rect x="656" y="314" width="110" height="24" rx="4" class="tag"/><text x="711" y="331" text-anchor="middle" class="ts">錢包扣 125</text>
+<rect x="776" y="314" width="128" height="24" rx="4" class="tag"/><text x="840" y="331" text-anchor="middle" class="ts">限額以 125 比對</text>
+<text x="656" y="364" class="ts">風險金額可以大於投注金額</text>
+<text x="40" y="402" class="ts">示意，不是玩家端畫面；派彩的計算見 07。</text>
+<circle cx="47" cy="424" r="4" class="dot"/><text x="60" y="429" class="ts">錢包扣款的金額一律是風險金額（R06-18）；盤口限額、系統單注上限、動態最大淨虧損一律以風險金額比對，不論賠率格式（R06-07 至 R06-10）。</text>
+<circle cx="47" cy="448" r="4" class="dot"/><text x="60" y="453" class="ts">過關與系統過關的投注金額一律是風險金額：過關的價格以歐洲盤組合，沒有負數（R06-06）。</text>
+<circle cx="47" cy="472" r="4" class="dot"/><text x="60" y="477" class="ts">比分框類玩法：風險金額＝投注金額 × 各區間中最大負數賠率的絕對值，例如最大負數 −2.50、輸入 100 → 風險金額 250（R06-06）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：同樣輸入 100，馬來盤 −0.80 的風險金額是 80、印尼盤 −1.25 是 125、馬來盤 0.80 是 100（R06-06）。錢包扣的、限額比的都是風險金額，不論賠率格式（R06-07 至 R06-10、R06-18）。數字是第 4 節的範例。</p>
+</section>
+
+<!-- ============================================================ 圖 06-07 -->
+<section class="fig" id="fig-06-07">
+<h2>圖 06-07　限額的層次：誰設定、誰看得到、取較低者</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="限額的層次">
+<!-- 營運商層 -->
+<rect x="40" y="24" width="520" height="92" rx="6" class="ext"/>
+<text x="56" y="48" class="tb">營運商層（範圍外，R06-11）</text>
+<text x="56" y="70" class="ts">自己的單注上限、最低投注額、同一玩家對同一投注項或同一賽事的累計上限</text>
+<text x="56" y="90" class="ts">營運商端在送出請求前自行執行，InSports 不檢查；經銷商可提供預設值（10）</text>
+<!-- 經銷商層 -->
+<rect x="40" y="130" width="520" height="128" rx="6" class="node"/>
+<text x="56" y="154" class="tb">經銷商層：盤口限額、最低投注額（R06-07）</text>
+<rect x="420" y="140" width="128" height="22" rx="4" class="chip"/><text x="484" y="156" text-anchor="middle" class="ts">經銷商可見、可改</text>
+<text x="56" y="176" class="ts">盤口限額：玩法設定模板的經銷商欄位，依玩法 × 階段（12 的 R12-01、R12-02）</text>
+<text x="56" y="194" class="ts">以該經銷商的幣別計；InSports 模板中的值只是預設，經銷商以自己的模板取代（R12-08）</text>
+<text x="56" y="212" class="ts">過關：整張風險金額與每一關的盤口限額各自比對，任一關超過即整張拒絕</text>
+<text x="56" y="230" class="ts">最低投注額：10 的一般設定，每個經銷商一個值，不是模板欄位（R10-04）；InSports 不設</text>
+<text x="56" y="248" class="ts">風險金額低於該值即整張拒絕，原因「低於最低投注額」</text>
+<!-- InSports 層 -->
+<rect x="40" y="272" width="520" height="130" rx="6" class="node"/><rect x="43" y="275" width="514" height="124" rx="4" class="node2"/>
+<text x="56" y="296" class="tb">InSports 層：系統單注上限、無覆蓋的限額百分比</text>
+<rect x="400" y="282" width="148" height="22" rx="4" class="chip"/><text x="474" y="298" text-anchor="middle" class="ts">經銷商看不到、不能改</text>
+<text x="56" y="318" class="ts">系統單注上限以美元設定，是最後一道防線（R06-08）</text>
+<text x="56" y="336" class="ts">比對時把風險金額依當日（營業日）的匯率換算成美元（R06-08、11 的 R11-01）</text>
+<text x="56" y="354" class="ts">無覆蓋的賽事，滾球限額以有覆蓋時的百分比計，套用在生效限額上（R06-09）</text>
+<text x="56" y="372" class="ts">動態最大淨虧損不打折；兩套機制與覆蓋狀態對經銷商不可見（04 的 R04-22）</text>
+<text x="56" y="390" class="ts">模板的 InSports 欄位，依玩法 × 階段；全域值設在「全部玩法」（12 的 R12-02）</text>
+<!-- 生效 -->
+<path d="M300,402 L300,414" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="416" width="520" height="120" rx="6" class="panel"/>
+<text x="56" y="440" class="tb">生效的上限＝盤口限額與系統單注上限中較低者（R06-08）</text>
+<text x="56" y="462" class="ts">任一超過：整張拒絕，原因都只是「超過限額」，不區分哪一層；低於最低投注額另有原因</text>
+<text x="56" y="480" class="ts">不接受一部分金額、不建議可接受的金額；一律以風險金額比對（R06-06）</text>
+<text x="56" y="498" class="ts">無覆蓋時再乘上百分比（R06-09）；動態最大淨虧損是另一道限額，見圖 06-08（R06-10）</text>
+<text x="56" y="522" class="ts">經銷商的最低投注額另見 10；營運商的限額在範圍外（R06-11）</text>
+<!-- 範例 -->
+<rect x="590" y="24" width="330" height="512" rx="6" class="panel"/>
+<text x="606" y="48" class="tb">範例：經銷商 AS，賽前讓分</text>
+<text x="606" y="66" class="ts">AS 幣別對美元匯率 0.3（範例）</text>
+<text x="606" y="92" class="ts">盤口限額（賽前）5,000 AS</text>
+<rect x="606" y="98" width="260" height="16" class="track"/><rect x="606" y="98" width="260" height="16" class="bar"/>
+<text x="606" y="142" class="ts">系統單注上限 1,000 美元 ＝ 3,333 AS</text>
+<rect x="606" y="148" width="260" height="16" class="track"/><rect x="606" y="148" width="173" height="16" class="bar"/>
+<line x1="779" y1="92" x2="779" y2="246" class="sep dash"/>
+<text x="606" y="192" class="tb">生效上限 3,333 AS（較低者）</text>
+<text x="606" y="214" class="ts">玩家的風險金額 4,000 AS ＝ 1,200 美元</text>
+<rect x="606" y="220" width="260" height="16" class="track"/><rect x="606" y="220" width="208" height="16" class="barw"/>
+<rect x="606" y="252" width="170" height="28" rx="4" class="stampw"/><text x="691" y="271" text-anchor="middle" class="stw">拒絕：超過限額</text>
+<text x="606" y="302" class="ts">AS 只看到「超過限額」，</text>
+<text x="606" y="320" class="ts">看不到系統層的值（R06-08）</text>
+<line x1="606" y1="338" x2="904" y2="338" class="sep"/>
+<text x="606" y="364" class="tb">範例：無覆蓋的賽事，滾球</text>
+<text x="606" y="386" class="ts">有覆蓋時的生效限額 2,000 AS</text>
+<rect x="606" y="392" width="260" height="16" class="track"/><rect x="606" y="392" width="104" height="16" class="bar"/>
+<text x="606" y="430" class="ts">無覆蓋百分比 50% → 限額 1,000 AS</text>
+<rect x="606" y="436" width="260" height="16" class="track"/><rect x="606" y="436" width="52" height="16" class="bar"/>
+<text x="606" y="472" class="ts">百分比套用在取較低者之後的生效限額；</text>
+<text x="606" y="490" class="ts">動態最大淨虧損不打折（R06-09）</text>
+<text x="606" y="516" class="ts">覆蓋狀態見 04 的 R04-22</text>
+</svg>
+<p class="cap"><b>圖說</b>：限額分三層：營運商層在範圍外、經銷商層的盤口限額（經銷商幣別，可見可改）、InSports 層的系統單注上限（美元，經銷商看不到）；兩者取較低者生效，超過都只回「超過限額」（R06-07、R06-08、R06-11）。經銷商的最低投注額是 10 的一般設定，低於即拒絕；無覆蓋時生效限額再依百分比降低，動態最大淨虧損不打折（R06-09）。數字是第 4 節的範例。</p>
+</section>
+
+<!-- ============================================================ 圖 06-08 -->
+<section class="fig" id="fig-06-08">
+<h2>圖 06-08　動態最大淨虧損：怎麼算、三層上限</h2>
+<svg viewBox="0 0 960 470" width="100%" role="img" aria-label="動態最大淨虧損">
+<!-- 左：怎麼算 -->
+<rect x="40" y="20" width="420" height="300" rx="6" class="panel"/>
+<text x="56" y="44" class="tb">淨虧損＝最不利賽果下的派彩 − 已收的風險金額</text>
+<text x="56" y="62" class="ts">（R06-10；經銷商 AS，A 對 B 常規時間讓分 −0.5，AS 幣別）</text>
+<text x="56" y="90" class="ts tb">已接受的注單</text>
+<text x="56" y="112" class="ts">主隊：風險金額 60,000 @ 0.90（贏時淨贏 54,000）</text>
+<text x="56" y="130" class="ts">客隊：風險金額 6,000 @ 0.95（贏時淨贏 5,700）</text>
+<text x="56" y="148" class="ts">已收的風險金額合計 66,000</text>
+<text x="56" y="178" class="ts tb">每一種賽果各算一次，取最不利的</text>
+<text x="56" y="200" class="ts">主勝：派彩（含本金）114,000 − 已收 66,000</text>
+<text x="56" y="220" class="tb">＝ 淨虧損 48,000　← 最壞情況</text>
+<text x="56" y="244" class="ts">客勝：派彩 11,700 − 已收 66,000 ＝ −54,300（盈餘）</text>
+<line x1="56" y1="258" x2="444" y2="258" class="sep"/>
+<text x="56" y="280" class="ts">新注單：主隊 風險金額 5,000 @ 1.00 → 主勝時再多 5,000</text>
+<text x="56" y="302" class="tb tw">新的最壞情況 53,000 ＞ 上限 50,000 → 整張拒絕</text>
+<!-- 右：三層 -->
+<rect x="480" y="20" width="440" height="300" rx="6" class="panel"/>
+<text x="496" y="44" class="tb">三層上限（示意，不是 11 的畫面）</text>
+<text x="496" y="68" class="ts">玩法層（AS）：常規時間讓分 ＠ A 對 B　上限 50,000</text>
+<rect x="496" y="74" width="300" height="18" class="track"/><rect x="496" y="74" width="288" height="18" class="bar"/><rect x="784" y="74" width="30" height="18" class="barw"/>
+<rect x="830" y="68" width="76" height="26" rx="4" class="stampw"/><text x="868" y="86" text-anchor="middle" class="stw">超過</text>
+<text x="496" y="110" class="ts">已接受 48,000 ＋ 新注單 5,000 ＝ 53,000</text>
+<text x="496" y="140" class="ts">賽事層（AS，全玩法）：A 對 B 全部玩法　上限 200,000</text>
+<rect x="496" y="146" width="300" height="18" class="track"/><rect x="496" y="146" width="90" height="18" class="bar"/><rect x="586" y="146" width="8" height="18" class="barw"/>
+<text x="496" y="182" class="ts">60,000 ＋ 5,000 ＝ 65,000：有餘裕，但玩法層已超過即拒絕</text>
+<text x="496" y="212" class="ts">InSports 層（跨經銷商合計，美元）：上限 300,000 美元</text>
+<rect x="496" y="218" width="300" height="18" class="track"/><rect x="496" y="218" width="180" height="18" class="bar"/>
+<text x="496" y="254" class="ts">AS 與其他經銷商合計 180,000 美元：未超過；任一層超過都拒絕</text>
+<line x1="496" y1="268" x2="904" y2="268" class="sep"/>
+<text x="496" y="290" class="ts">各經銷商分別累計（經銷商幣別）；InSports 層跨經銷商以美元合計</text>
+<text x="496" y="308" class="ts">淨虧損的持續監控與警示見 09</text>
+<circle cx="47" cy="346" r="4" class="dot"/><text x="60" y="351" class="ts">檢查在接受時做：新注單會使任一層超過上限就整張拒絕，原因「超過限額」；不接受一部分金額、不建議可接受的金額（R06-10）。</text>
+<circle cx="47" cy="370" r="4" class="dot"/><text x="60" y="375" class="ts">已接受的注單不因上限事後調低而受影響；玩法層與「全玩法」是模板的經銷商欄位，InSports 層是 InSports 欄位（12 的 R12-01）。</text>
+<circle cx="47" cy="394" r="4" class="dot"/><text x="60" y="399" class="ts">過關與系統過關：整張注單的最壞派彩全額計入每一關的玩法與賽事的淨虧損，不在各關之間分攤；計算方式屬 SPEC（R06-10）。</text>
+<circle cx="47" cy="418" r="4" class="dot"/><text x="60" y="423" class="ts">三層的值都是模板欄位，依玩法 × 階段；只要一組全域的值時，設在「全部玩法」的基本值（12 的 R12-02）。無覆蓋時不打折（R06-09）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：某玩法的淨虧損，是所有可能賽果中對經銷商最不利的一種下，須派彩的金額減去已收的風險金額；賽事層把全部玩法合在一起算，InSports 層跨經銷商以美元合計。新注單會使任一層超過上限就整張拒絕，不接受一部分（R06-10）。數字是第 4 節的範例。</p>
+</section>
+
+<!-- ============================================================ 圖 06-09 -->
+<section class="fig" id="fig-06-09">
+<h2>圖 06-09　滾球等待的兩套機制：有覆蓋與無覆蓋</h2>
+<svg viewBox="0 0 960 530" width="100%" role="img" aria-label="兩套等待機制">
+<rect x="40" y="16" width="880" height="70" rx="6" class="panel"/>
+<text x="56" y="40" class="tb">滾球注單在確認前進入滾球等待；用哪一套，看該賽事當時的訊號覆蓋狀態（04 的 R04-22；R06-12）</text>
+<text x="56" y="62" class="ts">等待秒數與逾時秒數是模板的 InSports 欄位，依運動 × 階段（12 的 R12-01）；只看賽況與訊號，不看玩家身分；賽前與冠軍盤不等待</text>
+<path d="M250,86 L250,110" class="ln" marker-end="url(#arr)"/>
+<path d="M710,86 L710,110" class="ln" marker-end="url(#arr)"/>
+<!-- 有覆蓋 -->
+<rect x="40" y="112" width="420" height="300" rx="6" class="node"/>
+<text x="250" y="138" text-anchor="middle" class="tb">有覆蓋（R06-13）</text>
+<text x="250" y="156" text-anchor="middle" class="ts">使用中的賽況來源是事件形式且穩定</text>
+<text x="56" y="188" class="ts tb">依據</text>
+<text x="110" y="188" class="ts">統一滾球訊號（安全／危險）＋統一滾球比分</text>
+<text x="56" y="222" class="ts tb">拒絕</text>
+<rect x="110" y="208" width="90" height="22" rx="4" class="tagw"/><text x="155" y="224" text-anchor="middle" class="ts tw">危險訊號</text>
+<rect x="210" y="208" width="90" height="22" rx="4" class="tagw"/><text x="255" y="224" text-anchor="middle" class="ts tw">比分改變</text>
+<rect x="310" y="208" width="90" height="22" rx="4" class="tagw"/><text x="355" y="224" text-anchor="middle" class="ts tw">訊號中斷</text>
+<text x="110" y="250" class="ts">期間訊號為危險、比分改變，或覆蓋由有轉無（訊號中斷）</text>
+<text x="56" y="284" class="ts tb">確認</text>
+<rect x="110" y="270" width="90" height="22" rx="4" class="tag"/><text x="155" y="286" text-anchor="middle" class="ts">已確認</text>
+<text x="210" y="286" class="ts">期滿時訊號為安全且比分未變</text>
+<text x="56" y="322" class="ts tb">限額</text>
+<text x="110" y="322" class="ts">正常的盤口限額</text>
+<text x="56" y="358" class="ts tb">等滿</text>
+<text x="110" y="358" class="ts">訊號一直安全也不提前確認，一律等滿秒數</text>
+<text x="110" y="376" class="ts">已接受的注單不受覆蓋狀態改變影響</text>
+<!-- 無覆蓋 -->
+<rect x="500" y="112" width="420" height="300" rx="6" class="node"/>
+<text x="710" y="138" text-anchor="middle" class="tb">無覆蓋（R06-14）</text>
+<text x="710" y="156" text-anchor="middle" class="ts">封盤形式、沒有使用中的來源，或來源不穩定</text>
+<text x="516" y="188" class="ts tb">依據</text>
+<text x="570" y="188" class="ts">只有統一滾球比分；以固定的等待秒數代替訊號</text>
+<text x="516" y="222" class="ts tb">拒絕</text>
+<rect x="570" y="208" width="90" height="22" rx="4" class="tagw"/><text x="615" y="224" text-anchor="middle" class="ts tw">比分改變</text>
+<text x="570" y="250" class="ts">期間統一滾球比分改變</text>
+<text x="516" y="284" class="ts tb">確認</text>
+<rect x="570" y="270" width="90" height="22" rx="4" class="tag"/><text x="615" y="286" text-anchor="middle" class="ts">已確認</text>
+<text x="670" y="286" class="ts">期滿時比分未變</text>
+<text x="516" y="322" class="ts tb">限額</text>
+<text x="570" y="322" class="ts tw">依無覆蓋百分比降低（R06-09）</text>
+<text x="516" y="358" class="ts tb">等滿</text>
+<text x="570" y="358" class="ts">一律等滿秒數</text>
+<text x="570" y="376" class="ts">期間覆蓋由無轉有：維持無覆蓋的秒數與限額等到期滿，不切換</text>
+<!-- 共同拒絕 -->
+<rect x="40" y="428" width="880" height="86" rx="6" class="panel"/>
+<text x="56" y="452" class="tb tw">兩套都適用的拒絕條件（R06-15）</text>
+<rect x="56" y="464" width="290" height="22" rx="4" class="tagw"/><text x="201" y="480" text-anchor="middle" class="ts tw">盤口線被暫停或關閉（R06-02 列出的任一種）</text>
+<rect x="356" y="464" width="250" height="22" rx="4" class="tagw"/><text x="481" y="480" text-anchor="middle" class="ts tw">賽事被標記待取消或待腰斬（R06-20）</text>
+<rect x="616" y="464" width="240" height="22" rx="4" class="tagw"/><text x="736" y="480" text-anchor="middle" class="ts tw">超過逾時秒數仍沒有結果 → 「逾時」</text>
+<text x="56" y="504" class="ts">逾時秒數是一關從進入等待起的最長時間，各關依自己賽事的值計；兩套機制與覆蓋狀態對經銷商不可見（04 的 R04-22）</text>
+</svg>
+<p class="cap"><b>圖說</b>：有覆蓋時以統一滾球訊號加比分判斷，訊號危險、比分改變或覆蓋由有轉無（訊號中斷）即拒絕，一律等滿秒數（R06-13、R06-14）；無覆蓋時沒有訊號，固定等待秒數，只看比分，限額依百分比降低（R06-14、R06-09）。盤口線暫停或關閉、待取消與待腰斬、逾時三種與覆蓋狀態無關（R06-15）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-10 -->
+<section class="fig" id="fig-06-10">
+<h2>圖 06-10　等待期間的時間線：六種結局</h2>
+<svg viewBox="0 0 960 642" width="100%" role="img" aria-label="等待期間的時間線">
+<!-- 注單卡 -->
+<rect x="40" y="20" width="230" height="200" rx="6" class="node"/>
+<rect x="40" y="20" width="230" height="26" rx="6" class="th"/><text x="155" y="38" text-anchor="middle" class="tb">注單 #1024　等待中</text>
+<text x="56" y="72" class="ts">A 對 B　滾球讓分 −0.25 主隊</text>
+<text x="56" y="92" class="ts">風險金額 500（已扣款）</text>
+<text x="56" y="112" class="ts">下注時比分 0:0　第 35 分鐘</text>
+<text x="56" y="132" class="ts">覆蓋狀態：有覆蓋</text>
+<text x="56" y="160" class="ts">統一滾球訊號</text><circle cx="150" cy="156" r="6" class="lamp"/><text x="162" y="160" class="ts">安全</text>
+<text x="56" y="188" class="ts">等待秒數 8 秒／逾時秒數 20 秒</text>
+<text x="56" y="206" class="ts">（範例，模板的 InSports 欄位）</text>
+<rect x="40" y="228" width="230" height="24" rx="6" class="ghost"/><text x="155" y="245" text-anchor="middle" class="ts">示意，不是 11 的畫面</text>
+<!-- 時間軸 -->
+<path d="M300,56 L910,56" class="ln" marker-end="url(#arr)"/>
+<line x1="320" y1="50" x2="320" y2="62" class="sep"/><text x="320" y="44" text-anchor="middle" class="ts">0 秒：進入等待</text>
+<line x1="700" y1="50" x2="700" y2="62" class="sep"/><text x="700" y="44" text-anchor="middle" class="ts">8 秒：等待秒數期滿</text>
+<line x1="880" y1="50" x2="880" y2="62" class="sep"/><text x="880" y="44" text-anchor="middle" class="ts">20 秒：逾時秒數</text>
+<line x1="700" y1="62" x2="700" y2="558" class="sep dash"/>
+<line x1="880" y1="62" x2="880" y2="558" class="sep dash"/>
+<rect x="300" y="80" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="102" class="tb">① 訊號一直安全、比分未變</text>
+<rect x="320" y="124" width="380" height="12" class="bar"/>
+<circle cx="420" cy="130" r="4" class="lamp"/><circle cx="520" cy="130" r="4" class="lamp"/><circle cx="620" cy="130" r="4" class="lamp"/>
+<rect x="712" y="116" width="120" height="28" rx="4" class="stamp"/><text x="772" y="135" text-anchor="middle" class="st">已確認</text>
+<rect x="300" y="160" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="182" class="tb">② 第 3 秒訊號危險（來源報可能點球）</text>
+<rect x="320" y="204" width="142" height="12" class="bar"/><circle cx="462" cy="210" r="5" class="lampw"/>
+<rect x="480" y="196" width="150" height="28" rx="4" class="stampw"/><text x="555" y="215" text-anchor="middle" class="stw">已拒絕：危險訊號</text>
+<rect x="300" y="240" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="262" class="tb">③ 第 5 秒比分 0:0 → 1:0</text>
+<rect x="320" y="284" width="237" height="12" class="bar"/><text x="557" y="278" text-anchor="middle" class="ts tw">1:0</text>
+<rect x="575" y="276" width="150" height="28" rx="4" class="stampw"/><text x="650" y="295" text-anchor="middle" class="stw">已拒絕：比分改變</text>
+<rect x="300" y="320" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="342" class="tb">④ 第 4 秒操盤手暫停該盤口線</text>
+<rect x="320" y="364" width="190" height="12" class="bar"/>
+<rect x="528" y="356" width="200" height="28" rx="4" class="stampw"/><text x="628" y="375" text-anchor="middle" class="stw">已拒絕：盤口暫停或關閉</text>
+<rect x="300" y="400" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="422" class="tb">⑤ 到 20 秒仍沒有結果</text>
+<rect x="320" y="444" width="380" height="12" class="bar"/><rect x="700" y="444" width="180" height="12" class="barw"/>
+<rect x="740" y="408" width="130" height="26" rx="4" class="stampw"/><text x="805" y="426" text-anchor="middle" class="stw">已拒絕：逾時</text>
+<rect x="300" y="480" width="620" height="70" rx="6" class="pnl"/>
+<text x="312" y="502" class="tb">⑥ 第 6 秒來源被判定不穩定，賽事轉為無覆蓋</text>
+<rect x="320" y="524" width="285" height="12" class="bar"/><circle cx="605" cy="530" r="5" class="lampw"/>
+<rect x="623" y="516" width="150" height="28" rx="4" class="stampw"/><text x="698" y="535" text-anchor="middle" class="stw">已拒絕：訊號中斷</text>
+<circle cx="47" cy="574" r="4" class="dot"/><text x="60" y="579" class="ts">有覆蓋：期間任何時候訊號為危險或比分改變即拒絕；期滿訊號安全且比分未變才確認，訊號一直安全也不提前（R06-13）。</text>
+<circle cx="47" cy="598" r="4" class="dot"/><text x="60" y="603" class="ts">覆蓋由有轉無即拒絕「訊號中斷」，之後的注單走無覆蓋機制：沒有訊號這一列，只看比分（R06-14）。</text>
+<circle cx="47" cy="622" r="4" class="dot"/><text x="60" y="627" class="ts">盤口線暫停或關閉、待取消／待腰斬、逾時三種與覆蓋狀態無關（R06-15）；等待中的注單玩家不能取消（R06-19）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：同一張有覆蓋的滾球注單進入等待後的六種結局：期滿安全且比分未變則確認，不提前；期間訊號危險、比分改變、盤口線暫停或關閉、覆蓋由有轉無即拒絕；到逾時秒數仍沒有結果也拒絕（R06-13 至 R06-15）。秒數是範例，實際值是模板的 InSports 欄位（R06-12）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-11 -->
+<section class="fig" id="fig-06-11">
+<h2>圖 06-11　過關中的滾球等待：各關各自等，整張一起定</h2>
+<svg viewBox="0 0 960 530" width="100%" role="img" aria-label="過關的滾球等待">
+<!-- 情境一 -->
+<rect x="40" y="20" width="880" height="236" rx="6" class="panel"/>
+<text x="56" y="44" class="tb">過關三關（第 4 節範例）：各關各自等待、各自確認；全部確認，整張才確認（R06-16）</text>
+<line x1="300" y1="58" x2="300" y2="212" class="sep dash"/><text x="300" y="70" text-anchor="middle" class="ts">0 秒</text>
+<line x1="700" y1="58" x2="700" y2="212" class="sep dash"/><text x="700" y="70" text-anchor="middle" class="ts">A 對 B 的等待秒數期滿</text>
+<text x="56" y="106" class="ts">滾球足球　A 對 B 讓分（有覆蓋）</text>
+<rect x="300" y="96" width="400" height="12" class="bar"/>
+<rect x="712" y="88" width="80" height="26" rx="4" class="stamp"/><text x="752" y="106" text-anchor="middle" class="st">確認</text>
+<text x="56" y="156" class="ts">賽前籃球　C 對 D 大小</text>
+<rect x="300" y="138" width="90" height="26" rx="4" class="stamp"/><text x="345" y="156" text-anchor="middle" class="st">立即確認</text>
+<text x="56" y="206" class="ts">冠軍盤　英超冠軍</text>
+<rect x="300" y="188" width="90" height="26" rx="4" class="stamp"/><text x="345" y="206" text-anchor="middle" class="st">立即確認</text>
+<rect x="800" y="84" width="110" height="130" rx="6" class="pnl"/>
+<text x="855" y="106" text-anchor="middle" class="tb">整張注單</text>
+<text x="855" y="128" text-anchor="middle" class="ts">0 秒 → 期滿：</text>
+<text x="855" y="146" text-anchor="middle" class="ts">等待中</text>
+<rect x="812" y="166" width="86" height="28" rx="4" class="stamp"/><text x="855" y="185" text-anchor="middle" class="st">已確認</text>
+<text x="56" y="240" class="ts">C 對 D 與冠軍盤早已確認，整張仍要等 A 對 B；A 對 B 確認後整張確認（R06-16、R06-19）</text>
+<!-- 情境二 -->
+<rect x="40" y="272" width="880" height="246" rx="6" class="panel"/>
+<text x="56" y="296" class="tb">系統過關 3 串 3（第 4 節範例）：任一關被拒絕，整張拒絕並退款，不重報剩下的關（R06-16）</text>
+<line x1="300" y1="310" x2="300" y2="470" class="sep dash"/><text x="300" y="322" text-anchor="middle" class="ts">0 秒</text>
+<line x1="520" y1="310" x2="520" y2="470" class="sep dash"/><text x="520" y="322" text-anchor="middle" class="ts tw">A 對 B 進球</text>
+<text x="56" y="352" class="ts">滾球　A 對 B 同場過關</text>
+<text x="56" y="370" class="ts">（主勝＋大 2.5，作為一關）</text>
+<rect x="300" y="350" width="220" height="12" class="bar"/>
+<circle cx="520" cy="356" r="5" class="lampw"/>
+<rect x="538" y="340" width="190" height="26" rx="4" class="stampw"/><text x="633" y="358" text-anchor="middle" class="stw">比分改變 → 該關拒絕</text>
+<text x="56" y="414" class="ts">滾球　C 對 D 主勝</text>
+<rect x="300" y="404" width="220" height="12" class="bar"/>
+<path d="M520,410 L700,410" class="lnw dash"/>
+<text x="610" y="400" text-anchor="middle" class="ts tw">不再等待</text>
+<text x="56" y="462" class="ts">賽前　E 對 F 大 2.5</text>
+<rect x="300" y="444" width="90" height="26" rx="4" class="stamp"/><text x="345" y="462" text-anchor="middle" class="st">立即確認</text>
+<text x="538" y="462" class="ts tw">整張拒絕時一併退款</text>
+<rect x="800" y="336" width="110" height="130" rx="6" class="pnl"/>
+<text x="855" y="358" text-anchor="middle" class="tb">整張注單</text>
+<text x="855" y="380" text-anchor="middle" class="ts">0 秒 → 進球：</text>
+<text x="855" y="398" text-anchor="middle" class="ts">等待中</text>
+<rect x="812" y="418" width="86" height="28" rx="4" class="stampw"/><text x="855" y="437" text-anchor="middle" class="stw">已拒絕</text>
+<text x="56" y="488" class="ts">退還整張的風險金額；不以 C 對 D 與 E 對 F 重報；系統過關是一張注單，不逐個組合處理（R06-16）</text>
+<text x="56" y="506" class="ts">各關依自己賽事的覆蓋狀態與等待秒數獨立判斷，不以最長的關為準；逾時也各關各自計（R06-15）</text>
+</svg>
+<p class="cap"><b>圖說</b>：過關與系統過關中，每一關依自己賽事的覆蓋狀態與等待秒數各自等待、各自確認；賽前關與冠軍盤關立即確認。全部確認整張才確認，任一關被拒絕整張拒絕並退款，不重報剩下的關；同場過關作為一關時，其中任一投注項被拒絕該關即拒絕（R06-16）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-12 -->
+<section class="fig" id="fig-06-12">
+<h2>圖 06-12　投注延遲與滾球等待是兩回事</h2>
+<svg viewBox="0 0 960 500" width="100%" role="img" aria-label="投注延遲與滾球等待">
+<rect x="210" y="20" width="350" height="34" rx="4" class="panel"/><text x="385" y="42" text-anchor="middle" class="tb">投注延遲（Bet Delay，R06-17）</text>
+<rect x="570" y="20" width="350" height="34" rx="4" class="panel"/><text x="745" y="42" text-anchor="middle" class="tb">滾球等待（Live Bet Waiting，R06-12）</text>
+<g>
+<rect x="40" y="60" width="160" height="40" rx="4" class="node"/><text x="56" y="85" class="tb">針對什麼</text>
+<rect x="210" y="60" width="350" height="40" rx="4" class="node"/><text x="222" y="85" class="ts">玩家：被人工標記的玩家（對人的措施）；09 只警示</text>
+<rect x="570" y="60" width="350" height="40" rx="4" class="node"/><text x="582" y="85" class="ts">賽況：該賽事的訊號與比分（對賽況的措施）</text>
+</g>
+<g>
+<rect x="40" y="104" width="160" height="40" rx="4" class="node"/><text x="56" y="129" class="tb">哪些注單</text>
+<rect x="210" y="104" width="350" height="40" rx="4" class="node"/><text x="222" y="129" class="ts">該玩家的每一筆，賽前與滾球都有</text>
+<rect x="570" y="104" width="350" height="40" rx="4" class="node"/><text x="582" y="129" class="ts">只有滾球關；賽前與冠軍盤不等待</text>
+</g>
+<g>
+<rect x="40" y="148" width="160" height="40" rx="4" class="node"/><text x="56" y="173" class="tb">在流程的哪裡</text>
+<rect x="210" y="148" width="350" height="40" rx="4" class="node"/><text x="222" y="173" class="ts">進入接受流程前；之後才做價格比較與檢查</text>
+<rect x="570" y="148" width="350" height="40" rx="4" class="node"/><text x="582" y="173" class="ts">通過檢查與價格比較之後、確認之前</text>
+</g>
+<g>
+<rect x="40" y="192" width="160" height="40" rx="4" class="node"/><text x="56" y="217" class="tb">期間發生什麼</text>
+<rect x="210" y="192" width="350" height="40" rx="4" class="node"/><text x="222" y="217" class="ts">價格變動依接受模式處理：重報或接受（R06-04、05）</text>
+<rect x="570" y="192" width="350" height="40" rx="4" class="node"/><text x="582" y="217" class="ts">只看訊號、比分、盤口、待取消／待腰斬、逾時（R06-13 至 15）</text>
+</g>
+<g>
+<rect x="40" y="236" width="160" height="40" rx="4" class="node"/><text x="56" y="261" class="tb">秒數從哪來</text>
+<rect x="210" y="236" width="350" height="40" rx="4" class="node"/>
+<text x="222" y="261" class="ts">記在 09 的玩家標記上，標記時指定；預設值見非功能需求</text>
+<rect x="570" y="236" width="350" height="40" rx="4" class="node"/><text x="582" y="261" class="ts">模板的 InSports 欄位，依運動 × 階段（12 的 R12-01）</text>
+</g>
+<g>
+<rect x="40" y="280" width="160" height="40" rx="4" class="node"/><text x="56" y="305" class="tb">互相影響</text>
+<rect x="210" y="280" width="350" height="40" rx="4" class="node"/><text x="222" y="305" class="ts">不改變滾球等待的秒數與規則</text>
+<rect x="570" y="280" width="350" height="40" rx="4" class="node"/><text x="582" y="305" class="ts">不因玩家身分、等級或標記而延長或縮短</text>
+</g>
+<!-- 時間線 -->
+<rect x="40" y="344" width="880" height="140" rx="6" class="panel"/>
+<text x="56" y="368" class="tb">同一張滾球注單，被標記與未標記的玩家各走一條線</text>
+<text x="56" y="406" class="ts">被標記的玩家</text>
+<rect x="200" y="390" width="130" height="24" rx="4" class="tagw"/><text x="265" y="407" text-anchor="middle" class="ts tw">投注延遲 X 秒</text>
+<path d="M330,402 L344,402" class="ln" marker-end="url(#arr)"/>
+<rect x="346" y="390" width="150" height="24" rx="4" class="tag"/><text x="421" y="407" text-anchor="middle" class="ts">檢查＋價格比較</text>
+<path d="M496,402 L510,402" class="ln" marker-end="url(#arr)"/>
+<rect x="512" y="390" width="200" height="24" rx="4" class="tag"/><text x="612" y="407" text-anchor="middle" class="ts">滾球等待 N 秒</text>
+<path d="M712,402 L726,402" class="ln" marker-end="url(#arr)"/>
+<rect x="728" y="388" width="90" height="28" rx="4" class="stamp"/><text x="773" y="407" text-anchor="middle" class="st">已確認</text>
+<text x="56" y="450" class="ts">未標記的玩家</text>
+<rect x="200" y="434" width="150" height="24" rx="4" class="tag"/><text x="275" y="451" text-anchor="middle" class="ts">檢查＋價格比較</text>
+<path d="M350,446 L364,446" class="ln" marker-end="url(#arr)"/>
+<rect x="366" y="434" width="200" height="24" rx="4" class="tag"/><text x="466" y="451" text-anchor="middle" class="ts">滾球等待 N 秒</text>
+<path d="M566,446 L580,446" class="ln" marker-end="url(#arr)"/>
+<rect x="582" y="432" width="90" height="28" rx="4" class="stamp"/><text x="627" y="451" text-anchor="middle" class="st">已確認</text>
+<text x="700" y="451" class="ts">N 相同：延遲不改變等待（R06-17）</text>
+</svg>
+<p class="cap"><b>圖說</b>：投注延遲是對玩家的措施，只對被 09 標記的玩家，在進入接受流程前先延遲，賽前與滾球都有；滾球等待是對賽況的措施，只看訊號與比分。被標記的玩家的滾球注單在延遲之後仍照常進入滾球等待，秒數不變（R06-17、R06-12）。延遲的秒數記在 09 的玩家標記上，標記只能人工設定，09 的監控只警示（R06-17）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-13 -->
+<section class="fig" id="fig-06-13">
+<h2>圖 06-13　注單在接受階段的三個狀態與拒絕原因</h2>
+<svg viewBox="0 0 960 536" width="100%" role="img" aria-label="注單狀態機">
+<rect x="60" y="200" width="130" height="56" rx="6" class="ext"/>
+<text x="125" y="222" text-anchor="middle" class="tb">下注請求</text>
+<text x="125" y="242" text-anchor="middle" class="ts">還不是注單</text>
+<path d="M190,228 L228,228" class="ln" marker-end="url(#arr)"/>
+<rect x="230" y="200" width="120" height="56" rx="6" class="ext"/>
+<text x="290" y="222" text-anchor="middle" class="tb">錢包扣款</text>
+<text x="290" y="242" text-anchor="middle" class="ts">風險金額（R06-18）</text>
+<path d="M350,228 L388,228" class="ln" marker-end="url(#arr)"/><text x="369" y="220" text-anchor="middle" class="ts">成功</text>
+<path d="M290,256 L290,318" class="lnw" marker-end="url(#arrw)"/><text x="298" y="292" class="ts tw">失敗</text>
+<rect x="230" y="320" width="120" height="50" rx="6" class="ext"/>
+<text x="290" y="340" text-anchor="middle" class="ts">注單不成立</text>
+<text x="290" y="358" text-anchor="middle" class="ts">玩家端不留下注單</text>
+<rect x="390" y="200" width="150" height="56" rx="6" class="node"/>
+<text x="465" y="222" text-anchor="middle" class="tb">檢查＋價格比較</text>
+<text x="465" y="242" text-anchor="middle" class="ts">（R06-02 至 R06-05）</text>
+<!-- 滾球 → 等待中 -->
+<path d="M465,200 L465,150 L588,150" class="ln" marker-end="url(#arr)"/>
+<text x="526" y="142" text-anchor="middle" class="ts">滾球關：進入滾球等待</text>
+<rect x="590" y="120" width="130" height="60" rx="6" class="node"/><rect x="593" y="123" width="124" height="54" rx="4" class="node2"/>
+<text x="655" y="144" text-anchor="middle" class="tb">等待中</text>
+<text x="655" y="164" text-anchor="middle" class="ts">已扣款，在滾球等待中</text>
+<!-- 賽前 → 已確認 -->
+<path d="M540,228 L788,228" class="ln" marker-end="url(#arr)"/>
+<text x="665" y="220" text-anchor="middle" class="ts">賽前關、冠軍盤關：直接確認</text>
+<!-- 等待中 → 已確認 -->
+<path d="M720,150 L855,150 L855,198" class="ln" marker-end="url(#arr)"/>
+<text x="790" y="142" text-anchor="middle" class="ts">期滿確認（R06-13、14）</text>
+<rect x="790" y="200" width="130" height="60" rx="6" class="node"/><rect x="793" y="203" width="124" height="54" rx="4" class="node2"/>
+<text x="855" y="224" text-anchor="middle" class="tb">已確認</text>
+<text x="855" y="244" text-anchor="middle" class="ts">交 07；接受階段結束</text>
+<!-- 等待中 → 已拒絕 -->
+<path d="M655,180 L655,358" class="lnw" marker-end="url(#arrw)"/>
+<text x="664" y="262" class="ts tw">危險訊號／比分改變</text>
+<text x="664" y="280" class="ts tw">訊號中斷／逾時</text>
+<text x="664" y="298" class="ts tw">盤口暫停或關閉</text>
+<text x="664" y="316" class="ts tw">待取消、待腰斬</text>
+<!-- 檢查 → 已拒絕 -->
+<path d="M465,256 L465,440 L588,440" class="lnw" marker-end="url(#arrw)"/>
+<text x="472" y="300" class="ts tw">不通過，或價格</text>
+<text x="472" y="318" class="ts tw">不符合接受模式</text>
+<text x="472" y="336" class="ts tw">（重報＝價格變動）</text>
+<rect x="590" y="360" width="330" height="136" rx="6" class="nodew"/>
+<text x="606" y="382" class="tb tw">已拒絕（附原因，不再改變）</text>
+<rect x="606" y="392" width="100" height="20" rx="4" class="tagw"/><text x="656" y="406" text-anchor="middle" class="ts tw">賽事狀態不符</text>
+<rect x="712" y="392" width="100" height="20" rx="4" class="tagw"/><text x="762" y="406" text-anchor="middle" class="ts tw">盤口暫停或關閉</text>
+<rect x="818" y="392" width="92" height="20" rx="4" class="tagw"/><text x="864" y="406" text-anchor="middle" class="ts tw">組合不符</text>
+<rect x="606" y="418" width="100" height="20" rx="4" class="tagw"/><text x="656" y="432" text-anchor="middle" class="ts tw">超過限額</text>
+<rect x="712" y="418" width="100" height="20" rx="4" class="tagw"/><text x="762" y="432" text-anchor="middle" class="ts tw">低於最低投注額</text>
+<rect x="818" y="418" width="92" height="20" rx="4" class="tagw"/><text x="864" y="432" text-anchor="middle" class="ts tw">比分不符</text>
+<rect x="606" y="444" width="100" height="20" rx="4" class="tagw"/><text x="656" y="458" text-anchor="middle" class="ts tw">價格變動</text>
+<rect x="712" y="444" width="100" height="20" rx="4" class="tagw"/><text x="762" y="458" text-anchor="middle" class="ts tw">危險訊號</text>
+<rect x="818" y="444" width="92" height="20" rx="4" class="tagw"/><text x="864" y="458" text-anchor="middle" class="ts tw">比分改變</text>
+<rect x="606" y="470" width="100" height="20" rx="4" class="tagw"/><text x="656" y="484" text-anchor="middle" class="ts tw">訊號中斷</text>
+<rect x="712" y="470" width="100" height="20" rx="4" class="tagw"/><text x="762" y="484" text-anchor="middle" class="ts tw">逾時</text>
+<text x="590" y="518" class="ts">已拒絕一律通知錢包退還已扣的風險金額（R06-18）</text>
+<!-- 透明 -->
+<text x="60" y="404" class="ts">三個狀態與拒絕原因對經銷商、</text>
+<text x="60" y="422" class="ts">營運商與玩家都可見（R06-19）</text>
+<text x="60" y="446" class="ts">等待中的注單玩家不能取消</text>
+<text x="60" y="470" class="ts">已確認交 07；已拒絕不再改變</text>
+<text x="60" y="494" class="ts">重報不是另一種狀態（R06-05）</text>
+</svg>
+<p class="cap"><b>圖說</b>：注單在接受階段只有三個狀態：等待中（已扣款，在滾球等待中）、已確認、已拒絕；賽前關與冠軍盤關不經過等待中（R06-19、R06-12）。扣款失敗的請求不成立，不是狀態；重報記為已拒絕、原因「價格變動」（R06-05、R06-18）。十一種拒絕原因對經銷商、營運商與玩家都可見。</p>
+</section>
+
+<!-- ============================================================ 圖 06-14 -->
+<section class="fig" id="fig-06-14">
+<h2>圖 06-14　待取消與待腰斬：等待中拒絕，已確認維持</h2>
+<svg viewBox="0 0 960 400" width="100%" role="img" aria-label="待取消與待腰斬">
+<path d="M60,50 L910,50" class="ln" marker-end="url(#arr)"/>
+<text x="60" y="38" class="ts">比賽時間 →</text>
+<line x1="520" y1="30" x2="520" y2="330" class="lnw dash"/>
+<text x="520" y="24" text-anchor="middle" class="ts tw">人工標記待腰斬（04 的 R04-23）</text>
+<text x="420" y="72" text-anchor="middle" class="ts">標記前</text>
+<text x="620" y="72" text-anchor="middle" class="ts">標記後</text>
+<!-- 注單 A -->
+<rect x="120" y="92" width="200" height="40" rx="4" class="node"/>
+<text x="130" y="110" class="tb">注單 A：已確認</text>
+<text x="130" y="126" class="ts">第 60 分鐘確認，進入 07</text>
+<path d="M320,112 L538,112" class="ln" marker-end="url(#arr)"/>
+<rect x="540" y="86" width="380" height="52" rx="4" class="node"/>
+<text x="556" y="106" class="tb">維持原狀</text>
+<text x="556" y="126" class="ts">效力依人工裁定後由 07 決定（R06-20）</text>
+<!-- 注單 B -->
+<rect x="340" y="180" width="180" height="40" rx="4" class="node"/>
+<text x="350" y="198" class="tb">注單 B：等待中</text>
+<text x="350" y="214" class="ts">標記當下仍在滾球等待</text>
+<path d="M520,200 L538,200" class="lnw" marker-end="url(#arrw)"/>
+<rect x="540" y="174" width="380" height="52" rx="4" class="nodew"/>
+<text x="556" y="194" class="tb tw">一律拒絕並退款</text>
+<text x="556" y="214" class="ts">原因「盤口暫停或關閉」（R06-20、R06-15）</text>
+<!-- 新請求 -->
+<rect x="540" y="268" width="170" height="52" rx="4" class="ext"/>
+<text x="556" y="288" class="tb">新的下注請求</text>
+<text x="556" y="308" class="ts">標記之後才送達</text>
+<path d="M710,294 L738,294" class="lnw" marker-end="url(#arrw)"/>
+<rect x="740" y="268" width="180" height="52" rx="4" class="nodew"/>
+<text x="756" y="288" class="tb tw">拒絕</text>
+<text x="756" y="308" class="ts">全部盤口已關閉（05 的 R05-16）</text>
+<circle cx="67" cy="356" r="4" class="dot"/><text x="80" y="361" class="ts">待取消與待腰斬是疊在統一狀態上的人工處理標記；系統只標記、下架、列候選，裁定一律人工（04 的 R04-23、圖 04-13）。</text>
+<circle cx="67" cy="380" r="4" class="dot"/><text x="80" y="385" class="ts">待取消同樣處理：延後的賽事照常接受賽前投注，只有待取消標記才停收（R06-02、04 的 R04-12）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：賽事被標記待取消或待腰斬的當下，三種注單各有處置：已確認的維持原狀，效力依人工裁定後由 07 決定；等待中的一律拒絕並退款，原因「盤口暫停或關閉」；之後的新請求因盤口已關閉而拒絕（R06-20、R06-15、05 的 R05-16）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-15 -->
+<section class="fig" id="fig-06-15">
+<h2>圖 06-15　各層能設定什麼</h2>
+<svg viewBox="0 0 960 632" width="100%" role="img" aria-label="各層設定">
+<rect x="40" y="20" width="330" height="40" rx="4" class="panel"/><text x="56" y="45" class="tb">項目（第 6 節）</text>
+<rect x="380" y="20" width="100" height="40" rx="4" class="panel"/><text x="430" y="39" text-anchor="middle" class="tb">InSports</text><text x="430" y="54" text-anchor="middle" class="ts">固定</text>
+<rect x="490" y="20" width="100" height="40" rx="4" class="panel"/><text x="540" y="39" text-anchor="middle" class="tb">Ops</text><text x="540" y="54" text-anchor="middle" class="ts">（11 的 R11-02）</text>
+<rect x="600" y="20" width="100" height="40" rx="4" class="panel"/><text x="650" y="39" text-anchor="middle" class="tb">經銷商</text><text x="650" y="54" text-anchor="middle" class="ts">自己的模板</text>
+<rect x="710" y="20" width="100" height="40" rx="4" class="ext"/><text x="760" y="39" text-anchor="middle" class="tb">營運商</text><text x="760" y="54" text-anchor="middle" class="ts">（範圍外）</text>
+<rect x="820" y="20" width="100" height="40" rx="4" class="panel"/><text x="870" y="39" text-anchor="middle" class="tb">玩家</text><text x="870" y="54" text-anchor="middle" class="ts">每次下注</text>
+<g class="ts">
+<text x="56" y="90">接受模式的三種選項（R06-04）</text><circle cx="430" cy="86" r="6" class="dot"/><circle cx="850" cy="86" r="6" class="dot"/><text x="862" y="90">選一種</text>
+<text x="56" y="122">價格比較的基準格式（05 的 R05-18）</text><circle cx="430" cy="118" r="6" class="dot"/>
+<text x="56" y="154">投注金額與風險金額的意思（R06-06）</text><circle cx="430" cy="150" r="6" class="dot"/>
+<text x="56" y="186">注單狀態與拒絕原因（R06-19）</text><circle cx="430" cy="182" r="6" class="dot"/>
+<text x="56" y="218">滾球等待不因玩家身分改變（R06-12）</text><circle cx="430" cy="214" r="6" class="dot"/>
+<text x="56" y="250">各層限額取較低者生效（R06-08）</text><circle cx="430" cy="246" r="6" class="dot"/>
+<text x="56" y="282">系統單注上限（美元，R06-08）</text><circle cx="540" cy="278" r="6" class="dot"/>
+<text x="56" y="314">無覆蓋的限額百分比（R06-09）</text><circle cx="540" cy="310" r="6" class="dot"/>
+<text x="56" y="346">InSports 層的動態最大淨虧損（美元，R06-10）</text><circle cx="540" cy="342" r="6" class="dot"/>
+<text x="56" y="378">滾球等待秒數、逾時秒數（R06-12、R06-15）</text><circle cx="540" cy="374" r="6" class="dot"/>
+<text x="56" y="410">盤口限額（R06-07）</text><circle cx="520" cy="406" r="6" class="chip"/><text x="532" y="410">預設值</text><circle cx="650" cy="406" r="6" class="dot"/>
+<text x="56" y="442">動態最大淨虧損，含「全玩法」（R06-10）</text><circle cx="520" cy="438" r="6" class="chip"/><text x="532" y="442">預設值</text><circle cx="650" cy="438" r="6" class="dot"/>
+<text x="56" y="474">最低投注額（R06-07、R06-11；InSports 不設）</text><circle cx="620" cy="470" r="6" class="dot"/><text x="632" y="474">10 的一般設定</text><circle cx="760" cy="470" r="6" class="dot"/>
+<text x="56" y="506">價格等級 B 到 J 的水位加成（R06-21）</text><circle cx="650" cy="502" r="6" class="dot"/>
+<text x="56" y="538">營運商的單注上限、同一玩家的累計上限（R06-11）</text><circle cx="760" cy="534" r="6" class="dot"/>
+<text x="56" y="570">玩家價格等級：A 到 J 十級（R06-21）</text><circle cx="430" cy="566" r="6" class="dot"/><circle cx="740" cy="566" r="6" class="dot"/><text x="752" y="570">指定</text>
+</g>
+<line x1="40" y1="584" x2="920" y2="584" class="sep"/>
+<circle cx="52" cy="606" r="6" class="dot"/><text x="64" y="610" class="ts">設定或選擇</text>
+<circle cx="160" cy="606" r="6" class="chip"/><text x="172" y="610" class="ts">提供預設值</text>
+<text x="280" y="610" class="ts">空白＝不涉及；營運商層在範圍外，只列出以說明邊界；Ops 與操盤手使用同一組權限（11 的 R11-02）</text>
+</svg>
+<p class="cap"><b>圖說</b>：接受模式的選項、基準格式、金額的意思、狀態與原因由 InSports 固定；系統單注上限、無覆蓋百分比、InSports 層淨虧損、等待與逾時秒數由 Ops 設定；盤口限額與動態最大淨虧損由 Ops 給預設值、經銷商在自己的模板中設定，經銷商另設最低投注額與各級水位加成；營運商層的限額與指定玩家的價格等級在範圍外；玩家每次下注選接受模式（第 6 節）。</p>
+</section>
+
+<!-- ============================================================ 圖 06-16 -->
+<section class="fig" id="fig-06-16">
+<h2>圖 06-16　六個下注情境與判定</h2>
+<svg viewBox="0 0 960 660" width="100%" role="img" aria-label="六個下注情境">
+<!-- P1 -->
+<g>
+  <rect x="15" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="32" r="11" class="num"/><text x="33" y="37" text-anchor="middle" class="numt">1</text>
+  <text x="52" y="37" class="ptitle">只接受原價，送達時價格變了</text>
+  <use href="#ch-ply" x="27" y="60" width="26" height="42" class="char"/>
+  <rect x="64" y="64" width="232" height="44" rx="6" class="bub"/><text x="74" y="82" class="bt">A 對 B 讓分主隊，馬來盤 0.85</text><text x="74" y="98" class="bt">接受模式：只接受原價</text>
+  <use href="#ch-sys" x="27" y="122" width="26" height="42" class="char"/>
+  <rect x="64" y="126" width="232" height="44" rx="6" class="bub"/><text x="74" y="144" class="bt">InSports：目前價格 0.83</text><text x="74" y="160" class="bt">≠ 0.85，不符合模式</text>
+  <text x="31" y="206" class="ts">這次請求結束，回傳 0.83</text>
+  <text x="31" y="224" class="ts">玩家要以 0.83 下注就重送一次</text>
+  <text x="31" y="242" class="ts">（R06-04、R06-05）</text>
+  <rect x="165" y="278" width="134" height="30" rx="4" class="stampw"/><text x="232" y="298" text-anchor="middle" class="stw">重報：價格變動</text>
+</g>
+<!-- P2 -->
+<g>
+  <rect x="330" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="32" r="11" class="num"/><text x="348" y="37" text-anchor="middle" class="numt">2</text>
+  <text x="367" y="37" class="ptitle">接受任何價，但比分已變</text>
+  <use href="#ch-ply" x="342" y="60" width="26" height="42" class="char"/>
+  <rect x="379" y="64" width="232" height="44" rx="6" class="bub"/><text x="389" y="82" class="bt">滾球大小 2.5，接受任何價</text><text x="389" y="98" class="bt">我看到的比分 0:0</text>
+  <use href="#ch-sys" x="342" y="122" width="26" height="42" class="char"/>
+  <rect x="379" y="126" width="232" height="44" rx="6" class="bub"/><text x="389" y="144" class="bt">統一滾球比分已是 1:0</text><text x="389" y="160" class="bt">比分不同＝價格已過期</text>
+  <text x="346" y="206" class="ts">大小的賠率依賴比分，要核對</text>
+  <text x="346" y="224" class="ts">不論接受模式都核對</text>
+  <text x="346" y="242" class="ts">（R06-03）</text>
+  <rect x="480" y="278" width="134" height="30" rx="4" class="stampw"/><text x="547" y="298" text-anchor="middle" class="stw">拒絕：比分不符</text>
+</g>
+<!-- P3 -->
+<g>
+  <rect x="645" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="32" r="11" class="num"/><text x="663" y="37" text-anchor="middle" class="numt">3</text>
+  <text x="682" y="37" class="ptitle">有覆蓋：等待中來源報可能點球</text>
+  <use href="#ch-ply" x="657" y="60" width="26" height="42" class="char"/>
+  <rect x="694" y="64" width="232" height="44" rx="6" class="bub"/><text x="704" y="82" class="bt">滾球讓分，比分 1:0</text><text x="704" y="98" class="bt">有覆蓋，等待 8 秒</text>
+  <use href="#ch-src" x="657" y="122" width="26" height="42" class="charw"/>
+  <rect x="694" y="126" width="232" height="44" rx="6" class="bubw"/><text x="704" y="144" class="bt tw">第 3 秒：使用中的賽況來源</text><text x="704" y="160" class="bt tw">報「可能點球」→ 訊號危險</text>
+  <text x="661" y="206" class="ts">期間任何時候訊號為危險即拒絕</text>
+  <text x="661" y="224" class="ts">危險的定義由 04 的訊號對應表決定</text>
+  <text x="661" y="242" class="ts">（R06-13、04 的 R04-21）</text>
+  <rect x="795" y="278" width="134" height="30" rx="4" class="stampw"/><text x="862" y="298" text-anchor="middle" class="stw">拒絕：危險訊號</text>
+</g>
+<!-- P4 -->
+<g>
+  <rect x="15" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="362" r="11" class="num"/><text x="33" y="367" text-anchor="middle" class="numt">4</text>
+  <text x="52" y="367" class="ptitle">無覆蓋：等待期滿比分未變</text>
+  <use href="#ch-ply" x="27" y="390" width="26" height="42" class="char"/>
+  <rect x="64" y="394" width="232" height="44" rx="6" class="bub"/><text x="74" y="412" class="bt">滾球大小，這場無覆蓋</text><text x="74" y="428" class="bt">風險金額 1,000（限額已降低）</text>
+  <use href="#ch-sys" x="27" y="452" width="26" height="42" class="char"/>
+  <rect x="64" y="456" width="232" height="44" rx="6" class="bub"/><text x="74" y="474" class="bt">沒有訊號，固定等 8 秒</text><text x="74" y="490" class="bt">期滿比分仍是 1:0</text>
+  <text x="31" y="536" class="ts">無覆蓋的限額依百分比計（R06-09）</text>
+  <text x="31" y="554" class="ts">經銷商看不到覆蓋狀態（R04-22）</text>
+  <text x="31" y="572" class="ts">（R06-14）</text>
+  <rect x="165" y="608" width="134" height="30" rx="4" class="stamp"/><text x="232" y="628" text-anchor="middle" class="st">已確認</text>
+</g>
+<!-- P5 -->
+<g>
+  <rect x="330" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="362" r="11" class="num"/><text x="348" y="367" text-anchor="middle" class="numt">5</text>
+  <text x="367" y="367" class="ptitle">玩家想取消等待中的注單</text>
+  <use href="#ch-ply" x="342" y="390" width="26" height="42" class="char"/>
+  <rect x="379" y="394" width="232" height="44" rx="6" class="bub"/><text x="389" y="412" class="bt">等太久了，我要取消！</text><text x="389" y="428" class="bt">注單還在等待中</text>
+  <use href="#ch-sys" x="342" y="452" width="26" height="42" class="char"/>
+  <rect x="379" y="456" width="232" height="44" rx="6" class="bub"/><text x="389" y="474" class="bt">等待中的注單不能取消</text><text x="389" y="490" class="bt">只會被拒絕，或期滿確認</text>
+  <text x="346" y="536" class="ts">拒絕條件只有 R06-13 至 R06-15</text>
+  <text x="346" y="554" class="ts">狀態對玩家可見，保持透明</text>
+  <text x="346" y="572" class="ts">（R06-19）</text>
+  <rect x="480" y="608" width="134" height="30" rx="4" class="stampw"/><text x="547" y="628" text-anchor="middle" class="stw">不接受取消</text>
+</g>
+<!-- P6 -->
+<g>
+  <rect x="645" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="362" r="11" class="num"/><text x="663" y="367" text-anchor="middle" class="numt">6</text>
+  <text x="682" y="367" class="ptitle">錢包回報餘額不足</text>
+  <use href="#ch-ply" x="657" y="390" width="26" height="42" class="char"/>
+  <rect x="694" y="394" width="232" height="44" rx="6" class="bub"/><text x="704" y="412" class="bt">下注 100，馬來盤 −0.80</text><text x="704" y="428" class="bt">（風險金額 80）</text>
+  <use href="#ch-sys" x="657" y="452" width="26" height="42" class="charw"/>
+  <rect x="694" y="456" width="232" height="44" rx="6" class="bubw"/><text x="704" y="474" class="bt tw">錢包（範圍外）：餘額不足</text><text x="704" y="490" class="bt tw">扣款失敗</text>
+  <text x="661" y="536" class="ts">不進入接受流程</text>
+  <text x="661" y="554" class="ts">玩家端不留下注單</text>
+  <text x="661" y="572" class="ts">（R06-18）</text>
+  <rect x="795" y="608" width="134" height="30" rx="4" class="stampw"/><text x="862" y="628" text-anchor="middle" class="stw">注單不成立</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：第 4 節的六個情境：價格變動重報（R06-04、R06-05）、比分不符拒絕（R06-03）、有覆蓋時危險訊號拒絕（R06-13）、無覆蓋期滿確認（R06-14）、等待中不能取消（R06-19）、扣款失敗注單不成立（R06-18）。</p>
+</section>
+
+</div>
+</body>
+</html>
