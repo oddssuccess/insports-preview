@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 風險控管：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+/* 本頁是共識用的高層概念圖：字比其他 PRD 的圖大、方塊少 */
+svg .h { font-size: 19px; font-weight: 700; font-family: var(--font-head); }
+svg .m { font-size: 15px; }
+svg .mw { font-size: 15px; fill: var(--warn); }
+svg .mb { font-size: 15px; font-weight: 700; }
+svg .ext { fill: var(--panel); stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+svg .nodew { fill: var(--panel); stroke: var(--warn); stroke-width: 1.4; stroke-dasharray: 6 4; }
+svg .cell { font-size: 18px; font-weight: 700; text-anchor: middle; }
+svg .cellw { font-size: 18px; font-weight: 700; text-anchor: middle; fill: var(--warn); }
+svg .cells { font-size: 18px; text-anchor: middle; fill: var(--soft); }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs></svg>
+
+<h1>09 風險控管：概念圖</h1>
+<p class="meta"><b>狀態</b>：概念草稿（版本 B2，3 張） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/09-risk-control.md">09 風險控管</a></p>
+<p class="disclaimer">本頁是高層概念示意，用來與 NST 對風險控管的業務需求達成共識，不約束資料模型、架構或介面。09 尚未有規則，圖中標為「待決定」的橘色項目是要一起決定的業務問題；其他 PRD 已決定的事附規則編號。09-01、09-02、09-05、09-06、09-07、09-09 曾屬未選用的版本，09-04 的責任矩陣因太複雜改以 09-10 取代；移除的編號不再使用。</p>
+<ol class="toc">
+  <li><a href="#fig-09-03">圖 09-03　從參數到處理佇列：觸發條件與人工觸發</a></li>
+  <li><a href="#fig-09-08">圖 09-08　三層：參數層固定、條件層活動、處置層人為主</a></li>
+  <li><a href="#fig-09-10">圖 09-10　一個觸發條件的樣子</a></li>
+</ol>
+
+<!-- ============================================================ 圖 09-03 -->
+<section class="fig" id="fig-09-03">
+<h2>圖 09-03　從參數到處理佇列：觸發條件與人工觸發</h2>
+<svg viewBox="0 0 960 720" width="100%" role="img" aria-label="從參數到處理佇列">
+<rect x="40" y="20" width="880" height="56" rx="6" class="node"/><rect x="43" y="23" width="874" height="50" rx="4" class="node2"/>
+<text x="480" y="55" text-anchor="middle" class="h">參數層：系統持續收集的監控參數，有定義、有歷史、各有保存期限</text>
+<path d="M280,76 L280,104" class="ln" marker-end="url(#arr)"/>
+<path d="M740,76 L740,104" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="106" width="520" height="100" rx="6" class="node"/>
+<text x="56" y="134" class="mb">基本條件：一個參數＋一個比較，答案只有是或否</text>
+<text x="56" y="160" class="m">例：30 天內淨輸贏超過 5 萬美元　　30 天內注單超過 100 張</text>
+<text x="56" y="186" class="ts">數值只是示意；基本條件只能引用參數層有的參數</text>
+<path d="M280,206 L280,234" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="236" width="520" height="130" rx="6" class="node"/>
+<text x="56" y="264" class="mb">觸發條件：多個基本條件以 AND／OR 組合</text>
+<text x="56" y="290" class="m">必須定義：範圍、是時的處置、否時的處置、自動與否</text>
+<text x="56" y="316" class="ts">範圍：全部、某經銷商、某營運商</text>
+<text x="56" y="338" class="ts">自動與否由每個觸發條件自己設定，不另設全域清單</text>
+<rect x="600" y="106" width="320" height="260" rx="6" class="node"/>
+<text x="616" y="134" class="mb">人工從參數層觸發</text>
+<text x="616" y="162" class="m">風控組直接看參數的資料與趨勢，</text>
+<text x="616" y="186" class="m">把玩家或注單送進處理佇列，附依據。</text>
+<text x="616" y="210" class="m">不需先有觸發條件。</text>
+<line x1="616" y1="236" x2="904" y2="236" class="sep"/>
+<text x="616" y="264" class="ts">條件層由風控組在後台自助設定，</text>
+<text x="616" y="286" class="ts">不改程式、不需覆核，隨趨勢調整；</text>
+<text x="616" y="308" class="ts">內容與數值不寫在 PRD、不放非功能需求。</text>
+<text x="616" y="330" class="ts">本 PRD 只要求形狀與可設定性。</text>
+<path d="M150,366 L150,424" class="ln" marker-end="url(#arr)"/>
+<text x="162" y="400" class="ts">設為自動</text>
+<path d="M440,366 L440,424" class="ln" marker-end="url(#arr)"/>
+<text x="452" y="400" class="ts">非自動</text>
+<path d="M760,366 L760,424" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="426" width="260" height="90" rx="6" class="node"/>
+<text x="56" y="454" class="mb">系統直接執行處置</text>
+<text x="56" y="478" class="ts">留紀錄</text>
+<text x="56" y="500" class="ts">建議也進佇列標示已執行，待確認</text>
+<rect x="340" y="426" width="580" height="90" rx="6" class="node"/><rect x="343" y="429" width="574" height="84" rx="4" class="node2"/>
+<text x="630" y="458" text-anchor="middle" class="h">處理佇列＝觸發條件命中＋人工從參數層觸發</text>
+<text x="630" y="490" text-anchor="middle" class="ts">每筆帶對象、命中的觸發條件或人工依據、建議的處置；排序與時限比照 04（R11-03）</text>
+<path d="M170,516 L170,556" class="ln" marker-end="url(#arr)"/>
+<path d="M630,516 L630,556" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="558" width="880" height="64" rx="6" class="panel"/>
+<text x="56" y="584" class="m">處置：人從佇列決定並動手（風控組、操盤手與 Ops），或系統已依自動的觸發條件執行。處置方式的清單由本 PRD 定：</text>
+<text x="56" y="608" class="m">05 暫停與關閉、12 開關與限額、06 玩家標記、07 暫緩結算、通知並列入觀察；都留紀錄。</text>
+<rect x="40" y="638" width="880" height="56" rx="6" class="nodew"/>
+<text x="56" y="662" class="mw">待決定：基本條件的基準原則（絕對值、相對自身歷史、相對模板上限或競賽等級）？</text>
+<text x="56" y="684" class="mw">身分連結（多帳號是否同一人）是參數層的另一條輸出線，方法待定。</text>
+<text x="56" y="714" class="ts">玩家標記若由自動的觸發條件加上，與 06 的 R06-17 衝突，撰寫規則時與 06 一併修改。經銷商目前不參與。</text>
+</svg>
+<p class="cap"><b>圖說</b>：參數層的參數先寫成答案只有是或否的基本條件，再以 AND／OR 組成觸發條件；每個觸發條件帶範圍、是時與否時的處置、自動與否。處理佇列有兩個入口：非自動的觸發條件命中，以及風控組從參數層人工觸發；設為自動的由系統直接執行。基本條件的基準原則與身分連結的方法待決定。</p>
+</section>
+
+<!-- ============================================================ 圖 09-08 -->
+<section class="fig" id="fig-09-08">
+<h2>圖 09-08　三層：參數層固定、條件層活動、處置層人為主</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="三層">
+<text x="690" y="40" text-anchor="middle" class="mb">誰定</text>
+<text x="800" y="40" text-anchor="middle" class="mb">多久變一次</text>
+<text x="900" y="40" text-anchor="middle" class="mb">寫在哪裡</text>
+<rect x="40" y="56" width="880" height="110" rx="6" class="node"/>
+<rect x="43" y="59" width="154" height="104" rx="4" class="node2"/>
+<text x="120" y="104" text-anchor="middle" class="h">參數層</text><text x="120" y="130" text-anchor="middle" class="ts">固定</text>
+<text x="216" y="86" class="m">系統持續收集的事實：操盤系統內提煉＋InSports 自己的其他元件</text>
+<text x="216" y="112" class="m">有定義、有歷史、各有保存期限；沒有條件用到的也要收</text>
+<text x="216" y="138" class="m">加一個參數＝產品變更；不向營運商索取資料</text>
+<text x="690" y="104" text-anchor="middle" class="m">本 PRD＋工程</text>
+<text x="800" y="104" text-anchor="middle" class="m">慢</text>
+<text x="900" y="96" text-anchor="middle" class="m">PRD 規則</text><text x="900" y="118" text-anchor="middle" class="m">與 SPEC</text>
+<path d="M120,166 L120,204" class="ln" marker-end="url(#arr)"/>
+<text x="140" y="190" class="ts">契約：基本條件只能引用參數層有的參數；風控組也能直接從參數層人工觸發</text>
+<rect x="40" y="206" width="880" height="110" rx="6" class="node"/>
+<rect x="43" y="209" width="154" height="104" rx="4" class="node2"/>
+<text x="120" y="254" text-anchor="middle" class="h">條件層</text><text x="120" y="280" text-anchor="middle" class="ts">活動</text>
+<text x="216" y="236" class="m">基本條件：一個參數＋一個比較，答案只有是或否</text>
+<text x="216" y="262" class="m">觸發條件：AND／OR 組合，帶範圍、是／否的處置、自動與否</text>
+<text x="216" y="288" class="m">風控組在後台自助設定，不改程式、不需覆核</text>
+<text x="690" y="254" text-anchor="middle" class="m">風控組</text>
+<text x="800" y="254" text-anchor="middle" class="m">常</text>
+<text x="900" y="246" text-anchor="middle" class="m">後台設定</text><text x="900" y="268" text-anchor="middle" class="m">（11）</text>
+<path d="M120,316 L120,354" class="ln" marker-end="url(#arr)"/>
+<text x="140" y="340" class="ts">契約：處置只能從本 PRD 定義的處置方式清單中選</text>
+<rect x="40" y="356" width="880" height="110" rx="6" class="node"/>
+<rect x="43" y="359" width="154" height="104" rx="4" class="node2"/>
+<text x="120" y="404" text-anchor="middle" class="h">處置層</text><text x="120" y="430" text-anchor="middle" class="ts">人為主</text>
+<text x="216" y="386" class="m">處理佇列＝觸發條件命中＋人工從參數層觸發</text>
+<text x="216" y="412" class="m">非自動的由人從佇列決定並動手；設為自動的由系統執行</text>
+<text x="216" y="438" class="m">05 暫停關閉、12 開關限額、06 標記、07 暫緩結算、通知觀察</text>
+<text x="690" y="388" text-anchor="middle" class="m">風控組、</text><text x="690" y="410" text-anchor="middle" class="m">操盤手與 Ops</text><text x="690" y="432" text-anchor="middle" class="m">自動的：系統</text>
+<text x="800" y="404" text-anchor="middle" class="m">每筆</text>
+<text x="900" y="396" text-anchor="middle" class="m">既有 PRD</text><text x="900" y="418" text-anchor="middle" class="m">的控制</text>
+<rect x="40" y="490" width="880" height="56" rx="6" class="nodew"/>
+<text x="56" y="524" class="mw">待決定：基本條件的基準原則；曝險持續算到哪幾層、冠軍盤以什麼為基準；身分連結的方法。</text>
+<text x="56" y="580" class="ts">本 PRD 不把門檻數值放非功能需求：條件與數值都是風控組的設定；參數的計算方式屬 SPEC。經銷商目前不參與。</text>
+</svg>
+<p class="cap"><b>圖說</b>：09 分成變動快慢不同的三層。參數層由本 PRD 定義、工程建，各有保存期限，變動最慢；條件層由風控組在後台自助設定基本條件與觸發條件，不需覆核；處置層的佇列來自觸發條件與人工觸發，以人為主，設為自動的由系統執行。層與層之間有契約：基本條件只能引用參數，處置只能從清單中選。基本條件的基準原則與身分連結的方法待決定。</p>
+</section>
+
+<!-- ============================================================ 圖 09-10 -->
+<section class="fig" id="fig-09-10">
+<h2>圖 09-10　一個觸發條件的樣子</h2>
+<svg viewBox="0 0 960 620" width="100%" role="img" aria-label="一個觸發條件">
+<rect x="40" y="20" width="880" height="56" rx="6" class="node"/><rect x="43" y="23" width="874" height="50" rx="4" class="node2"/>
+<text x="56" y="55" class="h">觸發條件「疑似優勢玩家」</text>
+<text x="904" y="55" text-anchor="end" class="m">範圍：全部（可改為某經銷商、某營運商）</text>
+<!-- 基本條件 -->
+<text x="40" y="112" class="mb">基本條件（每個答案只有是或否）</text>
+<rect x="40" y="124" width="240" height="120" rx="6" class="node"/>
+<text x="56" y="150" class="ts">參數（參數層）</text>
+<text x="56" y="172" class="m">30 天內淨輸贏（美元）</text>
+<text x="56" y="200" class="ts">比較（風控組設）</text>
+<text x="56" y="222" class="m">超過 50,000</text>
+<text x="310" y="190" text-anchor="middle" class="mb">AND</text>
+<rect x="340" y="124" width="240" height="120" rx="6" class="node"/>
+<text x="356" y="150" class="ts">參數（參數層）</text>
+<text x="356" y="172" class="m">30 天內注單張數</text>
+<text x="356" y="200" class="ts">比較（風控組設）</text>
+<text x="356" y="222" class="m">超過 100</text>
+<text x="610" y="190" text-anchor="middle" class="mb">AND</text>
+<rect x="640" y="124" width="280" height="120" rx="6" class="node"/>
+<text x="656" y="150" class="ts">參數（參數層）</text>
+<text x="656" y="172" class="m">最近 50 張注單中收盤價值為正的張數</text>
+<text x="656" y="200" class="ts">比較（風控組設）</text>
+<text x="656" y="222" class="m">超過 35</text>
+<path d="M480,244 L480,284" class="ln" marker-end="url(#arr)"/>
+<rect x="340" y="286" width="280" height="48" rx="6" class="node"/><rect x="343" y="289" width="274" height="42" rx="4" class="node2"/>
+<text x="480" y="317" text-anchor="middle" class="mb">觸發條件的答案：是／否</text>
+<path d="M400,334 L400,360 L200,360 L200,384" class="ln" marker-end="url(#arr)"/>
+<text x="290" y="354" text-anchor="middle" class="ts">是</text>
+<path d="M560,334 L560,360 L760,360 L760,384" class="ln" marker-end="url(#arr)"/>
+<text x="670" y="354" text-anchor="middle" class="ts">否</text>
+<rect x="40" y="386" width="400" height="96" rx="6" class="node"/>
+<text x="56" y="412" class="ts">是時的處置（從處置方式清單選）</text>
+<text x="56" y="438" class="m">建議加投注延遲標記（06 的 R06-17）</text>
+<text x="56" y="464" class="m">自動：否 → 進處理佇列，由人決定</text>
+<rect x="520" y="386" width="400" height="96" rx="6" class="node"/>
+<text x="536" y="412" class="ts">否時的處置（從處置方式清單選）</text>
+<text x="536" y="438" class="m">已標記者建議解除</text>
+<text x="536" y="464" class="m">自動：否 → 進處理佇列，由人決定</text>
+<rect x="40" y="506" width="880" height="64" rx="6" class="panel"/>
+<text x="56" y="532" class="m">誰定什麼：參數的清單與處置方式的清單是本 PRD 定的產品內容；</text>
+<text x="56" y="556" class="m">比較、組合、範圍、是／否各選哪個處置、自動與否，都是風控組在後台的設定，隨趨勢調整。</text>
+<text x="56" y="604" class="ts">數值只是示意。把「自動：否」改成「是」，命中時系統就直接執行；玩家標記要這樣做須先修改 06 的 R06-17。</text>
+</svg>
+<p class="cap"><b>圖說</b>：一個觸發條件由三個基本條件以 AND 組成，每個基本條件是參數層的一個參數加風控組設的比較；答案為是與否各對應一個從清單選出的處置方式，並各自標示自動與否。範圍可限定為某經銷商或某營運商。參數與處置方式的清單是產品內容，其餘都是設定。</p>
+</section>
+
+</div>
+</body>
+</html>
