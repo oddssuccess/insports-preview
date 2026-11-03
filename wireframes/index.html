@@ -16,7 +16,7 @@
 <p class="disclaimer">後台各頁面的畫面示意，與 PRD 第 8 節「參考設計（非約束）」同一定位：只說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型。頁面依後台主選單排列，每頁開頭列出功能清單與對應的 PRD 規則，末尾列出待確認事項與關鍵字中英對照。畫面中的名稱與數字都是範例；畫面上的文字一律使用英文，說明文字使用中文。PRD 放在 GitHub 上，需要 repo 的存取權限才能開啟。</p>
 
 <h2>共用版面</h2>
-<p><a href="layout.html">後台共用版面（已採用選單與完整流程規劃）</a>：預設第一階段選單已加入 Feed Monitor、移除驗證下注工具；可切換 BetLogics 現有頁面對照，或檢視注單、風控、結算、經銷商與報表的規劃入口。主內容區留白，詳細分工收在下方說明。</p>
+<p><a href="layout.html">後台共用版面（已採用選單與完整流程規劃）</a>：第一階段包含單場比賽與冠軍盤的建立、賽程、識別、屬性、生命週期、對應及人工審核；詳細賽況、賠率與賽果／結算列為後續。可切換 BetLogics 導覽對照與完整流程規劃；未繪製的入口標示 Planned，Feed Monitor 保留既有位置、階段歸屬待定。</p>
 
 <h2>Catalog</h2>
 <table class="doc-t">
@@ -25,6 +25,30 @@
   <tr><th><a href="catalog/competitors.html">參賽方（Competitors）</a></th><td>清單與下一場賽事、依競賽篩選、編輯類型、屬性與圖示、等級看板、多語系、排序看板（PRD 01）</td></tr>
   <tr><th><a href="catalog/markets.html">玩法（Markets）</a></th><td>依運動的玩法清單與預覽、冠軍盤玩法、玩法類型（投注規則）清單與明細、玩法對應表、未對應的玩法、多語系（PRD 01、03、04、05）</td></tr>
 </table>
+
+<h2>Matches</h2>
+<table class="doc-t">
+  <tr><th><a href="matches/schedule.html">單場比賽賽程（Schedule）</a></th><td>參考 BetLogics 的分組賽程與單場導覽、身分與目錄屬性、來源與生命週期、待審摘要與人工紀錄；含 PRD 規則分工與待確認事項（PRD 01、03、04、11）</td></tr>
+  <tr><th><a href="matches/mapping.html">賽事對應（Mapping）</a></th><td>候選比較、人工確認、對應更正、新競賽與參賽方處理（PRD 01、03、04、11）</td></tr>
+  <tr><th><a href="matches/match-review.html">賽事審核（Match Review）</a></th><td>待取消／待腰斬佇列、來源回歸、重掛、生命週期裁定與覆核（PRD 04、07、11）</td></tr>
+
+</table>
+
+<h2>Outrights</h2>
+<table class="doc-t">
+  <tr><th><a href="outrights/schedule.html">冠軍盤賽程（Schedule）</a></th><td>事件身分、期間、名單、來源證據與生命週期缺口（PRD 01、03、04、11）</td></tr>
+  <tr><th><a href="outrights/mapping.html">冠軍盤對應（Mapping）</a></th><td>事件候選、名單逐項對應／排除、鎖定與人工紀錄（PRD 01、04、11）</td></tr>
+</table>
+
+<h2>Provider</h2>
+<table class="doc-t">
+  <tr><th><a href="provider/matches/schedule.html">來源單場賽程（Matches › Schedule）</a></th><td>來源場次、取得狀態與時間、候選阻擋、人工指定建立者（PRD 01、03、04、11）</td></tr>
+  <tr><th><a href="provider/outrights/schedule.html">來源冠軍盤賽程（Outrights › Schedule）</a></th><td>來源事件、期間與名單、對應進度、來源狀態與未定建立流程（PRD 01、03、04、11）</td></tr>
+</table>
+
+<h2>草稿與待確認範圍</h2>
+<p>本次第一階段所列的單場賽程、對應、人工審核、冠軍盤賽程／對應與兩種來源賽程均已繪製。每頁有 PRD 功能追溯、BetLogics 介面參考、範例畫面與待確認建議；連結可開啟，資料與裁定皆為靜態示意。</p>
+<p>冠軍盤的建立者、事件粒度、起訖與生命週期、球員識別等仍未定案；畫面呈現未知與操作限制。詳細賽況、賠率、賽果／結算仍留後續，完整選單與其他規劃入口見<a href="layout.html">共用版面</a>。</p>
 
 </div>
 </body>

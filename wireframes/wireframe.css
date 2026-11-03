@@ -202,3 +202,24 @@ a.btn.pri { color: #fff; }
 #sidebar-full:checked ~ .frame .nav-proposal,
 #sidebar-full:checked ~ .frame .nav-planned { display: block; }
 #sidebar-full:checked ~ .frame .nav-current-only { display: none; }
+
+/* 本次第一階段：保留生命週期入口，詳細賽況、賠率與結算只在對照／完整模式顯示 */
+#sidebar-proposed:checked ~ .frame .nav-later { display: none; }
+.sidebar-draft .side .nav-label-current { display: none; }
+.sidebar-draft .side .nav-label-insports { display: inline; }
+#sidebar-current:checked ~ .frame .nav-label-current { display: inline; }
+#sidebar-current:checked ~ .frame .nav-label-insports { display: none; }
+
+/* 賽程介面參考：雙方上下排列、列尾選單與跨明細一致的賽事摘要 */
+.schedule-grid td:first-child { min-width: 118px; }
+.schedule-grid td:nth-child(2) { min-width: 190px; }
+.match-team { display: flex; justify-content: space-between; gap: 12px; padding: 2px 0; }
+.match-menu { min-width: 80px; }
+.match-menu > summary { cursor: pointer; }
+.match-menu .list { min-width: 150px; margin-top: 4px; background: var(--paper); }
+.match-context { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+                 gap: 12px; padding: 12px; margin: 12px 0; border: 1px solid var(--line); background: var(--fill); }
+
+/* 人工審核操作列：容納長標籤與多個按鈕，不受排序看板的固定寬度限制 */
+.savebar.wide { width: 100%; gap: 12px; flex-wrap: wrap; }
+.savebar.wide > div { display: flex; gap: 8px; flex-wrap: wrap; }
