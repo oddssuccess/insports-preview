@@ -157,3 +157,43 @@ table.cube tr.sel td { background: var(--fill-2); }
 .cv.hi { outline: 2px solid var(--mark); outline-offset: 1px; }
 a.btn { color: var(--ink); text-decoration: none; }
 a.btn.pri { color: #fff; }
+
+/* 共用版面：賽事側邊選單草稿（只用於 layout.html） */
+.sidebar-draft { grid-template-columns: 200px minmax(0, 1fr); min-height: 560px; }
+.sidebar-draft .side details { margin: 4px 0 8px; }
+.sidebar-draft .side summary.group { cursor: pointer; }
+.sidebar-draft .side summary.group::marker { color: var(--muted); }
+.sidebar-draft .side .nav-item { display: block; padding: 5px 16px 5px 24px; }
+.sidebar-draft .side a { padding-left: 24px; }
+.sidebar-draft .side a:hover { background: var(--fill-2); }
+.sidebar-draft .side a:focus-visible, .sidebar-draft .side summary:focus-visible {
+  outline: 2px solid var(--mark); outline-offset: -2px;
+}
+
+/* 共用版面的補充說明預設收合，先呈現選單與留白內容區 */
+.layout-notes { margin-top: 24px; }
+.layout-notes > summary { cursor: pointer; color: var(--muted); }
+.layout-notes > summary:focus-visible { outline: 2px solid var(--mark); outline-offset: 4px; }
+
+/* 共用版面：現有 BetLogics 與產線建議的比較（不需 JavaScript） */
+.layout-choice { margin: 0 4px 0 0; vertical-align: middle; }
+.layout-choice-label { margin-right: 20px; cursor: pointer; }
+.layout-current-caption, .layout-proposed-caption, .layout-full-caption { color: var(--muted); font-size: 12px; margin: 8px 0 12px; }
+.layout-proposed-caption, .layout-full-caption { display: none; }
+.sidebar-draft .side details details { margin-left: 12px; }
+.sidebar-draft .side .nav-root { padding-left: 16px; font-weight: 600; }
+.sidebar-draft .side .nav-proposal { display: none; border-top: 1px dashed var(--line); padding-top: 8px; }
+.sidebar-draft .side .nav-current-only { font-style: italic; }
+.nav-badge { display: inline-block; margin-left: 4px; padding: 0 4px; border: 1px dashed var(--mark); font-size: 10px; font-weight: 400; }
+#sidebar-proposed:checked ~ .layout-current-caption { display: none; }
+#sidebar-proposed:checked ~ .layout-proposed-caption { display: block; }
+#sidebar-proposed:checked ~ .frame .nav-proposal { display: block; }
+#sidebar-proposed:checked ~ .frame .nav-current-only { display: none; }
+
+/* 完整投注流程只在規劃模式顯示，不併入第一階段 */
+.sidebar-draft .side .nav-planned { display: none; }
+#sidebar-full:checked ~ .layout-current-caption { display: none; }
+#sidebar-full:checked ~ .layout-full-caption { display: block; }
+#sidebar-full:checked ~ .frame .nav-proposal,
+#sidebar-full:checked ~ .frame .nav-planned { display: block; }
+#sidebar-full:checked ~ .frame .nav-current-only { display: none; }
