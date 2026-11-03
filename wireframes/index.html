@@ -12,49 +12,16 @@
 <h1>後台畫面示意（wireframe）</h1>
 <p class="meta"><b>狀態</b>：草稿（示意） · <b>說明</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/README.md">wireframe README</a> · <b>PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md">PRD 目錄</a></p>
 
-<p class="disclaimer">各 PRD 的後台畫面示意，與 PRD 第 8 節「參考設計（非約束）」同一定位：只說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型。畫面中的名稱與數字都是範例。畫面上的文字一律使用英文，說明文字使用中文，各頁末附關鍵字中英對照。PRD 與各組 README 放在 GitHub 上，需要 repo 的存取權限才能開啟。</p>
+<p class="disclaimer">後台各頁面的畫面示意，與 PRD 第 8 節「參考設計（非約束）」同一定位：只說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型。頁面依後台主選單排列，每頁開頭列出功能清單與對應的 PRD 規則，末尾列出待確認事項與關鍵字中英對照。畫面中的名稱與數字都是範例；畫面上的文字一律使用英文，說明文字使用中文。PRD 放在 GitHub 上，需要 repo 的存取權限才能開啟。</p>
 
-<h2>01 運動與玩法目錄</h2>
-<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sports-and-markets/README.md">README</a></p>
-<table class="doc-t">
-  <tr><th><a href="sports-and-markets/sports.html">運動</a></th><td>清單、多語系、變更營運狀態、排序看板</td></tr>
-  <tr><th><a href="sports-and-markets/tournaments.html">競賽</a></th><td>清單、編輯、多語系、等級看板、排序看板</td></tr>
-  <tr><th><a href="sports-and-markets/competitors.html">參賽方</a></th><td>清單、編輯；多語系與看板與競賽相同</td></tr>
-  <tr><th><a href="sports-and-markets/period-score-items.html">時段與計分項目</a></th><td>各運動的時段 × 計分項目矩陣</td></tr>
-</table>
+<h2>共用版面</h2>
+<p><a href="layout.html">後台共用版面（主選單）</a>：共用側邊主選單、頂部列與空白內容區。</p>
 
-<h2>03 資料來源與連接器</h2>
-<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/sources-and-connectors/README.md">README</a></p>
+<h2>Catalog</h2>
 <table class="doc-t">
-  <tr><th><a href="sources-and-connectors/sources.html">來源</a></th><td>清單與四類資料的狀態矩陣、來源詳情（途徑與狀態紀錄）、停用與啟用</td></tr>
-  <tr><th><a href="sources-and-connectors/connectors.html">連接器</a></th><td>清單、暫停與恢復</td></tr>
-  <tr><th><a href="sources-and-connectors/accounts.html">帳號</a></th><td>清單、更換憑證、停用與啟用</td></tr>
-</table>
-
-<h2>04 賽事資料與對應</h2>
-<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/event-data-and-mapping/README.md">README</a></p>
-<table class="doc-t">
-  <tr><th><a href="event-data-and-mapping/review-queue.html">待處理</a></th><td>總佇列，依類型分頁籤；待覆核</td></tr>
-  <tr><th><a href="event-data-and-mapping/source-roles.html">來源角色</a></th><td>運動的賽程來源與更換、其餘角色的運動預設與競賽覆寫、新競賽清單</td></tr>
-  <tr><th><a href="event-data-and-mapping/event-mapping.html">賽事對應</a></th><td>對應看板、對應明細、人工對應、疑似重複的合併、指定建立者</td></tr>
-  <tr><th><a href="event-data-and-mapping/pending-cancellation.html">待取消與待腰斬</a></th><td>清單、處置</td></tr>
-  <tr><th><a href="event-data-and-mapping/in-play-signal.html">滾球訊號與覆蓋</a></th><td>進行中賽事的監看</td></tr>
-</table>
-
-<h2>05 賠率與操盤</h2>
-<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/odds-and-trading/README.md">README</a></p>
-<table class="doc-t">
-  <tr><th><a href="odds-and-trading/trading-desk.html">操盤台</a></th><td>未結束的賽事依競賽分組，各模型範圍的開盤、暫停或關閉與原因；競賽層的暫停</td></tr>
-  <tr><th><a href="odds-and-trading/event-trading.html">賽事操盤</a></th><td>錨定玩法與共識價、模型參數、各盤口線的定價流程 InSports 三步、暫停；加偏移</td></tr>
-</table>
-
-<h2>12 玩法設定</h2>
-<p class="meta"><b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <b>範圍與待確認事項</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/market-settings/README.md">README</a></p>
-<table class="doc-t">
-  <tr><th><a href="market-settings/templates.html">模板</a></th><td>清單（含封存）、玩法 × 階段的設定、疊加階段的值、來源與校正、儲存</td></tr>
-  <tr><th><a href="market-settings/assignment.html">模板指定</a></th><td>運動（預設模板、等級與模板的對應）、競賽、賽事</td></tr>
-  <tr><th><a href="market-settings/market-switches.html">玩法開關</a></th><td>關閉中的玩法、關閉玩法</td></tr>
-  <tr><th><a href="market-settings/phases.html">階段一覽</a></th><td>各運動的時間軸階段與疊加階段，唯讀</td></tr>
+  <tr><th><a href="catalog/sports.html">運動（Sports）</a></th><td>清單、變更營運狀態、營運狀態變更紀錄、多語系、排序看板（PRD 01）</td></tr>
+  <tr><th><a href="catalog/tournaments.html">競賽（Tournaments）</a></th><td>清單與下一場賽事、編輯屬性與圖示、等級看板、多語系、排序看板（PRD 01）</td></tr>
+  <tr><th><a href="catalog/competitors.html">參賽方（Competitors）</a></th><td>清單與下一場賽事、依競賽篩選、編輯類型、屬性與圖示、等級看板、多語系、排序看板（PRD 01）</td></tr>
 </table>
 
 </div>
