@@ -112,6 +112,11 @@ table.doc-t th { background: var(--fill); }
 .list div.on { background: var(--fill-2); font-weight: 600; }
 .list div.cat { background: var(--fill); color: var(--muted); font-size: 11px; }
 
+/* 清單＋右側預覽面板（Catalog › Markets） */
+.preview { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 12px; align-items: start; }
+.preview .panel { margin-top: 0; }
+table.grid tr.sel td { background: var(--fill-2); }
+
 /* 矩陣 */
 table.matrix { border-collapse: collapse; font-size: 12px; }
 table.matrix th, table.matrix td { border: 1px solid var(--line); padding: 4px 6px; text-align: center; }

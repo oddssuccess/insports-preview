@@ -36,7 +36,7 @@
         <a class="nav-item" data-route="/sports" href="catalog/sports.html">Sports</a>
         <a class="nav-item" data-route="/tournaments" href="catalog/tournaments.html">Tournaments</a>
         <a class="nav-item" data-route="/competitors" href="catalog/competitors.html">Competitors</a>
-        <span class="nav-item" data-route="/markets">Markets</span>
+        <a class="nav-item" data-route="/markets" href="catalog/markets.html">Markets</a>
         <span class="nav-item" data-route="/scopes">Scopes</span>
         <span class="nav-item" data-route="/commentary">Commentary</span>
         </details>
@@ -102,7 +102,7 @@
 <details class="layout-notes">
 <summary>現有頁面的分工與來源依據</summary>
 <p>依 BetLogics 工作目錄的 <code>services/office/web/src/app/layouts/standard/menu.ts</code> 與 <code>app.routes.ts</code> 核對；以下來源路徑皆相對於 <code>betlogics/services/office/web/src/app/</code>。這份草稿核對的是頁面與導覽，不代表已驗證正式環境的功能完整性。</p>
-<p>目前只有 Sports、Tournaments、Competitors 連到本 repo 既有的畫面；其餘為位置示意。Provider › Betting 在現有模式保留作為對照，它是系統管理者的驗證下注工具，並非玩家注單清單。驗證外部下注不屬於本次 InSports 賽事產線；取得資料帳號只用於讀取資料（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">R03-04</a>），因此已採用的第一階段模式移除它。三個模式都只處理賽事，冠軍盤另行規劃。預設顯示已採用的第一階段選單；完整投注流程的 Planned 入口是後續規劃，不表示功能已完成。</p>
+<p>目前只有 Sports、Tournaments、Competitors、Markets 連到本 repo 既有的畫面；其餘為位置示意。Provider › Betting 在現有模式保留作為對照，它是系統管理者的驗證下注工具，並非玩家注單清單。驗證外部下注不屬於本次 InSports 賽事產線；取得資料帳號只用於讀取資料（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">R03-04</a>），因此已採用的第一階段模式移除它。三個模式都只處理賽事，冠軍盤另行規劃。預設顯示已採用的第一階段選單；完整投注流程的 Planned 入口是後續規劃，不表示功能已完成。</p>
 
 <h2>功能清單</h2>
 <table class="doc-t">
