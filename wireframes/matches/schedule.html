@@ -29,17 +29,17 @@
   </ul></td></tr>
 </table>
 
-<p class="disclaimer">本頁是需求示意，用來說明資訊與操作的分工，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、名稱與數字都是範例；同一筆資料在四個畫面保持一致。業務依據為 InSports PRD；依使用者指示，清單、單場頁首、來源比較與人工紀錄直接參考 BetLogics 現有介面，再依本次範圍調整。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。相關對應、審核與來源賽程已連到本 repo 的草稿；畫面中的裁定不會寫入資料。</p>
+<p class="disclaimer">本頁是需求示意，用來說明資訊與操作的分工，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、名稱與數字都是範例；同一筆資料在四個畫面保持一致。業務依據為 InSports PRD；清單、單場頁首、來源比較與人工紀錄參考 BetLogics 現有介面，再依本次範圍調整。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。相關對應、審核與來源賽程已連到各頁草稿；畫面中的裁定不會寫入資料。</p>
 
 <h2>BetLogics 介面參考與調整</h2>
-<p>參考工作目錄為 <code>/home/hao/code/oddssuccess/betlogics</code>。以下檔案路徑相對於 <code>services/office/web/src/app/</code>；參考的是程式中實際的畫面結構，沒有假設整個 BetLogics 實作已符合 InSports PRD。樣式仍沿用本 repo 的共用線框版型。</p>
+<p>參考 BetLogics 的賽程清單、單場導覽、來源比較及人工操作紀錄；採用的介面安排與 InSports 調整如下。業務規則以 InSports PRD 為準，樣式沿用共用線框版型。</p>
 <table class="doc-t">
-  <tr><th>參考來源</th><th>本稿採用的介面安排</th><th>InSports 的調整與依據</th></tr>
-  <tr><td><code>pages/schedule/schedule.ts</code><br><code>pages/schedule/schedule-grid-styles.ts</code></td><td>篩選列、狀態頁籤與筆數、競賽橫列、窄時間欄、雙方上下排列、列尾選單（畫面 1）</td><td>使用 R04-12 的八種生命週期，R04-23 的待審標記另列；沿用本稿「全部」總覽，不複製 BetLogics 沒有全部頁籤的限制。排序與日期語意見待確認第 1 項。</td></tr>
-  <tr><td><code>components/match-nav/match-nav.ts</code><br><code>components/match-head/match-head.ts</code></td><td>返回清單、固定順序的單場導覽、共用賽事摘要（畫面 2～4）</td><td>保留同一統一識別、開賽時間、建立者與分開的狀態／標記（R04-04～06、R04-12、R04-23）；只列本期明細，不複製操盤、賠率、賽況及結算分頁。</td></tr>
-  <tr><td><code>pages/schedule/match-mapping-dialog.ts</code></td><td>統一紀錄在前、來源紀錄在後，並保留來源原始順序的比較表（畫面 3）</td><td>此稿將唯讀比較放在單場來源頁；完整人工對應仍屬 Mapping。反向只記來源，不改統一主客（R01-25、R04-06、R04-08～10）。</td></tr>
-  <tr><td><code>pages/schedule/match-detail.ts</code><br><code>components/provider-timing/provider-timing.ts</code></td><td>獨立的資料來源面板與人工操作紀錄（畫面 3、4）</td><td>只使用賽程可用性、來源／接收時間與人工稽核（R03-05、R03-08、R04-19）；不複製比分時段、補時歷史或未定的自動屬性歷史。</td></tr>
-  <tr><td><code>pages/schedule/match-actions.ts</code><br><code>pages/schedule/schedule-provider-rotator.ts</code></td><td>點選參賽方進入明細，較少用的入口放在列尾；來源摘要保持精簡（畫面 1）</td><td>建立者必須明示，不把來源切換當成換建立者（R04-05）；不提供重算賠率、直播、任意停用或尚未定義的欄位編輯。來源停用與人工裁定仍依 R03-13、R04-19。</td></tr>
+  <tr><th>參考介面</th><th>本稿採用的介面安排</th><th>InSports 的調整與依據</th></tr>
+  <tr><td>賽程清單與競賽分組</td><td>篩選列、狀態頁籤與筆數、競賽橫列、窄時間欄、雙方上下排列、列尾選單（畫面 1）</td><td>使用 R04-12 的八種生命週期，R04-23 的待審標記另列；沿用本稿「全部」總覽，不複製 BetLogics 沒有全部頁籤的限制。排序與日期語意見待確認第 1 項。</td></tr>
+  <tr><td>單場導覽與賽事摘要</td><td>返回清單、固定順序的單場導覽、共用賽事摘要（畫面 2～4）</td><td>保留同一統一識別、開賽時間、建立者與分開的狀態／標記（R04-04～06、R04-12、R04-23）；只列本期明細，不複製操盤、賠率、賽況及結算分頁。</td></tr>
+  <tr><td>來源對應比較</td><td>統一紀錄在前、來源紀錄在後，並保留來源原始順序的比較表（畫面 3）</td><td>此稿將唯讀比較放在單場來源頁；完整人工對應仍屬 Mapping。反向只記來源，不改統一主客（R01-25、R04-06、R04-08～10）。</td></tr>
+  <tr><td>資料來源與人工操作紀錄</td><td>獨立的資料來源面板與人工操作紀錄（畫面 3、4）</td><td>只使用賽程可用性、來源／接收時間與人工稽核（R03-05、R03-08、R04-19）；不複製比分時段、補時歷史或未定的自動屬性歷史。</td></tr>
+  <tr><td>賽程列操作與來源摘要</td><td>點選參賽方進入明細，較少用的入口放在列尾；來源摘要保持精簡（畫面 1）</td><td>建立者必須明示，不把來源切換當成換建立者（R04-05）；不提供重算賠率、直播、任意停用或尚未定義的欄位編輯。來源停用與人工裁定仍依 R03-13、R04-19。</td></tr>
 </table>
 <p>本次採用介面參考的決定見待確認第 14 項；缺少的業務規則仍留待補齊，不以 BetLogics 現有行為填成既定要求。</p>
 
@@ -112,7 +112,7 @@
         <tr><td><div>11-03</div><b>03:00</b><div><span class="chip">Result confirmed</span></div></td><td><div class="match-team">Team R</div><div class="match-team">Team S</div><div class="l2">M-41007</div></td><td>Provider A</td><td>Provider A</td><td>—</td><td><span class="btn">More ▾</span></td></tr>
       </tbody>
     </table>
-    <div class="pager"><span>6 example matches · Latest start first</span><span><a href="../outrights/schedule.html">Outright schedule</a></span></div>
+    <div class="pager"><span>6 matches · Latest start first</span><span><a href="../outrights/schedule.html">Outright schedule</a></span></div>
     <p class="hint">Canonical IDs are retained. Matches cannot be deleted, merged or created without a provider fixture. <span class="n">10</span></p>
   </main>
 </div>
@@ -309,7 +309,7 @@
 </ol>
 
 <h2>待確認事項</h2>
-<p>使用者於 2026-11-03 要求開始建立草稿；這是繪圖授權，不代表下列尚缺的業務規則已逐項定案。第 1～12 項保留待決或待補，第 13、14 項記錄使用者已明確指定的分期與介面參考。未定功能不畫成可執行操作。</p>
+<p>第 1～12 項為待決或待補需求；第 13、14 項記錄已於 2026-11-03 採用的分期與介面參考決定。未定事項不視為既定業務規則，相關操作限制仍保留。</p>
 <ol>
   <li><b>檢索、時間與排序</b>：畫面 1 依 BetLogics 的篩選列、狀態頁籤與競賽橫列安排，保留本稿的全部總覽；「目前開賽時間由晚到早」仍是檢索配置提案，尚非業務規則；採明確起訖與 UTC+08:00，不使用含糊的「今天」。非功能需求已定營業日為固定 UTC−4 00:00，但未定後台日期篩選是否使用營業日。建議新增日期捷徑時明示營業日或顯示時區日；審核佇列另遵守 R11-03，不能沿用此清單排序。待補 PRD 11。</li>
   <li><b>單場屬性與人工編輯權限</b>：R04-04 的資料可更改，不等於 Ops 可以覆寫任何來源欄位；場地、中立場、輪次、賽制、未知開賽時間與任意停用的規則未定。建議先維持畫面 2 的身分／賽程唯讀及 Catalog 屬性分工，不新增任意狀態、主客對調或停用操作。需要的單場專屬屬性與更正流程待補 PRD 01、04；競賽／參賽方不能停用的既有 Catalog 決定保持不變。</li>
@@ -323,8 +323,8 @@
   <li><b>球員識別與名單變動</b>：04 待確認第 1 項仍缺球員統一紀錄的建立與消歧；已有個人類型不足以解決。建議重用參賽方識別、轉隊不新建球員，名單新增／退出／淘汰保留歷史與來源依據；確認權限待補。R01-13、R04-18 與 OTR-03、OTR-04 的注單效果留後續，不能用來源關閉投注項推論退賽。待補 PRD 01、04、07。</li>
   <li><b>冠軍盤未完成對應的可用性</b>：R04-18 要求每個來源投注項對應或明確排除，但建立事件與全部對應完成的先後、未完成能否開盤尚未定。建議分開呈現事件已建立與對應完成度，未處理不得假稱已確認；開盤門檻由後續規則處理。結算後對應不能更動仍是既有約束，不在本期加入結算操作。待補 PRD 04、05。</li>
   <li><b>「其他參賽方」的對應</b>：R04-18 的範例排除「其他」，但<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/38-outright-winner.md">冠軍盤第一名目錄</a>允許「其他參賽方」，不可解讀成一律排除。建議只有範圍明確且相同才對應到集合投注項，否則明確排除並記理由，不建立虛構參賽方。待補 PRD 01、04 與目錄。</li>
-  <li><b>本次分期</b>：<b>已決定（2026-11-03），待寫回 PRD 04 的範圍與第 9 節第 1 項</b>。依使用者明確指示，第一階段包含單場與冠軍盤的統一紀錄、賽程、識別、屬性、生命週期、對應及人工審核；冠軍盤賽程、對應與來源賽程均納入。取代舊版 layout 的冠軍盤排除與含賠率、盤口結算交付的較廣第一階段。本頁畫面 1～4 僅實作其中單場賽程及必要明細；生命週期保留，詳細賽況、賽果／結算與賠率留後續。冠軍盤模板暫緩（12）不影響本次事件資料範圍，第 7～12 項仍待補，不標成已解決。</li>
-  <li><b>使用 BetLogics 作介面參考</b>：<b>已決定（2026-11-03），待寫回 PRD 11 第 8 節的參考設計</b>。依使用者「use betlogics as reference」指示，畫面 1～4 採用篩選列、狀態頁籤、競賽橫列、雙方上下排列、列尾選單、固定單場導覽、共用摘要、統一紀錄優先的來源比較與獨立人工紀錄面板；來源檔案與調整見本頁參考表。這是非約束的介面參考決定，不批准 BetLogics 的額外生命週期、預設篩選語意、來源選舉、任意停用、賠率操作或其他未定業務規則。</li>
+  <li><b>本次分期</b>：<b>已決定（2026-11-03），待寫回 PRD 04 的範圍與第 9 節第 1 項</b>。第一階段包含單場與冠軍盤的統一紀錄、賽程、識別、屬性、生命週期、對應及人工審核；冠軍盤賽程、對應與來源賽程均納入。取代較早共用版面的冠軍盤排除與含賠率、盤口結算交付的較廣第一階段定義。本頁畫面 1～4 僅實作其中單場賽程及必要明細；生命週期保留，詳細賽況、賽果／結算與賠率留後續。冠軍盤模板暫緩（12）不影響本次事件資料範圍，第 7～12 項仍待補，不標成已解決。</li>
+  <li><b>使用 BetLogics 作介面參考</b>：<b>已決定（2026-11-03），待寫回 PRD 11 第 8 節的參考設計</b>。畫面 1～4 採用篩選列、狀態頁籤、競賽橫列、雙方上下排列、列尾選單、固定單場導覽、共用摘要、統一紀錄優先的來源比較與獨立人工紀錄面板；參考介面與調整見本頁參考表。此介面參考不具約束性；BetLogics 的額外生命週期、預設篩選語意、來源選舉、任意停用、賠率操作與其他未定業務規則均未採用。</li>
 </ol>
 
 <h2>關鍵字中英對照</h2>
