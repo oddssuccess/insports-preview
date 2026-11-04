@@ -10,23 +10,21 @@
 <div class="doc">
 
 <h1>競賽（Tournaments）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Tournaments · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a></p>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Tournaments · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a> · <a href="../index.html">畫面索引</a></p>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動查看競賽，以及各競賽的下一場賽事；整理由賽程來源建立的競賽，包括修改屬性、設定等級、上傳圖示、修改各語言的名稱；調整競賽的系統排序</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動查看競賽；整理由賽程來源建立的競賽，包括修改屬性、設定等級、上傳圖示、修改各語言的名稱；調整競賽的系統排序；停用或恢復競賽</td></tr>
   <tr><th>不在本頁</th><td>
     <ul class="tight">
       <li>建立競賽，以及判斷賽程來源列出的新競賽要新建還是對應到既有競賽：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04</a> 的待處理清單（R04-02、R04-19）</li>
       <li>合併重複的競賽：04 的人工處理（R04-07）</li>
       <li>依競賽覆寫賽況來源、賽果來源與賽況來源的優先順序；虛擬競賽的賽程來源：04 的來源角色（R04-02、R04-20）</li>
-      <li>競賽指向的玩法設定模板，以及等級與模板的對應：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12</a> 的模板指定（R12-05、R12-06）</li>
-      <li>競賽層的玩法開關：12 的玩法開關（R12-10）</li>
-      <li>操盤手暫停或關閉整個競賽：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05</a> 的操盤控制（R05-11）</li>
-      <li>因風控原因不開某個競賽：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/09-risk-control.md">09</a>（09 待確認第 5 項）</li>
-      <li>經銷商對競賽的排序、開關、顯示名稱與預設圖示：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10 經銷商設定</a>（R10-02、R10-03）</li>
+      <li>競賽指向的玩法設定模板：第一次設定等級時依等級指定，之後是否改指由 Ops 決定（R01-32）</li>
+      <li>因風控原因不開某個競賽（R01-29）</li>
+      <li>經銷商對競賽的排序、顯示名稱與預設圖示（R01-28、R01-33；§6 經銷商可設定）</li>
       <li>維護屬性清單的值、系統預設圖示：另一個 Catalog 頁面（R01-31、R01-33）</li>
-      <li>依等級分類報表、依等級決定風控監控級別：11、09（R01-32）</li>
-      <li>競賽之下的參賽方：<a href="competitors.html">參賽方頁</a>依競賽篩選（見待確認第 5 項）；不提供連到其下賽事的連結</li>
+      <li>依等級決定風控監控級別與報表分類（R01-32）</li>
+      <li>競賽之下的參賽方：<a href="competitors.html">參賽方頁</a>依競賽篩選</li>
     </ul>
   </td></tr>
 </table>
@@ -37,15 +35,15 @@
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依運動列出競賽，可依屬性、等級、真實或虛擬篩選，包括「未定」與「未分級」；不能新增、刪除或停用</td><td>R01-12、R01-24、R01-27、R01-29、R01-31、R01-32；見待確認第 3 項</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>清單顯示下一場賽事，只供參考</td><td>見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依運動列出競賽，可依屬性、等級、停用與否篩選；虛擬競賽以標記區分，包括「未定」與「未分級」</td><td>R01-12、R01-27、R01-31、R01-32、R01-34</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>停用或恢復競賽</td><td>R01-34</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>3</td><td>修改競賽的國家／地區、性別、年齡層與組別</td><td>R01-31</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>4</td><td>設定競賽的等級，可以逐筆設定，也可以一次設定多筆；畫面上沒有模板相關的操作</td><td>R01-32、R12-06；見待確認第 2 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>4</td><td>設定競賽的等級，可以逐筆設定，也可以一次設定多筆，也可以改回未分級</td><td>R01-32</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
   <tr><td>5</td><td>查看競賽是否為虛擬，唯讀</td><td>R01-27</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>上傳、更換或移除競賽的圖示</td><td>R01-33</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>7</td><td>修改各語言的競賽名稱，基準名稱唯讀</td><td>R01-30</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>8</td><td>調整競賽的系統排序</td><td>R01-28</td><td><a href="#s5">畫面 5</a></td></tr>
-  <tr><td>9</td><td>開啟參賽方頁，列出在該競賽有賽事的參賽方</td><td>見待確認第 5 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>8</td><td>調整競賽的系統排序</td><td>R01-28</td><td><a href="#s6">畫面 6</a></td></tr>
+  <tr><td>9</td><td>開啟參賽方頁，列出在該競賽有賽事的參賽方</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
@@ -56,7 +54,7 @@
     <main class="main">
       <div class="page-head">
         <div><h3>Tournaments</h3><div class="sub">Leagues, cups and friendly series; a tournament carries over across seasons and editions</div></div>
-        <div class="strip"><span class="on">Tournament list</span><span>Tier board</span><span>Translations</span><span>Ordering board</span></div>
+        <div class="strip"><span class="on">List</span><span>Tier board</span><span>Sorting</span></div>
       </div>
 
       <div class="filters">
@@ -66,7 +64,7 @@
         <div class="f"><label>Age group</label><span class="box caret">All</span></div>
         <div class="f"><label>Class</label><span class="box caret">All</span></div>
         <div class="f"><label>Tier</label><span class="box caret">All</span></div>
-        <div class="f"><label>Real/Virtual <span class="n">3</span></label><span class="box caret">All</span></div>
+        <div class="f"><label>Status <span class="n">5</span></label><span class="box caret">All</span></div>
         <div class="f"><label>Search</label><span class="box wide">Tournament name or ID</span></div>
       </div>
 
@@ -77,17 +75,17 @@
           <th>Gender <span class="s">· Age group · Class</span></th>
           <th>Tier <span class="n">4</span></th>
           <th>Sort order</th>
-          <th>Next event <span class="n">5</span></th>
+          <th>Status <span class="n">5</span></th>
           <th>Actions <span class="n">6</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>Premier League<div class="l2">T-10231</div></td><td>England</td><td>Men · Senior · —</td><td>1</td><td>1</td><td>11-07 20:00<div class="l2">Team A vs Team B</div></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>UEFA Champions League<div class="l2">T-10002</div></td><td>Europe</td><td>Men · Senior · —</td><td>1</td><td>2</td><td>11-04 20:00<div class="l2">Team C vs Team D</div></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>FIFA World Cup<div class="l2">T-10001</div></td><td>International</td><td>Men · Senior · —</td><td>1</td><td>3</td><td class="l2">—</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Women's Super League<div class="l2">T-11502</div></td><td>England</td><td>Women · Senior · —</td><td>3</td><td>12</td><td>11-08 19:30<div class="l2">Team E vs Team F</div></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>11-03 14:00<div class="l2">Team G vs Team H</div></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Virtual Soccer League <span class="chip">Virtual</span><div class="l2">T-20004</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td>40</td><td>11-02 15:03<div class="l2">Virtual Team A vs Virtual Team B</div></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td class="l2">—</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Premier League<div class="l2">T-10231</div></td><td>England</td><td>Men · Senior · —</td><td>1</td><td>1</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>UEFA Champions League<div class="l2">T-10002</div></td><td>Europe</td><td>Men · Senior · —</td><td>1</td><td>2</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>FIFA World Cup<div class="l2">T-10001</div></td><td>International</td><td>Men · Senior · —</td><td>1</td><td>3</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Women's Super League<div class="l2">T-11502</div></td><td>England</td><td>Women · Senior · —</td><td>3</td><td>12</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Virtual Soccer League <span class="chip">Virtual</span> <span class="n">3</span><div class="l2">T-20004</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td>40</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr class="off"><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><b>Disabled</b></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td colspan="7" class="l2">… (other soccer tournaments)</td></tr>
         </tbody>
       </table>
@@ -96,31 +94,31 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>一次只看一個運動，沒有「All」。電子競技的每個遊戲各為一個運動（R01-24），例如要看英雄聯盟的競賽就選「League of Legends」。足球共有 1,390 個競賽，與運動頁的數量一致。</span></li>
+  <li><span class="n">1</span><span>一次只看一個運動。</span></li>
   <li><span class="n">2</span><span>國家／地區、性別、年齡層的初始值是「Unset」（未定），篩選可以選「Unset」，找出尚未整理的競賽；組別沒有填寫表示沒有組別，顯示「—」，不是未定（R01-31）。屬性的值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>；競賽可以用「International」與洲別，例如世界盃與歐冠。</span></li>
   <li><span class="n">3</span><span>虛擬競賽與真實競賽列在同一份清單，以「Virtual」標記區分（R01-27）。虛擬足球的競賽列在「Soccer」之下，因為虛擬足球不是另一個運動。</span></li>
   <li><span class="n">4</span><span>等級分為 1 至 10 級，1 最高；新建立的競賽為「Untiered」（R01-32）。等級不影響顯示的先後，顯示只依排序號（R01-28）；尚未設定排序號的競賽顯示「(not set)」並排在最後。</span></li>
-  <li><span class="n">5</span><span>下一場賽事只供參考（見待確認第 1 項），是統一狀態（R04-12）為未開始、延後、進行中或比賽中斷的單場比賽中，開賽時間最早的一場，不論是否已開出賠率；沒有時顯示「—」。Ops 可以由此判斷競賽是否還有後續賽事；例如世界盃目前沒有後續的單場比賽。不顯示未結算賽事的數量。</span></li>
-  <li><span class="n">6</span><span>「Edit」開啟畫面 2；「Competitors」開啟<a href="competitors.html">參賽方頁</a>，運動與競賽已選好，列出在這個競賽有賽事的參賽方（見待確認第 5 項）。沒有新增、刪除與停用：競賽由賽程來源建立，重複的紀錄由 04 的人工處理合併（R04-02、R04-07）；競賽沒有營運狀態，後台也不能停用，不開盤只會是風控原因（R01-29，見 09；與 R04-04 的用語見待確認第 3 項）。沒有連到其下賽事的連結，也沒有變更紀錄（見待確認第 4 項）。</span></li>
+  <li><span class="n">5</span><span>競賽分為正常與停用（R01-34）。停用的競賽仍列在清單中，以「Disabled」標示，可以照常修改屬性、等級、名稱與圖示。停用與恢復在編輯視窗的「Status」分頁（畫面 3）。</span></li>
+  <li><span class="n">6</span><span>「Edit」開啟這個競賽的編輯視窗，分為「Details」（畫面 2）、「Status」（畫面 3）與「Translations」（畫面 4）三個分頁；「Competitors」開啟<a href="competitors.html">參賽方頁</a>，運動與競賽已選好，列出在這個競賽有賽事的參賽方。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s2">畫面 2：編輯競賽</h2>
+<h2 id="s2">畫面 2：編輯競賽・基本資料</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:620px">
+  <div class="modal" style="width:640px">
     <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
+    <div class="tabs"><span class="on">Details</span><span>Status</span><span>Translations</span></div>
     <div class="mb">
       <div class="form">
-        <div class="f full"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Premier League 2</span></div>
         <div class="f"><label>Sport</label><span class="box ro">Soccer</span></div>
-        <div class="f"><label>Virtual <span class="n">2</span></label><span class="box ro">No (real tournament)</span></div>
-        <div class="f"><label>Country/Region <span class="n">3</span></label><span class="box caret">England</span><div class="hint">Countries/regions, International, or a continent</div></div>
+        <div class="f"><label>Virtual <span class="n">1</span></label><span class="box ro">No (real tournament)</span></div>
+        <div class="f"><label>Country/Region <span class="n">2</span></label><span class="box caret">England</span><div class="hint">Countries/regions, International, or a continent</div></div>
         <div class="f"><label>Gender</label><span class="box caret">Men</span><div class="hint">Unset / Men / Women / Mixed</div></div>
         <div class="f"><label>Age group</label><span class="box caret">U21</span><div class="hint">Unset, Senior, U23, U21, U20, U19, U17</div></div>
         <div class="f"><label>Class</label><span class="box caret">Reserve</span><div class="hint">None, College, High school, Reserve, Amateur, Veterans</div></div>
-        <div class="f"><label>Tier <span class="n">4</span></label><span class="box caret">Untiered</span><div class="hint">Untiered, or 1 (highest) to 10 (lowest)</div></div>
-        <div class="f"><label>Logo <span class="n">5</span></label><span class="box">(default logo)</span><div class="hint">Upload · Replace · Remove</div></div>
+        <div class="f"><label>Tier <span class="n">3</span></label><span class="box caret">Untiered</span><div class="hint">Untiered, or 1 (highest) to 10 (lowest)</div></div>
+        <div class="f"><label>Logo <span class="n">4</span></label><span class="box">(default logo)</span><div class="hint">Upload · Replace · Remove</div></div>
       </div>
     </div>
     <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
@@ -128,22 +126,79 @@
 </div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>基準名稱來自建立這個競賽的賽程來源，唯讀（R01-30）。各語言的名稱在「Translations」頁修改（畫面 4）；排序號在「Ordering board」頁修改（畫面 5）。</span></li>
-  <li><span class="n">2</span><span>虛擬與否在賽程來源建立競賽時，依 InSports 對該來源設定的競賽名稱規則判定，之後不變，Ops 不能修改（R01-27）。</span></li>
-  <li><span class="n">3</span><span>四個屬性只能從清單中選擇（R01-31）：國家／地區見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/regions.md">國家／地區</a>，競賽可用「International」與洲別；年齡層只列該運動的值，範例為足球的年齡層（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球</a>）；組別可選「None」，表示沒有組別。清單的值在另一個 Catalog 頁面維護，經銷商不能修改。</span></li>
-  <li><span class="n">4</span><span>等級由 Ops 設定，經銷商不能修改（R01-32）。本頁只改等級，不顯示也不改模板（見待確認第 2 項）：模板依 12 的 R12-06 處理，第一次設定等級時競賽指向該等級對應的模板，之後再改等級時已有的指定不變，是否改指由 Ops 在 12 的模板指定頁決定。範例的競賽仍是未分級，第一次設定等級就會指向對應的模板。</span></li>
-  <li><span class="n">5</span><span>Ops 可以上傳、更換或移除圖示。沒有圖示時，經銷商有設定預設圖示就顯示經銷商的，否則顯示 InSports 的系統預設圖示（R01-33）。</span></li>
+  <li><span class="n">1</span><span>虛擬與否在賽程來源建立競賽時，依 InSports 對該來源設定的競賽名稱規則判定，之後不變，Ops 不能修改（R01-27）。</span></li>
+  <li><span class="n">2</span><span>四個屬性只能從清單中選擇（R01-31）：國家／地區見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/regions.md">國家／地區</a>，競賽可用「International」與洲別；年齡層只列該運動的值，範例為足球的年齡層（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球</a>）；組別可選「None」，表示沒有組別。清單的值在另一個 Catalog 頁面維護，經銷商不能修改。</span></li>
+  <li><span class="n">3</span><span>等級由 Ops 設定，經銷商不能修改；已分級的競賽也可以改回「Untiered」（R01-32）。等級與玩法設定模板的關係見 R01-32：第一次設定等級時，競賽指定該等級的模板；之後再改等級，已有的指定不自動改變。</span></li>
+  <li><span class="n">4</span><span>Ops 可以上傳、更換或移除圖示。沒有圖示時，經銷商有設定預設圖示就顯示經銷商的，否則顯示 InSports 的系統預設圖示（R01-33）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s3">畫面 3：等級看板</h2>
+<h2 id="s3">畫面 3：編輯競賽・狀態</h2>
+
+<div lang="en" class="frame"><div class="backdrop">
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
+    <div class="tabs"><span>Details</span><span class="on">Status</span><span>Translations</span></div>
+    <div class="mb">
+      <div class="f"><label>Current status</label><span class="box ro">Active</span></div>
+      <p>Disabling this tournament <span class="n">1</span>:</p>
+      <ul class="tight">
+        <li>No new events (matches or outrights) are created for it</li>
+        <li>Events not yet started are taken down</li>
+        <li>Players cannot bet on any of its events, pre-match or in-play</li>
+        <li>Accepted bets are settled as usual</li>
+      </ul>
+    </div>
+    <div class="mf"><span class="btn">Close</span><span class="btn pri">Disable tournament</span> <span class="n">2</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>停用的效果依 R01-34。經銷商不能停用或恢復競賽，經銷商對競賽的開關見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a>。</span></li>
+  <li><span class="n">2</span><span>正常的競賽顯示「Disable tournament」；停用的競賽顯示「Enable tournament」，恢復後重新建立該競賽的賽事（R01-34）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="s4">畫面 4：編輯競賽・多語系</h2>
+
+<div lang="en" class="frame"><div class="backdrop">
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
+    <div class="tabs"><span>Details</span><span>Status</span><span class="on">Translations</span></div>
+    <div class="mb">
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Premier League 2</span></div>
+      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="form">
+        <div class="f"><label>English</label><span class="box" style="width:100%">Premier League 2 (U21)</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">英超 U21 聯賽</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">英超 U21 联赛</span></div>
+        <div class="f"><label>Thai</label><span class="box" style="width:100%"></span></div>
+        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Giải U21 Ngoại hạng Anh</span></div>
+        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Liga Primer 2</span></div>
+        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
+        <div class="f"><label>Korean</label><span class="box" style="width:100%">프리미어리그 2</span></div>
+        <div class="f full l2">… (other languages) <span class="n">3</span></div>
+      </div>
+    </div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+  </div>
+</div></div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>基準名稱來自建立這個競賽的賽程來源，唯讀（R01-30）。英文也是一個可修改的語言，不等於基準名稱，例如這裡的英文改成「Premier League 2 (U21)」。</span></li>
+  <li><span class="n">2</span><span>任何語言空白時都顯示基準名稱（R01-30），例如泰文與緬甸文。這裡修改的是 InSports 的名稱，不是經銷商自訂的顯示名稱。按「Save」才生效，「Cancel」則放棄修改。</span></li>
+  <li><span class="n">3</span><span>每種支援的語言一個欄位；支援哪些語言見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a>（R01-30）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="s5">畫面 5：等級看板</h2>
 
 <div lang="en" class="frame">
     <header class="top"><span>Home › Catalog › Tournaments › Tier board</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
     <main class="main">
       <div class="page-head">
         <div><h3>Tournament tiers</h3><div class="sub">Pick a tier per row, or select rows and set them at once, then click “Save”</div></div>
-        <div class="strip"><span>Tournament list</span><span class="on">Tier board</span><span>Translations</span><span>Ordering board</span></div>
+        <div class="strip"><span>List</span><span class="on">Tier board</span><span>Sorting</span></div>
       </div>
       <div class="filters">
         <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
@@ -153,14 +208,14 @@
       </div>
       <div class="bulk"><span>2 selected</span><span>→ Set to</span><span class="box caret">Tier 4</span><span class="btn">Apply</span> <span class="n">2</span></div>
       <table class="grid">
-        <thead><tr><th style="width:32px">☐</th><th>Tournament <span class="s">/ ID</span></th><th>Country/Region</th><th>Next event</th><th style="width:150px">Tier</th><th></th></tr></thead>
+        <thead><tr><th style="width:32px">☐</th><th>Tournament <span class="s">/ ID</span></th><th>Country/Region</th><th style="width:150px">Tier</th><th></th></tr></thead>
         <tbody>
-          <tr><td>☐</td><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>11-03 14:00</td><td><span class="box caret">Untiered</span></td><td></td></tr>
-          <tr style="background:var(--fill)"><td>☑</td><td>Eerste Divisie<div class="l2">T-10522</div></td><td>Netherlands</td><td>11-07 20:00</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr style="background:var(--fill)"><td>☑</td><td>Liga Portugal 2<div class="l2">T-10534</div></td><td>Portugal</td><td>11-08 16:00</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr style="background:var(--fill)"><td>☐</td><td>J2 League<div class="l2">T-10871</div></td><td>Japan</td><td>11-09 13:00</td><td><span class="box caret"><b>3</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr><td>☐</td><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">—</td><td><span class="box caret">Untiered</span></td><td></td></tr>
-          <tr><td colspan="6" class="l2">… (other untiered soccer tournaments)</td></tr>
+          <tr><td>☐</td><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td><span class="box caret">Untiered</span></td><td></td></tr>
+          <tr style="background:var(--fill)"><td>☑</td><td>Eerste Divisie<div class="l2">T-10522</div></td><td>Netherlands</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr style="background:var(--fill)"><td>☑</td><td>Liga Portugal 2<div class="l2">T-10534</div></td><td>Portugal</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr style="background:var(--fill)"><td>☐</td><td>J2 League<div class="l2">T-10871</div></td><td>Japan</td><td><span class="box caret"><b>3</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr><td>☐</td><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td><span class="box caret">Untiered</span></td><td></td></tr>
+          <tr><td colspan="5" class="l2">… (other untiered soccer tournaments)</td></tr>
         </tbody>
       </table>
       <div class="savebar"><span>3 unsaved changes <span class="n">3</span></span><span><span class="btn">Discard</span> <span class="btn pri">Save</span></span></div>
@@ -168,55 +223,20 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>依等級篩選，選項顯示各等級的競賽數，例如「Untiered (842)」；預設顯示「Untiered」，方便 Ops 整理新建立的競賽（R01-32）。下一場賽事與畫面 1 相同，只供參考，幫助 Ops 先整理即將有賽事的競賽。</span></li>
+  <li><span class="n">1</span><span>依等級篩選，選項顯示各等級的競賽數，例如「Untiered (842)」；預設顯示「Untiered」，方便 Ops 整理新建立的競賽（R01-32）。</span></li>
   <li><span class="n">2</span><span>勾選多列後，可以一次設為同一個等級；也可以直接在每列的下拉選單修改。</span></li>
-  <li><span class="n">3</span><span>修改後先標示「Modified」，按「Save」才生效；離開頁面前提醒尚未儲存。儲存只改等級，沒有模板相關的操作或提示，模板依 12 的 R12-06 處理（見畫面 2 的標註 4、待確認第 2 項）。範例中的三個競賽都是第一次設定等級。</span></li>
+  <li><span class="n">3</span><span>修改後先標示「Modified」，按「Save」才生效；離開頁面前提醒尚未儲存。儲存只改等級；與模板的關係見畫面 2 的標註 3。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s4">畫面 4：競賽多語系</h2>
+<h2 id="s6">畫面 6：排序</h2>
 
 <div lang="en" class="frame">
-    <header class="top"><span>Home › Catalog › Tournaments › Translations</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+    <header class="top"><span>Home › Catalog › Tournaments › Sorting</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
     <main class="main">
       <div class="page-head">
-        <div><h3>Tournament translations</h3><div class="sub">One column per language; click “Edit” to edit the row in place, then “Save”</div></div>
-        <div class="strip"><span>Tournament list</span><span>Tier board</span><span class="on">Translations</span><span>Ordering board</span></div>
-      </div>
-      <div class="filters">
-        <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
-        <div class="f"><label>Country/Region</label><span class="box caret">All</span></div>
-        <div class="f"><label>Search</label><span class="box wide">Tournament name or ID</span></div>
-      </div>
-      <table class="grid">
-        <thead><tr><th>ID</th><th>Base name <span class="n">1</span></th><th>English</th><th>Traditional Chinese</th><th>Simplified Chinese</th><th>Thai</th><th>Vietnamese</th><th class="l2">… <span class="n">2</span></th><th>Actions</th></tr></thead>
-        <tbody>
-          <tr style="background:var(--fill)"><td>T-10231</td><td class="l2">Premier League</td><td><span class="box" style="width:100%">English Premier League</span></td><td><span class="box" style="width:100%" lang="zh-Hant">英超</span></td><td><span class="box" style="width:100%" lang="zh-Hans">英超</span></td><td><span class="box" style="width:100%">พรีเมียร์ลีก</span></td><td><span class="box" style="width:100%">Ngoại hạng Anh</span></td><td></td><td><span class="btn">Cancel</span> <span class="btn pri">Save</span> <span class="n">3</span></td></tr>
-          <tr><td>T-10002</td><td class="l2">UEFA Champions League</td><td>UEFA Champions League</td><td lang="zh-Hant">歐冠</td><td lang="zh-Hans">欧冠</td><td>ยูฟ่า แชมเปียนส์ลีก</td><td>Cúp C1</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>T-11502</td><td class="l2">Women's Super League</td><td>Women's Super League</td><td lang="zh-Hant">女子英超</td><td lang="zh-Hans">女子英超</td><td class="l2">(blank)</td><td class="l2">(blank)</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>T-12840</td><td class="l2">Regional Amateur League</td><td class="l2">(blank)</td><td class="l2">(blank)</td><td class="l2">(blank)</td><td class="l2">(blank)</td><td class="l2">(blank)</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td colspan="9" class="l2">… (other soccer tournaments)</td></tr>
-        </tbody>
-      </table>
-      <div class="pager"><span>‹ Prev &nbsp;1&nbsp; 2&nbsp; 3&nbsp; …&nbsp; Next ›</span><span>1,390 soccer tournaments · 100 per page</span></div>
-    </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>基準名稱來自建立競賽的賽程來源，唯讀（R01-30）。英文也是一個可修改的語言，不等於基準名稱，例如英超的基準名稱是「Premier League」，英文改成「English Premier League」。任何語言空白時都顯示基準名稱，例如女子英超的泰文與越南文。</span></li>
-  <li><span class="n">2</span><span>每種語言一欄，語言清單由 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a> 決定；語言多時可以左右捲動。這裡修改的是 InSports 的名稱，經銷商自訂的顯示名稱見 10。</span></li>
-  <li><span class="n">3</span><span>按某列的「Edit」後，該列的各語言欄位直接變成輸入框（範例為英超），按「Save」才生效，「Cancel」則放棄修改；一次只編輯一列。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s5">畫面 5：排序看板</h2>
-
-<div lang="en" class="frame">
-    <header class="top"><span>Home › Catalog › Tournaments › Ordering board</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-    <main class="main">
-      <div class="page-head">
-        <div><h3>Tournament ordering</h3><div class="sub">Choose a sport, edit sort orders in place, then click “Save”; lower numbers come first</div></div>
-        <div class="strip"><span>Tournament list</span><span>Tier board</span><span>Translations</span><span class="on">Ordering board</span></div>
+        <div><h3>Tournament sorting</h3><div class="sub">Choose a sport, edit sort orders in place, then click “Save”; lower numbers come first</div></div>
+        <div class="strip"><span>List</span><span>Tier board</span><span class="on">Sorting</span></div>
       </div>
       <div class="filters">
         <div class="f"><label>Sport <span class="n">1</span></label><span class="box caret">Soccer</span></div>
@@ -242,42 +262,12 @@
 <ol class="notes">
   <li><span class="n">1</span><span>排序只在同一運動內調整。顯示的先後只依排序號，不受等級影響（R01-32）；等級只是篩選條件，方便分批整理。</span></li>
   <li><span class="n">2</span><span>新建立的競賽尚未設定排序號，排在最後（R01-28）；填入排序號並儲存後依排序號排列。</span></li>
-  <li><span class="n">3</span><span>競賽的系統排序由 Ops 設定（R01-28）；經銷商可以在此基礎上變更，也可以重置回系統排序（R10-02）。修改後先標示「Modified」，按「Save」才生效，儲存後依新的排序號重新排列；離開頁面前提醒尚未儲存。不提供拖曳。排序號的具體做法由 SPEC 提出。</span></li>
+  <li><span class="n">3</span><span>競賽的系統排序由 Ops 設定（R01-28）；經銷商可以在此基礎上變更，也可以重置回系統排序（R01-28）。修改後先標示「Modified」，按「Save」才生效，儲存後依新的排序號重新排列；離開頁面前提醒尚未儲存。排序號的具體做法由 SPEC 提出。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>待確認事項</h2>
-<p>以下各項 PRD 沒有寫明，已於 2026-11-02 由使用者決定，畫面依決定繪製。</p>
-<ol>
-  <li><b>清單的參考資訊</b>：競賽清單顯示下一場賽事，只供參考；不顯示未結算的單場比賽與冠軍盤賽事數量（畫面 1、3）。已決定（2026-11-02），待寫回 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">PRD 01</a> 第 9 節。</li>
-  <li><b>變更等級時不處理模板</b>：本頁只改等級，不顯示目前指向的模板，也不提供改指模板的操作或提示；之後再改等級，例如由 1 級改為 2 級，模板的指定不變，本頁也不做任何處理；是否改指模板，由 Ops 自行在 12 的模板指定頁決定（畫面 2、3）。第一次設定等級時，競賽仍依 R12-06 指向該等級對應的模板。已決定（2026-11-02），待寫回 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">PRD 12</a> 第 9 節。</li>
-  <li><b>R04-04 與 R01-29 的用語矛盾</b>：R04-04 說統一紀錄「只能停用」，R01-29 說競賽與參賽方「後台也不能停用」。畫面依 R01-29，不提供停用（畫面 1）。已決定（2026-11-02），待修正 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">PRD 04</a> 的 R04-04，例如改為識別不刪除，競賽與參賽方不能停用。</li>
-  <li><b>不提供變更紀錄</b>：等級、屬性、名稱與排序的修改只依<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求</a>留下稽核軌跡，本頁不另提供變更紀錄的視窗（畫面 1）。已決定（2026-11-02），待寫回 PRD 01 第 9 節。</li>
-  <li><b>連到競賽之下的參賽方</b>：競賽清單的「Competitors」開啟<a href="competitors.html">參賽方頁</a>，並帶入該競賽作為篩選，列出在該競賽有至少一場賽事的參賽方（畫面 1）；不提供連到其下賽事的連結。已決定（2026-11-02，參賽方頁的待確認第 5 項），待寫回 PRD 01 第 9 節。</li>
-</ol>
-
-<!-- ============================================================ -->
-<h2>關鍵字中英對照</h2>
-<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
-<table class="doc-t">
-  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
-  <tr><td>後台</td><td lang="en">Back Office</td><td>性別</td><td lang="en">Gender</td></tr>
-  <tr><td>目錄</td><td lang="en">Catalog</td><td>男子／女子／混合</td><td lang="en">Men / Women / Mixed</td></tr>
-  <tr><td>運動</td><td lang="en">Sport</td><td>年齡層</td><td lang="en">Age group</td></tr>
-  <tr><td>競賽</td><td lang="en">Tournament</td><td>成年</td><td lang="en">Senior</td></tr>
-  <tr><td>單場比賽</td><td lang="en">Matches</td><td>組別</td><td lang="en">Class</td></tr>
-  <tr><td>冠軍盤</td><td lang="en">Outrights</td><td>預備隊</td><td lang="en">Reserve</td></tr>
-  <tr><td>大學／高中／業餘／元老</td><td lang="en">College / High school / Amateur / Veterans</td></tr>
-  <tr><td>下一場賽事</td><td lang="en">Next event</td><td>未定</td><td lang="en">Unset</td></tr>
-  <tr><td>真實／虛擬</td><td lang="en">Real / Virtual</td><td>國家／地區</td><td lang="en">Country/Region</td></tr>
-  <tr><td>等級</td><td lang="en">Tier</td><td>國際</td><td lang="en">International</td></tr>
-  <tr><td>未分級</td><td lang="en">Untiered</td><td>歐洲</td><td lang="en">Europe</td></tr>
-  <tr><td>等級看板</td><td lang="en">Tier board</td><td>英格蘭</td><td lang="en">England</td></tr>
-  <tr><td>排序號</td><td lang="en">Sort order</td><td>圖示</td><td lang="en">Logo</td></tr>
-  <tr><td>排序看板</td><td lang="en">Ordering board</td><td>預設圖示</td><td lang="en">Default logo</td></tr>
-  <tr><td>尚未設定</td><td lang="en">Not set</td><td>基準名稱</td><td lang="en">Base name</td></tr>
-  <tr><td>多語系</td><td lang="en">Translations</td><td>足球</td><td lang="en">Soccer</td></tr>
-</table>
+<p>目前沒有。</p>
 
 </div>
 </body>

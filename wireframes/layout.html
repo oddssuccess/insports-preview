@@ -3,107 +3,73 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>後台共用版面：BetLogics 頁面與賽事產線</title>
+<title>後台共用版面</title>
 <link rel="stylesheet" href="wireframe.css">
 </head>
 <body>
 <div class="doc">
 <h1>後台共用版面</h1>
-<p class="meta">共用導覽框架 · 第一階段單場比賽與冠軍盤主選單 · 主內容區留白 · 2026-11-03</p>
+<p class="meta"><a href="index.html">畫面索引</a></p>
 
-<input class="layout-choice" type="radio" id="sidebar-proposed" name="sidebar-view" checked>
-<label class="layout-choice-label" for="sidebar-proposed">InSports 第一階段（已採用）</label>
-<input class="layout-choice" type="radio" id="sidebar-current" name="sidebar-view">
-<label class="layout-choice-label" for="sidebar-current">BetLogics 現有頁面（對照）</label>
-<input class="layout-choice" type="radio" id="sidebar-full" name="sidebar-view">
-<label class="layout-choice-label" for="sidebar-full">完整投注流程（規劃）</label>
-<p class="layout-current-caption">比對 BetLogics 的既有入口與層級，包含單場比賽與冠軍盤。此模式只供 UI 參考，業務規則與交付範圍以 InSports PRD 及本次決定為準。</p>
-<p class="layout-proposed-caption">第一階段涵蓋單場比賽與冠軍盤的建立、賽程、識別、屬性、生命週期、對應及人工審核。詳細賽況、賠率、賽果與結算入口留在其他模式。Planned 表示尚未繪製；Feed Monitor 保留既有規劃位置，Scope TBD 表示本階段歸屬尚未決定。</p>
-<p class="layout-full-caption">完整流程另呈現詳細賽況、賠率、賽果、結算，以及注單、提前兌現、風控、經銷商設定、報表與匯率入口。此模式不擴大第一階段交付範圍，詳細業務規則仍以各 PRD 為準。</p>
-<p class="disclaimer"><b>範圍更新（2026-11-03）：</b>現行範圍已取代先前的「冠軍盤另行規劃」及含賠率、盤口結算結果與對外供應的較廣第一階段定義。冠軍盤已納入第一階段；PRD 04 原先暫緩的冠軍盤識別、對應及生命週期細節仍待補齊，不能以本次範圍視為規則已定案。生命週期狀態不因詳細賽況與結算延後而排除。</p>
-
-<div id="s1" lang="en" class="frame">
+<div lang="en" class="frame">
   <div class="shell sidebar-draft">
     <aside class="side">
       <div class="brand">InSports Back Office</div>
       <nav aria-label="Main navigation">
         <span class="nav-item nav-root">Dashboard</span>
-        <details><summary class="group">Users &amp; Permissions</summary>
-        <span class="nav-item">Users</span>
-        <span class="nav-item">Roles</span>
-        <span class="nav-item">Permissions</span>
-        </details>
+        <span class="nav-item nav-root">Users &amp; Permissions</span>
+        <span class="nav-item nav-root">Distributors</span>
         <details open><summary class="group">Catalog</summary>
         <a class="nav-item" href="catalog/sports.html">Sports</a>
         <a class="nav-item" href="catalog/tournaments.html">Tournaments</a>
         <a class="nav-item" href="catalog/competitors.html">Competitors</a>
         <a class="nav-item" href="catalog/markets.html">Markets</a>
-        <span class="nav-item">Scopes</span>
-        <span class="nav-item nav-later">Commentary</span>
+        <span class="nav-item">Currencies</span>
         </details>
         <details open><summary class="group">Matches</summary>
         <a class="nav-item" href="matches/schedule.html">Schedule</a>
-        <span class="nav-item nav-later">Odds</span>
-        <span class="nav-item nav-later">Results</span>
-        <a class="nav-item" href="matches/mapping.html">Mapping</a>
-        <a class="nav-item" href="matches/match-review.html">Match Review</a>
-        <span class="nav-item nav-later">Commentary &amp; Signal</span>
-        <span class="nav-item nav-later">Grades</span>
+        <span class="nav-item">Odds</span>
+        <span class="nav-item">Results</span>
+        <span class="nav-item">Grades</span>
+        <a class="nav-item" href="matches/match-review.html">Review</a>
         </details>
         <details open><summary class="group">Outrights</summary>
         <a class="nav-item" href="outrights/schedule.html">Schedule</a>
-        <span class="nav-item nav-later">Odds</span>
-        <span class="nav-item nav-later">Results</span>
-        <a class="nav-item" href="outrights/mapping.html">Mapping</a>
-        <span class="nav-item nav-later">Grades</span>
+        <span class="nav-item">Odds</span>
+        <span class="nav-item">Results</span>
+        <span class="nav-item">Grades</span>
         </details>
-        <details class="nav-planned"><summary class="group">Bet Operations <span class="nav-badge">Planned</span></summary>
-        <span class="nav-item">Bet List</span>
-        <span class="nav-item">Cash Out</span>
-        </details>
-        <details class="nav-planned"><summary class="group">Risk <span class="nav-badge">Planned</span></summary>
-        <span class="nav-item">Monitoring</span>
-        <span class="nav-item">Review Queue</span>
-        <span class="nav-item">Rules</span>
-        </details>
-        <details class="nav-planned"><summary class="group">Settlement <span class="nav-badge">Planned</span></summary>
-        <span class="nav-item">Bet Settlements</span>
-        <span class="nav-item">Payout Exceptions</span>
-        </details>
-        <details class="nav-planned"><summary class="group">Distributors <span class="nav-badge">Planned</span></summary>
-        <span class="nav-item">Settings</span>
-        </details>
-        <span class="nav-item nav-root nav-planned">Reports <span class="nav-badge">Planned</span></span>
         <details open><summary class="group">Provider</summary>
-        <details open><summary class="group">Matches</summary>
-        <a class="nav-item" href="provider/matches/schedule.html"><span class="nav-label-insports">Schedule</span><span class="nav-label-current">Schedules</span></a>
-        <span class="nav-item nav-later">Odds</span>
-        <span class="nav-item nav-later">Results</span>
         <span class="nav-item">Tournaments</span>
         <span class="nav-item">Competitors</span>
+        <details open><summary class="group">Matches</summary>
+        <a class="nav-item" href="provider/matches/schedule.html">Schedules</a>
+        <span class="nav-item">Odds</span>
+        <span class="nav-item">Results</span>
         </details>
         <details open><summary class="group">Outrights</summary>
-        <a class="nav-item" href="provider/outrights/schedule.html"><span class="nav-label-insports">Schedule</span><span class="nav-label-current">Events</span></a>
-        <span class="nav-item nav-later">Odds</span>
-        <span class="nav-item nav-later">Results</span>
+        <a class="nav-item" href="provider/outrights/schedule.html">Schedule</a>
+        <span class="nav-item">Odds</span>
+        <span class="nav-item">Results</span>
         </details>
-        <span class="nav-item">Connectors</span>
-        <span class="nav-item nav-current-only">Betting</span>
         </details>
-        <span class="nav-item nav-root nav-proposal">Feed Monitor <span class="nav-badge">Planned</span> <span class="nav-badge">Scope TBD</span></span>
-        <details><summary class="group">Settings</summary>
-        <details class="nav-later"><summary class="group">Market Settings</summary>
+        <details open><summary class="group">Settings</summary>
+        <details open><summary class="group">Market Settings</summary>
         <span class="nav-item">Matches</span>
         <span class="nav-item">Outrights</span>
         </details>
         <span class="nav-item">Provider Settings</span>
-        <span class="nav-item">Feed Tenants</span>
-        <span class="nav-item nav-later">Grade Soak Rules</span>
-        <span class="nav-item nav-later">Score Soak Rules</span>
-        <span class="nav-item nav-later">Score Review Rules</span>
-        <span class="nav-item nav-later">Early Settlement Rules</span>
-        <span class="nav-item nav-planned">Exchange Rates <span class="nav-badge">Planned</span></span>
         </details>
+        <details open><summary class="group">Content</summary>
+        <span class="nav-item">Announcement</span>
+        <span class="nav-item">Game Rules</span>
+        </details>
+        <details open><summary class="group">Ticket Operations</summary>
+        <span class="nav-item">Ticket List</span>
+        <span class="nav-item">Ticket Confirmation</span>
+        </details>
+        <span class="nav-item nav-root">Risk Management</span>
+        <span class="nav-item nav-root">Reports</span>
       </nav>
     </aside>
     <div>
@@ -113,122 +79,46 @@
   </div>
 </div>
 
-<details class="layout-notes">
-<summary>現有頁面的分工與來源依據</summary>
-<p>依 BetLogics 的主選單與頁面導覽核對。這份草稿核對的是頁面與導覽，不代表已驗證正式環境的功能完整性。</p>
-<p>目前四個 Catalog 頁面、Matches 的 Schedule／Mapping／Match Review、Outrights 的 Schedule／Mapping，以及 Provider 的兩種 Schedule 均連到本次草稿；其餘為位置示意，不代表功能已完成。Provider › Betting 在現有模式保留作為對照，它是系統管理者的驗證下注工具，並非玩家注單清單。驗證外部下注不屬於本次 InSports 賽事產線；取得資料帳號只用於讀取資料（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">R03-04</a>），因此已採用的第一階段模式移除它。單場比賽與冠軍盤皆屬第一階段；Outrights › Schedule／Mapping 及 Provider › Outrights › Schedule 已有草稿；缺少規則的功能保留待確認，不因頁面存在而視為定案。BetLogics 的來源冠軍盤入口原名為 Events，InSports 依本次決定稱為 Schedule。預設顯示本次第一階段選單，其他模式保留後續工作與 UI 對照。</p>
-
-<h2>功能清單</h2>
+<h2>選單說明</h2>
 <table class="doc-t">
-  <tr><th>現有入口</th><th>頁內已有的功能或次頁</th><th>側邊選單的處理</th></tr>
-  <tr><td lang="en">Dashboard</td><td>目前是畫面骨架，系統數字顯示「—」與 Awaiting data。</td><td>保留入口，補上真實的產線摘要與異常捷徑；不能把頁面存在當成監看已完成。</td></tr>
-  <tr><td lang="en">Users &amp; Permissions</td><td>Users、Roles、Permissions；每位使用者有 Activity，含人工修改紀錄。</td><td>沿用。跨使用者的 Audit Log 是檢索便利性的改進，並非現有系統完全沒有稽核紀錄。</td></tr>
-  <tr><td lang="en">Catalog</td><td>Sports、Tournaments、Competitors、Markets、Scopes、Commentary。Commentary 已有來源代碼與統一事件的對應。</td><td>沿用既有 Catalog 草稿；Commentary 的詳細賽況代碼對應留在後續階段，不另建重複入口。</td></tr>
-  <tr><td lang="en">Matches</td><td>Schedule、Odds、Results、Mapping、Match Review、Commentary &amp; Signal、Grades。</td><td>第一階段顯示 Schedule、Mapping 與 Match Review；必要的單場明細留在 Schedule。賠率、賽果、結算與詳細賽況入口在對照及完整流程模式保留。</td></tr>
-  <tr><td lang="en">Outrights</td><td>Schedule、Mapping；Odds、Results、Grades 留在後續階段。</td><td>第一階段已納入冠軍盤的統一紀錄與對應；來源、身分、賽程、名單與生命週期的缺漏規則仍待補入 04，入口連到草稿，未定的建立與生命週期操作保留為待確認。</td></tr>
-  <tr><td lang="en">Provider</td><td>Matches 下有 Schedules、Tournaments、Competitors；Outrights 下有 Schedule（BetLogics 原名 Events）；Connectors 下可進入 Pipeline、Proxies。另有來源賠率、賽果及驗證下注頁。</td><td>保留來源資料與統一資料的區分。來源賽程涵蓋單場比賽與冠軍盤；賠率與賽果留後續階段，第一階段移除驗證下注入口。</td></tr>
-  <tr><td lang="en">Settings</td><td>Market Settings › Matches、Provider Settings、Feed Tenants、Grade Soak Rules、Score Soak Rules、Score Review Rules、Early Settlement Rules。</td><td>沿用來源設定的歸屬；Market Settings 與賽果／結算相關設定留在後續階段。這是 BetLogics 的設定入口清單；時間門檻等規則不因此自動成為 InSports 的產品決定。</td></tr>
+  <tr><th>選單</th><th>說明</th></tr>
+  <tr><td lang="en">Dashboard</td><td>後台總覽，顯示產線摘要與待處理事項的捷徑。</td></tr>
+  <tr><td lang="en">Users &amp; Permissions</td><td>後台使用者、角色與權限管理。</td></tr>
+  <tr><td lang="en">Distributors</td><td>經銷商（Distributor）及其設定管理。</td></tr>
+  <tr><td lang="en">Catalog › Sports</td><td>運動項目目錄。</td></tr>
+  <tr><td lang="en">Catalog › Tournaments</td><td>競賽（Tournament）目錄。</td></tr>
+  <tr><td lang="en">Catalog › Competitors</td><td>參賽方（Competitor）目錄，含隊伍與選手。</td></tr>
+  <tr><td lang="en">Catalog › Markets</td><td>玩法（Market）目錄。</td></tr>
+  <tr><td lang="en">Catalog › Currencies</td><td>幣別目錄。</td></tr>
+  <tr><td lang="en">Matches › Schedule</td><td>統一的單場比賽賽程與比賽明細。</td></tr>
+  <tr><td lang="en">Matches › Odds</td><td>單場比賽的賠率與操盤（Trading）。</td></tr>
+  <tr><td lang="en">Matches › Results</td><td>單場比賽的賽果。</td></tr>
+  <tr><td lang="en">Matches › Mapping</td><td>來源賽事與統一單場比賽的對應（Mapping）。</td></tr>
+  <tr><td lang="en">Matches › Grades</td><td>單場比賽盤口與投注項的結算結果（Grade）。</td></tr>
+  <tr><td lang="en">Matches › Review</td><td>單場比賽待人工審核的項目。</td></tr>
+  <tr><td lang="en">Outrights › Schedule</td><td>統一的冠軍盤（Outright）賽程與明細。</td></tr>
+  <tr><td lang="en">Outrights › Odds</td><td>冠軍盤的賠率與操盤。</td></tr>
+  <tr><td lang="en">Outrights › Results</td><td>冠軍盤的賽果。</td></tr>
+  <tr><td lang="en">Outrights › Mapping</td><td>來源冠軍盤與統一冠軍盤的對應。</td></tr>
+  <tr><td lang="en">Outrights › Grades</td><td>冠軍盤投注項的結算結果。</td></tr>
+  <tr><td lang="en">Provider › Tournaments</td><td>來源（Provider）提供的競賽資料。</td></tr>
+  <tr><td lang="en">Provider › Competitors</td><td>來源提供的參賽方資料。</td></tr>
+  <tr><td lang="en">Provider › Matches › Schedules</td><td>來源提供的單場比賽賽程。</td></tr>
+  <tr><td lang="en">Provider › Matches › Odds</td><td>來源提供的單場比賽賠率。</td></tr>
+  <tr><td lang="en">Provider › Matches › Results</td><td>來源提供的單場比賽賽果。</td></tr>
+  <tr><td lang="en">Provider › Outrights › Schedule</td><td>來源提供的冠軍盤賽程。</td></tr>
+  <tr><td lang="en">Provider › Outrights › Odds</td><td>來源提供的冠軍盤賠率。</td></tr>
+  <tr><td lang="en">Provider › Outrights › Results</td><td>來源提供的冠軍盤賽果。</td></tr>
+  <tr><td lang="en">Settings › Market Settings › Matches</td><td>單場比賽的玩法設定。</td></tr>
+  <tr><td lang="en">Settings › Market Settings › Outrights</td><td>冠軍盤的玩法設定。</td></tr>
+  <tr><td lang="en">Settings › Provider Settings</td><td>來源角色、賽程來源與資料使用設定。</td></tr>
+  <tr><td lang="en">Content › Announcement</td><td>公告管理。</td></tr>
+  <tr><td lang="en">Content › Game Rules</td><td>玩法規則說明內容。</td></tr>
+  <tr><td lang="en">Ticket Operations › Ticket List</td><td>注單（Ticket）清單與狀態查詢。</td></tr>
+  <tr><td lang="en">Ticket Operations › Ticket Confirmation</td><td>等待確認的注單，人工接受或拒絕。</td></tr>
+  <tr><td lang="en">Risk Management</td><td>風控（Risk Management）監控、警示與規則。</td></tr>
+  <tr><td lang="en">Reports</td><td>投注額、GGR 等營運報表。</td></tr>
 </table>
-
-<h2>已存在的次頁，不重複增加主選單</h2>
-<table class="doc-t">
-  <tr><th>入口</th><th>已有頁面與功能</th></tr>
-  <tr><td lang="en">Provider Settings</td><td>Data Usage、Connectors、Sports &amp; Markets、Fixture Sources、Classification。來源使用、賽程來源、連接器與帳號設定已有歸屬；InSports 的四種來源角色可在這些頁面細化。</td></tr>
-  <tr><td lang="en">Provider › Connectors</td><td>Pipeline（內部資料流監看）與 Proxies（代理伺服器）。Pipeline 已顯示擷取到內部 feed 消費端的速率、延遲與失敗佇列。</td></tr>
-  <tr><td lang="en">Matches › Mapping</td><td>Match／Tournament／Competitor Pairs；More Options 下有 Review、Controls 與各種對應紀錄。</td></tr>
-  <tr><td lang="en">Catalog › Markets</td><td>頁首的 Mapping 已連到玩法對應，同一列另有 Types（玩法類型）次頁。</td></tr>
-  <tr><td lang="en">Catalog › Commentary</td><td>來源事件代碼與統一事件的對應；Matches › Commentary &amp; Signal 則查看比賽實際收到的事件與訊號。</td></tr>
-  <tr><td lang="en">Matches › Schedule / Odds / Results</td><td>Schedule 有 Monitor；Odds 有 Trade、Comparison、History、Monitor；Results 有 Review Queue、Monitor。單場頁保留其明細導覽。</td></tr>
-  <tr><td lang="en">Users › Activity</td><td>每位使用者的操作紀錄，另有各業務頁面的紀錄。</td></tr>
-</table>
-
-<h2>現有選單與頁面功能對照</h2>
-<p>以下對照 BetLogics 的選單名稱與頁面功能，只供介面參考。實際 BetLogics 會依使用者權限顯示可進入的項目。</p>
-<table class="doc-t"><tr><th>BetLogics 選單</th><th>頁面功能</th></tr>
-<tr><td lang="en">Dashboard</td><td>後台總覽（目前為畫面骨架）</td></tr>
-<tr><td lang="en">Users &amp; Permissions › Users</td><td>使用者管理</td></tr>
-<tr><td lang="en">Users &amp; Permissions › Roles</td><td>角色管理</td></tr>
-<tr><td lang="en">Users &amp; Permissions › Permissions</td><td>權限管理</td></tr>
-<tr><td lang="en">Catalog › Sports</td><td>運動目錄</td></tr>
-<tr><td lang="en">Catalog › Tournaments</td><td>競賽目錄</td></tr>
-<tr><td lang="en">Catalog › Competitors</td><td>參賽方目錄</td></tr>
-<tr><td lang="en">Catalog › Markets</td><td>玩法目錄</td></tr>
-<tr><td lang="en">Catalog › Scopes</td><td>範圍定義</td></tr>
-<tr><td lang="en">Catalog › Commentary</td><td>詳細賽況代碼目錄與對應</td></tr>
-<tr><td lang="en">Matches › Schedule</td><td>統一單場賽程與明細</td></tr>
-<tr><td lang="en">Matches › Odds</td><td>單場賠率</td></tr>
-<tr><td lang="en">Matches › Results</td><td>單場賽果</td></tr>
-<tr><td lang="en">Matches › Mapping</td><td>單場賽事對應</td></tr>
-<tr><td lang="en">Matches › Match Review</td><td>單場賽事待處理審核</td></tr>
-<tr><td lang="en">Matches › Commentary &amp; Signal</td><td>單場詳細賽況與訊號</td></tr>
-<tr><td lang="en">Matches › Grades</td><td>單場盤口與投注項結算結果</td></tr>
-<tr><td lang="en">Outrights › Schedule / Odds / Results / Mapping / Grades</td><td>冠軍盤賽程、賠率、賽果、對應及投注項結算結果。</td></tr>
-<tr><td lang="en">Provider › Outrights › Events / Odds / Results</td><td>來源冠軍盤事件、賠率與賽果；InSports 的 Events 入口改稱 Schedule。</td></tr>
-<tr><td lang="en">Provider › Matches › Schedules</td><td>來源單場賽程</td></tr>
-<tr><td lang="en">Provider › Matches › Odds</td><td>來源單場賠率</td></tr>
-<tr><td lang="en">Provider › Matches › Results</td><td>來源單場賽果</td></tr>
-<tr><td lang="en">Provider › Matches › Tournaments</td><td>來源競賽</td></tr>
-<tr><td lang="en">Provider › Matches › Competitors</td><td>來源參賽方</td></tr>
-<tr><td lang="en">Provider › Connectors</td><td>連接器與取得途徑維運</td></tr>
-<tr><td lang="en">Provider › Betting</td><td>供應商驗證下注（本次第一階段排除）</td></tr>
-<tr><td lang="en">Settings › Market Settings › Matches</td><td>單場玩法設定</td></tr>
-<tr><td lang="en">Settings › Market Settings › Outrights</td><td>冠軍盤玩法設定</td></tr>
-<tr><td lang="en">Settings › Provider Settings</td><td>來源角色、賽程來源與資料使用設定</td></tr>
-<tr><td lang="en">Settings › Feed Tenants</td><td>資料客戶的權限與連線設定</td></tr>
-<tr><td lang="en">Settings › Grade Soak Rules</td><td>投注項結算結果的穩定等待規則</td></tr>
-<tr><td lang="en">Settings › Score Soak Rules</td><td>比分穩定等待規則</td></tr>
-<tr><td lang="en">Settings › Score Review Rules</td><td>比分審核規則</td></tr>
-<tr><td lang="en">Settings › Early Settlement Rules</td><td>提前結算規則</td></tr>
-</table>
-</details>
-
-<details class="layout-notes">
-<summary>已採用方案與後續功能規劃</summary>
-<p><b>現行範圍（2026-11-03）：</b>第一階段由來源資料建立單場比賽與冠軍盤的統一紀錄，維護賽程、識別、屬性、生命週期狀態、對應與人工審核。詳細賽況、賠率、賽果與結算延後。此決定已取代本稿先前「冠軍盤另行規劃」及「賽事資料、賠率與盤口結算結果，直到交付給使用者」的第一階段定義。仍沿用既有入口與次頁，不另建 Sources、Accounts、Mapping Tables 主選單；驗證下注入口仍排除。Feed Monitor 保留既有規劃位置，本次未決定其階段歸屬或新增功能。</p>
-
-<h2>產線各環節的覆蓋</h2>
-<table class="doc-t">
-  <tr><th>環節</th><th>現有頁面</th><th>判斷</th></tr>
-  <tr><td>取得來源資料與連線維運</td><td>Provider Settings、Provider › Matches、Provider › Outrights、Connectors、Pipeline</td><td>已有入口；監看來源與內部傳輸。</td></tr>
-  <tr><td>目錄、賽程、統一識別與生命週期</td><td>Catalog、Matches › Schedule／Mapping／Match Review、Outrights › Schedule／Mapping</td><td>第一階段工作；冠軍盤同樣納入，缺漏的業務規則留待確認，不沿用單場比賽的主客對應或取消流程。</td></tr>
-  <tr><td>定價、操盤與詳細賽況</td><td>Odds、Commentary &amp; Signal、Market Settings</td><td>後續階段；即時監看與歷史留在各頁內。開始、比賽中斷、結束等生命週期仍由第一階段 Schedule 與審核處理。</td></tr>
-  <tr><td>賽果與投注項結算</td><td>Results、Review Queue、Grades、相關設定頁</td><td>後續階段；Grades 的輸出是盤口／投注項結果，不代表注單已派彩。</td></tr>
-  <tr><td>對外供應</td><td>Feed Tenants 是金鑰、權限、期限與連線限制設定；Pipeline 只看到內部資料流。</td><td>既有規劃保留 Feed Monitor；其階段歸屬與詳細規則未由本次決定，不擴大目前交付範圍。</td></tr>
-  <tr><td>異常處理與追查</td><td>Dashboard、Attention、各審核佇列、Users › Activity、業務紀錄</td><td>既有入口可沿用，但 Dashboard 與 Attention 的摘要數據仍需接上真實資料。</td></tr>
-</table>
-
-<h2>新增與不新增的決定</h2>
-<table class="doc-t">
-  <tr><th>項目</th><th>建議</th><th>原因與完成條件</th></tr>
-  <tr><td lang="en">Feed Monitor</td><td><b>保留既有規劃入口，標示 Planned 與 Scope TBD；本次未決定階段歸屬。</b></td><td>先前規劃的功能需求為依客戶與資料類別查看 API／串流的供應狀態、最後送出時間與資料版本、延遲、錯誤、斷線及補同步情形，並連回相關賽事或 Feed Tenant。伺服器成功送出與客戶確認收到要分開；沒有客戶確認機制時不得宣稱已收到。實際可觀測欄位與門檻待定。</td></tr>
-  <tr><td lang="en">Pipeline</td><td>沿用 Connectors 的次頁。</td><td>頁面已存在。若值班使用頻率高，可提升為主選單捷徑；這是導覽調整，不是新能力。</td></tr>
-  <tr><td lang="en">Dashboard / Attention</td><td>補齊既有頁面與摘要資料。</td><td>Dashboard 目前是畫面骨架；主選單 Attention 的數量與等待時間仍為固定範例。應接上真實的處理狀態與頁面捷徑，避免再建重複的總覽或審核入口。</td></tr>
-  <tr><td lang="en">Audit Log</td><td>可選改進，暫不新增主選單。</td><td>已有每位使用者的 Activity 與業務紀錄。若事故追查常需跨使用者、賽事或設定搜尋，再於 Users &amp; Permissions 增加共用檢索入口；底層稽核不是從零開始。</td></tr>
-  <tr><td lang="en">Sources / Accounts / Mapping Tables</td><td>不另建獨立主入口。</td><td>沿用 Provider Settings、Commentary 與既有對應頁。InSports 規則有差異時，調整其頁內內容，避免兩個入口管理同一件事。</td></tr>
-  <tr><td lang="en">Provider › Betting</td><td>InSports 第一階段模式移除。</td><td>它驗證供應商下注，不是 InSports 的玩家下注流程；取得資料帳號不得下注（03 的 R03-04）。</td></tr>
-</table>
-<p>本稿呈現導覽方案與各階段分工。Feed Monitor 的功能頁、資料介面及階段歸屬，以及 Dashboard／Attention 的真實數據串接，仍待後續規劃；保留入口不表示本次新增交付。業務規則以 InSports PRD 為準。</p>
-
-<h2>完整投注流程規劃：玩家下注到派彩</h2>
-<p>「完整投注流程（規劃）」模式已列出下列入口，供整體導覽檢視。接受狀態與追查放在 Bet List；Monitoring 同時涵蓋監控參數、趨勢與曝險；Reports 內提供投注額與 GGR 檢視。功能頁在對應 PRD 明確後實作。</p>
-<table class="doc-t">
-  <tr><th>建議群組與入口</th><th>要補上的工作</th><th>需求依據與狀態</th></tr>
-  <tr><td lang="en">Bet Operations › Bet List</td><td>查看真實玩家的注單、等待／確認／拒絕狀態與原因，從同一筆注單追查接受流程及錢包扣款邊界；不另設重複的 Acceptance 主入口。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06</a>：R06-18、R06-19、R06-20；頁面分工為建議。</td></tr>
-  <tr><td lang="en">Settlement › Bet Settlements / Payout Exceptions</td><td>由投注項結果追到注單結算、取消、重新結算，以及派彩失敗或扣回的注單狀態；實際錢包入帳仍由整合端負責。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07</a> 的目的與範圍；規則仍是骨架，不能先指定重試或強制入帳操作。</td></tr>
-  <tr><td lang="en">Risk › Monitoring / Review Queue / Rules</td><td>查看監控參數、趨勢與曝險，處理警示與人工佇列，維護基本條件與觸發條件。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/09-risk-control.md">09</a> 概念草稿；R06-10、R06-17 提供限額與人工標記的邊界。</td></tr>
-  <tr><td lang="en">Distributors › Settings</td><td>經銷商的偏好、價格、模板、開關與繼承／覆寫。此入口依經銷商角色的權限提供，並不授予 Ops 任意修改所有經銷商設定的權限；Feed Tenants 仍負責 API 客戶權限。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a>：R10-01 至 R10-04；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12</a>：R12-08。</td></tr>
-  <tr><td lang="en">Reports / Settings › Exchange Rates</td><td>投注額、GGR 與經銷商層級報表；依營業日查看及覆寫匯率。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11</a> 的目的與範圍、R11-01；報表詳細欄位待撰寫。</td></tr>
-  <tr><td lang="en">Bet Operations › Cash Out</td><td>提供提前兌現紀錄與失敗狀態的入口；注單可否提前兌現依玩法設定與 08 的規則決定。詳細規則待補完，不預先加入人工強制兌現操作。</td><td><a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/08-cash-out.md">08</a> 的目的與範圍；規則仍是骨架。</td></tr>
-</table>
-
-<h2>待確認事項</h2>
-<ul class="tight">
-  <li>冠軍盤已納入本次第一階段；PRD 04 第 9 節的舊暫緩範圍待更新。來源建立條件、賽季／屆次／階段識別、名單與球員識別、狀態與人工審核規則仍待補齊，不直接套用單場比賽流程。</li>
-  <li>Feed Monitor 的階段歸屬、資料來源、可觀測欄位與客戶確認機制，以及何種情況需要人工處理，待補入需求與 SPEC。</li>
-  <li>BetLogics 的來源設定、Soak／Review／Early Settlement 規則，仍需逐項對照 InSports 的 03、04、07、12；沿用入口不等於沿用業務規則。</li>
-  <li>07、08 的骨架與 09 的概念草稿補完後，再繪製下注到派彩的操作頁。此處只列出所需能力，不自行決定尚未定案的操作。</li>
-</ul>
-</details>
 </div>
 </body>
 </html>

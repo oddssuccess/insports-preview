@@ -175,40 +175,9 @@ a.btn.pri { color: #fff; }
   outline: 2px solid var(--mark); outline-offset: -2px;
 }
 
-/* 共用版面的補充說明預設收合，先呈現選單與留白內容區 */
-.layout-notes { margin-top: 24px; }
-.layout-notes > summary { cursor: pointer; color: var(--muted); }
-.layout-notes > summary:focus-visible { outline: 2px solid var(--mark); outline-offset: 4px; }
-
-/* 共用版面：現有 BetLogics 與產線建議的比較（不需 JavaScript） */
-.layout-choice { margin: 0 4px 0 0; vertical-align: middle; }
-.layout-choice-label { margin-right: 20px; cursor: pointer; }
-.layout-current-caption, .layout-proposed-caption, .layout-full-caption { color: var(--muted); font-size: 12px; margin: 8px 0 12px; }
-.layout-proposed-caption, .layout-full-caption { display: none; }
+/* 共用版面：巢狀群組與無子項的主選單 */
 .sidebar-draft .side details details { margin-left: 12px; }
 .sidebar-draft .side .nav-root { padding-left: 16px; font-weight: 600; }
-.sidebar-draft .side .nav-proposal { display: none; border-top: 1px dashed var(--line); padding-top: 8px; }
-.sidebar-draft .side .nav-current-only { font-style: italic; }
-.nav-badge { display: inline-block; margin-left: 4px; padding: 0 4px; border: 1px dashed var(--mark); font-size: 10px; font-weight: 400; }
-#sidebar-proposed:checked ~ .layout-current-caption { display: none; }
-#sidebar-proposed:checked ~ .layout-proposed-caption { display: block; }
-#sidebar-proposed:checked ~ .frame .nav-proposal { display: block; }
-#sidebar-proposed:checked ~ .frame .nav-current-only { display: none; }
-
-/* 完整投注流程只在規劃模式顯示，不併入第一階段 */
-.sidebar-draft .side .nav-planned { display: none; }
-#sidebar-full:checked ~ .layout-current-caption { display: none; }
-#sidebar-full:checked ~ .layout-full-caption { display: block; }
-#sidebar-full:checked ~ .frame .nav-proposal,
-#sidebar-full:checked ~ .frame .nav-planned { display: block; }
-#sidebar-full:checked ~ .frame .nav-current-only { display: none; }
-
-/* 本次第一階段：保留生命週期入口，詳細賽況、賠率與結算只在對照／完整模式顯示 */
-#sidebar-proposed:checked ~ .frame .nav-later { display: none; }
-.sidebar-draft .side .nav-label-current { display: none; }
-.sidebar-draft .side .nav-label-insports { display: inline; }
-#sidebar-current:checked ~ .frame .nav-label-current { display: inline; }
-#sidebar-current:checked ~ .frame .nav-label-insports { display: none; }
 
 /* 賽程介面參考：雙方上下排列、列尾選單與跨明細一致的賽事摘要 */
 .schedule-grid td:first-child { min-width: 118px; }

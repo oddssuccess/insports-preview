@@ -10,10 +10,10 @@
 <div class="doc">
 
 <h1>運動（Sports）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Sports · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a></p>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Sports · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a> · <a href="../index.html">畫面索引</a></p>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 查看 InSports 提供哪些運動，以及各運動的競賽、參賽方與未結算賽事數量；變更運動的營運狀態並查看變更紀錄；修改各語言的運動名稱；調整運動的系統排序</td></tr>
+  <tr><th>服務的工作</th><td>Ops 查看 InSports 提供哪些運動，以及各運動的玩法、競賽與參賽方數量；變更運動的營運狀態並查看變更紀錄；修改各語言的運動名稱；調整運動的系統排序</td></tr>
   <tr><th>不在本頁</th><td>
     <ul class="tight">
       <li>新增或刪除運動：運動由 InSports 以設定維護（R01-08）</li>
@@ -31,11 +31,11 @@
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>在同一個清單列出所有運動（含電子競技的各遊戲），附營運狀態、排序號與參考數量；不能新增或刪除</td><td>R01-24、R01-08</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>在同一個清單列出所有運動，附營運狀態、排序號與參考數量；不能新增或刪除</td><td>R01-24、R01-08</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>變更營運狀態（正常、暫停、不支援），變更前列出受影響的未結算賽事與注單；不支援可以恢復</td><td>R01-29</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>3</td><td>查看一個運動的營運狀態變更紀錄</td><td>R01-29</td><td><a href="#s3">畫面 3</a></td></tr>
-  <tr><td>4</td><td>修改各語言的運動名稱，基準名稱唯讀</td><td>R01-30</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>5</td><td>調整運動的系統排序</td><td>R01-28</td><td><a href="#s5">畫面 5</a></td></tr>
+  <tr><td>3</td><td>查看一個運動的營運狀態變更紀錄</td><td>R01-29</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>4</td><td>修改各語言的運動名稱，基準名稱唯讀</td><td>R01-30</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>5</td><td>調整運動的系統排序</td><td>R01-28</td><td><a href="#s4">畫面 4</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
@@ -45,37 +45,36 @@
     <header class="top"><span>Home › Catalog › Sports</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
     <main class="main">
       <div class="page-head">
-        <div><h3>Sports</h3><div class="sub">All sports offered by InSports; each esports game is a sport of its own</div></div>
-        <div class="strip"><span class="on">Sport list</span><span>Ordering board</span><span>Translations</span></div>
+        <div><h3>Sports</h3><div class="sub">All sports offered by InSports</div></div>
+        <div class="strip"><span class="on">List</span><span>Sorting</span></div>
       </div>
 
       <div class="filters">
-        <div class="f"><label>Offering status</label><span class="box caret">All</span></div>
+        <div class="f"><label>Status</label><span class="box caret">All</span></div>
         <div class="f"><label>Search</label><span class="box wide">Sport name or ID</span></div>
       </div>
 
       <table class="grid">
         <thead><tr>
           <th>Sport <span class="s">/ ID</span> <span class="n">1</span></th>
-          <th>Offering status <span class="n">2</span></th>
+          <th>Status <span class="n">2</span></th>
           <th>Sort order <span class="n">3</span></th>
           <th>Markets <span class="n">4</span></th>
           <th>Tournaments</th>
           <th>Competitors</th>
-          <th>Unsettled events</th>
           <th>Actions <span class="n">5</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>Soccer<div class="l2">S-1</div></td><td>Active</td><td>1</td><td>176</td><td>1,390</td><td>21,530</td><td>2,904</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Futsal<div class="l2">S-29</div></td><td>Active</td><td>2</td><td>18</td><td>96</td><td>1,120</td><td>50</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Basketball<div class="l2">S-2</div></td><td>Active</td><td>3</td><td>74</td><td>415</td><td>6,215</td><td>981</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Tennis<div class="l2">S-5</div></td><td>Active</td><td>4</td><td>31</td><td>530</td><td>4,882</td><td>652</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>League of Legends<div class="l2">S-50</div></td><td>Active</td><td>6</td><td>22</td><td>85</td><td>640</td><td>118</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Golf<div class="l2">S-9</div></td><td>Active</td><td>12</td><td>1<div class="l2">Outrights only</div></td><td>58</td><td>1,940</td><td>12</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Cricket<div class="l2">S-21</div></td><td><b>Suspended</b></td><td>30</td><td>24</td><td>140</td><td>2,310</td><td>38</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr class="off"><td>Sport X<div class="l2">S-40</div></td><td>Discontinued</td><td>34</td><td>12</td><td>25</td><td>310</td><td>0</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td>Bandy<div class="l2">S-41</div></td><td>Active</td><td class="l2">(not set)</td><td>6</td><td>3</td><td>24</td><td>0</td><td><span class="btn">Offering status</span> <span class="btn">History</span></td></tr>
-          <tr><td colspan="8" class="l2">… (other sports)</td></tr>
+          <tr><td>Soccer<div class="l2">S-1</div></td><td>Active</td><td>1</td><td>176</td><td>1,390</td><td>21,530</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Futsal<div class="l2">S-29</div></td><td>Active</td><td>2</td><td>18</td><td>96</td><td>1,120</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Basketball<div class="l2">S-2</div></td><td>Active</td><td>3</td><td>74</td><td>415</td><td>6,215</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Tennis<div class="l2">S-5</div></td><td>Active</td><td>4</td><td>31</td><td>530</td><td>4,882</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>League of Legends<div class="l2">S-50</div></td><td>Active</td><td>6</td><td>22</td><td>85</td><td>640</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Golf<div class="l2">S-9</div></td><td>Active</td><td>12</td><td>1<div class="l2">Outrights only</div></td><td>58</td><td>1,940</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Cricket<div class="l2">S-21</div></td><td><b>Suspended</b></td><td>30</td><td>24</td><td>140</td><td>2,310</td><td><span class="btn">Edit</span></td></tr>
+          <tr class="off"><td>Sport X<div class="l2">S-40</div></td><td>Discontinued</td><td>34</td><td>12</td><td>25</td><td>310</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Bandy<div class="l2">S-41</div></td><td>Active</td><td class="l2">(not set)</td><td>6</td><td>3</td><td>24</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td colspan="7" class="l2">… (other sports)</td></tr>
         </tbody>
       </table>
       <div class="pager"><span></span><span>42 sports</span></div>
@@ -83,19 +82,20 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>所有運動列在同一個清單，依排序號排列，不分正常運動與電子競技。電子競技的每個遊戲各為一個運動（R01-24），例如上表的英雄聯盟與足球並列；沒有名為「Esports」的運動。名稱下方是運動的 ID，方便查詢。</span></li>
-  <li><span class="n">2</span><span>營運狀態（R01-29）分為正常、暫停（例如上表的板球）與不支援（例如 Sport X，整列以淡色顯示，仍可查詢）。各狀態的效果見畫面 2。</span></li>
-  <li><span class="n">3</span><span>排序號是系統排序（R01-28），只用於顯示的先後；尚未設定排序號的運動顯示「(not set)」並排在最後，例如上表的班迪球。調整排序在「Ordering board」頁（畫面 5）。</span></li>
-  <li><span class="n">4</span><span>玩法數是目錄定義的玩法數量（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/README.md">各運動的玩法範圍</a>），不是目前開出的盤口數。玩法、競賽、參賽方與未結算賽事的數量只供參考。</span></li>
-  <li><span class="n">5</span><span>「Offering status」開啟畫面 2，「History」開啟畫面 3。沒有新增與刪除：運動由 InSports 以設定維護（R01-08）。</span></li>
+  <li><span class="n">1</span><span>所有運動列在同一個清單，依排序號排列（R01-24）。名稱下方是運動的 ID，方便查詢。</span></li>
+  <li><span class="n">2</span><span>「Status」是營運狀態（R01-29），分為正常、暫停（例如上表的板球）與不支援（例如 Sport X，整列以淡色顯示，仍可查詢）。各狀態的效果見畫面 2。</span></li>
+  <li><span class="n">3</span><span>排序號是系統排序（R01-28），只用於顯示的先後；尚未設定排序號的運動顯示「(not set)」並排在最後，例如上表的班迪球。調整排序在「Sorting」頁（畫面 4）。</span></li>
+  <li><span class="n">4</span><span>玩法數是目錄定義的玩法數量（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/README.md">各運動的玩法範圍</a>），不是目前開出的盤口數。玩法、競賽與參賽方的數量只供參考。</span></li>
+  <li><span class="n">5</span><span>「Edit」開啟這個運動的編輯視窗，分為「Status」（畫面 2）與「Translations」（畫面 3）兩個分頁。沒有新增與刪除：運動由 InSports 以設定維護（R01-08）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s2">畫面 2：變更營運狀態</h2>
+<h2 id="s2">畫面 2：編輯運動・狀態</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:560px">
-    <div class="mh"><span>Change offering status · Cricket (S-21)</span><span>✕</span></div>
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>Edit sport · Cricket (S-21)</span><span>✕</span></div>
+    <div class="tabs"><span class="on">Status</span><span>Translations</span></div>
     <div class="mb">
       <div class="f"><label>Current status</label><span class="box ro">Suspended</span></div>
       <div class="f" style="margin-top:10px"><label>New status <span class="n">1</span></label>
@@ -112,28 +112,14 @@
           <tr><td>Unsettled bets</td><td>1,208</td></tr>
         </tbody>
       </table>
-    </div>
-    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Confirm change</span></div>
-  </div>
-</div></div>
+      <div style="text-align:right;margin-top:10px"><span class="btn pri">Confirm change</span></div>
 
-<ol class="notes">
-  <li><span class="n">1</span><span>三種營運狀態依 R01-29，任一狀態都可以改成另外兩種，包括從不支援恢復為正常或暫停。暫停通常用於短期的風控原因，不支援通常用於長期不再支援的運動。經銷商只能在正常與暫停之間設定。範例是把暫停中的板球恢復為正常。</span></li>
-  <li><span class="n">2</span><span>變更前列出目前受影響的數量（R01-29）：未結算的單場比賽與冠軍盤賽事，合計等於畫面 1 的未結算賽事（34 + 4 = 38），以及未結算注單。運動的賽事很多，因此只列數量，不逐場列出。不論變更成哪一種狀態，已成立的注單都照常結算。確認後記錄操作者與時間，見畫面 3。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s3">畫面 3：營運狀態變更紀錄</h2>
-
-<div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:600px">
-    <div class="mh"><span>Offering status history · Cricket (S-21)</span><span>✕</span></div>
-    <div class="mb">
+      <p style="margin-top:16px"><b>History</b> <span class="n">3</span></p>
       <table class="grid">
-        <thead><tr><th>Changed at <span class="n">1</span></th><th>From</th><th>To</th><th>Changed by</th></tr></thead>
+        <thead><tr><th>Changed at</th><th>From</th><th>To</th><th>Changed by</th></tr></thead>
         <tbody>
           <tr><td>2026-10-28 14:05</td><td>Active</td><td>Suspended</td><td>ops.lin</td></tr>
-          <tr><td>2026-06-02 09:30</td><td>Discontinued</td><td>Active <span class="n">2</span></td><td>ops.chen</td></tr>
+          <tr><td>2026-06-02 09:30</td><td>Discontinued</td><td>Active <span class="n">4</span></td><td>ops.chen</td></tr>
           <tr><td>2025-11-20 18:12</td><td>Active</td><td>Discontinued</td><td>ops.chen</td></tr>
         </tbody>
       </table>
@@ -144,52 +130,53 @@
 </div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>由畫面 1 的「History」開啟，只列這個運動的變更，新的在上；唯讀。每次變更記錄操作者與時間（R01-29）。</span></li>
-  <li><span class="n">2</span><span>不支援的運動可以恢復（R01-29），例如這筆把板球從不支援恢復為正常。恢復後是否補建不支援期間的賽程，見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md#9-待確認事項">PRD 01 第 9 節</a>待決定第 1 項。</span></li>
+  <li><span class="n">1</span><span>三種營運狀態依 R01-29，任一狀態都可以改成另外兩種，包括從不支援恢復為正常或暫停。暫停通常用於短期的風控原因，不支援通常用於長期不再支援的運動。經銷商只能在正常與暫停之間設定。範例是把暫停中的板球恢復為正常。</span></li>
+  <li><span class="n">2</span><span>變更前列出目前受影響的數量（R01-29）：未結算的單場比賽、冠軍盤賽事與注單。運動的賽事很多，因此只列數量，不逐場列出。不論變更成哪一種狀態，已成立的注單都照常結算。按「Confirm change」才生效。</span></li>
+  <li><span class="n">3</span><span>這個運動的營運狀態變更紀錄，新的在上；唯讀。每次變更記錄操作者與時間（R01-29），確認變更後新增一筆。</span></li>
+  <li><span class="n">4</span><span>不支援的運動可以恢復（R01-29），例如這筆把板球從不支援恢復為正常。恢復後，系統找出不支援期間沒有建立、且尚未開始的賽事（單場比賽與冠軍盤賽事），全部補建為統一紀錄（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md#9-待確認事項">PRD 01 第 9 節</a>已決定第 1 項）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s4">畫面 4：運動多語系</h2>
+<h2 id="s3">畫面 3：編輯運動・多語系</h2>
 
-<div lang="en" class="frame">
-    <header class="top"><span>Home › Catalog › Sports › Translations</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-    <main class="main">
-      <div class="page-head">
-        <div><h3>Sport translations</h3><div class="sub">One column per language; click “Edit” to edit the row in place, then “Save”</div></div>
-        <div class="strip"><span>Sport list</span><span>Ordering board</span><span class="on">Translations</span></div>
+<div lang="en" class="frame"><div class="backdrop">
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>Edit sport · Cricket (S-21)</span><span>✕</span></div>
+    <div class="tabs"><span>Status</span><span class="on">Translations</span></div>
+    <div class="mb">
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Cricket</span></div>
+      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="form">
+        <div class="f"><label>English</label><span class="box" style="width:100%">Cricket</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">板球</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">板球</span></div>
+        <div class="f"><label>Thai</label><span class="box" style="width:100%">คริกเก็ต</span></div>
+        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Cricket</span></div>
+        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Kriket</span></div>
+        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
+        <div class="f"><label>Korean</label><span class="box" style="width:100%">크리켓</span></div>
+        <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
-      <div class="filters">
-        <div class="f"><label>Search</label><span class="box wide">Sport name or ID</span></div>
-      </div>
-      <table class="grid">
-        <thead><tr><th>ID</th><th>Base name <span class="n">1</span></th><th>English</th><th>Traditional Chinese</th><th>Simplified Chinese</th><th>Thai</th><th>Vietnamese</th><th class="l2">… <span class="n">2</span></th><th>Actions</th></tr></thead>
-        <tbody>
-          <tr><td>S-1</td><td class="l2">Soccer</td><td>Football</td><td lang="zh-Hant">足球</td><td lang="zh-Hans">足球</td><td>ฟุตบอล</td><td>Bóng đá</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>S-29</td><td class="l2">Futsal</td><td>Futsal</td><td lang="zh-Hant">五人制足球</td><td lang="zh-Hans">五人制足球</td><td>ฟุตซอล</td><td>Futsal</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr style="background:var(--fill)"><td>S-2</td><td class="l2">Basketball</td><td><span class="box" style="width:100%">Basketball</span></td><td><span class="box" style="width:100%" lang="zh-Hant">籃球</span></td><td><span class="box" style="width:100%" lang="zh-Hans">篮球</span></td><td><span class="box" style="width:100%">บาสเกตบอล</span></td><td><span class="box" style="width:100%">Bóng rổ</span></td><td></td><td><span class="btn">Cancel</span> <span class="btn pri">Save</span> <span class="n">3</span></td></tr>
-          <tr><td>S-5</td><td class="l2">Tennis</td><td>Tennis</td><td lang="zh-Hant">網球</td><td lang="zh-Hans">网球</td><td>เทนนิส</td><td>Quần vợt</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>S-9</td><td class="l2">Golf</td><td>Golf</td><td lang="zh-Hant">高爾夫</td><td lang="zh-Hans">高尔夫</td><td>กอล์ฟ</td><td class="l2">(blank)</td><td></td><td><span class="btn">Edit</span></td></tr>
-          <tr><td colspan="9" class="l2">… (other sports)</td></tr>
-        </tbody>
-      </table>
-    </main>
-</div>
+    </div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
+  </div>
+</div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>運動的基準名稱由 InSports 以設定維護，唯讀（R01-30）。英文也是一個可修改的語言，不等於基準名稱，例如足球的基準名稱是「Soccer」，英文改成「Football」。任何語言空白時都顯示基準名稱，例如高爾夫的越南文。</span></li>
-  <li><span class="n">2</span><span>每種語言一欄；語言多時可以左右捲動。</span></li>
-  <li><span class="n">3</span><span>按某列的「Edit」後，該列的各語言欄位直接變成輸入框（範例為籃球），按「Save」才生效，「Cancel」則放棄修改；一次只編輯一列。</span></li>
+  <li><span class="n">1</span><span>運動的基準名稱由 InSports 以設定維護，唯讀（R01-30）。英文也是一個可修改的語言，不等於基準名稱。</span></li>
+  <li><span class="n">2</span><span>任何語言空白時都顯示基準名稱（R01-30），例如板球的緬甸文。按「Save」才生效，「Cancel」則放棄修改。</span></li>
+  <li><span class="n">3</span><span>每種支援的語言一個欄位；支援哪些語言見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a>（R01-30）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s5">畫面 5：排序看板</h2>
+<h2 id="s4">畫面 4：排序</h2>
 
 <div lang="en" class="frame">
-    <header class="top"><span>Home › Catalog › Sports › Ordering board</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+    <header class="top"><span>Home › Catalog › Sports › Sorting</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
     <main class="main">
       <div class="page-head">
-        <div><h3>Sport ordering</h3><div class="sub">All sports in one sequence; edit sort orders in place, then click “Save”; lower numbers come first</div></div>
-        <div class="strip"><span>Sport list</span><span class="on">Ordering board</span><span>Translations</span></div>
+        <div><h3>Sport sorting</h3><div class="sub">All sports in one sequence; edit sort orders in place, then click “Save”; lower numbers come first</div></div>
+        <div class="strip"><span>List</span><span class="on">Sorting</span></div>
       </div>
       <table class="grid" style="width:560px">
         <thead><tr><th style="width:110px">Sort order</th><th>Name</th><th>ID</th><th></th></tr></thead>
@@ -209,35 +196,14 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>所有運動共用一個排序，不分正常運動與電子競技（R01-28），例如英雄聯盟可以排在正常運動之間。</span></li>
+  <li><span class="n">1</span><span>所有運動共用一個排序（R01-28）。</span></li>
   <li><span class="n">2</span><span>尚未設定排序號的運動排在最後（R01-28），例如新加入目錄的班迪球；填入排序號並儲存後依排序號排列。</span></li>
   <li><span class="n">3</span><span>運動的初始排序由 InSports 決定，之後由 Ops 在這裡調整（R01-28）；這是系統排序，經銷商可以在此基礎上變更，也可以重置。修改後先標示「Modified」，按「Save」才生效；離開頁面前提醒尚未儲存。不提供拖曳。排序號的具體做法由 SPEC 提出。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2>關鍵字中英對照</h2>
-<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
-<table class="doc-t">
-  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
-  <tr><td>後台</td><td lang="en">Back Office</td><td>營運狀態</td><td lang="en">Offering status</td></tr>
-  <tr><td>目錄</td><td lang="en">Catalog</td><td>正常</td><td lang="en">Active</td></tr>
-  <tr><td>運動</td><td lang="en">Sports</td><td>暫停</td><td lang="en">Suspended</td></tr>
-  <tr><td>競賽</td><td lang="en">Tournaments</td><td>不支援</td><td lang="en">Discontinued</td></tr>
-  <tr><td>參賽方</td><td lang="en">Competitors</td><td>變更紀錄</td><td lang="en">History</td></tr>
-  <tr><td>英雄聯盟</td><td lang="en">League of Legends</td><td>操作者</td><td lang="en">Changed by</td></tr>
-  <tr><td>電子競技</td><td lang="en">Esports</td><td>賽程</td><td lang="en">Fixtures</td></tr>
-  <tr><td>排序號</td><td lang="en">Sort order</td><td>賠率</td><td lang="en">Odds</td></tr>
-  <tr><td>排序看板</td><td lang="en">Ordering board</td><td>注單</td><td lang="en">Bets</td></tr>
-  <tr><td>多語系</td><td lang="en">Translations</td><td>未結算</td><td lang="en">Unsettled</td></tr>
-  <tr><td>基準名稱</td><td lang="en">Base name</td><td>單場比賽</td><td lang="en">Matches</td></tr>
-  <tr><td>玩法</td><td lang="en">Markets</td><td>冠軍盤</td><td lang="en">Outrights</td></tr>
-  <tr><td>賽事</td><td lang="en">Events</td><td>滾球</td><td lang="en">In-play</td></tr>
-  <tr><td>足球</td><td lang="en">Soccer</td><td>賽前</td><td lang="en">Pre-match</td></tr>
-  <tr><td>五人制足球</td><td lang="en">Futsal</td><td>板球</td><td lang="en">Cricket</td></tr>
-  <tr><td>籃球</td><td lang="en">Basketball</td><td>排球</td><td lang="en">Volleyball</td></tr>
-  <tr><td>網球</td><td lang="en">Tennis</td><td>班迪球</td><td lang="en">Bandy</td></tr>
-  <tr><td>高爾夫</td><td lang="en">Golf</td><td>尚未設定</td><td lang="en">Not set</td></tr>
-</table>
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
 
 </div>
 </body>

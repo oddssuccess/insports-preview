@@ -13,23 +13,14 @@
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 查看冠軍盤統一紀錄、所屬競賽與期間、建立來源、參賽名單及各來源回報；從同一筆資料進入對應與來源賽程。生命週期仍在第一階段，未定規則明示缺口，不借用開盤狀態代替。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
-    <li>來源事件、名單逐項人工對應或排除與稽核：<a href="mapping.html">冠軍盤對應</a>（R04-18、R04-19）；來源原始清單與待建立資料：<a href="../provider/outrights/schedule.html">來源冠軍盤賽程</a>（R03-08、R04-01）。</li>
+    <li>來源事件、名單逐項人工對應或排除與稽核：冠軍盤對應（R04-18、R04-19）；來源原始清單與待建立資料：<a href="../provider/outrights/schedule.html">來源冠軍盤賽程</a>（R03-08、R04-01）。</li>
     <li>競賽／參賽方名稱、屬性、排序、等級與圖示：既有 <a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁；運動營運狀態：<a href="../catalog/sports.html">運動</a>頁（R01-24、R01-27～33）。</li>
     <li>冠軍盤玩法、排名依據與投注規則：<a href="../catalog/markets.html#s2">玩法目錄</a>（R01-01、R01-12～15、R01-21～22）。來源稱為冠軍盤的單場玩法，仍依 InSports 目錄歸類，不因此建立冠軍盤事件。</li>
-    <li>單場比賽、主客方向與單場待取消／待腰斬流程：<a href="../matches/schedule.html">單場賽程</a>、<a href="../matches/mapping.html">單場對應</a>、<a href="../matches/match-review.html">單場審核</a>（R01-25；R04-05～12、R04-23～24）。這些規則對長期冠軍盤如何套用仍待補。</li>
+    <li>單場比賽、主客方向與單場待取消／待腰斬流程：<a href="../matches/schedule.html">單場賽程</a>、單場對應、<a href="../matches/match-review.html">單場審核</a>（R01-25；R04-05～12、R04-23～24）。這些規則對長期冠軍盤如何套用仍待補。</li>
     <li>後續階段：賠率與投注項開關（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">R05-14</a>、R01-26）、詳細賽況／賽果與結算（R04-13～15、R04-21～22；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07</a>）、下注（06）、提前兌現（08）、風控（09）、經銷商設定（10）與 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 的冠軍盤模板</a>。OTR-01～07 的輸贏、退出、並列與派彩效果不在本頁操作。</li>
   </ul></td></tr>
 </table>
-<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。沿用 BetLogics 冠軍盤賽程的運動篩選、事件／玩法分欄與列尾入口；業務只依 InSports PRD。O-61001 是用來示範既有紀錄的範例，不代表事件粒度、建立流程或生命週期規則已核定。冠軍盤已納入第一階段，舊暫緩已被取代；缺口見下方。所有時間為 UTC+08:00，畫面 1～3 的 O-61001 名單只展示部分範例。畫面 4 另以 O-62001 示範已核實身分的建立者名單新增；它是獨立的 09:37 快照，不改寫原範例的二十人名單與 09:25 筆數。</p>
-
-<h2>BetLogics 介面參考與調整</h2>
-<p>已檢視 BetLogics 的冠軍盤賽程與對應頁面，參考其清單、來源明細與參賽方對照；業務依 InSports PRD，樣式沿用本專案。</p>
-<table class="doc-t">
-  <tr><th>參考來源</th><th>本稿採用</th><th>InSports 調整與依據</th></tr>
-  <tr><td>冠軍盤賽程清單</td><td>運動與搜尋篩選、事件／玩法分欄、列尾選單（畫面 1）</td><td>事件連到身分與參賽名單，來源入口連到本期草稿；對應工作與生命週期分欄，不採用價格狀態、模板與賠率入口（R01-12、R04-18）。</td></tr>
-  <tr><td>冠軍盤賽程的來源與時間顯示</td><td>統一紀錄與來源識別分開，時間缺值可見（畫面 1、3）</td><td>不採用依截止時間或本機時鐘推成 Closed 的邏輯。來源起訖精確度與統一狀態未定時明示未知，不以報價可用性代替生命週期（R03-08；待確認第 2、3 項）。</td></tr>
-  <tr><td>冠軍盤對應工作台與參賽方明細</td><td>事件與來源身分明細、來源參賽名單及未處理項目的線索（畫面 2、3）</td><td>名單來源遵守 R04-18，不移植固定莊家優先序或名稱自動配對。逐項人工對應留在 Mapping；畫面 4 補上建立者與參賽方身分均已確立的名單新增。未知球員、其他來源逕行擴充名單與退出／淘汰仍保持受限。</td></tr>
-</table>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。業務只依 InSports PRD。O-61001 是用來示範既有紀錄的範例，不代表事件粒度、建立流程或生命週期規則已核定。冠軍盤已納入第一階段，舊暫緩已被取代；缺口見下方。所有時間為 UTC+08:00，畫面 1～3 的 O-61001 名單只展示部分範例。畫面 4 另以 O-62001 示範已核實身分的建立者名單新增；它是獨立的 09:37 快照，不改寫原範例的二十人名單與 09:25 筆數。</p>
 
 <h2>功能清單</h2>
 <table class="doc-t">
@@ -57,7 +48,7 @@
     </div>
     <table class="grid schedule-grid">
       <thead><tr><th>Event <span class="n">2</span></th><th>Market definition</th><th>Creator</th><th>Start / end <span class="n">3</span></th><th>Canonical lifecycle <span class="n">4</span></th><th>Mapping work <span class="n">5</span></th><th>Actions</th></tr></thead>
-      <tbody><tr class="sel"><td><a href="#s2">Premier League 2026/27 Winner</a><div class="l2">O-61001 · Premier League · T-10231</div></td><td>Tournament Winner<div class="l2">OTR · Official placing</div></td><td>Provider A<div class="l2">OA-7001</div></td><td>Not supplied<div class="l2">Not supplied</div></td><td>Unknown</td><td>Provider B: 1 unresolved<div class="l2">2 mapped · 1 excluded</div></td><td><details class="match-menu"><summary>Options</summary><div class="list"><div><a href="#s2">Overview &amp; roster</a></div><div><a href="#s3">Source reports</a></div><div><a href="mapping.html#s2">Mapping</a></div></div></details></td></tr></tbody>
+      <tbody><tr class="sel"><td><a href="#s2">Premier League 2026/27 Winner</a><div class="l2">O-61001 · Premier League · T-10231</div></td><td>Tournament Winner<div class="l2">OTR · Official placing</div></td><td>Provider A<div class="l2">OA-7001</div></td><td>Not supplied<div class="l2">Not supplied</div></td><td>Unknown</td><td>Provider B: 1 unresolved<div class="l2">2 mapped · 1 excluded</div></td><td><details class="match-menu"><summary>Options</summary><div class="list"><div><a href="#s2">Overview &amp; roster</a></div><div><a href="#s3">Source reports</a></div><div>Mapping</div></div></details></td></tr></tbody>
     </table>
     <div class="pager"><span>1 event</span><span>20 competitors in creator roster</span></div>
     <p><a class="btn" href="#s4">Roster update · O-62001 · 09:37</a></p>
@@ -65,7 +56,7 @@
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>沿用 BetLogics 的運動篩選與事件搜尋形式，加入競賽／期間與對應工作篩選；這些檢索配置是本次草稿的介面提案，見待確認第 7 項。電子競技依遊戲分運動（R01-24）；高爾夫等只開冠軍盤的運動仍可在此查詢（R01-12）。</span></li>
+  <li><span class="n">1</span><span>運動篩選與事件搜尋，加上競賽／期間與對應工作篩選；這些檢索配置是本次草稿的介面提案，見待確認第 7 項。電子競技依遊戲分運動（R01-24）；高爾夫等只開冠軍盤的運動仍可在此查詢（R01-12）。</span></li>
   <li><span class="n">2</span><span>競賽跨賽季沿用，冠軍盤指向其中一季、一屆、階段或分組（R01-12）。本例使用 T-10231；O-61001 只是示範識別，不能從本列推定「每個玩法各建一事件」已定案（待確認第 1 項）。</span></li>
   <li><span class="n">3</span><span>本例所有來源都沒有提供起訖，明示未提供，不由「2026/27」推算日期，也不把接收時間補成開始時間（R03-08；待確認第 2 項）。來源有日期時應保留其精確度與時區，不能將只有日期的資料補成任意時刻。</span></li>
   <li><span class="n">4</span><span>生命週期保留在第一階段；此處未知是冠軍盤狀態規則待補，不是新的正式狀態碼（R04-12、R04-18 與待確認第 3 項）。不把來源 Open、關盤或日期經過轉成統一生命週期。</span></li>
@@ -78,7 +69,7 @@
   <header class="top"><span>Home › Outrights › Schedule › O-61001</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="match-context"><div><b>Premier League 2026/27 Winner</b><div class="l2">O-61001 · Soccer · Creator: Provider A / OA-7001</div></div><a class="btn" href="#s1">Back to schedule</a></div>
-    <div class="strip"><span class="on">Overview &amp; roster</span><span><a href="#s3">Source reports</a></span><span><a href="mapping.html#s2">Mapping</a></span></div>
+    <div class="strip"><span class="on">Overview &amp; roster</span><span><a href="#s3">Source reports</a></span><span>Mapping</span></div>
     <div class="panel"><div class="ph">Event identity <span class="n">1</span></div><div class="pb form">
       <div class="f"><label>Canonical ID</label><span class="box ro">O-61001</span></div>
       <div class="f"><label>Tournament</label><span class="box ro">Premier League · T-10231</span></div>
@@ -99,7 +90,7 @@
         <tr><td>Team B<div class="l2">C-50013</div></td><td>England</td><td>Men · Senior · —</td><td>Club · 2</td><td>OA-02</td><td>Listed<div class="l2">No participation status supplied</div></td></tr>
         <tr><td colspan="6" class="l2">18 more competitors in the creator roster</td></tr>
       </tbody></table>
-      <p class="hint">Provider B added “New Town FC” (OB-NEW). It is not in the current creator roster and has no confirmed mapping. <span class="n">6</span> <a href="mapping.html#s2">Review source item</a></p>
+      <p class="hint">Provider B added “New Town FC” (OB-NEW). It is not in the current creator roster and has no confirmed mapping. <span class="n">6</span> Review source item</p>
       <p><a href="#s4">View roster update · O-62001 · 09:37</a></p>
     </div></div>
   </main>
@@ -118,7 +109,7 @@
   <header class="top"><span>Home › Outrights › Schedule › O-61001 › Sources</span><span>All timestamps: UTC+08:00</span></header>
   <main class="main">
     <div class="match-context"><div><b>Premier League 2026/27 Winner</b><div class="l2">O-61001 · Snapshot: 2026-11-03 09:25</div></div><a class="btn" href="#s1">Back to schedule</a></div>
-    <div class="strip"><span><a href="#s2">Overview &amp; roster</a></span><span class="on">Source reports</span><span><a href="mapping.html#s2">Mapping</a></span></div>
+    <div class="strip"><span><a href="#s2">Overview &amp; roster</a></span><span class="on">Source reports</span><span>Mapping</span></div>
     <div class="panel"><div class="ph">Canonical lifecycle <span class="n">1</span></div><div class="pb"><b>Unknown</b><p>Source-reported statuses are shown separately below.</p><button class="btn" type="button" disabled>Change lifecycle</button></div></div>
     <div class="panel"><div class="ph">Source identity, time and status <span class="n">2</span><a href="../provider/outrights/schedule.html">Provider schedule</a></div><div class="pb">
       <table class="grid"><thead><tr><th>Provider / event</th><th>Source role</th><th>Source start / end</th><th>Source-reported status <span class="n">3</span></th><th>Mapping work</th></tr></thead><tbody>
@@ -133,7 +124,7 @@
       </tbody></table>
       <p class="hint">A missing listing, interrupted feed or closed source offer does not establish an outright cancellation or a competitor's elimination.</p>
     </div></div>
-    <p><a class="btn" href="mapping.html#s5">Operator records &amp; mapping lock</a> <span class="n">5</span></p>
+    <p><span class="btn">Operator records &amp; mapping lock</span> <span class="n">5</span></p>
   </main>
 </div>
 <ol class="notes">
@@ -173,7 +164,7 @@
     <div class="panel"><div class="ph">Existing mapping requiring correction <span class="n">5</span></div><div class="pb">
       <p>Provider B / OB-9201 / OB-R02 · Hill FC → current target: River FC · C-62001</p>
       <p class="hint">The target is disputed. The intended correction is Hill FC · C-62002; it has not taken effect at this 09:37 snapshot. The canonical creator roster above already has both distinct competitors.</p>
-      <a class="btn pri" href="mapping.html#s6">Review participant mapping correction</a>
+      <span class="btn pri">Review participant mapping correction</span>
     </div></div>
     <p class="hint">Roster membership does not determine participation, elimination, event lifecycle or betting availability. The roster is supplied by Provider A. <span class="n">6</span></p>
   </main>
@@ -193,24 +184,11 @@
   <li><b>時間欄位與維護權限</b>：起訖、僅有日期、未知日期及改期未定。建議保留來源精確度、時區與歷史，不從賽季名稱補日期，不讓 Ops 任意覆寫。畫面 1、3 的起訖皆未提供；已知 UTC+08:00 只用於接收與人工操作時間。待補 PRD 04。</li>
   <li><b>生命週期與人工審核</b>：不能把 R04-12 的單場狀態、R04-23 的消失處理直接當冠軍盤規則。建議先定義長期事件的狀態、來源證據、撤回、更正與人工權限；未定前保留原始回報並明示無法裁定，不由日期經過、停止報價或名單消失推論取消、結束或淘汰。畫面 3 的狀態操作停用。待補 PRD 04、11。</li>
   <li><b>球員與名單變動</b>：04 待確認第 1 項仍缺球員統一紀錄；R04-18 容許新增，卻未完整規定差異來源、退出與淘汰的人工處理。建議球員轉隊沿用識別、名單異動保留來源與原因，其他來源新增先待確認，不自行加到建立者名單。OTR-03／04 的注單效力與新增名單對注單影響留 07。畫面 2 的 OB-NEW 保持未處理。畫面 4 已補上規則明定且身分已確立的建立者新增案例；其未知身分、人工例外與退出／淘汰的缺口不因本例而定案。待補 PRD 01、04、07。</li>
-  <li><b>未完成對應的可用性</b>：R04-18 要求逐項對應或排除，部分處理時可否保存、其他來源是否可先使用及開盤門檻未定。建議把事件存在、名單對應完成度與開盤資格分開；畫面 1～3 的 O-61001 保留 1 未處理；畫面 4 的 O-62001 只在 B 實際送來 OB-R03 後另有 1 未處理，不能由建立者新增反推所有來源均欠一項。不宣稱來源整體已完成、可開盤或未經裁定的更正已生效。操作細節見<a href="mapping.html">對應頁</a>。待補 PRD 04、05。</li>
+  <li><b>未完成對應的可用性</b>：R04-18 要求逐項對應或排除，部分處理時可否保存、其他來源是否可先使用及開盤門檻未定。建議把事件存在、名單對應完成度與開盤資格分開；畫面 1～3 的 O-61001 保留 1 未處理；畫面 4 的 O-62001 只在 B 實際送來 OB-R03 後另有 1 未處理，不能由建立者新增反推所有來源均欠一項。不宣稱來源整體已完成、可開盤或未經裁定的更正已生效。操作細節見對應頁。待補 PRD 04、05。</li>
   <li><b>「其他參賽方」</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/38-outright-winner.md">OTR 目錄</a>允許明確涵蓋範圍的 Any Other，R04-18 範例卻排除來源「其他」。建議只在範圍已定義且一致時對應集合投注項；本例 B 未提供涵蓋範圍，明確排除並記理由，不推成全部「其他」一律排除。待補 PRD 01、04。</li>
-  <li><b>介面參考與分期</b>：<b>已決定（2026-11-03），待寫回 PRD 04、11</b>：第一階段必要頁面以 BetLogics 為介面參考，沿用篩選、清單、列尾選單與來源對照形式；冠軍盤建立、賽程、識別、屬性、生命週期、對應及人工審核納入，取代舊冠軍盤暫緩。BetLogics 的 Enabled、價格狀態、截止時間自動關閉與模板設定不移植為 InSports 規則。具體篩選／排序與畫面 1～4 的欄位配置仍是可調整的設計提案；畫面 4 顯示既有建立者新增已核實參賽方的前後資料與來源證據，依 R01-13、R04-18 呈現已定能力；第 1～6 項的其餘缺口沒有因此定案。</li>
+  <li><b>分期</b>：<b>已決定（2026-11-03），待寫回 PRD 04</b>：冠軍盤建立、賽程、識別、屬性、生命週期、對應及人工審核納入，取代舊冠軍盤暫緩。具體篩選／排序與畫面 1～4 的欄位配置仍是可調整的設計提案；畫面 4 顯示既有建立者新增已核實參賽方的前後資料與來源證據，依 R01-13、R04-18 呈現已定能力；第 1～6 項的其餘缺口沒有因此定案。</li>
 </ol>
 
-<h2>關鍵字中英對照</h2>
-<table class="doc-t">
-  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
-  <tr><td>冠軍盤賽程</td><td lang="en">Outrights schedule</td><td>統一紀錄</td><td lang="en">Canonical event</td></tr>
-  <tr><td>建立者／參賽名單</td><td lang="en">Creator / roster</td><td>來源回報</td><td lang="en">Source reports</td></tr>
-  <tr><td>賽季／屆次</td><td lang="en">Season / edition</td><td>階段／分組</td><td lang="en">Stage / group</td></tr>
-  <tr><td>排名依據／官方名次</td><td lang="en">Ranking basis / official placing</td><td>生命週期</td><td lang="en">Lifecycle</td></tr>
-  <tr><td>未知／未提供</td><td lang="en">Unknown / not supplied</td><td>對應／排除／未處理</td><td lang="en">Mapped / excluded / unresolved</td></tr>
-  <tr><td>接收時間</td><td lang="en">Received at</td><td>來源時間</td><td lang="en">Provider timestamp</td></tr>
-  <tr><td>參賽證據</td><td lang="en">Participation evidence</td><td>其他參賽方</td><td lang="en">Any Other</td></tr>
-  <tr><td>名單更新</td><td lang="en">Roster update</td><td>既有身分</td><td lang="en">Established identity</td></tr>
-  <tr><td>對應更正</td><td lang="en">Mapping correction</td><td>已接收項目</td><td lang="en">Received item</td></tr>
-</table>
 </div>
 </body>
 </html>

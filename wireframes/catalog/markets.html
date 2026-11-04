@@ -10,65 +10,61 @@
 <div class="doc">
 
 <h1>玩法（Markets）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Markets · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>（賠率的產生方式）</p>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>選單</b>：Catalog › Markets · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>（賠率的產生方式與賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10 經銷商設定</a>（系統支援的賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a>（玩法開關） · <a href="../index.html">畫面索引</a></p>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動查看目錄中有哪些玩法，以及每個玩法的定義：投注規則、時段、計分項目、計哪一方、盤口線參數、投注項、滾球的計分基準、賠率的產生方式與需要的賽果；查看投注規則（玩法類型）的投注項與結算結果；查看各資料來源的玩法如何對應到目錄，並定期檢視未對應的玩法；修改玩法與投注項各語言的名稱</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動查看目錄中的玩法，以及每個玩法的玩法類型、投注項、賠率格式與是否開啟；修改玩法各語言的名稱</td></tr>
   <tr><th>不在本頁</th><td>
     <ul class="tight">
       <li>新增、修改或刪除玩法、投注規則與投注項：由 InSports 以目錄設定維護（R01-08）</li>
-      <li>各運動的時段與計分項目清單：Catalog › Scopes（R01-17）</li>
-      <li>運動的營運狀態、名稱與排序：<a href="sports.html">運動</a>頁（R01-28 至 R01-30）；競賽與參賽方的屬性、等級與圖示：<a href="tournaments.html">競賽</a>、<a href="competitors.html">參賽方</a>頁</li>
-      <li>運動、競賽、賽事三層的玩法開關：Settings › Market Settings（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12</a> 的 R12-10）；本頁只顯示運動層的狀態，見待確認第 2 項</li>
-      <li>虛擬競賽只開放部分玩法（R01-27）：在哪裡設定見待確認第 7 項</li>
-      <li>玩法設定模板的欄位，例如可否過關、同場過關、提前兌現、提前結算、水位與限額：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12</a> 的 R12-01；欄位的意思見 02、05、06、07、08</li>
-      <li>單場賽事的主客方向對調：Matches › Mapping（04 的 R04-08）</li>
-      <li>滾球比分門檻與最少來源數：04 的 R04-14、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/live-quorum-scope.md">滾球比分未達門檻的影響範圍</a></li>
-      <li>連接器的讀取範圍：營運團隊不能依玩法設定（03 的 R03-10、R03-13）</li>
-      <li>經銷商的玩法開關；經銷商不能自訂玩法與投注項的顯示名稱：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10</a>、01 第 6 節</li>
+      <li>投注規則的盤口線參數、結算結果與滾球的計分基準：見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/README.md">投注規則目錄</a>（R01-02、R01-04、R01-05、R01-10、R01-19、R01-21、R01-23）</li>
+      <li>玩法的賠率產生方式（錨定、衍生或共識定價）：05 的 R05-04、R05-05、R01-26</li>
+      <li>冠軍盤玩法的投注項（參賽方名單）、排名依據與並列：R01-13 至 R01-15、R01-22</li>
+      <li>玩法需要的賽果與結算規則：見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/README.md">各運動文件</a>（R01-11、R01-18、04 的 R04-13）</li>
+      <li>運動的營運狀態、名稱與排序：<a href="sports.html">運動</a>頁（R01-28 至 R01-30）</li>
+      <li>運動、競賽、賽事三層的玩法開關：Settings › Market Settings（12 的 R12-10）；本頁只顯示運動層的狀態</li>
+      <li>來源玩法的對應表與未對應的玩法：04 的 R04-11</li>
+      <li>虛擬競賽只開放部分玩法：R01-27</li>
+      <li>玩法設定模板的欄位，例如可否過關、水位與限額：12 的 R12-01</li>
+      <li>經銷商提供哪些賠率格式：10 的 R10-01</li>
+      <li>經銷商的玩法開關；經銷商不能自訂玩法與投注項的顯示名稱：10、01 第 6 節</li>
     </ul>
   </td></tr>
 </table>
 
-<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。PRD 的用語「投注規則」在畫面上稱為 Type（玩法類型），「時段＋計分項目」稱為 Scope。</p>
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。PRD 的用語「投注規則」在畫面上稱為 Type（玩法類型）。</p>
 
 <!-- ============================================================ -->
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依運動列出目錄的玩法，運動分正常運動與電子競技；可依投注規則、時段、計分項目、計哪一方與賠率的產生方式篩選；唯讀，不能新增、修改或刪除</td><td>R01-03、R01-08、R01-17、R01-24</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>查看玩法的定義：投注規則、時段、計分項目、計哪一方、其他參數、盤口線參數與投注項（附識別）</td><td>R01-01、R01-04、R01-05、R01-06、R01-16、R01-20、R01-25</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>3</td><td>查看玩法在滾球時的計分基準（計入下注之前的計分，或只計下注之後）；賽前與滾球是同一個玩法</td><td>R01-09、R01-10、R01-19</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>4</td><td>查看玩法的賠率產生方式：錨定、衍生或共識定價，唯讀</td><td>R01-26、R03-10、R05-04、R05-05</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>查看玩法需要的賽果（各時段的計數、計分的先後順序或發生時間）、時間區間與指定事件玩法的結算規則是否已定義，以及運動層玩法開關的狀態（唯讀）</td><td>R01-11、R01-18、R04-13、R12-10；見待確認第 2 項</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>6</td><td>查看冠軍盤玩法：投注項來自參賽方名單、排名依據與是否可能並列</td><td>R01-12 至 R01-15、R01-22</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>7</td><td>列出所有投注規則（玩法類型），附投注項、盤口線參數、投注項是否逐一列舉、玩法數與最後開出日期</td><td>R01-02、R01-03、R01-07；見待確認第 4、6 項</td><td><a href="#s3">畫面 3</a></td></tr>
-  <tr><td>8</td><td>查看一個投注規則的明細：投注項、盤口線參數、四分之一盤、結算結果、滾球只計下注之後的例外清單，以及各運動使用它的玩法數</td><td>R01-02、R01-05、R01-10、R01-21、R01-23</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>9</td><td>查看玩法對應表：目錄玩法 × 各資料來源的玩法代碼，標示換算與衍生玩法；唯讀</td><td>R04-11、R03-10；見待確認第 3 項</td><td><a href="#s5">畫面 5</a></td></tr>
-  <tr><td>10</td><td>依來源列出未對應的玩法與出現次數，供定期檢視；只顯示，不推播</td><td>R04-11</td><td><a href="#s6">畫面 6</a></td></tr>
-  <tr><td>11</td><td>修改玩法與投注項各語言的名稱，基準名稱唯讀</td><td>見待確認第 1 項；R01-30（比照）</td><td><a href="#s7">畫面 7</a></td></tr>
+  <tr><td>1</td><td>依運動列出目錄的玩法，可依名稱或 ID 搜尋；唯讀</td><td>R01-03、R01-08、R01-24</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>查看玩法的投注規則與投注項（附識別）</td><td>R01-02、R01-06、R01-25</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>查看玩法提供的賠率格式與基準格式</td><td>R05-18、R05-19、R10-01</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>4</td><td>查看玩法是否開啟；關閉的玩法不開盤</td><td>R01-18、R12-10</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>5</td><td>查看冠軍盤玩法，以標記與單場比賽的玩法區分</td><td>R01-12</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>6</td><td>修改玩法各語言的名稱，基準名稱唯讀</td><td>R01-30（比照）</td><td><a href="#s3">畫面 3</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
-<h2 id="s1">畫面 1：玩法清單與預覽</h2>
+<h2 id="s1">畫面 1：玩法清單與明細</h2>
 
 <div lang="en" class="frame">
   <header class="top"><span>Home › Catalog › Markets</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main" style="min-width:1240px">
     <div class="page-head">
-      <div><h3>Markets</h3><div class="sub">Catalog markets per sport: type × scope; read-only <span class="n">1</span></div></div>
-      <div class="strip"><span class="on">Markets</span><span>Types</span><span>Mapping</span><span>Unmapped</span><span>Translations</span></div>
+      <div><h3>Markets</h3><div class="sub">Catalog markets per sport</div></div>
     </div>
 
     <div class="split">
       <div>
-        <div class="strip" style="margin-bottom:6px"><span class="on">Regular sports</span><span>Esports</span></div>
         <span class="box" style="width:100%;margin-bottom:6px">Find a sport…</span>
         <div class="list">
-          <div class="on">Soccer <span class="l2">176</span> <span class="n">2</span></div>
+          <div class="on">Soccer <span class="l2">176</span> <span class="n">1</span></div>
           <div>Futsal <span class="l2">18</span></div>
           <div>Basketball <span class="l2">74</span></div>
           <div>Tennis <span class="l2">31</span></div>
+          <div>League of Legends <span class="l2">22</span></div>
           <div>Golf <span class="l2">1</span></div>
           <div>Cricket <span class="l2">24 · Suspended</span></div>
           <div class="l2">Sport X 12 · Discontinued</div>
@@ -80,71 +76,44 @@
       <div>
         <div class="filters">
           <div class="f"><label>Search</label><span class="box wide">Market name or ID</span></div>
-          <div class="f"><label>Type</label><span class="box caret">All types</span></div>
-          <div class="f"><label>Period <span class="n">3</span></label><span class="box caret">All periods</span></div>
-          <div class="f"><label>Score item</label><span class="box caret">All score items</span></div>
-          <div class="f"><label>Team</label><span class="box caret">All</span></div>
-          <div class="f"><label>Pricing</label><span class="box caret">All</span></div>
-          <div class="f"><label>Name language</label><span class="box caret">English</span></div>
         </div>
 
         <div class="preview">
           <div>
             <table class="grid">
               <thead><tr>
-                <th>Market <span class="s">/ ID · Type</span> <span class="n">4</span></th>
-                <th>Scope <span class="n">5</span></th>
-                <th>In-play counts <span class="n">6</span></th>
-                <th>Pricing <span class="n">7</span></th>
-                <th>Last offered <span class="n">8</span></th>
+                <th>Market <span class="s">/ ID · Type</span> <span class="n">2</span></th>
+                <th>Last offered <span class="n">3</span></th>
               </tr></thead>
               <tbody>
-                <tr class="sel"><td><b>Handicap</b><div class="l2">M-1 · Handicap</div></td><td>Regular time · Goals<div class="l2">Both teams</div></td><td>After bet only</td><td>Anchor</td><td>2026-11-03</td></tr>
-                <tr><td>1H Handicap<div class="l2">M-2 · Handicap</div></td><td>1st half · Goals<div class="l2">Both teams</div></td><td>After bet only</td><td>Anchor</td><td>2026-11-03</td></tr>
-                <tr><td>Draw No Bet<div class="l2">M-3 · Handicap · line fixed at 0</div></td><td>Regular time · Goals<div class="l2">Both teams</div></td><td>After bet only</td><td>Derived</td><td>2026-11-03</td></tr>
-                <tr><td>ET Handicap<div class="l2">M-4 · Handicap</div></td><td>Extra time · Goals<div class="l2">Both teams</div></td><td>After bet only</td><td>Consensus</td><td>2026-11-01</td></tr>
-                <tr><td>Corner Handicap<div class="l2">M-5 · Handicap</div></td><td>Regular time · Corners<div class="l2">Both teams</div></td><td>All</td><td>Consensus</td><td>2026-11-03</td></tr>
-                <tr><td>Over/Under<div class="l2">M-6 · Over/Under</div></td><td>Regular time · Goals<div class="l2">Both teams</div></td><td>All</td><td>Anchor</td><td>2026-11-03</td></tr>
-                <tr><td>Home Over/Under<div class="l2">M-7 · Over/Under</div></td><td>Regular time · Goals<div class="l2">Home only</div></td><td>All</td><td>Derived</td><td>2026-11-03</td></tr>
-                <tr><td>15-Min Over/Under<div class="l2">M-8 · Over/Under</div></td><td>15-min interval · Goals<div class="l2">Both teams</div></td><td>All</td><td>Consensus</td><td>2026-11-02</td></tr>
-                <tr><td>Nth Corner<div class="l2">M-9 · Next Event</div></td><td>Regular time · Corners<div class="l2">Both teams</div></td><td>All</td><td>Consensus</td><td>2026-11-03</td></tr>
-                <tr><td>HT/FT<div class="l2">M-11 · Half Time/Full Time</div></td><td>1st half + Regular time · Goals<div class="l2">Both teams</div></td><td>All</td><td>Derived</td><td>2026-11-03</td></tr>
-                <tr><td>Correct Score<div class="l2">M-12 · Correct Score</div></td><td>Regular time · Goals<div class="l2">Both teams</div></td><td>All</td><td>Derived</td><td>2026-11-03</td></tr>
-                <tr class="off"><td>Goal Method <span class="chip">Closed at sport level</span> <span class="n">9</span><div class="l2">M-14 · Goal Method</div></td><td>Regular time · Goals<div class="l2">Both teams</div></td><td>All</td><td>Consensus</td><td>—</td></tr>
-                <tr><td colspan="5" class="l2">… (164 more)</td></tr>
+                <tr class="sel"><td><b>Handicap</b><div class="l2">M-1 · Handicap</div></td><td>2026-11-03</td></tr>
+                <tr><td>1H Handicap<div class="l2">M-2 · Handicap</div></td><td>2026-11-03</td></tr>
+                <tr><td>Draw No Bet<div class="l2">M-3 · Handicap</div></td><td>2026-11-03</td></tr>
+                <tr><td>ET Handicap<div class="l2">M-4 · Handicap</div></td><td>2026-11-01</td></tr>
+                <tr><td>Corner Handicap<div class="l2">M-5 · Handicap</div></td><td>2026-11-03</td></tr>
+                <tr><td>Over/Under<div class="l2">M-6 · Over/Under</div></td><td>2026-11-03</td></tr>
+                <tr><td>Home Over/Under<div class="l2">M-7 · Over/Under</div></td><td>2026-11-03</td></tr>
+                <tr><td>1X2<div class="l2">M-10 · 1X2</div></td><td>2026-11-03</td></tr>
+                <tr><td>HT/FT<div class="l2">M-11 · Half Time/Full Time</div></td><td>2026-11-03</td></tr>
+                <tr><td>Correct Score<div class="l2">M-12 · Correct Score</div></td><td>2026-11-03</td></tr>
+                <tr><td>Myanmar Handicap<div class="l2">M-13 · Myanmar Handicap</div></td><td>2026-11-03</td></tr>
+                <tr class="off"><td>Goal Method <span class="chip">Off</span> <span class="n">4</span><div class="l2">M-14 · Goal Method</div></td><td>—</td></tr>
+                <tr><td colspan="2" class="l2">… (164 more)</td></tr>
               </tbody>
             </table>
             <div class="pager"><span>Prev · 1 · 2 · Next</span><span>Page 1 / 2 · 176 markets · 100 / page</span></div>
           </div>
 
           <div class="panel">
-            <div class="ph"><span>Handicap · M-1</span><span class="l2">Soccer</span></div>
+            <div class="ph"><span>Market M-1</span><span><span class="dot on"></span>On <span class="n">5</span></span></div>
             <div class="pb">
-              <div class="hint">Definition <span class="n">10</span></div>
-              <table class="grid">
-                <tbody>
-                  <tr><td class="l2">Type</td><td>Handicap (HDP)</td></tr>
-                  <tr><td class="l2">Period</td><td>Regular time</td></tr>
-                  <tr><td class="l2">Score item</td><td>Goals</td></tr>
-                  <tr><td class="l2">Team</td><td>Both teams</td></tr>
-                  <tr><td class="l2">Other parameters</td><td>—</td></tr>
-                </tbody>
-              </table>
-              <div class="hint" style="margin-top:10px">Line parameter <span class="n">11</span></div>
-              <div>handicap <span class="chip">quarter lines allowed</span></div>
-              <div class="hint" style="margin-top:10px">Outcomes <span class="n">12</span></div>
+              <div><b>Handicap</b></div>
+              <div class="l2">Soccer · <span class="btn">Handicap (HDP) ›</span> <span class="n">6</span></div>
+              <div class="hint" style="margin-top:10px">Outcomes <span class="n">7</span></div>
               <div><span class="chip">Home · O-1</span> <span class="chip">Away · O-2</span></div>
-              <div class="hint" style="margin-top:10px">In-play</div>
-              <div>Counts goals after bet only; each bet records the score at placement</div>
-              <div class="hint" style="margin-top:10px">Pricing</div>
-              <div>Anchor market of the Soccer goal model; source odds are read</div>
-              <div class="hint" style="margin-top:10px">Result data needed <span class="n">13</span></div>
-              <div>Final count per period</div>
-              <div class="hint" style="margin-top:10px">Market switch, sport level <span class="n">14</span></div>
-              <div><span class="dot on"></span>On &nbsp; <span class="btn">Market Settings ›</span></div>
-              <div class="hint" style="margin-top:10px">Provider mappings <span class="n">15</span></div>
-              <div><span class="chip">SABA</span><span class="chip">SBOBET</span><span class="chip">Pinnacle</span><span class="chip">Obet33</span><span class="chip">WS</span><span class="chip">Wbet</span><span class="chip">CMD368</span><span class="chip">M8</span><span class="chip">AFB</span><span class="chip">BTI</span></div>
-              <div style="margin-top:12px"><span class="btn">Edit translations</span> <span class="btn">Open mapping</span> <span class="n">16</span></div>
+              <div class="hint" style="margin-top:10px">Odds formats <span class="n">8</span></div>
+              <div><b>Malay (base)</b> · HK · Indo · Decimal</div>
+              <div style="margin-top:12px"><span class="btn">Edit translations</span> <span class="n">9</span></div>
             </div>
           </div>
         </div>
@@ -154,22 +123,15 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>玩法、投注規則與投注項由 InSports 以目錄設定維護（R01-08），本頁不提供新增、修改或刪除。同一個投注規則可用於不同運動、時段與計分項目（R01-03），因此一個玩法即「投注規則 × 時段與計分項目（Scope）× 計哪一方」的一種組合。分頁：Markets（本畫面）、Types（畫面 3）、Mapping（畫面 5）、Unmapped（畫面 6）、Translations（畫面 7）。</span></li>
-  <li><span class="n">2</span><span>左側依運動切換，數字是該運動在目錄中的玩法數，與<a href="sports.html">運動</a>頁相同（足球 176）。運動分正常運動與電子競技兩個頁籤；電子競技的每個遊戲各為一個運動（R01-24），例如英雄聯盟列在 Esports 頁籤。暫停與不支援的運動仍列出、可查詢（R01-29），不支援的以淡色顯示。虛擬運動不是另一個運動（R01-27），虛擬足球的玩法就是足球的玩法，因此沒有獨立的項目。</span></li>
-  <li><span class="n">3</span><span>時段與計分項目的選項只來自該運動的清單（R01-17），例如足球的常規時間、上半場、加時賽、時間區間（15 分鐘），以及進球、角球、罰牌積分。清單本身在 Catalog › Scopes 維護。</span></li>
-  <li><span class="n">4</span><span>每列一個玩法，名稱下方是玩法 ID 與投注規則。賽前與滾球是同一個玩法的不同狀態（R01-09），不分成兩列。平局退款（M-3）不是另一個投注規則，而是讓分數固定為 0 的讓分（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/README.md">投注規則目錄</a>）。</span></li>
-  <li><span class="n">5</span><span>Scope 為時段與計分項目，第二行為計哪一方：雙方，或只計主隊或客隊（R01-16），例如 M-7 主隊進球大小。需要分別判定多個時段的玩法，逐一列出每個時段（R01-20），例如半全場（M-11）的上半場與常規時間。</span></li>
-  <li><span class="n">6</span><span>滾球的計分基準（R01-10）：預設「All」，計入下注之前的計分；「After bet only」只計下注之後的計分，目前只有足球、五人制足球與沙灘足球的進球讓分類玩法，例如 M-1 至 M-4。同一運動的角球讓分（M-5）與大小（M-6）都計入下注之前的計分。只計下注之後的玩法，注單另記錄下注當時的比分（R01-19）。</span></li>
-  <li><span class="n">7</span><span>賠率的產生方式，唯讀（05 的 R05-04、R05-05）：「Anchor」錨定玩法，連接器照常讀取，作為模型反推的依據；「Derived」衍生玩法，由 InSports 推導，連接器不讀取（03 的 R03-10）；「Consensus」共識定價玩法，直接採用各來源的共識價，必須有來源提供所有投注項的賠率才能開盤（R01-26）。目前只有足球的進球在常規時間、上半場、下半場屬於模型範圍；加時賽（M-4）、時間區間（M-8）與角球都是共識定價。</span></li>
-  <li><span class="n">8</span><span>最後開出日期是任一賽事最後一次開出這個玩法的日期，只供參考，不是 PRD 規則；「—」表示近期沒有開出。定義見待確認第 6 項。</span></li>
-  <li><span class="n">9</span><span>進球方式需要來源提供每個進球的方式；Ops 判斷取不到時，先人工指定賽果結算已成立的注單，再以運動層的玩法開關關閉該玩法（R01-18、12 的 R12-10），整列以淡色顯示。本頁只顯示開關狀態，開關在 Market Settings 操作（待確認第 2 項）。</span></li>
-  <li><span class="n">10</span><span>右側預覽選取的玩法。玩法的定義依 R01-01：投注規則、時段、計分項目（投注規則依計分項目判定時才需要）、計哪一方，以及投注規則要求的其他參數，例如半場成就的條件、冠軍盤的排名依據（畫面 2）。結算只依這些定義，不依玩法名稱的文字。</span></li>
-  <li><span class="n">11</span><span>盤口線依投注規則要求的參數區分，例如讓分數、總數、第 N 個、先達的 X；同一場賽事的同一個玩法可同時開多條盤口線（R01-04）。實際開出的盤口線不在本頁。讓分與大小允許四分之一盤，結算時注額各半（R01-05，計算見 07）。</span></li>
-  <li><span class="n">12</span><span>每個投注項都有自己的識別，可單獨結算（R01-06）。主隊（Home）指賽事中列在前面的參賽方，與實際主場無關（R01-25）。</span></li>
-  <li><span class="n">13</span><span>玩法需要的賽果（R01-18、04 的 R04-13）：各時段計分項目的計數，或另需計分的先後順序（例如第 N 個角球、落後反勝）或發生時間（時間區間的玩法）。時間區間與指定事件的玩法，另顯示結算規則（區間邊界、傷停補時、哪些事件算數）是否已寫在該運動文件的「運動特有規則」（R01-11）；未定義的不能開盤。</span></li>
-  <li><span class="n">14</span><span>運動層玩法開關的狀態（12 的 R12-10），唯讀；「Market Settings ›」連到開關所在的頁面。競賽層與賽事層的開關不在本頁顯示。</span></li>
-  <li><span class="n">15</span><span>有對應到這個玩法的資料來源（04 的 R04-11），完整的代碼在 Mapping 分頁（畫面 5）。對應不代表開盤，是否開盤由 05 決定。</span></li>
-  <li><span class="n">16</span><span>「Edit translations」開啟 Translations 分頁並篩出此玩法（畫面 7）；「Open mapping」開啟 Mapping 分頁並篩出此玩法。</span></li>
+  <li><span class="n">1</span><span>所有運動列在同一個清單，順序、數量與營運狀態都與<a href="sports.html">運動</a>頁相同；數字是該運動在目錄中的玩法數。暫停與不支援的運動仍可查詢。</span></li>
+  <li><span class="n">2</span><span>每列一個玩法，名稱下方是玩法 ID 與玩法類型；同一個玩法類型可用於多個玩法，例如 M-1 至 M-5 都是 Handicap（R01-03）。賽前與滾球共用同一個玩法（R01-09）。</span></li>
+  <li><span class="n">3</span><span>最後開出日期只供參考，不是 PRD 規則：任一賽事最後一次開出這個玩法任一條盤口線的日期，不分賽前或滾球、真實或虛擬賽事，經銷商的開關不影響；「—」表示近期沒有開出。</span></li>
+  <li><span class="n">4</span><span>關閉的玩法整列以淡色顯示並標示「Off」，例如來源取不到賽果而關閉的進球方式（R01-18、12 的 R12-10）。</span></li>
+  <li><span class="n">5</span><span>右側是選取玩法的明細。右上角顯示這個玩法在該運動是否開啟，唯讀（12 的 R12-10）。</span></li>
+  <li><span class="n">6</span><span>玩法所屬的運動與玩法類型；按玩法類型開啟它的規則文件，說明投注項、盤口線與結算結果（R01-02）。</span></li>
+  <li><span class="n">7</span><span>投注項的名稱與 ID，每個投注項可單獨結算（R01-06）。主隊（Home）指賽事中列在前面的參賽方，與實際主場無關（R01-25）。</span></li>
+  <li><span class="n">8</span><span>玩法以哪些賠率格式顯示，粗體是基準格式（05 的 R05-18）：兩項玩法以馬來盤為準，例如 M-1；三項以上的玩法以歐洲盤為準，例如 1X2（M-10）。其他格式由基準值換算，同一個價格（R05-01）。緬甸讓分（M-13）只顯示緬甸盤（R05-19）。系統支援的格式見 10 的 R10-01。</span></li>
+  <li><span class="n">9</span><span>開啟這個玩法的多語系視窗（畫面 3）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -179,12 +141,11 @@
   <header class="top"><span>Home › Catalog › Markets</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main" style="min-width:1240px">
     <div class="page-head">
-      <div><h3>Markets</h3><div class="sub">Catalog markets per sport: type × scope; read-only</div></div>
-      <div class="strip"><span class="on">Markets</span><span>Types</span><span>Mapping</span><span>Unmapped</span><span>Translations</span></div>
+      <div><h3>Markets</h3><div class="sub">Catalog markets per sport</div></div>
     </div>
     <div class="split">
       <div>
-        <div class="strip" style="margin-bottom:6px"><span class="on">Regular sports</span><span>Esports</span></div>
+        <span class="box" style="width:100%;margin-bottom:6px">Find a sport…</span>
         <div class="list">
           <div>Soccer <span class="l2">176</span></div>
           <div>Tennis <span class="l2">31</span></div>
@@ -192,29 +153,28 @@
           <div class="l2">…</div>
         </div>
       </div>
-      <div class="preview">
-        <table class="grid">
-          <thead><tr><th>Market <span class="s">/ ID · Type</span></th><th>Scope</th><th>Event kind <span class="n">1</span></th><th>Pricing</th><th>Last offered</th></tr></thead>
-          <tbody>
-            <tr class="sel"><td><b>Tournament Winner</b><div class="l2">M-301 · Outright Winner</div></td><td>Season or edition<div class="l2">—</div></td><td>Outright</td><td>Consensus</td><td>2026-11-02</td></tr>
-          </tbody>
-        </table>
-        <div class="panel">
-          <div class="ph"><span>Tournament Winner · M-301</span><span class="l2">Golf</span></div>
-          <div class="pb">
+      <div>
+        <div class="filters">
+          <div class="f"><label>Search</label><span class="box wide">Market name or ID</span></div>
+        </div>
+        <div class="preview">
+          <div>
             <table class="grid">
+              <thead><tr><th>Market <span class="s">/ ID · Type</span></th><th>Last offered</th></tr></thead>
               <tbody>
-                <tr><td class="l2">Type</td><td>Outright Winner (OTR)</td></tr>
-                <tr><td class="l2">Period</td><td>The season, edition, stage or group of the outright event <span class="n">2</span></td></tr>
-                <tr><td class="l2">Ranking basis</td><td>Official placing <span class="n">3</span></td></tr>
-                <tr><td class="l2">Dead heat</td><td>Only when officially tied</td></tr>
-                <tr><td class="l2">Score item</td><td>—</td></tr>
+                <tr class="sel"><td><b>Tournament Winner</b> <span class="chip">Outright</span> <span class="n">1</span><div class="l2">M-301 · Outright Winner</div></td><td>2026-11-02</td></tr>
               </tbody>
             </table>
-            <div class="hint" style="margin-top:10px">Outcomes <span class="n">4</span></div>
-            <div>One per competitor in the field; the list may change after opening</div>
-            <div class="hint" style="margin-top:10px">Provider mappings <span class="n">5</span></div>
-            <div class="l2">Event and participant mapping: Outrights › Mapping</div>
+          </div>
+          <div class="panel">
+            <div class="ph"><span>Market M-301</span><span><span class="dot on"></span>On</span></div>
+            <div class="pb">
+              <div><b>Tournament Winner</b></div>
+              <div class="l2">Golf · <span class="btn">Outright Winner (OTR) ›</span></div>
+              <div class="hint" style="margin-top:10px">Odds formats</div>
+              <div><b>Decimal (base)</b> · HK · Malay · Indo</div>
+              <div style="margin-top:12px"><span class="btn">Edit translations</span></div>
+            </div>
           </div>
         </div>
       </div>
@@ -223,256 +183,43 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>賽事分為單場比賽（Match）與冠軍盤賽事（Outright），不另設其他種類（R01-12）。高爾夫等多名參賽方同場的運動目前只開冠軍盤，與<a href="sports.html">運動</a>頁的「Outrights only」一致。</span></li>
-  <li><span class="n">2</span><span>冠軍盤的時段是冠軍盤賽事的對象：競賽的一個賽季或一屆，或其中一個階段或分組（R01-12）。競賽本身跨賽季沿用。</span></li>
-  <li><span class="n">3</span><span>排名依據（R01-22）：依官方名次時不需要計分項目，只有官方宣布並列才是並列；依計分項目的數量時（例如射手王只計進球），數量相同即為並列（R01-14）。並列的結算見 07。</span></li>
-  <li><span class="n">4</span><span>冠軍盤的投注項來自參賽方名單，數量不固定，開盤後可能因退出、淘汰或新增而變動（R01-13）；參賽方須能單獨識別（R01-15）。因此不列出固定的投注項。</span></li>
-  <li><span class="n">5</span><span>冠軍盤的建立、賽程、識別、屬性、生命週期、對應與人工審核已納入本次第一階段；現行範圍已於 2026-11-03 決定，取代 PRD 04 舊有的冠軍盤暫緩範圍，待寫回 PRD 04。R04-18 的名單來源、逐項對應或排除等原則仍適用，但 04 待確認第 1 項的球員統一紀錄與對應細節尚未補齊。未定規則保留在畫面外的待確認事項，不把規則缺口視為延後整個冠軍盤範圍；冠軍盤賽事與名單對應屬於 Outrights › Mapping，頁面規劃見<a href="../layout.html">共用版面</a>。</span></li>
+  <li><span class="n">1</span><span>賽事分為單場比賽與冠軍盤賽事（R01-12），冠軍盤玩法以「Outright」標記。高爾夫等多名參賽方同場的運動目前只開冠軍盤，與<a href="sports.html">運動</a>頁的「Outrights only」一致。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s3">畫面 3：玩法類型（投注規則）清單</h2>
-
-<div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets › Types</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-  <main class="main">
-    <div class="page-head">
-      <div><h3>Market types</h3><div class="sub">Bet shapes shared across sports; each defines its outcomes, line parameters and settlement results</div></div>
-      <div class="strip"><span>Markets</span><span class="on">Types</span><span>Mapping</span><span>Unmapped</span><span>Translations</span></div>
-    </div>
-    <div class="filters">
-      <div class="f"><label>Search</label><span class="box wide">Type name or code</span></div>
-      <div class="f"><label>Name language</label><span class="box caret">English</span></div>
-    </div>
-    <table class="grid">
-      <thead><tr>
-        <th>Code <span class="n">1</span></th><th>Name</th><th>Markets <span class="n">2</span></th><th>Outcome list <span class="n">3</span></th><th>Line parameter</th><th>Outcomes</th><th>In-play exception <span class="n">4</span></th><th>Last offered</th><th></th>
-      </tr></thead>
-      <tbody>
-        <tr class="sel"><td>HDP</td><td>Handicap</td><td>128</td><td>Fixed</td><td>handicap</td><td><span class="chip">Home</span><span class="chip">Away</span></td><td>Soccer, Futsal, Beach soccer: goals after bet</td><td>2026-11-03</td><td><span class="btn">View</span> <span class="n">5</span></td></tr>
-        <tr><td>OU</td><td>Over/Under</td><td>196</td><td>Fixed</td><td>total</td><td><span class="chip">Over</span><span class="chip">Under</span></td><td>—</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>1X2</td><td>1X2</td><td>31</td><td>Fixed</td><td>—</td><td><span class="chip">Home</span><span class="chip">Draw</span><span class="chip">Away</span></td><td>—</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>A1X2</td><td>Asian 1X2</td><td>2</td><td>Fixed</td><td>—</td><td><span class="chip">Home</span><span class="chip">Draw</span><span class="chip">Away</span></td><td>Soccer: goals after bet</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>CS</td><td>Correct Score</td><td>6</td><td>Enumerated</td><td>—</td><td><span class="chip">{score}</span><span class="chip">Any other score</span></td><td>—</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>MMH</td><td>Myanmar Handicap</td><td>8</td><td>Fixed</td><td>handicap</td><td><span class="chip">Home</span><span class="chip">Away</span></td><td><b>To be confirmed</b> <span class="n">6</span></td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>RT</td><td>Range Total</td><td>9</td><td>Enumerated</td><td>ranges</td><td><span class="chip">{range}</span></td><td>—</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>EVT</td><td>Next Event</td><td>17</td><td>Fixed</td><td>Nth</td><td><span class="chip">Home</span><span class="chip">Away</span><span class="chip">None</span></td><td>—</td><td>2026-11-03</td><td><span class="btn">View</span></td></tr>
-        <tr><td>GM</td><td>Goal Method</td><td>1</td><td>Fixed</td><td>—</td><td><span class="chip">Shot</span><span class="chip">Header</span><span class="chip">Penalty</span><span class="chip">Free kick</span><span class="chip">Own goal</span><span class="chip">No goal</span></td><td>—</td><td>—</td><td><span class="btn">View</span></td></tr>
-        <tr><td>OTR</td><td>Outright Winner</td><td>42</td><td>Enumerated</td><td>—</td><td><span class="chip">{competitor}</span></td><td>—</td><td>2026-11-02</td><td><span class="btn">View</span></td></tr>
-        <tr><td colspan="9" class="l2">… (other types)</td></tr>
-      </tbody>
-    </table>
-    <div class="pager"><span></span><span>41 types</span></div>
-  </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>每個投注規則一列，代碼與<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/README.md">投注規則目錄</a>的規則文件相同，例如 HDP。投注規則決定投注項、盤口線依什麼參數區分與可能的結算結果（R01-02）；經銷商不能新增投注規則（01 第 6 節）。</span></li>
-  <li><span class="n">2</span><span>使用這個投注規則的玩法數，合計所有運動（R01-03）；各運動的數量見畫面 4。</span></li>
-  <li><span class="n">3</span><span>「Fixed」投注項固定；「Enumerated」投注項逐一列舉，數量依開盤而定（R01-07），例如波膽每個比分一個投注項，另可有「其他比分」，涵蓋範圍在開盤時定義、之後不變（R01-21）。冠軍盤的投注項來自參賽方名單（R01-13）。此欄取代參考系統的 Line shape，見待確認第 4 項。</span></li>
-  <li><span class="n">4</span><span>滾球只計下注之後計分的例外，逐一列出適用的運動與計分項目，不得類推；未列出的一律計入下注之前的計分（R01-10）。</span></li>
-  <li><span class="n">5</span><span>「View」開啟畫面 4。沒有「Edit」：投注規則由目錄設定維護（R01-08）。</span></li>
-  <li><span class="n">6</span><span>緬甸讓分的滾球計分基準尚待其規則文件確認（R01-10），因此標示「To be confirmed」。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s4">畫面 4：玩法類型明細</h2>
+<h2 id="s3">畫面 3：編輯玩法・多語系</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:680px">
-    <div class="mh"><span>Market type · Handicap (HDP)</span><span>✕</span></div>
+  <div class="modal" style="width:640px">
+    <div class="mh"><span>Edit translations · Handicap (M-1)</span><span>✕</span></div>
     <div class="mb">
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Handicap</span></div>
+      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
       <div class="form">
-        <div class="f"><label>Outcomes</label><div><span class="chip">Home</span><span class="chip">Away</span></div></div>
-        <div class="f"><label>Line parameter <span class="n">1</span></label><div>handicap · quarter lines allowed</div></div>
-        <div class="f full"><label>Settlement results <span class="n">2</span></label><div><span class="chip">Win</span><span class="chip">Half win</span><span class="chip">Push</span><span class="chip">Half loss</span><span class="chip">Loss</span></div></div>
-        <div class="f full"><label>In-play counts only after bet <span class="n">3</span></label><div>Soccer · Goals; Futsal · Goals; Beach soccer · Goals</div><div class="hint">All other sports and score items count scoring before the bet</div></div>
-        <div class="f full"><label>Rule document</label><div><span class="btn">Open rule document HDP ›</span></div></div>
+        <div class="f"><label>English</label><span class="box" style="width:100%">Asian Handicap</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">讓分</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">让分</span></div>
+        <div class="f"><label>Thai</label><span class="box" style="width:100%">แฮนดิแคป</span></div>
+        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Kèo chấp</span></div>
+        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Voor</span></div>
+        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
+        <div class="f"><label>Korean</label><span class="box" style="width:100%">핸디캡</span></div>
+        <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
-      <p style="margin:12px 0 4px">Markets using this type <span class="n">4</span></p>
-      <table class="grid">
-        <thead><tr><th>Sport</th><th>Markets</th><th>Example</th></tr></thead>
-        <tbody>
-          <tr><td>Soccer</td><td>31</td><td>Handicap (M-1), Draw No Bet (M-3), Corner Handicap (M-5)</td></tr>
-          <tr><td>Basketball</td><td>12</td><td>Q1 Handicap</td></tr>
-          <tr><td>Tennis</td><td>6</td><td>Game Handicap</td></tr>
-          <tr><td>League of Legends</td><td>3</td><td>Map Handicap</td></tr>
-          <tr><td colspan="3" class="l2">… 128 markets in 22 sports</td></tr>
-        </tbody>
-      </table>
     </div>
-    <div class="mf"><span class="btn">Close</span></div>
+    <div class="mf"><span class="btn">Cancel</span><span class="btn pri">Save</span></div>
   </div>
 </div></div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>盤口線依什麼參數區分（R01-02、R01-04）。讓分與大小允許四分之一盤，例如 -0.75，結算時注額各半，分別以 -0.5 與 -1 計算（R01-05，計算見 07）。</span></li>
-  <li><span class="n">2</span><span>投注規則的結算結果，只適用於有效注單（R01-23）。因條件未分出勝負而退還注額一律稱為走盤（Push）；因賽事取消或中止而退還屬於作廢（Void），不是結算結果，因此不列在這裡。什麼賽果得到什麼結果，見規則文件。</span></li>
-  <li><span class="n">3</span><span>滾球只計下注之後計分的例外清單（R01-10），與畫面 3 的同一欄相同。</span></li>
-  <li><span class="n">4</span><span>依運動列出使用這個投注規則的玩法數與例子（R01-03），合計等於畫面 3 的玩法數（128）。點選運動回到畫面 1，並以此投注規則篩選。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s5">畫面 5：玩法對應表</h2>
-
-<div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets › Mapping</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-  <main class="main">
-    <div class="page-head">
-      <div><h3>Market mapping</h3><div class="sub">Catalog markets × provider market codes; read-only <span class="n">1</span></div></div>
-      <div class="strip"><span>Markets</span><span>Types</span><span class="on">Mapping</span><span>Unmapped</span><span>Translations</span></div>
-    </div>
-    <div class="filters">
-      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
-      <div class="f"><label>Type</label><span class="box caret">All types</span></div>
-      <div class="f"><label>Provider</label><span class="box caret">All providers</span></div>
-      <div class="f"><label>Search</label><span class="box wide">Market name or ID</span></div>
-    </div>
-    <table class="grid">
-      <thead><tr>
-        <th>Market <span class="s">/ ID</span></th><th>Pricing</th><th>SABA</th><th>SBOBET</th><th>Pinnacle</th><th>Obet33</th><th>WS</th><th>Wbet</th><th>CMD368</th><th>M8</th><th>AFB</th><th>BTI</th><th>Crown <span class="n">2</span></th>
-      </tr></thead>
-      <tbody>
-        <tr><td>Handicap<div class="l2">M-1</div></td><td>Anchor</td><td>1 ⇄ <span class="n">3</span></td><td>Handicap</td><td>s</td><td>hd</td><td>hd</td><td>HDP</td><td>FT_HDP</td><td>FT_HDP</td><td>FT_HDP</td><td>FT_HDP</td><td>—</td></tr>
-        <tr><td>1H Handicap<div class="l2">M-2</div></td><td>Anchor</td><td>7 ⇄</td><td>FH_Handicap</td><td>s</td><td>hd</td><td>hd</td><td>HDPH</td><td>FH_HDP</td><td>FH_HDP</td><td>FH_HDP</td><td>FH_HDP</td><td>—</td></tr>
-        <tr><td>ET Handicap<div class="l2">M-4</div></td><td>Consensus</td><td>17</td><td>Handicap</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Corner Handicap<div class="l2">M-5</div></td><td>Consensus</td><td>—</td><td>Handicap</td><td>s</td><td>hd</td><td>hd</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Over/Under<div class="l2">M-6</div></td><td>Anchor</td><td>3, 302</td><td>OverUnder</td><td>ou</td><td>ou</td><td>ou</td><td>OU</td><td>FT_OU</td><td>FT_OU</td><td>FT_OU</td><td>FT_OU</td><td>—</td></tr>
-        <tr class="off"><td>Home Over/Under<div class="l2">M-7</div></td><td>Derived <span class="n">4</span></td><td>401</td><td>OverUnder</td><td>tt</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr class="off"><td>Correct Score<div class="l2">M-12</div></td><td>Derived</td><td>413</td><td>CS</td><td>—</td><td>cs</td><td>cs</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td>Goal Method<div class="l2">M-14</div></td><td>Consensus</td><td>— <span class="n">5</span></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-        <tr><td colspan="13" class="l2">… (other markets)</td></tr>
-      </tbody>
-    </table>
-    <div class="pager"><span>Prev · 1 · 2 · Next</span><span>Page 1 / 2 · 176 markets</span></div>
-  </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>每列一個目錄玩法，每欄一個賠率來源，格中是該來源的玩法代碼。對應表由 InSports 維護，新增來源或來源新增玩法時更新（04 的 R04-11、04 第 6 節）；本頁唯讀，沒有新增或修改對應的操作（待確認第 3 項）。對應的條件是結算方式完全相同，包括計分項目、時段、是否含加時賽與點球大戰、投注項結構與計數規則；名稱或代碼相近不是依據。例如 SBOBET 同一個代碼「Handicap」依時段與計分項目分別對應到 M-1、M-4、M-5。</span></li>
-  <li><span class="n">2</span><span>欄位依來源排列，可左右捲動；「—」表示該來源沒有這個玩法或尚未對應。來源、途徑與帳號對經銷商不可見（03 的 R03-13）。</span></li>
-  <li><span class="n">3</span><span>「⇄」表示對應時需要換算，滑過時顯示換算方式，例如讓分的正負號慣例、四分之一盤的寫法，或滾球讓分是否計入下注之前的進球（R04-11、R01-10）。換算只依來源資料與報價當時的比分，無法確定時不使用該報價。賽事的主客方向對調屬於單場賽事，不在本表（R04-08）。</span></li>
-  <li><span class="n">4</span><span>衍生玩法同樣要對應，對應後才知道是衍生玩法；之後不使用來源的賠率，連接器能分開讀取時也不再讀取（R04-11、03 的 R03-10、05 的 R05-04），整列以淡色顯示。</span></li>
-  <li><span class="n">5</span><span>沒有任何來源對應的共識定價玩法無法取得賠率，不會開盤（R01-26）；這與畫面 1 的玩法開關是不同的原因。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s6">畫面 6：未對應的玩法</h2>
-
-<div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets › Unmapped</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-  <main class="main">
-    <div class="page-head">
-      <div><h3>Unmapped provider markets</h3><div class="sub">Provider markets that match no catalog market; not used and never offered <span class="n">1</span></div></div>
-      <div class="strip"><span>Markets</span><span>Types</span><span>Mapping</span><span class="on">Unmapped</span><span>Translations</span></div>
-    </div>
-    <div class="filters">
-      <div class="f"><label>Provider</label><span class="box caret">All providers</span></div>
-      <div class="f"><label>Sport</label><span class="box caret">All sports</span></div>
-      <div class="f"><label>Search</label><span class="box wide">Provider market code or name</span></div>
-    </div>
-    <table class="grid">
-      <thead><tr><th>Provider</th><th>Sport <span class="n">2</span></th><th>Provider market <span class="s">/ code</span></th><th>Sample</th><th>Occurrences <span class="n">3</span></th><th>First seen</th><th>Last seen</th></tr></thead>
-      <tbody>
-        <tr><td>SABA</td><td>Soccer</td><td>Handicap incl. ET &amp; PEN<div class="l2">88</div></td><td>Home -0.5 / Away +0.5</td><td>1,284</td><td>2026-09-14</td><td>2026-11-03</td></tr>
-        <tr><td>SBOBET</td><td>Soccer</td><td>1H Corner Odd/Even<div class="l2">FH_CornerOE</div></td><td>Odd / Even</td><td>642</td><td>2026-10-02</td><td>2026-11-03</td></tr>
-        <tr><td>Pinnacle</td><td>Basketball</td><td>Player points<div class="l2">pp</div></td><td>Over 24.5 / Under 24.5</td><td>3,910</td><td>2026-08-30</td><td>2026-11-03</td></tr>
-        <tr><td>BTI</td><td>Tennis</td><td>Set 1 Race to 3 Games<div class="l2">S1_RT3</div></td><td>Home / Away</td><td>215</td><td>2026-10-21</td><td>2026-11-02</td></tr>
-        <tr><td colspan="7" class="l2">… (other unmapped markets)</td></tr>
-      </tbody>
-    </table>
-    <div class="pager"><span></span><span>37 unmapped markets</span></div>
-  </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>無法對應到目錄的玩法不使用、不開盤（04 的 R04-11）。這裡依來源列出這些玩法與出現次數，供 Ops 定期檢視，再決定是否請 InSports 新增對應或目錄；只顯示，不推播。結算方式不同的玩法不近似對應，例如 SABA 的「含加時賽與點球大戰的讓分」不對應到只計常規時間的讓分。對應後判定為衍生玩法的不列在這裡。</span></li>
-  <li><span class="n">2</span><span>來源的玩法可能落在終局範圍外，例如球員玩法（Player Props，暫不納入，見 01 第 1 節）；這類玩法同樣列出，由 Ops 判斷。</span></li>
-  <li><span class="n">3</span><span>出現次數依 PRD 只要求「出現次數」；統計的期間由 SPEC 提出。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="s7">畫面 7：玩法多語系</h2>
-
-<div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets › Translations</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-  <main class="main">
-    <div class="page-head">
-      <div><h3>Market translations</h3><div class="sub">Market and outcome names, one column per language; click “Edit” to edit the row in place, then “Save”</div></div>
-      <div class="strip"><span>Markets</span><span>Types</span><span>Mapping</span><span>Unmapped</span><span class="on">Translations</span></div>
-    </div>
-    <div class="filters">
-      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
-      <div class="f"><label>Names <span class="n">1</span></label><span class="box caret">Markets and outcomes</span></div>
-      <div class="f"><label>Search</label><span class="box wide">Name or ID</span></div>
-    </div>
-    <table class="grid">
-      <thead><tr><th>ID</th><th>Base name <span class="n">2</span></th><th>English</th><th>Traditional Chinese</th><th>Simplified Chinese</th><th>Thai</th><th>Vietnamese</th><th class="l2">…</th><th>Actions</th></tr></thead>
-      <tbody>
-        <tr><td>M-1</td><td class="l2">Handicap</td><td>Asian Handicap</td><td lang="zh-Hant">讓分</td><td lang="zh-Hans">让分</td><td>แฮนดิแคป</td><td>Kèo chấp</td><td></td><td><span class="btn">Edit</span></td></tr>
-        <tr><td class="l2">&nbsp;&nbsp;O-1</td><td class="l2">Home</td><td>Home</td><td lang="zh-Hant">主隊</td><td lang="zh-Hans">主队</td><td>เจ้าบ้าน</td><td>Đội nhà</td><td></td><td><span class="btn">Edit</span></td></tr>
-        <tr><td class="l2">&nbsp;&nbsp;O-2</td><td class="l2">Away</td><td>Away</td><td lang="zh-Hant">客隊</td><td lang="zh-Hans">客队</td><td>ทีมเยือน</td><td>Đội khách</td><td></td><td><span class="btn">Edit</span></td></tr>
-        <tr class="sel"><td>M-6</td><td class="l2">Over/Under</td><td><span class="box" style="width:100%">Over/Under</span></td><td><span class="box" style="width:100%" lang="zh-Hant">大小</span></td><td><span class="box" style="width:100%" lang="zh-Hans">大小</span></td><td><span class="box" style="width:100%">สูง/ต่ำ</span></td><td><span class="box" style="width:100%">Tài/Xỉu</span></td><td></td><td><span class="btn">Cancel</span> <span class="btn pri">Save</span> <span class="n">3</span></td></tr>
-        <tr><td>M-11</td><td class="l2">HT/FT</td><td>Half Time/Full Time</td><td lang="zh-Hant">半全場</td><td lang="zh-Hans">半全场</td><td>ครึ่งแรก/เต็มเวลา</td><td class="l2">(blank)</td><td></td><td><span class="btn">Edit</span></td></tr>
-        <tr><td colspan="9" class="l2">… (other markets and outcomes)</td></tr>
-      </tbody>
-    </table>
-  </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>可修改玩法與投注項的名稱；投注項列在所屬玩法下方，例如 M-1 的 O-1、O-2。Ops 可以修改各語言的名稱是使用者的決定，PRD 尚未規定（待確認第 1 項）；經銷商仍不能自訂玩法與投注項的顯示名稱（01 第 6 節）。</span></li>
-  <li><span class="n">2</span><span>基準名稱唯讀，比照運動的做法（R01-30）：英文也是一個可修改的語言，不等於基準名稱，例如 M-1 的基準名稱是「Handicap」，英文改成「Asian Handicap」。任何語言空白時都顯示基準名稱，例如 M-11 的越南文。支援的語言見 10。</span></li>
-  <li><span class="n">3</span><span>按某列的「Edit」後，該列直接變成輸入框（範例為 M-6），按「Save」才生效，「Cancel」放棄修改；一次只編輯一列。名稱只用於顯示，結算只依玩法的定義（R01-01），因此改名不影響結算。</span></li>
+  <li><span class="n">1</span><span>基準名稱唯讀，比照 R01-30：英文也是一個可修改的語言，不等於基準名稱，例如 M-1 的英文改成「Asian Handicap」。</span></li>
+  <li><span class="n">2</span><span>Ops 可以修改玩法各語言的名稱，任何語言空白時都顯示基準名稱，例如緬甸文。按「Save」才生效，「Cancel」則放棄修改。名稱只用於顯示，結算只依玩法的定義（R01-01），改名不影響結算。</span></li>
+  <li><span class="n">3</span><span>每種支援的語言一個欄位；支援哪些語言見 10。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>待確認事項</h2>
-<ol>
-  <li><b>玩法與投注項的多語系名稱</b>：PRD 的 R01-30 只規定運動、競賽與參賽方的名稱，01 第 6 節只說經銷商不能自訂玩法與投注項的顯示名稱，沒有說 Ops 能否修改。決定：Ops 可以在後台修改玩法與投注項各語言的名稱，基準名稱唯讀，空白時顯示基準名稱，比照 R01-30（畫面 7）。已決定（2026-11-03），待寫回 PRD 01。</li>
-  <li><b>運動層玩法開關的位置</b>：R01-18 要求取不到賽果時以運動層的玩法開關關閉玩法（12 的 R12-10），但沒有說在哪個頁面操作。決定：本頁只顯示運動層開關的狀態（畫面 1 的標註 9、14），操作集中在 Settings › Market Settings，與競賽層、賽事層的開關同一處。已決定（2026-11-03），待寫回 PRD 12。</li>
-  <li><b>玩法對應表能否在後台修改</b>：04 第 6 節把玩法對應表列為 InSports 固定。決定：Mapping 與 Unmapped 分頁唯讀，只供查看與定期檢視（畫面 5、6）；新增或修改對應由 InSports 以設定維護。已決定（2026-11-03），待寫回 PRD 04。</li>
-  <li><b>參考系統的欄位</b>：參考系統的 Types 頁有 Line shape（full、fanout、partial）、2-way 與 Last offer 三欄，PRD 都沒有。決定：Line shape 改為「投注項固定或逐一列舉」（R01-07，畫面 3）；不畫 2-way；保留「最後開出日期」作為參考欄位，標示不是 PRD 規則（畫面 1、3）。已決定（2026-11-03），待寫回 PRD 11。</li>
-  <li><b>待決定：Market Settings 缺少運動層與競賽層開關的頁面</b>：依第 2 項，開關集中在 Settings › Market Settings，但<a href="../layout.html">共用版面</a>的 Market Settings 目前只有 Matches 一頁。建議在 Market Settings 下新增運動層與競賽層的玩法開關頁，或把 Matches 頁擴充為三層。</li>
-  <li><b>待決定：「最後開出日期」的定義</b>：依第 4 項保留此欄。建議定義為任一賽事最後一次開出該玩法任一條盤口線的日期，不分賽前或滾球、真實或虛擬賽事；經銷商的開關不影響。</li>
-  <li><b>待決定：虛擬競賽開放哪些玩法在哪裡設定</b>：R01-27 說虛擬競賽可以只開放部分玩法，但沒有說由誰、在哪裡設定。建議以競賽層的玩法開關（12 的 R12-10）處理，不在本頁另設欄位。</li>
-</ol>
-
-<!-- ============================================================ -->
-<h2>關鍵字中英對照</h2>
-<p>畫面上的文字一律使用英文；下表列出本頁畫面出現的關鍵字與對應的中文。</p>
-<table class="doc-t">
-  <tr><th>中文</th><th>English</th><th>中文</th><th>English</th></tr>
-  <tr><td>目錄</td><td lang="en">Catalog</td><td>投注項</td><td lang="en">Outcome</td></tr>
-  <tr><td>玩法</td><td lang="en">Market</td><td>盤口線參數</td><td lang="en">Line parameter</td></tr>
-  <tr><td>玩法類型（投注規則）</td><td lang="en">Market type / Type</td><td>四分之一盤</td><td lang="en">Quarter line</td></tr>
-  <tr><td>時段＋計分項目</td><td lang="en">Scope</td><td>結算結果</td><td lang="en">Settlement results</td></tr>
-  <tr><td>時段</td><td lang="en">Period</td><td>贏、贏半、走盤、輸半、輸</td><td lang="en">Win, Half win, Push, Half loss, Loss</td></tr>
-  <tr><td>計分項目</td><td lang="en">Score item</td><td>投注項固定／逐一列舉</td><td lang="en">Fixed / Enumerated</td></tr>
-  <tr><td>計哪一方</td><td lang="en">Team</td><td>其他比分</td><td lang="en">Any other score</td></tr>
-  <tr><td>雙方／只計主隊</td><td lang="en">Both teams / Home only</td><td>滾球的計分基準</td><td lang="en">In-play counts</td></tr>
-  <tr><td>常規時間</td><td lang="en">Regular time</td><td>只計下注之後</td><td lang="en">After bet only</td></tr>
-  <tr><td>上半場</td><td lang="en">1st half</td><td>賠率的產生方式</td><td lang="en">Pricing</td></tr>
-  <tr><td>加時賽</td><td lang="en">Extra time</td><td>錨定玩法</td><td lang="en">Anchor</td></tr>
-  <tr><td>時間區間（15 分鐘）</td><td lang="en">15-min interval</td><td>衍生玩法</td><td lang="en">Derived</td></tr>
-  <tr><td>進球</td><td lang="en">Goals</td><td>共識定價玩法</td><td lang="en">Consensus</td></tr>
-  <tr><td>角球</td><td lang="en">Corners</td><td>需要的賽果</td><td lang="en">Result data needed</td></tr>
-  <tr><td>讓分</td><td lang="en">Handicap</td><td>玩法開關</td><td lang="en">Market switch</td></tr>
-  <tr><td>平局退款</td><td lang="en">Draw No Bet</td><td>運動層關閉</td><td lang="en">Closed at sport level</td></tr>
-  <tr><td>大小</td><td lang="en">Over/Under</td><td>最後開出日期</td><td lang="en">Last offered</td></tr>
-  <tr><td>獨贏（三項）</td><td lang="en">1X2</td><td>玩法對應</td><td lang="en">Mapping</td></tr>
-  <tr><td>亞洲獨贏（三項）</td><td lang="en">Asian 1X2</td><td>資料來源</td><td lang="en">Provider</td></tr>
-  <tr><td>波膽</td><td lang="en">Correct Score</td><td>未對應的玩法</td><td lang="en">Unmapped provider markets</td></tr>
-  <tr><td>緬甸讓分</td><td lang="en">Myanmar Handicap</td><td>出現次數</td><td lang="en">Occurrences</td></tr>
-  <tr><td>總數區間</td><td lang="en">Range Total</td><td>球員玩法</td><td lang="en">Player props</td></tr>
-  <tr><td>事件球隊</td><td lang="en">Next Event</td><td>賽事種類</td><td lang="en">Event kind</td></tr>
-  <tr><td>進球方式</td><td lang="en">Goal Method</td><td>單場比賽／冠軍盤</td><td lang="en">Match / Outright</td></tr>
-  <tr><td>半全場</td><td lang="en">HT/FT</td><td>排名依據</td><td lang="en">Ranking basis</td></tr>
-  <tr><td>第一名（冠軍盤）</td><td lang="en">Outright Winner</td><td>並列</td><td lang="en">Dead heat</td></tr>
-  <tr><td>正常運動／電子競技</td><td lang="en">Regular sports / Esports</td><td>多語系</td><td lang="en">Translations</td></tr>
-  <tr><td>主隊／客隊</td><td lang="en">Home / Away</td><td>基準名稱</td><td lang="en">Base name</td></tr>
-  <tr><td>待確認</td><td lang="en">To be confirmed</td><td>規則文件</td><td lang="en">Rule document</td></tr>
-</table>
+<p>目前沒有。</p>
 
 </div>
 </body>
