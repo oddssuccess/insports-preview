@@ -192,3 +192,14 @@ a.btn.pri { color: #fff; }
 /* 人工審核操作列：容納長標籤與多個按鈕，不受排序看板的固定寬度限制 */
 .savebar.wide { width: 100%; gap: 12px; flex-wrap: wrap; }
 .savebar.wide > div { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* 單場賽程：狀態頁籤數量、依競賽分組列、時間／比分欄與各運動比分子欄 */
+.bucket span.zero { color: #aaa; border-style: dashed; }
+table.sched th.c, table.sched td.c { text-align: center; }
+table.sched td.t { text-align: center; white-space: nowrap; min-width: 84px; }
+table.sched td.t b { display: block; font-size: 15px; }
+table.sched td.sc { text-align: center; min-width: 40px; border-left: 1px solid var(--line-soft); }
+table.sched tr.grp td { background: var(--fill); font-weight: 600; letter-spacing: .03em; }
+table.sched .ids { color: var(--muted); font-size: 12px; text-align: right; }
+.bar { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.bar > div { display: flex; gap: 8px; align-items: center; }

@@ -3,317 +3,353 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>單場比賽賽程 wireframe</title>
+<title>單場賽程 wireframe</title>
 <link rel="stylesheet" href="../wireframe.css">
 </head>
 <body>
 <div class="doc">
 
-<p><a href="../index.html">畫面索引</a> · <a href="../layout.html">共用版面</a></p>
-<h1>單場比賽賽程（Matches › Schedule）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>日期</b>：2026-11-03 · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求</a></p>
+<h1>單場賽程（Matches › Schedule）</h1>
+<p class="meta"><b>狀態</b>：草稿（示意） · <b>日期</b>：2026-11-04 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 查看由來源建立的單場比賽統一紀錄，追查識別、主客順序、賽程、相關目錄屬性與生命週期；辨識來源中斷、待取消與待腰斬，進入對應或人工審核工作。單場明細留在本頁，不另增加主選單。</td></tr>
-  <tr><th>本次第一階段</th><td>由來源建立並維護單場比賽與冠軍盤的統一紀錄、賽程、識別、屬性、生命週期、對應與人工審核。冠軍盤的賽程、對應與來源賽程都在第一階段；本檔先畫單場比賽，冠軍盤使用獨立頁面。詳細賽況、賽果／結算及賠率屬後續階段。見待確認第 13 項與<a href="../layout.html">共用版面</a>。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動與日期查看統一單場比賽（Match）：依競賽分組，按統一狀態篩選，一眼看到每場的比分、目前時段、建立者與套用的玩法設定模板，並從單場進入賽事對應（Mapping）。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
-    <li><b>賽事對應頁</b>：候選比較、人工確認、更正對應與來源反向（R04-08～10、R04-19、R04-24）；新競賽審核、競賽與參賽方的重複處理留在對應次頁（R04-02、R04-04、R04-07）。賽事不得合併。</li>
-    <li><b><a href="match-review.html">賽事審核頁</a></b>：生命週期人工裁定、待取消／待腰斬、重掛、解除標記及必要覆核（R04-05、R04-12、R04-19、R04-23～24）；待處理佇列依原定開賽時間由近到遠，同時依入列先後（R11-03）。本頁只提供摘要與入口。</li>
-    <li><b><a href="../provider/matches/schedule.html">來源的單場賽程頁</a></b>：來源自己的清單、尚未建立或對應的場次；人工指定建立者從來源場次發起，須當場檢查完整賽程能力、無既有對應或候選、參賽方、競賽及真實／虛擬一致（R03-08；R04-01、R04-04～05）。</li>
-    <li><b>冠軍盤的<a href="../outrights/schedule.html">賽程</a>、對應與<a href="../provider/outrights/schedule.html">來源賽程頁</a></b>：競賽的賽季／屆次／階段／分組、可變參賽名單與投注項對應或排除（R01-12～15、R01-22；R04-18）。期間、建立流程與生命週期的缺口見待確認第 7～12 項。</li>
-    <li><b>既有目錄頁</b>：<a href="../catalog/sports.html">運動</a>的營運狀態、<a href="../catalog/tournaments.html">競賽</a>與<a href="../catalog/competitors.html">參賽方</a>的名稱、屬性、等級、圖示與排序（R01-24、R01-27～33）。本頁不增加目錄維護工具，也不改動既有目錄「不連到其下賽事」的決定。</li>
-    <li><b>來源設定與連線維運</b>：來源角色、目錄對應、取得途徑、帳號與啟停（R03-01～07、R03-09～14；R04-02～03、R04-20）。取得資料不代表可建立統一賽事；預設賽程來源每個運動恰好一個，虛擬競賽例外。</li>
-    <li><b>後續賽況與賽果頁</b>：詳細比分、事件、賽果共識與裁定、訊號與覆蓋（R04-13～15、R04-21～22）；本頁保留 R04-12 的全部生命週期，不提供賽果編輯。</li>
-    <li><b>後續玩法與操盤頁</b>：玩法／盤口／投注項定義與對應（R01-01～11、R01-16～23、R01-26；R04-11）、來源賠率異常（R04-17）、定價與操盤（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05：R05-01～21</a>；05A、05B）、模板與開關（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12：R12-01～10</a>）。操盤暫停、營運狀態與生命週期不可混用。</li>
-    <li><b>後續下注與金融操作</b>：注單組合（02：R02-01～03）、接受投注（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06：R06-01～21</a>）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07 結算</a>、08 提前兌現、09 風控、10 經銷商設定（R10-01～04）與報表／匯率（R11-01）。待審標記的下游效果見 R05-16、R06-20；07、08、09 尚缺的規則不在此補定。</li>
+    <li>待取消／待腰斬的裁定、重掛與覆核：<a href="match-review.html">賽事審核</a>（R04-19、R04-23～24）。</li>
+    <li>來源原始賽程與人工指定建立者：<a href="../provider/matches/schedule.html">來源單場賽程</a>（R04-01、R04-05）。</li>
+    <li>競賽、參賽方的名稱、屬性、等級與排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
+    <li>賠率與操盤：Matches › Odds（05）；賽果與結算：Matches › Results、Grades（R04-13～15、07）；玩法設定模板的內容與指定：Settings › Market Settings（R12-01～05）。</li>
   </ul></td></tr>
 </table>
 
-<p class="disclaimer">本頁是需求示意，用來說明資訊與操作的分工，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的來源、名稱與數字都是範例；同一筆資料在四個畫面保持一致。業務依據為 InSports PRD。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。相關對應、審核與來源賽程已連到各頁草稿；畫面中的裁定不會寫入資料。</p>
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例，時間為 UTC+08:00。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。</p>
 
+<!-- ============================================================ -->
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依競賽橫列查看統一單場比賽，以狀態頁籤篩選；雙方上下排列，列尾提供明細與審核入口</td><td>R01-12；R04-04～06、R04-12、R04-23；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>查看固定識別、主客順序與建立者；沒有無來源新增、刪除、合併或對調主客的操作</td><td>R04-04～07；R01-25；見待確認第 2 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
-  <tr><td>3</td><td>查看目前與原定開賽時間，辨識改期仍為同一筆統一賽事</td><td>R04-05；R11-03；見待確認第 1、6 項</td><td><a href="#s2">畫面 2</a>、<a href="#s4">畫面 4</a></td></tr>
-  <tr><td>4</td><td>查看競賽／參賽方的屬性與等級、運動營運狀態及真實／虛擬分類，維護仍在目錄頁</td><td>R01-24、R01-27～33；R04-20；見待確認第 2 項</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>5</td><td>顯示全部生命週期、來源狀態依據與獨立待審標記，不任意改選狀態</td><td>R04-12、R04-23；R03-08；R06-02；見待確認第 4 項</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
-  <tr><td>6</td><td>查看來源識別、主客方向、確認依據及對應頁入口</td><td>R04-08～10、R04-19；見待確認第 3 項</td><td><a href="#s3">畫面 3</a></td></tr>
-  <tr><td>7</td><td>查看待取消／待腰斬、候選與來源回歸，轉入人工審核</td><td>R04-05、R04-19、R04-23～24；R11-03；見待確認第 4、5 項</td><td><a href="#s1">畫面 1</a>、<a href="#s4">畫面 4</a></td></tr>
-  <tr><td>8</td><td>辨識來源賽程中斷與單場消失，查看來源時間與接收時間，不自動換建立者</td><td>R03-02、R03-05～08、R03-10；R04-05、R04-16、R04-23</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
-  <tr><td>9</td><td>查看人工裁定與覆核紀錄；不在此執行裁定、退款或結算操作</td><td>R04-19；非功能需求「稽核軌跡」；見待確認第 5、6 項</td><td><a href="#s4">畫面 4</a></td></tr>
+  <tr><td>1</td><td>依運動、日期區間、排序與名稱／識別搜尋單場比賽</td><td>R01-24；R04-04</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>依統一狀態分頁籤篩選，各頁籤顯示場數</td><td>R04-12</td><td><a href="#s1">畫面 1</a>、<a href="#s4">畫面 4</a></td></tr>
+  <tr><td>3</td><td>依競賽分組，可展開／收合，可依競賽篩選</td><td>R01-12</td><td><a href="#s4">畫面 4</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>4</td><td>單場顯示主客方（依建立者順序）、統一識別與開賽時間</td><td>R01-25；R04-04～06</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>6</td><td>顯示建立者與已對應的來源數</td><td>R04-05、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>7</td><td>顯示賽事套用的玩法設定模板及其指定層級</td><td>R12-05</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事審核</td><td>R04-23</td><td><a href="#s4">畫面 4</a></td></tr>
+  <tr><td>9</td><td>從單場進入賽事對應</td><td>R04-08～10、R04-19</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
-<h2 id="s1">畫面 1：單場比賽賽程</h2>
+<!-- ============================================================ -->
+<h2 id="s1">畫面 1：足球賽程（滾球中）</h2>
+
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Matches › Schedule</span><span>Language: English · ops.user</span></header>
+  <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main">
     <div class="page-head">
-      <div><h3>Match Schedule</h3><div class="sub">Canonical matches · UTC+08:00 · Snapshot: 2026-11-03 09:25</div></div>
-      <div class="strip"><span class="on">Schedule</span><span><a href="../provider/matches/schedule.html">Provider schedule</a></span></div><span class="n">1</span>
+      <div><h3>Match Schedule</h3><div class="sub">Canonical matches schedule</div></div>
     </div>
     <div class="filters">
-      <div class="f"><label>Sport <span class="n">2</span></label><span class="box caret">Soccer</span></div>
-      <div class="f"><label>Start from · UTC+08:00</label><span class="box">2026-11-02 00:00</span></div>
-      <div class="f"><label>Start before · UTC+08:00</label><span class="box">2026-11-09 00:00</span></div>
-      <div class="f"><label>Sort</label><span class="box caret">Latest start first</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Date range</label><span class="box">2026-11-04 – 2026-11-04</span></div>
+      <div class="f"><label>Sort <span class="n">1</span></label><span class="box caret">System sorting</span></div>
       <div class="f"><label>Search</label><span class="box wide">Names and IDs</span></div>
-      <span class="btn">Clear Filter</span>
+      <span class="btn">Clear filter</span>
     </div>
-    <div class="filters">
-      <div class="f"><label>Tournament</label><span class="box caret">All 5 tournaments</span></div>
-      <div class="f"><label>Review flag</label><span class="box caret">All</span></div>
-      <div class="f"><label>Creator</label><span class="box caret">All</span></div>
+    <div class="bar">
+      <div class="bucket"><span class="on">Live 6</span><span>Prematch 42</span><span class="zero">Postponed 0</span><span>Interrupted 1</span><span class="zero">Ended 0</span><span>Closed 3</span><span class="zero">Cancelled 0</span><span class="zero">Abandoned 0</span> <span class="n">2</span></div>
+      <div><span class="l2">6 / 6 shown</span><span class="btn">Collapse matches</span><a class="btn" href="#s5">Tournaments (All)</a></div>
     </div>
-    <div class="bucket" aria-label="Lifecycle filters">
-      <span class="on">All (6)</span><span>Not started (2)</span><span>Postponed (1)</span><span>In progress (1)</span><span>Interrupted (1)</span><span>Ended (0)</span><span>Result confirmed (1)</span><span>Cancelled (0)</span><span>Abandoned (0)</span>
-    </div>
-    <p class="hint">Lifecycle filters <span class="n">3</span> · 6 matches shown across 5 tournaments · Review flags do not change lifecycle counts</p>
-    <table class="grid schedule-grid">
-      <thead><tr><th>Time / lifecycle</th><th>Match <span class="n">4</span></th><th>Creator</th><th>Mapped providers <span class="n">5</span></th><th>Review flag <span class="n">6</span></th><th>More <span class="n">7</span></th></tr></thead>
+    <table class="grid sched schedule-grid">
+      <thead>
+        <tr><th rowspan="2" class="c">Time <span class="n">3</span></th><th rowspan="2">Match <span class="n">4</span></th><th colspan="3" class="c">Score <span class="n">5</span></th><th rowspan="2" class="c">Providers <span class="n">6</span></th><th rowspan="2" class="c">Settings <span class="n">7</span></th><th rowspan="2"></th></tr>
+        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
+      </thead>
       <tbody>
-        <tr><th colspan="6" scope="rowgroup">Premier League <span class="s">· T-10231</span> <span class="n">8</span></th></tr>
-        <tr class="sel">
-          <td><div>11-07</div><b>20:00</b><div><span class="chip">Postponed</span></div></td>
-          <td><div class="match-team"><a href="#s2">Team A</a><span class="l2">C-50012</span></div><div class="match-team"><a href="#s2">Team B</a><span class="l2">C-50013</span></div><div class="l2">M-41001 · Home first / Away second</div></td>
-          <td>Provider A</td><td><a href="#s3">A · B · C</a><div class="l2">3 mapped sources</div></td>
-          <td><span class="chip">Pending cancellation</span><div class="l2">Returned to creator's list</div></td>
-          <td><details class="match-menu"><summary class="btn">More ▾</summary><div class="list"><div><a href="#s2">Detail</a></div><div><a href="#s3">Data Sources</a></div><div><a href="#s4">Review &amp; Records</a></div><div>Match Mapping</div></div></details></td>
+        <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE ELITE</td></tr>
+        <tr>
+          <td class="t"><b>1 : 1</b>2H 18'</td>
+          <td><div class="match-team"><span>Pohang Steelers</span><span class="ids">C-10644</span></div><div class="match-team"><span>Gamba Osaka</span><span class="ids">C-7338</span></div><div class="l2">M-250356 · 2026-11-04 18:00</div></td>
+          <td class="sc">1<br>1</td><td class="sc">5<br>3</td><td class="sc">0<br>1</td>
+          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="c">S16<div class="l2">Tournament</div></td>
+          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div>Match Mapping</div></div></details></td>
+        </tr>
+        <tr>
+          <td class="t"><b>0 : 0</b>HT</td>
+          <td><div class="match-team"><span>Buriram United</span><span class="ids">C-23211</span></div><div class="match-team"><span>Kashima Antlers</span><span class="ids">C-7331</span></div><div class="l2">M-250357 · 2026-11-04 20:15</div></td>
+          <td class="sc">0<br>0</td><td class="sc">2<br>4</td><td class="sc">1<br>0</td>
+          <td class="c">Provider A<div class="l2">4 / 8</div></td>
+          <td class="c">S16<div class="l2">Tournament</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE TWO</td></tr>
+        <tr>
+          <td class="t"><b>1 : 2</b>1H 31'</td>
+          <td><div class="match-team"><span>Melbourne Victory</span><span class="ids">C-11596</span></div><div class="match-team"><span>Persib Bandung</span><span class="ids">C-8800</span></div><div class="l2">M-250699 · 2026-11-04 19:45</div></td>
+          <td class="sc">1<br>2</td><td class="sc">1<br>2</td><td class="sc">0<br>0</td>
+          <td class="c">Provider A<div class="l2">2 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="8">▾ THAI LEAGUE 1</td></tr>
+        <tr>
+          <td class="t"><b>0 : 3</b>2H 33'</td>
+          <td><div class="match-team"><span>Bangkok United</span><span class="ids">C-25498</span></div><div class="match-team"><span>Port FC</span><span class="ids">C-25722</span></div><div class="l2">M-251907 · 2026-11-04 18:00</div></td>
+          <td class="sc">0<br>3</td><td class="sc">7<br>2</td><td class="sc">1<br>0</td>
+          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="c">T30 Standard<div class="l2">Match</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td class="t"><b>1 : 0</b>1H 12'</td>
+          <td><div class="match-team"><span>BG Pathum United</span><span class="ids">C-25920</span></div><div class="match-team"><span>Muangthong United</span><span class="ids">C-26254</span></div><div class="l2">M-252208 · 2026-11-04 20:00</div></td>
+          <td class="sc">1<br>0</td><td class="sc">1<br>0</td><td class="sc">—<br>—</td>
+          <td class="c">Provider C<div class="l2">1 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="8">▾ VIETNAM NATIONAL CUP</td></tr>
+        <tr>
+          <td class="t"><b>2 : 2</b>ET 2H 7'</td>
+          <td><div class="match-team"><span>Hanoi FC</span><span class="ids">C-31002</span></div><div class="match-team"><span>Cong An Ha Noi</span><span class="ids">C-31017</span></div><div class="l2">M-252310 · 2026-11-04 18:30</div></td>
+          <td class="sc">2<br>2</td><td class="sc">6<br>8</td><td class="sc">0<br>1</td>
+          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
         </tr>
       </tbody>
+    </table>
+  </main>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>System sorting 依目錄設定的競賽排序（見<a href="../catalog/tournaments.html">競賽</a>頁），組內依開賽時間；另可改為依開賽時間排序。</span></li>
+  <li><span class="n">2</span><span>頁籤對應 R04-12 的八種統一狀態：Prematch（未開始）、Postponed（延後）、Live（進行中）、Interrupted（比賽中斷）、Ended（已結束）、Closed（賽果已確定）、Cancelled（取消）、Abandoned（腰斬）。數字是目前篩選條件下的場數，0 場的頁籤淡化。待取消／待腰斬是疊在狀態上的標記，不是頁籤（見<a href="#s4">畫面 4</a>）。</span></li>
+  <li><span class="n">3</span><span>滾球中顯示全場比分與目前時段及比賽時間：1H／HT／2H／ET 1H／ET 2H／PEN（點球大戰），足球的時段見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">01-soccer</a>。分鐘數在每個時段重新起算，例如 2H 18' 是下半場第 18 分鐘。目前時段與比賽時間直接取自來源的賽況資料，各運動皆同。</span></li>
+  <li><span class="n">4</span><span>上方為主隊、下方為客隊，順序以建立者為準且建立後不變（R01-25、R04-06）。右側為參賽方的統一識別，下方為賽事的統一識別與開賽時間（R04-04）。</span></li>
+  <li><span class="n">5</span><span>比分子欄依運動的計分項目（R01-17）：足球為 GL 進球、CR 角球、RC 紅牌；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
+  <li><span class="n">6</span><span>上行是建立者（R04-05），下行是已對應到本場的來源數／此運動已接入的來源數（R04-08）。</span></li>
+  <li><span class="n">7</span><span>本場實際套用的玩法設定模板，下行是指定在哪一層：Match、Tournament 或 Sport（R12-05，賽事優先於競賽，競賽優先於運動）。</span></li>
+  <li><span class="n">8</span><span>列尾選單只有 Match Mapping：開啟本場的賽事對應，查看與更正各來源的對應（R04-08～10、R04-19）。</span></li>
+</ol>
+
+<!-- ============================================================ -->
+<h2 id="s2">畫面 2：籃球賽程（滾球中）</h2>
+
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="filters">
+      <div class="f"><label>Sport</label><span class="box caret">Basketball</span></div>
+      <div class="f"><label>Date range</label><span class="box">2026-11-04 – 2026-11-04</span></div>
+      <div class="f"><label>Sort</label><span class="box caret">System sorting</span></div>
+      <div class="f"><label>Search</label><span class="box wide">Names and IDs</span></div>
+      <span class="btn">Clear filter</span>
+    </div>
+    <div class="bar">
+      <div class="bucket"><span class="on">Live 4</span><span>Prematch 143</span><span class="zero">Postponed 0</span><span class="zero">Interrupted 0</span><span>Ended 1</span><span>Closed 12</span><span class="zero">Cancelled 0</span><span class="zero">Abandoned 0</span></div>
+      <div><span class="l2">4 / 4 shown</span><span class="btn">Collapse matches</span><span class="btn">Tournaments (All)</span></div>
+    </div>
+    <table class="grid sched schedule-grid">
+      <thead>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th colspan="6" class="c">Score <span class="n">2</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">PTS</th><th class="c">Q1</th><th class="c">Q2</th><th class="c">Q3</th><th class="c">Q4</th><th class="c">OT</th></tr>
+      </thead>
       <tbody>
-        <tr><th colspan="6" scope="rowgroup">UEFA Champions League <span class="s">· T-10002</span></th></tr>
-        <tr><td><div>11-04</div><b>20:00</b><div><span class="chip">Not started</span></div></td><td><div class="match-team">Team C</div><div class="match-team">Team D</div><div class="l2">M-41002</div></td><td>Provider A</td><td>Provider A</td><td>—</td><td><span class="btn">More ▾</span></td></tr>
-      </tbody>
-      <tbody>
-        <tr><th colspan="6" scope="rowgroup">Premier League 2 <span class="s">· T-11977</span></th></tr>
-        <tr><td><div>11-03</div><b>14:00</b><div><span class="chip">Not started</span></div></td><td><div class="match-team">Team G U21 <span class="l2">C-51877</span></div><div class="match-team">Team H U21</div><div class="l2">M-41003</div></td><td>Provider A</td><td>Provider A</td><td>—</td><td><span class="btn">More ▾</span></td></tr>
-      </tbody>
-      <tbody>
-        <tr><th colspan="6" scope="rowgroup">Regional Invitational <span class="s">· T-13001</span></th></tr>
-        <tr><td><div>11-03</div><b>08:00</b><div><span class="chip">In progress</span></div></td><td><div class="match-team">Team K</div><div class="match-team">Team L</div><div class="l2">M-41004</div></td><td>Provider D<div class="l2">Manually designated</div></td><td>Provider D<div class="l2">Fixture feed interrupted <span class="n">9</span></div></td><td><span class="chip">Pending abandonment</span><div class="l2">Removed at 08:50, before feed interruption</div></td><td><a class="btn" href="match-review.html#s5">Review</a></td></tr>
-        <tr><td><div>11-03</div><b>07:00</b><div><span class="chip">Interrupted</span></div></td><td><div class="match-team">Team M</div><div class="match-team">Team N</div><div class="l2">M-41005</div></td><td>Provider D</td><td>Provider D<div class="l2">Fixture feed interrupted</div></td><td>—</td><td><span class="btn">More ▾</span></td></tr>
-      </tbody>
-      <tbody>
-        <tr><th colspan="6" scope="rowgroup">Regional Amateur League <span class="s">· T-12840</span></th></tr>
-        <tr><td><div>11-03</div><b>03:00</b><div><span class="chip">Result confirmed</span></div></td><td><div class="match-team">Team R</div><div class="match-team">Team S</div><div class="l2">M-41007</div></td><td>Provider A</td><td>Provider A</td><td>—</td><td><span class="btn">More ▾</span></td></tr>
+        <tr class="grp"><td colspan="11">▾ AUSTRALIA NBL</td></tr>
+        <tr>
+          <td class="t"><b>88 : 84</b>Q4 5:12</td>
+          <td><div class="match-team"><span>Brisbane Bullets</span><span class="ids">C-27605</span></div><div class="match-team"><span>Perth Wildcats</span><span class="ids">C-27276</span></div><div class="l2">M-248548 · 2026-11-04 17:00</div></td>
+          <td class="sc">88<br>84</td><td class="sc">24<br>20</td><td class="sc">22<br>25</td><td class="sc">23<br>21</td><td class="sc">19<br>18</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">3 / 6</div></td>
+          <td class="c">B10<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="11">▾ CHINA CBA</td></tr>
+        <tr>
+          <td class="t"><b>108 : 106</b>OT 2:40</td>
+          <td><div class="match-team"><span>Shanghai Sharks</span><span class="ids">C-41029</span></div><div class="match-team"><span>Liaoning Flying Leopards</span><span class="ids">C-41056</span></div><div class="l2">M-252203 · 2026-11-04 19:35</div></td>
+          <td class="sc">108<br>106</td><td class="sc">25<br>27</td><td class="sc">26<br>24</td><td class="sc">23<br>22</td><td class="sc">27<br>28</td><td class="sc">7<br>5</td>
+          <td class="c">Provider A<div class="l2">4 / 6</div></td>
+          <td class="c">T30 Standard<div class="l2">Tournament</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="11">▾ JAPAN B.LEAGUE</td></tr>
+        <tr>
+          <td class="t"><b>45 : 39</b>HT</td>
+          <td><div class="match-team"><span>Alvark Tokyo</span><span class="ids">C-8990</span></div><div class="match-team"><span>Chiba Jets</span><span class="ids">C-9199</span></div><div class="l2">M-252277 · 2026-11-04 18:05</div></td>
+          <td class="sc">45<br>39</td><td class="sc">21<br>18</td><td class="sc">24<br>21</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">2 / 6</div></td>
+          <td class="c">B10<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="11">▾ PHILIPPINES PBA</td></tr>
+        <tr>
+          <td class="t"><b>14 : 9</b>Q1 6:30</td>
+          <td><div class="match-team"><span>San Miguel Beermen</span><span class="ids">C-24747</span></div><div class="match-team"><span>Barangay Ginebra</span><span class="ids">C-9118</span></div><div class="l2">M-252290 · 2026-11-04 19:30</div></td>
+          <td class="sc">14<br>9</td><td class="sc">14<br>9</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">3 / 6</div></td>
+          <td class="c">B10<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
       </tbody>
     </table>
-    <div class="pager"><span>6 matches · Latest start first</span><span><a href="../outrights/schedule.html">Outright schedule</a></span></div>
-    <p class="hint">Canonical IDs are retained. Matches cannot be deleted, merged or created without a provider fixture. <span class="n">10</span></p>
   </main>
 </div>
+
 <ol class="notes">
-  <li><span class="n">1</span><span>頁首只保留賽程與來源賽程的分工；來源賽程入口已連到對應草稿。人工指定建立者須從合格來源場次開始，不提供無來源新增（R04-01、R04-04～05）；未擴入監看、直播或操盤。</span></li>
-  <li><span class="n">2</span><span>運動、日期、排序、搜尋列使用明確起訖。搜尋不暗中取消日期條件，也不複製來源系統的筆數上限或預設開啟狀態。這些是檢索配置，不新增業務規則（R04-04、R04-12；待確認第 1 項）。</span></li>
-  <li><span class="n">3</span><span>狀態頁籤依 R04-12 的八種生命週期，另有全部總覽，所以六筆不同生命週期可以同時顯示。各狀態筆數相加等於六，待取消／待腰斬不計為另一種生命週期（R04-23）。</span></li>
-  <li><span class="n">4</span><span>雙方上下排列並列出識別碼，第一列固定為主方，第二列為客方（R01-25）。點選名稱開啟的是該場明細，不是編輯參賽方。範例識別與既有 Catalog 一致；候選新識別不列成統一賽事（R04-04～05、R04-24）。</span></li>
-  <li><span class="n">5</span><span>來源欄僅是已對應資料的摘要，與建立者分欄。點選第一筆摘要可查看逐來源明細；查看來源不會變更建立者（R04-05、R04-08～10）。</span></li>
-  <li><span class="n">6</span><span>待取消／待腰斬另列。來源回歸不自動解除；進行中的場次消失不自動改為已結束（R04-12、R04-23）。賽果已確定只顯示生命週期，不加入賽果與結算操作；延期也不等於取消（R06-02）。</span></li>
-  <li><span class="n">7</span><span>列尾選單的第一筆示範可展開的明細入口，其餘是同類位置示意。完整對應與裁定分別在 Mapping、Match Review（R04-08～10、R04-19、R04-23）。未加入重算賠率、直播或任意欄位編輯。</span></li>
-  <li><span class="n">8</span><span>競賽橫列將目前排序中連續屬於同競賽的場次放在同一標題之下；不為了分組而偷偷改變時間排序。同一競賽必要時可以再次出現。這是 R01-12 競賽歸屬的顯示方式，不改統一競賽或來源對應。</span></li>
-  <li><span class="n">9</span><span>來源賽程中斷與比賽中斷是獨立事實。M-41004 先消失而進入待腰斬，之後來源中斷；M-41005 的比賽中斷不是由來源中斷推論。來源恢復前不自動改建立者或把未知的清單狀態當成消失（R03-05；R04-12、R04-16、R04-23）。</span></li>
-  <li><span class="n">10</span><span>識別不刪除、不重複使用，賽事不合併，無來源不得建立（R04-04～07）。R04-04 的「只能停用」尚不足以定義額外任意停用按鈕，見待確認第 2 項。</span></li>
+  <li><span class="n">1</span><span>籃球的目前時段為 Q1～Q4、HT（中場）與 OT（加時賽），後接該節剩餘時間（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">02-basketball</a>）。</span></li>
+  <li><span class="n">2</span><span>籃球只有得分一個計分項目，因此子欄改為時段：PTS 是全場（含加時賽），Q1～Q4 是各節，OT 是加時賽合計；尚未開打的時段顯示「—」（R01-17、R04-13）。</span></li>
 </ol>
 
-<h2 id="s2">畫面 2：單場基本資料與目錄屬性</h2>
+<!-- ============================================================ -->
+<h2 id="s3">畫面 3：網球賽程（滾球中）</h2>
+
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Matches › Schedule › M-41001</span><span>Language: English · ops.user</span></header>
+  <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main">
-    <div class="page-head"><div><a href="#s1">‹ Back to schedule</a><h3>Match Detail</h3><div class="sub">M-41001 · Snapshot: 2026-11-03 09:25</div></div><a class="btn" href="#s3">Identity &amp; Sources</a></div>
-    <div class="strip"><span class="on">Detail</span><span><a href="#s3">Data Sources</a></span><span><a href="#s4">Review &amp; Records</a></span></div>
-    <div class="match-context">
-      <div><b>Team A vs Team B</b><div class="l2">Soccer · Premier League · M-41001</div></div>
-      <div><b>2026-11-07 20:00</b><div class="l2">UTC+08:00 · Creator: Provider A</div></div>
-      <div><span class="chip">Postponed</span><span class="chip">Pending cancellation</span></div>
+    <div class="filters">
+      <div class="f"><label>Sport</label><span class="box caret">Tennis</span></div>
+      <div class="f"><label>Date range</label><span class="box">2026-11-04 – 2026-11-04</span></div>
+      <div class="f"><label>Sort</label><span class="box caret">System sorting</span></div>
+      <div class="f"><label>Search</label><span class="box wide">Names and IDs</span></div>
+      <span class="btn">Clear filter</span>
     </div>
-    <div class="panel">
-      <div class="ph">Identity <span class="n">1</span></div>
-      <div class="pb form">
-        <div class="f"><label>Canonical match ID</label><span class="box ro">M-41001</span></div>
-        <div class="f"><label>Tournament</label><span class="box ro">Premier League · T-10231</span></div>
-        <div class="f"><label>Home / first competitor <span class="n">2</span></label><span class="box ro">Team A · C-50012</span></div>
-        <div class="f"><label>Away / second competitor</label><span class="box ro">Team B · C-50013</span></div>
-        <div class="f"><label>Creator <span class="n">3</span></label><span class="box ro">Provider A · Sport fixture source</span></div>
-        <div class="f"><label>Creator fixture ID</label><span class="box ro">FA-7001</span></div>
-        <div class="f"><label>Current sport fixture source</label><span class="box ro">Provider A</span></div>
-        <div class="f"><label>Real / virtual <span class="n">4</span></label><span class="box ro">Real</span></div>
-      </div>
+    <div class="bar">
+      <div class="bucket"><span class="on">Live 3</span><span>Prematch 300</span><span class="zero">Postponed 0</span><span class="zero">Interrupted 0</span><span class="zero">Ended 0</span><span>Closed 5</span><span class="zero">Cancelled 0</span><span>Abandoned 1</span></div>
+      <div><span class="l2">3 / 3 shown</span><span class="btn">Collapse matches</span><span class="btn">Tournaments (All)</span></div>
     </div>
-    <div class="panel">
-      <div class="ph">Schedule &amp; lifecycle <span class="n">5</span></div>
-      <div class="pb form">
-        <div class="f"><label>Current start · UTC+08:00</label><span class="box ro">2026-11-07 20:00</span></div>
-        <div class="f"><label>Original start · UTC+08:00</label><span class="box ro">2026-11-07 18:00</span></div>
-        <div class="f"><label>Lifecycle</label><span class="box ro">Postponed</span></div>
-        <div class="f"><label>Review flag</label><span class="box ro">Pending cancellation</span></div>
-        <div class="full hint">The creator postponed this fixture and supplied a new time using FA-7001. It later removed the fixture, then returned it. The review flag remains until an operator clears it.</div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph">Catalog properties <span class="n">6</span><span><a href="../catalog/tournaments.html">Tournaments</a> · <a href="../catalog/competitors.html">Competitors</a></span></div>
-      <div class="pb">
-        <table class="grid">
-          <thead><tr><th>Record</th><th>Country / region</th><th>Gender</th><th>Age group</th><th>Class</th><th>Type</th><th>Tier</th></tr></thead>
-          <tbody>
-            <tr><td>Premier League · T-10231</td><td>England</td><td>Men</td><td>Senior</td><td>—</td><td>Not applicable</td><td>1</td></tr>
-            <tr><td>Team A · C-50012</td><td>England</td><td>Men</td><td>Senior</td><td>—</td><td>Club</td><td>1</td></tr>
-            <tr><td>Team B · C-50013</td><td>England</td><td>Men</td><td>Senior</td><td>—</td><td>Club</td><td>2</td></tr>
-          </tbody>
-        </table>
-        <p class="hint">These belong to the linked catalog records. Match-specific property overrides are not available here.</p>
-        <p><span class="n">7</span> Sport offering status: <b>Active</b> · <a href="../catalog/sports.html">Sports</a></p>
-      </div>
-    </div>
+    <table class="grid sched schedule-grid">
+      <thead>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match <span class="n">2</span></th><th colspan="6" class="c">Score <span class="n">3</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">Sets</th><th class="c">S1</th><th class="c">S2</th><th class="c">S3</th><th class="c">S4</th><th class="c">S5</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><td colspan="11">▾ ATP - PARIS MASTERS</td></tr>
+        <tr>
+          <td class="t"><b>1 : 0</b>Set 2</td>
+          <td><div class="match-team"><span>Alexander Zverev (GER)</span><span class="ids">C-11352</span></div><div class="match-team"><span>Lorenzo Musetti (ITA)</span><span class="ids">C-9468</span></div><div class="l2">M-249916 · 2026-11-04 20:30 · Best of 3</div></td>
+          <td class="sc">1<br>0</td><td class="sc">6<br>4</td><td class="sc">3<br>2</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">3 / 5</div></td>
+          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td class="t"><b>1 : 1</b>Set 3</td>
+          <td><div class="match-team"><span>Quentin Halys (FRA)</span><span class="ids">C-16797</span></div><div class="match-team"><span>Frances Tiafoe (USA)</span><span class="ids">C-9193</span></div><div class="l2">M-251250 · 2026-11-04 18:15 · Best of 3</div></td>
+          <td class="sc">1<br>1</td><td class="sc">7<br>6</td><td class="sc">3<br>6</td><td class="sc">2<br>1</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">3 / 5</div></td>
+          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="11">▾ EXHIBITION - SEA TENNIS SHOWDOWN</td></tr>
+        <tr>
+          <td class="t"><b>2 : 1</b>Set 4</td>
+          <td><div class="match-team"><span>Kasidit Samrej (THA)</span><span class="ids">C-16781</span></div><div class="match-team"><span>Francis Alcantara (PHI)</span><span class="ids">C-10392</span></div><div class="l2">M-251253 · 2026-11-04 17:00 · Best of 5</div></td>
+          <td class="sc">2<br>1</td><td class="sc">6<br>3</td><td class="sc">4<br>6</td><td class="sc">6<br>2</td><td class="sc">1<br>1</td><td class="sc">—<br>—</td>
+          <td class="c">Provider C<div class="l2">1 / 5</div></td>
+          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+      </tbody>
+    </table>
   </main>
 </div>
+
 <ol class="notes">
-  <li><span class="n">1</span><span>統一識別不因名稱或時間改變而換號（R04-04～06）；沒有一般新增、刪除或合併操作。此處顯示既有欄位，額外單場屬性與更正權限仍待定（待確認第 2 項）。</span></li>
-  <li><span class="n">2</span><span>主／客僅表示第一／第二參賽方，不表示實際主場；建立後不得對調。其他來源相反時記在對應方向，不改統一紀錄（R01-25；R04-06、R04-08）。</span></li>
-  <li><span class="n">3</span><span>建立者負責這場賽事到結束。運動目前預設來源是另一個層次；未來更換預設來源不會替換這場的建立者（R04-02、R04-05）。本例兩者恰好相同。</span></li>
-  <li><span class="n">4</span><span>真實／虛擬在建立時由競賽決定，之後不可修改；虛擬參賽方不得與真實或其他虛擬來源混合對應，虛擬賽程來源另行指定（R01-27；R04-20）。電競遊戲各是獨立運動，不能一律視為虛擬（R01-24）。</span></li>
-  <li><span class="n">5</span><span>建立者沿用識別改期仍是同一場（R04-05）。本例有明確延期回報，才顯示延後；僅改時間不自行推論延期（R04-12）。新時間本身不觸發待取消，本例是之後從清單移除才加標記，回歸不自動解除（R04-23）。原定時間供審核排序（R11-03）。</span></li>
-  <li><span class="n">6</span><span>屬性屬於競賽或參賽方，不新增一套賽事覆寫（R01-31、R01-32）。未定與未分級不等於無組別；個人沒有年齡層。名稱、圖示與排序沿用目錄（R01-28、R01-30、R01-33），這裡只連到既有維護頁。</span></li>
-  <li><span class="n">7</span><span>運動營運狀態另列。暫停仍建立賽程，不支援則停止建立（R01-29）；不把它當成比賽中斷、待取消或操盤暫停。變更操作在運動頁，不在本頁。</span></li>
+  <li><span class="n">1</span><span>網球的目前時段是正在進行的盤（Set 1～Set 5）；網球沒有比賽時鐘（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/03-tennis.md">03-tennis</a>）。</span></li>
+  <li><span class="n">2</span><span>參賽方是球員。賽制（三盤兩勝或五盤三勝）依賽事而定，顯示在賽事識別旁，決定 S4、S5 是否會出現比分。</span></li>
+  <li><span class="n">3</span><span>Sets 是盤數（全場），S1～S5 是各盤的局數；兩者都是網球的計分項目（R01-17）。三盤兩勝的比賽 S4、S5 恆為「—」。</span></li>
 </ol>
 
-<h2 id="s3">畫面 3：來源對應與生命週期依據</h2>
+<!-- ============================================================ -->
+<h2 id="s4">畫面 4：賽前頁籤與競賽收合</h2>
+
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Matches › Schedule › M-41001 › Sources</span><span>All timestamps: UTC+08:00</span></header>
+  <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main">
-    <div class="page-head"><div><a href="#s1">‹ Back to schedule</a><h3>Data Sources</h3><div class="sub">M-41001 · Snapshot: 2026-11-03 09:25</div></div><a class="btn" href="#s3">Identity &amp; Sources</a></div>
-    <div class="strip"><span><a href="#s2">Detail</a></span><span class="on">Data Sources</span><span><a href="#s4">Review &amp; Records</a></span></div>
-    <div class="match-context">
-      <div><b>Team A vs Team B</b><div class="l2">Soccer · Premier League · M-41001</div></div>
-      <div><b>2026-11-07 20:00</b><div class="l2">UTC+08:00 · Creator: Provider A</div></div>
-      <div><span class="chip">Postponed</span><span class="chip">Pending cancellation</span></div>
+    <div class="bar">
+      <div class="bucket"><span>Live 6</span><span class="on">Prematch 42</span><span class="zero">Postponed 0</span><span>Interrupted 1</span><span class="zero">Ended 0</span><span>Closed 3</span><span class="zero">Cancelled 0</span><span class="zero">Abandoned 0</span></div>
+      <div><span class="l2">3 / 42 shown</span><span class="btn">Show matches <span class="n">1</span></span><a class="btn" href="#s5">Tournaments (All)</a></div>
     </div>
-    <div class="panel">
-      <div class="ph">Canonical lifecycle <span class="n">1</span></div>
-      <div class="pb">
-        <p><b>Postponed</b> <span class="chip">Pending cancellation</span></p>
-        <p>Provider A explicitly reported postponement. Its fixture is now listed again; the pending cancellation still requires operator review.</p>
-        <div class="legend"><span>Not started</span><span>Postponed</span><span>In progress</span><span>Interrupted</span><span>Ended</span><span>Result confirmed</span><span>Cancelled</span><span>Abandoned</span></div>
-        <div class="hint">Lifecycle is derived from mapped sources. Silence or a missing fixture does not retract an earlier status report.</div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph">Identity comparison <span class="n">2</span><span class="btn">Open match mapping</span></div>
-      <div class="pb">
-        <table class="grid">
-          <thead><tr><th>Record / fixture</th><th>Competitor order <span class="n">3</span></th><th>Confirmation basis <span class="n">4</span></th><th>Reported start</th><th>Reported lifecycle</th></tr></thead>
-          <tbody>
-            <tr class="sel"><td><b>Canonical</b><div class="l2">M-41001 · T-10231</div></td><td><div>Team A · C-50012</div><div>Team B · C-50013</div><div class="l2">Fixed home / away order</div></td><td>Reference record<div class="l2">Creator: Provider A</div></td><td>11-07 20:00</td><td>Postponed</td></tr>
-            <tr><td>Provider A <span class="chip">Creator</span><div class="l2">FA-7001</div></td><td><div>Team A</div><div>Team B</div><div class="l2">Same direction</div></td><td>Created from fixture source</td><td>11-07 20:00</td><td>Postponed</td></tr>
-            <tr><td>Provider B<div class="l2">FB-8814</div></td><td><div>Team B</div><div>Team A</div><div class="l2">Reversed</div></td><td>Manual confirmation<div class="l2">2026-11-02 16:10</div></td><td>11-07 18:00</td><td>Not started</td></tr>
-            <tr><td>Provider C<div class="l2">FC-1990</div></td><td><div>Team A</div><div>Team B</div><div class="l2">Same direction</div></td><td>Manual confirmation<div class="l2">2026-11-02 16:12</div></td><td>11-07 18:00<div class="l2">Last received value</div></td><td>Not started<div class="l2">Last received value</div></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph">Fixture availability &amp; timestamps <span class="n">5</span></div>
-      <div class="pb">
-        <table class="grid">
-          <thead><tr><th>Provider</th><th>Fixture data status</th><th>Listing evidence</th><th>Provider timestamp</th><th>Received at</th></tr></thead>
-          <tbody>
-            <tr><td>Provider A</td><td>Normal</td><td>Listed again at 09:20</td><td>2026-11-03 09:20:10</td><td>2026-11-03 09:20:12</td></tr>
-            <tr><td>Provider B</td><td>Normal</td><td>Listed</td><td>Not supplied</td><td>2026-11-03 09:23:00</td></tr>
-            <tr><td>Provider C</td><td>Interrupted</td><td>Last seen at 09:00<div class="l2">Current listing unknown</div></td><td>2026-11-03 08:59:58</td><td>2026-11-03 09:00:00</td></tr>
-          </tbody>
-        </table>
-        <p class="hint">A provider outage is not evidence that this fixture was removed. The creator is not replaced automatically.</p>
-      </div>
-    </div>
+    <table class="grid sched schedule-grid">
+      <thead>
+        <tr><th rowspan="2" class="c">Time</th><th rowspan="2">Match</th><th colspan="3" class="c">Score</th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><td colspan="8">▸ AFC CHAMPIONS LEAGUE ELITE <span class="l2">4</span></td></tr>
+        <tr class="grp"><td colspan="8">▸ AFC CHAMPIONS LEAGUE TWO <span class="l2">6</span></td></tr>
+        <tr class="grp"><td colspan="8">▾ THAI LEAGUE 1 <span class="l2">3</span></td></tr>
+        <tr>
+          <td class="t"><b>21:00</b>Not started</td>
+          <td><div class="match-team"><span>Chonburi FC</span><span class="ids">C-25510</span></div><div class="match-team"><span>Ratchaburi FC</span><span class="ids">C-25533</span></div><div class="l2">M-252411 · 2026-11-04 21:00</div></td>
+          <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="sel">
+          <td class="t"><b>21:30</b>Not started<div><a class="chip" href="match-review.html">Pending cancellation</a> <span class="n">2</span></div></td>
+          <td><div class="match-team"><span>Khon Kaen United</span><span class="ids">C-25541</span></div><div class="match-team"><span>Lamphun Warriors</span><span class="ids">C-25548</span></div><div class="l2">M-252412 · 2026-11-04 21:30</div></td>
+          <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider A<div class="l2">2 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr>
+          <td class="t"><b>22:00</b>Not started</td>
+          <td><div class="match-team"><span>Sukhothai FC</span><span class="ids">C-25560</span></div><div class="match-team"><span>Nakhon Ratchasima</span><span class="ids">C-25571</span></div><div class="l2">M-252413 · 2026-11-04 22:00</div></td>
+          <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
+          <td class="c">Provider C<div class="l2">1 / 8</div></td>
+          <td class="c">S12<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="8">▸ VIETNAM NATIONAL CUP <span class="l2">2</span></td></tr>
+        <tr class="grp"><td colspan="8">▸ INDONESIA LIGA 1 <span class="l2">9</span></td></tr>
+        <tr class="grp"><td colspan="8">▸ MALAYSIA SUPER LEAGUE <span class="l2">18</span></td></tr>
+      </tbody>
+    </table>
   </main>
 </div>
+
 <ol class="notes">
-  <li><span class="n">1</span><span>統一生命週期取所有已對應來源的回報，按較保守原則整理，不以建立者單獨決定（R04-12）；此例 A 報延期、其餘仍未開始，因此為延後。沉默、中斷或消失不算撤回較嚴格回報。人工可裁定取消、腰斬或回到較寬鬆狀態，操作在審核頁；規則重疊處見待確認第 4 項。</span></li>
-  <li><span class="n">2</span><span>比較表採「統一紀錄在前、來源在後」，放在唯讀來源頁。只列已確認的對應，不把多個候選算成已對應。多候選期間該來源資料不用於此賽事，確認後只能人工更正（R04-09～10）。對應入口連到獨立草稿；這裡不提供直接解除、換建立者或合併按鈕（R04-05、R04-07）。</span></li>
-  <li><span class="n">3</span><span>B 的順序相反，但統一主客仍固定；來源反向是在對應中處理（R01-25；R04-06、R04-08）。來源競賽名稱及參賽方名稱只可排序候選或排除衝突，不是確認依據（R04-02、R04-08）。</span></li>
-  <li><span class="n">4</span><span>例子只使用 PRD 已容許的人工確認，不預先承諾賠率或賽後比分的自動比對已在第一階段啟用（R04-08；待確認第 3 項）。人工停用的資料不得作為確認依據；既有對應不因此自行撤銷（R04-10、R04-16）。</span></li>
-  <li><span class="n">5</span><span>來源狀態依資料類別分開（R03-05），不代表來源所有資料皆可用或皆中斷；每筆保留接收時間與來源有提供的時間，沒有來源時間不能補成接收時間（R03-08）。已知中斷不視為單場消失，也不自動改用其他建立者（R03-02；R04-05、R04-16、R04-23）。恢復後依 R03-10 補取可取得的賽程。</span></li>
+  <li><span class="n">1</span><span>Collapse matches／Show matches 一次收合或展開所有競賽；也可以逐一點競賽列展開。收合時競賽列後顯示場數，「3 / 42 shown」是目前展開的場數／頁籤總場數。</span></li>
+  <li><span class="n">2</span><span>待取消（Pending cancellation）或待腰斬（Pending abandonment）標記疊在統一狀態上，本場仍在 Prematch 頁籤；已下架，點擊進入<a href="match-review.html">賽事審核</a>處理（R04-12、R04-23）。</span></li>
 </ol>
 
-<h2 id="s4">畫面 4：待審摘要與人工紀錄</h2>
+<!-- ============================================================ -->
+<h2 id="s5">畫面 5：選擇競賽</h2>
+
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Matches › Schedule › M-41001 › Review</span><span>All timestamps: UTC+08:00</span></header>
-  <main class="main">
-    <div class="page-head"><div><a href="#s1">‹ Back to schedule</a><h3>Review &amp; Records</h3><div class="sub">M-41001 · Snapshot: 2026-11-03 09:25</div></div><a class="btn" href="#s3">Identity &amp; Sources</a></div>
-    <div class="strip"><span><a href="#s2">Detail</a></span><span><a href="#s3">Data Sources</a></span><span class="on">Review &amp; Records</span></div>
-    <div class="match-context">
-      <div><b>Team A vs Team B</b><div class="l2">Soccer · Premier League · M-41001</div></div>
-      <div><b>2026-11-07 20:00</b><div class="l2">UTC+08:00 · Creator: Provider A</div></div>
-      <div><span class="chip">Postponed</span><span class="chip">Pending cancellation</span></div>
-    </div>
-    <div class="panel">
-      <div class="ph">Pending cancellation <span class="n">1</span><a class="btn" href="match-review.html#s2">Open match review</a></div>
-      <div class="pb">
-        <table class="grid"><tbody>
-          <tr><th>Trigger</th><td>Provider A removed FA-7001 from its fixture list at 2026-11-03 09:10.</td></tr>
-          <tr><th>Provider reason</th><td>Not supplied</td></tr>
-          <tr><th>Current evidence</th><td>FA-7001 returned at 09:20. The review flag is still active.</td></tr>
-          <tr><th>Original start <span class="n">2</span></th><td>2026-11-07 18:00</td></tr>
-          <tr><th>Current start</th><td>2026-11-07 20:00</td></tr>
-          <tr><th>Entered review</th><td>2026-11-03 09:10</td></tr>
-        </tbody></table>
-        <p class="hint">Review is required even after the fixture returns. Lifecycle and review flag are separate.</p>
+  <div class="backdrop">
+    <div class="modal">
+      <div class="mh"><span>Select Tournament <span class="chip">5 / 5</span></span><span>×</span></div>
+      <div class="mb">
+        <div class="list">
+          <div class="cat"><label><input type="checkbox" checked> REGULAR TOURNAMENTS · 4</label> <span class="n">1</span></div>
+          <div><label><input type="checkbox" checked disabled> AFC Champions League Elite · 2</label></div>
+          <div><label><input type="checkbox" checked disabled> AFC Champions League Two · 1</label></div>
+          <div><label><input type="checkbox" checked disabled> Thai League 1 · 2</label></div>
+          <div><label><input type="checkbox" checked disabled> Vietnam National Cup · 1</label></div>
+          <div class="cat"><label><input type="checkbox"> VIRTUAL TOURNAMENTS · 1</label> <span class="n">2</span></div>
+          <div><label><input type="checkbox"> Virtual Premier Cup · 0</label></div>
+        </div>
+        <p class="hint">A ticked category stays complete: tournaments added later show up on their own.</p>
       </div>
+      <div class="mf"><span class="btn">Show all</span><span class="btn">Cancel</span><span class="btn pri">Apply</span></div>
     </div>
-    <div class="panel">
-      <div class="ph">Candidate fixtures <span class="n">3</span></div>
-      <div class="pb">
-        <table class="grid">
-          <thead><tr><th>Record / fixture</th><th>Competitor order</th><th>Reported start</th><th>Reported lifecycle</th><th>Canonical record</th></tr></thead>
-          <tbody><tr><td>Provider A · FA-7009</td><td>Team A / Team B</td><td>2026-11-07 20:00</td><td>Not started</td><td>Not created · Awaiting review</td></tr></tbody>
-        </table>
-        <p class="hint">A candidate is not a confirmed match. Re-anchoring requires the same creator and a candidate that has not started. One new fixture ID can be attached to only one canonical match.</p>
-        <p class="hint">Decisions belong in Match Review: cancel and void, re-anchor, leave pending, or clear the flag after the fixture returns. <span class="n">4</span></p>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph">Operator Actions <span class="n">5</span></div>
-      <div class="pb">
-        <table class="grid">
-          <thead><tr><th>Time</th><th>Operator</th><th>Action</th><th>Change / basis</th><th>Approval</th></tr></thead>
-          <tbody>
-            <tr><td>11-03 09:15</td><td>ops.lee</td><td>Leave pending</td><td>Review flag retained. Waiting for the creator to clarify whether FA-7009 is a duplicate.</td><td>Single operator</td></tr>
-            <tr><td>11-02 16:12</td><td>ops.lin</td><td>Confirm mapping</td><td>FC-1990 → M-41001; same direction. Fixture and both competitors checked manually.</td><td>Single operator</td></tr>
-            <tr><td>11-02 16:10</td><td>ops.lin</td><td>Confirm mapping</td><td>FB-8814 → M-41001; reversed direction. Fixture and both competitors checked manually.</td><td>Single operator</td></tr>
-          </tbody>
-        </table>
-        <p class="hint">No re-anchor or cancellation decision has been applied. Review records do not indicate that any refund or settlement has completed.</p>
-      </div>
-    </div>
-  </main>
+  </div>
 </div>
+
 <ol class="notes">
-  <li><span class="n">1</span><span>本頁呈現單場摘要，正式裁定在賽事審核頁。來源原因顯示原值，未提供就留白說明，不能自行推論已取消；來源回歸只註記，不自動解除（R04-23）。入口可開啟賽事審核草稿，裁定與覆核流程在該頁說明。</span></li>
-  <li><span class="n">2</span><span>審核佇列依原定時間而非改期後時間排序，同時再依入列先後（R11-03）。本稿不虛構處理時限或倒數；等待上限與原定時間在反覆改期時的細節見待確認第 6 項。</span></li>
-  <li><span class="n">3</span><span>候選只是可能同場，不建立、不開盤，名稱相同不能確認。具體候選條件由 SPEC 決定，不在此設定任意時間門檻；先發新識別或先撤舊識別都一樣（R04-24）。重掛限同一建立者、候選尚未開始且一個新識別只掛一筆；保留統一識別，注單不轉移（R04-05）。</span></li>
-  <li><span class="n">4</span><span>列出 R04-23 的選項作分工說明，不在 Schedule 執行。本例已回到清單，因此具備解除標記的必要條件；無候選時不能重掛。作廢與重掛依 R04-19 覆核；重掛的注單效力、待腰斬後續賽與各時段結算尚待 07，不能宣稱已退款（待確認第 5 項）。</span></li>
-  <li><span class="n">5</span><span>人工操作紀錄附裁定依據與覆核欄。人工操作須可查到由誰、何時、改了什麼，裁定另有依據（非功能需求；R04-19）。本例是首次人工確認與暫不處理，不是更正對應或重掛。影響已結算注單、退還注額或改變結算依據的裁定，須另一人覆核後才生效；R11-02 的操盤免覆核規則不適用於此。此處只有人工紀錄，不假裝已有完整自動變更歷史（待確認第 6 項）。</span></li>
+  <li><span class="n">1</span><span>列出此運動在目前日期區間有賽事的競賽，後接目前頁籤的場數（本例為畫面 1 的 Live）。勾選整個類別時，之後新增的競賽自動納入；取消類別勾選後才能逐一勾選競賽。</span></li>
+  <li><span class="n">2</span><span>競賽分為真實與虛擬兩類（R01-27、R04-20），各為一個類別。</span></li>
 </ol>
 
+<!-- ============================================================ -->
 <h2>待確認事項</h2>
-<p>第 1～12 項為待決或待補需求；第 13 項記錄已於 2026-11-03 採用的分期決定。未定事項不視為既定業務規則，相關操作限制仍保留。</p>
-<ol>
-  <li><b>檢索、時間與排序</b>：畫面 1 以篩選列、狀態頁籤與競賽橫列安排，另有全部總覽；「目前開賽時間由晚到早」仍是檢索配置提案，尚非業務規則；採明確起訖與 UTC+08:00，不使用含糊的「今天」。非功能需求已定營業日為固定 UTC−4 00:00，但未定後台日期篩選是否使用營業日。建議新增日期捷徑時明示營業日或顯示時區日；審核佇列另遵守 R11-03，不能沿用此清單排序。待補 PRD 11。</li>
-  <li><b>單場屬性與人工編輯權限</b>：R04-04 的資料可更改，不等於 Ops 可以覆寫任何來源欄位；場地、中立場、輪次、賽制、未知開賽時間與任意停用的規則未定。建議先維持畫面 2 的身分／賽程唯讀及 Catalog 屬性分工，不新增任意狀態、主客對調或停用操作。需要的單場專屬屬性與更正流程待補 PRD 01、04；競賽／參賽方不能停用的既有 Catalog 決定保持不變。</li>
-  <li><b>第一階段的對應證據</b>：R04-08（a）需要賽前賠率、（c）需要共同時段的賽後比分；排除詳細賠率／賽果畫面不自動回答是否接收這些比對證據。建議本階段先啟用（b）已確立參賽方＋容許時間＋唯一候選及（d）人工確認；若要（a）／（c），另明定最小證據輸入，不能順便擴入操盤或結算。畫面 3 僅示範人工確認，不預設這項建議已獲採用。待補 PRD 04、11。</li>
-  <li><b>取消／腰斬的規則優先序</b>：R04-12 說需要所有來源一致或人工裁定，R04-23 則要求建立者取消或消失等情況進入人工處理。建議 R04-23 特例優先，即使來源一致也不跳過人工；完整狀態轉移與放寬條件仍須補清楚。畫面 3、4 選用沒有全來源取消爭議的例子，不將此建議假定成既定規則。待補 PRD 04。</li>
-  <li><b>審核與後續注單效果</b>：R04-23 的取消作廢與重掛仍有 R04-19 覆核要求；R05-16、R06-20 定義下游反應，但 PRD 07 第 9 節第 1 項的注單效力、續賽與各時段結算尚缺。建議第一階段呈現生命週期裁定與覆核，不宣稱退款／結算已完成。11 第 9 節第 4 項要求審核顯示已有注單數，本期能否取得仍待確認；本稿不捏造為 0，也不新增注單操作。待補 PRD 04、07、11；審核草稿以未知顯示尚未取得的影響資訊，不能視為無注單。</li>
-  <li><b>門檻、原定時間與歷史</b>：非功能需求未定凍結、對應時間容許值與審核時限；R11-03 的原定時間在多次改期／重掛時如何取值也須說明。建議保留原始基準，不以每次改期重設，避免改變審核與延期判斷。畫面 2～4 只顯示明確來源證據與人工紀錄，不畫自動逾期、倒數或完整自動變更歷史；後者若需要，另補保存與查詢規則。待補 PRD 04、07、11 與非功能需求；候選判定細節及整批消失保護仍依 04 待確認第 9、11 項交 SPEC。</li>
-  <li><b>冠軍盤事件與玩法的分界</b>：R01-12 已定賽季／屆次／階段／分組，但同一賽季的冠軍、射手王、小組第一是否共用事件未明。建議以明確業務對象與參賽方範圍區分，不能只靠名稱；多玩法是否共用事件由業務決定，識別鍵與模型交 SPEC。來源列為冠軍盤的足球取勝方式／勝分差、羽球局數波膽，依各運動目錄仍屬單場玩法。待補 PRD 01、04；本頁不混列冠軍盤。</li>
-  <li><b>冠軍盤的建立者</b>：R04-18 有名單來源，R04-05 的人工指定流程則主要描述單場。建議冠軍盤也須有具完整賽程能力的建立者、不開放無來源建立；運動預設來源及個別人工例外如何套用仍須明定。不能以「有冠軍盤報價」代替賽程能力（R03-05、R04-01）。待補 PRD 03、04；規則未定不代表從第一階段排除。</li>
-  <li><b>冠軍盤起訖與生命週期</b>：未知時間、改期、長期事件狀態及多來源裁定未定。建議顯示來源的起訖與時區，未知明示；不把單場開賽時間及八種狀態直接套用，也不把停止報價或名單消失等同取消、結束或淘汰。待補 PRD 01、04；名單參賽狀態、事件生命週期與投注項開關須分開。</li>
-  <li><b>球員識別與名單變動</b>：04 待確認第 1 項仍缺球員統一紀錄的建立與消歧；已有個人類型不足以解決。建議重用參賽方識別、轉隊不新建球員，名單新增／退出／淘汰保留歷史與來源依據；確認權限待補。R01-13、R04-18 與 OTR-03、OTR-04 的注單效果留後續，不能用來源關閉投注項推論退賽。待補 PRD 01、04、07。</li>
-  <li><b>冠軍盤未完成對應的可用性</b>：R04-18 要求每個來源投注項對應或明確排除，但建立事件與全部對應完成的先後、未完成能否開盤尚未定。建議分開呈現事件已建立與對應完成度，未處理不得假稱已確認；開盤門檻由後續規則處理。結算後對應不能更動仍是既有約束，不在本期加入結算操作。待補 PRD 04、05。</li>
-  <li><b>「其他參賽方」的對應</b>：R04-18 的範例排除「其他」，但<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/38-outright-winner.md">冠軍盤第一名目錄</a>允許「其他參賽方」，不可解讀成一律排除。建議只有範圍明確且相同才對應到集合投注項，否則明確排除並記理由，不建立虛構參賽方。待補 PRD 01、04 與目錄。</li>
-  <li><b>本次分期</b>：<b>已決定（2026-11-03），待寫回 PRD 04 的範圍與第 9 節第 1 項</b>。第一階段包含單場與冠軍盤的統一紀錄、賽程、識別、屬性、生命週期、對應及人工審核；冠軍盤賽程、對應與來源賽程均納入。取代較早共用版面的冠軍盤排除與含賠率、盤口結算交付的較廣第一階段定義。本頁畫面 1～4 僅實作其中單場賽程及必要明細；生命週期保留，詳細賽況、賽果／結算與賠率留後續。冠軍盤模板暫緩（12）不影響本次事件資料範圍，第 7～12 項仍待補，不標成已解決。</li>
-</ol>
-
+<p>目前沒有。</p>
 
 </div>
 </body>
