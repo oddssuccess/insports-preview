@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 玩法設定：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+/* 本頁共用：階段帶（chevron）、切片表的格子、儀表板元件、場景劇情元件 */
+svg .chev { fill: var(--panel); stroke: var(--line); stroke-width: 1; }
+svg .chevsel { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1.6; }
+svg .chevdim { fill: var(--panel); stroke: var(--soft); stroke-width: .8; opacity: .55; }
+svg .chevt { font-size: 11px; text-anchor: middle; }
+svg .grp { font-size: 11px; fill: var(--soft); text-anchor: middle; letter-spacing: .1em; }
+svg .grpline { stroke: var(--sep); stroke-width: 1; }
+svg .ovl { fill: none; stroke: var(--soft); stroke-width: 1; }
+svg .ovlsel { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1.6; }
+svg .cellset { fill: rgba(79,209,255,.14); stroke: var(--line); stroke-width: 1; }
+svg .cellinh { fill: none; stroke: var(--soft); stroke-width: 1; stroke-dasharray: 3 3; }
+svg .cellwarn { fill: var(--tagw-fill); stroke: var(--warn); stroke-width: 1; }
+svg .cellt { font-size: 12px; text-anchor: middle; }
+svg .cellti { font-size: 12px; text-anchor: middle; fill: var(--soft); }
+svg .tiny { font-size: 11px; fill: var(--soft); }
+svg .tinyi { font-size: 11px; fill: var(--ink); }
+svg .card { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .hdr { fill: rgba(79,209,255,.08); stroke: none; }
+svg .rowline { stroke: rgba(79,209,255,.18); stroke-width: 1; }
+svg .badge { fill: rgba(79,209,255,.16); stroke: var(--line); stroke-width: 1; }
+svg .badgew { fill: rgba(255,159,67,.16); stroke: var(--warn); stroke-width: 1; }
+svg .light { fill: var(--line); } svg .lightw { fill: var(--warn); } svg .lighto { fill: none; stroke: var(--soft); stroke-width: 1.2; }
+svg .slice { fill: var(--panel); stroke: var(--line); stroke-width: 1.2; }
+svg .sliceback { fill: var(--panel); stroke: var(--line); stroke-width: .8; opacity: .6; }
+svg .bandi { fill: rgba(79,209,255,.12); stroke: none; }
+svg .bandd { fill: rgba(244,248,255,.06); stroke: none; }
+svg .bubble { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+svg .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+svg .stampt { font-size: 13px; font-weight: 700; text-anchor: middle; }
+svg .person { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-linecap: round; }
+svg .btn { fill: none; stroke: var(--soft); stroke-width: 1; }
+svg .btnp { fill: rgba(79,209,255,.16); stroke: var(--line); stroke-width: 1; }
+svg .tab { fill: none; stroke: var(--soft); stroke-width: 1; }
+svg .tabsel { fill: rgba(79,209,255,.16); stroke: var(--line); stroke-width: 1.4; }
+svg .callout { fill: var(--line); }
+svg .callt { font-size: 11px; font-weight: 700; fill: var(--bg); text-anchor: middle; }
+svg .track { stroke: rgba(79,209,255,.35); stroke-width: 10; stroke-linecap: butt; }
+svg .trackw { stroke: rgba(255,159,67,.45); stroke-width: 10; }
+svg .num { font-size: 16px; font-weight: 700; text-anchor: middle; }
+</style>
+<script>
+// 共用的畫圖小工具：階段帶（chevron）與切片表。圖的內容仍寫在各 <svg> 內，這裡只省去重複的幾何。
+const NS = 'http://www.w3.org/2000/svg';
+function el(n, a, txt) { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); if (txt != null) e.textContent = txt; return e; }
+// strip：s = {x, y, w, h, groups:[{label, warn, items:[{t|[t1,t2], dot, sel, dim, warn}]}], overlays:[{t, dot, sel}], ovlY}
+function strip(sel, s) {
+  const g = document.querySelector(sel); const h = s.h || 34;
+  const n = s.groups.reduce((a, gr) => a + gr.items.length, 0); const cw = s.w / n; let i = 0;
+  for (const gr of s.groups) {
+    const x0 = s.x + i * cw, x1 = x0 + gr.items.length * cw;
+    if (gr.label) { g.appendChild(el('text', { x: (x0 + x1) / 2, y: s.y - 13, class: 'grp' + (gr.warn ? ' tw' : '') }, gr.label)); g.appendChild(el('line', { x1: x0 + 2, y1: s.y - 7, x2: x1 - 2, y2: s.y - 7, class: 'grpline' })); }
+    for (const it of gr.items) {
+      const x = s.x + i * cw, first = i === 0; const nx = first ? 0 : 8;
+      const d = `M${x},${s.y} L${x + cw - 8},${s.y} L${x + cw},${s.y + h / 2} L${x + cw - 8},${s.y + h} L${x},${s.y + h} L${x + nx},${s.y + h / 2} Z`;
+      g.appendChild(el('path', { d, class: it.sel ? 'chevsel' : (it.dim ? 'chevdim' : 'chev') }));
+      const lines = Array.isArray(it.t) ? it.t : [it.t]; const cx = x + cw / 2 + (first ? 0 : 3);
+      const t = el('text', { x: cx, y: s.y + h / 2 + 4 - (lines.length - 1) * 6, class: 'chevt' + (it.sel ? ' tb' : '') + (it.warn ? ' tw' : '') });
+      lines.forEach((ln, k) => t.appendChild(el('tspan', { x: cx, dy: k ? 12 : 0 }, ln)));
+      g.appendChild(t);
+      if (it.dot) g.appendChild(el('circle', { cx: x + cw - 13, cy: s.y + 7, r: 3, class: 'dot' }));
+      i++;
+    }
+  }
+  if (s.overlays) {
+    let ox = s.x + 14; const oy = s.ovlY || (s.y + h + 14);
+    g.appendChild(el('path', { d: `M${s.x + 6},${s.y + h} L${s.x + 6},${oy + 11} L${ox},${oy + 11}`, class: 'ln dash', style: 'stroke-width:1' }));
+    for (const o of s.overlays) {
+      const w = o.t.length * 11.5 + 22 + (o.dot ? 8 : 0);
+      g.appendChild(el('rect', { x: ox, y: oy, width: w, height: 22, rx: 11, class: o.sel ? 'ovlsel' : 'ovl' }));
+      g.appendChild(el('text', { x: ox + w / 2 - (o.dot ? 4 : 0), y: oy + 15, class: 'chevt' + (o.sel ? ' tb' : '') }, o.t));
+      if (o.dot) g.appendChild(el('circle', { cx: ox + w - 9, cy: oy + 11, r: 3, class: 'dot' }));
+      ox += w + 8;
+    }
+  }
+}
+// grid：s = {x, y, labelw, colw:[..], rowh, head:[..], headClass, rows:[{label, b, cells:[{v, k:'set'|'inh'|'warn'|'none'}]}]}
+function grid(sel, s) {
+  const g = document.querySelector(sel); const rh = s.rowh || 30; let y = s.y;
+  let x = s.x + s.labelw;
+  s.head.forEach((h, i) => { g.appendChild(el('text', { x: x + s.colw[i] / 2, y: y + 14, class: 'tiny', 'text-anchor': 'middle' }, h)); x += s.colw[i]; });
+  y += 22; g.appendChild(el('line', { x1: s.x, y1: y, x2: x, y2: y, class: 'rowline' }));
+  for (const r of s.rows) {
+    g.appendChild(el('text', { x: s.x + 4, y: y + rh / 2 + 4, class: r.b ? 'ts tb' : 'ts' }, r.label)); let cx = s.x + s.labelw;
+    r.cells.forEach((c, i) => {
+      const w = s.colw[i];
+      if (c && c.k !== 'none') {
+        const cls = c.k === 'set' ? 'cellset' : c.k === 'warn' ? 'cellwarn' : 'cellinh';
+        g.appendChild(el('rect', { x: cx + 4, y: y + 4, width: w - 8, height: rh - 8, rx: 3, class: cls }));
+        g.appendChild(el('text', { x: cx + w / 2, y: y + rh / 2 + 4, class: c.k === 'inh' ? 'cellti' : (c.k === 'warn' ? 'cellt tw' : 'cellt') }, c.v));
+      }
+      cx += w;
+    });
+    y += rh; g.appendChild(el('line', { x1: s.x, y1: y, x2: cx, y2: y, class: 'rowline' }));
+  }
+}
+// 常用的階段清單
+const PRE10 = ['早盤', '1 個月', '14 天', '7 天', '6 天', '5 天', '4 天', '3 天', '2 天', '比賽當天'].map(t => ({ t }));
+const PRE4 = ['早盤', '3 天', '2 天', '比賽當天'].map(t => ({ t }));
+const SOCCER = (opt = {}) => [
+  { label: '賽前', items: PRE10.map(p => ({ ...p, ...(opt[p.t] || {}) })) },
+  { label: '常規時間', items: [{ t: '上半場', ...(opt['上半場'] || {}) }, { t: '下半場', ...(opt['下半場'] || {}) }] },
+  { label: '加時賽', items: [{ t: ['加時賽', '上半場'], ...(opt['加時賽上半場'] || {}) }, { t: ['加時賽', '下半場'], ...(opt['加時賽下半場'] || {}) }] },
+  { label: '點球大戰', items: [{ t: '點球大戰', ...(opt['點球大戰'] || {}) }] },
+];
+const SOCCER_OVL = (opt = {}) => ['熱門時段', '中場休息', '紅牌後 3 分鐘', '比賽中斷'].map(t => ({ t, ...(opt[t] || {}) }));
+</script>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4fd1ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff9f43"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b9c7dc"/></marker>
+  <symbol id="person" viewBox="0 0 24 24"><circle class="person" cx="12" cy="7" r="4"/><path class="person" d="M4 22 a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="ico-lock" viewBox="0 0 24 24"><rect class="person" x="5" y="10" width="14" height="10" rx="2"/><path class="person" d="M8 10 V7 a4 4 0 0 1 8 0 V10"/></symbol>
+</defs></svg>
+
+<h1>12 玩法設定：概念圖</h1>
+<p class="meta"><b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a></p>
+<p class="disclaimer">本頁是概念示意，不約束資料模型、架構或介面；規則見 12 的 R12-01 起，圖中附規則編號。圖中的模板名稱、競賽、賽事與數字都是範例，數字取自 12 第 4 節的範例表。2026-11-05 從三份候選中挑出 7 張；12-03、12-04、12-05、12-06、12-07、12-08、12-11、12-13、12-15、12-17、12-18 曾屬未選用的候選，移除的編號不再使用。圖 12-09、12-10、12-12 以後台畫面的樣子示意，不是 11 與 10 的畫面。</p>
+<ol class="toc">
+  <li><a href="#fig-12-01">圖 12-01　模板是一個立方體：玩法 × 欄位 × 階段</a></li>
+  <li><a href="#fig-12-02">圖 12-02　階段軸展開：時間軸階段與疊加階段，由 InSports 依運動固定</a></li>
+  <li><a href="#fig-12-14">圖 12-14　賽前倒數：以日計的階段，比賽日依換日時刻換算</a></li>
+  <li><a href="#fig-12-09">圖 12-09　逐個切片看一格：設定值與生效值</a></li>
+  <li><a href="#fig-12-10">圖 12-10　指定頁：運動、競賽、賽事三個頁籤，較具體的一層優先</a></li>
+  <li><a href="#fig-12-12">圖 12-12　開出欄位與玩法開關的面板，以及開不開的結果燈</a></li>
+  <li><a href="#fig-12-16">圖 12-16　同一時刻，兩個經銷商的玩家各看到什麼</a></li>
+</ol>
+
+<!-- ============================================================ 圖 12-01 -->
+<section class="fig" id="fig-12-01">
+<h2>圖 12-01　模板是一個立方體：玩法 × 欄位 × 階段</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="模板的三個軸">
+<text x="40" y="30" class="tb">玩法設定模板「足球．一級」</text>
+<text x="230" y="30" class="ts">依運動分開、具名、共用；運動、競賽、賽事指向它（R12-01）</text>
+<!-- 後方的切片：每個階段一片 -->
+<rect x="116" y="96" width="520" height="270" rx="4" class="sliceback"/>
+<rect x="102" y="110" width="520" height="270" rx="4" class="sliceback"/>
+<rect x="88" y="124" width="520" height="270" rx="4" class="sliceback"/>
+<rect x="74" y="138" width="520" height="270" rx="4" class="sliceback"/>
+<text x="642" y="108" class="tiny">早盤</text>
+<text x="628" y="122" class="tiny">…　比賽當天</text>
+<text x="614" y="136" class="tiny">上半場</text>
+<text x="600" y="150" class="tiny">下半場　…</text>
+<text x="586" y="164" class="tiny">疊加階段各一片</text>
+<!-- 前方的切片 -->
+<rect x="60" y="152" width="520" height="270" rx="4" class="slice"/>
+<rect x="160" y="156" width="210" height="22" class="bandi"/><text x="265" y="171" class="tiny tinyi" text-anchor="middle">InSports 欄位：所有經銷商共用</text>
+<rect x="370" y="156" width="206" height="22" class="bandd"/><text x="473" y="171" class="tiny tinyi" text-anchor="middle">經銷商欄位：值是給經銷商的預設</text>
+<g id="g1201"></g>
+<text x="66" y="415" class="tiny">切片：某一個階段</text>
+<!-- 軸 -->
+<path d="M60,440 L580,440" class="ln" marker-end="url(#arr)"/><text x="320" y="458" class="ts" text-anchor="middle">欄位（欄）：每個欄位的意思由 05、06、02、07、08 定義</text>
+<path d="M40,422 L40,152" class="ln" marker-end="url(#arr)"/><text x="28" y="290" class="ts" transform="rotate(-90 28 290)" text-anchor="middle">玩法（列）</text>
+<path d="M596,430 L666,360" class="ln" marker-end="url(#arr)"/><text x="690" y="396" class="ts">階段（切片）</text>
+<text x="690" y="412" class="tiny">時間軸階段與疊加階段各一片（R12-03）</text>
+<!-- 右側說明 -->
+<rect x="700" y="60" width="220" height="118" rx="6" class="node"/>
+<text x="712" y="82" class="tb">整份模板一組的欄位</text>
+<text x="712" y="102" class="tiny">不分玩法與階段（R12-02）：</text>
+<text x="712" y="120" class="ts">各來源的賠率開關與權重</text>
+<text x="712" y="138" class="ts">校正來源與其權重</text>
+<text x="712" y="156" class="ts">價格等級 B 到 J 的水位加成</text>
+<rect x="700" y="196" width="220" height="86" rx="6" class="node"/>
+<text x="712" y="218" class="tb">一格＝一個值</text>
+<text x="712" y="238" class="ts">某玩法在某階段的某欄位</text>
+<text x="712" y="256" class="tiny">實線：此階段有設定</text>
+<text x="712" y="272" class="tiny">虛線：沒有設定，沿用前面的值</text>
+<rect x="700" y="300" width="220" height="86" rx="6" class="node"/>
+<text x="712" y="322" class="tb">「全部玩法」列</text>
+<text x="712" y="342" class="ts">每個欄位必有全部玩法的基本值</text>
+<text x="712" y="360" class="tiny">所以任何玩法在任何階段都有值，</text>
+<text x="712" y="376" class="tiny">目錄新增的玩法也是（R12-02）</text>
+<!-- 底部 -->
+<rect x="40" y="490" width="880" height="80" rx="6" class="panel"/>
+<text x="56" y="514" class="ts">模板分兩類欄位：<tspan class="tb">InSports 欄位</tspan>只在 InSports 的模板中，例如開出、拉近比例、系統單注上限、滾球等待秒數、逾時秒數、可否提前結算；</text>
+<text x="56" y="536" class="ts"><tspan class="tb">經銷商欄位</tspan>在 InSports 模板中的值是預設值，例如水位、跳水、盤口線數量、盤口限額、動態最大淨虧損、可否過關、可否提前兌現，</text>
+<text x="56" y="558" class="ts">經銷商可以用自己的模板整份取代（R12-08，圖 12-16）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：模板依運動分開、具名、共用；設定單位為「玩法 × 階段」的欄位在立方體裡一格一個值，整份模板一組的欄位在立方體外（R12-01、R12-02）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-02 -->
+<section class="fig" id="fig-12-02">
+<h2>圖 12-02　階段軸展開：時間軸階段與疊加階段，由 InSports 依運動固定</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="各運動的階段">
+<text x="40" y="30" class="tb">足球</text><text x="80" y="30" class="tiny">15 個時間軸階段＋4 種疊加階段</text>
+<g id="g1202a"></g>
+<text x="40" y="170" class="tb">網球</text><text x="80" y="170" class="tiny">對陣要到比賽前 3 天內才確定：賽前只分早盤、3 天、2 天、比賽當天；滾球依盤</text>
+<g id="g1202b"></g>
+<text x="40" y="300" class="tb">司諾克</text><text x="100" y="300" class="tiny">局數多且依賽事而定：滾球只有一個階段</text>
+<g id="g1202c"></g>
+<!-- 說明 -->
+<rect x="40" y="420" width="280" height="120" rx="6" class="node"/>
+<text x="52" y="442" class="tb">時間軸階段</text>
+<text x="52" y="462" class="tiny">一場賽事依序經過。賽前依距比賽日的天數分段，</text>
+<text x="52" y="478" class="tiny">以日計、不以時數計：同一天開賽的賽事都在同一階段。</text>
+<text x="52" y="494" class="tiny">滾球依 01 的時段清單中依序進行、互不重疊的時段</text>
+<text x="52" y="510" class="tiny">（R01-17）；沒有進行的時段不會進入。</text>
+<text x="52" y="526" class="tiny">某階段沒有設定時，沿用前一個階段的值（R12-04）。</text>
+<rect x="340" y="420" width="300" height="120" rx="6" class="node"/>
+<text x="352" y="442" class="tb">疊加階段</text>
+<text x="352" y="462" class="tiny">在特定時間或狀況下才生效，結束後回到時間軸的值。</text>
+<text x="352" y="478" class="tiny">共四種：熱門時段（比賽當天開賽前的一段時間）、</text>
+<text x="352" y="494" class="tiny">中場或節間休息、事件後的一段時間（例如紅牌後 3 分鐘）、</text>
+<text x="352" y="510" class="tiny">比賽中斷（雨停、技術暫停）。</text>
+<text x="352" y="526" class="tiny">時長與比賽日的換日時刻見非功能需求。</text>
+<rect x="660" y="420" width="260" height="120" rx="6" class="node"/>
+<use href="#ico-lock" x="672" y="428" width="18" height="18"/>
+<text x="696" y="442" class="tb">InSports 固定</text>
+<text x="672" y="462" class="tiny">各運動的階段由 InSports 定義，</text>
+<text x="672" y="478" class="tiny">Ops 與經銷商都不能增減，</text>
+<text x="672" y="494" class="tiny">只能在模板中為各階段設定值。</text>
+<text x="672" y="510" class="tiny">經銷商模板的階段與 InSports 相同</text>
+<text x="672" y="526" class="tiny">（R12-03、R12-08）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：階段分時間軸階段與疊加階段，各運動的清單由 InSports 固定；賽前以日計，滾球依時段清單，時段不依序或局數不定的運動只有一個「滾球」階段（R12-03）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-14 -->
+<section class="fig" id="fig-12-14">
+<h2>圖 12-14　賽前倒數：以日計的階段，比賽日依換日時刻換算</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="賽前的階段">
+<rect x="40" y="16" width="880" height="40" rx="6" class="node"/>
+<text x="56" y="42" class="tb">熱刺 vs 紐卡索（英超）</text><text x="260" y="42" class="ts">開賽：臺灣時間週日 03:00　｜　模板：足球．一級（讓分水位：基本值 5%、比賽當天 4%）</text>
+<g id="g1214"></g>
+<!-- 值的軌道 -->
+<text x="40" y="200" class="tiny">讓分的水位（生效值）</text>
+<line x1="40" y1="222" x2="832" y2="222" class="track"/><line x1="832" y1="222" x2="920" y2="222" class="track" style="stroke:var(--line);opacity:.9"/>
+<text x="436" y="212" class="ts" text-anchor="middle">5%：基本值，早盤到 2 天都沒有另設 → 一路沿用</text>
+<text x="876" y="212" class="ts tb" text-anchor="middle">4%</text>
+<text x="876" y="244" class="tiny" text-anchor="middle">比賽當天</text>
+<!-- 換日 -->
+<rect x="40" y="266" width="880" height="270" rx="8" class="card"/><rect x="40" y="266" width="880" height="30" rx="8" class="hdr"/>
+<text x="56" y="286" class="tb">「比賽當天」從什麼時候開始</text><text x="270" y="286" class="tiny">比賽日依 UTC-4 計，即臺灣時間 12:00 換日；熱門時段的時長見非功能需求</text>
+<!-- 時間尺：臺灣 週六 00:00 → 週日 06:00 -->
+<line x1="80" y1="400" x2="880" y2="400" class="sep"/>
+<text x="80" y="420" class="tiny" text-anchor="middle">臺灣 週六 00:00</text>
+<line x1="400" y1="392" x2="400" y2="408" class="sep"/><text x="400" y="420" class="tiny" text-anchor="middle">週六 12:00</text>
+<line x1="693" y1="392" x2="693" y2="408" class="sep"/><text x="693" y="420" class="tiny" text-anchor="middle">週六 23:00</text>
+<line x1="800" y1="392" x2="800" y2="408" class="sep"/><text x="800" y="420" class="tiny tb" text-anchor="middle">週日 03:00 開賽</text>
+<text x="880" y="420" class="tiny" text-anchor="middle">週日 06:00</text>
+<line x1="80" y1="360" x2="400" y2="360" class="track"/><text x="240" y="348" class="ts" text-anchor="middle">「2 天」：5%</text>
+<line x1="400" y1="360" x2="693" y2="360" class="track" style="stroke:var(--line);opacity:.9"/><text x="546" y="348" class="ts tb" text-anchor="middle">「比賽當天」：4%</text>
+<line x1="693" y1="360" x2="800" y2="360" class="track" style="stroke:var(--line);opacity:.9"/><text x="746" y="348" class="ts tb" text-anchor="middle">4%</text>
+<rect x="660" y="316" width="172" height="22" rx="11" class="ovlsel"/><text x="746" y="331" class="chevt tb">熱門時段（疊加）生效中</text>
+<line x1="800" y1="360" x2="880" y2="360" class="track" style="stroke:var(--line);opacity:.5"/><text x="840" y="348" class="tiny" text-anchor="middle">上半場 …</text>
+<text x="56" y="452" class="ts">① 臺灣時間週日 03:00 開賽，換算為 UTC-4 是週六 15:00 → 比賽日是週六。</text>
+<text x="56" y="474" class="ts">② 自臺灣時間週六 12:00（UTC-4 的 00:00）起進入「比賽當天」→ 讓分水位 4%。同一天開賽的賽事不論幾點開賽都在同一階段，不以距開賽的時數計。</text>
+<text x="56" y="496" class="ts">③ 週六 23:00 起進入熱門時段（疊加）：這份模板的熱門時段沒有設定值 → 不覆蓋，維持 4%；有設定值才覆蓋，即使比 4% 低也一樣。</text>
+<text x="56" y="522" class="tiny">（R12-03、R12-04、非功能需求的換日時刻與熱門時段時長）</text>
+</svg>
+<p class="cap"><b>圖說</b>：賽前階段依距比賽日的天數分段，以日計；比賽日依 UTC-4 換算，臺灣時間 12:00 換日；沒設定的階段沿用前一個階段的值，疊加階段有值才覆蓋（R12-03、R12-04）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-09 -->
+<section class="fig" id="fig-12-09">
+<h2>圖 12-09　逐個切片看一格：設定值與生效值</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="取值示意">
+<rect x="20" y="10" width="920" height="300" rx="8" class="card"/>
+<rect x="20" y="10" width="920" height="40" rx="8" class="hdr"/>
+<text x="36" y="36" class="tb">讓分 × 水位：每個切片顯示什麼</text><text x="260" y="36" class="tiny">設定：全部玩法基本值 6%；讓分在比賽當天 4%；全部玩法在下半場 7%；中場休息全部 5%；紅牌後 3 分鐘讓分 8%</text>
+<g id="g1209"></g>
+<text x="36" y="232" class="tiny">實線＝該切片有設定值　虛線＝沿用前面的生效值　空白＝這格在該切片沒有設定也不覆蓋</text>
+<text x="36" y="254" class="tiny">時間軸：個別玩法優先於全部玩法；沒設定沿用前一個階段；後面的階段覆蓋前面的，即使前面是個別、後面是全部玩法（下半場：讓分也變 7%）。</text>
+<text x="36" y="276" class="tiny">疊加階段：生效中且有值才覆蓋，即使比時間軸的值低；兩個同時生效（補時紅牌延續到中場）：水位取最高 8%，3 分鐘過後回到中場的 5%。</text>
+<text x="36" y="298" class="tiny">（R12-04）</text>
+<!-- 兩個疊加同時生效 -->
+<rect x="20" y="330" width="920" height="290" rx="8" class="card"/>
+<rect x="20" y="330" width="920" height="40" rx="8" class="hdr"/>
+<text x="36" y="356" class="tb">兩個以上疊加階段同時生效且都有值：各欄位怎麼取</text>
+<text x="36" y="392" class="tiny">欄位</text><text x="390" y="392" class="tiny">取法</text><text x="540" y="392" class="tiny">欄位</text><text x="820" y="392" class="tiny">取法</text>
+<line x1="36" y1="400" x2="924" y2="400" class="rowline"/>
+<text x="36" y="422" class="ts">水位</text><rect x="380" y="406" width="90" height="22" rx="11" class="badge"/><text x="425" y="421" class="chevt tb">取最高</text>
+<text x="540" y="422" class="ts">兌現折扣</text><rect x="810" y="406" width="90" height="22" rx="11" class="badge"/><text x="855" y="421" class="chevt">取高</text>
+<line x1="36" y1="434" x2="924" y2="434" class="rowline"/>
+<text x="36" y="456" class="ts">開出、可否過關、可否同場過關、可否提前兌現、可否提前結算</text><rect x="380" y="440" width="120" height="22" rx="11" class="badgew"/><text x="440" y="455" class="chevt tw">任一為否即為否</text>
+<text x="540" y="456" class="ts">盤口線數量</text><rect x="810" y="440" width="90" height="22" rx="11" class="badge"/><text x="855" y="455" class="chevt">取少</text>
+<line x1="36" y1="468" x2="924" y2="468" class="rowline"/>
+<text x="36" y="490" class="ts">盤口限額、動態最大淨虧損、系統單注上限、無覆蓋的限額百分比</text><rect x="380" y="474" width="90" height="22" rx="11" class="badge"/><text x="425" y="489" class="chevt">取低</text>
+<text x="540" y="490" class="ts">跳水的門檻</text><rect x="810" y="474" width="90" height="22" rx="11" class="badge"/><text x="855" y="489" class="chevt">取低</text>
+<line x1="36" y1="502" x2="924" y2="502" class="rowline"/>
+<text x="36" y="524" class="ts">滾球等待秒數</text><rect x="380" y="508" width="90" height="22" rx="11" class="badge"/><text x="425" y="523" class="chevt">取高</text>
+<text x="540" y="524" class="ts">跳水的每步、上限、歸零時間</text><rect x="810" y="508" width="90" height="22" rx="11" class="badge"/><text x="855" y="523" class="chevt">取高</text>
+<line x1="36" y1="536" x2="924" y2="536" class="rowline"/>
+<text x="36" y="558" class="ts">逾時秒數</text><rect x="380" y="542" width="90" height="22" rx="11" class="badge"/><text x="425" y="557" class="chevt">取低</text>
+<text x="540" y="558" class="ts">拉近比例</text><rect x="810" y="542" width="90" height="22" rx="11" class="badge"/><text x="855" y="557" class="chevt">取高</text>
+<line x1="36" y1="570" x2="924" y2="570" class="rowline"/>
+<text x="36" y="596" class="tiny">原則：水位取最高，其他欄位一律取較保守的值（R12-04）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：同一格在各切片的設定值與生效值；兩個以上疊加階段同時生效時，水位取最高、其他欄位取較保守的值（R12-04）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-10 -->
+<section class="fig" id="fig-12-10">
+<h2>圖 12-10　指定頁：運動、競賽、賽事三個頁籤，較具體的一層優先</h2>
+<svg viewBox="0 0 960 700" width="100%" role="img" aria-label="指定頁示意">
+<rect x="20" y="10" width="920" height="620" rx="8" class="card"/>
+<rect x="20" y="10" width="920" height="40" rx="8" class="hdr"/>
+<text x="36" y="36" class="tb">模板的指定</text><text x="130" y="36" class="tiny">InSports 操盤後台（示意，不是 11 的畫面）</text>
+<rect x="36" y="62" width="70" height="26" rx="4" class="tabsel"/><text x="71" y="80" class="ts tb" text-anchor="middle">運動</text>
+<rect x="112" y="62" width="70" height="26" rx="4" class="tabsel"/><text x="147" y="80" class="ts tb" text-anchor="middle">競賽</text>
+<rect x="188" y="62" width="70" height="26" rx="4" class="tabsel"/><text x="223" y="80" class="ts tb" text-anchor="middle">賽事</text>
+<line x1="270" y1="64" x2="270" y2="86" class="sep"/>
+<rect x="282" y="62" width="80" height="26" rx="4" class="btn"/><text x="322" y="80" class="ts" text-anchor="middle">模板 →</text>
+<text x="924" y="80" class="tiny" text-anchor="end">三個頁籤一起畫，實際是分開的頁</text>
+<!-- 運動 -->
+<rect x="36" y="104" width="420" height="150" rx="6" class="node"/>
+<text x="48" y="126" class="tb">運動</text><text x="90" y="126" class="tiny">每個運動必須指向一份：該運動的預設模板</text>
+<line x1="48" y1="136" x2="444" y2="136" class="rowline"/>
+<text x="48" y="158" class="ts">足球</text><rect x="240" y="144" width="200" height="22" rx="4" class="btn"/><text x="250" y="160" class="ts">足球．預設</text><text x="430" y="160" class="tiny" text-anchor="end">▾</text>
+<text x="48" y="190" class="ts">籃球</text><rect x="240" y="176" width="200" height="22" rx="4" class="btn"/><text x="250" y="192" class="ts">籃球．預設</text><text x="430" y="192" class="tiny" text-anchor="end">▾</text>
+<text x="48" y="222" class="ts">網球</text><rect x="240" y="208" width="200" height="22" rx="4" class="btn"/><text x="250" y="224" class="ts">網球．預設</text><text x="430" y="224" class="tiny" text-anchor="end">▾</text>
+<text x="48" y="246" class="tiny">競賽與賽事沒有指向時，一路沿用到這裡（R12-05）</text>
+<!-- 等級對應 -->
+<rect x="480" y="104" width="444" height="150" rx="6" class="node"/>
+<text x="492" y="126" class="tb">足球：競賽等級與模板的對應</text><text x="700" y="126" class="tiny">依運動設定（R12-06）</text>
+<line x1="492" y1="136" x2="912" y2="136" class="rowline"/>
+<text x="492" y="158" class="ts">1 級</text><rect x="600" y="144" width="200" height="22" rx="4" class="btn"/><text x="610" y="160" class="ts">足球．一級</text>
+<text x="492" y="190" class="ts">2 級</text><rect x="600" y="176" width="200" height="22" rx="4" class="btn"/><text x="610" y="192" class="ts">足球．二級</text>
+<text x="492" y="222" class="ts">3 級</text><rect x="600" y="208" width="200" height="22" rx="4" class="cellinh"/><text x="610" y="224" class="ts" style="fill:var(--soft)">（沒有對應 → 沿用預設模板）</text>
+<text x="492" y="246" class="tiny">只看競賽等級，參賽方等級不用於模板</text>
+<!-- 競賽 -->
+<rect x="36" y="272" width="888" height="150" rx="6" class="node"/>
+<text x="48" y="294" class="tb">競賽</text><text x="90" y="294" class="tiny">足球　第一次設等級時指向對應的模板；之後再改等級，由 Ops 決定是否改指，已有的指定不自動改</text>
+<text x="48" y="318" class="tiny">競賽</text><text x="300" y="318" class="tiny">等級</text><text x="420" y="318" class="tiny">模板</text><text x="680" y="318" class="tiny">怎麼來的</text>
+<line x1="48" y1="326" x2="912" y2="326" class="rowline"/>
+<circle cx="56" cy="346" r="5" class="light"/><text x="68" y="350" class="ts">英超</text><text x="300" y="350" class="ts">1</text><rect x="420" y="336" width="230" height="22" rx="4" class="btn"/><text x="430" y="352" class="ts">足球．一級</text><text x="640" y="352" class="tiny" text-anchor="end">▾</text><text x="680" y="350" class="tiny">設為 1 級時指向（R12-06）</text>
+<circle cx="56" cy="376" r="5" class="lighto"/><text x="68" y="380" class="ts">某盃賽</text><text x="300" y="380" class="ts tw">未分級</text><rect x="420" y="366" width="230" height="22" rx="4" class="cellinh"/><text x="430" y="382" class="ts" style="fill:var(--soft)">沿用　足球．預設</text><text x="680" y="380" class="tiny">新建立，不指向（01 的 R01-32）</text>
+<circle cx="56" cy="406" r="5" class="light"/><text x="68" y="410" class="ts">西甲</text><text x="300" y="410" class="ts">2 → 1</text><rect x="420" y="396" width="230" height="22" rx="4" class="btn"/><text x="430" y="412" class="ts">足球．二級</text><text x="640" y="412" class="tiny" text-anchor="end">▾</text><text x="680" y="410" class="tiny tw">等級改了，指定沒自動改</text>
+<!-- 賽事 -->
+<rect x="36" y="440" width="888" height="176" rx="6" class="node"/>
+<text x="48" y="462" class="tb">賽事</text><text x="90" y="462" class="tiny">足球　2026-11-07　賽事指向自己的模板時優先於競賽；沒有指向就沿用競賽的</text>
+<text x="48" y="486" class="tiny">競賽：英超　競賽 → 足球．一級</text>
+<line x1="48" y1="494" x2="912" y2="494" class="rowline"/>
+<text x="60" y="516" class="ts">熱刺 vs 紐卡索</text><rect x="420" y="502" width="230" height="22" rx="4" class="btn"/><text x="430" y="518" class="ts">熱刺 vs 紐卡索 專用</text><text x="640" y="518" class="tiny" text-anchor="end">▾</text><text x="680" y="516" class="tiny">賽事自己的模板（複製自 足球．一級）</text>
+<text x="60" y="546" class="ts">阿森納 vs 車路士</text><rect x="420" y="532" width="230" height="22" rx="4" class="cellinh"/><text x="430" y="548" class="ts" style="fill:var(--soft)">沿用　足球．一級</text><text x="680" y="546" class="tiny">沿用競賽的模板</text>
+<text x="48" y="576" class="tiny">競賽：某盃賽　競賽未分級 → 足球．預設</text>
+<line x1="48" y1="584" x2="912" y2="584" class="rowline"/>
+<text x="60" y="606" class="ts">甲隊 vs 乙隊</text><rect x="420" y="592" width="230" height="22" rx="4" class="cellinh"/><text x="430" y="608" class="ts" style="fill:var(--soft)">沿用　足球．預設</text><text x="680" y="606" class="tiny">沿用競賽，競賽再沿用運動</text>
+<!-- 封存 -->
+<rect x="20" y="640" width="920" height="50" rx="8" class="ghost"/>
+<text x="36" y="660" class="ts tw">模板清單預設不列已封存的模板：只被賽事指向的模板（例如「熱刺 vs 紐卡索 專用」）在該賽事的注單全部結算完成後滿 30 天自動封存，</text>
+<text x="36" y="680" class="ts tw">不能再指定，仍可查詢（R12-07）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：運動必須指向預設模板；競賽第一次設等級時依對應指向，未分級與之後改等級都不自動改；賽事指向自己的模板時優先，沒有就沿用；只被賽事指向的模板結算後滿 30 天封存（R12-05 至 R12-07）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-12 -->
+<section class="fig" id="fig-12-12">
+<h2>圖 12-12　開出欄位與玩法開關的面板，以及開不開的結果燈</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="開出與開關示意">
+<!-- 開出 -->
+<rect x="20" y="10" width="440" height="250" rx="8" class="card"/>
+<rect x="20" y="10" width="440" height="40" rx="8" class="hdr"/>
+<text x="36" y="36" class="tb">模板「足球．三級以下」的開出</text><text x="270" y="36" class="tiny">常態，依玩法 × 階段</text>
+<g id="g1212"></g>
+<text x="36" y="214" class="tiny">為否：該玩法在該階段不開盤，已開盤的關閉。</text>
+<text x="36" y="230" class="tiny">為是：只表示不擋，仍依其他規則（R12-09）。</text>
+<text x="36" y="250" class="tiny">修改開出要改模板；臨時的關閉用右邊的開關。</text>
+<!-- 開關 -->
+<rect x="480" y="10" width="460" height="250" rx="8" class="card"/>
+<rect x="480" y="10" width="460" height="40" rx="8" class="hdr"/>
+<text x="496" y="36" class="tb">玩法開關</text><text x="580" y="36" class="tiny">不在模板內；運動、競賽、賽事三層，任一層關閉就不開</text>
+<text x="496" y="70" class="tiny">層</text><text x="600" y="70" class="tiny">玩法</text><text x="840" y="70" class="tiny">開關</text>
+<line x1="496" y1="78" x2="924" y2="78" class="rowline"/>
+<text x="496" y="102" class="ts">運動　足球</text><text x="600" y="102" class="ts">落後反勝</text><rect x="830" y="90" width="36" height="18" rx="9" class="btn"/><circle cx="857" cy="99" r="7" class="toggle-off"/><text x="874" y="103" class="tiny tw">關</text>
+<text x="496" y="122" class="tiny">取不到賽果（01 的 R01-18）→ 所有足球賽事都不開</text>
+<line x1="496" y1="130" x2="924" y2="130" class="rowline"/>
+<text x="496" y="154" class="ts">競賽　英超</text><text x="600" y="154" class="ts">角球大小</text><rect x="830" y="142" width="36" height="18" rx="9" class="btn"/><circle cx="857" cy="151" r="7" class="toggle-off"/><text x="874" y="155" class="tiny tw">關</text>
+<text x="496" y="174" class="tiny">只關英超 → 其他競賽照常，模板不必修改</text>
+<line x1="496" y1="182" x2="924" y2="182" class="rowline"/>
+<text x="496" y="206" class="ts">賽事　某場友誼賽</text><text x="600" y="206" class="ts">推導的玩法</text><rect x="830" y="194" width="36" height="18" rx="9" class="btn"/><circle cx="857" cy="203" r="7" class="toggle-off"/><text x="874" y="207" class="tiny tw">關</text>
+<text x="496" y="226" class="tiny">推導不適用（05 的 R05-05）；操盤手的關閉也在這層（05 的 R05-11）</text>
+<line x1="496" y1="234" x2="924" y2="234" class="rowline"/>
+<text x="496" y="252" class="tiny">開啟只表示不擋。經銷商自己的開關見 10（R10-03），只影響該經銷商。</text>
+<!-- 結果 -->
+<rect x="20" y="280" width="920" height="300" rx="8" class="card"/>
+<rect x="20" y="280" width="920" height="40" rx="8" class="hdr"/>
+<text x="36" y="306" class="tb">結果：某玩法在某賽事開不開</text><text x="260" y="306" class="tiny">模板的開出為否，或任一層開關關閉，就不開盤；已成立的注單照常結算（R12-10）</text>
+<text x="36" y="340" class="tiny">玩法 @ 賽事（階段）</text><text x="400" y="340" class="tiny">開出</text><text x="480" y="340" class="tiny">運動</text><text x="550" y="340" class="tiny">競賽</text><text x="620" y="340" class="tiny">賽事</text><text x="700" y="340" class="tiny">結果</text>
+<line x1="36" y1="348" x2="924" y2="348" class="rowline"/>
+<text x="36" y="372" class="ts">角球大小 @ 三級競賽的賽事（下半場）</text><text x="400" y="372" class="ts tw">否</text><circle cx="490" cy="368" r="5" class="light"/><circle cx="560" cy="368" r="5" class="light"/><circle cx="630" cy="368" r="5" class="light"/><rect x="700" y="356" width="220" height="22" rx="11" class="badgew"/><text x="810" y="371" class="chevt tw">不開盤：模板的開出為否</text>
+<line x1="36" y1="384" x2="924" y2="384" class="rowline"/>
+<text x="36" y="408" class="ts">角球大小 @ 三級競賽的賽事（賽前）</text><text x="400" y="408" class="ts">是</text><circle cx="490" cy="404" r="5" class="light"/><circle cx="560" cy="404" r="5" class="light"/><circle cx="630" cy="404" r="5" class="light"/><rect x="700" y="392" width="220" height="22" rx="11" class="badge"/><text x="810" y="407" class="chevt">開盤（其他規則允許時）</text>
+<line x1="36" y1="420" x2="924" y2="420" class="rowline"/>
+<text x="36" y="444" class="ts">落後反勝 @ 任何足球賽事</text><text x="400" y="444" class="ts">是</text><circle cx="490" cy="440" r="5" class="lightw"/><circle cx="560" cy="440" r="5" class="light"/><circle cx="630" cy="440" r="5" class="light"/><rect x="700" y="428" width="220" height="22" rx="11" class="badgew"/><text x="810" y="443" class="chevt tw">不開盤：運動層關閉</text>
+<line x1="36" y1="456" x2="924" y2="456" class="rowline"/>
+<text x="36" y="480" class="ts">角球大小 @ 英超的賽事（賽前）</text><text x="400" y="480" class="ts">是</text><circle cx="490" cy="476" r="5" class="light"/><circle cx="560" cy="476" r="5" class="lightw"/><circle cx="630" cy="476" r="5" class="light"/><rect x="700" y="464" width="220" height="22" rx="11" class="badgew"/><text x="810" y="479" class="chevt tw">不開盤：競賽層關閉</text>
+<line x1="36" y1="492" x2="924" y2="492" class="rowline"/>
+<text x="36" y="516" class="ts">讓分 @ 英超的賽事（賽前）</text><text x="400" y="516" class="ts">是</text><circle cx="490" cy="512" r="5" class="light"/><circle cx="560" cy="512" r="5" class="light"/><circle cx="630" cy="512" r="5" class="light"/><rect x="700" y="500" width="220" height="22" rx="11" class="badge"/><text x="810" y="515" class="chevt">開盤（其他規則允許時）</text>
+<line x1="36" y1="528" x2="924" y2="528" class="rowline"/>
+<text x="36" y="556" class="tiny">狀態燈：</text><circle cx="90" cy="552" r="5" class="light"/><text x="100" y="556" class="tiny">該層開</text><circle cx="160" cy="552" r="5" class="lightw"/><text x="170" y="556" class="tiny">該層關</text>
+<text x="300" y="556" class="tiny">InSports 關閉時所有經銷商都不開盤；經銷商自己關閉只影響自己（R12-10）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：開出是模板的欄位，用於常態；玩法開關在模板外、分三層，用於臨時或只針對一處；任一為否就不開盤，已成立的注單照常結算（R12-09、R12-10）。</p>
+</section>
+
+<!-- ============================================================ 圖 12-16 -->
+<section class="fig" id="fig-12-16">
+<h2>圖 12-16　同一時刻，兩個經銷商的玩家各看到什麼</h2>
+<svg viewBox="0 0 960 540" width="100%" role="img" aria-label="經銷商看到的值">
+<!-- InSports -->
+<rect x="230" y="16" width="500" height="120" rx="8" class="card"/><rect x="230" y="16" width="500" height="30" rx="8" class="hdr"/>
+<text x="246" y="36" class="tb">InSports：英超 → 足球．一級（比賽當天的切片）</text>
+<rect x="246" y="56" width="230" height="70" class="bandi"/><text x="361" y="76" class="tiny tinyi" text-anchor="middle">InSports 欄位</text>
+<text x="361" y="98" class="ts" text-anchor="middle">開出：是　拉近比例：0.5</text><text x="361" y="118" class="ts" text-anchor="middle">滾球等待秒數：5</text>
+<rect x="484" y="56" width="230" height="70" class="bandd"/><text x="599" y="76" class="tiny tinyi" text-anchor="middle">經銷商欄位（預設值）</text>
+<text x="599" y="98" class="ts" text-anchor="middle">水位：4%　盤口線數量：5</text><text x="599" y="118" class="ts" text-anchor="middle">可否過關：是</text>
+<path d="M361,136 L240,200" class="ln" marker-end="url(#arr)"/><text x="270" y="162" class="tiny">InSports 欄位</text>
+<path d="M361,136 L720,200" class="ln" marker-end="url(#arr)"/><text x="600" y="162" class="tiny">InSports 欄位</text>
+<path d="M599,136 L720,200" class="ln dash" marker-end="url(#arr)"/><text x="690" y="186" class="tiny">經銷商欄位的預設值</text>
+<!-- AS -->
+<rect x="40" y="202" width="420" height="250" rx="8" class="card"/><rect x="40" y="202" width="420" height="30" rx="8" class="hdr"/>
+<text x="56" y="222" class="tb">經銷商 AS</text><text x="150" y="222" class="tiny">在足球指定了自己的模板「AS．足球」（運動層命中）</text>
+<text x="56" y="252" class="tiny">欄位</text><text x="200" y="252" class="tiny">值</text><text x="300" y="252" class="tiny">取自</text>
+<line x1="56" y1="260" x2="444" y2="260" class="rowline"/>
+<text x="56" y="282" class="ts">開出</text><text x="200" y="282" class="ts">是</text><text x="300" y="282" class="tiny">足球．一級（InSports）</text>
+<text x="56" y="306" class="ts">拉近比例</text><text x="200" y="306" class="ts">0.5</text><text x="300" y="306" class="tiny">足球．一級（InSports）</text>
+<line x1="56" y1="316" x2="444" y2="316" class="rowline"/>
+<text x="56" y="338" class="ts">水位</text><rect x="190" y="324" width="60" height="22" rx="4" class="cellset"/><text x="220" y="339" class="cellt tb">3%</text><text x="300" y="338" class="tiny">AS．足球</text>
+<text x="56" y="366" class="ts">盤口線數量</text><rect x="190" y="352" width="60" height="22" rx="4" class="cellset"/><text x="220" y="367" class="cellt tb">7</text><text x="300" y="366" class="tiny">AS．足球（最多 7）</text>
+<text x="56" y="394" class="ts">可否過關</text><rect x="190" y="380" width="60" height="22" rx="4" class="cellset"/><text x="220" y="395" class="cellt tb">否</text><text x="300" y="394" class="tiny">AS．足球</text>
+<line x1="56" y1="406" x2="444" y2="406" class="rowline"/>
+<text x="56" y="428" class="tiny">InSports 另為英超指定了模板，但 AS 在足球層已命中，</text>
+<text x="56" y="444" class="tiny">經銷商欄位整份用 AS．足球，不逐格比對。</text>
+<!-- B -->
+<rect x="500" y="202" width="420" height="250" rx="8" class="card"/><rect x="500" y="202" width="420" height="30" rx="8" class="hdr"/>
+<text x="516" y="222" class="tb">經銷商 B</text><text x="600" y="222" class="tiny">運動、競賽、賽事三層都沒有指定自己的模板</text>
+<text x="516" y="252" class="tiny">欄位</text><text x="660" y="252" class="tiny">值</text><text x="760" y="252" class="tiny">取自</text>
+<line x1="516" y1="260" x2="904" y2="260" class="rowline"/>
+<text x="516" y="282" class="ts">開出</text><text x="660" y="282" class="ts">是</text><text x="760" y="282" class="tiny">足球．一級（InSports）</text>
+<text x="516" y="306" class="ts">拉近比例</text><text x="660" y="306" class="ts">0.5</text><text x="760" y="306" class="tiny">足球．一級（InSports）</text>
+<line x1="516" y1="316" x2="904" y2="316" class="rowline"/>
+<text x="516" y="338" class="ts">水位</text><rect x="650" y="324" width="60" height="22" rx="4" class="cellinh"/><text x="680" y="339" class="cellti">4%</text><text x="760" y="338" class="tiny">足球．一級 的預設值</text>
+<text x="516" y="366" class="ts">盤口線數量</text><rect x="650" y="352" width="60" height="22" rx="4" class="cellinh"/><text x="680" y="367" class="cellti">5</text><text x="760" y="366" class="tiny">足球．一級 的預設值</text>
+<text x="516" y="394" class="ts">可否過關</text><rect x="650" y="380" width="60" height="22" rx="4" class="cellinh"/><text x="680" y="395" class="cellti">是</text><text x="760" y="394" class="tiny">足球．一級 的預設值</text>
+<line x1="516" y1="406" x2="904" y2="406" class="rowline"/>
+<text x="516" y="428" class="tiny">沒有指定時沿用 InSports 的模板：</text>
+<text x="516" y="444" class="tiny">採用 InSports 依 R12-05 解析出的模板中的經銷商欄位。</text>
+<!-- 底 -->
+<text x="40" y="488" class="ts">InSports 欄位對所有經銷商都一樣；經銷商欄位可以比預設寬鬆或嚴格，InSports 不設上下限，只有盤口線數量最多 7 條（05 的 R05-13）。</text>
+<g transform="rotate(-6 130 100)"><rect x="40" y="82" width="180" height="36" rx="6" class="stamp"/><text x="130" y="106" class="stampt">整份採用，不逐格覆寫</text></g>
+<text x="40" y="524" class="tiny">（R12-08）</text>
+</svg>
+<p class="cap"><b>圖說</b>：InSports 欄位一律用 InSports 指定的模板；經銷商欄位先看經銷商自己的指定，命中就整份採用，三層都沒有才用 InSports 模板裡的預設值（R12-08）。</p>
+</section>
+
+<script>
+grid('#g1201', { x: 64, y: 180, labelw: 96, colw: [70, 70, 70, 70, 70, 70], head: ['開出', '拉近比例', '等待秒數', '水位', '盤口線數量', '盤口限額'], rows: [
+  { label: '全部玩法', b: true, cells: [{ v: '是', k: 'set' }, { v: '0.5', k: 'set' }, { v: '5', k: 'set' }, { v: '6%', k: 'set' }, { v: '5', k: 'set' }, { v: '1 萬', k: 'set' }] },
+  { label: '讓分', cells: [{ v: '是', k: 'inh' }, { v: '0.5', k: 'inh' }, { v: '5', k: 'inh' }, { v: '4%', k: 'set' }, { v: '5', k: 'inh' }, { v: '2 萬', k: 'set' }] },
+  { label: '大小', cells: [{ v: '是', k: 'inh' }, { v: '0.5', k: 'inh' }, { v: '5', k: 'inh' }, { v: '5%', k: 'set' }, { v: '5', k: 'inh' }, { v: '1 萬', k: 'inh' }] },
+  { label: '角球大小', cells: [{ v: '否', k: 'warn' }, { v: '0.5', k: 'inh' }, { v: '5', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '5', k: 'inh' }, { v: '1 萬', k: 'inh' }] },
+  { label: '波膽', cells: [{ v: '是', k: 'inh' }, { v: '0.5', k: 'inh' }, { v: '5', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '5', k: 'inh' }, { v: '1 萬', k: 'inh' }] },
+  { label: '落後反勝', cells: [{ v: '是', k: 'inh' }, { v: '0.5', k: 'inh' }, { v: '5', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '5', k: 'inh' }, { v: '1 萬', k: 'inh' }] },
+] });
+strip('#g1202a', { x: 40, y: 60, w: 880, groups: SOCCER(), overlays: SOCCER_OVL() });
+strip('#g1202b', { x: 40, y: 200, w: 558, groups: [{ label: '賽前', items: PRE4 }, { label: '盤', items: ['第 1 盤', '第 2 盤', '第 3 盤', '第 4 盤', '第 5 盤'].map(t => ({ t })) }], overlays: [{ t: '熱門時段' }, { t: '比賽中斷' }] });
+strip('#g1202c', { x: 40, y: 330, w: 682, groups: [{ label: '賽前', items: PRE10 }, { label: '滾球', items: [{ t: '滾球' }] }], overlays: [{ t: '熱門時段' }, { t: '比賽中斷' }] });
+grid('#g1209', { x: 36, y: 60, labelw: 150, colw: [92, 92, 92, 92, 92, 92, 92, 92], head: ['基本值', '早盤 … 2 天', '比賽當天', '上半場', '下半場', '中場休息', '紅牌後 3 分鐘', '兩者同時'], rows: [
+  { label: '全部玩法（設定值）', b: true, cells: [{ v: '6%', k: 'set' }, null, null, null, { v: '7%', k: 'set' }, { v: '5%', k: 'set' }, null, null] },
+  { label: '讓分（設定值）', b: true, cells: [null, null, { v: '4%', k: 'set' }, null, null, null, { v: '8%', k: 'set' }, null] },
+  { label: '讓分（生效值）', cells: [{ v: '6%', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '4%', k: 'set' }, { v: '4%', k: 'inh' }, { v: '7%', k: 'set' }, { v: '5%', k: 'set' }, { v: '8%', k: 'set' }, { v: '8% 取高', k: 'set' }] },
+  { label: '其他玩法（生效值）', cells: [{ v: '6%', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '6%', k: 'inh' }, { v: '7%', k: 'set' }, { v: '5%', k: 'set' }, { v: '不覆蓋', k: 'inh' }, { v: '5%', k: 'set' }] },
+] });
+grid('#g1212', { x: 36, y: 60, labelw: 110, colw: [90, 90, 90], head: ['賽前', '上半場', '下半場'], rows: [
+  { label: '全部玩法', b: true, cells: [{ v: '是', k: 'set' }, { v: '是', k: 'set' }, { v: '是', k: 'set' }] },
+  { label: '角球大小', cells: [{ v: '是', k: 'inh' }, { v: '否', k: 'warn' }, { v: '否', k: 'warn' }] },
+  { label: '落後反勝', cells: [{ v: '是', k: 'inh' }, { v: '是', k: 'inh' }, { v: '是', k: 'inh' }] },
+  { label: '讓分', cells: [{ v: '是', k: 'inh' }, { v: '是', k: 'inh' }, { v: '是', k: 'inh' }] },
+] });
+strip('#g1214', { x: 40, y: 100, w: 880, groups: [{ label: '賽前：依距比賽日的天數，以日計', items: PRE10.map(p => p.t === '比賽當天' ? { ...p, sel: true, dot: true } : p) }], overlays: [{ t: '熱門時段', sel: true }] });
+</script>
+
+</div>
+</body>
+</html>

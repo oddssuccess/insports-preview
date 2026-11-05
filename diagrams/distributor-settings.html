@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10 經銷商設定：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+/* 場景劇情與儀表板的補充樣式（與 bet-acceptance.html 相同） */
+svg .ico { stroke: var(--line); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .ico.w { stroke: var(--warn); }
+svg .pnl { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .num { fill: var(--line); }
+svg .numt { font-size: 13px; font-weight: 700; fill: var(--bg); }
+svg .ptitle { font-size: 13px; font-weight: 700; }
+svg .bub { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .bubw { fill: var(--panel); stroke: var(--warn); stroke-width: 1; stroke-dasharray: 4 3; }
+svg .bt { font-size: 12px; }
+svg .char { fill: none; stroke: var(--line); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+svg .charw { fill: none; stroke: var(--warn); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 4 3; }
+svg .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+svg .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+svg .st { font-size: 13px; font-weight: 700; fill: var(--line); }
+svg .stw { font-size: 13px; font-weight: 700; fill: var(--warn); }
+svg .ext { fill: var(--panel); stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+svg .tiny { font-size: 11px; fill: var(--soft); }
+/* 本頁新增：後台視窗、欄位、燈號、鎖頭 */
+svg .win { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .winbar { fill: rgba(79,209,255,.08); stroke: none; }
+svg .field { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .fieldset { fill: rgba(79,209,255,.14); stroke: var(--line); stroke-width: 1; }
+svg .fieldinh { fill: none; stroke: var(--soft); stroke-width: 1; stroke-dasharray: 3 3; }
+svg .rowline { stroke: rgba(79,209,255,.18); stroke-width: 1; }
+svg .lamp { fill: var(--line); } svg .lampw { fill: var(--warn); } svg .lampo { fill: none; stroke: var(--soft); stroke-width: 1.2; }
+svg .gate { fill: var(--panel); stroke: var(--line); stroke-width: 1.4; }
+svg .gatew { fill: var(--panel); stroke: var(--warn); stroke-width: 1.4; }
+svg .badge { fill: rgba(79,209,255,.16); stroke: var(--line); stroke-width: 1; }
+svg .badgeg { fill: none; stroke: var(--soft); stroke-width: 1; }
+svg .badgew { fill: rgba(255,159,67,.16); stroke: var(--warn); stroke-width: 1; }
+svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: round; }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#4fd1ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ff9f43"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b9c7dc"/></marker>
+  <symbol id="ch-ply" viewBox="0 0 40 64"><circle cx="20" cy="14" r="9"/><path d="M6,62 L6,40 Q6,29 17,29 L23,29 Q34,29 34,40 L34,62"/><path d="M6,42 L1,54"/><path d="M34,42 L39,54"/><path d="M14,10 Q20,4 26,10"/></symbol>
+  <symbol id="ch-ops" viewBox="0 0 40 64"><circle cx="20" cy="14" r="9"/><path d="M11,14 Q11,3 20,3 Q29,3 29,14"/><path d="M29,14 L29,19 Q29,23 25,23"/><path d="M6,62 L6,40 Q6,29 17,29 L23,29 Q34,29 34,40 L34,62"/><path d="M6,42 L1,54"/><path d="M34,42 L39,54"/></symbol>
+  <symbol id="ch-sys" viewBox="0 0 40 64"><rect x="3" y="12" width="34" height="26" rx="3"/><path d="M20,38 L20,48"/><path d="M10,50 L30,50"/><path d="M9,20 L21,20"/><path d="M9,26 L27,26"/><path d="M9,32 L17,32"/></symbol>
+</defs></svg>
+
+<h1>10 經銷商設定：概念圖</h1>
+<p class="meta"><b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10 經銷商設定</a></p>
+<p class="disclaimer">本頁是概念示意，不約束資料模型、架構或介面；規則見 10 的 R10-01 起，圖中附規則編號。圖中的經銷商（AS、B）、名稱與金額都是範例，取自 10 第 4 節的範例表。畫成後台樣式的圖只是示意，不是 11 的畫面，也不是經銷商後台的 wireframe。灰色虛線代表範圍外（營運商層）。</p>
+<ol class="toc">
+  <li><a href="#fig-10-01">圖 10-01　兩個入口，同一份設定：經銷商後台與主操盤後台代辦</a></li>
+  <li><a href="#fig-10-02">圖 10-02　經銷商能做什麼、不能做什麼</a></li>
+  <li><a href="#fig-10-03">圖 10-03　名稱的三層：InSports 的名稱、經銷商的覆寫、玩家看到的</a></li>
+  <li><a href="#fig-10-04">圖 10-04　兩道閘門串聯：InSports 的開關與經銷商的開關</a></li>
+  <li><a href="#fig-10-05">圖 10-05　經銷商可以覆寫的三組設定，各自放在哪裡</a></li>
+  <li><a href="#fig-10-06">圖 10-06　六個經銷商情境與判定</a></li>
+</ol>
+
+<section class="fig" id="fig-10-01">
+<h2>圖 10-01　兩個入口，同一份設定：經銷商後台與主操盤後台代辦</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="經銷商後台與主操盤後台代辦">
+<!-- 左：經銷商後台 -->
+<rect x="40" y="30" width="400" height="230" rx="8" class="win"/><rect x="40" y="30" width="400" height="30" rx="8" class="winbar"/>
+<text x="56" y="50" class="tb">經銷商後台</text><text x="150" y="50" class="tiny">登入：經銷商 AS ／ 王小明</text>
+<use href="#ch-ply" x="60" y="76" width="30" height="48" class="char"/>
+<text x="104" y="90" class="ts">AS 自己操作</text>
+<text x="104" y="118" class="ts">只看得到 AS 的設定、賽事與注單</text>
+<text x="56" y="160" class="tb">最低投注額</text><rect x="170" y="144" width="110" height="24" rx="4" class="fieldset"/><text x="225" y="161" text-anchor="middle" class="tb">50</text><text x="292" y="160" class="tiny">AS 幣別</text>
+<text x="56" y="196" class="tb">提供的賠率格式</text><rect x="170" y="180" width="60" height="24" rx="12" class="badge"/><text x="200" y="197" text-anchor="middle" class="bt">馬來盤</text><rect x="236" y="180" width="60" height="24" rx="12" class="badge"/><text x="266" y="197" text-anchor="middle" class="bt">香港盤</text><rect x="302" y="180" width="60" height="24" rx="12" class="badgeg"/><text x="332" y="197" text-anchor="middle" class="bt">歐洲盤</text>
+<text x="56" y="236" class="tiny">看不到：其他經銷商、InSports 欄位（系統單注上限、等待秒數…）</text>
+<!-- 右：主操盤後台 -->
+<rect x="520" y="30" width="400" height="230" rx="8" class="win"/><rect x="520" y="30" width="400" height="30" rx="8" class="winbar"/>
+<text x="536" y="50" class="tb">主操盤後台</text><text x="640" y="50" class="tiny">登入：InSports ／ Ops 林</text>
+<use href="#ch-ops" x="540" y="76" width="30" height="48" class="char"/>
+<text x="584" y="90" class="ts">InSports 人員代辦</text>
+<text x="584" y="112" class="tiny">代辦對象</text><rect x="640" y="98" width="130" height="22" rx="4" class="field"/><text x="650" y="113" class="bt">經銷商 AS ▾</text>
+<text x="536" y="160" class="tb">最低投注額</text><rect x="650" y="144" width="110" height="24" rx="4" class="fieldset"/><text x="705" y="161" text-anchor="middle" class="tb">60</text><text x="772" y="160" class="tiny">AS 幣別</text>
+<text x="536" y="196" class="tb">提供的賠率格式</text><rect x="650" y="180" width="60" height="24" rx="12" class="badge"/><text x="680" y="197" text-anchor="middle" class="bt">馬來盤</text><rect x="716" y="180" width="60" height="24" rx="12" class="badge"/><text x="746" y="197" text-anchor="middle" class="bt">香港盤</text><rect x="782" y="180" width="60" height="24" rx="12" class="badgeg"/><text x="812" y="197" text-anchor="middle" class="bt">歐洲盤</text>
+<text x="536" y="236" class="tiny">同一張表單，多一個「代辦對象」；效果與 AS 自己操作相同</text>
+<!-- 匯流 -->
+<path d="M240,262 L240,300 L480,300 L480,330" class="ln" marker-end="url(#arr)"/>
+<path d="M720,262 L720,300 L480,300" class="ln"/>
+<rect x="300" y="332" width="360" height="54" rx="6" class="node"/><rect x="303" y="335" width="354" height="48" rx="4" class="node2"/>
+<text x="480" y="354" text-anchor="middle" class="tb">AS 的設定（同一份）</text>
+<text x="480" y="374" text-anchor="middle" class="ts">最低投注額 60　·　賠率格式：馬來盤、香港盤</text>
+<!-- 紀錄 -->
+<rect x="40" y="414" width="880" height="120" rx="8" class="panel"/>
+<text x="56" y="438" class="tb">設定變更紀錄（AS 與 InSports 都看得到；09 的 R09-04 收集）</text>
+<line x1="56" y1="448" x2="904" y2="448" class="rowline"/>
+<text x="56" y="470" class="tiny">11-05 10:12</text><text x="150" y="470" class="ts">AS ／ 王小明</text><text x="330" y="470" class="ts">最低投注額　30 → 50</text>
+<text x="56" y="496" class="tiny">11-05 14:03</text><text x="150" y="496" class="ts">InSports ／ Ops 林</text><rect x="290" y="482" width="96" height="20" rx="10" class="badge"/><text x="338" y="496" text-anchor="middle" class="bt">代辦：AS</text><text x="400" y="496" class="ts">最低投注額　50 → 60</text>
+<text x="56" y="522" class="tiny">代辦的紀錄記下實際操作的 InSports 人員與被代辦的經銷商；兩種入口的紀錄放在同一處。</text>
+<text x="880" y="552" text-anchor="end" class="tiny">（R10-05）</text>
+</svg>
+<p class="cap"><b>圖說</b>：經銷商的每一項設定都有兩個入口：經銷商自己在經銷商後台操作，或由 InSports 人員在主操盤後台代辦，效果相同，改的是同一份設定；代辦的紀錄記下操作者與被代辦的經銷商，雙方都看得到。經銷商後台看不到其他經銷商，也看不到 InSports 欄位（R10-05）。</p>
+</section>
+
+<section class="fig" id="fig-10-02">
+<h2>圖 10-02　經銷商能做什麼、不能做什麼</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="經銷商的責任矩陣">
+<!-- 左：可以 -->
+<rect x="40" y="24" width="430" height="540" rx="6" class="panel"/>
+<text x="255" y="52" text-anchor="middle" class="tb">經銷商可以做的（自己做或 InSports 代辦）</text>
+<line x1="60" y1="64" x2="450" y2="64" class="sep"/>
+<g>
+  <circle cx="84" cy="92" r="12" class="chip"/><text x="84" y="97" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="97" class="tb">顯示名稱與圖示（R10-06、R10-07）</text>
+  <text x="104" y="115" class="ts">運動、競賽、參賽方、玩法、投注項的各語言顯示名稱；預設圖示。</text>
+</g>
+<g>
+  <circle cx="84" cy="146" r="12" class="chip"/><text x="84" y="151" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="151" class="tb">排序與開關（R10-02、R10-03、R10-08）</text>
+  <text x="104" y="169" class="ts">運動與競賽的排序或重置；運動正常／暫停；競賽、賽事、</text>
+  <text x="104" y="185" class="ts">玩法、盤口的關閉；虛擬運動整體的開關。只能擋，不能放行。</text>
+</g>
+<g>
+  <circle cx="84" cy="216" r="12" class="chip"/><text x="84" y="221" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="221" class="tb">自己的玩法設定模板（R10-09、12 的 R12-08）</text>
+  <text x="104" y="239" class="ts">水位、跳水、盤口線數量（最多 7）、盤口限額、淨賠付與最高賠付、</text>
+  <text x="104" y="255" class="ts">單張最高派彩、可否過關／同場過關、可否提前兌現與兌現折扣、</text>
+  <text x="104" y="271" class="ts">價格等級 B 到 J 的水位加成。整份覆寫 InSports 的經銷商欄位。</text>
+</g>
+<g>
+  <circle cx="84" cy="302" r="12" class="chip"/><text x="84" y="307" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="307" class="tb">一般設定（R10-01、R10-04、R10-10、R10-13）</text>
+  <text x="104" y="325" class="ts">提供的賠率格式；最低投注額；過關的最高派彩與最高淨贏；</text>
+  <text x="104" y="341" class="ts">給營運商的限額預設值（InSports 不檢查）。</text>
+</g>
+<g>
+  <circle cx="84" cy="372" r="12" class="chip"/><text x="84" y="377" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="377" class="tb">偏移（R10-11）</text>
+  <text x="104" y="395" class="ts">對自己的盤口或盤口線加正負偏移（定價流程第 6 步）；</text>
+  <text x="104" y="411" class="ts">只改自己玩家的價格。</text>
+</g>
+<g>
+  <circle cx="84" cy="440" r="12" class="chip"/><text x="84" y="445" text-anchor="middle" class="tb">✓</text>
+  <text x="104" y="445" class="tb">看自己的資料</text>
+  <text x="104" y="463" class="ts">自己的設定、賽事、注單、結算結果與入帳狀態（07）。</text>
+</g>
+<rect x="60" y="480" width="390" height="64" rx="6" class="node"/><rect x="63" y="483" width="384" height="58" rx="4" class="node2"/>
+<text x="255" y="505" text-anchor="middle" class="tb">共同的前提</text>
+<text x="255" y="527" text-anchor="middle" class="ts">只影響自己的玩家；InSports 與其他經銷商不受影響（R10-08）。</text>
+<!-- 右：不能 -->
+<rect x="500" y="24" width="420" height="540" rx="6" class="ghost"/>
+<text x="710" y="52" text-anchor="middle" class="tb tw">經銷商不能做的（R10-14）</text>
+<line x1="520" y1="64" x2="900" y2="64" class="sep"/>
+<g>
+  <circle cx="544" cy="92" r="12" class="chipw"/><text x="544" y="97" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="97" class="tw">動目錄</text>
+  <text x="564" y="115" class="ts">新增或修改運動、投注規則、玩法、投注項、競賽、參賽方；</text>
+  <text x="564" y="131" class="ts">改基準名稱、屬性、等級、個別圖示；停用競賽；設為不支援。</text>
+</g>
+<g>
+  <circle cx="544" cy="162" r="12" class="chipw"/><text x="544" y="167" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="167" class="tw">動基礎賠率與 InSports 欄位</text>
+  <text x="564" y="185" class="ts">基礎賠率、InSports 價格、模型；開出、來源權重、校正、</text>
+  <text x="564" y="201" class="ts">系統單注上限、等待秒數等 InSports 欄位：改不了也看不到。</text>
+</g>
+<g>
+  <circle cx="544" cy="232" r="12" class="chipw"/><text x="544" y="237" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="237" class="tw">放行 InSports 關掉的</text>
+  <text x="564" y="255" class="ts">InSports 暫停、關閉、停用或不支援的，經銷商開不了；</text>
+  <text x="564" y="271" class="ts">也不能增減階段、逐格覆寫模板、開超過 7 條盤口線。</text>
+</g>
+<g>
+  <circle cx="544" cy="302" r="12" class="chipw"/><text x="544" y="307" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="307" class="tw">動注單</text>
+  <text x="564" y="325" class="ts">作廢、重新結算、暫緩結算、人工結算、回轉兌現、</text>
+  <text x="564" y="341" class="ts">取消或修改注單，都是 Ops 的事（07、08）。</text>
+</g>
+<g>
+  <circle cx="544" cy="372" r="12" class="chipw"/><text x="544" y="377" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="377" class="tw">參與風控、看報表</text>
+  <text x="564" y="395" class="ts">看不到玩家標記、條件與佇列，不能標記玩家（09）；</text>
+  <text x="564" y="411" class="ts">第一版沒有自助查詢報表（11 的 R11-08）。</text>
+</g>
+<g>
+  <circle cx="544" cy="442" r="12" class="chipw"/><text x="544" y="447" text-anchor="middle" class="tb tw">✕</text>
+  <text x="564" y="447" class="tw">管個別玩家與營運商層</text>
+  <text x="564" y="465" class="ts">玩家的限額、黑名單、價格等級由營運商端執行；</text>
+  <text x="564" y="481" class="ts">營運商的幣別與占成在範圍外。</text>
+</g>
+<text x="564" y="530" class="tiny">不論從經銷商後台還是由 InSports 人員代辦都一樣。</text>
+<!-- 底 -->
+<circle cx="52" cy="596" r="4" class="dot"/>
+<text x="66" y="601" class="ts">分辨的原則：目錄、基礎賠率、InSports 欄位、注單的處理與風控是 InSports 的；在那之上「給自己的玩家看什麼、收不收、收多少」是經銷商的。</text>
+<text x="880" y="628" text-anchor="end" class="tiny">（R10-01 至 R10-14）</text>
+</svg>
+<p class="cap"><b>圖說</b>：左邊是經銷商能做的六類，右邊是明列不能做的六類；共同的前提是只影響自己的玩家。目錄、基礎賠率、InSports 欄位、注單處理與風控永遠是 InSports 的（R10-14、R10-01 至 R10-13）。</p>
+</section>
+
+<section class="fig" id="fig-10-03">
+<h2>圖 10-03　名稱的三層：InSports 的名稱、經銷商的覆寫、玩家看到的</h2>
+<svg viewBox="0 0 960 500" width="100%" role="img" aria-label="顯示名稱的覆寫與沿用">
+<!-- 欄標 -->
+<rect x="40" y="24" width="270" height="36" rx="6" class="node"/><text x="175" y="47" text-anchor="middle" class="tb">InSports 的名稱（01 的 R01-30）</text>
+<rect x="345" y="24" width="270" height="36" rx="6" class="node"/><text x="480" y="47" text-anchor="middle" class="tb">經銷商 AS 的覆寫（R10-06）</text>
+<rect x="650" y="24" width="270" height="36" rx="6" class="node"/><text x="785" y="47" text-anchor="middle" class="tb">AS 的玩家看到的</text>
+<path d="M312,42 L343,42" class="ln" marker-end="url(#arr)"/><path d="M617,42 L648,42" class="ln" marker-end="url(#arr)"/>
+<!-- 競賽：英超 -->
+<rect x="40" y="80" width="880" height="170" rx="8" class="panel"/>
+<text x="56" y="102" class="tb">競賽</text><text x="92" y="102" class="ts">基準名稱來自賽程來源：</text><text x="236" y="102" class="mono">Premier League</text>
+<rect x="356" y="94" width="11" height="8" rx="1.5" class="lock"/><path d="M358.5,94 V91.5 a3 3 0 0 1 6 0 V94" class="lock"/><text x="374" y="102" class="tiny">基準名稱任何人都不能改</text>
+<line x1="56" y1="112" x2="904" y2="112" class="rowline"/>
+<text x="56" y="136" class="tiny">英文</text><rect x="110" y="122" width="190" height="22" rx="4" class="field"/><text x="120" y="137" class="bt">Premier League</text>
+<rect x="355" y="122" width="250" height="22" rx="4" class="fieldinh"/><text x="480" y="137" text-anchor="middle" class="tiny">（沒有覆寫）</text>
+<rect x="660" y="122" width="250" height="22" rx="4" class="field"/><text x="670" y="137" class="bt">Premier League</text><text x="800" y="137" class="tiny">← InSports 的英文</text>
+<text x="56" y="166" class="tiny">繁體中文</text><rect x="110" y="152" width="190" height="22" rx="4" class="field"/><text x="120" y="167" class="bt">英超</text>
+<rect x="355" y="152" width="250" height="22" rx="4" class="fieldset"/><text x="365" y="167" class="bt tb">英格蘭超級聯賽</text>
+<rect x="660" y="152" width="250" height="22" rx="4" class="fieldset"/><text x="670" y="167" class="bt tb">英格蘭超級聯賽</text><text x="800" y="167" class="tiny">← AS 的覆寫</text>
+<text x="56" y="196" class="tiny">泰文</text><rect x="110" y="182" width="190" height="22" rx="4" class="field"/><text x="120" y="197" class="bt">พรีเมียร์ลีก</text>
+<rect x="355" y="182" width="250" height="22" rx="4" class="fieldinh"/><text x="480" y="197" text-anchor="middle" class="tiny">（沒有覆寫）</text>
+<rect x="660" y="182" width="250" height="22" rx="4" class="field"/><text x="670" y="197" class="bt">พรีเมียร์ลีก</text><text x="800" y="197" class="tiny">← InSports 的泰文</text>
+<text x="56" y="226" class="tiny">越南文</text><rect x="110" y="212" width="190" height="22" rx="4" class="fieldinh"/><text x="205" y="227" text-anchor="middle" class="tiny">（InSports 也沒有）</text>
+<rect x="355" y="212" width="250" height="22" rx="4" class="fieldinh"/><text x="480" y="227" text-anchor="middle" class="tiny">（沒有覆寫）</text>
+<rect x="660" y="212" width="250" height="22" rx="4" class="field"/><text x="670" y="227" class="bt mono">Premier League</text><text x="800" y="227" class="tiny">← 基準名稱</text>
+<!-- 玩法 -->
+<rect x="40" y="270" width="880" height="96" rx="8" class="panel"/>
+<text x="56" y="292" class="tb">玩法與投注項</text><text x="150" y="292" class="ts">以目錄為單位，對所有運動與賽事生效，不逐場覆寫</text>
+<line x1="56" y1="302" x2="904" y2="302" class="rowline"/>
+<text x="56" y="326" class="tiny">繁體中文</text><rect x="110" y="312" width="190" height="22" rx="4" class="field"/><text x="120" y="327" class="bt">讓分</text>
+<rect x="355" y="312" width="250" height="22" rx="4" class="fieldset"/><text x="365" y="327" class="bt tb">讓球</text>
+<rect x="660" y="312" width="250" height="22" rx="4" class="fieldset"/><text x="670" y="327" class="bt tb">讓球</text><text x="800" y="327" class="tiny">← AS 的覆寫</text>
+<text x="56" y="356" class="tiny">英文</text><rect x="110" y="342" width="190" height="22" rx="4" class="field"/><text x="120" y="357" class="bt">Handicap</text>
+<rect x="355" y="342" width="250" height="22" rx="4" class="fieldinh"/><text x="480" y="357" text-anchor="middle" class="tiny">（沒有覆寫）</text>
+<rect x="660" y="342" width="250" height="22" rx="4" class="field"/><text x="670" y="357" class="bt">Handicap</text><text x="800" y="357" class="tiny">← 目錄的英文</text>
+<!-- 圖示 -->
+<rect x="40" y="386" width="880" height="60" rx="8" class="panel"/>
+<text x="56" y="410" class="tb">預設圖示（R10-07）</text>
+<text x="56" y="432" class="ts">競賽或參賽方沒有圖示時：先用 AS 的預設圖示，AS 沒有設定時用 InSports 的系統預設圖示；個別競賽與參賽方的圖示由 Ops 上傳，AS 不能動。</text>
+<!-- 底 -->
+<circle cx="52" cy="470" r="4" class="dot"/>
+<text x="66" y="475" class="ts">取值順序：AS 該語言的覆寫 → InSports 該語言的名稱 → 基準名稱。覆寫只影響 AS 的玩家；語言清單由 InSports 固定，不能新增語言。</text>
+<text x="880" y="495" text-anchor="end" class="tiny">（R10-06、R10-07、01 的 R01-30、R01-33）</text>
+</svg>
+<p class="cap"><b>圖說</b>：經銷商依語言覆寫顯示名稱，沒有覆寫的語言顯示 InSports 的名稱，InSports 也沒有時顯示基準名稱；基準名稱任何人都不能改。玩法與投注項的覆寫以目錄為單位。預設圖示也是先經銷商、後 InSports（R10-06、R10-07、01 的 R01-30、R01-33）。</p>
+</section>
+
+<section class="fig" id="fig-10-04">
+<h2>圖 10-04　兩道閘門串聯：InSports 的開關與經銷商的開關</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="InSports 與經銷商的開關串聯">
+<!-- 管線 -->
+<rect x="40" y="40" width="150" height="60" rx="6" class="node"/><rect x="43" y="43" width="144" height="54" rx="4" class="node2"/>
+<text x="115" y="66" text-anchor="middle" class="tb">某場賽事的某玩法</text><text x="115" y="86" text-anchor="middle" class="ts">例：英超某場角球大小</text>
+<path d="M192,70 L250,70" class="ln" marker-end="url(#arr)"/>
+<rect x="252" y="24" width="260" height="92" rx="6" class="gate"/>
+<text x="382" y="48" text-anchor="middle" class="tb">閘門 1：InSports 的開關</text>
+<text x="382" y="68" text-anchor="middle" class="ts">運動營運狀態、競賽停用、操盤手暫停／關閉、</text>
+<text x="382" y="84" text-anchor="middle" class="ts">模板的開出、三層玩法開關、待取消與待腰斬</text>
+<text x="382" y="104" text-anchor="middle" class="tiny">（01、05、12）</text>
+<path d="M514,70 L572,70" class="ln" marker-end="url(#arr)"/>
+<rect x="574" y="24" width="260" height="92" rx="6" class="gate"/>
+<text x="704" y="48" text-anchor="middle" class="tb">閘門 2：經銷商 AS 的開關</text>
+<text x="704" y="68" text-anchor="middle" class="ts">運動正常／暫停、競賽、賽事、玩法、盤口，</text>
+<text x="704" y="84" text-anchor="middle" class="ts">虛擬運動整體</text>
+<text x="704" y="104" text-anchor="middle" class="tiny">（R10-03、R10-08）</text>
+<path d="M836,70 L880,70" class="ln" marker-end="url(#arr)"/>
+<text x="900" y="66" text-anchor="middle" class="ts">AS 的</text><text x="900" y="82" text-anchor="middle" class="ts">玩家</text>
+<!-- 三個情境 -->
+<text x="56" y="160" class="tb">三種情形</text>
+<text x="330" y="160" text-anchor="middle" class="tiny">閘門 1</text><text x="560" y="160" text-anchor="middle" class="tiny">閘門 2（AS）</text><text x="760" y="160" text-anchor="middle" class="tiny">AS 的玩家</text><text x="890" y="160" text-anchor="middle" class="tiny">經銷商 B 的玩家</text>
+<line x1="56" y1="170" x2="904" y2="170" class="rowline"/>
+<!-- 1 -->
+<text x="56" y="200" class="ts">1　兩邊都開</text>
+<circle cx="330" cy="196" r="9" class="lamp"/><text x="350" y="200" class="ts">開</text>
+<circle cx="560" cy="196" r="9" class="lamp"/><text x="580" y="200" class="ts">開</text>
+<rect x="710" y="184" width="100" height="24" rx="12" class="badge"/><text x="760" y="201" text-anchor="middle" class="bt">開盤</text>
+<rect x="840" y="184" width="100" height="24" rx="12" class="badge"/><text x="890" y="201" text-anchor="middle" class="bt">開盤</text>
+<!-- 2 -->
+<text x="56" y="244" class="ts">2　InSports 關，AS 想開</text>
+<circle cx="330" cy="240" r="9" class="lampw"/><text x="350" y="244" class="ts tw">關</text>
+<circle cx="560" cy="240" r="9" class="lampo"/><text x="580" y="244" class="ts">開（沒有用）</text>
+<rect x="710" y="228" width="100" height="24" rx="12" class="badgew"/><text x="760" y="245" text-anchor="middle" class="bt tw">不開盤</text>
+<rect x="840" y="228" width="100" height="24" rx="12" class="badgew"/><text x="890" y="245" text-anchor="middle" class="bt tw">不開盤</text>
+<text x="56" y="264" class="tiny">經銷商的開關只能擋，不能放行：InSports 關的，所有經銷商都不開盤（12 的 R12-10）。</text>
+<!-- 3 -->
+<text x="56" y="304" class="ts">3　InSports 開，AS 關</text>
+<circle cx="330" cy="300" r="9" class="lamp"/><text x="350" y="304" class="ts">開</text>
+<circle cx="560" cy="300" r="9" class="lampw"/><text x="580" y="304" class="ts tw">關</text>
+<rect x="710" y="288" width="100" height="24" rx="12" class="badgew"/><text x="760" y="305" text-anchor="middle" class="bt tw">不開盤</text>
+<rect x="840" y="288" width="100" height="24" rx="12" class="badge"/><text x="890" y="305" text-anchor="middle" class="bt">開盤</text>
+<text x="56" y="324" class="tiny">只影響 AS 自己的玩家；InSports 之後再關再開，AS 關的仍然關著，直到 AS 自己開。</text>
+<!-- 效果 -->
+<rect x="40" y="356" width="880" height="110" rx="8" class="panel"/>
+<text x="56" y="380" class="tb">經銷商關閉或暫停的效果（R10-03，與 01 的暫停相同）</text>
+<rect x="56" y="396" width="260" height="50" rx="6" class="node"/><text x="186" y="418" text-anchor="middle" class="ts">不產生該經銷商的賠率</text><text x="186" y="436" text-anchor="middle" class="tiny">玩家端看不到或顯示暫停</text>
+<rect x="340" y="396" width="260" height="50" rx="6" class="node"/><text x="470" y="418" text-anchor="middle" class="ts">不接受新注單</text><text x="470" y="436" text-anchor="middle" class="tiny">06 的 R06-02「盤口狀態」擋下</text>
+<rect x="624" y="396" width="280" height="50" rx="6" class="node"/><text x="764" y="418" text-anchor="middle" class="ts">已成立的注單照常結算</text><text x="764" y="436" text-anchor="middle" class="tiny">不作廢、不退款（07）</text>
+<!-- 底 -->
+<circle cx="52" cy="500" r="4" class="dot"/>
+<text x="66" y="505" class="ts">經銷商的開關分運動（只能正常／暫停，不能不支援）、競賽、賽事、玩法、盤口，另有虛擬運動整體一個；任一層關閉，其下的一切就不開盤。</text>
+<text x="880" y="545" text-anchor="end" class="tiny">（R10-03、R10-08）</text>
+</svg>
+<p class="cap"><b>圖說</b>：兩道閘門串聯，InSports 的在前、經銷商的在後，都開才開盤；經銷商的開關只能擋，不能放行 InSports 關掉的，也只影響自己的玩家。關閉的效果與 01 的暫停相同：不產生賠率、不接受新注單、已成立的注單照常結算（R10-03、R10-08）。</p>
+</section>
+
+<section class="fig" id="fig-10-05">
+<h2>圖 10-05　經銷商可以覆寫的三組設定，各自放在哪裡</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="經銷商可以覆寫的設定分組">
+<!-- 三組 -->
+<rect x="40" y="24" width="280" height="330" rx="8" class="panel"/>
+<text x="180" y="50" text-anchor="middle" class="tb">賠率</text><line x1="56" y1="60" x2="304" y2="60" class="sep"/>
+<rect x="56" y="74" width="248" height="26" rx="4" class="ext"/><text x="68" y="91" class="bt">玩法開關</text><text x="296" y="91" text-anchor="end" class="tiny">開關</text>
+<rect x="56" y="108" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="125" class="bt">可否過關、可否同場過關</text><text x="296" y="125" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="142" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="159" class="bt">水位</text><text x="296" y="159" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="176" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="193" class="bt">價格等級 B 到 J 的水位加成</text><text x="296" y="193" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="210" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="227" class="bt">盤口線數量（最多 7 條）</text><text x="296" y="227" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="244" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="261" class="bt">可否提前兌現、兌現折扣</text><text x="296" y="261" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="278" width="248" height="26" rx="4" class="ext"/><text x="68" y="295" class="bt">偏移</text><text x="296" y="295" text-anchor="end" class="tiny">盤口上的操作</text>
+<text x="56" y="330" class="tiny">提前結算不在這裡：InSports 欄位（07）。</text>
+
+<rect x="340" y="24" width="280" height="330" rx="8" class="panel"/>
+<text x="480" y="50" text-anchor="middle" class="tb">收注</text><line x1="356" y1="60" x2="604" y2="60" class="sep"/>
+<rect x="356" y="74" width="248" height="26" rx="4" class="fieldset"/><text x="368" y="91" class="bt">跳水的門檻、每步、上限、歸零</text><text x="596" y="91" text-anchor="end" class="tiny">模板</text>
+<rect x="356" y="108" width="248" height="26" rx="4" class="fieldset"/><text x="368" y="125" class="bt">盤口限額（單張風險金額）</text><text x="596" y="125" text-anchor="end" class="tiny">模板</text>
+<rect x="356" y="142" width="248" height="26" rx="4" class="fieldset"/><text x="368" y="159" class="bt">單張最高派彩（封頂）</text><text x="596" y="159" text-anchor="end" class="tiny">模板</text>
+<rect x="356" y="176" width="248" height="26" rx="4" class="field"/><text x="368" y="193" class="bt">最低投注額</text><text x="596" y="193" text-anchor="end" class="tiny">一般設定</text>
+<rect x="356" y="210" width="248" height="26" rx="4" class="ext"/><text x="368" y="227" class="bt">給營運商的限額預設值</text><text x="596" y="227" text-anchor="end" class="tiny">一般設定・不檢查</text>
+<text x="356" y="262" class="tiny">單次＝盤口限額，限的是風險金額；</text>
+<text x="356" y="278" class="tiny">封頂＝單張最高派彩，限的是派彩金額。</text>
+<text x="356" y="306" class="tiny">兩者都依玩法 × 階段，在 06 的接受檢查中比對；</text>
+<text x="356" y="322" class="tiny">會超過就整張拒絕，不接受一部分。</text>
+
+<rect x="640" y="24" width="280" height="330" rx="8" class="panel"/>
+<text x="780" y="50" text-anchor="middle" class="tb">風控</text><line x1="656" y1="60" x2="904" y2="60" class="sep"/>
+<rect x="656" y="74" width="248" height="26" rx="4" class="fieldset"/><text x="668" y="91" class="bt">玩法的最高賠付</text><text x="896" y="91" text-anchor="end" class="tiny">模板</text>
+<rect x="656" y="108" width="248" height="26" rx="4" class="fieldset"/><text x="668" y="125" class="bt">玩法的淨賠付（動態最大淨虧損）</text><text x="896" y="125" text-anchor="end" class="tiny">模板</text>
+<rect x="656" y="142" width="248" height="26" rx="4" class="fieldset"/><text x="668" y="159" class="bt">賽事全玩法的最高賠付與淨賠付</text><text x="896" y="159" text-anchor="end" class="tiny">模板</text>
+<rect x="656" y="176" width="248" height="26" rx="4" class="field"/><text x="668" y="193" class="bt">過關的最高派彩</text><text x="896" y="193" text-anchor="end" class="tiny">一般設定</text>
+<rect x="656" y="210" width="248" height="26" rx="4" class="field"/><text x="668" y="227" class="bt">過關的最高淨贏</text><text x="896" y="227" text-anchor="end" class="tiny">一般設定</text>
+<text x="656" y="262" class="tiny">最高賠付＝最不利賽果下須派彩的總額；</text>
+<text x="656" y="278" class="tiny">淨賠付＝再減去已收的風險金額。</text>
+<text x="656" y="306" class="tiny">單場／玩法的是累計的曝險上限；</text>
+<text x="656" y="322" class="tiny">過關的是一張注單的上限，跨玩法，不在模板。</text>
+<!-- 承載 -->
+<rect x="40" y="380" width="430" height="120" rx="8" class="node"/><rect x="43" y="383" width="424" height="114" rx="4" class="node2"/>
+<rect x="56" y="396" width="60" height="22" rx="4" class="fieldset"/><text x="86" y="411" text-anchor="middle" class="tiny">模板</text>
+<text x="128" y="411" class="tb">AS 的玩法設定模板（12 的 R12-08）</text>
+<text x="56" y="440" class="ts">只含經銷商欄位，依玩法 × 階段；指定給運動、競賽或賽事，</text>
+<text x="56" y="458" class="ts">整份取代 InSports 模板的經銷商欄位；沒有指定時用 InSports 的預設值。</text>
+<text x="56" y="484" class="tiny">取值與優先順序見圖 12-16。</text>
+<rect x="490" y="380" width="430" height="120" rx="8" class="node"/><rect x="493" y="383" width="424" height="114" rx="4" class="node2"/>
+<rect x="506" y="396" width="70" height="22" rx="4" class="field"/><text x="541" y="411" text-anchor="middle" class="tiny">一般設定</text>
+<text x="590" y="411" class="tb">AS 的一般設定</text>
+<text x="506" y="440" class="ts">每個經銷商一個值，以經銷商的幣別計，不依玩法與階段：</text>
+<text x="506" y="458" class="ts">最低投注額、過關的最高派彩與最高淨贏、給營運商的預設值、</text>
+<text x="506" y="476" class="ts">提供的賠率格式；另有開關與偏移是盤口上的操作，不是設定值。</text>
+<!-- 底 -->
+<circle cx="52" cy="534" r="4" class="dot"/>
+<text x="66" y="539" class="ts">經銷商欄位都可以比 InSports 的預設值寬鬆或嚴格，InSports 不設上下限；唯一的例外是盤口線數量最多 7 條（05 的 R05-13）。</text>
+<text x="880" y="585" text-anchor="end" class="tiny">（R10-09、R10-10、12 的 R12-08）</text>
+</svg>
+<p class="cap"><b>圖說</b>：經銷商可以覆寫的設定分賠率、收注、風控三組；依玩法與階段的放在自己的玩法設定模板（整份覆寫），跨玩法的放在一般設定，開關與偏移是盤口上的操作。提前結算是 InSports 欄位，不在其中（R10-09、R10-10、12 的 R12-08）。</p>
+</section>
+
+<section class="fig" id="fig-10-06">
+<h2>圖 10-06　六個經銷商情境與判定</h2>
+<svg viewBox="0 0 960 660" width="100%" role="img" aria-label="六個經銷商情境">
+<!-- P1 -->
+<g>
+  <rect x="15" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="32" r="11" class="num"/><text x="33" y="37" text-anchor="middle" class="numt">1</text>
+  <text x="52" y="37" class="ptitle">請 InSports 幫忙改名</text>
+  <use href="#ch-ply" x="27" y="60" width="26" height="42" class="char"/>
+  <rect x="64" y="64" width="232" height="44" rx="6" class="bub"/><text x="74" y="82" class="bt">AS：幫我把英超改成</text><text x="74" y="98" class="bt">「英格蘭超級聯賽」</text>
+  <use href="#ch-ops" x="27" y="122" width="26" height="42" class="char"/>
+  <rect x="64" y="126" width="232" height="44" rx="6" class="bub"/><text x="74" y="144" class="bt">Ops 林在主操盤後台選 AS 代辦</text><text x="74" y="160" class="bt">改的是 AS 自己那份名稱</text>
+  <text x="31" y="206" class="ts">效果與 AS 自己改相同</text>
+  <text x="31" y="224" class="ts">紀錄記下 Ops 林與代辦對象 AS</text>
+  <text x="31" y="242" class="ts">（R10-05、R10-06）</text>
+  <rect x="165" y="278" width="134" height="30" rx="4" class="stamp"/><text x="232" y="298" text-anchor="middle" class="st">可以：代辦</text>
+</g>
+<!-- P2 -->
+<g>
+  <rect x="330" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="32" r="11" class="num"/><text x="348" y="37" text-anchor="middle" class="numt">2</text>
+  <text x="367" y="37" class="ptitle">把「讓分」改叫「讓球」</text>
+  <use href="#ch-ply" x="342" y="60" width="26" height="42" class="char"/>
+  <rect x="379" y="64" width="232" height="44" rx="6" class="bub"/><text x="389" y="82" class="bt">AS：繁體中文的「讓分」</text><text x="389" y="98" class="bt">我的站要顯示「讓球」</text>
+  <use href="#ch-sys" x="342" y="122" width="26" height="42" class="char"/>
+  <rect x="379" y="126" width="232" height="44" rx="6" class="bub"/><text x="389" y="144" class="bt">繁中玩家看到「讓球」</text><text x="389" y="160" class="bt">英文玩家仍看目錄的 Handicap</text>
+  <text x="346" y="206" class="ts">玩法名稱依語言覆寫，以目錄為單位</text>
+  <text x="346" y="224" class="ts">其他經銷商不受影響</text>
+  <text x="346" y="242" class="ts">（R10-06）</text>
+  <rect x="480" y="278" width="134" height="30" rx="4" class="stamp"/><text x="547" y="298" text-anchor="middle" class="st">可以：覆寫名稱</text>
+</g>
+<!-- P3 -->
+<g>
+  <rect x="645" y="10" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="32" r="11" class="num"/><text x="663" y="37" text-anchor="middle" class="numt">3</text>
+  <text x="682" y="37" class="ptitle">InSports 關了，AS 想開</text>
+  <use href="#ch-sys" x="657" y="60" width="26" height="42" class="charw"/>
+  <rect x="694" y="64" width="232" height="44" rx="6" class="bubw"/><text x="704" y="82" class="bt tw">操盤手關閉了某場的角球大小</text><text x="704" y="98" class="bt tw">（05 的 R05-11）</text>
+  <use href="#ch-ply" x="657" y="122" width="26" height="42" class="char"/>
+  <rect x="694" y="126" width="232" height="44" rx="6" class="bub"/><text x="704" y="144" class="bt">AS：我的玩家想買角球</text><text x="704" y="160" class="bt">幫我對 AS 開起來</text>
+  <text x="661" y="206" class="ts">經銷商的開關只能擋，不能放行</text>
+  <text x="661" y="224" class="ts">InSports 關的，所有經銷商都不開盤</text>
+  <text x="661" y="242" class="ts">（R10-08）</text>
+  <rect x="795" y="278" width="134" height="30" rx="4" class="stampw"/><text x="862" y="298" text-anchor="middle" class="stw">不能：只能擋</text>
+</g>
+<!-- P4 -->
+<g>
+  <rect x="15" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="33" cy="362" r="11" class="num"/><text x="33" y="367" text-anchor="middle" class="numt">4</text>
+  <text x="52" y="367" class="ptitle">五關過關，派彩超過上限</text>
+  <use href="#ch-ply" x="27" y="390" width="26" height="42" class="char"/>
+  <rect x="64" y="394" width="232" height="44" rx="6" class="bub"/><text x="74" y="412" class="bt">AS 的一般設定：</text><text x="74" y="428" class="bt">過關最高派彩 500,000</text>
+  <use href="#ch-sys" x="27" y="452" width="26" height="42" class="char"/>
+  <rect x="64" y="456" width="232" height="44" rx="6" class="bub"/><text x="74" y="474" class="bt">AS 的玩家下五關過關</text><text x="74" y="490" class="bt">派彩 620,000 ＞ 500,000</text>
+  <text x="31" y="536" class="ts">整張拒絕，不接受一部分</text>
+  <text x="31" y="554" class="ts">風險金額仍只逐關比對盤口限額</text>
+  <text x="31" y="572" class="ts">（R10-10、06 的 R06-07）</text>
+  <rect x="165" y="608" width="134" height="30" rx="4" class="stampw"/><text x="232" y="628" text-anchor="middle" class="stw">拒絕：超過限額</text>
+</g>
+<!-- P5 -->
+<g>
+  <rect x="330" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="348" cy="362" r="11" class="num"/><text x="348" y="367" text-anchor="middle" class="numt">5</text>
+  <text x="367" y="367" class="ptitle">想作廢自己玩家的注單</text>
+  <use href="#ch-ply" x="342" y="390" width="26" height="42" class="char"/>
+  <rect x="379" y="394" width="232" height="44" rx="6" class="bub"/><text x="389" y="412" class="bt">AS：這張注單賠率明顯錯了</text><text x="389" y="428" class="bt">我在後台把它作廢</text>
+  <use href="#ch-ops" x="342" y="452" width="26" height="42" class="char"/>
+  <rect x="379" y="456" width="232" height="44" rx="6" class="bub"/><text x="389" y="474" class="bt">作廢是 Ops 的事（07 的 R07-17）</text><text x="389" y="490" class="bt">AS 後台沒有這個按鈕</text>
+  <text x="346" y="536" class="ts">經銷商不能作廢、重新結算、暫緩結算</text>
+  <text x="346" y="554" class="ts">或回轉兌現；可以看到結果與狀態</text>
+  <text x="346" y="572" class="ts">（R10-14）</text>
+  <rect x="480" y="608" width="134" height="30" rx="4" class="stampw"/><text x="547" y="628" text-anchor="middle" class="stw">不能：Ops 的事</text>
+</g>
+<!-- P6 -->
+<g>
+  <rect x="645" y="340" width="300" height="310" rx="8" class="pnl"/>
+  <circle cx="663" cy="362" r="11" class="num"/><text x="663" y="367" text-anchor="middle" class="numt">6</text>
+  <text x="682" y="367" class="ptitle">想把某位玩家列入黑名單</text>
+  <use href="#ch-ply" x="657" y="390" width="26" height="42" class="char"/>
+  <rect x="694" y="394" width="232" height="44" rx="6" class="bub"/><text x="704" y="412" class="bt">AS：這個玩家老是贏</text><text x="704" y="428" class="bt">幫我擋掉他、或把他降級</text>
+  <use href="#ch-sys" x="657" y="452" width="26" height="42" class="char"/>
+  <rect x="694" y="456" width="232" height="44" rx="6" class="ext"/><text x="704" y="474" class="bt">玩家的黑名單、限額、價格等級</text><text x="704" y="490" class="bt">由營運商端執行（06 的 R06-11）</text>
+  <text x="661" y="536" class="ts">經銷商管的是整個經銷商的設定，</text>
+  <text x="661" y="554" class="ts">不管個別玩家；風控也看不到玩家標記</text>
+  <text x="661" y="572" class="ts">（R10-14、09 的 R09-02）</text>
+  <rect x="795" y="608" width="134" height="30" rx="4" class="stampw"/><text x="862" y="628" text-anchor="middle" class="stw">不能：營運商端</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：六個情境各停在一個判定章：代辦與覆寫名稱可以；放行 InSports 關掉的、作廢注單、管個別玩家不能；派彩超過經銷商自己設的上限則整張拒絕（R10-05、R10-06、R10-08、R10-10、R10-14）。</p>
+</section>
+
+</div>
+</body>
+</html>

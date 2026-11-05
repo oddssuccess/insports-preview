@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 結算與派彩：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+svg .pnl { fill: var(--panel-fill); stroke: var(--panel-stroke); stroke-width: 1; }
+svg .ptitle { font-size: 13px; font-weight: 700; }
+svg .ext { fill: var(--panel); stroke: var(--soft); stroke-width: 1; stroke-dasharray: 5 4; }
+svg .nodew { fill: var(--panel); stroke: var(--warn); stroke-width: 1.2; }
+svg .big { fill: none; stroke: var(--line); stroke-width: 1.6; }
+svg .bigw { fill: none; stroke: var(--warn); stroke-width: 1.6; }
+svg .track { fill: none; stroke: var(--sep); stroke-width: 1; }
+svg .n20 { font-size: 20px; font-weight: 700; font-family: var(--font-head); }
+svg .lane { stroke: var(--sep); stroke-width: 1; stroke-dasharray: 2 4; }
+svg .stamp { fill: none; stroke: var(--line); stroke-width: 2; }
+svg .stampw { fill: none; stroke: var(--warn); stroke-width: 2; }
+svg .st { font-size: 13px; font-weight: 700; fill: var(--line); }
+svg .stw { font-size: 13px; font-weight: 700; fill: var(--warn); }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#cfe8ff"/></marker>
+</defs></svg>
+
+<h1>07 結算與派彩：概念圖</h1>
+<p class="meta"><b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07 結算與派彩</a></p>
+<p class="disclaimer">本頁是概念示意，用來幫助理解 PRD 07 的規則，不約束資料模型、架構或介面；圖中的名稱、金額與價格都是範例，取自 PRD 第 4 節。價格以歐洲盤 D 寫出；灰色虛線代表範圍外（錢包、營運商端）；橘色代表作廢、回滾、暫緩、擋下或失敗。2026-11-05 確認的四個決定（評定的兩種來源與外部優先、回滾退回未結算而錢只動差額、未結算與已結算兩大態、提前兌現經滾球等待而提前結算不等）已反映在圖中。</p>
+<ol class="toc">
+  <li><a href="#fig-07-01">圖 07-01　結算的輸入：評定的兩種來源與優先順序</a></li>
+  <li><a href="#fig-07-02">圖 07-02　派彩倍率：五種結算結果一把尺</a></li>
+  <li><a href="#fig-07-03">圖 07-03　過關的關：未決、已決，回滾一關帶動整張</a></li>
+  <li><a href="#fig-07-04">圖 07-04　提前結算不等待，提前兌現要等待</a></li>
+  <li><a href="#fig-07-05">圖 07-05　作廢：原因、等待上限與人工作廢</a></li>
+  <li><a href="#fig-07-06">圖 07-06　回滾與重新結算：錢只動差額</a></li>
+  <li><a href="#fig-07-07">圖 07-07　注單的兩大狀態：未結算、已結算與回滾</a></li>
+</ol>
+
+<!-- ============================================================ 圖 07-01 -->
+<section class="fig" id="fig-07-01">
+<h2>圖 07-01　結算的輸入：評定的兩種來源與優先順序</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="評定的兩種來源與優先順序">
+<!-- 內部評定 -->
+<rect x="40" y="30" width="440" height="300" rx="6" class="pnl"/>
+<text x="56" y="54" class="ptitle">內部評定（InSports 自己算）</text>
+<rect x="56" y="70" width="195" height="74" rx="6" class="node"/>
+<text x="153" y="94" text-anchor="middle" class="tb">穩定的統一賽果</text>
+<text x="153" y="112" text-anchor="middle" class="ts">04 的 R04-14；賽況也是證據</text>
+<text x="153" y="130" text-anchor="middle" class="ts">含提前結算用的滾球比分</text>
+<rect x="269" y="70" width="195" height="74" rx="6" class="node"/>
+<text x="366" y="94" text-anchor="middle" class="tb">人工裁定的賽果</text>
+<text x="366" y="112" text-anchor="middle" class="ts">腰斬、指定賽果、重複賽事</text>
+<text x="366" y="130" text-anchor="middle" class="ts">冠軍盤名次、Ops 標記淘汰</text>
+<path d="M153,144 L153,186" class="ln" marker-end="url(#arr)"/>
+<path d="M366,144 L366,186" class="ln" marker-end="url(#arr)"/>
+<rect x="56" y="188" width="408" height="56" rx="6" class="node"/>
+<text x="260" y="212" text-anchor="middle" class="tb">套用投注規則與運動特有規則（目錄）</text>
+<text x="260" y="232" text-anchor="middle" class="ts">本 PRD 不另定賽果的判定；賽果不穩定就不產生評定</text>
+<path d="M260,244 L260,300 L480,300" class="ln"/>
+<text x="110" y="292" class="ts">未涵蓋的盤口線才用</text>
+<!-- 外部評定 -->
+<rect x="500" y="30" width="420" height="300" rx="6" class="pnl"/>
+<text x="516" y="54" class="ptitle">外部評定（評定來源直接給）</text>
+<rect x="516" y="70" width="388" height="74" rx="6" class="node"/>
+<text x="710" y="94" text-anchor="middle" class="tb">評定來源，例如來源 A（付費來源）</text>
+<text x="710" y="112" text-anchor="middle" class="ts">03、04 的第五類資料與第五種角色，指定方式比照賽果來源</text>
+<text x="710" y="130" text-anchor="middle" class="ts">涵蓋＝已指定來源且玩法已對應（R04-11），開盤時確定</text>
+<path d="M710,144 L710,186" class="ln" marker-end="url(#arr)"/>
+<rect x="516" y="188" width="388" height="56" rx="6" class="node"/>
+<text x="710" y="212" text-anchor="middle" class="tb">送達即用，不等統一賽果（R04-14 的例外）</text>
+<text x="710" y="232" text-anchor="middle" class="ts">來源中斷時該來源的盤口線等它恢復，不改用內部評定</text>
+<path d="M710,244 L710,300 L480,300" class="ln"/>
+<text x="560" y="292" class="ts">涵蓋的盤口線一律用外部</text>
+<path d="M480,300 L480,338" class="ln" marker-end="url(#arr)"/>
+<!-- 評定 -->
+<rect x="40" y="340" width="880" height="120" rx="6" class="node"/><rect x="43" y="343" width="874" height="114" rx="4" class="node2"/>
+<text x="56" y="364" class="tb">評定（Grading）：以盤口線為單位，給每個投注項一個結果</text>
+<rect x="56" y="378" width="150" height="30" rx="4" class="tag"/><text x="131" y="398" text-anchor="middle">讓分 −0.75</text>
+<text x="226" y="398">主隊</text><rect x="266" y="378" width="60" height="30" rx="4" class="tag"/><text x="296" y="398" text-anchor="middle" class="tb">贏半</text>
+<text x="346" y="398">客隊</text><rect x="386" y="378" width="60" height="30" rx="4" class="tag"/><text x="416" y="398" text-anchor="middle" class="tb">輸半</text>
+<text x="56" y="440" class="ts">可能的值：</text>
+<g class="ts">
+<rect x="126" y="422" width="44" height="24" rx="4" class="chip"/><text x="148" y="439" text-anchor="middle">贏</text>
+<rect x="178" y="422" width="56" height="24" rx="4" class="chip"/><text x="206" y="439" text-anchor="middle">贏半</text>
+<rect x="242" y="422" width="56" height="24" rx="4" class="chip"/><text x="270" y="439" text-anchor="middle">走盤</text>
+<rect x="306" y="422" width="56" height="24" rx="4" class="chip"/><text x="334" y="439" text-anchor="middle">輸半</text>
+<rect x="370" y="422" width="44" height="24" rx="4" class="chip"/><text x="392" y="439" text-anchor="middle">輸</text>
+<rect x="422" y="422" width="150" height="24" rx="4" class="chipw"/><text x="497" y="439" text-anchor="middle" class="tw">退款＝該投注項作廢</text>
+</g>
+<text x="600" y="439" class="ts">緬甸盤另有「部分」；退款不是投注規則的結果（R01-23）</text>
+<!-- 優先順序 -->
+<text x="40" y="488" class="ptitle">同一條盤口線的優先順序（R07-01）</text>
+<rect x="40" y="500" width="270" height="70" rx="6" class="node"/>
+<text x="175" y="526" text-anchor="middle" class="tb">未涵蓋的盤口線</text>
+<text x="175" y="548" text-anchor="middle" class="ts">用內部評定</text>
+<rect x="330" y="500" width="270" height="70" rx="6" class="node"/>
+<text x="465" y="526" text-anchor="middle" class="tb">涵蓋的盤口線</text>
+<text x="465" y="548" text-anchor="middle" class="ts">等外部評定送達再結，內部只作比對</text>
+<rect x="620" y="500" width="300" height="70" rx="6" class="nodew"/>
+<text x="770" y="526" text-anchor="middle" class="tb tw">涵蓋且兩者任一投注項不同</text>
+<text x="770" y="548" text-anchor="middle" class="ts">該盤口線不結算，交人工裁定（R04-15）</text>
+<text x="40" y="604" class="ts">已依外部評定結算後內部評定才到且不同、或來源事後更正：同樣交人工，裁定改變結果時回滾與重新結算（R07-19），72 小時後不再回滾（R07-20）。其他盤口線照常。</text>
+</svg>
+<p class="cap"><b>圖說</b>：結算的直接輸入是評定：以盤口線為單位，給每個投注項贏、贏半、走盤、輸半、輸或退款。內部評定由 InSports 依穩定的統一賽果（含由賽況推得）或人工裁定套投注規則算出；外部評定由評定來源直接提供，通常只有付費來源有，且只涵蓋已對應的盤口線。涵蓋的盤口線以外部評定結算、不等統一賽果穩定，內部評定只作比對；未涵蓋的用內部評定；兩者不一致時該盤口線擋下交人工（R07-01、R07-02、R07-04）。</p>
+</section>
+<!-- ============================================================ 圖 07-02 -->
+<section class="fig" id="fig-07-02">
+<h2>圖 07-02　派彩倍率：五種結算結果一把尺</h2>
+<svg viewBox="0 0 960 440" width="100%" role="img" aria-label="五種結算結果的派彩倍率">
+<text x="40" y="40" class="tb">派彩金額 ＝ 風險金額 × 倍率</text>
+<text x="40" y="64" class="ts">例：風險金額 80，歐洲盤 D = 2.25</text>
+<text x="160" y="110" text-anchor="middle" class="tb">輸</text>
+<text x="160" y="132" text-anchor="middle" class="ts">倍率 0</text>
+<line x1="120" y1="330" x2="200" y2="330" class="lnw"/>
+<text x="160" y="322" text-anchor="middle" class="tb">0</text>
+<text x="340" y="110" text-anchor="middle" class="tb">輸半</text>
+<text x="340" y="132" text-anchor="middle" class="ts">倍率 0.5</text>
+<rect x="300" y="297" width="80" height="33" rx="3" class="tag"/>
+<text x="340" y="289" text-anchor="middle" class="tb">40</text>
+<text x="520" y="110" text-anchor="middle" class="tb">走盤</text>
+<text x="520" y="132" text-anchor="middle" class="ts">倍率 1</text>
+<rect x="480" y="263" width="80" height="67" rx="3" class="tag"/>
+<text x="520" y="255" text-anchor="middle" class="tb">80</text>
+<text x="700" y="110" text-anchor="middle" class="tb">贏半</text>
+<text x="700" y="132" text-anchor="middle" class="ts">倍率 (1 + D) ÷ 2</text>
+<rect x="660" y="222" width="80" height="108" rx="3" class="tag"/>
+<text x="700" y="214" text-anchor="middle" class="tb">130</text>
+<text x="880" y="110" text-anchor="middle" class="tb">贏</text>
+<text x="880" y="132" text-anchor="middle" class="ts">倍率 D</text>
+<rect x="840" y="180" width="80" height="150" rx="3" class="tag"/>
+<text x="880" y="172" text-anchor="middle" class="tb">180</text>
+<line x1="80" y1="330" x2="920" y2="330" class="sep"/>
+<line x1="80" y1="263" x2="920" y2="263" class="ln dash"/>
+<text x="86" y="257" class="ts">風險金額 80：走盤退還的金額</text>
+<text x="40" y="372" class="ts">贏半 ＝ 一半以 D 派彩、一半走盤；輸半 ＝ 一半為輸、一半走盤。退款（作廢）倍率 1，同走盤（R07-05、R07-15）。</text>
+<text x="40" y="396" class="ts">D 由下注當時的基準值換算（R05-18）：馬來盤 −0.80 → D = 1 + 1 ÷ 0.80 = 2.25；負數賠率不需要另一套算法。</text>
+<text x="40" y="420" class="ts">沒有 D 的緬甸盤與比分框、冠軍盤的並列，各有自己的公式（R07-07、R07-08、R07-12）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：五種結算結果各對應一個倍率：輸 0、輸半 0.5、走盤 1、贏半 (1 + D) ÷ 2、贏 D；風險金額 80、D = 2.25 時派彩依序為 0、40、80、130、180。退款（作廢）同走盤為 1（R07-04、R07-05）。</p>
+</section>
+<!-- ============================================================ 圖 07-03 -->
+<section class="fig" id="fig-07-03">
+<h2>圖 07-03　過關的關：未決、已決，回滾一關帶動整張</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="過關各關的狀態與整張注單">
+<text x="40" y="36" class="ptitle">過關三關，風險金額 100：第一關 1.85、第二關 2.10、第三關 1.95</text>
+<!-- 時間軸 -->
+<g class="ts" text-anchor="middle">
+<text x="260" y="64">①</text><text x="400" y="64">②</text><text x="540" y="64">③</text><text x="680" y="64">④</text><text x="820" y="64">⑤</text>
+</g>
+<line x1="200" y1="72" x2="920" y2="72" class="track"/>
+<!-- 泳道 -->
+<g class="tb"><text x="40" y="118">第一關</text><text x="40" y="198">第二關</text><text x="40" y="278">第三關</text><text x="40" y="378">整張注單</text></g>
+<line x1="130" y1="112" x2="920" y2="112" class="lane"/>
+<line x1="130" y1="192" x2="920" y2="192" class="lane"/>
+<line x1="130" y1="272" x2="920" y2="272" class="lane"/>
+<line x1="130" y1="372" x2="920" y2="372" class="lane"/>
+<!-- 第一關 -->
+<rect x="140" y="96" width="90" height="30" rx="4" class="chip"/><text x="185" y="116" text-anchor="middle" class="ts">未決</text>
+<rect x="240" y="96" width="90" height="30" rx="4" class="tag"/><text x="285" y="116" text-anchor="middle" class="ts tb">已決：贏</text>
+<!-- 第二關 -->
+<rect x="140" y="176" width="90" height="30" rx="4" class="chip"/><text x="185" y="196" text-anchor="middle" class="ts">未決</text>
+<rect x="355" y="176" width="90" height="30" rx="4" class="tag"/><text x="400" y="196" text-anchor="middle" class="ts tb">已決：輸</text>
+<rect x="495" y="176" width="90" height="30" rx="4" class="chipw"/><text x="540" y="196" text-anchor="middle" class="ts tw">回滾→未決</text>
+<rect x="635" y="176" width="90" height="30" rx="4" class="tag"/><text x="680" y="196" text-anchor="middle" class="ts tb">已決：贏半</text>
+<!-- 第三關 -->
+<rect x="140" y="256" width="90" height="30" rx="4" class="chip"/><text x="185" y="276" text-anchor="middle" class="ts">未決</text>
+<rect x="635" y="256" width="90" height="30" rx="4" class="tag"/><text x="680" y="276" text-anchor="middle" class="ts tb">已決：贏</text>
+<!-- 注單 -->
+<rect x="140" y="356" width="90" height="30" rx="4" class="chip"/><text x="185" y="376" text-anchor="middle" class="ts">未結算</text>
+<path d="M400,206 L400,352" class="ln" marker-end="url(#arr)"/>
+<rect x="340" y="356" width="120" height="30" rx="4" class="tag"/><text x="400" y="376" text-anchor="middle" class="ts tb">已結算：輸，派彩 0</text>
+<path d="M540,206 L540,352" class="lnw" marker-end="url(#arrw)"/>
+<rect x="480" y="356" width="120" height="30" rx="4" class="chipw"/><text x="540" y="376" text-anchor="middle" class="ts tw">回滾→已回滾</text>
+<path d="M680,286 L680,352" class="ln" marker-end="url(#arr)"/>
+<rect x="640" y="356" width="80" height="30" rx="4" class="chip"/><text x="680" y="376" text-anchor="middle" class="ts">仍未結算</text>
+<rect x="760" y="356" width="150" height="30" rx="4" class="tag"/><text x="835" y="376" text-anchor="middle" class="ts tb">已結算：贏 559.16</text>
+<!-- 說明 -->
+<rect x="40" y="410" width="880" height="130" rx="6" class="pnl"/>
+<g class="ts">
+<text x="56" y="434">① 第一關評定到達即為已決，整張仍等其他關；不逐關派彩（R07-09）。</text>
+<text x="56" y="456">② 第二關輸：任一關輸整張立即結算為輸，派彩 0，不等第三關（R07-09、R07-13）。</text>
+<text x="56" y="478" class="tw">③ 第二關的評定被更正：該關回未決，含它的已結算注單整張回滾，標記已回滾、不可兌現；錢本來就沒動（R07-19）。</text>
+<text x="56" y="500">④ 第二關重新評定為贏半（倍率 1.55）、第三關贏；所有關已決。</text>
+<text x="56" y="522">⑤ 重新結算：100 × 1.85 × 1.55 × 1.95 = 559.16，差額 +559.16 入帳（R07-06、R07-19）。系統過關的組合同理，整張一次派彩（R07-10）。</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：過關的每一關各有未決、已決兩種狀態，評定到達即為已決；整張注單在所有關已決或任一關輸時結算，不逐關派彩。某一關的評定被更正時該關回未決，含它的已結算注單整張回滾，等所有關再次已決後重新結算，錢只動差額（R07-09、R07-10、R07-19）。</p>
+</section>
+<!-- ============================================================ 圖 07-04 -->
+<section class="fig" id="fig-07-04">
+<h2>圖 07-04　提前結算不等待，提前兌現要等待</h2>
+<svg viewBox="0 0 960 560" width="100%" role="img" aria-label="提前結算與提前兌現的對照">
+<!-- 左：提前結算 -->
+<rect x="40" y="30" width="430" height="440" rx="6" class="pnl"/>
+<text x="56" y="56" class="ptitle">提前結算（R07-13）：依賽果，由 07 負責</text>
+<rect x="60" y="76" width="390" height="56" rx="6" class="node"/>
+<text x="255" y="100" text-anchor="middle" class="tb">投注項已確定</text>
+<text x="255" y="120" text-anchor="middle" class="ts">例：大 2.5 在第 3 球時；依穩定的統一滾球比分（R04-14）</text>
+<path d="M255,132 L255,160" class="ln" marker-end="url(#arr)"/>
+<rect x="60" y="162" width="390" height="56" rx="6" class="node"/>
+<text x="255" y="186" text-anchor="middle" class="tb">模板「可否提前結算」為是</text>
+<text x="255" y="206" text-anchor="middle" class="ts">InSports 欄位，依玩法與階段，所有經銷商一致（12 的 R12-01）</text>
+<path d="M255,218 L255,246" class="ln" marker-end="url(#arr)"/>
+<rect x="60" y="248" width="390" height="56" rx="6" class="node"/>
+<text x="255" y="272" text-anchor="middle" class="tb">立即結算與派彩：大贏、小輸</text>
+<text x="255" y="292" text-anchor="middle" class="ts">不另加等待（R07-02）；比分穩定就是結算時點</text>
+<path d="M255,304 L255,332" class="lnw" marker-end="url(#arrw)"/>
+<rect x="60" y="334" width="390" height="56" rx="6" class="nodew"/>
+<text x="255" y="358" text-anchor="middle" class="tb tw">之後比分更正：回滾與重新結算</text>
+<text x="255" y="378" text-anchor="middle" class="ts">已派彩的可能扣回（R07-19）；這是接受的風險（R04-14）</text>
+<text x="60" y="420" class="ts">為否時等時段結束再結算，結果相同，只有時點不同。</text>
+<text x="60" y="442" class="ts">過關中一關提前確定為輸，整張立即結算為輸（R07-09）。</text>
+<!-- 右：提前兌現 -->
+<rect x="490" y="30" width="430" height="440" rx="6" class="pnl"/>
+<text x="506" y="56" class="ptitle">提前兌現（08）：依價格，玩家主動賣回</text>
+<rect x="510" y="76" width="390" height="56" rx="6" class="node"/>
+<text x="705" y="100" text-anchor="middle" class="tb">兌現請求送達</text>
+<text x="705" y="120" text-anchor="middle" class="ts">帶金額、出售比例與接受模式；注單進入兌現等待中（R08-13、R08-17）</text>
+<path d="M705,132 L705,160" class="ln" marker-end="url(#arr)"/>
+<rect x="510" y="162" width="390" height="56" rx="6" class="node"/>
+<text x="705" y="186" text-anchor="middle" class="tb">滾球未決關各自經 06 的滾球等待</text>
+<text x="705" y="206" text-anchor="middle" class="ts">訊號危險、比分改變、訊號中斷、逾時任一即拒絕（R08-14）</text>
+<path d="M705,218 L705,246" class="ln" marker-end="url(#arr)"/>
+<rect x="510" y="248" width="390" height="56" rx="6" class="node"/>
+<text x="705" y="272" text-anchor="middle" class="tb">錢包入帳成功才成立 → 已兌現</text>
+<text x="705" y="292" text-anchor="middle" class="ts">已結算的一種結果；各關結果仍照常判定（R08-16、R08-17）</text>
+<path d="M705,304 L705,332" class="lnw" marker-end="url(#arrw)"/>
+<rect x="510" y="334" width="390" height="56" rx="6" class="nodew"/>
+<text x="705" y="358" text-anchor="middle" class="tb tw">賽事取消且未確定：兌現回轉＝回滾</text>
+<text x="705" y="378" text-anchor="middle" class="ts">扣回兌現金額、回復原狀，交 07 依作廢結算（R08-18）</text>
+<text x="510" y="420" class="ts">為什麼要等：兌現金額依當下的價格，訊號延遲會讓玩家在</text>
+<text x="510" y="442" class="ts">進球已發生、價格還沒反映時賣出；結算依穩定賽果，沒有這個風險。</text>
+<!-- 底 -->
+<rect x="40" y="490" width="880" height="50" rx="6" class="pnl"/>
+<text x="56" y="520" class="ts">兩者都是提前讓注單進入已結算，也都只能靠回滾撤銷；差別在輸入：提前結算用賽果（不等），提前兌現用價格（要等）。已回滾的注單不可兌現（R08-01）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：提前結算依穩定的賽果，投注項已確定且模板允許時立即結算，不另加等待，事後更正靠回滾；提前兌現依價格，含滾球未決關的請求必須經 06 的滾球等待，因為訊號延遲會讓價格落後於賽況，入帳成功才成為已兌現，賽事取消時回轉即回滾（R07-02、R07-13、R07-19；08 的 R08-14、R08-17、R08-18）。</p>
+</section>
+<!-- ============================================================ 圖 07-05 -->
+<section class="fig" id="fig-07-05">
+<h2>圖 07-05　作廢：原因、等待上限與人工作廢</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="作廢的原因、等待上限與人工作廢">
+<!-- 原因 -->
+<text x="40" y="36" class="ptitle">作廢的原因固定為下列幾種，每張作廢的注單都記錄原因（R07-15）；作廢以投注項為單位，退還風險金額</text>
+<g class="ts tw">
+<rect x="40" y="50" width="110" height="26" rx="4" class="tagw"/><text x="95" y="68" text-anchor="middle">賽事取消</text>
+<rect x="160" y="50" width="130" height="26" rx="4" class="tagw"/><text x="225" y="68" text-anchor="middle">腰斬或延期逾期</text>
+<rect x="300" y="50" width="110" height="26" rx="4" class="tagw"/><text x="355" y="68" text-anchor="middle">時段未進行</text>
+<rect x="420" y="50" width="110" height="26" rx="4" class="tagw"/><text x="475" y="68" text-anchor="middle">賽果無效</text>
+<rect x="540" y="50" width="150" height="26" rx="4" class="tagw"/><text x="615" y="68" text-anchor="middle">參賽方未開始競賽</text>
+<rect x="700" y="50" width="110" height="26" rx="4" class="tagw"/><text x="755" y="68" text-anchor="middle">虛擬賽事無賽果</text>
+<rect x="820" y="50" width="100" height="26" rx="4" class="tagw"/><text x="870" y="68" text-anchor="middle">人工作廢</text>
+</g>
+<!-- 腰斬與延期時間軸 -->
+<rect x="40" y="96" width="560" height="250" rx="6" class="pnl"/>
+<text x="56" y="120" class="ptitle">腰斬與延期（R07-16）：已確定的照結，其餘作廢；逾期由人工作廢</text>
+<line x1="80" y1="170" x2="560" y2="170" class="ln"/>
+<line x1="80" y1="160" x2="80" y2="180" class="ln"/><line x1="300" y1="160" x2="300" y2="180" class="ln"/><line x1="480" y1="160" x2="480" y2="180" class="lnw"/>
+<text x="80" y="198" text-anchor="middle" class="ts">原定開賽</text>
+<text x="300" y="198" text-anchor="middle" class="ts">下半場 70 分鐘 1:0 腰斬</text>
+<text x="480" y="198" text-anchor="middle" class="ts tw">等待上限（足球 12 小時）</text>
+<text x="190" y="150" text-anchor="middle" class="ts">在上限內恢復：照常結算</text>
+<text x="520" y="150" text-anchor="middle" class="ts tw">逾期：人工作廢，不自動</text>
+<g class="ts">
+<text x="56" y="232">人工確認上半場 1:0、常規時間未完成（R04-23）後：</text>
+<rect x="56" y="244" width="120" height="24" rx="4" class="chip"/><text x="116" y="261" text-anchor="middle">上半場玩法：照結</text>
+<rect x="186" y="244" width="150" height="24" rx="4" class="chip"/><text x="261" y="261" text-anchor="middle">常規時間大 0.5：已確定</text>
+<rect x="346" y="244" width="110" height="24" rx="4" class="chipw"/><text x="401" y="261" text-anchor="middle" class="tw">讓分 −0.5：作廢</text>
+<rect x="466" y="244" width="110" height="24" rx="4" class="chipw"/><text x="521" y="261" text-anchor="middle" class="tw">大 2.5：作廢</text>
+<text x="56" y="296">等待上限依各運動（第 8 節的表）；重掛不重設基準，已作廢的不因重掛恢復（R04-05）。</text>
+<text x="56" y="318">官方事後宣布的正式賽果採不採用依各運動文件；各時段賽果一律人工確認。</text>
+</g>
+<!-- 人工作廢 -->
+<rect x="620" y="96" width="300" height="250" rx="6" class="pnl"/>
+<text x="636" y="120" class="ptitle">人工作廢（R07-17）</text>
+<g class="ts">
+<text x="636" y="146">範圍：單張注單，或一條盤口線</text>
+<text x="636" y="166">（含該玩法的全部盤口線）的全部注單</text>
+<text x="636" y="194">原因只能從固定清單選：</text>
+<rect x="636" y="204" width="80" height="22" rx="4" class="chipw"/><text x="676" y="220" text-anchor="middle" class="tw">錯誤賠率</text>
+<rect x="724" y="204" width="90" height="22" rx="4" class="chipw"/><text x="769" y="220" text-anchor="middle" class="tw">錯誤盤口線</text>
+<rect x="822" y="204" width="90" height="22" rx="4" class="chipw"/><text x="867" y="220" text-anchor="middle" class="tw">錯誤對應</text>
+<rect x="636" y="232" width="80" height="22" rx="4" class="chipw"/><text x="676" y="248" text-anchor="middle" class="tw">異常投注</text>
+<rect x="724" y="232" width="120" height="22" rx="4" class="chipw"/><text x="784" y="248" text-anchor="middle" class="tw">其他（須填說明）</text>
+<text x="636" y="280">不需另一人覆核（R04-19 的例外）</text>
+<text x="636" y="300">記錄由誰、何時、原因；原因對經銷商可見</text>
+<text x="636" y="320">已結算的也可作廢：回滾與重新結算</text>
+</g>
+<!-- 結果 -->
+<rect x="40" y="366" width="880" height="80" rx="6" class="nodew"/>
+<text x="56" y="390" class="tb tw">作廢的效果（R07-15、R07-09、R07-11）</text>
+<text x="56" y="412" class="ts">單注：已結算（作廢退款），退還風險金額。過關：作廢的關倍率 1，其餘各關照常；全部作廢退還風險金額。同場過關：剩下的投注項依 R02-02 重新計價。</text>
+<text x="56" y="432" class="ts">作廢退款是已結算的一種結果，不是投注規則的結算結果（R01-23）；在評定中以「退款」表示（R07-01）；暫緩結算中的注單連作廢退款也擋（R07-22）。</text>
+<!-- 其他 -->
+<rect x="40" y="466" width="880" height="110" rx="6" class="pnl"/>
+<g class="ts">
+<text x="56" y="490">賽事取消：04 的統一狀態為取消，或待取消的人工裁定「取消並作廢注單」（R04-23），該賽事全部注單作廢。</text>
+<text x="56" y="512">時段未進行：比賽沒有加時賽或點球大戰時，該時段的玩法作廢；常規時間與全場照常（各運動文件）。</text>
+<text x="56" y="534">冠軍盤：未開始競賽的參賽方作廢（OTR-03、OTR-04）；開始後被淘汰的為輸，由 Ops 標記後立即結算（R07-14）。</text>
+<text x="56" y="556">虛擬賽事：沒有產生賽果即作廢，沒有等待上限（R01-27）。重複賽事與對應更正：各依人工指定的賽果結算（R07-18）。</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：作廢的原因固定七種，每張注單記錄原因，作廢退款是已結算的一種結果。腰斬與延期：已確定的投注項照結、其餘作廢，等待上限依各運動，逾期一律人工作廢；人工作廢只能選固定原因、單張或整條盤口線、不需覆核、原因對經銷商可見。過關中作廢的關倍率 1，同場過關重新計價（R07-15 至 R07-17）。</p>
+</section>
+<!-- ============================================================ 圖 07-06 -->
+<section class="fig" id="fig-07-06">
+<h2>圖 07-06　回滾與重新結算：錢只動差額</h2>
+<svg viewBox="0 0 960 600" width="100%" role="img" aria-label="回滾與重新結算的時間軸">
+<text x="40" y="36" class="ptitle">單注：馬來盤 −0.80 讓分主隊 −0.75，風險金額 80，D = 2.25；Ops 事後以「錯誤賠率」作廢整條盤口線</text>
+<!-- 泳道 -->
+<g class="tb"><text x="40" y="118">注單</text><text x="40" y="238">錢包</text></g>
+<text x="40" y="258" class="ts">（範圍外）</text>
+<line x1="120" y1="112" x2="920" y2="112" class="lane"/>
+<rect x="120" y="200" width="800" height="76" rx="6" class="ext"/>
+<!-- 事件 ① 結算 -->
+<rect x="130" y="80" width="150" height="64" rx="6" class="node"/>
+<text x="205" y="104" text-anchor="middle" class="tb">① 已結算：贏</text>
+<text x="205" y="124" text-anchor="middle" class="ts">派彩 180</text>
+<path d="M205,144 L205,206" class="ln" marker-end="url(#arr)"/>
+<rect x="150" y="214" width="110" height="48" rx="4" class="tag"/><text x="205" y="234" text-anchor="middle" class="ts">入帳 +180</text><text x="205" y="252" text-anchor="middle" class="ts">已入帳</text>
+<!-- 事件 ② 回滾 -->
+<path d="M280,112 L328,112" class="ln" marker-end="url(#arr)"/>
+<rect x="330" y="80" width="170" height="64" rx="6" class="nodew"/>
+<text x="415" y="104" text-anchor="middle" class="tb tw">② 回滾：已回滾</text>
+<text x="415" y="124" text-anchor="middle" class="ts">裁定提出即回滾，180 保留</text>
+<text x="415" y="238" text-anchor="middle" class="ts">錢不動</text>
+<text x="415" y="256" text-anchor="middle" class="ts tw">期間不可提前兌現</text>
+<!-- 事件 ③ 重新結算 -->
+<path d="M500,112 L548,112" class="ln" marker-end="url(#arr)"/>
+<rect x="550" y="80" width="190" height="64" rx="6" class="node"/>
+<text x="645" y="104" text-anchor="middle" class="tb">③ 重新結算：作廢退款</text>
+<text x="645" y="124" text-anchor="middle" class="ts">覆核通過才重結；差額 −100</text>
+<path d="M645,144 L645,206" class="ln" marker-end="url(#arr)"/>
+<rect x="585" y="214" width="120" height="48" rx="4" class="tag"/><text x="645" y="234" text-anchor="middle" class="ts">扣回 −100</text><text x="645" y="252" text-anchor="middle" class="ts">成功→已入帳</text>
+<!-- 失敗 -->
+<path d="M740,112 L788,112" class="lnw" marker-end="url(#arrw)"/>
+<rect x="790" y="80" width="130" height="64" rx="6" class="nodew"/>
+<text x="855" y="104" text-anchor="middle" class="tb tw">扣回失敗</text>
+<text x="855" y="124" text-anchor="middle" class="ts">入帳狀態：待扣回</text>
+<text x="855" y="238" text-anchor="middle" class="ts">不抵銷之後的派彩</text>
+<text x="855" y="256" text-anchor="middle" class="ts">處理方式屬 SPEC（R07-21）</text>
+<!-- 多次 -->
+<path d="M740,96 L760,96 L760,60 L415,60 L415,78" class="ln dash" marker-end="url(#arr)"/>
+<text x="590" y="54" text-anchor="middle" class="ts">可以多次回滾與重新結算，每次都從頭算，差額以已派彩金額為基準</text>
+<!-- 觸發與覆核 -->
+<rect x="40" y="300" width="430" height="150" rx="6" class="pnl"/>
+<text x="56" y="324" class="ptitle">什麼會觸發回滾（R07-19）</text>
+<g class="ts">
+<text x="56" y="348">指定賽果改變穩定值、賽果無效、對應更正、改變結算依據的重掛</text>
+<text x="56" y="370">提前結算後比分更正、並列或冠軍盤名次更正</text>
+<text x="56" y="392">外部評定與內部評定事後不一致的裁定、人工作廢已結算的注單</text>
+<text x="56" y="414">裁定提出即回滾（不動錢），等待覆核時停留在已回滾</text>
+<text x="56" y="436">覆核通過才重結（動錢）；駁回以原評定重結，差額 0</text>
+</g>
+<!-- 終局性 -->
+<rect x="490" y="300" width="430" height="150" rx="6" class="pnl"/>
+<text x="506" y="324" class="ptitle">終局性（R07-20）</text>
+<line x1="520" y1="370" x2="900" y2="370" class="ln"/>
+<line x1="520" y1="360" x2="520" y2="380" class="ln"/><line x1="760" y1="360" x2="760" y2="380" class="lnw"/>
+<text x="520" y="398" text-anchor="middle" class="ts">原定開賽</text>
+<text x="760" y="398" text-anchor="middle" class="ts tw">＋72 小時</text>
+<text x="640" y="350" text-anchor="middle" class="ts">官方或來源的更動：可回滾</text>
+<text x="835" y="350" text-anchor="middle" class="ts tw">不再回滾</text>
+<text x="506" y="424" class="ts">InSports 自己的結算錯誤（抄錯、對應錯、指定錯）：任何時候都可回滾</text>
+<text x="506" y="444" class="ts">冠軍盤自該冠軍盤的結算時點起算 72 小時</text>
+<!-- 底部 -->
+<rect x="40" y="470" width="880" height="110" rx="6" class="pnl"/>
+<g class="ts">
+<text x="56" y="494">回滾只做狀態與紀錄，不通知錢包；重新結算才通知入帳或扣回差額，為 0 時只更新結果（R07-19、R07-24）。</text>
+<text x="56" y="516">入帳或扣回未成功時，注單的結算結果與金額不變，入帳狀態記為待入帳或待扣回，對 Ops、經銷商與營運商都可見（R07-21）。</text>
+<text x="56" y="538">同盤口線已結算為輸的注單：回滾後重新結算為作廢退款，差額 +80 入帳；原本派彩 0 不需入帳的，現在要通知入帳。</text>
+<text x="56" y="560">已兌現的注單的回滾是 08 的兌現回轉：扣回歷次兌現金額、回復原狀後，交本 PRD 依作廢結算（R08-18）。</text>
+</g>
+</svg>
+<p class="cap"><b>圖說</b>：回滾把已結算的注單退回未結算並標記已回滾，錢不動；重新結算以新的評定整張從頭算，只把新舊派彩金額的差額通知錢包入帳或扣回，扣回失敗記為待扣回。裁定提出即回滾、覆核通過才重新結算，駁回則以原評定重結差額 0；開賽 72 小時後官方或來源的更動不再回滾，InSports 自己的錯誤不受此限（R07-19 至 R07-21）。</p>
+</section>
+<!-- ============================================================ 圖 07-07 -->
+<section class="fig" id="fig-07-07">
+<h2>圖 07-07　注單的兩大狀態：未結算、已結算與回滾</h2>
+<svg viewBox="0 0 960 640" width="100%" role="img" aria-label="注單的兩大狀態與回滾">
+<!-- 06 -->
+<rect x="40" y="40" width="130" height="50" rx="6" class="ext"/>
+<text x="105" y="62" text-anchor="middle" class="ts">06 的已確認</text>
+<text x="105" y="80" text-anchor="middle" class="ts">扣款成功</text>
+<path d="M105,90 L105,118" class="ln" marker-end="url(#arr)"/>
+<!-- 未結算 -->
+<rect x="40" y="120" width="410" height="330" rx="8" class="big"/>
+<text x="60" y="150" class="n20">未結算</text>
+<text x="150" y="150" class="ts">對玩家與營運商一律顯示為已確認</text>
+<rect x="60" y="170" width="180" height="64" rx="6" class="node"/>
+<text x="150" y="194" text-anchor="middle" class="tb">等待評定</text>
+<text x="150" y="214" text-anchor="middle" class="ts">R07-02</text>
+<rect x="250" y="170" width="180" height="64" rx="6" class="nodew"/>
+<text x="340" y="194" text-anchor="middle" class="tb tw">暫緩結算中</text>
+<text x="340" y="214" text-anchor="middle" class="ts">09 標記；判定照常、不派彩</text>
+<rect x="60" y="254" width="180" height="64" rx="6" class="node"/>
+<text x="150" y="278" text-anchor="middle" class="tb">兌現等待中</text>
+<text x="150" y="298" text-anchor="middle" class="ts">08 的 R08-17；07 先不結算</text>
+<rect x="250" y="254" width="180" height="64" rx="6" class="nodew"/>
+<text x="340" y="278" text-anchor="middle" class="tb tw">已回滾</text>
+<text x="340" y="298" text-anchor="middle" class="ts">錢不動；不可提前兌現</text>
+<text x="60" y="352" class="ts">暫緩與已回滾的標記只在 InSports 後台</text>
+<text x="60" y="372" class="ts">與經銷商後台可見（R07-22、R07-23）。</text>
+<text x="60" y="404" class="ts">過關與系統過關的每一關另有</text>
+<text x="60" y="424" class="ts">未決、已決兩種狀態（R07-09，圖 07-03）。</text>
+<!-- 已結算 -->
+<rect x="510" y="120" width="410" height="330" rx="8" class="big"/>
+<text x="530" y="150" class="n20">已結算</text>
+<text x="620" y="150" class="ts">帶整張注單的結果，三類之一</text>
+<rect x="530" y="170" width="370" height="74" rx="6" class="node"/>
+<text x="715" y="194" text-anchor="middle" class="tb">依賽果：贏、贏半、走盤、輸半、輸</text>
+<text x="715" y="214" text-anchor="middle" class="ts">過關依派彩金額對風險金額的大小對應為贏、走盤、輸</text>
+<text x="715" y="232" text-anchor="middle" class="ts">附派彩金額與各投注項的結算結果</text>
+<rect x="530" y="264" width="370" height="64" rx="6" class="nodew"/>
+<text x="715" y="288" text-anchor="middle" class="tb tw">作廢退款</text>
+<text x="715" y="308" text-anchor="middle" class="ts">退還風險金額，附作廢原因（R07-15）</text>
+<rect x="530" y="348" width="370" height="64" rx="6" class="node"/>
+<text x="715" y="372" text-anchor="middle" class="tb">已兌現</text>
+<text x="715" y="392" text-anchor="middle" class="ts">08 整張兌現；各關結果仍照常判定與記錄</text>
+<text x="530" y="438" class="ts">只會因回滾改變（R07-23）。</text>
+<!-- 箭頭 -->
+<path d="M450,210 L508,210" class="ln" marker-end="url(#arr)"/>
+<text x="479" y="200" text-anchor="middle" class="ts">結算</text>
+<path d="M450,296 L508,296" class="ln" marker-end="url(#arr)"/>
+<text x="479" y="286" text-anchor="middle" class="ts">作廢</text>
+<path d="M450,380 L508,380" class="ln" marker-end="url(#arr)"/>
+<text x="479" y="370" text-anchor="middle" class="ts">兌現成立</text>
+<path d="M715,450 L715,490 L340,490 L340,452" class="lnw" marker-end="url(#arrw)"/>
+<text x="527" y="482" text-anchor="middle" class="tb tw">回滾（R07-19）：退回未結算，標記已回滾；已兌現的經 08 的兌現回轉</text>
+<!-- 入帳狀態 -->
+<rect x="40" y="520" width="880" height="90" rx="6" class="pnl"/>
+<text x="56" y="544" class="ptitle">入帳狀態，與注單狀態分開記（R07-21）</text>
+<g class="ts">
+<rect x="56" y="560" width="130" height="26" rx="4" class="chip"/><text x="121" y="578" text-anchor="middle">不需入帳（派彩 0）</text>
+<rect x="196" y="560" width="90" height="26" rx="4" class="chip"/><text x="241" y="578" text-anchor="middle">已入帳</text>
+<rect x="296" y="560" width="90" height="26" rx="4" class="chipw"/><text x="341" y="578" text-anchor="middle" class="tw">待入帳</text>
+<rect x="396" y="560" width="90" height="26" rx="4" class="chipw"/><text x="441" y="578" text-anchor="middle" class="tw">待扣回</text>
+</g>
+<text x="510" y="578" class="ts">結算完成＝已結算，且不是待入帳或待扣回（供 R12-07 與 11 的報表）</text>
+</svg>
+<p class="cap"><b>圖說</b>：注單只有未結算與已結算兩大狀態。未結算接 06 的已確認，含等待評定、暫緩結算中、兌現等待中與已回滾，對玩家與營運商一律顯示為已確認；已結算帶結果：依賽果、作廢退款或已兌現。任何已結算的注單都可以回滾回未結算（已兌現的經 08 的回轉），回滾不動錢。入帳狀態另記，待入帳與待扣回不算結算完成（R07-19、R07-21 至 R07-23）。</p>
+</section>
+
+</div>
+</body>
+</html>

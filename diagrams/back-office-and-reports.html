@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 後台與報表：概念圖</title>
+<link rel="stylesheet" href="blueprint.css">
+<style>
+/* 本頁補充：報表維度的三種方塊、表格列、時間軸數字 */
+svg .h { font-size: 17px; font-weight: 700; font-family: var(--font-head); }
+svg .cell { font-size: 13px; }
+svg .n18 { font-size: 18px; font-weight: 700; font-family: var(--font-head); }
+svg .dim { fill: var(--panel); stroke: var(--soft); stroke-width: 1; }
+svg .dims { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1; }
+svg .dimc { fill: var(--panel); stroke: var(--line); stroke-width: 1; stroke-dasharray: 4 3; }
+svg .th { fill: var(--tag-fill); }
+svg .hlrow { fill: var(--hl-fill); }
+svg .bar { fill: var(--tag-fill); stroke: var(--line); stroke-width: 1; }
+</style>
+</head>
+<body>
+<div class="doc">
+<svg class="defs" aria-hidden="true"><defs>
+  <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#7fd6ff"/></marker>
+  <marker id="arrs" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#b9c7dc"/></marker>
+  <marker id="arrw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#ffc857"/></marker>
+</defs></svg>
+
+<h1>11 後台與報表：概念圖</h1>
+<p class="meta"><b>狀態</b>：概念草稿（6 張） · <b>所屬</b>：<a href="index.html">概念圖總覽</a> · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台與報表</a></p>
+<p class="disclaimer">本頁是概念示意，不約束資料模型、架構或介面，也不是後台的畫面；規則見 11 的 R11-01 起，圖中附規則編號。圖中的經銷商、營運商、賽事與數字都是範例；金額示意只列美元，實際本幣與美元並列。</p>
+<ol class="toc">
+  <li><a href="#fig-11-01">圖 11-01　報表日：一張注單在哪一天進哪份報表</a></li>
+  <li><a href="#fig-11-02">圖 11-02　一張注單的指標：投注額、有效投注額、輸贏、毛利率</a></li>
+  <li><a href="#fig-11-03">圖 11-03　三份報表與注單的去向</a></li>
+  <li><a href="#fig-11-04">圖 11-04　輸贏報表的視角清單：單注、過關類、全部</a></li>
+  <li><a href="#fig-11-05">圖 11-05　逐層鑽取：選一個視角，從經銷商看到盤口線</a></li>
+  <li><a href="#fig-11-06">圖 11-06　未結算投注報表：從賽事清單鑽到盤口線與投注項</a></li>
+</ol>
+
+<!-- ============================================================ 圖 11-01 -->
+<section class="fig" id="fig-11-01">
+<h2>圖 11-01　報表日：一張注單在哪一天進哪份報表</h2>
+<svg viewBox="0 0 960 470" width="100%" role="img" aria-label="報表日時間軸">
+<line x1="60" y1="70" x2="920" y2="70" class="ln"/>
+<g>
+<circle cx="100" cy="70" r="7" class="dot"/><text x="100" y="48" text-anchor="middle" class="n18">D0</text>
+<text x="100" y="100" text-anchor="middle" class="tb">下注</text>
+<rect x="30" y="112" width="178" height="112" rx="6" class="node"/>
+<text x="42" y="134" class="cell">風險金額 1,000</text>
+<text x="42" y="156" class="cell">歐洲盤 2.00</text>
+<text x="42" y="180" class="ts">進未結算投注報表</text>
+<text x="42" y="198" class="ts">美元用下注日匯率</text>
+<text x="42" y="214" class="ts">（R11-13、06 的 R06-08）</text>
+</g>
+<g>
+<circle cx="300" cy="70" r="7" class="dot"/><text x="300" y="48" text-anchor="middle" class="n18">D1</text>
+<text x="300" y="100" text-anchor="middle" class="tb">兌現 50%</text>
+<rect x="224" y="112" width="160" height="112" rx="6" class="node"/>
+<text x="236" y="134" class="cell">兌現金額 575</text>
+<text x="236" y="156" class="cell">已兌現的風險金額 500</text>
+<text x="236" y="180" class="ts">D1 記兌現輸贏 −75</text>
+<text x="236" y="198" class="ts">剩餘 500 留在未結算</text>
+<text x="236" y="214" class="ts">（R11-04、08 的 R08-19）</text>
+</g>
+<g>
+<circle cx="500" cy="70" r="7" class="dot"/><text x="500" y="48" text-anchor="middle" class="n18">D2</text>
+<text x="500" y="100" text-anchor="middle" class="tb">結算完成：輸</text>
+<rect x="414" y="112" width="172" height="112" rx="6" class="node"/><rect x="417" y="115" width="166" height="106" rx="4" class="node2"/>
+<text x="426" y="134" class="cell">報表日＝D2</text>
+<text x="426" y="156" class="cell">投注額 500、有效 500</text>
+<text x="426" y="178" class="cell">輸贏 +500</text>
+<text x="426" y="198" class="ts">離開未結算投注報表</text>
+<text x="426" y="214" class="ts">美元用 D2 匯率（R07-24）</text>
+</g>
+<g>
+<circle cx="700" cy="70" r="7" class="dot"/><text x="700" y="48" text-anchor="middle" class="n18">D3</text>
+<text x="700" y="100" text-anchor="middle" class="tb">賽果更正，重新結算：贏</text>
+<rect x="616" y="112" width="168" height="112" rx="6" class="node"/>
+<text x="628" y="134" class="cell">新派彩 1,000</text>
+<text x="628" y="156" class="cell">差額 −1,000 記 D3</text>
+<text x="628" y="180" class="ts">D2 的數字不變</text>
+<text x="628" y="198" class="ts">投注額與有效的差額 0</text>
+<text x="628" y="214" class="ts">（R11-04、07 的 R07-19）</text>
+</g>
+<g>
+<circle cx="880" cy="70" r="7" class="dot"/><text x="880" y="48" text-anchor="middle" class="n18">D5</text>
+<text x="880" y="100" text-anchor="middle" class="tb">Ops 覆寫 D2 匯率</text>
+<rect x="808" y="112" width="112" height="112" rx="6" class="node"/>
+<text x="820" y="134" class="cell">D2 美元重算</text>
+<text x="820" y="156" class="cell">本幣不變</text>
+<text x="820" y="180" class="ts">（R11-01、R11-04）</text>
+</g>
+<!-- 兩份報表的帶 -->
+<line x1="40" y1="250" x2="920" y2="250" class="sep"/>
+<text x="40" y="282" class="ts">未結算投注報表</text>
+<rect x="150" y="266" width="350" height="24" rx="4" class="bar"/><text x="325" y="283" text-anchor="middle" class="ts">D0 起整張　　D1 起剩餘 500</text>
+<text x="40" y="326" class="ts">輸贏報表</text>
+<rect x="290" y="310" width="20" height="24" rx="4" class="bar"/><text x="300" y="327" text-anchor="middle" class="ts">D1</text>
+<text x="318" y="327" class="ts">兌現輸贏 −75</text>
+<rect x="490" y="310" width="20" height="24" rx="4" class="bar"/><text x="500" y="327" text-anchor="middle" class="ts">D2</text>
+<text x="518" y="327" class="ts">+500</text>
+<rect x="690" y="310" width="20" height="24" rx="4" class="bar"/><text x="700" y="327" text-anchor="middle" class="ts">D3</text>
+<text x="718" y="327" class="ts">−1,000（差額）</text>
+<line x1="40" y1="356" x2="920" y2="356" class="sep"/>
+<circle cx="52" cy="384" r="4" class="dot"/><text x="66" y="389">報表日＝結算完成的營業日（已結算或已作廢，且入帳不是待入帳或待扣回；07 的 R07-23）。</text>
+<circle cx="52" cy="412" r="4" class="dot"/><text x="66" y="417">差額一律記在發生當日：重新結算記重新結算日、兌現記兌現日、回轉沖回；已過的營業日不再變動。</text>
+<circle cx="52" cy="440" r="4" class="dotw"/><text x="66" y="445">作廢的注單不計投注額、有效投注額與輸贏，只計作廢注單數；暫緩結算中的注單留在未結算投注報表（R11-14）。</text>
+</svg>
+<p class="cap"><b>圖說</b>：同一張注單依發生的營業日分別進兩份報表：未結算時在未結算投注報表，結算完成的那一天進輸贏報表，之後的兌現、重新結算只以差額記在發生日，已過的營業日不再變動；覆寫匯率只改該日的美元數字（R11-04、R11-14）。</p>
+</section>
+
+<!-- ============================================================ 圖 11-02 -->
+<section class="fig" id="fig-11-02">
+<h2>圖 11-02　一張注單的指標：投注額、有效投注額、輸贏、毛利率</h2>
+<svg viewBox="0 0 960 580" width="100%" role="img" aria-label="一張注單的指標">
+<text x="40" y="36" class="tb">三張注單，各算一次報表欄位（公司角度，正值是公司盈利）</text>
+<rect x="40" y="60" width="280" height="56" rx="6" class="node"/><rect x="43" y="63" width="274" height="50" rx="4" class="node2"/>
+<text x="180" y="84" text-anchor="middle" class="tb">讓分單注，港盤 0.95</text>
+<text x="180" y="104" text-anchor="middle" class="ts">風險金額 1,000；結算結果贏半</text>
+<path d="M180,116 L180,136" class="ln" marker-end="url(#arr)"/>
+<rect x="40" y="138" width="280" height="30" rx="4" class="panel"/><text x="52" y="158" class="cell">風險金額</text><text x="308" y="158" text-anchor="end" class="cell mono">1,000</text>
+<rect x="40" y="172" width="280" height="30" rx="4" class="panel"/><text x="52" y="192" class="cell">派彩金額（倍率 1.475）</text><text x="308" y="192" text-anchor="end" class="cell mono">1,475</text>
+<rect x="40" y="206" width="280" height="30" rx="4" class="tag"/><text x="52" y="226" class="cell">投注額</text><text x="308" y="226" text-anchor="end" class="cell mono">1,000</text>
+<rect x="40" y="240" width="280" height="30" rx="4" class="tag"/><text x="52" y="260" class="cell">有效投注額（贏半計一半）</text><text x="308" y="260" text-anchor="end" class="cell mono">500</text>
+<rect x="40" y="274" width="280" height="30" rx="4" class="tag"/><text x="52" y="294" class="cell">輸贏＝1,000 − 1,475</text><text x="308" y="294" text-anchor="end" class="cell mono">−475</text>
+<rect x="40" y="308" width="280" height="30" rx="4" class="tag"/><text x="52" y="328" class="cell">毛利率＝−475 ÷ 500</text><text x="308" y="328" text-anchor="end" class="cell mono">−95%</text>
+<text x="52" y="356" class="ts">07 的 R07-05 派彩倍率；R11-05</text>
+<rect x="340" y="60" width="280" height="56" rx="6" class="node"/><rect x="343" y="63" width="274" height="50" rx="4" class="node2"/>
+<text x="480" y="84" text-anchor="middle" class="tb">馬來盤 −0.80，輸入 1,000</text>
+<text x="480" y="104" text-anchor="middle" class="ts">風險金額 800（06 的 R06-06）；結算結果輸</text>
+<path d="M480,116 L480,136" class="ln" marker-end="url(#arr)"/>
+<rect x="340" y="138" width="280" height="30" rx="4" class="panel"/><text x="352" y="158" class="cell">風險金額（不是投注金額）</text><text x="608" y="158" text-anchor="end" class="cell mono">800</text>
+<rect x="340" y="172" width="280" height="30" rx="4" class="panel"/><text x="352" y="192" class="cell">派彩金額</text><text x="608" y="192" text-anchor="end" class="cell mono">0</text>
+<rect x="340" y="206" width="280" height="30" rx="4" class="tag"/><text x="352" y="226" class="cell">投注額</text><text x="608" y="226" text-anchor="end" class="cell mono">800</text>
+<rect x="340" y="240" width="280" height="30" rx="4" class="tag"/><text x="352" y="260" class="cell">有效投注額（輸計全額）</text><text x="608" y="260" text-anchor="end" class="cell mono">800</text>
+<rect x="340" y="274" width="280" height="30" rx="4" class="tag"/><text x="352" y="294" class="cell">輸贏＝800 − 0</text><text x="608" y="294" text-anchor="end" class="cell mono">+800</text>
+<rect x="340" y="308" width="280" height="30" rx="4" class="tag"/><text x="352" y="328" class="cell">毛利率＝800 ÷ 800</text><text x="608" y="328" text-anchor="end" class="cell mono">100%</text>
+<text x="352" y="356" class="ts">投注額以風險金額計，不是輸入的 1,000</text>
+<rect x="640" y="60" width="280" height="56" rx="6" class="node"/><rect x="643" y="63" width="274" height="50" rx="4" class="node2"/>
+<text x="780" y="84" text-anchor="middle" class="tb">單注，營業日 D1 整張兌現</text>
+<text x="780" y="104" text-anchor="middle" class="ts">風險金額 1,000；兌現金額 1,150</text>
+<path d="M780,116 L780,136" class="ln" marker-end="url(#arr)"/>
+<rect x="640" y="138" width="280" height="30" rx="4" class="panel"/><text x="652" y="158" class="cell">已兌現部分的風險金額</text><text x="908" y="158" text-anchor="end" class="cell mono">1,000</text>
+<rect x="640" y="172" width="280" height="30" rx="4" class="panel"/><text x="652" y="192" class="cell">兌現金額</text><text x="908" y="192" text-anchor="end" class="cell mono">1,150</text>
+<rect x="640" y="206" width="280" height="30" rx="4" class="tag"/><text x="652" y="226" class="cell">投注額（沒有結算的部分）</text><text x="908" y="226" text-anchor="end" class="cell mono">0</text>
+<rect x="640" y="240" width="280" height="30" rx="4" class="tag"/><text x="652" y="260" class="cell">有效投注額</text><text x="908" y="260" text-anchor="end" class="cell mono">0</text>
+<rect x="640" y="274" width="280" height="30" rx="4" class="tag"/><text x="652" y="294" class="cell">兌現輸贏＝1,000 − 1,150</text><text x="908" y="294" text-anchor="end" class="cell mono">−150</text>
+<rect x="640" y="308" width="280" height="30" rx="4" class="tag"/><text x="652" y="328" class="cell">毛利率</text><text x="908" y="328" text-anchor="end" class="cell mono">—</text>
+<text x="652" y="356" class="ts">記在兌現日；也併入輸贏（08 的 R08-19）</text>
+<line x1="40" y1="400" x2="920" y2="400" class="sep"/>
+<rect x="40" y="414" width="880" height="150" rx="6" class="panel"/>
+<text x="56" y="438" class="tb">定義（第 2 節）</text>
+<text x="56" y="462" class="cell">投注額＝結算完成注單的風險金額合計　　有效投注額＝風險金額 × 折算（贏、輸 1；贏半、輸半 ½；走盤、作廢 0；緬甸盤的部分依比例）</text>
+<text x="56" y="486" class="cell">輸贏（GGR）＝Σ(風險金額 − 派彩金額)，等於 07 淨輸贏的相反數　　兌現輸贏＝已兌現部分的風險金額 − 兌現金額</text>
+<text x="56" y="510" class="cell">毛利率（Hold）＝GGR ÷ 有效投注額；與 05、12 的水位（Margin）無關</text>
+<text x="56" y="534" class="ts">走盤：注單數與投注額照計，有效投注額與輸贏為 0。作廢：只計作廢注單數（07 的 R07-04）。</text>
+<text x="56" y="554" class="ts">每一列同時列本幣與美元，美元依 R11-01 以報表日的匯率換算。</text>
+</svg>
+<p class="cap"><b>圖說</b>：報表的每個欄位都從風險金額與派彩金額算出：投注額是風險金額，有效投注額依結算結果折算，輸贏是風險金額減派彩金額（公司角度），毛利率是輸贏除以有效投注額；負賠率的注單以風險金額計，不以輸入的金額計；兌現以兌現輸贏記在兌現日（第 2 節、R11-05）。</p>
+</section>
+
+<!-- ============================================================ 圖 11-03 -->
+<section class="fig" id="fig-11-03">
+<h2>圖 11-03　三份報表與注單的去向</h2>
+<svg viewBox="0 0 960 620" width="100%" role="img" aria-label="三份報表與注單的去向">
+<!-- 注單狀態 -->
+<rect x="40" y="20" width="400" height="48" rx="6" class="node"/>
+<text x="240" y="42" text-anchor="middle" class="tb">已確認、尚未結算完成</text>
+<text x="240" y="60" text-anchor="middle" class="ts">含暫緩結算中、等待賽果穩定（07 的 R07-23）</text>
+<rect x="520" y="20" width="400" height="48" rx="6" class="node"/>
+<text x="720" y="42" text-anchor="middle" class="tb">結算完成：已結算或已作廢</text>
+<text x="720" y="60" text-anchor="middle" class="ts">且入帳不是待入帳或待扣回；報表日＝這一天（R11-04）</text>
+<path d="M440,44 L518,44" class="ln" marker-end="url(#arr)"/>
+<text x="479" y="36" text-anchor="middle" class="ts">結算</text>
+<path d="M240,68 L240,100" class="ln" marker-end="url(#arr)"/>
+<path d="M720,68 L720,100" class="ln" marker-end="url(#arr)"/>
+<!-- 未結算投注報表 -->
+<rect x="40" y="102" width="400" height="226" rx="6" class="node"/><rect x="43" y="105" width="394" height="220" rx="4" class="node2"/>
+<text x="56" y="128" class="h">未結算投注報表（Total Bets）</text>
+<text x="56" y="150" class="ts">即時；美元用下注日匯率（R11-13）</text>
+<rect x="56" y="162" width="368" height="70" rx="4" class="panel"/>
+<text x="68" y="182" class="tb">單注分頁</text>
+<text x="68" y="202" class="cell">運動 › 賽事（含冠軍盤）› 玩法 › 盤口線 › 投注項</text>
+<text x="68" y="222" class="ts">注單數、風險金額、潛在派彩、曝險（09 的 R09-05）</text>
+<rect x="56" y="240" width="368" height="50" rx="4" class="panel"/>
+<text x="68" y="260" class="tb">過關類分頁</text>
+<text x="68" y="280" class="cell">注單類型 › 關數：注單數、風險金額、潛在派彩</text>
+<rect x="56" y="298" width="130" height="22" rx="4" class="tagw"/><text x="121" y="314" text-anchor="middle" class="ts tw">暫緩結算：留在此</text>
+<text x="196" y="314" class="ts">顯示標記、層級與原因（R11-14）</text>
+<!-- 輸贏報表 -->
+<rect x="520" y="102" width="400" height="226" rx="6" class="node"/><rect x="523" y="105" width="394" height="220" rx="4" class="node2"/>
+<text x="536" y="128" class="h">輸贏報表（Win/Loss Report）</text>
+<text x="536" y="150" class="ts">依報表日；美元用報表日匯率（R11-01）</text>
+<rect x="536" y="162" width="116" height="60" rx="4" class="panel"/><text x="594" y="186" text-anchor="middle" class="tb">全部</text><text x="594" y="206" text-anchor="middle" class="ts">2 個視角</text>
+<rect x="662" y="162" width="116" height="60" rx="4" class="panel"/><text x="720" y="186" text-anchor="middle" class="tb">單注</text><text x="720" y="206" text-anchor="middle" class="ts">9 個視角</text>
+<rect x="788" y="162" width="116" height="60" rx="4" class="panel"/><text x="846" y="186" text-anchor="middle" class="tb">過關類</text><text x="846" y="206" text-anchor="middle" class="ts">3 個視角</text>
+<text x="536" y="246" class="cell">全部＝單注＋過關類（R11-09）；視角見圖 11-04</text>
+<text x="536" y="268" class="cell">欄位：注單數、作廢注單數、投注額、有效投注額、</text>
+<text x="536" y="288" class="cell">輸贏、兌現輸贏、毛利率、最後更新時間（R11-11）</text>
+<text x="536" y="312" class="ts">篩選：營業日範圍必填；幣別、經銷商、營運商；輸贏門檻（R11-12）</text>
+<!-- 兌現箭頭 -->
+<path d="M440,215 L518,215" class="ln dash" marker-end="url(#arr)"/>
+<text x="479" y="207" text-anchor="middle" class="ts">已兌現的部分</text>
+<text x="479" y="232" text-anchor="middle" class="ts">記兌現日</text>
+<!-- 經銷商與營運商報表 -->
+<path d="M720,328 L720,360" class="ln" marker-end="url(#arr)"/>
+<text x="740" y="350" class="ts">同範圍合計相等（R11-07、R11-16）</text>
+<rect x="520" y="362" width="400" height="120" rx="6" class="node"/><rect x="523" y="365" width="394" height="114" rx="4" class="node2"/>
+<text x="536" y="388" class="h">經銷商與營運商報表</text>
+<text x="536" y="412" class="cell">年 › 月 › 營業日 × 經銷商 › 營運商 × 幣別</text>
+<text x="536" y="434" class="cell">欄位同輸贏報表；每個營運商每種幣別一列，另有美元合計</text>
+<text x="536" y="456" class="ts">月合計＝各營業日依當日匯率換算後加總，不用月匯率（R11-15）</text>
+<text x="536" y="474" class="ts">InSports 與經銷商對帳的依據；不計占成（R11-16）</text>
+<!-- 維度 -->
+<rect x="40" y="362" width="440" height="140" rx="6" class="panel"/>
+<text x="56" y="388" class="tb">可用的維度（R11-06）</text>
+<text x="56" y="410" class="cell">組織與時間：經銷商、營運商、幣別、營業日（日或月）</text>
+<text x="56" y="432" class="cell">運動以下：運動、競賽、賽事、玩法、盤口線（只在單注）</text>
+<text x="56" y="454" class="cell">分類：注單類型、關數、單場／冠軍盤、</text>
+<text x="56" y="474" class="cell">　　　競賽等級、參賽方等級、玩家價格等級</text>
+<text x="56" y="494" class="ts">報表最細到營運商，不到玩家；一場賽事的參賽方等級取兩方較高者</text>
+<line x1="40" y1="520" x2="920" y2="520" class="sep"/>
+<circle cx="52" cy="546" r="4" class="dot"/><text x="66" y="551">三份報表都由注單推導，任何營業日都可重算，結果必須一致；任一層級都可匯出 CSV、Excel（R11-07）。</text>
+<circle cx="52" cy="574" r="4" class="dot"/><text x="66" y="579">第一版只在 InSports 後台給 Ops；經銷商與營運商不直接查看（R11-08）。</text>
+<text x="66" y="606" class="ts">更新頻率與重算方式屬非功能需求與 SPEC。</text>
+</svg>
+<p class="cap"><b>圖說</b>：尚未結算完成的注單在未結算投注報表，結算完成後依報表日進輸贏報表，兌現的部分以兌現日進輸贏報表；經銷商與營運商報表是輸贏報表依月、經銷商、營運商、幣別的彙總，同範圍合計必須相等。三份報表共用同一套維度與欄位（R11-06、R11-07、R11-09、R11-13 至 R11-16）。</p>
+</section>
+
+<!-- ============================================================ 圖 11-04 -->
+<section class="fig" id="fig-11-04">
+<h2>圖 11-04　輸贏報表的視角清單：單注、過關類、全部</h2>
+<svg viewBox="0 0 960 730" width="100%" role="img" aria-label="輸贏報表的視角清單">
+<rect x="40" y="16" width="880" height="30" rx="5" class="panel"/><text x="52" y="36" class="tb">單注分頁：9 個視角，只有這個分頁有運動以下的層級（R11-09）</text>
+<text x="52" y="76" class="mono ts">S-1</text>
+<rect x="100" y="58" width="64" height="26" rx="5" class="dim"/><text x="132" y="76" text-anchor="middle" class="cell">經銷商</text>
+<path d="M166,71 L177,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="180" y="58" width="64" height="26" rx="5" class="dim"/><text x="212" y="76" text-anchor="middle" class="cell">營運商</text>
+<path d="M246,71 L257,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="58" width="50" height="26" rx="5" class="dims"/><text x="285" y="76" text-anchor="middle" class="cell">運動</text>
+<path d="M312,71 L323,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="326" y="58" width="50" height="26" rx="5" class="dims"/><text x="351" y="76" text-anchor="middle" class="cell">競賽</text>
+<path d="M378,71 L389,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="392" y="58" width="50" height="26" rx="5" class="dims"/><text x="417" y="76" text-anchor="middle" class="cell">賽事</text>
+<path d="M444,71 L455,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="458" y="58" width="50" height="26" rx="5" class="dims"/><text x="483" y="76" text-anchor="middle" class="cell">玩法</text>
+<path d="M510,71 L521,71" class="ln" marker-end="url(#arrs)"/>
+<rect x="524" y="58" width="64" height="26" rx="5" class="dims"/><text x="556" y="76" text-anchor="middle" class="cell">盤口線</text>
+<text x="52" y="112" class="mono ts">S-2</text>
+<rect x="100" y="94" width="64" height="26" rx="5" class="dim"/><text x="132" y="112" text-anchor="middle" class="cell">經銷商</text>
+<path d="M166,107 L177,107" class="ln" marker-end="url(#arrs)"/>
+<rect x="180" y="94" width="64" height="26" rx="5" class="dim"/><text x="212" y="112" text-anchor="middle" class="cell">營運商</text>
+<path d="M246,107 L257,107" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="94" width="64" height="26" rx="5" class="dim"/><text x="292" y="112" text-anchor="middle" class="cell">營業日</text>
+<path d="M326,107 L337,107" class="ln" marker-end="url(#arrs)"/>
+<rect x="340" y="94" width="50" height="26" rx="5" class="dims"/><text x="365" y="112" text-anchor="middle" class="cell">運動</text>
+<path d="M392,107 L403,107" class="ln" marker-end="url(#arrs)"/>
+<rect x="406" y="94" width="50" height="26" rx="5" class="dims"/><text x="431" y="112" text-anchor="middle" class="cell">競賽</text>
+<path d="M458,107 L469,107" class="ln" marker-end="url(#arrs)"/>
+<rect x="472" y="94" width="50" height="26" rx="5" class="dims"/><text x="497" y="112" text-anchor="middle" class="cell">賽事</text>
+<text x="52" y="148" class="mono ts">S-3</text>
+<rect x="100" y="130" width="50" height="26" rx="5" class="dims"/><text x="125" y="148" text-anchor="middle" class="cell">運動</text>
+<path d="M152,143 L163,143" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="130" width="50" height="26" rx="5" class="dims"/><text x="191" y="148" text-anchor="middle" class="cell">競賽</text>
+<path d="M218,143 L229,143" class="ln" marker-end="url(#arrs)"/>
+<rect x="232" y="130" width="50" height="26" rx="5" class="dims"/><text x="257" y="148" text-anchor="middle" class="cell">賽事</text>
+<path d="M284,143 L295,143" class="ln" marker-end="url(#arrs)"/>
+<rect x="298" y="130" width="50" height="26" rx="5" class="dims"/><text x="323" y="148" text-anchor="middle" class="cell">玩法</text>
+<path d="M350,143 L361,143" class="ln" marker-end="url(#arrs)"/>
+<rect x="364" y="130" width="64" height="26" rx="5" class="dims"/><text x="396" y="148" text-anchor="middle" class="cell">盤口線</text>
+<text x="52" y="184" class="mono ts">S-4</text>
+<rect x="100" y="166" width="50" height="26" rx="5" class="dims"/><text x="125" y="184" text-anchor="middle" class="cell">運動</text>
+<path d="M152,179 L163,179" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="166" width="50" height="26" rx="5" class="dims"/><text x="191" y="184" text-anchor="middle" class="cell">玩法</text>
+<path d="M218,179 L229,179" class="ln" marker-end="url(#arrs)"/>
+<rect x="232" y="166" width="50" height="26" rx="5" class="dims"/><text x="257" y="184" text-anchor="middle" class="cell">競賽</text>
+<path d="M284,179 L295,179" class="ln" marker-end="url(#arrs)"/>
+<rect x="298" y="166" width="50" height="26" rx="5" class="dims"/><text x="323" y="184" text-anchor="middle" class="cell">賽事</text>
+<path d="M350,179 L361,179" class="ln" marker-end="url(#arrs)"/>
+<rect x="364" y="166" width="64" height="26" rx="5" class="dims"/><text x="396" y="184" text-anchor="middle" class="cell">盤口線</text>
+<text x="52" y="220" class="mono ts">S-5</text>
+<rect x="100" y="202" width="50" height="26" rx="5" class="dims"/><text x="125" y="220" text-anchor="middle" class="cell">運動</text>
+<path d="M152,215 L163,215" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="202" width="106" height="26" rx="5" class="dimc"/><text x="219" y="220" text-anchor="middle" class="cell">單場／冠軍盤</text>
+<path d="M274,215 L285,215" class="ln" marker-end="url(#arrs)"/>
+<rect x="288" y="202" width="50" height="26" rx="5" class="dims"/><text x="313" y="220" text-anchor="middle" class="cell">競賽</text>
+<path d="M340,215 L351,215" class="ln" marker-end="url(#arrs)"/>
+<rect x="354" y="202" width="50" height="26" rx="5" class="dims"/><text x="379" y="220" text-anchor="middle" class="cell">賽事</text>
+<path d="M406,215 L417,215" class="ln" marker-end="url(#arrs)"/>
+<rect x="420" y="202" width="50" height="26" rx="5" class="dims"/><text x="445" y="220" text-anchor="middle" class="cell">玩法</text>
+<text x="52" y="256" class="mono ts">S-6</text>
+<rect x="100" y="238" width="78" height="26" rx="5" class="dimc"/><text x="139" y="256" text-anchor="middle" class="cell">競賽等級</text>
+<path d="M180,251 L191,251" class="ln" marker-end="url(#arrs)"/>
+<rect x="194" y="238" width="50" height="26" rx="5" class="dims"/><text x="219" y="256" text-anchor="middle" class="cell">運動</text>
+<path d="M246,251 L257,251" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="238" width="50" height="26" rx="5" class="dims"/><text x="285" y="256" text-anchor="middle" class="cell">競賽</text>
+<path d="M312,251 L323,251" class="ln" marker-end="url(#arrs)"/>
+<rect x="326" y="238" width="50" height="26" rx="5" class="dims"/><text x="351" y="256" text-anchor="middle" class="cell">賽事</text>
+<text x="52" y="292" class="mono ts">S-7</text>
+<rect x="100" y="274" width="92" height="26" rx="5" class="dimc"/><text x="146" y="292" text-anchor="middle" class="cell">參賽方等級</text>
+<path d="M194,287 L205,287" class="ln" marker-end="url(#arrs)"/>
+<rect x="208" y="274" width="50" height="26" rx="5" class="dims"/><text x="233" y="292" text-anchor="middle" class="cell">運動</text>
+<path d="M260,287 L271,287" class="ln" marker-end="url(#arrs)"/>
+<rect x="274" y="274" width="50" height="26" rx="5" class="dims"/><text x="299" y="292" text-anchor="middle" class="cell">競賽</text>
+<path d="M326,287 L337,287" class="ln" marker-end="url(#arrs)"/>
+<rect x="340" y="274" width="50" height="26" rx="5" class="dims"/><text x="365" y="292" text-anchor="middle" class="cell">賽事</text>
+<text x="52" y="328" class="mono ts">S-8</text>
+<rect x="100" y="310" width="50" height="26" rx="5" class="dim"/><text x="125" y="328" text-anchor="middle" class="cell">幣別</text>
+<path d="M152,323 L163,323" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="310" width="64" height="26" rx="5" class="dim"/><text x="198" y="328" text-anchor="middle" class="cell">經銷商</text>
+<path d="M232,323 L243,323" class="ln" marker-end="url(#arrs)"/>
+<rect x="246" y="310" width="64" height="26" rx="5" class="dim"/><text x="278" y="328" text-anchor="middle" class="cell">營運商</text>
+<path d="M312,323 L323,323" class="ln" marker-end="url(#arrs)"/>
+<rect x="326" y="310" width="64" height="26" rx="5" class="dim"/><text x="358" y="328" text-anchor="middle" class="cell">營業日</text>
+<text x="52" y="364" class="mono ts">S-9</text>
+<rect x="100" y="346" width="64" height="26" rx="5" class="dim"/><text x="132" y="364" text-anchor="middle" class="cell">經銷商</text>
+<path d="M166,359 L177,359" class="ln" marker-end="url(#arrs)"/>
+<rect x="180" y="346" width="64" height="26" rx="5" class="dim"/><text x="212" y="364" text-anchor="middle" class="cell">營運商</text>
+<path d="M246,359 L257,359" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="346" width="106" height="26" rx="5" class="dimc"/><text x="313" y="364" text-anchor="middle" class="cell">玩家價格等級</text>
+<path d="M368,359 L379,359" class="ln" marker-end="url(#arrs)"/>
+<rect x="382" y="346" width="50" height="26" rx="5" class="dims"/><text x="407" y="364" text-anchor="middle" class="cell">運動</text>
+<rect x="40" y="388" width="880" height="30" rx="5" class="panel"/><text x="52" y="408" class="tb">過關類分頁：3 個視角，以注單類型與關數代替運動層級，整張不分攤到各關</text>
+<text x="52" y="448" class="mono ts">P-1</text>
+<rect x="100" y="430" width="64" height="26" rx="5" class="dim"/><text x="132" y="448" text-anchor="middle" class="cell">經銷商</text>
+<path d="M166,443 L177,443" class="ln" marker-end="url(#arrs)"/>
+<rect x="180" y="430" width="64" height="26" rx="5" class="dim"/><text x="212" y="448" text-anchor="middle" class="cell">營運商</text>
+<path d="M246,443 L257,443" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="430" width="78" height="26" rx="5" class="dimc"/><text x="299" y="448" text-anchor="middle" class="cell">注單類型</text>
+<path d="M340,443 L351,443" class="ln" marker-end="url(#arrs)"/>
+<rect x="354" y="430" width="50" height="26" rx="5" class="dimc"/><text x="379" y="448" text-anchor="middle" class="cell">關數</text>
+<path d="M406,443 L417,443" class="ln" marker-end="url(#arrs)"/>
+<rect x="420" y="430" width="64" height="26" rx="5" class="dim"/><text x="452" y="448" text-anchor="middle" class="cell">營業日</text>
+<text x="52" y="484" class="mono ts">P-2</text>
+<rect x="100" y="466" width="78" height="26" rx="5" class="dimc"/><text x="139" y="484" text-anchor="middle" class="cell">注單類型</text>
+<path d="M180,479 L191,479" class="ln" marker-end="url(#arrs)"/>
+<rect x="194" y="466" width="50" height="26" rx="5" class="dimc"/><text x="219" y="484" text-anchor="middle" class="cell">關數</text>
+<path d="M246,479 L257,479" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="466" width="64" height="26" rx="5" class="dim"/><text x="292" y="484" text-anchor="middle" class="cell">經銷商</text>
+<path d="M326,479 L337,479" class="ln" marker-end="url(#arrs)"/>
+<rect x="340" y="466" width="64" height="26" rx="5" class="dim"/><text x="372" y="484" text-anchor="middle" class="cell">營運商</text>
+<text x="52" y="520" class="mono ts">P-3</text>
+<rect x="100" y="502" width="50" height="26" rx="5" class="dim"/><text x="125" y="520" text-anchor="middle" class="cell">幣別</text>
+<path d="M152,515 L163,515" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="502" width="64" height="26" rx="5" class="dim"/><text x="198" y="520" text-anchor="middle" class="cell">經銷商</text>
+<path d="M232,515 L243,515" class="ln" marker-end="url(#arrs)"/>
+<rect x="246" y="502" width="64" height="26" rx="5" class="dim"/><text x="278" y="520" text-anchor="middle" class="cell">營運商</text>
+<path d="M312,515 L323,515" class="ln" marker-end="url(#arrs)"/>
+<rect x="326" y="502" width="64" height="26" rx="5" class="dim"/><text x="358" y="520" text-anchor="middle" class="cell">營業日</text>
+<rect x="40" y="544" width="880" height="30" rx="5" class="panel"/><text x="52" y="564" class="tb">全部分頁：2 個視角，只有非運動的維度；合計＝單注＋過關類</text>
+<text x="52" y="604" class="mono ts">A-1</text>
+<rect x="100" y="586" width="50" height="26" rx="5" class="dim"/><text x="125" y="604" text-anchor="middle" class="cell">幣別</text>
+<path d="M152,599 L163,599" class="ln" marker-end="url(#arrs)"/>
+<rect x="166" y="586" width="64" height="26" rx="5" class="dim"/><text x="198" y="604" text-anchor="middle" class="cell">經銷商</text>
+<path d="M232,599 L243,599" class="ln" marker-end="url(#arrs)"/>
+<rect x="246" y="586" width="64" height="26" rx="5" class="dim"/><text x="278" y="604" text-anchor="middle" class="cell">營運商</text>
+<path d="M312,599 L323,599" class="ln" marker-end="url(#arrs)"/>
+<rect x="326" y="586" width="64" height="26" rx="5" class="dim"/><text x="358" y="604" text-anchor="middle" class="cell">營業日</text>
+<text x="52" y="640" class="mono ts">A-2</text>
+<rect x="100" y="622" width="64" height="26" rx="5" class="dim"/><text x="132" y="640" text-anchor="middle" class="cell">經銷商</text>
+<path d="M166,635 L177,635" class="ln" marker-end="url(#arrs)"/>
+<rect x="180" y="622" width="64" height="26" rx="5" class="dim"/><text x="212" y="640" text-anchor="middle" class="cell">營運商</text>
+<path d="M246,635 L257,635" class="ln" marker-end="url(#arrs)"/>
+<rect x="260" y="622" width="64" height="26" rx="5" class="dim"/><text x="292" y="640" text-anchor="middle" class="cell">營業日</text>
+<path d="M326,635 L337,635" class="ln" marker-end="url(#arrs)"/>
+<rect x="340" y="622" width="78" height="26" rx="5" class="dimc"/><text x="379" y="640" text-anchor="middle" class="cell">注單類型</text>
+<line x1="40" y1="668" x2="920" y2="668" class="sep"/>
+<rect x="52" y="682" width="22" height="16" rx="4" class="dim"/><text x="82" y="695" class="ts">組織與時間：經銷商、營運商、幣別、營業日</text>
+<rect x="352" y="682" width="22" height="16" rx="4" class="dims"/><text x="382" y="695" class="ts">運動以下的層級：只在單注分頁</text>
+<rect x="602" y="682" width="22" height="16" rx="4" class="dimc"/><text x="632" y="695" class="ts">分類：等級、價格等級、單場／冠軍盤、注單類型、關數</text>
+<text x="52" y="714" class="ts">每個視角從第一層開始逐層鑽取，每一層同一組欄位、都可匯出（R11-10、R11-11）；清單日後可增，編號不重用。</text>
+</svg>
+<p class="cap"><b>圖說</b>：輸贏報表分三個分頁，各有固定的視角清單；一個視角就是一串固定順序的層級。只有單注分頁有運動、競賽、賽事、玩法、盤口線；過關類分頁改用注單類型與關數，整張注單不分攤到各關的運動與賽事；全部分頁只有組織與時間的維度，合計等於另外兩個分頁之和（R11-09、R11-10）。</p>
+</section>
+
+<!-- ============================================================ 圖 11-05 -->
+<section class="fig" id="fig-11-05">
+<h2>圖 11-05　逐層鑽取：選一個視角，從經銷商看到盤口線</h2>
+<svg viewBox="0 0 960 630" width="100%" role="img" aria-label="逐層鑽取">
+<text x="40" y="30" class="tb">視角 S-1：經銷商 › 營運商 › 運動 › 競賽 › 賽事 › 玩法 › 盤口線　　篩選：營業日 2026-11-01 至 2026-11-05，美元</text>
+<text x="40" y="76" class="ts">已鑽取到</text>
+<rect x="110" y="58" width="80" height="26" rx="5" class="chip"/><text x="150" y="76" text-anchor="middle" class="cell">經銷商 D</text>
+<text x="196" y="76" class="ts">›</text>
+<rect x="208" y="58" width="80" height="26" rx="5" class="chip"/><text x="248" y="76" text-anchor="middle" class="cell">營運商 X</text>
+<text x="294" y="76" class="ts">›</text>
+<rect x="306" y="58" width="52" height="26" rx="5" class="chip"/><text x="332" y="76" text-anchor="middle" class="cell">足球</text>
+<text x="364" y="76" class="ts">›</text>
+<rect x="376" y="58" width="52" height="26" rx="5" class="chip"/><text x="402" y="76" text-anchor="middle" class="cell">英超</text>
+<text x="434" y="76" class="ts">›</text>
+<rect x="446" y="58" width="122" height="26" rx="5" class="chip"/><text x="507" y="76" text-anchor="middle" class="cell">曼城 vs 利物浦</text>
+<text x="574" y="76" class="ts">›</text>
+<rect x="586" y="58" width="52" height="26" rx="5" class="tag"/><text x="612" y="76" text-anchor="middle" class="cell">玩法</text>
+<text x="644" y="76" class="ts">›</text>
+<rect x="656" y="58" width="66" height="26" rx="5" class="ghost"/><text x="689" y="76" text-anchor="middle" class="cell">盤口線</text>
+<text x="40" y="124" class="ts">每一層都是同一組欄位（R11-11）；金額以美元示意，實際本幣與美元並列（R11-05）</text>
+<rect x="40" y="150" width="880" height="26" rx="4" class="th"/>
+<text x="50" y="168" class="ts tb">玩法（目前這一層）</text>
+<text x="300" y="168" text-anchor="end" class="ts tb">注單數</text>
+<text x="370" y="168" text-anchor="end" class="ts tb">作廢</text>
+<text x="460" y="168" text-anchor="end" class="ts tb">投注額</text>
+<text x="570" y="168" text-anchor="end" class="ts tb">有效投注額</text>
+<text x="660" y="168" text-anchor="end" class="ts tb">輸贏</text>
+<text x="760" y="168" text-anchor="end" class="ts tb">兌現輸贏</text>
+<text x="860" y="168" text-anchor="end" class="ts tb">毛利率</text>
+<rect x="40" y="176" width="880" height="26" class="hlrow"/>
+<text x="50" y="194" class="cell">讓分</text>
+<text x="300" y="194" text-anchor="end" class="cell mono">1,240</text>
+<text x="370" y="194" text-anchor="end" class="cell mono">6</text>
+<text x="460" y="194" text-anchor="end" class="cell mono">310,000</text>
+<text x="570" y="194" text-anchor="end" class="cell mono">286,500</text>
+<text x="660" y="194" text-anchor="end" class="cell mono">+9,800</text>
+<text x="760" y="194" text-anchor="end" class="cell mono">−420</text>
+<text x="860" y="194" text-anchor="end" class="cell mono">3.4%</text>
+<text x="50" y="220" class="cell">大小</text>
+<text x="300" y="220" text-anchor="end" class="cell mono">860</text>
+<text x="370" y="220" text-anchor="end" class="cell mono">2</text>
+<text x="460" y="220" text-anchor="end" class="cell mono">198,000</text>
+<text x="570" y="220" text-anchor="end" class="cell mono">190,000</text>
+<text x="660" y="220" text-anchor="end" class="cell mono">−4,100</text>
+<text x="760" y="220" text-anchor="end" class="cell mono">0</text>
+<text x="860" y="220" text-anchor="end" class="cell mono">−2.2%</text>
+<text x="50" y="246" class="cell">獨贏（三項）</text>
+<text x="300" y="246" text-anchor="end" class="cell mono">410</text>
+<text x="370" y="246" text-anchor="end" class="cell mono">0</text>
+<text x="460" y="246" text-anchor="end" class="cell mono">72,000</text>
+<text x="570" y="246" text-anchor="end" class="cell mono">72,000</text>
+<text x="660" y="246" text-anchor="end" class="cell mono">+5,900</text>
+<text x="760" y="246" text-anchor="end" class="cell mono">−150</text>
+<text x="860" y="246" text-anchor="end" class="cell mono">8.2%</text>
+<line x1="40" y1="254" x2="920" y2="254" class="sep"/>
+<text x="50" y="272" class="cell tb">合計</text>
+<text x="300" y="272" text-anchor="end" class="cell mono tb">2,510</text>
+<text x="370" y="272" text-anchor="end" class="cell mono tb">8</text>
+<text x="460" y="272" text-anchor="end" class="cell mono tb">580,000</text>
+<text x="570" y="272" text-anchor="end" class="cell mono tb">548,500</text>
+<text x="660" y="272" text-anchor="end" class="cell mono tb">+11,600</text>
+<text x="760" y="272" text-anchor="end" class="cell mono tb">−570</text>
+<text x="860" y="272" text-anchor="end" class="cell mono tb">2.1%</text>
+<path d="M120,288 L120,340" class="ln" marker-end="url(#arr)"/>
+<text x="136" y="318" class="cell">點「讓分」那一列，鑽到下一層：盤口線</text>
+<rect x="40" y="350" width="880" height="26" rx="4" class="th"/>
+<text x="50" y="368" class="ts tb">盤口線（讓分的下一層）</text>
+<text x="300" y="368" text-anchor="end" class="ts tb">注單數</text>
+<text x="370" y="368" text-anchor="end" class="ts tb">作廢</text>
+<text x="460" y="368" text-anchor="end" class="ts tb">投注額</text>
+<text x="570" y="368" text-anchor="end" class="ts tb">有效投注額</text>
+<text x="660" y="368" text-anchor="end" class="ts tb">輸贏</text>
+<text x="760" y="368" text-anchor="end" class="ts tb">兌現輸贏</text>
+<text x="860" y="368" text-anchor="end" class="ts tb">毛利率</text>
+<text x="50" y="394" class="cell">-0.5</text>
+<text x="300" y="394" text-anchor="end" class="cell mono">520</text>
+<text x="370" y="394" text-anchor="end" class="cell mono">3</text>
+<text x="460" y="394" text-anchor="end" class="cell mono">140,000</text>
+<text x="570" y="394" text-anchor="end" class="cell mono">128,000</text>
+<text x="660" y="394" text-anchor="end" class="cell mono">+6,200</text>
+<text x="760" y="394" text-anchor="end" class="cell mono">−300</text>
+<text x="860" y="394" text-anchor="end" class="cell mono">4.8%</text>
+<text x="50" y="420" class="cell">-0.75</text>
+<text x="300" y="420" text-anchor="end" class="cell mono">480</text>
+<text x="370" y="420" text-anchor="end" class="cell mono">2</text>
+<text x="460" y="420" text-anchor="end" class="cell mono">120,000</text>
+<text x="570" y="420" text-anchor="end" class="cell mono">112,500</text>
+<text x="660" y="420" text-anchor="end" class="cell mono">+1,900</text>
+<text x="760" y="420" text-anchor="end" class="cell mono">−120</text>
+<text x="860" y="420" text-anchor="end" class="cell mono">1.7%</text>
+<text x="50" y="446" class="cell">-1</text>
+<text x="300" y="446" text-anchor="end" class="cell mono">240</text>
+<text x="370" y="446" text-anchor="end" class="cell mono">1</text>
+<text x="460" y="446" text-anchor="end" class="cell mono">50,000</text>
+<text x="570" y="446" text-anchor="end" class="cell mono">46,000</text>
+<text x="660" y="446" text-anchor="end" class="cell mono">+1,700</text>
+<text x="760" y="446" text-anchor="end" class="cell mono">0</text>
+<text x="860" y="446" text-anchor="end" class="cell mono">3.7%</text>
+<line x1="40" y1="454" x2="920" y2="454" class="sep"/>
+<text x="50" y="472" class="cell tb">合計＝上一層的「讓分」列</text>
+<text x="300" y="472" text-anchor="end" class="cell mono tb">1,240</text>
+<text x="370" y="472" text-anchor="end" class="cell mono tb">6</text>
+<text x="460" y="472" text-anchor="end" class="cell mono tb">310,000</text>
+<text x="570" y="472" text-anchor="end" class="cell mono tb">286,500</text>
+<text x="660" y="472" text-anchor="end" class="cell mono tb">+9,800</text>
+<text x="760" y="472" text-anchor="end" class="cell mono tb">−420</text>
+<text x="860" y="472" text-anchor="end" class="cell mono tb">3.4%</text>
+<line x1="40" y1="500" x2="920" y2="500" class="sep"/>
+<circle cx="52" cy="526" r="4" class="dot"/><text x="66" y="531">每一層都可匯出 CSV、Excel（R11-07）；下一層的合計等於上一層被點的那一列。</text>
+<circle cx="52" cy="554" r="4" class="dot"/><text x="66" y="559">可設輸贏金額的門檻，只看絕對值超過門檻的列；營業日範圍必填（R11-12）。</text>
+<circle cx="52" cy="582" r="4" class="dotw"/><text x="66" y="587">作廢注單數另列，不計入投注額與輸贏（R11-04）。本圖只是示意，不是 11 的畫面。</text>
+</svg>
+<p class="cap"><b>圖說</b>：使用者選一個視角後，從第一層開始逐層鑽取；每一層都是同一組欄位、都可匯出，下一層的合計等於上一層被點的那一列（R11-10 至 R11-12）。</p>
+</section>
+
+<!-- ============================================================ 圖 11-06 -->
+<section class="fig" id="fig-11-06">
+<h2>圖 11-06　未結算投注報表：從賽事清單鑽到盤口線與投注項</h2>
+<svg viewBox="0 0 960 638" width="100%" role="img" aria-label="未結算投注報表">
+<text x="40" y="28" class="tb">單注分頁，第一層：賽事清單（每格是注單數）　　篩選：運動＝足球（也可選賽事、玩法）；即時更新</text>
+<rect x="40" y="42" width="880" height="26" rx="4" class="th"/>
+<text x="50" y="60" text-anchor="start" class="ts tb">開賽</text>
+<text x="130" y="60" text-anchor="start" class="ts tb">賽事</text>
+<text x="440" y="60" text-anchor="end" class="ts tb">合計</text>
+<text x="540" y="60" text-anchor="end" class="ts tb">讓分</text>
+<text x="640" y="60" text-anchor="end" class="ts tb">大小</text>
+<text x="760" y="60" text-anchor="end" class="ts tb">獨贏（三項）</text>
+<text x="880" y="60" text-anchor="end" class="ts tb">其他玩法</text>
+<rect x="40" y="68" width="880" height="24" class="panel"/><text x="50" y="85" class="ts tb">英超</text>
+<rect x="40" y="92" width="880" height="28" class="hlrow"/>
+<text x="50" y="111" text-anchor="start" class="cell">11/08 22:30</text>
+<text x="130" y="111" text-anchor="start" class="cell">曼城 vs 利物浦</text>
+<text x="440" y="111" text-anchor="end" class="cell mono">31</text>
+<text x="540" y="111" text-anchor="end" class="cell mono">11</text>
+<text x="640" y="111" text-anchor="end" class="cell mono">9</text>
+<text x="760" y="111" text-anchor="end" class="cell mono">6</text>
+<text x="880" y="111" text-anchor="end" class="cell mono">5</text>
+<text x="50" y="139" text-anchor="start" class="cell">11/08 23:00</text>
+<text x="130" y="139" text-anchor="start" class="cell">阿森納 vs 切爾西</text>
+<text x="440" y="139" text-anchor="end" class="cell mono">12</text>
+<text x="540" y="139" text-anchor="end" class="cell mono">5</text>
+<text x="640" y="139" text-anchor="end" class="cell mono">4</text>
+<text x="760" y="139" text-anchor="end" class="cell mono">2</text>
+<text x="880" y="139" text-anchor="end" class="cell mono">1</text>
+<rect x="270" y="125" width="118" height="18" rx="4" class="tagw"/><text x="329" y="138" text-anchor="middle" class="ts tw">含暫緩結算 1 張</text>
+<rect x="40" y="148" width="880" height="24" class="panel"/><text x="50" y="165" class="ts tb">冠軍盤賽事也在這一層（R11-13）</text>
+<text x="50" y="191" text-anchor="start" class="cell">2026/27</text>
+<text x="130" y="191" text-anchor="start" class="cell">英超冠軍</text>
+<text x="440" y="191" text-anchor="end" class="cell mono">14</text>
+<text x="540" y="191" text-anchor="end" class="cell mono">—</text>
+<text x="640" y="191" text-anchor="end" class="cell mono">—</text>
+<text x="760" y="191" text-anchor="end" class="cell mono">—</text>
+<text x="880" y="191" text-anchor="end" class="cell mono">14</text>
+<text x="40" y="216" class="ts">每格是注單數，也可切換看風險金額；冠軍盤賽事與單場同列（R11-13）。暫緩結算中的注單留在本報表並顯示標記（R11-14）。</text>
+<path d="M120,234 L120,274" class="ln" marker-end="url(#arr)"/>
+<text x="136" y="258" class="cell">點「曼城 vs 利物浦」的「讓分」，鑽到下一層：盤口線與投注項</text>
+<text x="40" y="298" class="tb">第二層：曼城 vs 利物浦 › 讓分　　每條盤口線的兩個投注項各列注單數、風險金額、潛在派彩（美元示意，依下注日匯率，06 的 R06-08）</text>
+<rect x="40" y="310" width="880" height="22" rx="4" class="th"/>
+<text x="330" y="326" text-anchor="middle" class="ts tb">主隊</text>
+<text x="690" y="326" text-anchor="middle" class="ts tb">客隊</text>
+<line x1="200" y1="310" x2="200" y2="358" class="sep"/><line x1="540" y1="310" x2="540" y2="358" class="sep"/>
+<rect x="40" y="332" width="880" height="26" class="th"/>
+<text x="50" y="350" text-anchor="start" class="ts tb">盤口線</text>
+<text x="270" y="350" text-anchor="end" class="ts tb">注單數</text>
+<text x="400" y="350" text-anchor="end" class="ts tb">風險金額</text>
+<text x="530" y="350" text-anchor="end" class="ts tb">潛在派彩</text>
+<text x="640" y="350" text-anchor="end" class="ts tb">注單數</text>
+<text x="780" y="350" text-anchor="end" class="ts tb">風險金額</text>
+<text x="910" y="350" text-anchor="end" class="ts tb">潛在派彩</text>
+<text x="50" y="376" text-anchor="start" class="cell">-0.5（主 0.90／客 0.95）</text>
+<text x="270" y="376" text-anchor="end" class="cell mono">2</text>
+<text x="400" y="376" text-anchor="end" class="cell mono">3,000</text>
+<text x="530" y="376" text-anchor="end" class="cell mono">5,700</text>
+<text x="640" y="376" text-anchor="end" class="cell mono">1</text>
+<text x="780" y="376" text-anchor="end" class="cell mono">1,000</text>
+<text x="910" y="376" text-anchor="end" class="cell mono">1,950</text>
+<text x="50" y="402" text-anchor="start" class="cell">-0.75（主 0.90／客 0.95）</text>
+<text x="270" y="402" text-anchor="end" class="cell mono">3</text>
+<text x="400" y="402" text-anchor="end" class="cell mono">4,500</text>
+<text x="530" y="402" text-anchor="end" class="cell mono">8,550</text>
+<text x="640" y="402" text-anchor="end" class="cell mono">2</text>
+<text x="780" y="402" text-anchor="end" class="cell mono">2,000</text>
+<text x="910" y="402" text-anchor="end" class="cell mono">3,900</text>
+<text x="50" y="428" text-anchor="start" class="cell">-1（主 0.90／客 0.95）</text>
+<text x="270" y="428" text-anchor="end" class="cell mono">1</text>
+<text x="400" y="428" text-anchor="end" class="cell mono">2,000</text>
+<text x="530" y="428" text-anchor="end" class="cell mono">3,800</text>
+<text x="640" y="428" text-anchor="end" class="cell mono">2</text>
+<text x="780" y="428" text-anchor="end" class="cell mono">3,000</text>
+<text x="910" y="428" text-anchor="end" class="cell mono">5,850</text>
+<line x1="40" y1="436" x2="920" y2="436" class="sep"/>
+<text x="50" y="454" text-anchor="start" class="cell tb">合計</text>
+<text x="270" y="454" text-anchor="end" class="cell mono tb">6</text>
+<text x="400" y="454" text-anchor="end" class="cell mono tb">9,500</text>
+<text x="530" y="454" text-anchor="end" class="cell mono tb">18,050</text>
+<text x="640" y="454" text-anchor="end" class="cell mono tb">5</text>
+<text x="780" y="454" text-anchor="end" class="cell mono tb">6,000</text>
+<text x="910" y="454" text-anchor="end" class="cell mono tb">11,700</text>
+<rect x="40" y="472" width="880" height="54" rx="6" class="node"/>
+<text x="56" y="494" class="cell tb">玩法 × 賽事的曝險（09 的 R09-05）：最壞賽果的派彩 − 已收風險金額＝主隊淨勝 2 球以上時 18,050 − 15,500 ＝ 2,550</text>
+<text x="56" y="514" class="ts">曝險依整個玩法的各線合併算，不逐線算；本報表只呈現，算法不在本 PRD。</text>
+<line x1="40" y1="542" x2="920" y2="542" class="sep"/>
+<circle cx="52" cy="568" r="4" class="dot"/><text x="66" y="573">注單結算完成或作廢即離開本報表，同時計入輸贏報表；已兌現的部分離開，剩餘部分留下（R11-14）。</text>
+<circle cx="52" cy="596" r="4" class="dot"/><text x="66" y="601">過關類分頁另列：注單類型 › 關數，只列注單數、風險金額與潛在派彩；各關投注項的曝險由 09 計入（R11-13）。</text>
+<text x="66" y="626" class="ts">本圖只是示意，不是 11 的畫面；賽事、盤口線與金額都是範例。</text>
+</svg>
+<p class="cap"><b>圖說</b>：未結算投注報表即時呈現尚未結算完成的注單。第一層是賽事清單，依競賽分組，每格是該賽事該玩法的注單數，冠軍盤賽事同列；點進一個賽事的玩法，第二層列出每條盤口線的兩個投注項各自的注單數、風險金額與潛在派彩，曝險依 09 的算法以整個玩法呈現。注單結算完成或作廢即離開，暫緩結算中的留著並顯示標記（R11-13、R11-14）。</p>
+</section>
+
+</div>
+</body>
+</html>
