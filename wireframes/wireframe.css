@@ -331,3 +331,15 @@ table.grid.queue th { white-space: normal; }
 .idx-nav ul ul { border-left: 1px solid var(--line-soft); margin-left: 6px; }
 .idx-tag { margin-left: 6px; padding: 0 6px; border: 1px solid var(--line); background: var(--fill); color: var(--mark); font-size: 11px; }
 .idx-desc { display: block; color: var(--muted); font-size: 12px; }
+
+/* Provider Settings › Classification：規則表的篩選列與新增列 */
+.rule-row-add td, .rule-row-add th { background: var(--fill); }
+.rule-filters { display: flex; align-items: flex-end; gap: 14px; flex-wrap: wrap; }
+
+/* Provider Settings › Sports & Markets：運動開關矩陣與玩法標籤 */
+.sport-matrix td, .sport-matrix th[scope="col"] { text-align: center; }
+.sport-matrix td:first-child, .sport-matrix th:first-child { text-align: left; }
+.sport-matrix .l2 { display: block; }
+.market-pill { display: inline-block; border: 1px solid var(--mark); border-radius: 12px; padding: 1px 10px; margin: 2px 4px 2px 0;
+  font-size: 12px; font-weight: 600; color: var(--ink); background: var(--paper); text-decoration: none; }
+.market-pill.off { border-color: var(--line); border-style: dashed; color: var(--muted); font-weight: 400; text-decoration: line-through; }

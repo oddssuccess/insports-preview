@@ -9,138 +9,69 @@
 <body>
 <div class="doc">
 
-<h1>來源運動與玩法（Provider Settings › Sports &amp; Markets）</h1>
-<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../../index.html">畫面索引</a></p>
+<h1>來源設定・運動與玩法（Provider Settings › Sports &amp; Markets）</h1>
+<p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Settings › Provider Settings · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../../index.html">畫面索引</a></p>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 查看各來源與運動的既有對應；依來源及運動查看玩法對應、來源賠率的處理方式，以及未對應玩法的出現次數。內容唯讀。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依來源開關連接器要收集的運動與玩法。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
-    <li>依運動、玩法或賽事控制讀取範圍：不提供這類設定。連接器讀取所串接的全部資料，衍生玩法依固定規則處理（R03-10、R03-13；R05-04～05）。</li>
-    <li>依來源與資料類別停用：<a href="data-usage.html">Data Usage</a>；連接器、途徑及帳號的啟停：<a href="connectors.html">Connectors</a>（R03-04～07、R03-09、R03-12～14）。</li>
-    <li>賽程來源的指定：<a href="fixture-sources.html">Fixture Sources</a>；競賽名稱分類：<a href="classification.html">Classification</a>（R04-01～02、R04-20；R01-27）。運動對應不代表具備完整賽程能力。</li>
-    <li>運動的營運狀態、目錄時段與計分項目：<a href="../../catalog/sports.html">Catalog › Sports</a>；玩法定義：<a href="../../catalog/markets.html">Catalog › Markets</a>（R01-17～18、R01-24、R01-26、R01-29）。</li>
-    <li>來源賠率開關、權重、模板指定與玩法開關由玩法設定處理，不改變本頁的讀取規則（R05-09、R05-11、R05-21；R12-01、R12-05、R12-09～10）。</li>
-    <li>玩法對應表的維護，以及賽事對應、方向或矛盾資料的人工處理另屬 04；本頁只查看既有結果（R04-08～11、R04-17、R04-19）。</li>
+    <li>依來源與資料類別停用：<a href="data-usage.html">Data Usage</a>；暫停整個連接器：<a href="connectors.html">Connectors</a>（R03-07、R03-13）。</li>
+    <li>各運動的賽程來源：<a href="fixture-sources.html">Fixture Sources</a>（R04-02）。</li>
+    <li>來源賠率開關與權重、玩法開關與模板：Market Settings（R05-09；R12-01、R12-10）。</li>
+    <li>玩法對應表與賽事對應：PRD 04（R04-08、R04-11）。</li>
   </ul></td></tr>
 </table>
-<p class="disclaimer">本頁是需求示意，用來說明畫面提供的資訊與操作，不約束版面、元件或資料模型。七個來源依已確認名單列出；運動對應、玩法名稱、識別及次數為示意資料，不代表已驗證的串接覆蓋。側邊主選單見<a href="../../layout.html">共用版面</a>。</p>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。運動、玩法、開關與時間均為範例，不代表來源的實際能力。側邊主選單見<a href="../../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>查看七個來源與運動的既有對應，缺少對應時保留空值</td><td>R03-01；R04-03～04；R01-17、R01-24</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>依來源及運動查看來源玩法與目錄玩法</td><td>R03-08；R04-11</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
-  <tr><td>3</td><td>唯讀顯示錨定、衍生與共識定價玩法的來源賠率處理</td><td>R03-10、R03-13；R05-04～05</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
-  <tr><td>4</td><td>列出未對應的來源玩法與出現次數</td><td>R04-11</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>來源不提供賠率時顯示原因，不把它當作未對應或資料中斷</td><td>R03-01、R03-05；R04-01</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>1</td><td>依來源與運動開關連接器的收集</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>依來源開關玩法：點玩法名稱切換</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>運動的賽程來源不能關閉該運動</td><td>R03-13；R04-02</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
-<h2 id="s1">畫面 1：運動對應與來源玩法</h2>
+<h2 id="s1">畫面 1：運動與玩法開關</h2>
 <div lang="en" class="frame">
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
-    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Sports and markets</div></div></div>
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose which sports and markets each connector collects.</div></div></div>
     <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a class="on" aria-current="page" href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a></nav>
-    <div class="panel">
-      <div class="ph">Sports <span class="n">1</span></div>
-      <div class="pb">
-        <table class="grid provider-table">
-          <thead><tr>
-            <th>InSports sport</th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></span></th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></span></th>
-            <th><span class="provider-identity"><span class="provider-icon">S</span><span class="provider-name">Sofascore</span></span></th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></span><span class="provider-via">via insportlive <span class="n">2</span></span></th>
-            <th><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></span><span class="provider-via">via insportlive</span></th>
-          </tr></thead>
-          <tbody>
-            <tr><td>Soccer</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td></tr>
-            <tr><td>Basketball</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>—</td><td>—</td></tr>
-            <tr><td>Tennis</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>—</td><td>—</td></tr>
-            <tr><td>League of Legends</td><td>Mapped</td><td>Mapped</td><td>Mapped</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-          </tbody>
-        </table>
-        <div class="pager"><span>4 sports shown</span><span><a href="../../catalog/sports.html">Sport catalog</a></span></div>
-      </div>
-    </div>
-    <div class="panel">
-      <div class="ph">Markets <span class="n">3</span></div>
-      <div class="pb">
-        <div class="filters"><div class="f"><label>Provider</label><span class="box caret">Saba</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">Market name or provider ID</span></div><a class="btn" href="#s3">RunningBall</a></div>
-        <table class="grid">
-          <thead><tr><th>Provider market <span class="s">/ ID</span></th><th>InSports market <span class="n">4</span></th><th>Type</th><th>Source odds <span class="n">5</span></th><th>Unmapped occurrences <span class="n">6</span></th></tr></thead>
-          <tbody>
-            <tr><td>Handicap<div class="l2">SP-M01</div></td><td>Handicap · M-1<div class="l2">Goals · Regular time</div></td><td>Anchor</td><td>Read</td><td>—</td></tr>
-            <tr><td>Over / Under<div class="l2">SP-M06</div></td><td>Over/Under · M-6<div class="l2">Goals · Regular time</div></td><td>Anchor</td><td>Read</td><td>—</td></tr>
-            <tr><td><a href="#s2">Correct Score</a><div class="l2">SP-M12</div></td><td>Correct Score · M-12<div class="l2">Goals · Regular time</div></td><td>Derived</td><td>Not used</td><td>—</td></tr>
-            <tr><td>Corner Handicap<div class="l2">SP-M05</div></td><td>Corner Handicap · M-5<div class="l2">Corners · Regular time</div></td><td>Consensus</td><td>Read</td><td>—</td></tr>
-            <tr><td>Player Special<div class="l2">SP-M99</div></td><td>Unmapped</td><td>—</td><td>Read<div class="l2">Not used</div></td><td>6</td></tr>
-          </tbody>
-        </table>
-        <div class="pager"><span>5 source markets</span><span>Page 1 of 1</span></div>
-      </div>
-    </div>
+    <table class="grid provider-table sport-matrix" aria-label="Sports collected by each provider">
+      <thead><tr><th scope="col">Sport <span class="n">1</span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></span></th><th scope="col"><span class="provider-identity"><span class="provider-icon" aria-hidden="true">S</span><span class="provider-name">Sofascore</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></span></th></tr></thead>
+      <tbody>
+      <tr><td>Soccer</td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Soccer">ON</span> <span class="n">3</span></td><td><span class="provider-switch on" title="Sbobet Soccer">ON</span></td><td><span class="provider-switch on" title="Pinnacle Soccer">ON</span></td><td><span class="provider-switch on" title="Flashscore Soccer">ON</span></td><td><span class="l2">N/A</span> <span class="n">2</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Basketball</td><td><span class="provider-switch on" title="Saba Basketball">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Basketball">ON</span></td><td><span class="provider-switch on" title="Pinnacle Basketball">ON</span></td><td><span class="provider-switch on" title="Flashscore Basketball">ON</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Tennis</td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Tennis">ON</span></td><td><span class="provider-switch on" title="Sbobet Tennis">ON</span></td><td><span class="provider-switch on" title="Pinnacle Tennis">ON</span></td><td><span class="provider-switch on" title="Flashscore Tennis">ON</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Ice Hockey</td><td><span class="provider-switch off" title="Saba Ice Hockey">OFF</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Ice Hockey">ON</span></td><td><span class="provider-switch on" title="Pinnacle Ice Hockey">ON</span></td><td><span class="provider-switch off" title="Flashscore Ice Hockey">OFF</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Baseball</td><td><span class="provider-switch on" title="Saba Baseball">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Baseball">ON</span></td><td><span class="provider-switch on" title="Pinnacle Baseball">ON</span></td><td><span class="provider-switch on" title="Flashscore Baseball">ON</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Cricket</td><td><span class="provider-switch on" title="Saba Cricket">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Cricket">ON</span></td><td><span class="l2">—</span></td><td><span class="provider-switch on" title="Flashscore Cricket">ON</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Table Tennis</td><td><span class="provider-switch on" title="Saba Table Tennis">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Table Tennis">ON</span></td><td><span class="provider-switch on" title="Pinnacle Table Tennis">ON</span></td><td><span class="l2">—</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>League of Legends</td><td><span class="provider-switch on" title="Saba League of Legends">ON</span></td><td><span class="provider-switch on" title="Sbobet League of Legends">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for League of Legends">ON</span></td><td><span class="l2">—</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      <tr><td>Dota 2</td><td><span class="provider-switch on" title="Saba Dota 2">ON</span></td><td><span class="provider-switch on" title="Sbobet Dota 2">ON</span></td><td><span class="provider-switch on" aria-disabled="true" title="Fixture source for Dota 2">ON</span></td><td><span class="l2">—</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td><td><span class="l2">N/A</span></td></tr>
+      </tbody>
+    </table>
+    <div class="pager"><span>9 sports shown</span><span>Changes are saved immediately</span></div>
+    <p class="hint">Providers that cannot filter markets are not listed. <span class="n">4</span></p>
+    <table class="grid" aria-label="Markets collected by each provider">
+      <thead><tr><th>Provider</th><th>Markets</th><th>Last change <span class="n">5</span></th></tr></thead>
+      <tbody>
+        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill on" href="#s1" aria-pressed="true">1X2</a><a class="market-pill on" href="#s1" aria-pressed="true">Moneyline</a><a class="market-pill off" href="#s1" aria-pressed="false">Odd / Even</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
+        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
+      </tbody>
+    </table>
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>「Sports」每列一個目錄運動，每欄一個來源。「Mapped」表示已有該來源與目錄運動的對應，「—」表示本例沒有已確立的對應，不代表來源中斷或一定不提供這項運動。電子競技逐一列出遊戲，如 League of Legends，不合成一個 Esports 運動；表格沒有運動讀取開關（R04-03～04、R01-17、R01-24；R03-10、R03-13）。</span></li>
-  <li><span class="n">2</span><span>「via insportlive」是取得途徑。RunningBall 與 BetGenius 各保留自己的來源欄，不把轉送商列為第八個來源；運動有對應也不表示該來源已被指定角色，或具備完整賽程能力（R03-01～02；R04-01～02）。</span></li>
-  <li><span class="n">3</span><span>「Markets」依來源、運動與原始名稱／識別查詢。本例選 Saba 的足球；來源識別 SP-M01 與目錄識別 M-1 分開。RunningBall 入口展示切換來源後沒有賠率玩法的情況（畫面 3），不修改來源設定（R03-08、R04-11）。</span></li>
-  <li><span class="n">4</span><span>「InSports market」顯示已有的目錄對應及計分項目、時段。本例 Handicap 對應常規時間進球讓分；Player Special 尚未對應。名稱相近不表示結算相同，未對應的玩法不使用、不開盤；本頁沒有編輯對應的操作（R04-11；R01-17）。</span></li>
-  <li><span class="n">5</span><span>「Source odds」顯示固定處理方式，不是開關。讓分與大小是錨定玩法，角球讓分是共識定價玩法，照常讀取；波膽是衍生玩法，對應後不使用來源賠率，詳見畫面 2。Read 不代表已參與定價或已開盤，仍受來源狀態、模板與開盤條件限制（R03-10、R03-13；R05-04～05、R05-09；R01-18、R01-26；R12-09～10）。</span></li>
-  <li><span class="n">6</span><span>「Unmapped occurrences」列出未對應玩法的出現次數，供 Ops 定期查看。本例 SP-M99 出現 6 次；其他已對應玩法顯示「—」。衍生玩法已完成對應，不列入未對應次數；統計範圍見待確認事項（R04-11）。</span></li>
-</ol>
-
-<h2 id="s2">畫面 2：衍生玩法的來源賠率</h2>
-<div lang="en" class="frame">
-  <div class="backdrop"><div class="modal" style="width:740px">
-    <div class="mh"><span>Saba · Correct Score</span><a href="#s1" aria-label="Close market details">×</a></div>
-    <div class="mb">
-      <table class="grid"><tbody>
-        <tr><th>Provider / Sport</th><td>Saba / Soccer</td></tr>
-        <tr><th>Provider market</th><td>Correct Score · SP-M12</td></tr>
-        <tr><th>InSports market <span class="n">1</span></th><td>Correct Score · M-12</td></tr>
-        <tr><th>Scoring item / Period</th><td>Goals / Regular time</td></tr>
-        <tr><th>Type <span class="n">2</span></th><td>Derived</td></tr>
-        <tr><th>Source odds <span class="n">3</span></th><td>Not used</td></tr>
-      </tbody></table>
-    </div>
-    <div class="mf"><a class="btn" href="../../catalog/markets.html#s1">Market catalog</a><a class="btn" href="#s1">Close</a></div>
-  </div></div>
-</div>
-<ol class="notes">
-  <li><span class="n">1</span><span>「InSports market」保留已確立的玩法對應。本例 SP-M12 對應 M-12；不因來源賠率不使用就解除對應或重新列為未對應。Market catalog 開啟目錄清單，示意連結未套用個別玩法篩選（R04-11）。</span></li>
-  <li><span class="n">2</span><span>「Type」是固定分類，不能在本頁改成錨定或共識定價。本例的足球常規時間進球波膽由模型推導；不同計分項目或時段不能僅依同名類推（R05-04～05）。</span></li>
-  <li><span class="n">3</span><span>「Source odds」為 Not used。完成對應並判定為衍生玩法後，不再把該來源賠率交給對應層；能分開讀取時不再讀取，不能分開時仍接收但不採用，也不用來與推導價格比對。對應前照常讀取；此處沒有儲存、啟停或逐玩法讀取設定（R03-10、R03-13；R04-11；R05-04）。</span></li>
-</ol>
-
-<h2 id="s3">畫面 3：來源沒有賠率玩法</h2>
-<div lang="en" class="frame">
-  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
-  <main class="main">
-    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Sports and markets</div></div></div>
-    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a class="on" aria-current="page" href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a></nav>
-    <div class="panel">
-      <div class="ph">Markets</div>
-      <div class="pb">
-        <div class="filters"><div class="f"><label>Provider <span class="n">1</span></label><span class="box caret">RunningBall</span><span class="l2">via insportlive</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><a class="btn" href="#s1">Saba</a></div>
-        <p>No source odds. <span class="n">2</span></p>
-        <div class="pager"><span>0 source markets</span><a href="data-usage.html">Data Usage</a></div>
-      </div>
-    </div>
-  </main>
-</div>
-<ol class="notes">
-  <li><span class="n">1</span><span>「Provider」本例選 RunningBall，透過 insportlive 取得資料；BetGenius 是另一個來源，不能因共用途徑而合併。Saba 入口回到畫面 1 的來源玩法範例（R03-01～02）。</span></li>
-  <li><span class="n">2</span><span>「No source odds」表示這個來源不提供賠率，與暫時查無資料、中斷或尚未對應不同。RunningBall 與 BetGenius 的足球賽況及賽果仍各自存在；資料類別的使用設定在 Data Usage 查看，不在此啟用不存在的賠率能力（R03-05、R04-01；來源目錄的<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/providers/19-runningball.md">RunningBall</a>與<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/providers/20-betgenius.md">BetGenius</a>）。</span></li>
+  <li><span class="n">1</span><span>每列一個運動，每欄一個來源。ON 表示連接器收集該來源的該運動，OFF 表示不收集。切換後立即套用，並記錄操作者與時間（非功能需求：稽核軌跡）。</span></li>
+  <li><span class="n">2</span><span>N/A 表示該來源的資料線無法依運動篩選，關閉也不會減少收集，因此沒有開關；「—」表示來源沒有該運動。</span></li>
+  <li><span class="n">3</span><span>鎖住的 ON 是該運動的賽程來源，例如 Saba 是足球與網球的賽程來源。運動的賽程不能停用，要先在 <a href="fixture-sources.html">Fixture Sources</a> 更換賽程來源（R03-13、R04-02）。</span></li>
+  <li><span class="n">4</span><span>玩法表只列出可依玩法篩選的來源，以來源為單位，套用到該來源收集的所有運動。點玩法名稱切換：實線為收集，刪除線為不收集。</span></li>
+  <li><span class="n">5</span><span>每個來源最近一次切換運動或玩法的時間與操作者。</span></li>
 </ol>
 
 <h2>待確認事項</h2>
-<ol>
-  <li>未對應玩法的出現次數：R04-11 要求顯示次數，但統計時間範圍、重複回報的計數方式及資料保留期限尚未定義。本例的 6 次不代表固定每日、每場或累計終身次數。</li>
-</ol>
+<p>目前沒有。</p>
 </div>
 </body>
 </html>
