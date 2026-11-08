@@ -1,112 +1,204 @@
 <!doctype html>
-<html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>來源冠軍盤賽程 wireframe</title><link rel="stylesheet" href="../../wireframe.css"></head>
-<body><div class="doc"><p><a href="../../index.html">畫面索引</a> · <a href="../../layout.html">共用版面</a></p><h1>來源冠軍盤賽程（Provider › Outrights › Schedule）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>日期</b>：2026-11-03 · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求</a></p>
-<table class="doc-t"><tr><th>服務的工作</th><td>Ops 查看來源冠軍盤事件、期間、名單、來源時間及統一關係；辨識未處理項目與建立條件缺口，進入冠軍盤對應。</td></tr><tr><th>不在本頁</th><td><ul class="tight"><li><a href="../../outrights/schedule.html">統一冠軍盤賽程</a>顯示統一身分與名單；冠軍盤對應負責逐項對應／排除、人工紀錄及鎖定（R01-12～15、R04-18～19）。本頁來源資料唯讀。</li><li><a href="../matches/schedule.html">單場來源賽程</a>及其人工指定建立者屬單場規則（R04-05）。冠軍盤不直接沿用主客、重掛、待取消或八種生命週期（R04-08、R04-12、R04-23）。</li><li>來源角色、連接器、帳號、啟停與取得途徑的維運在來源設定；資料類別依 R03-05～07、R03-13，不能在本頁逐事件停讀或覆寫來源（R03-01～04、R03-09～14；R04-02）。</li><li>目錄屬性與名稱在 <a href="../../catalog/competitors.html">參賽方</a>、<a href="../../catalog/tournaments.html">競賽</a>、<a href="../../catalog/markets.html">玩法</a>管理（R01-24、R01-27～33、R04-11）。來源稱為冠軍盤的單場玩法仍依 InSports 目錄歸類。</li><li>詳細賽況、賠率、賽果與結算留後續（R04-13～15、R04-21～22；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">R05-14</a>；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07</a>；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/betting-rules/38-outright-winner.md">OTR-01～07</a>）。06 的下注、08 提前兌現、09 風控、10 經銷商與12 冠軍盤模板不因此納入。</li></ul></td></tr></table>
-<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。業務以 InSports PRD 為準；來源、名稱、數字與時間為範例。畫面只畫主內容區，側欄見<a href="../../layout.html">共用版面</a>。本次第一階段包含單場比賽與冠軍盤的來源資料、統一紀錄、賽程、識別、屬性、生命週期、對應及人工審核；詳細賽況、賠率與賽果／結算仍屬後續。</p>
-<h2>功能清單</h2><table class="doc-t"><tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr><tr><td>1</td><td>查看來源事件、期間、原始狀態與統一關係</td><td>R01-12；R03-08；R04-04、R04-18；見待確認第 1、2、6 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr><tr><td>2</td><td>查看來源名單、逐項對應進度與未知身分</td><td>R01-13、R01-15；R04-18；見待確認第 3、4 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr><tr><td>3</td><td>分開顯示來源資料可用性、完整賽程能力與兩種時間戳</td><td>R03-05～08；R04-01～02、R04-16</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr><tr><td>4</td><td>從已對應資料進入人工對應與紀錄；未知建立條件禁止誤建</td><td>R04-18～19；見待確認第 1、3、5 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr><tr><td>5</td><td>查看建立者名單由二位增為三位的來源前後資料，依其他來源實際新增項目連到統一名單與對應</td><td>R01-13、R01-15；R03-08；R04-04、R04-18；見待確認第 3、4 項</td><td><a href="#s4">畫面 4</a></td></tr></table>
-<h2 id="s1">畫面 1：來源冠軍盤清單與對應進度</h2>
-<div lang="en" class="frame"><header class="top"><span>Home › Provider › Outrights › Schedule</span><span>UTC+08:00 · ops.user</span></header><main class="main">
-<div class="page-head"><div><h3>Provider — Outright Schedule</h3><div class="sub">Provider B · Source records · Snapshot: 2026-11-03 09:25 UTC+08:00</div></div><a class="btn" href="../../outrights/schedule.html">Canonical schedule</a></div>
-<div class="filters"><div class="f"><label>Provider <span class="n">1</span></label><span class="box caret">Provider B</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">Event or provider ID</span></div><div class="f"><label>Canonical relation</label><span class="box caret">All</span></div></div>
-<div class="bucket"><span class="on">All (2)</span><span>Open (1)</span><span>Scheduled (1)</span></div>
-<p class="hint">Provider-reported statuses only · Fixture data: Normal · Full fixture capability: Not verified <span class="n">2</span></p>
-<table class="grid"><thead><tr><th>Provider event</th><th>Provider market label</th><th>Source period / dates <span class="n">3</span></th><th>Source status</th><th>Canonical relation <span class="n">4</span></th><th>View</th></tr></thead><tbody>
-<tr class="sel"><td>Premier League Winner<div class="l2">OB-8814</div></td><td>Winner</td><td>2026/27 · Whole season<div class="l2">Start / end: Not supplied</div></td><td>Open</td><td><a href="../../outrights/schedule.html#s2">O-61001</a><div class="l2">2 items mapped · 1 excluded · 1 unresolved</div></td><td><a class="btn" href="#s2">Detail &amp; roster</a></td></tr>
-<tr><td>National Cup Top Scorer<div class="l2">OB-8820</div></td><td>Top Scorer</td><td>2026/27<div class="l2">Source start: 2026-11-15 12:00 UTC+08:00<br>Source end: Not supplied</div></td><td>Scheduled</td><td>Not created<div class="l2">Event and player identities unresolved</div></td><td><a class="btn" href="#s3">Review requirements</a></td></tr>
-</tbody></table>
-<div class="pager"><span>2 source events · 1 linked · 1 not created</span><span>Provider B</span></div>
-<p><a class="btn" href="#s4">Creator roster update · A / OA-7201 · 09:37</a></p>
-<p class="hint">Receiving a source event does not establish creator eligibility or a canonical lifecycle. <span class="n">5</span></p>
-</main></div>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源冠軍盤賽程 wireframe</title>
+<link rel="stylesheet" href="../../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>來源冠軍盤賽程（Provider › Outrights › Schedule）</h1>
+<p class="meta"><b>選單</b>：Provider › Outrights › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 依來源（Provider）與運動，查看該來源回報的冠軍盤：事件、玩法、開始日期與來源狀態，點選事件查看來源的投注項（Outcome）清單與變更紀錄，並看到已連結的統一冠軍盤。內容皆為來源回報值，唯讀。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>統一冠軍盤的狀態、開始日期與設定模板：<a href="../../outrights/schedule.html">Outrights › Schedule</a>；統一的投注項與變更紀錄：<a href="../../outrights/outright-detail.html">冠軍盤明細</a>（R04-04、R04-12、R04-18）。</li>
+    <li>對應的確認、排除與更正等操作不在本頁；已連結的來源識別配對見<a href="../../outrights/outright-mapping.html">冠軍盤對應</a>（R04-18）。</li>
+    <li>來源單場賽程：<a href="../matches/schedule.html">Provider › Matches › Schedule</a>。來源競賽與參賽方：<a href="../tournaments.html">Provider › Tournaments</a>、<a href="../competitors.html">Provider › Competitors</a>（R03-08）。</li>
+    <li>賽程來源、連接器、帳號與資料類別啟停：Settings › Provider Settings（R03-05～07、R03-12～14）。賠率、賽果與結算：後續階段（04、05、07）。</li>
+  </ul></td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱、識別與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../../layout.html">共用版面</a>。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>依來源、運動與關鍵字（事件、玩法、識別）檢索來源冠軍盤，可依來源狀態頁籤篩選</td><td>R03-01、R03-08；R04-03；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>顯示來源回報的事件、玩法、開始日期與來源狀態（Running、Suspended）</td><td>R03-08；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>顯示該來源資料類別的狀態（正常、中斷、停用）與最近接收時間</td><td>R03-05；R04-16</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>4</td><td>顯示已連結的統一冠軍盤；沒有連結的也能查到</td><td>R04-04、R04-18</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>5</td><td>查看來源記錄與來源投注項清單，每項顯示連結的統一參賽方，以及已連結、已排除或未處理</td><td>R01-15；R03-08；R04-18</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>6</td><td>查閱來源冠軍盤（開始日期、來源狀態）與每個來源投注項（是否在來源清單中）的變更紀錄，投注項依來源識別分組</td><td>R03-08；R04-19</td><td><a href="#s3">畫面 3</a>、<a href="#s4">畫面 4</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：來源冠軍盤賽程</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Outrights › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><h3>Provider — Outright Schedule</h3><div class="sub">Per-provider outrights as reported by the provider</div></div>
+    </div>
+    <div class="filters">
+      <div class="f"><label>Provider <span class="n">1</span></label><span class="box caret">Provider B</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Search</label><span class="box wide">Event / market / ID</span></div>
+      <span class="btn">Clear Filter</span>
+    </div>
+    <p class="hint">Fixture data: Normal · Last received 2026-11-08 09:20:12 <span class="n">2</span></p>
+    <div class="bar">
+      <div class="bucket"><span class="on">All 2</span><span>Running 1</span><span>Suspended 1</span> <span class="n">3</span></div>
+      <div><span class="l2">2 / 2 shown</span></div>
+    </div>
+    <table class="grid schedule-grid">
+      <thead><tr><th>Event <span class="n">4</span></th><th>Market</th><th>Start Date</th><th>Status <span class="n">5</span></th><th>Linked Outright <span class="n">6</span></th></tr></thead>
+      <tbody>
+        <tr>
+          <td><b><a href="#s2">ENGLAND CHAMPIONSHIP 26/27</a></b><div class="l2">OB-8814</div></td>
+          <td>Winner</td>
+          <td>2026-08-08</td>
+          <td>Running</td>
+          <td>O-61001</td>
+        </tr>
+        <tr>
+          <td><b><a href="#s2">NATIONAL CUP 26/27</a></b><div class="l2">OB-8820</div></td>
+          <td>Top Scorer</td>
+          <td>2026-11-15</td>
+          <td>Suspended</td>
+          <td>Not linked</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="pager"><span>2 provider outrights</span></div>
+  </main>
+</div>
 <ol class="notes">
-<li><span class="n">1</span><span>清單有 Provider／Sport／搜尋列、來源狀態頁籤，保留來源識別（R03-08）。未對應資料不能因無統一名稱而隱藏。檢索與列順序是介面提案，見待確認第 6 項。</span></li>
-<li><span class="n">2</span><span>來源 Open、Scheduled 只表示原始回報，不對應到單場八種狀態或冠軍盤統一生命週期。正常須有有效內容；具完整賽程能力須另查未開盤未來事件、期間、取消及名單，不能由有報價或有內容推定（R03-05、R04-01）。B 的能力未核實，不提供指定建立者。</span></li>
-<li><span class="n">3</span><span>OB-8814 沿用統一冠軍盤範例，起訖未提供；OB-8820 展示來源有明確時區的開始時間，並非由賽季名稱推算。來源期限是否等於事件起訖待確認；不將投注截止、接收或更新時間當開始／結束（R03-08；待確認第 2 項）。</span></li>
-<li><span class="n">4</span><span>OB-8814 是既有人工關係，其四項的 2／1／1 與冠軍盤對應頁一致；OB-8820 只有來源紀錄，沒有統一識別（R04-04、R04-18）。事件有對應與名單全部完成是兩件事，部分可用性見待確認第 4 項。</span></li>
-<li><span class="n">5</span><span>第一階段包含冠軍盤，但 R04-18 與第 9 節仍缺事件、建立者及球員規則。本頁只保存可追查的來源事實並列出阻擋原因，不能從接收成功推導統一事件應自動建立（待確認第 1、3 項）。</span></li>
-</ol>
-<h2 id="s2">畫面 2：來源事件、期間與名單明細</h2>
-<div lang="en" class="frame"><header class="top"><span>Home › Provider › Outrights › Schedule</span><span>UTC+08:00 · ops.user</span></header><main class="main">
-<div class="page-head"><div><a href="#s1">‹ Back to provider schedule</a><h3>Provider B · OB-8814</h3><div class="sub">Premier League Winner · 2026/27 · Snapshot: 2026-11-03 09:25 UTC+08:00</div></div><span class="btn">Review outcome mapping</span></div>
-<div class="match-context"><div><b>Premier League Winner</b><div class="l2">Provider B / OB-8814 · Soccer · Whole season</div></div><div>Source status: Open<div class="l2">Linked event: O-61001 · Creator: A / OA-7001</div></div></div>
-<div class="panel"><div class="ph">Source identity &amp; time <span class="n">1</span></div><div class="pb"><table class="grid"><tbody>
-<tr><th>Provider competition / period</th><td>Premier League / 2026/27 · Whole season</td></tr><tr><th>Provider market label</th><td>Winner</td></tr><tr><th>Source start / end</th><td>Not supplied / Not supplied</td></tr><tr><th>Provider timestamp</th><td>Not supplied</td></tr><tr><th>Received at</th><td>2026-11-03 09:20:12 UTC+08:00</td></tr><tr><th>Fixture data / listing</th><td>Normal / Listed</td></tr><tr><th>Canonical lifecycle</th><td>Unknown · Source status is not a canonical decision</td></tr>
-</tbody></table></div></div>
-<div class="panel"><div class="ph">Provider roster <span class="n">2</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider item / name</th><th>Canonical relation</th><th>Creator roster item</th><th>Decision</th></tr></thead><tbody>
-<tr><td>OB-01 · Team A</td><td>C-50012 · Team A</td><td>OA-01</td><td>Mapped · ops.lin · 08:45</td></tr>
-<tr><td>OB-02 · Team B</td><td>C-50013 · Team B</td><td>OA-02</td><td>Mapped · ops.lin · 08:45</td></tr>
-<tr><td>OB-OTHER · Any Other</td><td>No equivalent target established</td><td>—</td><td>Excluded · ops.lin · 08:50<div class="l2">Coverage not defined by provider</div></td></tr>
-<tr><td>OB-NEW · New Town FC</td><td>Unresolved<div class="l2">C-58810 is a same-name record, not a confirmed identity</div></td><td>Not in creator roster</td><td>Review identity and roster</td></tr>
-</tbody></table><p class="hint">4 source items · 2 mapped · 1 excluded · 1 unresolved. The creator's roster has 20 competitors. <span class="n">3</span></p></div></div>
-<p class="hint">Source listing and item closure do not establish participation, withdrawal or elimination. An interrupted feed would make current listing unknown, not automatically remove the event. <span class="n">4</span></p>
-<p><a class="btn" href="../../outrights/schedule.html#s3">Compare source reports</a> <span class="btn">Operator records</span> <span class="n">5</span></p>
-<p><a href="#s4">View roster update · A / OA-7201 · 09:37</a></p>
-</main></div>
-<ol class="notes">
-<li><span class="n">1</span><span>來源時間沒提供就明示，不以接收時間補值；與 O-61001 的來源畫面完全一致（R03-08）。來源期間與統一期間並列可供人工判斷，但不自動覆寫統一資料。</span></li>
-<li><span class="n">2</span><span>來源項目保留原始識別與名稱，對應目標使用統一參賽方識別（R01-15、R04-18）。本頁唯讀；真正的人工確認、排除、鎖定與更正限制在對應頁，不能從這裡繞過（R04-19）。</span></li>
-<li><span class="n">3</span><span>來源 B 的四項不是建立者 A 的完整二十個參賽方名單。未處理持續可見，不當成已完成；Any Other 的排除只因本例範圍不明，不能成為一律排除規則（R04-18；OTR 目錄；待確認第 4 項）。</span></li>
-<li><span class="n">4</span><span>生命週期、名單參賽狀態、報價開關及資料類別狀態分開。來源中斷不等於移除事件或淘汰參賽方（R03-05～08、R04-16、R04-18；R05-14）；冠軍盤的消失裁定仍見待確認第 2 項。</span></li>
-<li><span class="n">5</span><span>來源資料供查看與對應，不提供修改原始資料、刪除識別或任意換建立者；人工紀錄依 R04-19 與非功能需求顯示。結算後對應不可更動，第一階段只讀取鎖定資訊，不加入結算操作（R04-18；待確認第 5 項）。</span></li>
-</ol>
-<h2 id="s3">畫面 3：尚未建立的來源事件與待補條件</h2>
-<div lang="en" class="frame"><header class="top"><span>Home › Provider › Outrights › Schedule</span><span>UTC+08:00 · ops.user</span></header><main class="main">
-<div class="page-head"><div><a href="#s1">‹ Back to provider schedule</a><h3>Provider B · OB-8820</h3><div class="sub">National Cup Top Scorer · No canonical event</div></div></div>
-<div class="panel"><div class="ph">Received source facts <span class="n">1</span></div><div class="pb"><table class="grid"><tbody>
-<tr><th>Sport / source competition</th><td>Soccer / National Cup</td></tr><tr><th>Period / source market</th><td>2026/27 / Top Scorer</td></tr><tr><th>Source start</th><td>2026-11-15 12:00 UTC+08:00</td></tr><tr><th>Source end</th><td>Not supplied</td></tr><tr><th>Source status</th><td>Scheduled</td></tr><tr><th>Provider timestamp / received at</th><td>Not supplied / 2026-11-03 09:22:00 UTC+08:00</td></tr><tr><th>Canonical event</th><td>Not created · No canonical ID assigned</td></tr>
-</tbody></table></div></div>
-<div class="panel"><div class="ph">Source participants <span class="n">2</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider item</th><th>Name / source kind</th><th>Identity</th></tr></thead><tbody><tr><td>OB-P01</td><td>Player X / Player</td><td>Unresolved</td></tr><tr><td>OB-P02</td><td>Player Y / Player</td><td>Unresolved</td></tr></tbody></table></div></div>
-<div class="panel"><div class="ph">Source and identity evidence <span class="n">3</span></div><div class="pb"><table class="grid"><thead><tr><th>Field</th><th>Current evidence</th></tr></thead><tbody>
-<tr><td>Full fixture capability and creator eligibility</td><td>Not verified</td></tr><tr><td>Event identity, period and competitor scope</td><td>Source facts available · Canonical equivalence not established</td></tr><tr><td>Player identities and roster authority</td><td>Not established</td></tr><tr><td>Canonical dates and lifecycle</td><td>No decision · Source values remain separate</td></tr>
-</tbody></table><p><button type="button" class="btn" disabled>Create canonical event</button></p></div></div>
-<p><span class="btn">View outright mapping workbench</span> <span class="n">4</span></p>
-</main></div>
-<ol class="notes">
-<li><span class="n">1</span><span>不同於 OB-8814 的既有關係，本例只有來源資料；開始時間與狀態為來源回報，接收時間由 InSports 記錄（R03-08）。有一個未來日期不表示已滿足完整賽程能力（R04-01）。</span></li>
-<li><span class="n">2</span><span>R01-15 要求參賽方可個別識別，但 PRD 04 第 9 節第 1 項仍缺球員統一紀錄與消歧流程。來源說是 Player 不足以對應已有同名參賽方，也不照搬以隊伍主客對戰比對的 R04-08（待確認第 3 項）。</span></li>
-<li><span class="n">3</span><span>表內保留目前來源與身分證據。停用的建立按鈕是未定流程的佔位，不是操作者權限不足，也不表示規則已核定或建檔功能已完成。建議建立者須具完整賽程能力、來源名單有權威且先做重複檢查；具體規則仍待 PRD 決定（R04-01、R04-18；待確認第 1 項）。畫面不以此建議視為既定政策。</span></li>
-<li><span class="n">4</span><span>對應工作台可檢視既有事件與名單處置；不代表本例已符合新事件確認條件。第一階段包含此流程（待確認第 6 項）。</span></li>
+  <li><span class="n">1</span><span>「Provider」與「Sport」每次各選一個，其餘條件只在此範圍內比對。來源以原始供應者區分，不以轉送商或帳號區分（R03-01、R04-03）。沒有統一關係的資料也能查到。</span></li>
+  <li><span class="n">2</span><span>該來源「賽程」類別（含冠軍盤名單）的狀態與最近一次收到有效內容的時間。來源中斷時保留最後收到的資料並標示中斷，不視為事件消失；正常收到空清單也不等於中斷（R03-05、R04-16）。</span></li>
+  <li><span class="n">3</span><span>頁籤使用來源冠軍盤的狀態 Running、Suspended，加上「All」；數字是目前條件下的筆數。這是來源冠軍盤的狀態，不是統一冠軍盤的四種狀態，也不是來源的資料類別狀態（R03-05、R04-12；見待確認第 1 項）。</span></li>
+  <li><span class="n">4</span><span>事件名稱與來源識別保留來源原值，點選開啟<a href="#s2">來源明細</a>。同一事件的多個玩法各佔一列，與<a href="../../outrights/schedule.html">統一賽程</a>一致（R03-08）。</span></li>
+  <li><span class="n">5</span><span>來源冠軍盤的狀態（Running、Suspended）；來源沒有提供的欄位顯示「—」，不由賽季或接收時間補值。事件從來源消失只回報「已不在來源上」，不推論取消或結束（R03-08、R04-12）。</span></li>
+  <li><span class="n">6</span><span>已連結的統一冠軍盤識別，沒有則顯示「Not linked」。未連結不等於取消（R04-04、R04-18）。</span></li>
 </ol>
 
-<h2 id="s4">畫面 4：建立者名單更新與其他來源項目到達</h2>
-<div lang="en" class="frame"><header class="top"><span>Home › Provider › Outrights › Schedule › OA-7201</span><span>UTC+08:00 · ops.user</span></header><main class="main">
-  <div class="page-head"><div><a href="#s1">‹ Back to provider schedule</a><h3>Creator Roster Update Evidence</h3><div class="sub">Snapshot: 2026-11-03 09:37 UTC+08:00</div></div><a class="btn" href="../../outrights/schedule.html#s4">Canonical roster update</a></div>
-  <div class="match-context"><div><b>Regional Invitational 2026/27 Winner</b><div class="l2">Provider A / OA-7201 · Soccer · 2026/27</div></div><div><b>Canonical event: O-62001</b><div class="l2">Regional Invitational · T-13001 · Creator: Provider A</div></div></div>
-  <p class="hint">Event and creator: verified. OA-R01, OA-R02 and OA-R03 identify existing canonical competitors. <span class="n">1</span></p>
-  <div class="panel"><div class="ph">Creator's received roster · 2 → 3 <span class="n">2</span></div><div class="pb">
-    <table class="grid"><thead><tr><th>Creator item / name</th><th>Roster at 09:30</th><th>Roster received at 09:35:02</th><th>Established canonical competitor</th></tr></thead><tbody>
-      <tr><td>OA-R01 · River FC</td><td>Listed</td><td>Retained</td><td>C-62001 · River FC</td></tr>
-      <tr><td>OA-R02 · Hill FC</td><td>Listed</td><td>Retained</td><td>C-62002 · Hill FC</td></tr>
-      <tr class="sel"><td>OA-R03 · Lake FC</td><td>Not listed</td><td>Newly listed</td><td>C-62003 · Lake FC<div class="l2">Existing identity; new membership in O-62001</div></td></tr>
-    </tbody></table>
-    <p class="hint">The creator update adds OA-R03 to the event roster. O-62001, OA-7201 and all existing roster identities are retained. <a href="../../outrights/schedule.html#s4">View the canonical before / after</a></p>
-  </div></div>
-  <div class="panel"><div class="ph">Source provenance <span class="n">3</span></div><div class="pb">
-    <table class="grid"><thead><tr><th>Source data</th><th>Provider timestamp</th><th>Received at</th><th>Recorded fact</th></tr></thead><tbody>
-      <tr><td>Provider A · OA-7201<div class="l2">Fixture data: Normal</div></td><td>2026-11-03 09:35:00</td><td>2026-11-03 09:35:02</td><td>Creator roster lists OA-R01, OA-R02 and new OA-R03</td></tr>
-      <tr><td>Provider B · OB-9201<div class="l2">Fixture data: Normal</div></td><td>2026-11-03 09:36:00</td><td>2026-11-03 09:36:02</td><td>B supplies new item OB-R03 · Lake FC</td></tr>
-    </tbody></table>
-    <p class="hint">All timestamps are UTC+08:00. These are source updates, not operator actions. No event date, lifecycle or participation ruling is derived from them.</p>
-  </div></div>
-  <div class="panel"><div class="ph">Provider B items actually received <span class="n">4</span></div><div class="pb">
-    <table class="grid"><thead><tr><th>Provider item / name</th><th>Current canonical relation at 09:37</th><th>Work required</th></tr></thead><tbody>
-      <tr><td>OB-R01 · River FC</td><td>C-62001 · River FC</td><td>Existing mapping retained</td></tr>
-      <tr><td>OB-R02 · Hill FC</td><td>C-62001 · River FC<div class="l2">Incorrect existing target; correction not yet effective</div></td><td>Review correction to C-62002 · Hill FC</td></tr>
-      <tr class="sel"><td>OB-R03 · Lake FC<div class="l2">First received at 09:36:02</div></td><td>Unresolved<div class="l2">Creator roster contains C-62003 · Lake FC</div></td><td>Explicit mapping or exclusion required</td></tr>
-    </tbody></table>
-    <p class="hint">3 received B items · 2 current mappings, including 1 under correction · 1 unresolved. At 09:35 B had sent no Lake FC item, so the creator addition alone did not create a B mapping task.</p>
-  </div></div>
-  <p><span class="btn pri">Open participant correction</span> <a class="btn" href="../../outrights/schedule.html#s4">View canonical roster</a> <span class="n">5</span></p>
-  <p class="hint">Provider data is read-only.</p>
-</main></div>
+<h2 id="s2">畫面 2：來源明細</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Outrights › Schedule › Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="#s1">‹ Back to Schedule</a><h3>Provider Outright Detail</h3><div class="sub">Provider B · OB-8814</div></div>
+    </div>
+    <nav class="detail-tabs" aria-label="Provider outright detail"><a class="on" href="#s2" aria-current="page">Overview</a><a href="#s3">History</a></nav>
+    <section class="panel">
+      <div class="ph">Source Record <span class="n">1</span></div>
+      <div class="pb">
+        <table class="grid"><tbody>
+          <tr><th>Provider ID</th><td>OB-8814</td><th>Event</th><td>ENGLAND CHAMPIONSHIP 26/27</td></tr>
+          <tr><th>Competition</th><td>Championship</td><th>Market</th><td>Winner</td></tr>
+          <tr><th>Start Date</th><td>2026-08-08</td><th>Status</th><td>Running</td></tr>
+          <tr><th>Fixture data</th><td>Normal</td><th>Linked Outright</th><td>O-61001</td></tr>
+          <tr><th>Provider time</th><td>—</td><th>Received at</th><td>2026-11-08 09:20:12</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+    <section class="panel">
+      <div class="ph"><span>Source Outcomes <span class="n">2</span></span><span>24 source items</span></div>
+      <div class="pb">
+        <table class="grid">
+          <thead><tr><th>Provider outcome_id</th><th>Name</th><th>Linked Competitor <span class="n">3</span></th><th>Link <span class="n">4</span></th></tr></thead>
+          <tbody>
+            <tr><td>OB-11</td><td>Team A</td><td>C-50012 · Team A</td><td>Linked</td></tr>
+            <tr><td>OB-12</td><td>Team B</td><td>C-50013 · Team B</td><td>Linked</td></tr>
+            <tr><td>OB-13</td><td>Team C</td><td>C-50027 · Team C</td><td>Linked</td></tr>
+            <tr><td>OB-14</td><td>Team D</td><td>C-50031 · Team D</td><td>Linked</td></tr>
+            <tr><td>OB-OTHER</td><td>Any Other</td><td>—</td><td>Excluded<div class="l2">Coverage not supplied</div></td></tr>
+            <tr><td>OB-NEW</td><td>New Town FC</td><td>—</td><td>Unresolved</td></tr>
+            <tr><td colspan="4" class="l2">18 more source items</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">24 source items · 22 linked · 1 excluded · 1 unresolved</p>
+      </div>
+    </section>
+  </main>
+</div>
 <ol class="notes">
-  <li><span class="n">1</span><span>O-62001 是與原 O-61001 分開的範例；建立者與三位參賽方身分已核實是明示的示意前提，不聲稱已完成外部查證。畫面不建立新事件、不處理未知球員，也不擴張建立者指定規則（R01-15；R04-04、R04-18）。</span></li>
-  <li><span class="n">2</span><span>R01-13、R04-18 允許開盤後名單新增。本例只從既有建立者 A 的名單接收新增，沿用 Lake FC 的 C-62003；原事件與原兩位參賽方保留。其他來源的項目不改寫 A 的權威名單，也沒有 Ops 任意加人的入口。</span></li>
-  <li><span class="n">3</span><span>每筆來源資料分開保留來源時間與 InSports 接收時間（R03-08）。A 的 09:35 更新與 B 的 09:36 更新是兩件事，不能寫成同一次同步，也不是虛構的人工紀錄。這只是本次差異證據，不承諾完整自動歷史或保存期限（R03-11）。</span></li>
-  <li><span class="n">4</span><span>只有 B 實際提供 OB-R03 後，才有 R04-18 要求逐項處置的新項目。A 名單新增不等於所有其他來源都已提供相同項目；未提供時不製造待辦。C-62003 已存在與 OB-R03 已對應不同，後者在本快照仍未處理；不預設來源整體可用或開盤條件。</span></li>
-  <li><span class="n">5</span><span>OB-R02 現有錯配保留並連到人工更正，不在唯讀來源頁覆寫。更正前後、操作者、依據、條件覆核與結果由 Mapping 的同一 O-62001 範例呈現；R04-10、R04-19 的人工裁定紀錄不能用來源接收時間代替。</span></li>
+  <li><span class="n">1</span><span>來源記錄保留來源原值。來源沒有提供的時間顯示「—」，Received at 是 InSports 的接收時間，不拿來補成來源時間（R03-08）。沒有統一關係的來源事件也有這張明細，Linked Outright 顯示「Not linked」。</span></li>
+  <li><span class="n">2</span><span>來源自己的投注項清單，保留原始識別與名稱；它可以與統一冠軍盤的名單不同，例如來源多出的項目或「Any Other」。統一名單來自建立者（R01-13、R04-18）。</span></li>
+  <li><span class="n">3</span><span>已連結的統一參賽方，顯示 Catalog 的參賽方識別與名稱。球員以個人類型的參賽方識別，不因同名而連結（R01-15、R04-18）。</span></li>
+  <li><span class="n">4</span><span>Linked 已連結到統一參賽方；Excluded 已明確排除並有理由，例如來源的「Any Other」涵蓋範圍與建立者名單不一致；Unresolved 尚未處理，持續列在待處理清單。未處理的項目只是該來源在這個投注項的賠率不使用，不擋冠軍盤開盤（R04-18）。來源項目的狀態不等於參賽方退出或淘汰（R05-14）。</span></li>
 </ol>
 
-<h2>待確認事項</h2><p>以下業務規則仍待確認；所列建議在確認前不作為可執行功能。</p><ol><li><b>建立者與事件相同性</b>：冠軍盤建立者例外、同季多玩法是否共用事件、來源換識別與重複處置未定。建議先核實完整賽程能力與權威名單，再定競賽／期間／參賽對象的相同性；未核實保留來源紀錄，不開放無來源或僅憑報價建檔。待補 PRD 01、03、04；畫面 3 保持受限。</li><li><b>期間、日期與生命週期</b>：起訖、日期精確度、多來源更正與長期事件消失未定。建議來源事實原樣呈現，未知不補值，不把停止報價、清單消失或日期經過當取消或淘汰；單場八種狀態不直接套用。待補 PRD 04、11。</li><li><b>球員與名單身分</b>：PRD 04 第 9 節第 1 項未定球員建立與消歧；建議轉隊保留身分，來源新增名單先人工查明權威與既有識別，記錄異動原因。畫面 3 不將來源 Player 自動建成統一個人。畫面 4 只補既有建立者新增已確立參賽方的已定能力，不因此核可未知身分、來源衝突或人工例外。待補 PRD 01、04、07。</li><li><b>未處理項目與集合投注項</b>：R04-18 要求逐項對應或排除，新增名單後部分對應的保存、資料可用性及時限仍未定。建議已處理項目保留，未處理持續可見；畫面 4 只為 B 在 09:36 實際提供的 OB-R03 列新待辦，不為未提供的參賽方製造待辦。Any Other 僅在涵蓋範圍一致時對應集合，不當成虛構參賽方，不一律排除。待補 PRD 01、04、05；詳見冠軍盤對應草稿。</li><li><b>稽核、鎖定與資料保存</b>：結算後對應不可更動（R04-18）；本期如何取得可靠的鎖定資料仍待補，未知時建議唯讀。完整來源歷史與原始資料保存期限未定（R03-11），不能將本頁接收時間當成完整歷史。待補 PRD 03、04、07、11 與非功能需求。</li><li><b>分期</b>：已決定（2026-11-03），待寫回 PRD 04。冠軍盤來源賽程、建立、身分、屬性、生命週期、對應與審核在本期；原先冠軍盤暫緩已被取代。畫面 4 依 R01-13、R04-18 呈現已核實身分的建立者名單新增與來源證據，不表示上述缺口已定案。</li></ol>
-</div></body></html>
+<h2 id="s3">畫面 3：來源變更紀錄（Outright）</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Outrights › Schedule › Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="#s1">‹ Back to Schedule</a><h3>Provider Outright Detail</h3><div class="sub">Provider B · OB-8814</div></div>
+    </div>
+    <nav class="detail-tabs" aria-label="Provider outright detail"><a href="#s2">Overview</a><a class="on" href="#s3" aria-current="page">History</a></nav>
+    <nav class="detail-tabs" aria-label="History"><a class="on" href="#s3" aria-current="page">Outright</a><a href="#s4">Outcomes</a></nav>
+    <section class="panel">
+      <div class="ph">Outright History <span class="n">1</span></div>
+      <div class="pb">
+        <table class="grid">
+          <thead><tr><th>Time</th><th>Start Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>2026-08-08 08:00:12</td><td>2026-08-08</td><td>Running</td></tr>
+            <tr><td>2026-07-20 09:20:12</td><td>2026-08-08</td><td>Suspended</td></tr>
+            <tr><td>2026-07-01 09:20:12</td><td>—</td><td>Suspended</td></tr>
+          </tbody>
+        </table>
+        <div class="pager"><span>3 records</span></div>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>來源冠軍盤的變更紀錄，每一列是 InSports 收到變更時的來源值，由新到舊，時間是接收時間；來源沒有提供的值顯示「—」。來源的狀態與日期保留原值，不轉成統一狀態（R03-08）。</span></li>
+</ol>
+
+<h2 id="s4">畫面 4：來源變更紀錄（Outcomes）</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Outrights › Schedule › Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="#s1">‹ Back to Schedule</a><h3>Provider Outright Detail</h3><div class="sub">Provider B · OB-8814</div></div>
+    </div>
+    <nav class="detail-tabs" aria-label="Provider outright detail"><a href="#s2">Overview</a><a class="on" href="#s3" aria-current="page">History</a></nav>
+    <nav class="detail-tabs" aria-label="History"><a href="#s3">Outright</a><a class="on" href="#s4" aria-current="page">Outcomes</a></nav>
+    <section class="panel">
+      <div class="ph">Outcome History <span class="n">1</span></div>
+      <div class="pb">
+        <table class="grid sched">
+          <thead><tr><th>Time</th><th>Listing <span class="n">2</span></th></tr></thead>
+          <tbody>
+            <tr class="grp"><td colspan="2">▾ OB-NEW · New Town FC</td></tr>
+            <tr><td>2026-11-07 16:20:12</td><td>Listed</td></tr>
+            <tr class="grp"><td colspan="2">▾ OB-14 · Team D</td></tr>
+            <tr><td>2026-11-07 16:20:12</td><td>No longer listed</td></tr>
+            <tr><td>2026-07-01 09:20:12</td><td>Listed</td></tr>
+            <tr class="grp"><td colspan="2">▾ OB-13 · Team C</td></tr>
+            <tr><td>2026-07-01 09:20:12</td><td>Listed</td></tr>
+            <tr><td colspan="2" class="l2">21 more source items</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>各來源投注項的變更紀錄，依來源投注項識別分組，組內由新到舊。</span></li>
+  <li><span class="n">2</span><span>該項目是否在來源清單中：Listed 或 No longer listed。項目從來源消失只回報「已不在來源上」，不代表參賽方被淘汰或退出；淘汰由 Ops 人工標記（R03-08、R05-14、R07-14）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<ol>
+  <li><b>來源冠軍盤的狀態</b>：<b>已決定（2026-11-08），待寫回 PRD 03、04</b>：來源冠軍盤顯示 Running、Suspended 兩種狀態。PRD 沒有定義來源事件的狀態；R03-05 的來源狀態（正常、中斷、停用）屬於來源的資料類別，R03-08 規定事件從來源清單消失只回報「已不在來源上」。尚待確認：兩種狀態的涵義；由來源回報或由連接器判定；與資料類別狀態的關係；對統一冠軍盤的狀態與投注不產生影響（R03-08、R04-12）。</li>
+</ol>
+
+</div>
+</body>
+</html>

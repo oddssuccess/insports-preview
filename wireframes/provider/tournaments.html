@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源競賽 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>來源競賽（Provider › Tournaments）</h1>
+<p class="meta"><b>日期</b>：2026-11-07 · <b>選單</b>：Provider › Tournaments · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../index.html">畫面索引</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 依來源與運動查詢競賽的原始識別、名稱與來源提供的國家／地區、性別、年齡層，並查看各競賽的來源場次數與下一場比賽。清單與明細均為唯讀。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>統一競賽的屬性、等級、圖示、多語系、排序與停用：<a href="../catalog/tournaments.html">Catalog › Tournaments</a>（R01-30～34）。</li>
+    <li>競賽的對應、確認與合併：PRD 04 的人工處理（R04-07、R04-19）。</li>
+    <li>來源場次的完整內容：<a href="matches/schedule.html">來源單場賽程</a>、<a href="outrights/schedule.html">來源冠軍盤賽程</a>（R04-01）。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字皆為範例。側邊主選單見<a href="../layout.html">共用版面</a>。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>依語言、來源、運動、國家／地區、性別與關鍵字檢索競賽</td><td>R03-01、R03-08；R04-03</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>查看來源自己的競賽識別與名稱，缺值顯示「—」</td><td>R03-08；R04-04</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>3</td><td>查看來源場次數與下一場比賽</td><td>R03-08；R04-01</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>4</td><td>查看來源提供的國家／地區、性別與年齡層</td><td>R03-08；R01-31</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>5</td><td>由明細進入該競賽的來源場次</td><td>R03-08；R04-01</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>R03-08</td><td><a href="#s3">畫面 3</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：來源競賽清單</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Tournaments</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider — Tournaments</h3><div class="sub">Per-provider tournament dictionary, keyed by provider + sport</div></div></div>
+    <div class="filters">
+      <div class="f"><label>Language <span class="n">1</span></label><span class="box caret">English</span></div>
+      <div class="f"><label>Provider <span class="n">2</span></label><span class="box caret">Saba</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
+      <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Search <span class="n">3</span></label><span class="box wide">Id or name…</span></div>
+    </div>
+    <table class="grid">
+      <thead><tr><th>Tournament <span class="l2">/ ID</span> <span class="n">4</span></th><th>Upcoming <span class="n">5</span></th><th>Country <span class="l2">/ Gender / Age</span> <span class="n">6</span></th><th>Matches ▼ <span class="n">7</span></th><th>View <span class="n">8</span></th></tr></thead>
+      <tbody>
+        <tr><td>SABA International Friendly Virtual PES 21<span class="n">9</span><div class="l2">95731</div></td><td>11-08 00:30 · Croatia (V) / Poland (V)</td><td>—<div class="l2">— / —</div></td><td>18</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>English FA Cup<div class="l2">29670</div></td><td>11-08 01:30 · Altrincham / Notts County</td><td>England<div class="l2">— / —</div></td><td>16</td><td><a class="btn" href="#s2">Details</a></td></tr>
+        <tr><td>USA Major League Soccer<div class="l2">356</div></td><td>11-08 05:00 · CF Montreal / Vancouver Whitecaps FC</td><td>United States<div class="l2">— / —</div></td><td>15</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Soccer PinGoal - Super League<div class="l2">183444</div></td><td>—</td><td>—<div class="l2">— / —</div></td><td>8</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>English League Championship<div class="l2">79</div></td><td>—</td><td>England<div class="l2">— / —</div></td><td>8</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Germany-Bundesliga I<div class="l2">5</div></td><td>11-08 01:30 · VfB Stuttgart / Werder Bremen</td><td>—<div class="l2">— / —</div></td><td>5</td><td><span class="btn">Details</span></td></tr>
+      </tbody>
+    </table>
+    <div class="pager"><span>Page 1 of 1</span><span>6 tournaments</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」（R03-08）。</span></li>
+  <li><span class="n">2</span><span>「Provider」與「Sport」每次各選一個，其餘條件只在此範圍內比對。來源以原始供應者區分，不以轉送商或帳號區分；同一個識別值在不同來源不代表同一競賽。電子競技依各遊戲選擇運動（R03-01、R04-03）。</span></li>
+  <li><span class="n">3</span><span>「Search」比對來源名稱與來源競賽識別，範圍限於上方選定的來源與運動（R03-08）。</span></li>
+  <li><span class="n">4</span><span>「Tournament / ID」上行是來源名稱，下行是來源自己的競賽識別。例如 29670 屬於來源 Saba，不是統一識別；來源沒有提供的欄位顯示「—」（R03-08、R04-04）。</span></li>
+  <li><span class="n">5</span><span>「Upcoming」是目前來源仍在清單、回報未開始且開賽時間最早的一場，列開賽時間與主客隊。本例 English League Championship 的 8 場都已開賽或結束，顯示「—」（R03-08、R04-01）。</span></li>
+  <li><span class="n">6</span><span>「Country / Gender / Age」原樣呈現來源提供的國家／地區、性別與年齡層，來源沒有提供的顯示「—」，如 Germany-Bundesliga I 沒有國家。這些是來源值，與 Catalog 的統一屬性分開（R03-08、R01-31）。</span></li>
+  <li><span class="n">7</span><span>「Matches」是目前保留的來源單場紀錄數，每筆來源紀錄各算一筆，不代表統一賽事場數。預設依場次數由多到少排序（R03-08、R04-01）。</span></li>
+  <li><span class="n">8</span><span>「Details」開啟唯讀的來源資料（畫面 2）。</span></li>
+  <li><span class="n">9</span><span>虛擬競賽是來源產生的虛擬對象，名稱如「Virtual PES 21」「PinGoal」是來源自己的名稱，原樣顯示。來源沒有提供國家等屬性時顯示「—」（R01-27、R04-20）。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：來源競賽明細</h2>
+<div lang="en" class="frame">
+  <div class="backdrop"><div class="modal" style="width: 780px">
+    <div class="mh"><span>Saba · English FA Cup</span><a href="#s1" aria-label="Close tournament details">×</a></div>
+    <div class="mb">
+      <table class="grid"><tbody>
+        <tr><th>Provider / Sport</th><td>Saba / Soccer</td></tr>
+        <tr><th>Provider sport ID</th><td>1</td></tr>
+        <tr><th>Provider tournament ID</th><td>29670</td></tr>
+        <tr><th>Country</th><td>England</td></tr>
+        <tr><th>Gender</th><td>—</td></tr>
+        <tr><th>Age group</th><td>—</td></tr>
+      </tbody></table>
+      <div class="panel"><div class="ph">Provider names <span class="n">1</span></div><div class="pb">
+        <table class="grid"><thead><tr><th>Language</th><th>Name</th></tr></thead><tbody><tr><td>English</td><td>English FA Cup</td></tr><tr><td>Traditional Chinese</td><td lang="zh-Hant">英格蘭足總盃</td></tr><tr><td>Thai</td><td>—</td></tr></tbody></table>
+      </div></div>
+    </div>
+    <div class="mf"><a class="btn" href="matches/schedule.html#s1">Provider schedule <span class="n">2</span></a><a class="btn" href="#s1">Close</a></div>
+  </div></div>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>列出實際收到的各語言名稱，缺值顯示「—」。來源名稱不等於 Ops 在 Catalog 維護的統一顯示名稱（R03-08、R01-30）。</span></li>
+  <li><span class="n">2</span><span>「Provider schedule」開啟來源單場賽程。示意連結未套用競賽篩選（R03-08、R04-01）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：沒有搜尋結果</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Tournaments</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider — Tournaments</h3><div class="sub">Per-provider tournament dictionary, keyed by provider + sport</div></div></div>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">Saba</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">Northern Cup</span></div><a class="btn" href="#s1">Clear search <span class="n">1</span></a></div>
+    <div class="panel"><div class="pb">No provider tournaments found. <span class="n">2</span></div></div>
+    <div class="pager"><span></span><span>0 tournaments</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1（R03-08）。</span></li>
+  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成（R03-08）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+</div>
+</body>
+</html>

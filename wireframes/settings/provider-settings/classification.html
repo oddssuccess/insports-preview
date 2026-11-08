@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源分類 wireframe</title>
+<link rel="stylesheet" href="../../wireframe.css">
+</head>
+<body>
+<div class="doc">
+<h1>來源設定・分類（Classification）</h1>
+<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings › Classification · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看來源競賽的虛擬判定規則、名稱推測的屬性提示，以及電子競技遊戲與目錄運動的對照；辨認尚未能對到遊戲的來源資料。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>統一競賽與參賽方的屬性、屬性清單、等級及顯示名稱：Catalog（R01-30、R01-31、R01-32）。來源名稱提示不會寫入統一屬性。</li>
+    <li>競賽、參賽方與賽事的對應確認、更正、合併：R04-07、R04-08、R04-19。本頁不提供這些操作。</li>
+    <li>運動預設賽程來源：<a href="fixture-sources.html">Fixture Sources</a>（R04-02）；虛擬來源另行指定（R04-20）。</li>
+    <li>來源分類規則的新增、編輯、刪除與衝突處理細節：規則維護範圍尚未明定，見待確認事項；本頁先展示分類資訊。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。名稱規則、來源名稱與判定結果均為範例。四個分頁依使用者指定的參考頁面呈現；屬性提示的規則尚待 PRD 確認，不能當成已定義的統一屬性功能。側邊主選單見<a href="../../layout.html">共用版面</a>。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>查看各來源的虛擬競賽名稱規則，以及來源名稱的判定範例</td><td>R01-27；R04-20；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>分開查看競賽與參賽方名稱的屬性提示，保留推測與統一屬性的差別</td><td>R01-31；使用者指定參考頁面，見待確認第 2 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>3</td><td>查看來源電子競技的遊戲對照與尚未對到遊戲的競賽</td><td>R01-24；R04-03；見待確認第 3 項</td><td><a href="#s4">畫面 4</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：競賽類型</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">View provider classification rules and name hints.</div></div></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a class="on" href="classification.html" aria-current="page">Classification</a></nav>
+    <nav class="detail-tabs" aria-label="Classification"><a class="on" href="#s1" aria-current="page">Type</a><a href="#s2">Tournament Attributes</a><a href="#s3">Competitor Attributes</a><a href="#s4">E-Sports Titles</a></nav>
+    <p class="hint">Virtual tournament rules apply when a tournament is created. Existing tournament types stay unchanged. <span class="n">1</span></p>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">All providers</span></div><div class="f"><label>Search</label><span class="box wide">Keyword or pattern</span></div></div>
+    <table class="grid"><thead><tr><th>Provider</th><th>Type</th><th>Condition <span class="n">2</span></th><th>Keyword or pattern</th><th>Enabled</th></tr></thead><tbody>
+      <tr><td><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></td><td>Virtual</td><td>Contains</td><td>Virtual Soccer</td><td>Yes</td></tr>
+      <tr><td><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></td><td>Virtual</td><td>Contains</td><td>Virtual Basketball</td><td>Yes</td></tr>
+    </tbody></table>
+    <div class="pager"><span>Read-only rules</span><span>2 rules shown</span></div>
+    <section class="panel"><div class="ph">Name examples <span class="n">3</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider</th><th>Source sport</th><th>Source tournament name</th><th>Rule result</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>Soccer</td><td>Virtual Soccer League</td><td>Virtual</td></tr>
+      <tr><td>Sbobet</td><td>Basketball</td><td>Virtual Basketball League</td><td>Virtual</td></tr>
+      <tr><td>Saba</td><td>Esports</td><td>E-Soccer Battle</td><td>No virtual rule matched</td></tr>
+    </tbody></table></div></section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>虛擬與否在賽程來源建立競賽時，依該來源的競賽名稱規則決定；建立後不變，Ops 不能修改既有紀錄的虛擬標記（R01-27）。本頁只有規則與範例，不提供對既有競賽重新分類的操作。</span></li>
+  <li><span class="n">2</span><span>規則按原始來源分開，顯示條件、文字與是否使用。此處的「Contains」是名稱規則的畫面範例，並未規定字串比對、優先順序或衝突演算法。規則如何維護仍待確認，本頁先唯讀。沒有額外的 Major、Specials 或自動寫入組別的分類。</span></li>
+  <li><span class="n">3</span><span>虛擬足球仍屬於足球，虛擬籃球仍屬於籃球（R01-27）。真人操作的 E-Soccer 是獨立的電子競技運動，不是虛擬足球（R01-24）；未命中虛擬規則不等於已完成遊戲對照，遊戲歸屬見畫面 4。虛擬與真實對象的隔離限制依 R04-20。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：競賽名稱的屬性提示</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">View provider classification rules and name hints.</div></div></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a class="on" href="classification.html" aria-current="page">Classification</a></nav>
+    <nav class="detail-tabs" aria-label="Classification"><a href="#s1">Type</a><a class="on" href="#s2" aria-current="page">Tournament Attributes</a><a href="#s3">Competitor Attributes</a><a href="#s4">E-Sports Titles</a></nav>
+    <p class="hint">Hints inferred from provider names. Catalog attributes are unchanged. <span class="n">1</span></p>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">All providers</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Attribute</label><span class="box caret">All attributes</span></div></div>
+    <table class="grid"><thead><tr><th>Provider</th><th>Sport</th><th>Attribute</th><th>Hint value</th><th>Condition</th><th>Keyword or pattern <span class="n">2</span></th><th>Enabled</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>Soccer</td><td>Gender</td><td>Women</td><td>Contains</td><td>Women</td><td>Yes</td></tr>
+      <tr><td>Sbobet</td><td>Soccer</td><td>Age Group</td><td>U21</td><td>Contains</td><td>U21</td><td>Yes</td></tr>
+      <tr><td>Flashscore</td><td>Soccer</td><td>Country / Region</td><td>England</td><td>Starts with</td><td>ENGLAND:</td><td>Yes</td></tr>
+    </tbody></table>
+    <div class="pager"><span>Read-only name hints</span><span>3 rules shown</span></div>
+    <section class="panel"><div class="ph">Name examples <span class="n">3</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider</th><th>Source tournament name</th><th>Country / Region hint</th><th>Gender hint</th><th>Age Group hint</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>England Women Super League</td><td>—</td><td>Women</td><td>—</td></tr>
+      <tr><td>Sbobet</td><td>England U21 Premier League</td><td>—</td><td>—</td><td>U21</td></tr>
+      <tr><td>Flashscore</td><td>ENGLAND: Premier League</td><td>England</td><td>—</td><td>—</td></tr>
+    </tbody></table><p class="hint">— No inferred value</p></div></section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>這是依名稱推測的來源提示，不是來源原始欄位，也不是統一競賽的屬性。新統一競賽的屬性仍按 R01-31 設為未定，組別留白；Ops 在 Catalog 修改。本頁不把名稱推測自動寫回屬性。</span></li>
+  <li><span class="n">2</span><span>競賽名稱有自己的規則，與參賽方分開顯示；依來源、運動與屬性篩選。使用者指定參考此種分頁，但名稱推測屬性的規則、允許值與維護方式尚未寫入 PRD，見待確認第 2 項，因此先列唯讀範例。</span></li>
+  <li><span class="n">3</span><span>有提示才填值，沒有就顯示「—」，不以常見值補齊。例如名稱含 England，但來源沒有該提示規則時，國家／地區仍留空。這些提示不確認兩個來源的對象相同；名稱不能單獨當成對應依據（R04-08）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：參賽方名稱的屬性提示</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">View provider classification rules and name hints.</div></div></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a class="on" href="classification.html" aria-current="page">Classification</a></nav>
+    <nav class="detail-tabs" aria-label="Classification"><a href="#s1">Type</a><a href="#s2">Tournament Attributes</a><a class="on" href="#s3" aria-current="page">Competitor Attributes</a><a href="#s4">E-Sports Titles</a></nav>
+    <p class="hint">Hints inferred from provider names. Catalog attributes are unchanged. <span class="n">1</span></p>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">All providers</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Attribute</label><span class="box caret">All attributes</span></div></div>
+    <table class="grid"><thead><tr><th>Provider</th><th>Sport</th><th>Attribute</th><th>Hint value</th><th>Condition</th><th>Keyword or pattern <span class="n">2</span></th><th>Enabled</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>Soccer</td><td>Gender</td><td>Women</td><td>Ends with</td><td>(W)</td><td>Yes</td></tr>
+      <tr><td>Sbobet</td><td>Soccer</td><td>Age Group</td><td>U21</td><td>Ends with</td><td>U21</td><td>Yes</td></tr>
+    </tbody></table>
+    <div class="pager"><span>Read-only name hints</span><span>2 rules shown</span></div>
+    <section class="panel"><div class="ph">Name examples <span class="n">3</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider</th><th>Source competitor name</th><th>Country / Region hint</th><th>Gender hint</th><th>Age Group hint</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>Chelsea (W)</td><td>—</td><td>Women</td><td>—</td></tr>
+      <tr><td>Sbobet</td><td>Chelsea U21</td><td>—</td><td>—</td><td>U21</td></tr>
+      <tr><td>Saba</td><td>Alex North</td><td>—</td><td>—</td><td>—</td></tr>
+    </tbody></table><p class="hint">— No inferred value</p></div></section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>與競賽分頁一樣，只顯示來源名稱的推測提示，不改統一參賽方的國家／地區、性別、年齡層、組別或類型；屬性的正式清單與修改在 Catalog（R01-31）。這些提示的功能範圍見待確認第 2 項。</span></li>
+  <li><span class="n">2</span><span>參賽方與競賽的名稱慣例可能不同，因此不共用規則。例如競賽寫 Women，參賽方寫 (W)。範例只展示各自名稱的提示，沒有依名稱確認或更正參賽方對應的操作（R04-08）。</span></li>
+  <li><span class="n">3</span><span>找不到提示時留空，不因球隊或球員名稱補上國家與性別。個人類型的統一參賽方沒有年齡層（R01-31）；名稱提示不能替個人新增年齡層。個人／隊伍的判斷也不由這張名稱規則表決定。</span></li>
+</ol>
+
+<h2 id="s4">畫面 4：電子競技遊戲</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">View provider classification rules and name hints.</div></div></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a class="on" href="classification.html" aria-current="page">Classification</a></nav>
+    <nav class="detail-tabs" aria-label="Classification"><a href="#s1">Type</a><a href="#s2">Tournament Attributes</a><a href="#s3">Competitor Attributes</a><a class="on" href="#s4" aria-current="page">E-Sports Titles</a></nav>
+    <p class="hint">Each game uses its own sport in the catalog. <span class="n">1</span></p>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">All providers</span></div><div class="f"><label>Title</label><span class="box caret">All titles</span></div><div class="f"><label>Search</label><span class="box wide">Source tournament name</span></div></div>
+    <section class="panel"><div class="ph">Unresolved titles <span class="n">2</span></div><div class="pb"><table class="grid"><thead><tr><th>Provider</th><th>Source sport</th><th>Source tournament</th><th>Catalog sport</th><th>Use</th></tr></thead><tbody><tr><td>Saba</td><td>Esports</td><td>Community Cup</td><td>Unresolved</td><td>Cannot open markets</td></tr></tbody></table></div></section>
+    <p><b>Title assignments</b> <span class="n">3</span></p>
+    <table class="grid"><thead><tr><th>Provider</th><th>Source sport</th><th>Source tournament name</th><th>Catalog sport</th></tr></thead><tbody>
+      <tr><td>Saba</td><td>Esports</td><td>League of Legends - World Championship</td><td>League of Legends <span class="l2">S-50</span></td></tr>
+      <tr><td>Sbobet</td><td>Esports</td><td>Dota 2 - International</td><td>Dota 2</td></tr>
+      <tr><td>Saba</td><td>Esports</td><td>E-Soccer Battle</td><td>E-Soccer</td></tr>
+    </tbody></table>
+    <div class="pager"><span>Read-only assignments</span><span>3 assigned · 1 unresolved</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>來源即使把所有遊戲放在 Esports 下，InSports 仍以各遊戲的運動處理，不新增統一的 Esports 運動（R01-24、R04-03）。本頁展示來源用語與目錄遊戲的差別。</span></li>
+  <li><span class="n">2</span><span>無法確定遊戲的競賽另外列出，不猜成某個遊戲，也不自動擴充運動目錄；無法對應到該遊戲時不得開盤（R01-24）。此處只查看資料，不帶入賽事對應或人工建立流程。</span></li>
+  <li><span class="n">3</span><span>逐筆查看來源競賽所屬的遊戲。E-Soccer 與其他電子競技遊戲各自一個運動，不歸足球，也不歸 RNG 虛擬運動（R01-24、R01-27）。遊戲判定規則如何維護與更新仍待確認，因此不展示規則編輯、重新套用或自動改寫既有賽事的操作。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<ol>
+  <li>虛擬判定規則：R01-27 已定義使用各來源的競賽名稱規則，01 第 6 節將規則歸為 InSports 固定；維護方式、可用條件與規則衝突的處理尚未定義。建議確認維護方式後再決定是否另需畫面；不得改動既有紀錄的虛擬標記。畫面 1 維持唯讀顯示。</li>
+  <li>競賽與參賽方名稱的屬性提示：使用者指定的參考頁面包含這兩個分頁，PRD 尚未定義名稱推測、允許值、更新時點與來源原始屬性的關係。建議只作來源查看時的提示，與原始回報及統一屬性分開；不自動寫入 R01-31 的屬性。畫面 2、3 為此建議的唯讀範例，規則維護與採用範圍待決定。</li>
+  <li>電子競技遊戲規則：R01-24 已要求來源對到各遊戲的運動，但未指定使用來源欄位、名稱規則或人工維護的方式，也未定義規則變更對既有紀錄的效果。建議先保留未對到遊戲的資料供查看，規則維護方式確認後再補操作；畫面 4 不推定演算法或重新分類流程。</li>
+</ol>
+</div>
+</body>
+</html>

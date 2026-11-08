@@ -9,40 +9,87 @@
 <body>
 <div class="doc">
 
-<p><a href="../.wireframes/index.html">先前依 PRD 主題排列的畫面</a></p>
 <h1>後台畫面示意（wireframe）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>說明</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/README.md">畫面使用說明</a> · <b>PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md">PRD 目錄</a></p>
+<p class="meta"><b>說明</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/wireframes/README.md">畫面使用說明</a> · <b>PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md">PRD 目錄</a> · <b>共用版面</b>：<a href="layout.html">layout</a></p>
 
-<p class="disclaimer">後台各頁面的畫面示意，與 PRD 第 8 節「參考設計（非約束）」同一定位：只說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型。頁面依後台主選單排列，每頁開頭列出功能清單與對應的 PRD 規則，末尾列出待確認事項。畫面中的名稱與數字都是範例；畫面上的文字一律使用英文，說明文字使用中文。</p>
-
-<h2>共用版面</h2>
-<p><a href="layout.html">後台共用版面（已採用選單與完整流程規劃）</a>。</p>
-
-<h2>Catalog</h2>
+<h2>階段內容</h2>
+<h3 class="example">Phase 1: SCHEDULE</h3>
+<p class="meta"><b>目標</b>：能由來源資料建立 InSports 統一賽事，並正確匯入賽事狀態與屬性。 · <b>期限</b>：11 月 10 日</p>
 <table class="doc-t">
-  <tr><th><a href="catalog/sports.html">運動（Sports）</a></th><td>清單、編輯視窗（營運狀態與變更紀錄、多語系）、排序（PRD 01）</td></tr>
-  <tr><th><a href="catalog/tournaments.html">競賽（Tournaments）</a></th><td>清單、編輯視窗（基本資料、停用與恢復、多語系）、等級看板、排序（PRD 01）</td></tr>
-  <tr><th><a href="catalog/competitors.html">參賽方（Competitors）</a></th><td>清單與依競賽篩選、編輯視窗（基本資料、多語系）、等級看板、排序（PRD 01）</td></tr>
-  <tr><th><a href="catalog/markets.html">玩法（Markets）</a></th><td>依運動的玩法清單與明細（含賠率格式）、冠軍盤玩法、多語系視窗（PRD 01、05、10、12）</td></tr>
+  <tr><th>頁面</th><th>異動</th><th>畫面元件</th></tr>
+  <tr><td>Catalog › Sports</td><td>New</td><td>運動清單、編輯視窗（狀態、多語系）、排序</td></tr>
+  <tr><td>Catalog › Tournaments</td><td>New</td><td>競賽清單、編輯視窗（基本資料、狀態、多語系）、等級看板、排序</td></tr>
+  <tr><td>Catalog › Competitors</td><td>New</td><td>參賽方清單與競賽篩選、編輯視窗（基本資料、多語系）、等級看板、排序</td></tr>
+  <tr><td>Catalog › Markets</td><td>New</td><td>依運動的玩法清單與明細、冠軍盤玩法、多語系視窗</td></tr>
+  <tr><td>Matches › Schedule</td><td>New</td><td>狀態頁籤、競賽分組與收合、比分與時段、競賽篩選、賽事對應入口</td></tr>
+  <tr><td>Matches › Match Detail</td><td>New</td><td>States（各來源回報時間差）、Properties（開賽時間與傷停補時變更紀錄）、Match Mapping 視窗</td></tr>
+  <tr><td>Matches › Issues</td><td>New</td><td>問題佇列、待取消／待腰斬／狀態未確認案件、來源證據、裁定與覆核</td></tr>
+  <tr><td>Outrights › Schedule</td><td>New</td><td>事件、玩法、開始日期、統一狀態與設定模板</td></tr>
+  <tr><td>Outrights › Outright Detail</td><td>New</td><td>事件資料、投注項清單、變更紀錄、Outright Mapping 視窗</td></tr>
+  <tr><td>Provider › Tournaments</td><td>New</td><td>依來源與運動檢索、競賽明細、無搜尋結果</td></tr>
+  <tr><td>Provider › Competitors</td><td>New</td><td>依來源與運動檢索、參賽方明細、無搜尋結果</td></tr>
+  <tr><td>Provider › Matches › Schedules</td><td>New</td><td>來源場次清單、賽前頁籤與競賽收合、選擇競賽</td></tr>
+  <tr><td>Provider › Outrights › Schedule</td><td>New</td><td>來源冠軍盤清單、來源明細（投注項與連結狀態）、變更紀錄</td></tr>
 </table>
 
-<h2>Matches</h2>
-<table class="doc-t">
-  <tr><th><a href="matches/schedule.html">單場比賽賽程（Schedule）</a></th><td>依狀態頁籤與競賽分組的單場清單、足球／籃球／網球的比分與時段、建立者與模板、競賽篩選、賽事對應入口（PRD 01、04、12）</td></tr>
-  <tr><th><a href="matches/match-review.html">賽事審核（Match Review）</a></th><td>待取消／待腰斬佇列、來源回歸、重掛、生命週期裁定與覆核（PRD 04、07、11）</td></tr>
-
-</table>
-
-<h2>Outrights</h2>
-<table class="doc-t">
-  <tr><th><a href="outrights/schedule.html">冠軍盤賽程（Schedule）</a></th><td>事件身分、期間、名單、來源證據與生命週期缺口；<a href="outrights/schedule.html#s4">建立者名單更新</a>（PRD 01、03、04、11）</td></tr>
-</table>
-
-<h2>Provider</h2>
-<table class="doc-t">
-  <tr><th><a href="provider/matches/schedule.html">來源單場賽程（Matches › Schedule）</a></th><td>來源場次、取得狀態與時間、候選阻擋、人工指定建立者（PRD 01、03、04、11）</td></tr>
-  <tr><th><a href="provider/outrights/schedule.html">來源冠軍盤賽程（Outrights › Schedule）</a></th><td>來源事件、期間與名單、對應進度、來源狀態與未定建立流程；<a href="provider/outrights/schedule.html#s4">建立者名單變動證據</a>（PRD 01、03、04、11）</td></tr>
-</table>
+<h2>頁面導覽</h2>
+<p class="meta">依後台主選單排列；縮排表示子頁（Subpage）與視窗（Pop-up）。尚未畫出的選單項目不列入。</p>
+<div class="idx-nav">
+<details open><summary class="group">Catalog</summary>
+<ul class="idx-tree">
+<li><a href="catalog/sports.html">Sports</a><span class="idx-desc">清單與排序</span>
+<ul>
+<li><a href="catalog/sports.html#s2">Edit Sport</a><span class="idx-tag">Pop-up</span><span class="idx-desc">營運狀態與變更紀錄</span></li>
+<li><a href="catalog/sports.html#s3">Edit Sport · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
+</ul></li>
+<li><a href="catalog/tournaments.html">Tournaments</a><span class="idx-desc">清單、等級看板與排序</span>
+<ul>
+<li><a href="catalog/tournaments.html#s2">Edit Tournament</a><span class="idx-tag">Pop-up</span><span class="idx-desc">基本資料、停用與恢復</span></li>
+<li><a href="catalog/tournaments.html#s4">Edit Tournament · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
+</ul></li>
+<li><a href="catalog/competitors.html">Competitors</a><span class="idx-desc">清單、依競賽篩選、等級看板與排序</span>
+<ul>
+<li><a href="catalog/competitors.html#s2">Edit Competitor</a><span class="idx-tag">Pop-up</span><span class="idx-desc">基本資料</span></li>
+<li><a href="catalog/competitors.html#s3">Edit Competitor · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
+</ul></li>
+<li><a href="catalog/markets.html">Markets</a><span class="idx-desc">依運動的玩法清單與明細、冠軍盤玩法</span>
+<ul>
+<li><a href="catalog/markets.html#s3">Edit Market · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
+</ul></li></ul></details>
+<details open><summary class="group">Matches</summary>
+<ul class="idx-tree">
+<li><a href="matches/schedule.html">Schedule</a><span class="idx-desc">依狀態頁籤與競賽分組的單場清單、競賽篩選</span>
+<ul>
+<li><a href="matches/match-detail.html">Match Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">States 與 Properties 的逐項變更紀錄</span>
+<ul>
+<li><a href="matches/match-mapping.html">Match Mapping</a><span class="idx-tag">Pop-up</span><span class="idx-desc">已對應來源的識別、名稱與對應紀錄</span></li>
+</ul></li>
+</ul></li>
+<li><a href="matches/issues.html">Issues</a><span class="idx-desc">待取消、待腰斬與狀態未確認的問題佇列、裁定與覆核</span></li></ul></details>
+<details open><summary class="group">Outrights</summary>
+<ul class="idx-tree">
+<li><a href="outrights/schedule.html">Schedule</a><span class="idx-desc">事件、玩法、開始日期、統一狀態與設定模板</span>
+<ul>
+<li><a href="outrights/outright-detail.html">Outright Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">事件資料、投注項清單與變更紀錄</span>
+<ul>
+<li><a href="outrights/outright-mapping.html">Outright Mapping</a><span class="idx-tag">Pop-up</span><span class="idx-desc">各來源與事件、投注項的識別配對</span></li>
+</ul></li>
+</ul></li></ul></details>
+<details open><summary class="group">Provider</summary>
+<ul class="idx-tree">
+<li><a href="provider/tournaments.html">Tournaments</a><span class="idx-desc">依來源與運動檢索競賽</span></li>
+<li><a href="provider/competitors.html">Competitors</a><span class="idx-desc">依來源與運動檢索參賽方</span></li>
+</ul>
+<details open><summary class="group">Matches</summary>
+<ul class="idx-tree">
+<li><a href="provider/matches/schedule.html">Schedules</a><span class="idx-desc">來源場次、狀態頁籤、比分與文字轉播、競賽篩選</span></li>
+</ul></details>
+<details open><summary class="group">Outrights</summary>
+<ul class="idx-tree">
+<li><a href="provider/outrights/schedule.html">Schedule</a><span class="idx-desc">來源冠軍盤、開始日期、狀態、已連結的統一冠軍盤、投注項與變更紀錄</span></li>
+</ul></details>
+</details>
+</div>
 
 </div>
 </body>

@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源參賽方 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>來源參賽方（Provider › Competitors）</h1>
+<p class="meta"><b>日期</b>：2026-11-07 · <b>選單</b>：Provider › Competitors · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../index.html">畫面索引</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 依來源與運動查詢隊伍、個人或組合的原始識別、名稱與來源提供的國家／地區、性別、年齡層，並查看其出現的來源競賽、來源場次數與下一場比賽。清單與明細均為唯讀。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>統一參賽方的類型、屬性、等級、圖示、多語系與排序：<a href="../catalog/competitors.html">Catalog › Competitors</a>（R01-30～33）。</li>
+    <li>參賽方的對應、確認與合併：PRD 04 的人工處理（R04-07、R04-19）。</li>
+    <li>來源場次的完整內容與主客方向：<a href="matches/schedule.html">來源單場賽程</a>（R01-25、R04-01、R04-06）。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字皆為範例。側邊主選單見<a href="../layout.html">共用版面</a>。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>依語言、來源、運動、國家／地區、年齡層、性別與關鍵字檢索參賽方</td><td>R03-01、R03-08；R04-03</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>查看來源自己的參賽方識別與名稱（含虛擬競賽的參賽方），缺值顯示「—」</td><td>R03-08；R04-04；R01-27、R04-20</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>3</td><td>查看參賽方出現的來源競賽、來源場次數與下一場比賽</td><td>R03-08；R04-01</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>4</td><td>查看來源提供的國家／地區、性別與年齡層</td><td>R03-08；R01-31</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>5</td><td>由明細進入該參賽方的來源場次</td><td>R03-08；R04-01</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>R03-08</td><td><a href="#s3">畫面 3</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：來源參賽方清單</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Competitors</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider — Competitors</h3><div class="sub">Per-provider competitor (team / athlete) dictionary, keyed by provider + sport</div></div></div>
+    <div class="filters">
+      <div class="f"><label>Language <span class="n">1</span></label><span class="box caret">English</span></div>
+      <div class="f"><label>Provider <span class="n">2</span></label><span class="box caret">Saba</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
+      <div class="f"><label>Age</label><span class="box caret">All Ages</span></div>
+      <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Search <span class="n">3</span></label><span class="box wide">Id or name…</span></div>
+    </div>
+    <table class="grid">
+      <thead><tr><th>Competitor <span class="l2">/ ID</span> <span class="n">4</span></th><th>Tournaments <span class="n">5</span></th><th>Upcoming <span class="n">6</span></th><th>Country <span class="l2">/ Gender / Age</span> <span class="n">7</span></th><th>Matches ▼ <span class="n">8</span></th><th>View <span class="n">9</span></th></tr></thead>
+      <tbody>
+        <tr><td>Croatia (V)<span class="n">10</span><div class="l2">674806</div></td><td><span class="chip">1/1</span> SABA International Friendly Virtual PES 21<div class="l2">95731</div></td><td>11-08 00:30 · Croatia (V) / Poland (V)</td><td>—<div class="l2">— / —</div></td><td>3</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Arsenal<div class="l2">3101</div></td><td><span class="chip">1/2</span> English FA Cup<div class="l2">29670</div></td><td>11-08 03:00 · Arsenal / Chelsea</td><td>England<div class="l2">— / —</div></td><td>2</td><td><a class="btn" href="#s2">Details</a></td></tr>
+        <tr><td>Arsenal (PG)<div class="l2">777277</div></td><td><span class="chip">1/1</span> Soccer PinGoal - Super League<div class="l2">183444</div></td><td>—</td><td>—<div class="l2">— / —</div></td><td>2</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Altrincham<div class="l2">5289</div></td><td>English FA Cup<div class="l2">29670</div></td><td>11-08 01:30 · Altrincham / Notts County</td><td>England<div class="l2">— / —</div></td><td>1</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Sunderland<div class="l2">4410</div></td><td>English League Championship<div class="l2">79</div></td><td>—</td><td>England<div class="l2">— / —</div></td><td>1</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Atalanta U23<div class="l2">1028822</div></td><td>Italy Serie C<div class="l2">66396</div></td><td>11-08 00:30 · AC Trento / Atalanta U23</td><td>Italy<div class="l2">— / U23</div></td><td>1</td><td><span class="btn">Details</span></td></tr>
+        <tr><td>Werder Bremen<div class="l2">—</div></td><td>Germany-Bundesliga I<div class="l2">5</div></td><td>11-08 01:30 · VfB Stuttgart / Werder Bremen</td><td>—<div class="l2">— / —</div></td><td>1</td><td><span class="btn">Details</span></td></tr>
+      </tbody>
+    </table>
+    <div class="pager"><span>Page 1 of 1</span><span>7 competitors</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」（R03-08）。</span></li>
+  <li><span class="n">2</span><span>「Provider」與「Sport」每次各選一個，其餘條件只在此範圍內比對。來源以原始供應者區分；不同來源的相同識別或同名隊伍不視為同一筆資料。電子競技依各遊戲選擇運動（R03-01、R04-03、R04-04）。</span></li>
+  <li><span class="n">3</span><span>「Search」比對來源名稱與來源參賽方識別，範圍限於上方選定的來源與運動（R03-08）。</span></li>
+  <li><span class="n">4</span><span>「Competitor / ID」上行是來源名稱，下行是來源自己的參賽方識別，不是統一識別。來源沒有提供識別時顯示「—」，如 Werder Bremen（R03-08、R04-04）。</span></li>
+  <li><span class="n">5</span><span>「Tournaments」一次顯示一個該參賽方在來源場次中出現的競賽與來源競賽識別，點擊輪流切換；標籤「1/2」是目前第幾個／共出現在幾個競賽，如 Arsenal 共 2 個。完整清單在明細的 Provider tournaments（R03-08、R04-04）。</span></li>
+  <li><span class="n">6</span><span>「Upcoming」是目前來源仍在清單、回報未開始且開賽時間最早的一場，列開賽時間與主客隊，主客順序取自來源。沒有下一場時顯示「—」（R03-08、R04-01、R04-06）。</span></li>
+  <li><span class="n">7</span><span>「Country / Gender / Age」原樣呈現來源提供的值，來源沒有提供的顯示「—」，如 Atalanta U23 的年齡層為 U23。這些是來源值，與 Catalog 的統一屬性分開（R03-08、R01-31）。</span></li>
+  <li><span class="n">8</span><span>「Matches」是目前保留且包含該參賽方的來源單場紀錄數，預設由多到少排序。同一場比賽的兩個參賽方各算一筆，不能加總為統一賽事場數（R03-08、R04-01）。</span></li>
+  <li><span class="n">9</span><span>「Details」開啟唯讀的來源資料（畫面 2）。</span></li>
+  <li><span class="n">10</span><span>虛擬競賽下的參賽方是來源產生的虛擬對象，名稱後綴如「(V)」「(PG)」是來源自己的名稱，原樣顯示。與同名的真實隊伍是不同的來源紀錄，如 Arsenal 與 Arsenal (PG)；來源沒有提供國家等屬性時顯示「—」（R01-27、R04-20）。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：來源參賽方明細</h2>
+<div lang="en" class="frame">
+  <div class="backdrop"><div class="modal" style="width: 780px">
+    <div class="mh"><span>Saba · Arsenal</span><a href="#s1" aria-label="Close competitor details">×</a></div>
+    <div class="mb">
+      <table class="grid"><tbody>
+        <tr><th>Provider / Sport</th><td>Saba / Soccer</td></tr>
+        <tr><th>Provider sport ID</th><td>1</td></tr>
+        <tr><th>Provider competitor ID</th><td>3101</td></tr>
+        <tr><th>Country</th><td>England</td></tr>
+        <tr><th>Gender</th><td>—</td></tr>
+        <tr><th>Age group</th><td>—</td></tr>
+      </tbody></table>
+      <div class="panel"><div class="ph">Provider names <span class="n">1</span></div><div class="pb"><table class="grid"><thead><tr><th>Language</th><th>Name</th></tr></thead><tbody><tr><td>English</td><td>Arsenal</td></tr><tr><td>Traditional Chinese</td><td lang="zh-Hant">阿森納</td></tr><tr><td>Thai</td><td>—</td></tr></tbody></table></div></div>
+      <div class="panel"><div class="ph">Provider tournaments <span class="n">2</span></div><div class="pb"><table class="grid"><thead><tr><th>Tournament</th><th>Provider ID</th><th>Matches</th></tr></thead><tbody><tr><td><a href="tournaments.html#s2">English FA Cup</a></td><td>29670</td><td>1</td></tr><tr><td>English Premier League</td><td>9</td><td>1</td></tr></tbody></table></div></div>
+    </div>
+    <div class="mf"><a class="btn" href="matches/schedule.html#s1">Provider schedule <span class="n">3</span></a><a class="btn" href="#s1">Close</a></div>
+  </div></div>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>列出實際收到的各語言名稱，缺值顯示「—」。來源名稱不等於 Ops 在 Catalog 維護的統一顯示名稱（R03-08、R01-30）。</span></li>
+  <li><span class="n">2</span><span>逐列列出參賽方出現的競賽與各競賽的來源場次數，名稱連到來源競賽明細（R03-08、R04-01）。</span></li>
+  <li><span class="n">3</span><span>「Provider schedule」開啟來源單場賽程。示意連結未套用參賽方篩選（R03-08、R04-01）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：沒有搜尋結果</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Provider › Competitors</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider — Competitors</h3><div class="sub">Per-provider competitor (team / athlete) dictionary, keyed by provider + sport</div></div></div>
+    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">Saba</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">99999999</span></div><a class="btn" href="#s1">Clear search <span class="n">1</span></a></div>
+    <div class="panel"><div class="pb">No provider competitors found. <span class="n">2</span></div></div>
+    <div class="pager"><span></span><span>0 competitors</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1（R03-08）。</span></li>
+  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成（R03-08）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+</div>
+</body>
+</html>

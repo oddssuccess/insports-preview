@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>賽事對應元件 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>賽事對應元件（Match Mapping）</h1>
+<p class="meta"><b>日期</b>：2026-11-05 · <b>入口</b>：單場賽程、賽事明細 · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 從賽程或賽事明細開啟彈出視窗，查看本場與已對應來源的識別、名稱，以及對應者與時間。內容全部唯讀。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>對應的操作介面與處理流程不在本次 wireframe 範圍。</li>
+    <li>來源狀態、時段回報及屬性變更：<a href="match-detail.html">賽事明細</a>（R03-08、R04-01）。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，用來說明視窗要顯示哪些資訊，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例，時間為 UTC+08:00。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>在彈出視窗列出本場統一紀錄與已對應來源</td><td>R04-04、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>顯示賽事識別，以及競賽、主客隊的識別與名稱，並標示主客反向</td><td>R04-04、R04-06、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>顯示既有紀錄的對應者與時間</td><td>R04-08、R04-19</td><td><a href="#s1">畫面 1</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：本場的來源對應</h2>
+<div lang="en" class="frame">
+  <div class="backdrop">
+    <div class="modal" style="width: 800px" role="dialog" aria-labelledby="mapping-title">
+      <div class="mh">
+        <div><div class="l2">Match Mapping · M-250356</div><div id="mapping-title">Pohang Steelers vs Gamba Osaka</div></div>
+        <a href="match-detail.html#s1" aria-label="Close Match Mapping">×</a>
+      </div>
+      <div class="mb">
+        <table class="grid">
+          <thead><tr><th>Provider <span class="n">1</span></th><th>IDs <span class="n">2</span></th><th>Names <span class="n">3</span></th><th>By <span class="n">4</span></th></tr></thead>
+          <tbody>
+            <tr class="sel">
+              <td><b>Canonical</b><div class="l2">M-250356</div></td>
+              <td>T-1042<br>C-10644<br>C-7338</td>
+              <td>AFC Champions League Elite<br>Pohang Steelers<br>Gamba Osaka</td>
+              <td>Auto<div class="l2">2026-11-03<br>10:00:00</div></td>
+            </tr>
+            <tr>
+              <td><b>Provider A</b><div class="l2">FA-250356</div></td>
+              <td>TA-1042<br>CA-10644<br>CA-7338</td>
+              <td>AFC Champions League Elite<br>Pohang Steelers<br>Gamba Osaka</td>
+              <td>Auto<div class="l2">2026-11-03<br>10:00:00</div></td>
+            </tr>
+            <tr>
+              <td><b>Provider B</b><div class="l2">FB-88412</div></td>
+              <td>TB-884<br>CB-2451<br>CB-3118</td>
+              <td>AFC Champions League Elite<br>Pohang<br>Gamba Osaka</td>
+              <td>Auto<div class="l2">2026-11-04<br>15:40:00</div></td>
+            </tr>
+            <tr>
+              <td><b>Provider C</b><div class="l2">FC-60177</div><div><span class="chip" title="Home/away swapped on this provider">H↔A</span></div></td>
+              <td>—<br>—<br>—</td>
+              <td>AFC Champions League Elite<br>Gamba Osaka<br>Pohang Steelers FC</td>
+              <td>Auto<div class="l2">2026-11-04<br>16:05:00</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Provider」第一列 Canonical 是本場的統一紀錄，其後每個已對應來源一列；名稱下方是各自的賽事識別。本例為來源 A、B、C，與<a href="match-detail.html#s1">賽事明細</a>的 3 個已對應來源一致。賽事識別下方另列「H↔A」，表示該來源的主客方向與 Canonical 相反，與明細的「H↔A」標記相同；此標記唯讀，滑鼠移入時顯示「Home/away swapped on this provider」。右上角「×」關閉視窗（R04-04、R04-08）。</span></li>
+  <li><span class="n">2</span><span>「IDs」由上而下是競賽、主隊、客隊的識別，與右方名稱逐行對照。Canonical 顯示統一識別，來源列顯示來源自己的識別；來源沒有提供時顯示「—」，如本例來源 C（R04-04）。</span></li>
+  <li><span class="n">3</span><span>「Names」依序顯示競賽、主隊、客隊。來源列保留原始名稱與順序，例如來源 C 的主隊是 Gamba Osaka、客隊是 Pohang Steelers FC（R04-06、R04-08）。</span></li>
+  <li><span class="n">4</span><span>「By」顯示既有紀錄的對應者，下方是日期與時間；Auto 代表系統，人工紀錄則顯示使用者名稱。本欄僅呈現紀錄（R04-08、R04-19）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<p>目前沒有。</p>
+
+</div>
+</body>
+</html>

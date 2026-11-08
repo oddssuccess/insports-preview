@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>來源設定・資料使用 wireframe</title>
+<link rel="stylesheet" href="../../wireframe.css">
+</head>
+<body><div class="doc">
+<h1>來源設定・資料使用（Provider Settings › Data Usage）</h1>
+<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a> · <a href="../../index.html">畫面索引</a></p>
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 查看七個來源的四類資料是否使用及目前回應情況，查看中斷或停用原因，並依來源與資料類別啟用或停用。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>暫停整個連接器、取得途徑及連線狀態：<a href="connectors.html">Connectors</a>（R03-02、R03-04、R03-06、R03-12～14）。</li>
+    <li>完整賽程能力與各運動的賽程來源：<a href="fixture-sources.html">Fixture Sources</a>（R03-05、R04-01～02）。運動及玩法對照：<a href="sports-and-markets.html">Sports &amp; Markets</a>（R03-10、R04-03、R04-11）。</li>
+    <li>賠率產生及校正的來源權重、玩法採用、各運動或競賽的設定：Market Settings（R05-09、R12-01～05）。本頁只處理來源資料類別。</li>
+    <li>對應操作、統一賽果與中斷後的投注處理：PRD 04～07；原始資料重處理及保存：R03-11 與非功能需求。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。來源名稱採指定名單，開關、狀態及時間是示例，不代表實際服務狀況；時間為 UTC+08:00。只畫主內容區，側欄見<a href="../../layout.html">共用版面</a>。</p>
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>列出七個來源，RunningBall 與 BetGenius 各自保留名稱及轉送途徑</td><td>R03-01～02；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>分開顯示四類資料的使用開關與回應狀態</td><td>R03-05～07、R03-13；R04-01</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>查看連接器狀態，並進入連接器頁</td><td>R03-06～07、R03-14</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>4</td><td>查看取得方式、最後有效回應、中斷原因與持續時間</td><td>R03-05～06、R03-08、R03-14</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>5</td><td>依來源與資料類別變更使用設定，記錄原因與操作者</td><td>R03-07、R03-12～13；非功能需求的稽核軌跡</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>6</td><td>不能停用正在擔任賽程來源或仍有未結束場次的建立者之 Match 資料</td><td>R03-13、R04-02、R04-05</td><td><a href="#s1">畫面 1</a>、<a href="#s4">畫面 4</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：資料使用矩陣</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose which provider data to use.</div></div><a class="btn" href="connectors.html#s1">Connection Status</a></div>
+    <nav class="provider-settings-tabs" aria-label="Provider Settings"><a href="data-usage.html" class="on" aria-current="page">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <div class="bar"><span class="hint"><b>ON</b> means we use this category. Status shows whether the provider is responding. <span class="n">1</span></span><span class="l2">7 providers</span></div>
+    <table class="grid provider-table" aria-label="Provider data usage">
+      <thead><tr><th scope="col">Provider <span class="n">2</span></th><th scope="col">Connector <span class="n">3</span></th><th scope="col">Match <span class="n">4</span><span class="l2">Fixtures and schedule</span></th><th scope="col">Odds<span class="l2">Market prices</span></th><th scope="col">Live Data<span class="l2">Score, state and properties</span></th><th scope="col">Result<span class="l2">Settled results</span></th></tr></thead>
+      <tbody>
+<tr data-provider="saba"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" aria-disabled="true" title="Assigned fixture source; change it in Fixture Sources before switching Match off">ON</span> <span class="n">7</span></div><div class="provider-state"><span class="provider-health running">Running</span><a class="provider-info" href="#s4" aria-label="Why Saba Match cannot be switched off">i</a></div></td><td data-category="Odds"><div class="provider-state on"><span class="provider-switch on" title="Saba Odds usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Saba Odds: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="Saba Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Saba Live Data: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Result"><div class="provider-state on"><span class="provider-switch on" title="Saba Result usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Saba Result: Valid provider response received." title="Valid provider response received.">i</span></div></td></tr>
+        <tr data-provider="sbobet"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" aria-disabled="true" title="Assigned fixture source for Basketball and 24 other sports; change assignments in Fixture Sources before switching Match off">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Sbobet Match: Running. Match usage cannot be switched OFF while Sbobet is the fixture source for Basketball or any other assigned sport." title="Running. Match usage cannot be switched OFF while Sbobet is the fixture source for Basketball or any other assigned sport.">i</span></div></td><td data-category="Odds"><div class="provider-state on"><span class="provider-switch on" title="Sbobet Odds usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Sbobet Odds: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="Sbobet Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Sbobet Live Data: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Result"><div class="provider-state on"><a class="provider-switch on" href="#s3" aria-label="Change Sbobet Result usage">ON</a> <span class="n">6</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Sbobet Result: Valid provider response received." title="Valid provider response received.">i</span></div></td></tr>
+        <tr data-provider="pinnacle"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" title="Pinnacle Match usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Pinnacle Match: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Odds"><div class="provider-state on"><span class="provider-switch on" title="Pinnacle Odds usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><a class="provider-info" href="#s2" aria-label="Pinnacle Odds details">i</a></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="Pinnacle Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Pinnacle Live Data: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Result"><div class="provider-state on"><span class="provider-switch on" title="Pinnacle Result usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Pinnacle Result: No current valid response." title="No current valid response.">i</span></div></td></tr>
+        <tr data-provider="flashscore"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" title="Flashscore Match usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Flashscore Match: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Odds"><div class="provider-state off"><span class="provider-switch off" title="Flashscore Odds usage">OFF</span></div><div class="provider-state"><span class="provider-health na">N/A</span><span class="provider-info" tabindex="0" role="img" aria-label="Flashscore Odds: Not using this data category." title="Not using this data category.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="Flashscore Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Flashscore Live Data: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Result"><div class="provider-state on"><span class="provider-switch on" title="Flashscore Result usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="Flashscore Result: Valid provider response received." title="Valid provider response received.">i</span></div></td></tr>
+        <tr data-provider="sofascore"><th scope="row"><div class="provider-identity"><span class="provider-icon" aria-hidden="true">S</span><span class="provider-name">Sofascore</span></div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" title="Sofascore Match usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Sofascore Match: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Odds"><div class="provider-state on"><span class="provider-switch on" title="Sofascore Odds usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Sofascore Odds: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="Sofascore Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health interrupted">Interrupted</span><span class="provider-info" tabindex="0" role="img" aria-label="Sofascore Live Data: No current valid response." title="No current valid response.">i</span></div></td><td data-category="Result"><div class="provider-state off"><span class="provider-switch off" title="Sofascore Result usage">OFF</span></div><div class="provider-state"><span class="provider-health na">N/A</span><span class="provider-info" tabindex="0" role="img" aria-label="Sofascore Result: Not using this data category." title="Not using this data category.">i</span></div></td></tr>
+        <tr data-provider="runningball"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><div class="provider-via">via insportlive</div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" title="RunningBall Match usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="RunningBall Match: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Odds"><div class="provider-state off"><span class="provider-switch off" title="RunningBall Odds usage">OFF</span></div><div class="provider-state"><span class="provider-health na">N/A</span><span class="provider-info" tabindex="0" role="img" aria-label="RunningBall Odds: Odds are not provided through this connection." title="Odds are not provided through this connection.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="RunningBall Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="RunningBall Live Data: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Result"><div class="provider-state on"><span class="provider-switch on" title="RunningBall Result usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="RunningBall Result: Valid provider response received." title="Valid provider response received.">i</span></div></td></tr>
+        <tr data-provider="betgenius"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><div class="provider-via">via insportlive</div></th><td>Enabled</td><td data-category="Match"><div class="provider-state on"><span class="provider-switch on" title="BetGenius Match usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="BetGenius Match: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Odds"><div class="provider-state off"><span class="provider-switch off" title="BetGenius Odds usage">OFF</span></div><div class="provider-state"><span class="provider-health na">N/A</span><span class="provider-info" tabindex="0" role="img" aria-label="BetGenius Odds: Odds are not provided through this connection." title="Odds are not provided through this connection.">i</span></div></td><td data-category="Live Data"><div class="provider-state on"><span class="provider-switch on" title="BetGenius Live Data usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="BetGenius Live Data: Valid provider response received." title="Valid provider response received.">i</span></div></td><td data-category="Result"><div class="provider-state on"><span class="provider-switch on" title="BetGenius Result usage">ON</span></div><div class="provider-state"><span class="provider-health running">Running</span><span class="provider-info" tabindex="0" role="img" aria-label="BetGenius Result: Valid provider response received." title="Valid provider response received.">i</span></div></td></tr>
+      </tbody>
+    </table>
+    <div class="provider-legend"><span><span class="provider-health running">Running</span> Valid provider response</span><span><span class="provider-health interrupted">Interrupted</span> No current valid response</span><span><span class="provider-health na">N/A</span> Not using</span></div>
+    <p class="hint">Open info for delivery method, last valid response and OFF reason. <span class="n">5</span></p>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>開關與狀態分開：ON 是設定為使用，Running 是有有效回應；例如 Pinnacle 仍是 ON，但目前 Interrupted。系統恢復後自動回到 Running，不改寫 ON／OFF。N/A 表示目前未使用，詳細原因可以是人工停用或未提供（R03-05～07）。</span></li>
+  <li><span class="n">2</span><span>清單只列 Saba、Sbobet、Pinnacle、Flashscore、Sofascore、RunningBall、BetGenius。後兩者各一列，名稱下方同樣顯示「via insportlive」；共用轉送商仍是兩個來源，不合併成 insportlive 來源（R03-01）。</span></li>
+  <li><span class="n">3</span><span>「Connector」是目前取得途徑的連接器設定，本例皆為 Enabled；不代表每類資料都 Running。RunningBall 與 BetGenius 共用 insportlive，其連接器操作在 <a href="connectors.html">Connectors</a>，本表不為兩者建立互相獨立的連接器開關（R03-02、R03-06～07）。</span></li>
+  <li><span class="n">4</span><span>Match、Odds、Live Data、Result 對應賽程、賠率、賽況、賽果。RunningBall 與 BetGenius 依指定範例顯示 Match／Live Data／Result 為 ON、Running，Odds 為 OFF、N/A。Match 有資料不等於具完整賽程能力，也不代表可擔任建立者；該資格由 Ops 在 <a href="fixture-sources.html">Fixture Sources</a> 另行設定（R03-05、R04-01）。</span></li>
+  <li><span class="n">5</span><span>資訊圖示查看此來源及類別的回應或停用原因；Pinnacle 的 Odds 示意見畫面 2。Running 對應 PRD 的正常，Interrupted 對應中斷；只連線成功或收到心跳不足以算正常。未提供與人工停用可同樣顯示 N/A，但原因要分開（R03-05、R03-07、R03-14）。</span></li>
+  <li><span class="n">6</span><span>點資料類別的開關，開啟變更視窗；Sbobet 的 Result 示意見畫面 3。停用只影響該來源的該類資料，仍可接收供後台查看；重新啟用後由系統判定是否正常，不保證立即 Running。每次記錄操作者、時間、原因（R03-07、R03-12～13）。</span></li>
+  <li><span class="n">7</span><span>Saba 是本例足球與網球的賽程來源，Sbobet 是籃球等另外 25 個一般運動的賽程來源，兩者的 Match 開關都不能切成 OFF；資訊圖示說明原因，Saba 的視窗見畫面 4。尚有未結束賽事的個別建立者也受同樣限制（R03-13、R04-02、R04-05）。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：資料狀態說明</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width: 580px" role="dialog" aria-labelledby="data-info-title">
+  <div class="mh"><span id="data-info-title">Pinnacle · Odds</span><a href="#s1" aria-label="Close data details">×</a></div>
+  <div class="mb">
+    <p><span class="provider-health interrupted">Interrupted</span> <span class="n">1</span></p>
+    <p>No current valid response. All configured paths are unavailable.</p>
+    <table class="grid"><tbody>
+      <tr><th>Usage</th><td>ON</td></tr>
+      <tr><th>Delivery <span class="n">2</span></th><td>Polling</td></tr>
+      <tr><th>Last valid response</th><td>2026-11-06 17:39:50</td></tr>
+      <tr><th>Interrupted since</th><td>2026-11-06 17:40:00 · 12 min</td></tr>
+      <tr><th>Reason</th><td>Provider maintenance</td></tr>
+      <tr><th>Available paths</th><td>0 / 1</td></tr>
+    </tbody></table>
+  </div>
+  <div class="mf"><a class="btn" href="connectors.html#s1">Connection Status</a><a class="btn" href="#s1">Close</a></div>
+</div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>開關仍為 ON，中斷不是人工停用。畫面時間是 17:52，因此自 17:40 起已持續 12 分鐘；全部途徑無法取得有效資料才顯示中斷。恢復須持續收到有效內容，不提供人工標記正常的按鈕（R03-05～07、R03-14）。</span></li>
+  <li><span class="n">2</span><span>Delivery 只顯示目前取得方式，不在此修改協定或輪詢頻率。Last valid response 是 InSports 收到最後有效回應的時間，與來源回報的資料時間不同；本例時間及原因只用於說明顯示方式（R03-08、R03-14）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：變更資料使用</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width: 620px" role="dialog" aria-labelledby="data-change-title">
+  <div class="mh"><span id="data-change-title">Switch OFF · Sbobet Result</span><a href="#s1" aria-label="Close usage change">×</a></div>
+  <div class="mb">
+    <table class="grid"><tbody><tr><th>Provider</th><td>Sbobet</td></tr><tr><th>Data category</th><td>Result</td></tr><tr><th>Usage <span class="n">1</span></th><td>ON → OFF</td></tr></tbody></table>
+    <p>Stop using Sbobet results immediately. Other data categories stay enabled.</p>
+    <p class="hint">Results may still be received for viewing. Turning usage ON again requires a manual change.</p>
+    <div class="provider-form"><label for="usage-reason">Reason <span class="n">2</span></label><textarea id="usage-reason" rows="2" required>Result feed is under review.</textarea></div>
+  </div>
+  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Switch OFF</span></div>
+</div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>送出後立即停用 Sbobet 的賽果，下游不用於任何判定；不暫停整個連接器，也不改其他資料類別。重新啟用使用相同確認方式，明示 OFF → ON，之後重新依有效回應判斷狀態。新串接來源也由人工啟用，不需試運轉（R03-07、R03-12～13）。</span></li>
+  <li><span class="n">2</span><span>Reason 必填；記錄誰、何時、哪個來源與類別、前後值及原因。此視窗不裁定比分、作廢或重新結算；停用對進行中賽事的影響依 PRD 04～07 處理（R03-13；非功能需求的稽核軌跡）。</span></li>
+</ol>
+
+<h2 id="s4">畫面 4：賽程資料不能停用</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width: 620px" role="dialog" aria-labelledby="fixture-lock-title">
+  <div class="mh"><span id="fixture-lock-title">Saba · Match</span><a href="#s1" aria-label="Close fixture source notice">×</a></div>
+  <div class="mb">
+    <p class="provider-warning">Match usage cannot be switched OFF while Saba is an assigned fixture source. <span class="n">1</span></p>
+    <table class="grid"><thead><tr><th>Sport</th><th>Fixture source</th></tr></thead><tbody><tr><td>Soccer</td><td>Saba</td></tr><tr><td>Tennis</td><td>Saba</td></tr></tbody></table>
+    <p>Change the fixture source first. Existing matches keep their original creator.</p>
+  </div>
+  <div class="mf"><a class="btn" href="fixture-sources.html#s1">Fixture Sources</a><a class="btn" href="#s1">Close</a></div>
+</div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>本例足球與網球都使用 Saba，必須先更換相關運動的賽程來源；更換只影響之後建立的比賽。若仍有由 Saba 建立且未結束的場次，仍須維持其賽程資料，不能用改設定繞過限制（R03-13、R04-02、R04-05）。</span></li>
+</ol>
+<h2>待確認事項</h2>
+<ol>
+  <li>已決定（2026-11-06）：本次範例只使用七個指定來源；RunningBall、BetGenius 分別顯示「via insportlive」，Match／Live Data／Result 為 ON、Running，Odds 為 OFF、N/A。這是畫面範例，不宣告來源具完整賽程能力；來源能力設定另由 R03-05 定義。來源清單與顯示方式待納入 PRD 11 的參考設計。</li>
+  <li>中斷及恢復的時間數值由非功能需求與 SPEC 定義；此頁只顯示判定結果、原因及持續時間，不提供手動調整判定門檻。</li>
+</ol>
+</div></body></html>

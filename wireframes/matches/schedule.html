@@ -10,37 +10,42 @@
 <div class="doc">
 
 <h1>單場賽程（Matches › Schedule）</h1>
-<p class="meta"><b>狀態</b>：草稿（示意） · <b>日期</b>：2026-11-04 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
+<p class="meta"><b>日期</b>：2026-11-04 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依運動與日期查看統一單場比賽（Match）：依競賽分組，按統一狀態篩選，一眼看到每場的比分、目前時段、建立者與套用的玩法設定模板，並從單場進入賽事對應（Mapping）。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
-    <li>待取消／待腰斬的裁定、重掛與覆核：<a href="match-review.html">賽事審核</a>（R04-19、R04-23～24）。</li>
-    <li>來源原始賽程與人工指定建立者：<a href="../provider/matches/schedule.html">來源單場賽程</a>（R04-01、R04-05）。</li>
+    <li>待取消／待腰斬的裁定、重掛與覆核：<a href="issues.html">賽事問題</a>（R04-19、R04-23～24）。</li>
+    <li>來源原始賽程與既有統一關係：<a href="../provider/matches/schedule.html">來源單場賽程</a>，內容唯讀（R03-08、R04-01）。R04-05 的人工指定建立者是從既有來源場次建立統一比賽，操作流程不在目前畫面範圍。</li>
     <li>競賽、參賽方的名稱、屬性、等級與排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
     <li>賠率與操盤：Matches › Odds（05）；賽果與結算：Matches › Results、Grades（R04-13～15、07）；玩法設定模板的內容與指定：Settings › Market Settings（R12-01～05）。</li>
   </ul></td></tr>
 </table>
 
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例，時間為 UTC+08:00。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。</p>
+<p class="disclaimer">即時資料（比賽時間、比分與文字轉播）於第二階段（LIVE DATA）才有資料，目前畫面僅示意欄位位置。</p>
 
 <!-- ============================================================ -->
 <h2>功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動、日期區間、排序與名稱／識別搜尋單場比賽</td><td>R01-24；R04-04</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>依統一狀態分頁籤篩選，各頁籤顯示場數</td><td>R04-12</td><td><a href="#s1">畫面 1</a>、<a href="#s4">畫面 4</a></td></tr>
-  <tr><td>3</td><td>依競賽分組，可展開／收合，可依競賽篩選</td><td>R01-12</td><td><a href="#s4">畫面 4</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>2</td><td>依統一狀態分頁籤篩選，各頁籤顯示場數</td><td>R04-12</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>3</td><td>依競賽分組，可展開／收合，可依競賽篩選</td><td>R01-12</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>4</td><td>單場顯示主客方（依建立者順序）、統一識別與開賽時間</td><td>R01-25；R04-04～06</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>6</td><td>顯示建立者與已對應的來源數</td><td>R04-05、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>7</td><td>顯示賽事套用的玩法設定模板及其指定層級</td><td>R12-05</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
-  <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事審核</td><td>R04-23</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>9</td><td>從單場進入賽事對應</td><td>R04-08～10、R04-19</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>7</td><td>顯示賽事套用的玩法設定模板及其指定層級</td><td>R12-05</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事審核</td><td>R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>9</td><td>從單場進入明細與唯讀的賽事對應彈出視窗</td><td>R04-04～06、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>10</td><td>滾球中有直播的賽事可開啟直播</td><td>待補</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
-<h2 id="s1">畫面 1：足球賽程（滾球中）</h2>
+<h2 id="s1">畫面 1：賽程（滾球中）</h2>
+<p>各運動依自己的計分項目與時段有各自的比分欄（R01-17）。以下以足球、籃球、網球為例，其餘欄位與操作各運動相同，說明見足球範例。</p>
+
+<h3 class="example" id="s1-soccer">足球</h3>
 
 <div lang="en" class="frame">
   <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
@@ -57,7 +62,7 @@
     </div>
     <div class="bar">
       <div class="bucket"><span class="on">Live 6</span><span>Prematch 42</span><span class="zero">Postponed 0</span><span>Interrupted 1</span><span class="zero">Ended 0</span><span>Closed 3</span><span class="zero">Cancelled 0</span><span class="zero">Abandoned 0</span> <span class="n">2</span></div>
-      <div><span class="l2">6 / 6 shown</span><span class="btn">Collapse matches</span><a class="btn" href="#s5">Tournaments (All)</a></div>
+      <div><span class="l2">6 / 6 shown</span><span class="btn">Collapse matches</span><a class="btn" href="#s3">Tournaments (All)</a></div>
     </div>
     <table class="grid sched schedule-grid">
       <thead>
@@ -68,18 +73,18 @@
         <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE ELITE</td></tr>
         <tr>
           <td class="t"><b>1 : 1</b>2H 18'</td>
-          <td><div class="match-team"><span>Pohang Steelers</span><span class="ids">C-10644</span></div><div class="match-team"><span>Gamba Osaka</span><span class="ids">C-7338</span></div><div class="l2">M-250356 · 2026-11-04 18:00</div></td>
+          <td><div class="match-team"><a href="match-detail.html#s1">Pohang Steelers</a><span class="ids">C-10644</span></div><div class="match-team"><a href="match-detail.html#s1">Gamba Osaka</a><span class="ids">C-7338</span></div><div class="l2"><a href="match-detail.html#s1">M-250356</a> · 2026-11-04 18:00 <span class="play" title="Livestream">▶</span> <span class="n">9</span></div></td>
           <td class="sc">1<br>1</td><td class="sc">5<br>3</td><td class="sc">0<br>1</td>
           <td class="c">Provider A<div class="l2">3 / 8</div></td>
-          <td class="c">S16<div class="l2">Tournament</div></td>
-          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div>Match Mapping</div></div></details></td>
+          <td class="c">Template 16<div class="l2">Tournament</div></td>
+          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div><a href="match-mapping.html#s1">Match Mapping</a></div></div></details></td>
         </tr>
         <tr>
           <td class="t"><b>0 : 0</b>HT</td>
-          <td><div class="match-team"><span>Buriram United</span><span class="ids">C-23211</span></div><div class="match-team"><span>Kashima Antlers</span><span class="ids">C-7331</span></div><div class="l2">M-250357 · 2026-11-04 20:15</div></td>
+          <td><div class="match-team"><span>Buriram United</span><span class="ids">C-23211</span></div><div class="match-team"><span>Kashima Antlers</span><span class="ids">C-7331</span></div><div class="l2">M-250357 · 2026-11-04 20:15 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">0<br>0</td><td class="sc">2<br>4</td><td class="sc">1<br>0</td>
           <td class="c">Provider A<div class="l2">4 / 8</div></td>
-          <td class="c">S16<div class="l2">Tournament</div></td>
+          <td class="c">Template 16<div class="l2">Tournament</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE TWO</td></tr>
@@ -88,16 +93,16 @@
           <td><div class="match-team"><span>Melbourne Victory</span><span class="ids">C-11596</span></div><div class="match-team"><span>Persib Bandung</span><span class="ids">C-8800</span></div><div class="l2">M-250699 · 2026-11-04 19:45</div></td>
           <td class="sc">1<br>2</td><td class="sc">1<br>2</td><td class="sc">0<br>0</td>
           <td class="c">Provider A<div class="l2">2 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="8">▾ THAI LEAGUE 1</td></tr>
         <tr>
           <td class="t"><b>0 : 3</b>2H 33'</td>
-          <td><div class="match-team"><span>Bangkok United</span><span class="ids">C-25498</span></div><div class="match-team"><span>Port FC</span><span class="ids">C-25722</span></div><div class="l2">M-251907 · 2026-11-04 18:00</div></td>
+          <td><div class="match-team"><span>Bangkok United</span><span class="ids">C-25498</span></div><div class="match-team"><span>Port FC</span><span class="ids">C-25722</span></div><div class="l2">M-251907 · 2026-11-04 18:00 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">0<br>3</td><td class="sc">7<br>2</td><td class="sc">1<br>0</td>
           <td class="c">Provider A<div class="l2">3 / 8</div></td>
-          <td class="c">T30 Standard<div class="l2">Match</div></td>
+          <td class="c">Template 30<div class="l2">Match</div></td>
           <td>⋮</td>
         </tr>
         <tr>
@@ -105,7 +110,7 @@
           <td><div class="match-team"><span>BG Pathum United</span><span class="ids">C-25920</span></div><div class="match-team"><span>Muangthong United</span><span class="ids">C-26254</span></div><div class="l2">M-252208 · 2026-11-04 20:00</div></td>
           <td class="sc">1<br>0</td><td class="sc">1<br>0</td><td class="sc">—<br>—</td>
           <td class="c">Provider C<div class="l2">1 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="8">▾ VIETNAM NATIONAL CUP</td></tr>
@@ -114,7 +119,7 @@
           <td><div class="match-team"><span>Hanoi FC</span><span class="ids">C-31002</span></div><div class="match-team"><span>Cong An Ha Noi</span><span class="ids">C-31017</span></div><div class="l2">M-252310 · 2026-11-04 18:30</div></td>
           <td class="sc">2<br>2</td><td class="sc">6<br>8</td><td class="sc">0<br>1</td>
           <td class="c">Provider A<div class="l2">3 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
       </tbody>
@@ -124,17 +129,17 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>System sorting 依目錄設定的競賽排序（見<a href="../catalog/tournaments.html">競賽</a>頁），組內依開賽時間；另可改為依開賽時間排序。</span></li>
-  <li><span class="n">2</span><span>頁籤對應 R04-12 的八種統一狀態：Prematch（未開始）、Postponed（延後）、Live（進行中）、Interrupted（比賽中斷）、Ended（已結束）、Closed（賽果已確定）、Cancelled（取消）、Abandoned（腰斬）。數字是目前篩選條件下的場數，0 場的頁籤淡化。待取消／待腰斬是疊在狀態上的標記，不是頁籤（見<a href="#s4">畫面 4</a>）。</span></li>
+  <li><span class="n">2</span><span>頁籤對應 R04-12 的八種統一狀態：Live（進行中）、Prematch（未開始）、Postponed（延後）、Interrupted（比賽中斷）、Ended（已結束）、Closed（賽果已確定）、Cancelled（取消）、Abandoned（腰斬）。數字是目前篩選條件下的場數，0 場的頁籤淡化。待取消／待腰斬是疊在狀態上的標記，不是頁籤（見<a href="#s2">畫面 2</a>）。</span></li>
   <li><span class="n">3</span><span>滾球中顯示全場比分與目前時段及比賽時間：1H／HT／2H／ET 1H／ET 2H／PEN（點球大戰），足球的時段見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">01-soccer</a>。分鐘數在每個時段重新起算，例如 2H 18' 是下半場第 18 分鐘。目前時段與比賽時間直接取自來源的賽況資料，各運動皆同。</span></li>
-  <li><span class="n">4</span><span>上方為主隊、下方為客隊，順序以建立者為準且建立後不變（R01-25、R04-06）。右側為參賽方的統一識別，下方為賽事的統一識別與開賽時間（R04-04）。</span></li>
-  <li><span class="n">5</span><span>比分子欄依運動的計分項目（R01-17）：足球為 GL 進球、CR 角球、RC 紅牌；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
+  <li><span class="n">4</span><span>上方為主隊、下方為客隊，順序以建立者為準且建立後不變（R01-25、R04-06）。右側為參賽方的統一識別，下方為賽事的統一識別與開賽時間（R04-04）。點選賽事開啟<a href="match-detail.html">賽事明細</a>。</span></li>
+  <li><span class="n">5</span><span>足球的比分子欄是計分項目 GL 進球、CR 角球、RC 紅牌（R01-17）；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
   <li><span class="n">6</span><span>上行是建立者（R04-05），下行是已對應到本場的來源數／此運動已接入的來源數（R04-08）。</span></li>
   <li><span class="n">7</span><span>本場實際套用的玩法設定模板，下行是指定在哪一層：Match、Tournament 或 Sport（R12-05，賽事優先於競賽，競賽優先於運動）。</span></li>
-  <li><span class="n">8</span><span>列尾選單只有 Match Mapping：開啟本場的賽事對應，查看與更正各來源的對應（R04-08～10、R04-19）。</span></li>
+  <li><span class="n">8</span><span>列尾選單只有 <a href="match-mapping.html">Match Mapping</a>：開啟唯讀的賽事對應彈出視窗，查看本場與已對應來源的識別、名稱及對應者（R04-04、R04-06、R04-08）。</span></li>
+  <li><span class="n">9</span><span>僅滾球中且有直播的賽事，在開賽時間右側顯示播放圖示，點擊開啟直播。</span></li>
 </ol>
 
-<!-- ============================================================ -->
-<h2 id="s2">畫面 2：籃球賽程（滾球中）</h2>
+<h3 class="example" id="s1-basketball">籃球</h3>
 
 <div lang="en" class="frame">
   <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
@@ -162,16 +167,16 @@
           <td><div class="match-team"><span>Brisbane Bullets</span><span class="ids">C-27605</span></div><div class="match-team"><span>Perth Wildcats</span><span class="ids">C-27276</span></div><div class="l2">M-248548 · 2026-11-04 17:00</div></td>
           <td class="sc">88<br>84</td><td class="sc">24<br>20</td><td class="sc">22<br>25</td><td class="sc">23<br>21</td><td class="sc">19<br>18</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">3 / 6</div></td>
-          <td class="c">B10<div class="l2">Sport</div></td>
+          <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="11">▾ CHINA CBA</td></tr>
         <tr>
           <td class="t"><b>108 : 106</b>OT 2:40</td>
-          <td><div class="match-team"><span>Shanghai Sharks</span><span class="ids">C-41029</span></div><div class="match-team"><span>Liaoning Flying Leopards</span><span class="ids">C-41056</span></div><div class="l2">M-252203 · 2026-11-04 19:35</div></td>
+          <td><div class="match-team"><span>Shanghai Sharks</span><span class="ids">C-41029</span></div><div class="match-team"><span>Liaoning Flying Leopards</span><span class="ids">C-41056</span></div><div class="l2">M-252203 · 2026-11-04 19:35 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">108<br>106</td><td class="sc">25<br>27</td><td class="sc">26<br>24</td><td class="sc">23<br>22</td><td class="sc">27<br>28</td><td class="sc">7<br>5</td>
           <td class="c">Provider A<div class="l2">4 / 6</div></td>
-          <td class="c">T30 Standard<div class="l2">Tournament</div></td>
+          <td class="c">Template 30<div class="l2">Tournament</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="11">▾ JAPAN B.LEAGUE</td></tr>
@@ -180,7 +185,7 @@
           <td><div class="match-team"><span>Alvark Tokyo</span><span class="ids">C-8990</span></div><div class="match-team"><span>Chiba Jets</span><span class="ids">C-9199</span></div><div class="l2">M-252277 · 2026-11-04 18:05</div></td>
           <td class="sc">45<br>39</td><td class="sc">21<br>18</td><td class="sc">24<br>21</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">2 / 6</div></td>
-          <td class="c">B10<div class="l2">Sport</div></td>
+          <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="11">▾ PHILIPPINES PBA</td></tr>
@@ -189,7 +194,7 @@
           <td><div class="match-team"><span>San Miguel Beermen</span><span class="ids">C-24747</span></div><div class="match-team"><span>Barangay Ginebra</span><span class="ids">C-9118</span></div><div class="l2">M-252290 · 2026-11-04 19:30</div></td>
           <td class="sc">14<br>9</td><td class="sc">14<br>9</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">3 / 6</div></td>
-          <td class="c">B10<div class="l2">Sport</div></td>
+          <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
       </tbody>
@@ -202,8 +207,7 @@
   <li><span class="n">2</span><span>籃球只有得分一個計分項目，因此子欄改為時段：PTS 是全場（含加時賽），Q1～Q4 是各節，OT 是加時賽合計；尚未開打的時段顯示「—」（R01-17、R04-13）。</span></li>
 </ol>
 
-<!-- ============================================================ -->
-<h2 id="s3">畫面 3：網球賽程（滾球中）</h2>
+<h3 class="example" id="s1-tennis">網球</h3>
 
 <div lang="en" class="frame">
   <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
@@ -228,10 +232,10 @@
         <tr class="grp"><td colspan="11">▾ ATP - PARIS MASTERS</td></tr>
         <tr>
           <td class="t"><b>1 : 0</b>Set 2</td>
-          <td><div class="match-team"><span>Alexander Zverev (GER)</span><span class="ids">C-11352</span></div><div class="match-team"><span>Lorenzo Musetti (ITA)</span><span class="ids">C-9468</span></div><div class="l2">M-249916 · 2026-11-04 20:30 · Best of 3</div></td>
+          <td><div class="match-team"><span>Alexander Zverev (GER)</span><span class="ids">C-11352</span></div><div class="match-team"><span>Lorenzo Musetti (ITA)</span><span class="ids">C-9468</span></div><div class="l2">M-249916 · 2026-11-04 20:30 <span class="play" title="Livestream">▶</span> · Best of 3</div></td>
           <td class="sc">1<br>0</td><td class="sc">6<br>4</td><td class="sc">3<br>2</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">3 / 5</div></td>
-          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td class="c">Template 1<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr>
@@ -239,7 +243,7 @@
           <td><div class="match-team"><span>Quentin Halys (FRA)</span><span class="ids">C-16797</span></div><div class="match-team"><span>Frances Tiafoe (USA)</span><span class="ids">C-9193</span></div><div class="l2">M-251250 · 2026-11-04 18:15 · Best of 3</div></td>
           <td class="sc">1<br>1</td><td class="sc">7<br>6</td><td class="sc">3<br>6</td><td class="sc">2<br>1</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">3 / 5</div></td>
-          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td class="c">Template 1<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="11">▾ EXHIBITION - SEA TENNIS SHOWDOWN</td></tr>
@@ -248,7 +252,7 @@
           <td><div class="match-team"><span>Kasidit Samrej (THA)</span><span class="ids">C-16781</span></div><div class="match-team"><span>Francis Alcantara (PHI)</span><span class="ids">C-10392</span></div><div class="l2">M-251253 · 2026-11-04 17:00 · Best of 5</div></td>
           <td class="sc">2<br>1</td><td class="sc">6<br>3</td><td class="sc">4<br>6</td><td class="sc">6<br>2</td><td class="sc">1<br>1</td><td class="sc">—<br>—</td>
           <td class="c">Provider C<div class="l2">1 / 5</div></td>
-          <td class="c">Standard<div class="l2">Sport</div></td>
+          <td class="c">Template 1<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
       </tbody>
@@ -263,14 +267,14 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s4">畫面 4：賽前頁籤與競賽收合</h2>
+<h2 id="s2">畫面 2：賽前頁籤與競賽收合</h2>
 
 <div lang="en" class="frame">
   <header class="top"><span>Home › Matches › Schedule</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main">
     <div class="bar">
       <div class="bucket"><span>Live 6</span><span class="on">Prematch 42</span><span class="zero">Postponed 0</span><span>Interrupted 1</span><span class="zero">Ended 0</span><span>Closed 3</span><span class="zero">Cancelled 0</span><span class="zero">Abandoned 0</span></div>
-      <div><span class="l2">3 / 42 shown</span><span class="btn">Show matches <span class="n">1</span></span><a class="btn" href="#s5">Tournaments (All)</a></div>
+      <div><span class="l2">3 / 42 shown</span><span class="btn">Show matches <span class="n">1</span></span><a class="btn" href="#s3">Tournaments (All)</a></div>
     </div>
     <table class="grid sched schedule-grid">
       <thead>
@@ -286,15 +290,15 @@
           <td><div class="match-team"><span>Chonburi FC</span><span class="ids">C-25510</span></div><div class="match-team"><span>Ratchaburi FC</span><span class="ids">C-25533</span></div><div class="l2">M-252411 · 2026-11-04 21:00</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">3 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="sel">
-          <td class="t"><b>21:30</b>Not started<div><a class="chip" href="match-review.html">Pending cancellation</a> <span class="n">2</span></div></td>
+          <td class="t"><b>21:30</b>Not started<div><a class="chip" href="issues.html">Pending cancellation</a> <span class="n">2</span></div></td>
           <td><div class="match-team"><span>Khon Kaen United</span><span class="ids">C-25541</span></div><div class="match-team"><span>Lamphun Warriors</span><span class="ids">C-25548</span></div><div class="l2">M-252412 · 2026-11-04 21:30</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider A<div class="l2">2 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr>
@@ -302,7 +306,7 @@
           <td><div class="match-team"><span>Sukhothai FC</span><span class="ids">C-25560</span></div><div class="match-team"><span>Nakhon Ratchasima</span><span class="ids">C-25571</span></div><div class="l2">M-252413 · 2026-11-04 22:00</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
           <td class="c">Provider C<div class="l2">1 / 8</div></td>
-          <td class="c">S12<div class="l2">Sport</div></td>
+          <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="grp"><td colspan="8">▸ VIETNAM NATIONAL CUP <span class="l2">2</span></td></tr>
@@ -315,11 +319,11 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>Collapse matches／Show matches 一次收合或展開所有競賽；也可以逐一點競賽列展開。收合時競賽列後顯示場數，「3 / 42 shown」是目前展開的場數／頁籤總場數。</span></li>
-  <li><span class="n">2</span><span>待取消（Pending cancellation）或待腰斬（Pending abandonment）標記疊在統一狀態上，本場仍在 Prematch 頁籤；已下架，點擊進入<a href="match-review.html">賽事審核</a>處理（R04-12、R04-23）。</span></li>
+  <li><span class="n">2</span><span>待取消（Pending cancellation）或待腰斬（Pending abandonment）標記疊在統一狀態上，本場仍在 Prematch 頁籤；已下架，點擊進入<a href="issues.html">賽事問題</a>處理（R04-12、R04-23）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s5">畫面 5：選擇競賽</h2>
+<h2 id="s3">畫面 3：選擇競賽</h2>
 
 <div lang="en" class="frame">
   <div class="backdrop">
@@ -335,7 +339,6 @@
           <div class="cat"><label><input type="checkbox"> VIRTUAL TOURNAMENTS · 1</label> <span class="n">2</span></div>
           <div><label><input type="checkbox"> Virtual Premier Cup · 0</label></div>
         </div>
-        <p class="hint">A ticked category stays complete: tournaments added later show up on their own.</p>
       </div>
       <div class="mf"><span class="btn">Show all</span><span class="btn">Cancel</span><span class="btn pri">Apply</span></div>
     </div>
@@ -343,13 +346,15 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>列出此運動在目前日期區間有賽事的競賽，後接目前頁籤的場數（本例為畫面 1 的 Live）。勾選整個類別時，之後新增的競賽自動納入；取消類別勾選後才能逐一勾選競賽。</span></li>
+  <li><span class="n">1</span><span>列出此運動在目前日期區間有賽事的競賽，後接目前頁籤的場數（本例為畫面 1 足球範例的 Live）。勾選整個類別時，之後新增的競賽自動納入；取消類別勾選後才能逐一勾選競賽。</span></li>
   <li><span class="n">2</span><span>競賽分為真實與虛擬兩類（R01-27、R04-20），各為一個類別。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2>待確認事項</h2>
-<p>目前沒有。</p>
+<ul>
+  <li>直播：PRD 尚未定義直播的來源、與賽事的對應方式及開啟形式（新視窗或內嵌播放器）。</li>
+</ul>
 
 </div>
 </body>

@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>賽程來源 wireframe</title>
+<link rel="stylesheet" href="../../wireframe.css">
+</head>
+<body>
+<div class="doc">
+<h1>來源設定・賽程來源（Fixture Sources）</h1>
+<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings › Fixture Sources · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 設定每個運動的賽程來源，以及哪些來源具備完整賽程能力；更換來源前確認影響的範圍。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>各類資料的使用開關與取得狀態：<a href="data-usage.html">Data Usage</a>（R03-05、R03-13）。整個連接器的暫停、恢復與影響：<a href="connectors.html">Connectors</a>（R03-07）；個別取得途徑與帳號維護另屬串接維運（R03-04）。</li>
+    <li>逐場指定建立者、競賽審核與賽事對應操作：04 的 R04-02、R04-05、R04-08；本頁只設定運動層的預設來源。</li>
+    <li>賠率、賽況與賽果的來源角色及競賽覆寫：R04-02。經銷商無法查看或設定來源。</li>
+    <li>虛擬競賽的來源另行指定；方式尚待決定，不套用此處的運動預設（R04-20）。</li>
+  </ul></td></tr>
+</table>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。來源名稱、能力設定、運動與數字均為範例；能力設定不是對各供應商實際服務的判定。畫面只畫主內容區，側邊主選單見<a href="../../layout.html">共用版面</a>。</p>
+
+<h2>功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>以來源與運動矩陣查看預設賽程來源；每個運動恰好一個，沒有競賽覆寫</td><td>R04-02；R01-24</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>在矩陣內更換預設來源，於表格下方填原因並儲存或放棄變更</td><td>R04-05；04 第 5 節；非功能需求與稽核</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>3</td><td>由 Ops 設定完整賽程能力；沒有能力設定的來源不能被指定</td><td>R03-05；R04-01、R04-02、R04-05</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>4</td><td>區分來源指定、資料使用狀態與取得途徑；中斷不自動改換來源</td><td>R03-01、R03-05、R03-13；R04-02</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>5</td><td>唯讀查看目錄運動與各來源的運動代碼</td><td>R03-08；R04-03</td><td><a href="#s4">畫面 4</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：每個運動的賽程來源</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose one provider to create new fixtures for each sport.</div></div><a class="btn" href="#s4">Sport Codes <span class="n">6</span></a></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <div class="filters fixture-filters">
+      <div class="f"><label>Search</label><span class="box wide">Sport name...</span></div>
+      <div class="f"><label>Esports <span class="n">1</span></label><span class="provider-switch off">OFF</span></div>
+      <span class="l2">27 sports</span><span class="btn fixture-refresh">Refresh</span>
+    </div>
+    <div class="fixture-scroll" tabindex="0" role="region" aria-label="Fixture sources by provider and sport"><table class="grid provider-table fixture-matrix">
+      <thead><tr><th scope="col">Provider / Sports <span class="n">2</span></th>
+        <th scope="col">Soccer</th>
+        <th scope="col">Basketball</th>
+        <th scope="col">Tennis</th>
+        <th scope="col">Baseball</th>
+        <th scope="col">Ice Hockey</th>
+        <th scope="col">Volleyball</th>
+        <th scope="col">Table Tennis</th>
+        <th scope="col">Badminton</th>
+        <th scope="col">Handball</th>
+        <th scope="col">Cricket</th>
+        <th scope="col">Darts</th>
+        <th scope="col">Rugby Union</th>
+        <th scope="col">MMA</th>
+        <th scope="col">Boxing</th>
+        <th scope="col">Golf</th>
+        <th scope="col">American Football</th>
+        <th scope="col">Futsal</th>
+        <th scope="col">Snooker</th>
+        <th scope="col">Beach Volleyball</th>
+        <th scope="col">Water Polo</th>
+        <th scope="col">Motorsport</th>
+        <th scope="col">Muay Thai</th>
+        <th scope="col">Aussie Rules Football</th>
+        <th scope="col">Field Hockey</th>
+        <th scope="col">Cycling</th>
+        <th scope="col">Beach Soccer</th>
+        <th scope="col">Rugby League</th>
+      </tr></thead><tbody>
+      <tr data-provider="saba"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="sbobet"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th>
+        <td><a class="fixture-choice" href="#s2" aria-label="Select Sbobet as the Soccer fixture source">Select</a></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+      </tr>
+      <tr data-provider="pinnacle"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="flashscore"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="sofascore"><th scope="row"><div class="provider-identity"><span class="provider-icon">S</span><span class="provider-name">Sofascore</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="runningball"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><div class="provider-via">via insportlive</div></th>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+      </tr>
+      <tr data-provider="betgenius"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><div class="provider-via">via insportlive</div></th>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+      </tr>
+    </tbody></table></div>
+    <section class="fixture-save">
+      <div class="provider-form"><label for="fixture-reason-s1">Reason for changing fixture sources <span class="n">3</span></label><input id="fixture-reason-s1" type="text" value="" placeholder="Record why these fixture sources should be used" required></div>
+      <div class="fixture-actions"><span class="btn" aria-disabled="true">Save fixture sources</span><span class="btn" aria-disabled="true">Discard changes</span></div>
+    </section>
+    <p class="hint">Fixture sources create new events. Existing events keep their original creator. <span class="n">4</span></p>
+    <div class="pager"><span><a href="#s3">Full fixture capability</a> <span class="n">5</span></span><span>Saved · 2026-11-06 17:40 · ops.user</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Search 依運動名稱篩選；Esports 的 OFF 只列一般運動，ON 只列電子競技，每個遊戲各一欄，沒有合併的 Esports 運動。本例依目前 PRD 目錄列出 27 個一般運動；數量隨篩選結果改變（R01-24）。篩選不改變賽程來源設定。</span></li>
+  <li><span class="n">2</span><span>每列一個來源、每欄一個運動；來源欄固定，運動欄可橫向捲動。每個運動恰好選一個來源，選另一個會取代原選擇，沒有競賽層覆寫（R04-02）。綠色 Source 為目前畫面選擇，Select 為可選來源；「—」表示未設定完整賽程能力，不能選取。RunningBall 與 BetGenius 分別保留 via insportlive（R03-01、R03-05）。本例 Saba 負責足球與網球，Sbobet 負責其餘 25 個一般運動；點 Sbobet 的足球格查看畫面 2。</span></li>
+  <li><span class="n">3</span><span>原因與按鈕放在矩陣下方，不另開換來源視窗。選擇後先保留於頁面，填寫原因才可按 Save fixture sources；沒有變更時 Save／Discard 不可用。Discard changes 放棄尚未儲存的選擇，儲存時記錄所有已修改運動、前後值、操作者、時間與原因（R04-02；非功能需求與稽核）。</span></li>
+  <li><span class="n">4</span><span>變更預設只影響之後建立的賽事；既有賽事由原建立者負責到結束。新來源列出的比賽仍先與既有紀錄比對，新競賽依原規則進待處理清單；不因改設定搬動既有賽事（R04-02、R04-05）。虛擬競賽另行指定，不使用此預設（R04-20）。</span></li>
+  <li><span class="n">5</span><span>Full fixture capability 另開畫面 3，不佔用運動矩陣的欄位。完整賽程能力由 Ops 設定，與資料是否正常取得、是否被選為來源分開；各類資料的狀態在 Data Usage（R03-05）。中斷不自動換來源，已指定來源的 Match 資料不能停用（R03-13、R04-02）。本例 Sofascore 也設為有完整賽程能力，與另外四個可選來源一樣顯示 Select；這些值只用於示意。</span></li>
+  <li><span class="n">6</span><span>右上角 Sport Codes 開啟畫面 4，唯讀對照目錄運動與來源運動代碼，不新增對應操作，也不變更本頁的賽程來源（R03-08、R04-03）。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：頁內變更與儲存</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
+  <main class="main">
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose one provider to create new fixtures for each sport.</div></div><a class="btn" href="#s4">Sport Codes <span class="n">6</span></a></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <div class="filters fixture-filters">
+      <div class="f"><label>Search</label><span class="box wide">Sport name...</span></div>
+      <div class="f"><label>Esports <span class="n">1</span></label><span class="provider-switch off">OFF</span></div>
+      <span class="l2">27 sports</span><span class="btn fixture-refresh" aria-disabled="true">Refresh</span>
+    </div>
+    <div class="fixture-scroll" tabindex="0" role="region" aria-label="Fixture sources by provider and sport"><table class="grid provider-table fixture-matrix">
+      <thead><tr><th scope="col">Provider / Sports <span class="n">2</span></th>
+        <th scope="col">Soccer</th>
+        <th scope="col">Basketball</th>
+        <th scope="col">Tennis</th>
+        <th scope="col">Baseball</th>
+        <th scope="col">Ice Hockey</th>
+        <th scope="col">Volleyball</th>
+        <th scope="col">Table Tennis</th>
+        <th scope="col">Badminton</th>
+        <th scope="col">Handball</th>
+        <th scope="col">Cricket</th>
+        <th scope="col">Darts</th>
+        <th scope="col">Rugby Union</th>
+        <th scope="col">MMA</th>
+        <th scope="col">Boxing</th>
+        <th scope="col">Golf</th>
+        <th scope="col">American Football</th>
+        <th scope="col">Futsal</th>
+        <th scope="col">Snooker</th>
+        <th scope="col">Beach Volleyball</th>
+        <th scope="col">Water Polo</th>
+        <th scope="col">Motorsport</th>
+        <th scope="col">Muay Thai</th>
+        <th scope="col">Aussie Rules Football</th>
+        <th scope="col">Field Hockey</th>
+        <th scope="col">Cycling</th>
+        <th scope="col">Beach Soccer</th>
+        <th scope="col">Rugby League</th>
+      </tr></thead><tbody>
+      <tr data-provider="saba"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="sbobet"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th>
+        <td class="fixture-selected fixture-pending"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+        <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
+      </tr>
+      <tr data-provider="pinnacle"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="flashscore"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="sofascore"><th scope="row"><div class="provider-identity"><span class="provider-icon">S</span><span class="provider-name">Sofascore</span></div></th>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-choice">Select</span></td>
+      </tr>
+      <tr data-provider="runningball"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><div class="provider-via">via insportlive</div></th>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+      </tr>
+      <tr data-provider="betgenius"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><div class="provider-via">via insportlive</div></th>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+      </tr>
+    </tbody></table></div>
+    <section class="fixture-save">
+      <div class="provider-form"><label for="fixture-reason-s2">Reason for changing fixture sources <span class="n">3</span></label><input id="fixture-reason-s2" type="text" value="Planned change to the Soccer fixture source for new events." placeholder="Record why these fixture sources should be used" required></div>
+      <div class="fixture-actions"><span class="btn pri">Save fixture sources</span><a class="btn" href="#s1">Discard changes</a><span class="l2">1 unsaved change · Soccer: Saba → Sbobet</span></div>
+    </section>
+    <p class="hint">All changed sports are saved, including those hidden by filters.</p>
+    <p class="hint">Fixture sources create new events. Existing events keep their original creator. <span class="n">4</span></p>
+    <div class="pager"><span><a href="#s3">Full fixture capability</a> <span class="n">5</span></span><span>Saved · 2026-11-06 17:40 · ops.user</span></div>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Search 依運動名稱篩選；Esports 的 OFF 只列一般運動，ON 只列電子競技，每個遊戲各一欄，沒有合併的 Esports 運動。本例依目前 PRD 目錄列出 27 個一般運動；數量隨篩選結果改變（R01-24）。篩選不改變賽程來源設定。</span></li>
+  <li><span class="n">2</span><span>每列一個來源、每欄一個運動；來源欄固定，運動欄可橫向捲動。每個運動恰好選一個來源，選另一個會取代原選擇，沒有競賽層覆寫（R04-02）。綠色 Source 為目前畫面選擇，Select 為可選來源；「—」表示未設定完整賽程能力，不能選取。RunningBall 與 BetGenius 分別保留 via insportlive（R03-01、R03-05）。本例足球已改選 Sbobet，虛線標出尚未儲存的格子；儲存前仍以原 Saba 設定運作。</span></li>
+  <li><span class="n">3</span><span>原因與按鈕放在矩陣下方，不另開換來源視窗。選擇後先保留於頁面，填寫原因才可按 Save fixture sources；沒有變更時 Save／Discard 不可用。Discard changes 放棄尚未儲存的選擇，儲存時記錄所有已修改運動、前後值、操作者、時間與原因（R04-02；非功能需求與稽核）。切換篩選不丟掉其他運動的修改；儲存包含暫時隱藏的變更，Refresh 在有修改時不可用。</span></li>
+  <li><span class="n">4</span><span>變更預設只影響之後建立的賽事；既有賽事由原建立者負責到結束。新來源列出的比賽仍先與既有紀錄比對，新競賽依原規則進待處理清單；不因改設定搬動既有賽事（R04-02、R04-05）。虛擬競賽另行指定，不使用此預設（R04-20）。</span></li>
+  <li><span class="n">5</span><span>Full fixture capability 另開畫面 3，不佔用運動矩陣的欄位。完整賽程能力由 Ops 設定，與資料是否正常取得、是否被選為來源分開；各類資料的狀態在 Data Usage（R03-05）。中斷不自動換來源，已指定來源的 Match 資料不能停用（R03-13、R04-02）。本例 Sofascore 也設為有完整賽程能力，與另外四個可選來源一樣顯示 Select；這些值只用於示意。</span></li>
+  <li><span class="n">6</span><span>右上角 Sport Codes 開啟畫面 4，唯讀對照目錄運動與來源運動代碼，不新增對應操作，也不變更本頁的賽程來源（R03-08、R04-03）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：完整賽程能力設定</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:760px">
+  <div class="mh"><span>Full fixture capability</span><a href="#s1" aria-label="Close">×</a></div>
+  <div class="mb">
+    <p class="hint">Set by Ops after checking the provider's fixture coverage. <span class="n">1</span></p>
+    <table class="grid"><thead><tr><th>Provider</th><th>Full fixtures</th><th>Current fixture-source assignments <span class="n">2</span></th></tr></thead><tbody>
+      <tr><td>Saba</td><td><span class="box ro">Yes</span></td><td>Soccer · Tennis</td></tr>
+      <tr><td>Sbobet</td><td><span class="box ro">Yes</span></td><td>Basketball · 24 other sports</td></tr>
+      <tr><td>Pinnacle</td><td><span class="box caret">Yes</span></td><td>—</td></tr>
+      <tr><td>Flashscore</td><td><span class="box caret">Yes</span></td><td>—</td></tr>
+      <tr><td>Sofascore</td><td><span class="box caret">Yes</span></td><td>—</td></tr>
+      <tr><td>RunningBall <span class="l2">via insportlive</span></td><td><span class="box caret">No</span></td><td>—</td></tr>
+      <tr><td>BetGenius <span class="l2">via insportlive</span></td><td><span class="box caret">No</span></td><td>—</td></tr>
+    </tbody></table>
+    <p class="hint">Change active fixture-source assignments before removing their capability.</p>
+    <div class="provider-form"><label for="capability-reason">Reason <span class="n">3</span></label><textarea id="capability-reason" rows="2" required placeholder="Reason for changing full fixture capability"></textarea></div>
+    <p class="hint">Setting capability does not select a fixture source or change data usage.</p>
+  </div>
+  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Save capability settings</span></div>
+</div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>「Yes／No」是 Ops 的設定，不是連接器偵測結果；沒有自動驗證或自動改變能力的操作（R03-05）。未設定完整賽程能力的來源不能擔任預設賽程來源，也不能被人工指定為個別賽事的建立者（R04-02、R04-05）。範例能力值不代表對供應商的實際評估。</span></li>
+  <li><span class="n">2</span><span>列出目前使用這個來源的運動，避免撤掉能力後留下不合格的預設。正在使用的 Saba、Sbobet 在本示意中唯讀；先更換運動預設，再處理能力設定。這是維持 R03-05、R04-02 的畫面安排，不代表可把既有賽事的建立者一起更換。來源仍有未結束賽事時撤銷能力的處理，見待確認第 2 項。</span></li>
+  <li><span class="n">3</span><span>能力設定與資料使用開關分開儲存，記錄變更原因、操作者與時間。設定「Yes」不會自動取得任何運動的賽程來源角色（R03-05、R04-02；非功能需求與稽核）。</span></li>
+</ol>
+
+
+<h2 id="s4">畫面 4：運動代碼對照</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:1080px">
+  <div class="mh"><span>Sport Codes</span><a href="#s1" aria-label="Close sport codes">×</a></div><div class="mb">
+  <p class="hint">Provider sport codes and their existing catalog assignments. <span class="n">1</span></p>
+  <div class="fixture-scroll" tabindex="0" role="region" aria-label="Provider sport codes"><table class="grid provider-table"><thead><tr><th>Sport / ID</th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th>
+<th><div class="provider-identity"><span class="provider-icon">S</span><span class="provider-name">Sofascore</span></div></th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><div class="provider-via">via insportlive</div></th>
+<th><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><div class="provider-via">via insportlive</div></th>
+</tr></thead><tbody>
+<tr><th scope="row">Soccer<span class="l2">S-1</span></th>
+<td>Soccer<div class="l2">SA-S01</div></td>
+<td>Soccer<div class="l2">SB-S01</div></td>
+<td>Soccer<div class="l2">PN-S01</div></td>
+<td>Soccer<div class="l2">FS-S01</div></td>
+<td>Soccer<div class="l2">SO-S01</div></td>
+<td>Soccer<div class="l2">RB-S01</div></td>
+<td>Soccer<div class="l2">BG-S01</div></td>
+</tr>
+<tr><th scope="row">Basketball<span class="l2">S-2</span></th>
+<td>Basketball<div class="l2">SA-S02</div></td>
+<td>Basketball<div class="l2">SB-S02</div></td>
+<td>Basketball<div class="l2">PN-S02</div></td>
+<td>Basketball<div class="l2">FS-S02</div></td>
+<td>Basketball<div class="l2">SO-S02</div></td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr><th scope="row">Tennis<span class="l2">S-5</span></th>
+<td>Tennis<div class="l2">SA-S03</div></td>
+<td>Tennis<div class="l2">SB-S03</div></td>
+<td>Tennis<div class="l2">PN-S03</div></td>
+<td>Tennis<div class="l2">FS-S03</div></td>
+<td>Tennis<div class="l2">SO-S03</div></td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table></div><p class="hint">— No established sport mapping <span class="n">2</span></p></div><div class="mf"><a class="btn" href="sports-and-markets.html#s1">Sports &amp; Markets</a><a class="btn" href="#s1">Close</a></div></div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Sport Codes 保留目錄識別與各來源自己的運動名稱、代碼，代碼不跨來源比較。本例節錄三個運動，來源代碼均為示意；表內已有對應不表示來源具完整賽程能力（R03-08、R04-03）。</span></li>
+  <li><span class="n">2</span><span>「—」表示沒有已確立的運動對應，不代表來源中斷或一定不提供該運動；與 Sports &amp; Markets 的對應範例一致。本視窗唯讀，不提供編輯或解除對應（R04-03）。</span></li>
+</ol>
+
+<h2>待確認事項</h2>
+<ol>
+  <li>虛擬競賽的來源指定方式：R04-20 明確留待虛擬資料來源決定後補上。建議確認後另畫指定畫面，本頁維持運動層的預設。</li>
+  <li>來源已有未結束賽事時，撤銷完整賽程能力的生效方式尚未明定。建議保留既有建立者責任，只停止新的指定；本頁不畫撤銷後轉移或中止既有賽事。仍被選為運動預設時，先更換預設再撤銷。</li>
+</ol>
+</div>
+</body>
+</html>
