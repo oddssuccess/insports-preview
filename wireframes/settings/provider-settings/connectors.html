@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>連接器設定 wireframe</title>
+<title>來源設定・連接器 wireframe</title>
 <link rel="stylesheet" href="../../wireframe.css">
 </head>
 <body><div class="doc">
-<h1>連接器（Provider Settings › Connectors）</h1>
-<p class="meta"><b>日期</b>：2026-11-06 · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求與稽核</a> · <a href="../../index.html">畫面索引</a></p>
+<h1>來源設定・連接器（Provider Settings › Connectors）</h1>
+<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings › Connectors · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求與稽核</a> · <a href="../../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 連接器清單</a><a href="#s2">2 暫停前查看賽程影響</a><a href="#s3">3 恢復已暫停的連接器</a><a href="#s4">4 連接器變更紀錄</a><a href="#s5">5 共用轉送商的暫停影響</a><a href="#s6">6 已暫停與尚未啟用的連接器</a><a href="#s7">7 啟用新連接器</a><a href="#open">待確認事項</a></nav>
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 查看整個連接器的啟用設定、資料取得情況及異常原因；暫停前確認受影響來源與賽程，恢復時填寫原因，並查看變更紀錄。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
@@ -19,7 +20,7 @@
   </ul></td></tr>
 </table>
 <p class="disclaimer">本頁是靜態需求示意，不約束版面、元件或資料模型。來源名稱依本次指定名單，其餘設定、資料狀態、原因與時間均為範例，不代表實際串接狀態。時間皆為 UTC；畫面只畫主內容區，側欄見<a href="../../layout.html">共用版面</a>。</p>
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>分開顯示人工啟用設定與實際資料取得情況，異常列原因與持續時間</td><td>R03-01～02、R03-05～07、R03-14</td><td><a href="#s1">畫面 1</a>、<a href="#s6">畫面 6</a></td></tr>
@@ -31,11 +32,11 @@
 
 <h2 id="s1">畫面 1：連接器清單</h2>
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Settings › Provider Settings</span><span>English · ops.user</span></header>
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector collection and availability.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
     <nav class="provider-settings-tabs" aria-label="Provider settings">
-      <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
+      <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-markets.html">Sports &amp; Market Types</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
     </nav>
     <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 17:52 · UTC</span></div>
     <table class="grid provider-table">
@@ -147,11 +148,11 @@
 </ol>
 <h2 id="s6">畫面 6：已暫停與尚未啟用的連接器</h2>
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Settings › Provider Settings</span><span>English · ops.user</span></header>
+  <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector collection and availability.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
     <nav class="provider-settings-tabs" aria-label="Provider settings">
-      <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
+      <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-markets.html">Sports &amp; Market Types</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
     </nav>
     <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 18:05 · UTC</span></div>
     <table class="grid provider-table">
@@ -166,7 +167,7 @@
 </div>
 <ol class="notes">
   <li><span class="n">1</span><span>畫面 3 的入口。暫停後按鈕改為 Resume；Saba 的 Match 因是賽程來源而視為中斷，其餘類別視為停用，影響見畫面 2（R03-07、R03-13）。</span></li>
-  <li><span class="n">2</span><span>串接完成但尚未啟用的連接器，啟用前該來源各類資料為停用；Enable 開啟畫面 7（R03-12）。</span></li>
+  <li><span class="n">2</span><span>串接完成但尚未啟用的連接器，啟用前該來源各類資料為停用；Enable 開啟畫面 7（R03-12）。Aiscore 是新串接來源的範例，只出現在畫面 6、7；本畫面只節錄兩列，其他頁籤的七個來源不含它。</span></li>
 </ol>
 
 <h2 id="s7">畫面 7：啟用新連接器</h2>
@@ -189,6 +190,6 @@
   <li><span class="n">1</span><span>啟用後立即開始取得資料，不需要試運轉；各類資料的使用開關初始為 ON，之後可在 <a href="data-usage.html">Data Usage</a> 逐類停用（R03-12～13）。</span></li>
   <li><span class="n">2</span><span>原因必填，記錄操作者、時間與前後設定（R03-13；非功能需求：稽核軌跡）。</span></li>
 </ol>
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 </div></body></html>

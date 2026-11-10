@@ -11,17 +11,19 @@
 
 <h1>參賽方（Competitors）</h1>
 <p class="meta"><b>選單</b>：Catalog › Competitors · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 參賽方清單</a><a href="#s2">2 編輯參賽方・基本資料</a><a href="#s3">3 編輯參賽方・多語系</a><a href="#s4">4 等級看板</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動或競賽查看參賽方（隊伍、個人與組合）；整理由賽程來源建立的參賽方，包括修改類型與屬性、設定等級、上傳圖示、修改各語言的名稱；調整參賽方的系統排序</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動或競賽查看參賽方（隊伍、個人與組合）；整理由賽程來源建立的參賽方，包括修改類型與屬性、設定等級、上傳圖示、修改各語言的名稱</td></tr>
   <tr><th>不在本頁</th><td>
     <ul class="tight">
       <li>建立參賽方、參賽方與來源的對應：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04</a> 的統一紀錄與對應（R04-04、R04-08）</li>
       <li>合併疑似重複的參賽方：04 的人工處理（R04-07）</li>
       <li>冠軍盤的參賽方名單、參賽方退出或被淘汰時的處理：04 的 R04-18、R01-13</li>
-      <li>球員的統一紀錄，例如射手王冠軍盤的球員：尚未定義，見 04 待確認第 1 項</li>
+      <li>球員（例如射手王冠軍盤的球員）的建立與對應：04 的 R04-18；球員是類型為個人的參賽方，在本頁與其他參賽方一併列出</li>
       <li>因風控原因不開某個參賽方（R01-29）</li>
-      <li>經銷商對參賽方的排序、顯示名稱與預設圖示（R01-28、R01-33；§6 經銷商可設定）</li>
+      <li>參賽方的排序：參賽方不設排序號，顯示的先後由使用的地方決定，例如單場比賽依賽程、冠軍盤投注項依賠率、清單依名稱（R01-28）</li>
+      <li>經銷商對參賽方的顯示名稱與預設圖示（R10-06、R01-33；§6 經銷商可設定）</li>
       <li>維護屬性清單的值、系統預設圖示：另一個 Catalog 頁面（R01-31、R01-33）</li>
       <li>依等級決定風控監控級別與報表分類（R01-32）</li>
     </ul>
@@ -31,17 +33,16 @@
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依運動列出參賽方，可依類型、屬性、等級篩選；虛擬參賽方以標記區分，包括「未定」與「未分級」</td><td>R01-15、R01-27、R01-31、R01-32</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依運動列出參賽方，可依類型、屬性、等級篩選，包括「未定」與「未分級」；虛擬參賽方以標記區分</td><td>R01-15、R01-27、R01-31、R01-32</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>依競賽篩選參賽方；從<a href="tournaments.html">競賽清單</a>進入時已選好該競賽</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>修改參賽方的類型、國家／地區、性別、年齡層與組別；個人沒有年齡層</td><td>R01-31</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>4</td><td>設定參賽方的等級，可以逐筆設定，也可以一次設定多筆，也可以改回未分級</td><td>R01-32</td><td><a href="#s2">畫面 2</a>、<a href="#s4">畫面 4</a></td></tr>
   <tr><td>5</td><td>查看參賽方是否為虛擬，唯讀</td><td>R01-27</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>上傳、更換或移除參賽方的圖示</td><td>R01-33</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>7</td><td>修改各語言的參賽方名稱，基準名稱唯讀</td><td>R01-30</td><td><a href="#s3">畫面 3</a></td></tr>
-  <tr><td>8</td><td>調整參賽方的系統排序</td><td>R01-28；是否需要見待確認第 1 項</td><td><a href="#s5">畫面 5</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
@@ -52,7 +53,7 @@
     <main class="main">
       <div class="page-head">
         <div><h3>Competitors</h3><div class="sub">Teams, individuals and pairs; each competitor belongs to one sport</div></div>
-        <div class="strip"><span class="on">List</span><span>Tier board</span><span>Sorting</span></div>
+        <div class="strip"><span class="on">List</span><span>Tier board</span></div>
       </div>
 
       <div class="filters">
@@ -74,17 +75,16 @@
           <th>Country/Region</th>
           <th>Gender <span class="s">· Age group · Class</span></th>
           <th>Tier</th>
-          <th>Sort order</th>
           <th>Actions <span class="n">5</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>Team A<div class="l2">C-50012</div></td><td>Club</td><td>England</td><td>Men · Senior · —</td><td>1</td><td>1</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>Team B<div class="l2">C-50013</div></td><td>Club</td><td>England</td><td>Men · Senior · —</td><td>2</td><td>6</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>England<div class="l2">C-50201</div></td><td>National team</td><td>England</td><td>Men · Senior · —</td><td>1</td><td>3</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>Team G U21<div class="l2">C-51877</div></td><td>Club</td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>Team A <span class="chip">Virtual</span> <span class="n">4</span><div class="l2">C-90004</div></td><td class="l2">Unset</td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td>40</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>New Town FC<div class="l2">C-58810</div></td><td class="l2">Unset</td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td colspan="7" class="l2">… (other soccer competitors)</td></tr>
+          <tr><td>Team A<div class="l2">C-50012</div></td><td>Club</td><td>England</td><td>Men · Senior · —</td><td>1</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Team B<div class="l2">C-50013</div></td><td>Club</td><td>England</td><td>Men · Senior · —</td><td>2</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>England<div class="l2">C-50201</div></td><td>National team</td><td>England</td><td>Men · Senior · —</td><td>1</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Team G U21<div class="l2">C-51877</div></td><td>Club</td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Team A <span class="chip">Virtual</span> <span class="n">4</span><div class="l2">C-90004</div></td><td class="l2">Unset</td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>New Town FC<div class="l2">C-58810</div></td><td class="l2">Unset</td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td colspan="6" class="l2">… (other soccer competitors)</td></tr>
         </tbody>
       </table>
       <div class="pager"><span>‹ Prev &nbsp;1&nbsp; 2&nbsp; 3&nbsp; …&nbsp; Next ›</span><span>21,530 soccer competitors · 100 per page</span></div>
@@ -103,7 +103,7 @@
 <h2 id="s2">畫面 2：編輯參賽方・基本資料</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit competitor · Player K (C-70321)</span><span>✕</span></div>
     <div class="tabs"><span class="on">Details</span><span>Translations</span></div>
     <div class="mb">
@@ -135,21 +135,21 @@
 <h2 id="s3">畫面 3：編輯參賽方・多語系</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit competitor · Player K (C-70321)</span><span>✕</span></div>
     <div class="tabs"><span>Details</span><span class="on">Translations</span></div>
     <div class="mb">
-      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Player K</span></div>
-      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro full">Player K</span></div>
+      <div class="hint lead">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
       <div class="form">
-        <div class="f"><label>English</label><span class="box" style="width:100%">K. Player</span></div>
-        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">K 選手</span></div>
-        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">K 选手</span></div>
-        <div class="f"><label>Thai</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Player K</span></div>
-        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Player K</span></div>
-        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Korean</label><span class="box" style="width:100%">플레이어 K</span></div>
+        <div class="f"><label>English</label><span class="box full">K. Player</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box full" lang="zh-Hant">K 選手</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box full" lang="zh-Hans">K 选手</span></div>
+        <div class="f"><label>Thai</label><span class="box full"></span></div>
+        <div class="f"><label>Vietnamese</label><span class="box full">Player K</span></div>
+        <div class="f"><label>Indonesian</label><span class="box full">Player K</span></div>
+        <div class="f"><label>Burmese</label><span class="box full"></span></div>
+        <div class="f"><label>Korean</label><span class="box full">플레이어 K</span></div>
         <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
     </div>
@@ -171,7 +171,7 @@
     <main class="main">
       <div class="page-head">
         <div><h3>Competitor tiers</h3><div class="sub">Pick a tier per row, or select rows and set them at once, then click “Save”</div></div>
-        <div class="strip"><span>List</span><span class="on">Tier board</span><span>Sorting</span></div>
+        <div class="strip"><span>List</span><span class="on">Tier board</span></div>
       </div>
       <div class="filters">
         <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
@@ -183,8 +183,8 @@
       <table class="grid">
         <thead><tr><th style="width:32px">☐</th><th>Competitor <span class="s">/ ID</span></th><th>Type</th><th style="width:150px">Tier</th><th></th></tr></thead>
         <tbody>
-          <tr style="background:var(--fill)"><td>☑</td><td>Team G U21<div class="l2">C-51877</div></td><td>Club</td><td><span class="box caret"><b>6</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr style="background:var(--fill)"><td>☑</td><td>Team H U21<div class="l2">C-51878</div></td><td>Club</td><td><span class="box caret"><b>6</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr class="changed"><td>☑</td><td>Team G U21<div class="l2">C-51877</div></td><td>Club</td><td><span class="box caret"><b>6</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr class="changed"><td>☑</td><td>Team H U21<div class="l2">C-51878</div></td><td>Club</td><td><span class="box caret"><b>6</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
           <tr><td>☐</td><td>Team J U21<div class="l2">C-51890</div></td><td class="l2">Unset</td><td><span class="box caret">Untiered</span></td><td></td></tr>
           <tr><td colspan="5" class="l2">… (other untiered competitors in Premier League 2)</td></tr>
         </tbody>
@@ -200,46 +200,8 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2 id="s5">畫面 5：排序</h2>
-
-<div lang="en" class="frame">
-    <header class="top"><span>Home › Catalog › Competitors › Sorting</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
-    <main class="main">
-      <div class="page-head">
-        <div><h3>Competitor sorting</h3><div class="sub">Choose a sport, edit sort orders in place, then click “Save”; lower numbers come first</div></div>
-        <div class="strip"><span>List</span><span>Tier board</span><span class="on">Sorting</span></div>
-      </div>
-      <div class="filters">
-        <div class="f"><label>Sport <span class="n">1</span></label><span class="box caret">Soccer</span></div>
-        <div class="f"><label>Tournament</label><span class="box caret">All</span></div>
-        <div class="f"><label>Search</label><span class="box wide">Competitor name or ID</span></div>
-      </div>
-      <table class="grid" style="width:560px">
-        <thead><tr><th style="width:110px">Sort order</th><th>Competitor</th><th>ID</th><th></th></tr></thead>
-        <tbody>
-          <tr><td><span class="box" style="min-width:80px;width:80px">1</span></td><td>Team A</td><td class="l2">C-50012</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">2</span></td><td>Team C</td><td class="l2">C-50014</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">3</span></td><td>England</td><td class="l2">C-50201</td><td></td></tr>
-          <tr style="background:var(--fill)"><td><span class="box" style="min-width:80px;width:80px"><b>4</b></span></td><td>Team D</td><td class="l2">C-50015</td><td><span class="chip">Modified (was 9)</span></td></tr>
-          <tr><td colspan="4" class="l2">…</td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px"></span></td><td>New Town FC</td><td class="l2">C-58810</td><td><span class="chip">Not set</span> <span class="n">2</span></td></tr>
-        </tbody>
-      </table>
-      <div class="savebar"><span>1 unsaved change <span class="n">3</span></span><span><span class="btn">Discard</span> <span class="btn pri">Save</span></span></div>
-    </main>
-</div>
-
-<ol class="notes">
-  <li><span class="n">1</span><span>排序只在同一運動內調整；可以先選競賽，只列該競賽的參賽方，但排序號仍是參賽方本身的一個值，不因競賽不同。顯示的先後只依排序號，不受等級影響（R01-32），例如冠軍盤投注項的先後。</span></li>
-  <li><span class="n">2</span><span>新建立的參賽方尚未設定排序號，排在最後（R01-28）；填入排序號並儲存後依排序號排列。</span></li>
-  <li><span class="n">3</span><span>參賽方的系統排序由 Ops 設定（R01-28）；經銷商可以在此基礎上變更，也可以重置回系統排序（R01-28）。修改後先標示「Modified」，按「Save」才生效；離開頁面前提醒尚未儲存。排序號的具體做法由 SPEC 提出。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2>待確認事項</h2>
-<ol>
-  <li><b>參賽方是否需要排序號</b>：R01-28 讓運動、競賽與參賽方都有排序號，R10-02 也讓經銷商變更三者的排序；畫面 5 依此保留參賽方的排序。但參賽方排序的用途不明：單場比賽的主客隊順序來自賽程，冠軍盤的投注項通常依賠率排列；參賽方數量又大（單是足球就超過兩萬個），且每天都有新建立、尚未設定排序號的參賽方，Ops 難以維護。建議：參賽方不設排序號，移除畫面 5 與「Sorting」分頁；參賽方的顯示先後由使用的地方決定，例如冠軍盤投注項依賠率、其他清單依名稱。若採用，需寫回 PRD 01 的 R01-28 與 PRD 10 的 R10-02。待決定。</li>
-</ol>
+<h2 id="open">待確認事項</h2>
+<p>目前沒有。</p>
 
 </div>
 </body>

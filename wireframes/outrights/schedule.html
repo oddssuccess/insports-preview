@@ -10,28 +10,28 @@
 <div class="doc">
 
 <h1>冠軍盤賽程（Outrights › Schedule）</h1>
-<p class="meta"><b>選單</b>：Outrights › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
+<p class="meta"><b>選單</b>：Outrights › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 冠軍盤賽程</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動與統一狀態查看冠軍盤（Outright）：事件、玩法、開始日期、狀態與套用的設定模板，並從單筆進入<a href="outright-detail.html">冠軍盤明細</a>與唯讀的<a href="outright-mapping.html">冠軍盤對應</a>視窗。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動與統一狀態查看冠軍盤（Outright）：事件、玩法、開始日期與狀態，並從單筆進入<a href="outright-detail.html">冠軍盤明細</a>與唯讀的<a href="outright-mapping.html">冠軍盤對應</a>視窗。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>事件資料、投注項（Outcome）清單與變更紀錄：<a href="outright-detail.html">冠軍盤明細</a>（R01-13、R01-15、R04-19）。</li>
     <li>已連結來源的識別配對：<a href="outright-mapping.html">冠軍盤對應</a>（R04-18）；來源原始事件與名單：<a href="../provider/outrights/schedule.html">來源冠軍盤賽程</a>（R03-08）。</li>
-    <li>競賽、參賽方的名稱、屬性與排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
-    <li>賠率與操盤（05）、賽果輸入與確認（R04-14）、結算（07）；設定模板的內容與指定：Settings › Market Settings（12）。</li>
+    <li>競賽、參賽方的名稱與屬性，以及競賽的排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
+    <li>賠率與操盤（05）、賽果輸入與確認（R04-14）、結算（07）。冠軍盤的玩法設定模板：PRD 12 暫緩，目前沒有（R07-14），本頁不顯示。</li>
   </ul></td></tr>
 </table>
 
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動、統一狀態與關鍵字（事件、玩法、識別）篩選冠軍盤，可清除篩選</td><td>R01-24；R04-04、R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>每個玩法一列，顯示事件（競賽加期間）、玩法與開始日期</td><td>R01-12；R04-12、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>顯示四種統一狀態：未開始、進行中、賽果已確定、取消</td><td>R04-12；見待確認第 1、2 項</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>4</td><td>顯示賽事套用的玩法設定模板</td><td>R12-05</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>點選事件進入冠軍盤明細；列尾選單開啟冠軍盤對應視窗</td><td>R04-04、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>4</td><td>點選事件進入冠軍盤明細；列尾選單開啟冠軍盤對應視窗</td><td>R04-04、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
 <h2 id="s1">畫面 1：冠軍盤賽程</h2>
@@ -44,18 +44,17 @@
     <div class="filters">
       <div class="f"><label>Sport <span class="n">1</span></label><span class="box caret">Soccer</span></div>
       <div class="f"><label>Status <span class="n">2</span></label><span class="box caret">All Statuses</span></div>
-      <div class="f"><label>Search</label><span class="box wide">Event / market / ID</span></div>
+      <div class="f"><label>Search</label><span class="box wide">Event / market type / ID</span></div>
       <span class="btn">Clear Filter</span>
     </div>
     <table class="grid schedule-grid">
-      <thead><tr><th>Event <span class="n">3</span></th><th>Market <span class="n">4</span></th><th>Start Date <span class="n">5</span></th><th>Status <span class="n">6</span></th><th>Settings <span class="n">7</span></th><th></th></tr></thead>
+      <thead><tr><th>Event <span class="n">3</span></th><th>Market Type <span class="n">4</span></th><th>Start Date <span class="n">5</span></th><th>Status <span class="n">6</span></th><th></th></tr></thead>
       <tbody>
         <tr>
-          <td><b><a href="outright-detail.html#s1">UEFA NATIONS LEAGUE B 2026/27</a></b><div class="l2">O-61002</div></td>
-          <td>Group Winner · Group 4</td>
+          <td><b><a href="outright-detail.html#s1">UEFA NATIONS LEAGUE B 2026/27 · GROUP 4</a></b><div class="l2">O-61002</div></td>
+          <td>Group Winner</td>
           <td>2026-11-15</td>
           <td><span class="pill">Not started</span></td>
-          <td>O01 Standard<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr>
@@ -63,15 +62,13 @@
           <td>Winner</td>
           <td>2026-08-08</td>
           <td><span class="pill on">Live</span></td>
-          <td>O02 Custom<div class="l2">Outright</div></td>
-          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div><a href="outright-mapping.html#s1">Outright Mapping</a></div></div></details></td>
+          <td><details class="match-menu" open><summary>⋮ <span class="n">7</span></summary><div class="list"><div><a href="outright-mapping.html#s1">Outright Mapping</a></div></div></details></td>
         </tr>
         <tr>
           <td><b><a href="outright-detail.html#s1">AFC CHAMPIONS LEAGUE TWO 2025/26</a></b><div class="l2">O-60410</div></td>
           <td>Winner</td>
           <td>2025-09-17</td>
           <td><span class="pill">Result confirmed</span></td>
-          <td>O01 Standard<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
         <tr class="off">
@@ -79,7 +76,6 @@
           <td>Winner</td>
           <td>—</td>
           <td><span class="pill">Cancelled</span></td>
-          <td>—</td>
           <td>⋮</td>
         </tr>
       </tbody>
@@ -91,14 +87,13 @@
   <li><span class="n">1</span><span>依運動篩選；電子競技每個遊戲各為一個運動（R01-24）。</span></li>
   <li><span class="n">2</span><span>統一狀態只有四種：未開始、進行中、賽果已確定、取消（R04-12）。</span></li>
   <li><span class="n">3</span><span>冠軍盤以競賽加期間（賽季、屆次、階段或分組）為一筆事件，下方是統一識別（R01-12、R04-04、R04-18）。點選事件名稱開啟<a href="outright-detail.html">冠軍盤明細</a>。同一事件的多個玩法各佔一列，事件名稱重複顯示。</span></li>
-  <li><span class="n">4</span><span>玩法與期間或分組，例如「Group Winner · Group 4」是小組第一名，「Winner」是整個賽事的冠軍。玩法定義在<a href="../catalog/markets.html#s2">玩法目錄</a>維護（R01-12、R01-22）。</span></li>
+  <li><span class="n">4</span><span>玩法，例如「Group Winner」是小組第一名（分組屬於事件的期間，見標註 3），「Winner」是整個事件的冠軍。玩法定義在<a href="../catalog/markets.html#s2">玩法目錄</a>維護（R01-12、R01-22）。</span></li>
   <li><span class="n">5</span><span>由建立者提供，沒有提供時由 Ops 輸入；不需要結束日期，結束由賽果確定決定（R04-12）。取消且沒有開始日期的事件顯示「—」。</span></li>
   <li><span class="n">6</span><span>統一狀態，由已對應來源與人工裁定整理；來源停止報價或從清單消失都不推論取消或結束，取消一律人工裁定（R04-12、R04-18）。</span></li>
-  <li><span class="n">7</span><span>冠軍盤套用的設定模板，下方為指定的層級：Sport 是沿用運動的預設模板，Outright 是直接指定給這筆冠軍盤；沒有競賽層。模板的內容與指定在 Settings › Market Settings 維護（R12-05）。</span></li>
-  <li><span class="n">8</span><span>列尾選單開啟<a href="outright-mapping.html">冠軍盤對應</a>，唯讀顯示本冠軍盤連結的來源與投注項識別配對（R04-18）。</span></li>
+  <li><span class="n">7</span><span>列尾選單開啟<a href="outright-mapping.html">冠軍盤對應</a>，唯讀顯示本冠軍盤連結的來源與投注項識別配對（R04-18）。</span></li>
 </ol>
 
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <ol>
   <li><b>進行中（Live）的觸發</b>：R04-12 只列出冠軍盤的四種狀態，沒有說明何時轉為進行中：開始日期到達、任一來源回報開始，或人工切換？單場「任一來源報開始即為進行中」是否適用於冠軍盤？OTR-03 依各運動認定「開始競賽」（高爾夫為開球、賽車為暖胎圈的起跑訊號），它與事件進行中的關係為何？</li>
   <li><b>狀態轉換</b>：四種狀態之間哪些轉換允許，例如進行中回到未開始、取消後恢復？取消一律人工裁定（R04-12），是否需要覆核（R04-19 只明定會使已結算注單重新結算或退款的裁定須覆核）？</li>

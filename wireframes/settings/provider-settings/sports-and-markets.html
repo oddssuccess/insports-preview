@@ -3,31 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>來源運動與玩法 wireframe</title>
+<title>來源設定・運動與玩法 wireframe</title>
 <link rel="stylesheet" href="../../wireframe.css">
 </head>
 <body>
 <div class="doc">
 
-<h1>來源設定・運動與玩法（Provider Settings › Sports &amp; Markets）</h1>
-<p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Settings › Provider Settings · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../../index.html">畫面索引</a></p>
+<h1>來源設定・運動與玩法（Provider Settings › Sports &amp; Market Types）</h1>
+<p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Settings › Provider Settings › Sports &amp; Market Types · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 運動與玩法開關</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依來源開關連接器要收集的運動與玩法。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>依來源與資料類別停用：<a href="data-usage.html">Data Usage</a>；暫停整個連接器：<a href="connectors.html">Connectors</a>（R03-07、R03-13）。</li>
     <li>各運動的賽程來源：<a href="fixture-sources.html">Fixture Sources</a>（R04-02）。</li>
-    <li>來源賠率開關與權重、玩法開關與模板：Market Settings（R05-09；R12-01、R12-10）。</li>
+    <li>來源賠率開關與權重、玩法開關與模板：Market Type Settings（R05-09；R12-01、R12-10）。</li>
     <li>玩法對應表與賽事對應：PRD 04（R04-08、R04-11）。</li>
   </ul></td></tr>
 </table>
 <p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。運動、玩法、開關與時間均為範例，不代表來源的實際能力。側邊主選單見<a href="../../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依來源與運動開關連接器的收集</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>依來源開關玩法：點玩法名稱切換</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依來源與運動開關連接器的收集</td><td>見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>依來源開關玩法：點玩法名稱切換</td><td>見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>運動的賽程來源不能關閉該運動</td><td>R03-13；R04-02</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
@@ -35,8 +36,8 @@
 <div lang="en" class="frame">
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
-    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose which sports and markets each connector collects.</div></div></div>
-    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a class="on" aria-current="page" href="sports-and-markets.html">Sports &amp; Markets</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose which sports and market types each connector collects.</div></div></div>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a class="on" aria-current="page" href="sports-and-markets.html">Sports &amp; Market Types</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a></nav>
     <table class="grid provider-table sport-matrix" aria-label="Sports collected by each provider">
       <thead><tr><th scope="col">Sport <span class="n">1</span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></span></th><th scope="col"><span class="provider-identity"><span class="provider-icon" aria-hidden="true">S</span><span class="provider-name">Sofascore</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></span></th><th scope="col"><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></span></th></tr></thead>
       <tbody>
@@ -52,9 +53,9 @@
       </tbody>
     </table>
     <div class="pager"><span>9 sports shown</span><span>Changes are saved immediately</span></div>
-    <p class="hint">Providers that cannot filter markets are not listed. <span class="n">4</span></p>
-    <table class="grid" aria-label="Markets collected by each provider">
-      <thead><tr><th>Provider</th><th>Markets</th><th>Last change <span class="n">5</span></th></tr></thead>
+    <p class="hint">Providers that cannot filter market types are not listed. <span class="n">4</span></p>
+    <table class="grid" aria-label="Market types collected by each provider">
+      <thead><tr><th>Provider</th><th>Market Types</th><th>Last change <span class="n">5</span></th></tr></thead>
       <tbody>
         <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill on" href="#s1" aria-pressed="true">1X2</a><a class="market-pill on" href="#s1" aria-pressed="true">Moneyline</a><a class="market-pill off" href="#s1" aria-pressed="false">Odd / Even</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
         <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
@@ -70,8 +71,10 @@
   <li><span class="n">5</span><span>每個來源最近一次切換運動或玩法的時間與操作者。</span></li>
 </ol>
 
-<h2>待確認事項</h2>
-<p>目前沒有。</p>
+<h2 id="open">待確認事項</h2>
+<ol>
+  <li><b>已決定（2026-11-10），待寫回 PRD 03</b>：保留本頁籤，Ops 可依來源開關連接器收集的運動與玩法（畫面 1）。這與 R03-10「連接器持續讀取所串接的全部資料，不提供依運動、玩法或賽事設定的讀取範圍」及 R03-13「連接器內不能再依運動、玩法或賽事動態停用」不同，PRD 03 待依此決定修改。尚待決定並寫入 PRD 的細節：關閉收集後，已建立的賽事與已對應玩法如何處理；切換是否比照其他變更填寫原因（R03-13）。</li>
+</ol>
 </div>
 </body>
 </html>

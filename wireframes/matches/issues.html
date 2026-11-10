@@ -10,7 +10,8 @@
 <div class="doc">
 
 <h1>賽事問題（Issues）</h1>
-<p class="meta"><b>選單</b>：Matches › Issues · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台與報表</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06 投注接受</a> · <a href="../index.html">畫面索引</a></p>
+<p class="meta"><b>選單</b>：Matches › Issues · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台與報表</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06 投注接受</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07 結算與派彩</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 問題佇列</a><a href="#s2">2 待取消案件（雙重賽候選）</a><a href="#s3">3 待腰斬案件</a><a href="#s4">4 狀態未確認案件</a><a href="#s5">5 待覆核</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 處理狀態可能有問題、系統不會自行決定的單場比賽：賽程來源不再提供的待取消（Pending Cancellation）與待腰斬（Pending Abandonment），以及來源沉默後仍維持較嚴格狀態的賽事。Ops 在此比對各來源的證據與候選（Candidate），提出裁定，需要時由另一人覆核。</td></tr>
@@ -27,18 +28,18 @@
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依問題類型與處理進度列出待處理賽事，並顯示各類數量，每場以單一按鈕進入案件畫面</td><td>R04-19、R04-23；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>排序可選「Longest wait」「Newest first」「Kickoff time」；預設為 Longest wait（最早進入佇列的在前）；Kickoff time 為已過的在前（越久越前），其後由近到遠，同時間依入列先後</td><td>R11-03</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依問題類型與處理進度列出待處理賽事，並顯示各類數量，可依運動篩選及搜尋，每場以單一按鈕進入案件畫面</td><td>R04-19、R04-23；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>依原定開賽時間排序（Kickoff time，預設）：已過的在前、越久越前，其後由近到遠，同時間依入列先後；另可改選「Longest wait」「Newest first」</td><td>R11-03（預設排序）；另外兩種是畫面提供的檢視方式，R11-03 未規定</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>每場顯示賽程資訊、統一狀態、問題類型與簡述、建議的下一步，以及處理進度與已等待時間；候選與注單數留在案件畫面</td><td>R04-12、R04-23、R04-24</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>4</td><td>逐來源比對回報狀態、開賽時間、清單上的有無、來源時間與收到時間</td><td>R03-08、R04-12、R04-23</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s4">畫面 4</a></td></tr>
+  <tr><td>4</td><td>逐來源比對回報狀態、開賽時間或最後比分、清單上的有無（依問題類型）、來源時間與收到時間</td><td>R03-08、R04-12、R04-23</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s4">畫面 4</a></td></tr>
   <tr><td>5</td><td>列出候選供人工判斷，含同一候選也列在其他待取消賽事的情況</td><td>R04-05、R04-24</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>待取消的四種裁定：取消並作廢、重掛到候選、暫不處理、解除並上架</td><td>R04-05、R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>7</td><td>待腰斬的裁定：確認腰斬、確認未腰斬並解除、暫不處理</td><td>R04-23</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>7</td><td>待腰斬的裁定：確認腰斬、確認未腰斬並解除、暫不處理</td><td>R04-23、R05-16</td><td><a href="#s3">畫面 3</a></td></tr>
   <tr><td>8</td><td>維持較嚴格狀態的賽事，由人工裁定回到較寬鬆的狀態</td><td>R04-12；見待確認第 1 項</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>9</td><td>會作廢注單或改變結算依據的裁定，由另一人覆核後生效；每項裁定記錄人員、時間與依據</td><td>R04-19；非功能需求「稽核軌跡」；見待確認第 2 項</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>9</td><td>會作廢注單或改變結算依據的裁定，由另一人覆核後生效；每項裁定記錄人員、時間與依據</td><td>R04-19；非功能需求「稽核軌跡」；見待確認第 2 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s5">畫面 5</a></td></tr>
   <tr><td>10</td><td>提示標記期間賽事下架、全部盤口關閉</td><td>R04-23、R05-16、R06-20</td><td><a href="#s2">畫面 2</a></td></tr>
 </table>
 
@@ -53,39 +54,40 @@
     </div>
 
     <div class="tiles">
-      <div class="tile sel"><b>All types</b><div class="l2">6 open</div></div>
-      <div class="tile"><b>Pending cancellation</b> <span class="n">1</span><div class="l2">4 open · Not started or postponed, no longer offered by the creator</div></div>
-      <div class="tile"><b>Pending abandonment</b><div class="l2">1 open · In progress, no longer offered by the creator</div></div>
+      <div class="tile sel"><b>All types</b><div class="l2">7 open</div></div>
+      <div class="tile"><b>Pending cancellation</b> <span class="n">1</span><div class="l2">5 open · Not started or postponed, no longer offered by the creator</div></div>
+      <div class="tile"><b>Pending abandonment</b><div class="l2">1 open · During play, no longer offered by the creator</div></div>
       <div class="tile"><b>Unconfirmed status</b> <span class="n">2</span><div class="l2">1 open · Stricter status kept after sources went silent</div></div>
     </div>
 
-    <div class="tabs"><span class="on">Needs decision (5) <span class="n">3</span></span><span><a href="#s5">Awaiting approval (1)</a></span><span>Resolved (38)</span><span>All (44)</span></div>
+    <div class="tabs"><span class="on">Needs decision (6) <span class="n">3</span></span><span><a href="#s5">Awaiting approval (1)</a></span><span>Resolved (38)</span><span>All (45)</span></div>
     <div class="filters">
       <div class="f"><label>Sport</label><span class="box caret">All sports</span></div>
       <div class="f"><label>Search</label><span class="box wide">Match ID, team or tournament</span></div>
-      <div class="f"><label>Sort <span class="n">4</span></label><span class="box caret">Longest wait</span></div>
+      <div class="f"><label>Sort <span class="n">4</span></label><span class="box caret">Kickoff time</span></div>
       <a class="btn">Clear filters</a>
     </div>
 
     <table class="grid queue">
       <thead><tr><th>Match</th><th>What happened <span class="n">5</span></th><th>What to check <span class="n">6</span></th><th>Review progress <span class="n">7</span></th><th>Action</th></tr></thead>
       <tbody>
-        <tr><td><b>Minnesota Timberwolves vs Oklahoma City Thunder</b><div class="l2">#52040 Basketball · NBA</div><div class="l2">Scheduled 2026-11-08 09:00</div><div><span class="chip">Not started</span> <span class="l2">Fixture source <b>SABA</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>SABA lists this match again</b> <span class="n">8</span></div><div class="l2">The returned listing does not automatically resolve this review.</div></td><td>Check the provider match ID, kickoff and status before releasing the flag.</td><td><span class="chip">Needs decision</span><div><b>Waiting 1d</b></div><div class="l2">Opened 2026-11-05 21:53:26</div><div class="l2">Due 2026-11-08 21:00</div></td><td><a class="btn pri">Review</a></td></tr>
-        <tr><td><b>Hanshin Tigers vs Yomiuri Giants</b><div class="l2">#52007 Baseball · NPB</div><div class="l2">Scheduled 2026-11-06 18:00</div><div><span class="chip">Postponed</span> <span class="l2">Fixture source <b>SABA</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Postponed without a new kickoff</b></div><div class="l2">Two fixtures are listed for 11-08, and one may be this match.</div></td><td>Compare each candidate's kickoff and first-seen time, then cancel or re-attach.</td><td><span class="chip">Needs decision</span><div><b>Waiting 23h</b></div><div class="l2">Opened 2026-11-06 17:12:03</div><div class="l2">Overdue · was due 2026-11-07 06:00</div></td><td><a class="btn pri" href="#s2">Review</a></td></tr>
-        <tr><td><b>Kitchee vs Eastern</b><div class="l2">#51988 Soccer · Hong Kong Premier League</div><div class="l2">Scheduled 2026-11-07 11:00</div><div><span class="chip">Not started</span> <span class="l2">Fixture source <b>SABA</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Kickoff passed, still Not started</b></div><div class="l2">The provider still reports Not started after the scheduled kickoff.</div></td><td>Check whether the match was played or cancelled before voiding it.</td><td><span class="chip">Needs decision</span><div><b>Waiting 4h</b></div><div class="l2">Opened 2026-11-07 11:45:10</div><div class="l2">Due 2026-11-07 23:00</div></td><td><a class="btn pri">Review</a></td></tr>
-        <tr><td><b>Lee Zii Jia vs Viktor Axelsen</b><div class="l2">#52055 Badminton · BWF World Tour</div><div class="l2">Scheduled 2026-11-07 20:00</div><div><span class="chip">In progress</span> <span class="l2">Fixture source <b>CMD</b></span></div></td><td><span class="chip">Unconfirmed status</span><div><b>Only WBET reported a start, then went silent</b></div><div class="l2">The stricter status stays until someone decides.</div></td><td>Check whether the match really started, then update to the looser status.</td><td><span class="chip">Needs decision</span><div><b>Waiting 3h</b></div><div class="l2">Opened 2026-11-07 12:40:31</div></td><td><a class="btn pri" href="#s4">Review</a></td></tr>
-        <tr><td><b>Persib Bandung vs Persija Jakarta</b><div class="l2">#52011 Soccer · Liga 1 Indonesia</div><div class="l2">Scheduled 2026-11-07 15:30</div><div><span class="chip">In progress</span> <span class="l2">Fixture source <b>SABA</b></span></div></td><td><span class="chip">Pending abandonment</span><div><b>SABA no longer lists this match during play</b></div><div class="l2">Removal alone does not confirm an abandonment.</div></td><td>Confirm whether play was abandoned. Unfinished periods are voided, so a second person must approve.</td><td><span class="chip">Needs decision</span><div><b>Waiting 15m</b></div><div class="l2">Opened 2026-11-07 16:05:44</div></td><td><a class="btn pri" href="#s3">Review</a></td></tr>
+        <tr class="urgent"><td><b>Hanshin Tigers vs Yomiuri Giants</b><div class="l2">M-52007 · Baseball · NPB</div><div class="l2">Scheduled 2026-11-06 18:00</div><div><span class="chip">Postponed</span> <span class="l2">Creator <b>Sbobet</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Postponed without a new kickoff</b></div><div class="l2">Two fixtures are listed for 11-08, and one may be this match.</div></td><td>The waiting limit has passed: cancel the match and void the bets. Candidates stay listed for reference.</td><td><span class="chip">Needs decision</span><div><b>Waiting 23h</b></div><div class="l2">Entered 2026-11-06 17:12:03</div><div><span class="chip bad">Overdue</span> <span class="l2">was due 2026-11-07 06:00</span></div></td><td><a class="btn pri" href="#s2">Review</a></td></tr>
+        <tr><td><b>Kitchee vs Eastern</b><div class="l2">M-51988 · Soccer · Hong Kong Premier League</div><div class="l2">Scheduled 2026-11-07 11:00</div><div><span class="chip">Not started</span> <span class="l2">Creator <b>Saba</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Kickoff passed, still Not started</b></div><div class="l2">The provider still reports Not started after the scheduled kickoff.</div></td><td>Check whether the match was played or cancelled before voiding it.</td><td><span class="chip">Needs decision</span><div><b>Waiting 4h</b></div><div class="l2">Entered 2026-11-07 11:45:10</div><div class="l2">Due 2026-11-07 23:00</div></td><td><a class="btn pri">Review</a></td></tr>
+        <tr><td><b>Persib Bandung vs Persija Jakarta</b><div class="l2">M-52011 · Soccer · Liga 1 Indonesia</div><div class="l2">Scheduled 2026-11-07 15:30</div><div><span class="chip">Interrupted</span> <span class="l2">Creator <b>Saba</b></span></div></td><td><span class="chip">Pending abandonment</span><div><b>Saba no longer lists this match during play</b></div><div class="l2">Removal alone does not confirm an abandonment.</div></td><td>Confirm whether play was abandoned. Undecided selections are voided, so a second person must approve.</td><td><span class="chip">Needs decision</span><div><b>Waiting 15m</b></div><div class="l2">Entered 2026-11-07 16:05:44</div></td><td><a class="btn pri" href="#s3">Review</a></td></tr>
+        <tr><td><b>Hanshin Tigers vs Yomiuri Giants</b><div class="l2">M-52008 · Baseball · NPB</div><div class="l2">Scheduled 2026-11-07 18:00</div><div><span class="chip">Postponed</span> <span class="l2">Creator <b>Sbobet</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Postponed without a new kickoff</b></div><div class="l2">The next game of the same series. One 11-08 fixture is a candidate for both this match and M-52007.</div></td><td>Decide together with M-52007: a candidate can be re-anchored to only one match.</td><td><span class="chip">Needs decision</span><div><b>Waiting 3h</b></div><div class="l2">Entered 2026-11-07 13:20:15</div><div class="l2">Due 2026-11-08 06:00</div></td><td><span class="btn pri">Review</span></td></tr>
+        <tr><td><b>Lee Zii Jia vs Viktor Axelsen</b><div class="l2">M-52055 · Badminton · BWF World Tour</div><div class="l2">Scheduled 2026-11-07 20:00</div><div><span class="chip">In progress</span> <span class="l2">Creator <b>CMD</b></span></div></td><td><span class="chip">Unconfirmed status</span><div><b>Only WBET reported a start, then went silent</b></div><div class="l2">The stricter status stays until someone decides.</div></td><td>Check whether the match really started, then update to the looser status.</td><td><span class="chip">Needs decision</span><div><b>Waiting 3h</b></div><div class="l2">Entered 2026-11-07 12:40:31</div></td><td><a class="btn pri" href="#s4">Review</a></td></tr>
+        <tr><td><b>Minnesota Timberwolves vs Oklahoma City Thunder</b><div class="l2">M-52040 · Basketball · NBA</div><div class="l2">Scheduled 2026-11-08 09:00</div><div><span class="chip">Not started</span> <span class="l2">Creator <b>Sbobet</b></span></div></td><td><span class="chip">Pending cancellation</span><div><b>Sbobet lists this match again</b> <span class="n">8</span></div><div class="l2">The returned listing does not automatically resolve this issue.</div></td><td>Check the provider match ID, kickoff and status before releasing the flag.</td><td><span class="chip">Needs decision</span><div><b>Waiting 1d</b></div><div class="l2">Entered 2026-11-05 21:53:26</div><div class="l2">Due 2026-11-08 21:00</div></td><td><a class="btn pri">Review</a></td></tr>
       </tbody>
     </table>
-    <div class="pager"><span>Showing 1–5 of 5</span><span>‹ 1 ›</span></div>
+    <div class="pager"><span>Showing 1–6 of 6</span><span>‹ 1 ›</span></div>
   </main>
 </div>
 
 <ol class="notes">
   <li><span class="n">1</span><span>待取消只發生在統一狀態為未開始或延後的賽事；同一類之下依觸發原因再分，見標註 5（R04-23）。</span></li>
   <li><span class="n">2</span><span>來源報了較嚴格的狀態（例如進行中、比賽中斷），之後沉默或不再提供，系統不視為撤回，交人工判斷（R04-12）。列入本頁是使用者的決定，見待確認第 1 項。</span></li>
-  <li><span class="n">3</span><span>處理進度頁籤：Needs decision 是尚未有人提出裁定的案件；Awaiting approval 是已提案、等另一人覆核的案件（畫面 5）；Resolved 是已裁定生效；All 為全部。篩選與排序適用所有頁籤；搜尋範圍是賽事編號、隊伍與競賽名稱（R04-19）。</span></li>
-  <li><span class="n">4</span><span>排序有三種：Longest wait（預設）依進入佇列的時間，最早進入的在前；Kickoff time 依原定開賽時間，不用延期後的時間，已過的在前、越久越前，其後由近到遠，同時間依進入佇列的先後（R11-03）；Newest first 依進入佇列的時間，最晚進入的在前。排序選項適用所有頁籤。</span></li>
+  <li><span class="n">3</span><span>處理進度頁籤：Needs decision 是尚待裁定的案件，包括曾記錄「暫不處理」的；Awaiting approval 是已提案、等另一人覆核的案件（畫面 5）；Resolved 是已裁定生效；All 為全部。篩選與排序適用所有頁籤；搜尋範圍是賽事編號、隊伍與競賽名稱（R04-19）。</span></li>
+  <li><span class="n">4</span><span>排序有三種：Kickoff time（預設）依原定開賽時間，不用延期後的時間，已過的在前、越久越前，其後由近到遠，同時間依進入佇列的先後（R11-03）；Longest wait 依進入佇列的時間，最早進入的在前；Newest first 依進入佇列的時間，最晚進入的在前。後兩種是畫面另外提供的檢視方式，R11-03 未規定。排序選項適用所有頁籤。</span></li>
   <li><span class="n">5</span><span>問題類型標籤與簡述。「Match」欄的狀態標籤是統一狀態；待取消與待腰斬是疊在統一狀態上的標記，不是狀態，所以另外標在這一欄。待取消的觸發原因有四種：從清單消失、標為取消、標為延期而沒有新的開賽時間、原定開賽時間已過仍停在賽前狀態（R04-12、R04-23）。來源中斷不會觸發（R04-16）。</span></li>
   <li><span class="n">6</span><span>提示 Ops 下一步要查什麼，依問題類型而定；提示文字是示意，不是 PRD 規則。候選與已有注單數等判斷依據在案件畫面查看（R04-23、R04-24）。</span></li>
   <li><span class="n">7</span><span>處理進度（Needs decision、Awaiting approval、Resolved）、已等待時間（從進入佇列起算）與進入佇列的時間。Due 只有待取消才有：就是各運動延期規則的等待上限，自原定開賽時間起算（足球、籃球、棒球皆為 12 小時），超過時標示 Overdue，由人工作廢；網球、羽球沒有上限，所以不顯示（R04-23、R07-16、R11-03）。待腰斬與狀態未確認的時限數值見非功能需求。</span></li>
@@ -104,19 +106,19 @@
     </div>
 
     <div class="match-context">
-      <div><b>M-52007 · Hanshin Tigers vs Yomiuri Giants</b><div class="l2">Baseball · NPB · Creator: SABA · 77120431</div></div>
+      <div><b>M-52007 · Hanshin Tigers vs Yomiuri Giants</b><div class="l2">Baseball · NPB · Creator: Sbobet · 77120431</div></div>
       <div><b>Original kickoff 2026-11-06 18:00</b><div class="l2">Entered issues 2026-11-06 17:12 · Bets 214</div></div>
       <div><span class="chip">Postponed</span><span class="chip">Pending cancellation</span><span class="chip">Needs decision</span></div>
     </div>
-    <div class="detail-tabs"><a href="match-detail.html">Match detail</a><a href="match-mapping.html">Match mapping</a></div>
+    <div class="bar"><div><a class="btn" href="match-detail.html">Match Detail</a><a class="btn" href="match-mapping.html">Match Mapping</a></div></div>
 
     <div class="panel"><div class="pb">The match is delisted and all markets are closed while it is pending cancellation. Bets already accepted stay as they are. <span class="n">1</span></div></div>
 
     <div class="panel">
       <div class="ph">What happened <span class="n">2</span></div>
       <div class="pb">
-        <p><b>Postponed without a new kickoff</b> · SABA marked 77120431 as postponed at 17:12 and gave no new kickoff.</p>
-        <p class="hint">Reason given by SABA: “Rain”. Shown for reference; it does not limit the decisions.</p>
+        <p><b>Postponed without a new kickoff</b> · Sbobet marked 77120431 as postponed at 17:12 and gave no new kickoff.</p>
+        <p class="hint">Reason given by Sbobet: “Rain”. Shown for reference; it does not limit the decisions.</p>
       </div>
     </div>
 
@@ -126,7 +128,7 @@
         <table class="grid">
           <thead><tr><th>Provider</th><th>Fixture ID</th><th>Reported status</th><th>Kickoff</th><th>On provider list</th><th>Source time</th><th>Received</th></tr></thead>
           <tbody>
-            <tr><td>SABA<div class="l2">Creator</div></td><td>77120431</td><td>Postponed</td><td>No new kickoff</td><td>Yes</td><td>11-06 17:11:58</td><td>11-06 17:12:03</td></tr>
+            <tr><td>Sbobet<div class="l2">Creator</div></td><td>77120431</td><td>Postponed</td><td>No new kickoff</td><td>Yes</td><td>11-06 17:11:58</td><td>11-06 17:12:03</td></tr>
             <tr><td>CMD</td><td>25230118</td><td>Postponed</td><td>2026-11-06 18:00</td><td>Yes</td><td>—</td><td>11-07 16:02:40</td></tr>
             <tr><td>WBET</td><td>27090512</td><td>Not started</td><td>2026-11-06 18:00</td><td>No · removed 11-06 19:30</td><td>—</td><td>11-06 19:30:12</td></tr>
           </tbody>
@@ -140,8 +142,8 @@
         <table class="grid">
           <thead><tr><th>Select</th><th>Creator fixture</th><th>Kickoff</th><th>Status</th><th>First seen</th><th>Also a candidate for</th></tr></thead>
           <tbody>
-            <tr><td><input type="radio" name="cand" checked></td><td>SABA · 77129810<div class="l2">Hanshin Tigers vs Yomiuri Giants</div></td><td>2026-11-08 13:00</td><td>Not started</td><td>11-07 09:40</td><td>—</td></tr>
-            <tr><td><input type="radio" name="cand"></td><td>SABA · 77120455<div class="l2">Hanshin Tigers vs Yomiuri Giants</div></td><td>2026-11-08 18:00</td><td>Not started</td><td>10-20 08:15</td><td>M-52008 (pending cancellation)</td></tr>
+            <tr><td><input type="radio" name="cand"></td><td>Sbobet · 77129810<div class="l2">Hanshin Tigers vs Yomiuri Giants</div></td><td>2026-11-08 13:00</td><td>Not started</td><td>11-07 09:40</td><td>—</td></tr>
+            <tr><td><input type="radio" name="cand"></td><td>Sbobet · 77120455<div class="l2">Hanshin Tigers vs Yomiuri Giants</div></td><td>2026-11-08 18:00</td><td>Not started</td><td>10-20 08:15</td><td>M-52008 (pending cancellation)</td></tr>
           </tbody>
         </table>
         <p class="hint">Same teams on the same day can be a doubleheader. Compare kickoff, first seen and provider IDs before choosing.</p>
@@ -151,10 +153,10 @@
     <div class="panel">
       <div class="ph">Choose a decision <span class="n">5</span></div>
       <div class="pb">
-        <div><label><input type="radio" name="dec"> <b>Cancel match and void bets</b></label> <span class="chip">Needs approval</span></div>
-        <div><label><input type="radio" name="dec" checked> <b>Re-anchor to the selected candidate</b> · SABA 77129810</label> <span class="chip">Needs approval</span><div class="l2">Bets stay on M-52007. Original kickoff stays the postponement basis.</div></div>
+        <div><label><input type="radio" name="dec" checked> <b>Cancel match and void bets</b></label> <span class="chip">Needs approval</span></div>
+        <div><label><input type="radio" name="dec" disabled> <b>Re-anchor to the selected candidate</b></label> <span class="chip">Needs approval</span><div class="l2">Not available: the waiting limit passed on 2026-11-07 06:00. Before the limit, bets stay on M-52007 and the original kickoff stays the postponement basis.</div></div>
         <div><label><input type="radio" name="dec"> <b>Keep pending</b></label></div>
-        <div><label><input type="radio" name="dec" disabled> <b>Clear flag and relist</b></label><div class="l2">Available only when SABA lists 77120431 again.</div></div>
+        <div><label><input type="radio" name="dec" disabled> <b>Clear flag and relist</b></label><div class="l2">Available only when Sbobet offers 77120431 again, for example with a new kickoff.</div></div>
         <div class="f"><label>Reason / supporting evidence (required)</label><textarea rows="3" placeholder="Record the evidence behind this decision."></textarea></div>
         <div class="savebar wide"><span>Submitted proposals take effect after another office user approves.</span><div><button class="btn pri" type="button">Submit for approval</button></div></div>
       </div>
@@ -168,7 +170,7 @@
           <tbody>
             <tr><td>11-06 17:12</td><td>System</td><td>Pending cancellation</td><td>Creator postponed without a new kickoff</td></tr>
             <tr><td>11-06 19:05</td><td>ops.wang</td><td>Keep pending</td><td>NPB has not announced the makeup date</td></tr>
-            <tr><td>11-07 09:40</td><td>System</td><td>Candidate added</td><td>SABA 77129810</td></tr>
+            <tr><td>11-07 09:40</td><td>System</td><td>Candidate added</td><td>Sbobet 77129810</td></tr>
           </tbody>
         </table>
       </div>
@@ -179,14 +181,14 @@
 <ol class="notes">
   <li><span class="n">1</span><span>標記期間賽事下架、全部盤口關閉，不分賽前或滾球；已成立的注單維持原狀，效力在裁定後由 07 決定（R04-23、R05-16、R06-20）。</span></li>
   <li><span class="n">2</span><span>觸發原因與來源給的原因分開顯示；來源的原因只供參考，不限制選項（R04-23）。</span></li>
-  <li><span class="n">3</span><span>逐來源列出回報的事實；來源時間與收到時間分列，用來判斷資料是否太舊（R03-08）。只有建立者不再提供才會觸發待取消，其他來源從清單移除不會（R04-10、R04-23）。</span></li>
+  <li><span class="n">3</span><span>逐來源列出回報的事實；來源時間與收到時間分列，用來判斷資料是否太舊（R03-08）。只有建立者不再提供才會觸發待取消，其他來源從清單移除不會（R04-23）。</span></li>
   <li><span class="n">4</span><span>候選寧可多列，同組對戰（例如雙重賽的另一場）也會列入，由 Ops 分辨。重掛只限同一建立者、尚未開始的候選；一個候選同時符合多筆待取消賽事時，只能重掛到其中一筆（R04-05、R04-24）。</span></li>
   <li><span class="n">5</span><span>只有四種選項（R04-23）；選項不受來源給的原因限制，系統不自行取消、作廢、重掛或恢復。
     <ul class="tight">
       <li><b>Cancel match and void bets</b>（取消並作廢注單）：賽事取消，注單作廢並退還風險金額（07 的 R07-15）。須由另一人覆核（R04-19）。作廢後，即使之後重掛到新識別也不恢復。超過各運動延期規則的等待上限時，只能走這個選項（R04-23、R07-16）。</li>
-      <li><b>Re-anchor to the selected candidate</b>（重掛到候選）：Ops 判斷候選與本場是同一場時，從候選清單選一個，既有賽事改用新識別，並解除待取消、重新上架。注單留在原賽事，效力依延期規則，判斷的基準時間不因重掛重設（R04-05）。只限同一建立者、尚未開始的候選；沒有候選時不能選；一個候選只能重掛到一筆賽事。重掛改變結算依據時須覆核（R04-19）。</li>
+      <li><b>Re-anchor to the selected candidate</b>（重掛到候選）：Ops 判斷候選與本場是同一場時，從候選清單選一個，既有賽事改用新識別，並解除待取消、重新上架。注單留在原賽事，效力依延期規則，判斷的基準時間不因重掛重設（R04-05）。只限同一建立者、尚未開始的候選；沒有候選時不能選；一個候選只能重掛到一筆賽事。重掛改變結算依據時須覆核（R04-19）。本例已超過等待上限，所以這個選項灰掉（R04-23）。</li>
       <li><b>Keep pending</b>（暫不處理）：維持待取消與下架，不改任何資料，只留下處理紀錄。用於還在等來源資料，例如來源尚未公布新的開賽時間。處理時限不會因此重設。</li>
-      <li><b>Clear flag and relist</b>（解除並上架）：只在賽事已回到賽程來源清單上時可選，所以這張案件灰掉。回到清單只註記，不自動解除；由 Ops 確認後才解除標記並上架，統一狀態依各來源重新整理。不涉及作廢，一人即可。</li>
+      <li><b>Clear flag and relist</b>（解除並上架）：只在賽事已回到賽程來源清單上時可選，本例 Sbobet 仍標為延期且沒有新的開賽時間，尚未回到清單，所以這張案件灰掉。回到清單只註記，不自動解除；由 Ops 確認後才解除標記並上架，統一狀態依各來源重新整理。不涉及作廢，一人即可。</li>
     </ul>
   </span></li>
   <li><span class="n">6</span><span>每項裁定與系統事件都記錄人員、時間與依據（R04-19、非功能需求「稽核軌跡」）。</span></li>
@@ -204,14 +206,14 @@
     </div>
 
     <div class="match-context">
-      <div><b>M-52011 · Persib Bandung vs Persija Jakarta</b><div class="l2">Soccer · Liga 1 Indonesia · Creator: SABA · 77134002</div></div>
+      <div><b>M-52011 · Persib Bandung vs Persija Jakarta</b><div class="l2">Soccer · Liga 1 Indonesia · Creator: Saba · 77134002</div></div>
       <div><b>Original kickoff 2026-11-07 15:30</b><div class="l2">Entered issues 2026-11-07 16:05 · Bets 1,208</div></div>
-      <div><span class="chip">In progress</span><span class="chip">Pending abandonment</span><span class="chip">Needs decision</span></div>
+      <div><span class="chip">Interrupted</span><span class="chip">Pending abandonment</span><span class="chip">Needs decision</span></div>
     </div>
 
     <div class="panel">
       <div class="ph">What happened</div>
-      <div class="pb"><p><b>Removed from the creator's list during play</b> · SABA stopped listing 77134002 at 16:05, minute 31 of the first half.</p></div>
+      <div class="pb"><p><b>Removed from the creator's list during play</b> · Saba stopped listing 77134002 at 16:05, minute 35 of the first half.</p></div>
     </div>
 
     <div class="panel">
@@ -220,7 +222,7 @@
         <table class="grid">
           <thead><tr><th>Provider</th><th>Fixture ID</th><th>Reported status</th><th>Last score</th><th>On provider list</th><th>Source time</th><th>Received</th></tr></thead>
           <tbody>
-            <tr><td>SABA<div class="l2">Creator</div></td><td>77134002</td><td>1st half</td><td>1–0</td><td>No · removed 16:05</td><td>16:04:51</td><td>16:04:55</td></tr>
+            <tr><td>Saba<div class="l2">Creator</div></td><td>77134002</td><td>1st half</td><td>1–0</td><td>No · removed 16:05</td><td>16:04:51</td><td>16:04:55</td></tr>
             <tr><td>CMD</td><td>25241760</td><td>Interrupted</td><td>1–0</td><td>Yes</td><td>—</td><td>16:19:30</td></tr>
             <tr><td>WSSPORTS</td><td>3461208</td><td>1st half</td><td>1–0</td><td>Yes</td><td>16:03:12</td><td>16:03:14</td></tr>
           </tbody>
@@ -242,9 +244,9 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>待腰斬一律由人工確認是否腰斬，不論賽果是否已穩定，系統不自動結算（R04-14、R04-23）。選項有三種，只有「確認腰斬」來自 PRD 規則。
+  <li><span class="n">1</span><span>待腰斬一律由人工確認是否腰斬，不論賽果是否已穩定，系統不自動結算（R04-14、R04-23）。選項有三種：「確認腰斬」依 R04-23；「確認未腰斬並解除」對應 05 的人工裁定「繼續」，裁定後重新開盤（R05-16）；「暫不處理」是示意。
     <ul class="tight">
-      <li><b>Confirm abandonment</b>（確認腰斬）：賽事設為腰斬，未完成時段的注單作廢；各時段賽果另行人工確認，系統不自動結算（R04-14、R04-23）。會作廢注單，須由另一人覆核後才生效（R04-19）。</li>
+      <li><b>Confirm abandonment</b>（確認腰斬）：賽事設為腰斬，未確定的投注項作廢（07 的 R07-15、R07-16）；各時段賽果另行人工確認，系統不自動結算（R04-14、R04-23）。會作廢注單，須由另一人覆核後才生效（R04-19）。</li>
       <li><b>Not abandoned · clear flag</b>（確認未腰斬並解除）：Ops 判斷比賽仍在進行，只是來源不再列出，解除待腰斬標記；統一狀態依其餘已對應來源整理，不另行設定（R04-12）。不涉及作廢，一人即可。</li>
       <li><b>Keep pending</b>（暫不處理）：維持待腰斬標記，不改任何資料，只留下處理紀錄；用於證據還不足以判斷，例如來源之間回報不一致。</li>
     </ul>
@@ -282,7 +284,7 @@
           <tbody>
             <tr><td>CMD<div class="l2">Creator</div></td><td>25250977</td><td>Not started</td><td>2026-11-07 20:00</td><td>16:15:02</td><td>16:15:04</td></tr>
             <tr><td>WBET</td><td>27101345</td><td>In progress</td><td>2026-11-07 20:00</td><td>12:14:20</td><td>12:14:21</td></tr>
-            <tr><td>SABA</td><td>77140210</td><td>Not started</td><td>2026-11-07 20:00</td><td>16:18:40</td><td>16:18:41</td></tr>
+            <tr><td>Saba</td><td>77140210</td><td>Not started</td><td>2026-11-07 20:00</td><td>16:18:40</td><td>16:18:41</td></tr>
           </tbody>
         </table>
       </div>
@@ -322,7 +324,7 @@
     </div>
 
     <div class="match-context">
-      <div><b>M-51950 · Selangor vs Johor Darul Ta'zim</b><div class="l2">Soccer · Malaysia Super League · Creator: SABA · 77098812</div></div>
+      <div><b>M-51950 · Selangor vs Johor Darul Ta'zim</b><div class="l2">Soccer · Malaysia Super League · Creator: Saba · 77098812</div></div>
       <div><b>Original kickoff 2026-11-05 20:00</b><div class="l2">Entered issues 2026-11-05 14:30 · Bets 412</div></div>
       <div><span class="chip">Postponed</span><span class="chip">Pending cancellation</span><span class="chip">Awaiting approval</span></div>
     </div>
@@ -334,7 +336,7 @@
           <tbody>
             <tr><td>Decision</td><td>Cancel match and void bets</td></tr>
             <tr><td>Proposed by</td><td>ops.lin · 2026-11-07 15:58</td></tr>
-            <tr><td>Reason</td><td>MFL announced the match is cancelled; no makeup date. SABA has no candidate.</td></tr>
+            <tr><td>Reason</td><td>MFL announced the match is cancelled; no makeup date. Saba has no candidate.</td></tr>
             <tr><td>Affected bets</td><td>412</td></tr>
           </tbody>
         </table>
@@ -362,13 +364,13 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <ol>
   <li><b>狀態未確認列入本頁</b>：已決定（2026-11-07），待寫回 PRD 04、11。
     <p>R04-12 規定來源沉默時較嚴格狀態「交人工」，但 R04-19 的人工處理清單與 R11-03 的佇列沒有列出。決定列為本頁第三種問題類型，裁定為回到較寬鬆的狀態（畫面 1、畫面 4）。</p>
     <p><b>情境範例</b>（畫面 4 的 M-52055，羽球）：</p>
     <ul class="tight">
-      <li>原定 11-07 20:00 開賽，賽程來源 CMD 與 SABA 一直回報「未開始」。</li>
+      <li>原定 11-07 20:00 開賽，建立者 CMD 與另一個來源 Saba 一直回報「未開始」。</li>
       <li>另一個來源 WBET 在 12:10 回報「已開始」（比原定時間早了近 8 小時），12:14 後沒有任何資料。</li>
       <li>依 R04-12，任一來源報開始即為進行中，賽前投注停止；WBET 沉默不算撤回，狀態維持進行中。</li>
       <li>CMD 仍列出這場比賽，所以不會進入待取消或待腰斬（R04-23）。</li>
@@ -384,8 +386,8 @@
   <li><b>駁回後的去向</b>：R04-19 只規定覆核後才生效，沒有說駁回後的處理（畫面 5）。
     <p><b>情境範例</b>（畫面 2 的 M-52007，棒球）：</p>
     <ul class="tight">
-      <li>ops.chen 判斷 SABA 新列出的 77129810 是同一場，提案「重掛到候選」。</li>
-      <li>覆核者 ops.lin 發現 77120455 才是延期後的場次，駁回。</li>
+      <li>ops.chen 依球團公告提案「取消並作廢注單」。</li>
+      <li>覆核者 ops.lin 認為公告指的是系列賽的另一場（M-52008），依據不足，駁回。</li>
       <li>M-52007 仍標記待取消、下架；從原定開賽時間 11-06 18:00 起算，棒球 12 小時的等待上限早已過。</li>
     </ul>
     <p><b>討論問題</b></p>

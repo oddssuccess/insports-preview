@@ -11,6 +11,7 @@
 
 <h1>冠軍盤明細（Outright Detail）</h1>
 <p class="meta"><b>選單</b>：Outrights › Schedule › Outright Detail · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 資料與投注項</a><a href="#s2">2 變更紀錄（Outright）</a><a href="#s3">3 變更紀錄（Competitors）</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 從<a href="schedule.html">冠軍盤賽程</a>點選事件進入，查看這筆冠軍盤的資料與投注項（Outcome）清單，並查閱冠軍盤本身與每個投注項的變更紀錄；可開啟冠軍盤對應視窗。</td></tr>
@@ -22,10 +23,10 @@
 
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字都是範例；投注項只展示部分資料。側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>顯示冠軍盤的資料：識別、競賽、期間、玩法、排名依據、開始日期、狀態與設定模板</td><td>R01-12、R01-22；R04-04、R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>顯示冠軍盤的資料：識別、競賽、期間、玩法、排名依據、開始日期、狀態、參賽方類型、真實或虛擬與建立者</td><td>R01-12、R01-22；R04-04、R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>列出投注項（參賽方）、統一識別與狀態（Active、Eliminated），不含賠率</td><td>R01-13、R01-15；R04-18；R07-14</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>查閱冠軍盤（開始日期、狀態）與每個投注項（狀態）的變更紀錄，投注項依參賽方識別分組</td><td>R04-19；非功能需求的稽核軌跡</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>4</td><td>開啟冠軍盤對應視窗</td><td>R04-18</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
@@ -46,10 +47,10 @@
         <table class="grid"><tbody>
           <tr><th>Outright ID</th><td>O-61001</td><th>Event</th><td>English League Championship 2026/27</td></tr>
           <tr><th>Tournament</th><td>English League Championship · T-10240</td><th>Period</th><td>2026/27 · Whole season</td></tr>
-          <tr><th>Market</th><td>Winner</td><th>Ranking basis</th><td>Official placing</td></tr>
+          <tr><th>Market Type</th><td>Winner</td><th>Ranking basis</th><td>Official placing</td></tr>
           <tr><th>Start Date</th><td>2026-08-08</td><th>Status</th><td><span class="pill on">Live</span></td></tr>
-          <tr><th>Competitor type</th><td>Team</td><th>Real / virtual</th><td>Real</td></tr>
-          <tr><th>Settings</th><td>O02 Custom<div class="l2">Outright</div></td><th>Created by</th><td>Provider A</td></tr>
+          <tr><th>Competitor type</th><td>Club</td><th>Real / virtual</th><td>Real</td></tr>
+          <tr><th>Created by</th><td colspan="3">Saba</td></tr>
         </tbody></table>
       </div>
     </section>
@@ -145,7 +146,7 @@
   <li><span class="n">2</span><span>投注項狀態的變更：Active 與 Eliminated。Eliminated 由 Ops 依官方資料人工標記，下方顯示標記的人員（R07-14、OTR-03）；新增的投注項以 Active 開始（R01-13、OTR-08）。</span></li>
 </ol>
 
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 
 </div>

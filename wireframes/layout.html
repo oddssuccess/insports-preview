@@ -23,7 +23,7 @@
         <a class="nav-item" href="catalog/sports.html">Sports</a>
         <a class="nav-item" href="catalog/tournaments.html">Tournaments</a>
         <a class="nav-item" href="catalog/competitors.html">Competitors</a>
-        <a class="nav-item" href="catalog/markets.html">Markets</a>
+        <a class="nav-item" href="catalog/markets.html">Market Types</a>
         <span class="nav-item">Currencies</span>
         </details>
         <details open><summary class="group">Matches</summary>
@@ -54,7 +54,7 @@
         </details>
         </details>
         <details open><summary class="group">Settings</summary>
-        <details open><summary class="group">Market Settings</summary>
+        <details open><summary class="group">Market Type Settings</summary>
         <span class="nav-item">Matches</span>
         <span class="nav-item">Outrights</span>
         </details>
@@ -88,30 +88,32 @@
   <tr><td lang="en">Catalog › Sports</td><td>運動項目目錄。</td></tr>
   <tr><td lang="en">Catalog › Tournaments</td><td>競賽（Tournament）目錄。</td></tr>
   <tr><td lang="en">Catalog › Competitors</td><td>參賽方（Competitor）目錄，含隊伍與選手。</td></tr>
-  <tr><td lang="en">Catalog › Markets</td><td>玩法（Market）目錄。</td></tr>
+  <tr><td lang="en">Catalog › Market Types</td><td>玩法（Market Type）目錄。</td></tr>
   <tr><td lang="en">Catalog › Currencies</td><td>幣別目錄。</td></tr>
-  <tr><td lang="en">Matches › Schedule</td><td>統一的單場比賽賽程；點選單場開啟<a href="matches/match-detail.html">比賽明細</a>（States／Properties），列尾選單開啟<a href="matches/match-mapping.html">賽事對應元件</a>，唯讀查看本場與已對應來源。</td></tr>
+  <tr><td lang="en">Matches › Schedule</td><td>統一的單場比賽賽程，含文字轉播、滾球訊號與覆蓋；點選單場開啟<a href="matches/match-detail.html">比賽明細</a>（Data Sources 的 States、各計分類別與 Properties），從文字轉播開啟<a href="matches/match-commentary-history.html">歷史紀錄</a>，列尾選單開啟<a href="matches/match-mapping.html">賽事對應元件</a>。</td></tr>
+  <tr><td lang="en">Matches › Schedule › Match Detail › Data Sources</td><td>比分變更依計分類別放在 States 與 Properties 之間；足球為 <a href="matches/match-detail.html#s4">Goal</a>、<a href="matches/match-detail.html#s4-corner">Corner</a>、<a href="matches/match-detail.html#s4-booking">Booking</a>、<a href="matches/match-detail.html#s4-red-card">Red Card</a>，籃球為 <a href="matches/match-detail.html#s4-basketball">Points</a>，網球為 <a href="matches/match-detail.html#s4-tennis">Games</a>。各類別比較來源與統一比分的新舊值、穩定狀態及採用紀錄，不另設主選單。</td></tr>
+  <tr><td lang="en">Matches › Schedule › Match Commentary History</td><td><a href="matches/match-commentary-history.html">賽事文字轉播歷史</a>，從賽程或比賽明細開啟，以來源選擇卡切換單一來源的時間軸，追查事件與文字及雙時間，不另設主選單。</td></tr>
+  <tr><td lang="en">Matches › Schedule › Match Mapping</td><td><a href="matches/match-mapping.html">賽事對應</a>（Mapping）的唯讀視窗，並列統一賽事與已對應來源的識別、競賽及隊伍名稱、對應紀錄（By）與時間；從賽程列尾選單或明細開啟，不另設主選單。</td></tr>
   <tr><td lang="en">Matches › Odds</td><td>單場比賽的賠率與操盤（Trading）。</td></tr>
   <tr><td lang="en">Matches › Results</td><td>單場比賽的賽果。</td></tr>
-  <tr><td lang="en">Matches › Schedule › Match Mapping</td><td><a href="matches/match-mapping.html">賽事對應</a>（Mapping）的唯讀視窗，並列統一賽事與已對應來源的識別、競賽及隊伍名稱、對應紀錄（By）與時間；從賽程列尾選單或明細開啟，不另設主選單。</td></tr>
   <tr><td lang="en">Matches › Grades</td><td>單場比賽盤口與投注項的結算結果（Grade）。</td></tr>
   <tr><td lang="en">Matches › Issues</td><td><a href="matches/issues.html">賽事問題</a>：待取消、待腰斬與狀態未確認的單場比賽，比對來源證據與候選後裁定，需要時另一人覆核。</td></tr>
   <tr><td lang="en">Outrights › Schedule</td><td>統一的冠軍盤（Outright）賽程；點選事件開啟<a href="outrights/outright-detail.html">冠軍盤明細</a>，查看事件資料、投注項與變更紀錄。</td></tr>
   <tr><td lang="en">Outrights › Schedule › Outright Detail</td><td><a href="outrights/outright-detail.html">冠軍盤明細</a>，從單一事件開啟，並提供已對應來源視窗入口，不另設主選單。</td></tr>
+  <tr><td lang="en">Outrights › Schedule › Outright Mapping</td><td><a href="outrights/outright-mapping.html">冠軍盤對應元件</a>，唯讀並列各來源與事件、投注項的識別配對，不另設主選單。</td></tr>
   <tr><td lang="en">Outrights › Odds</td><td>冠軍盤的賠率與操盤。</td></tr>
   <tr><td lang="en">Outrights › Results</td><td>冠軍盤的賽果。</td></tr>
-  <tr><td lang="en">Outrights › Schedule › Outright Mapping</td><td><a href="outrights/outright-mapping.html">冠軍盤對應元件</a>，唯讀並列各來源與事件、投注項的識別配對，不另設主選單。</td></tr>
   <tr><td lang="en">Outrights › Grades</td><td>冠軍盤投注項的結算結果。</td></tr>
   <tr><td lang="en">Provider › Tournaments</td><td><a href="provider/tournaments.html">來源競賽</a>：依來源（Provider）及運動查看識別、原始名稱、相關賽事與既有統一紀錄。</td></tr>
   <tr><td lang="en">Provider › Competitors</td><td><a href="provider/competitors.html">來源參賽方</a>：依來源及運動查看識別、原始名稱、相關賽事與既有統一紀錄。</td></tr>
-  <tr><td lang="en">Provider › Matches › Schedules</td><td>來源提供的單場比賽賽程。</td></tr>
+  <tr><td lang="en">Provider › Matches › Schedules</td><td><a href="provider/matches/schedule.html">來源單場賽程</a>：來源提供的單場比賽賽程，唯讀。</td></tr>
   <tr><td lang="en">Provider › Matches › Odds</td><td>來源提供的單場比賽賠率。</td></tr>
   <tr><td lang="en">Provider › Matches › Results</td><td>來源提供的單場比賽賽果。</td></tr>
-  <tr><td lang="en">Provider › Outrights › Schedule</td><td>來源提供的冠軍盤賽程；點選事件查看來源的投注項清單與變更紀錄，唯讀。</td></tr>
+  <tr><td lang="en">Provider › Outrights › Schedule</td><td><a href="provider/outrights/schedule.html">來源冠軍盤賽程</a>：來源提供的冠軍盤賽程；點選事件查看來源的投注項清單與變更紀錄，唯讀。</td></tr>
   <tr><td lang="en">Provider › Outrights › Odds</td><td>來源提供的冠軍盤賠率。</td></tr>
   <tr><td lang="en">Provider › Outrights › Results</td><td>來源提供的冠軍盤賽果。</td></tr>
-  <tr><td lang="en">Settings › Market Settings › Matches</td><td>單場比賽的玩法設定。</td></tr>
-  <tr><td lang="en">Settings › Market Settings › Outrights</td><td>冠軍盤的玩法設定。</td></tr>
+  <tr><td lang="en">Settings › Market Type Settings › Matches</td><td>單場比賽的玩法設定。</td></tr>
+  <tr><td lang="en">Settings › Market Type Settings › Outrights</td><td>冠軍盤的玩法設定。</td></tr>
   <tr><td lang="en">Settings › Provider Settings</td><td><a href="settings/provider-settings/data-usage.html">資料使用</a>、<a href="settings/provider-settings/connectors.html">連接器</a>、<a href="settings/provider-settings/sports-and-markets.html">運動與玩法收集</a>、<a href="settings/provider-settings/fixture-sources.html">賽程來源</a>及<a href="settings/provider-settings/classification.html">名稱分類規則</a>。</td></tr>
   <tr><td lang="en">Content › Announcement</td><td>公告管理。</td></tr>
   <tr><td lang="en">Content › Game Rules</td><td>玩法規則說明內容。</td></tr>

@@ -11,6 +11,7 @@
 
 <h1>冠軍盤對應元件（Outright Mapping）</h1>
 <p class="meta"><b>入口</b>：冠軍盤賽程、冠軍盤明細 · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 來源對應</a><a href="#open">待確認事項</a></nav>
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 一眼查看本冠軍盤連結了哪些來源，以及統一的 Outright ID 與每個 Outcome ID，各自對應各來源的哪個識別。內容全部唯讀。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
@@ -18,9 +19,9 @@
     <li>對應的操作介面與處理流程不在本次 wireframe 範圍。</li>
   </ul></td></tr>
 </table>
-<p class="disclaimer">本頁是需求示意，用來說明視窗要顯示哪些資訊，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字都是範例。所有時間皆為 UTC。</p>
+<p class="disclaimer">本頁是需求示意，用來說明視窗要顯示哪些資訊，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字都是範例。</p>
 
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>以一張表並列所有已連結的來源（含建立者），顯示 Outright ID 與各來源事件識別的配對</td><td>R04-04、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
@@ -35,7 +36,7 @@
       <div class="mb">
         <table class="grid">
           <thead>
-            <tr><th rowspan="2">Level <span class="n">1</span></th><th colspan="2">InSports</th><th>Provider A <span class="n">2</span></th><th>Provider B</th><th>Provider C</th></tr>
+            <tr><th rowspan="2">Level <span class="n">1</span></th><th colspan="2">InSports</th><th>Saba <span class="n">2</span></th><th>Sbobet</th><th>Pinnacle</th></tr>
             <tr><th>ID</th><th>Name</th><th class="l2">Creator</th><th class="l2">Mapped</th><th class="l2">Mapped</th></tr>
           </thead>
           <tbody>
@@ -53,11 +54,11 @@
 </div>
 <ol class="notes">
   <li><span class="n">1</span><span>第一列是冠軍盤本身，其後每個投注項一列，與<a href="outright-detail.html#s1">冠軍盤明細</a>的清單相同；每個來源一欄，格內是該來源自己的識別：事件列是來源的 outright ID，投注項列是來源的 outcome_id。來源識別不能取代 InSports 識別（R04-04、R04-18）。右上角「×」關閉視窗。</span></li>
-  <li><span class="n">2</span><span>Provider A 是建立者，名單來自它，每個投注項都有配對；其他來源標示 Mapped。來源欄的順序固定，建立者在最前。</span></li>
-  <li><span class="n">3</span><span>「—」表示該來源在這個投注項上沒有配對，例如 Provider C 沒有提供 Team C，或已明確排除；此時不使用該來源在這個投注項的賠率，但不擋整個冠軍盤開盤（R04-18）。</span></li>
+  <li><span class="n">2</span><span>Saba 是建立者，名單來自它，每個投注項都有配對；其他來源標示 Mapped。來源欄的順序固定，建立者在最前。</span></li>
+  <li><span class="n">3</span><span>「—」表示該來源在這個投注項上沒有配對，例如 Pinnacle 沒有提供 Team C，或已明確排除；此時不使用該來源在這個投注項的賠率，但不擋整個冠軍盤開盤（R04-18）。</span></li>
 </ol>
 
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 
 </div>

@@ -9,11 +9,12 @@
 <body>
 <div class="doc">
 
-<h1>玩法（Markets）</h1>
-<p class="meta"><b>選單</b>：Catalog › Markets · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>（賠率的產生方式與賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10 經銷商設定</a>（系統支援的賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a>（玩法開關） · <a href="../index.html">畫面索引</a></p>
+<h1>玩法（Market Types）</h1>
+<p class="meta"><b>選單</b>：Catalog › Market Types · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>（賠率的產生方式與賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/10-distributor-settings.md">10 經銷商設定</a>（系統支援的賠率格式）、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a>（玩法開關） · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 玩法清單與明細</a><a href="#s2">2 冠軍盤玩法</a><a href="#s3">3 編輯玩法・多語系</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動查看目錄中的玩法，以及每個玩法的玩法類型、投注項、賠率格式與是否開啟；修改玩法各語言的名稱</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動查看目錄中的玩法，以及每個玩法的投注規則、投注項、賠率格式與是否開啟；修改玩法各語言的名稱</td></tr>
   <tr><th>不在本頁</th><td>
     <ul class="tight">
       <li>新增、修改或刪除玩法、投注規則與投注項：由 InSports 以目錄設定維護（R01-08）</li>
@@ -22,20 +23,20 @@
       <li>冠軍盤玩法的投注項（參賽方名單）、排名依據與並列：R01-13 至 R01-15、R01-22</li>
       <li>玩法需要的賽果與結算規則：見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/README.md">各運動文件</a>（R01-11、R01-18、04 的 R04-13）</li>
       <li>運動的營運狀態、名稱與排序：<a href="sports.html">運動</a>頁（R01-28 至 R01-30）</li>
-      <li>運動、競賽、賽事三層的玩法開關：Settings › Market Settings（12 的 R12-10）；本頁只顯示運動層的狀態</li>
+      <li>運動、競賽、賽事三層的玩法開關：Settings › Market Type Settings（12 的 R12-10）；本頁只顯示運動層的狀態</li>
       <li>來源玩法的對應表與未對應的玩法：04 的 R04-11</li>
       <li>虛擬競賽只開放部分玩法：R01-27</li>
       <li>玩法設定模板的欄位，例如可否過關、水位與限額：12 的 R12-01</li>
       <li>經銷商提供哪些賠率格式：10 的 R10-01</li>
-      <li>經銷商的玩法開關；經銷商不能自訂玩法與投注項的顯示名稱：10、01 第 6 節</li>
+      <li>經銷商的玩法開關，以及經銷商對玩法與投注項顯示名稱的覆寫：10（R10-06）、01 第 6 節</li>
     </ul>
   </td></tr>
 </table>
 
-<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。PRD 的用語「投注規則」在畫面上稱為 Type（玩法類型）。所有時間皆為 UTC。</p>
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。PRD 的用語「投注規則」在畫面上稱為 Type（投注規則）。所有時間皆為 UTC。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動列出目錄的玩法，可依名稱或 ID 搜尋；唯讀</td><td>R01-03、R01-08、R01-24</td><td><a href="#s1">畫面 1</a></td></tr>
@@ -50,15 +51,15 @@
 <h2 id="s1">畫面 1：玩法清單與明細</h2>
 
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <header class="top"><span>Home › Catalog › Market Types</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main" style="min-width:1240px">
     <div class="page-head">
-      <div><h3>Markets</h3><div class="sub">Catalog markets per sport</div></div>
+      <div><h3>Market Types</h3><div class="sub">Catalog market types per sport</div></div>
     </div>
 
     <div class="split">
       <div>
-        <span class="box" style="width:100%;margin-bottom:6px">Find a sport…</span>
+        <span class="box full mb-6">Find a sport…</span>
         <div class="list">
           <div class="on">Soccer <span class="l2">176</span> <span class="n">1</span></div>
           <div>Futsal <span class="l2">18</span></div>
@@ -75,14 +76,14 @@
 
       <div>
         <div class="filters">
-          <div class="f"><label>Search</label><span class="box wide">Market name or ID</span></div>
+          <div class="f"><label>Search</label><span class="box wide">Market type name or ID</span></div>
         </div>
 
         <div class="preview">
           <div>
             <table class="grid">
               <thead><tr>
-                <th>Market <span class="s">/ ID · Type</span> <span class="n">2</span></th>
+                <th>Market Type <span class="s">/ ID · Category</span> <span class="n">2</span></th>
                 <th>Last offered <span class="n">3</span></th>
               </tr></thead>
               <tbody>
@@ -101,19 +102,19 @@
                 <tr><td colspan="2" class="l2">… (164 more)</td></tr>
               </tbody>
             </table>
-            <div class="pager"><span>Prev · 1 · 2 · Next</span><span>Page 1 / 2 · 176 markets · 100 / page</span></div>
+            <div class="pager"><span>Prev · 1 · 2 · Next</span><span>Page 1 / 2 · 176 market types · 100 / page</span></div>
           </div>
 
           <div class="panel">
-            <div class="ph"><span>Market M-1</span><span><span class="dot on"></span>On <span class="n">5</span></span></div>
+            <div class="ph"><span>Market Type M-1</span><span><span class="dot on"></span>On <span class="n">5</span></span></div>
             <div class="pb">
               <div><b>Handicap</b></div>
               <div class="l2">Soccer · <span class="btn">Handicap (HDP) ›</span> <span class="n">6</span></div>
-              <div class="hint" style="margin-top:10px">Outcomes <span class="n">7</span></div>
+              <div class="hint mt-10">Outcomes <span class="n">7</span></div>
               <div><span class="chip">Home · O-1</span> <span class="chip">Away · O-2</span></div>
-              <div class="hint" style="margin-top:10px">Odds formats <span class="n">8</span></div>
+              <div class="hint mt-10">Odds formats <span class="n">8</span></div>
               <div><b>Malay (base)</b> · HK · Indo · Decimal</div>
-              <div style="margin-top:12px"><span class="btn">Edit translations</span> <span class="n">9</span></div>
+              <div class="mt-12"><span class="btn">Edit translations</span> <span class="n">9</span></div>
             </div>
           </div>
         </div>
@@ -124,11 +125,11 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>所有運動列在同一個清單，順序、數量與營運狀態都與<a href="sports.html">運動</a>頁相同；數字是該運動在目錄中的玩法數。暫停與不支援的運動仍可查詢。</span></li>
-  <li><span class="n">2</span><span>每列一個玩法，名稱下方是玩法 ID 與玩法類型；同一個玩法類型可用於多個玩法，例如 M-1 至 M-5 都是 Handicap（R01-03）。賽前與滾球共用同一個玩法（R01-09）。</span></li>
+  <li><span class="n">2</span><span>每列一個玩法，名稱下方是玩法 ID 與投注規則；同一個投注規則可用於多個玩法，例如 M-1 至 M-5 都是 Handicap（R01-03）。賽前與滾球共用同一個玩法（R01-09）。</span></li>
   <li><span class="n">3</span><span>最後開出日期只供參考，不是 PRD 規則：任一賽事最後一次開出這個玩法任一條盤口線的日期，不分賽前或滾球、真實或虛擬賽事，經銷商的開關不影響；「—」表示近期沒有開出。</span></li>
   <li><span class="n">4</span><span>關閉的玩法整列以淡色顯示並標示「Off」，例如來源取不到賽果而關閉的進球方式（R01-18、12 的 R12-10）。</span></li>
   <li><span class="n">5</span><span>右側是選取玩法的明細。右上角顯示這個玩法在該運動是否開啟，唯讀（12 的 R12-10）。</span></li>
-  <li><span class="n">6</span><span>玩法所屬的運動與玩法類型；按玩法類型開啟它的規則文件，說明投注項、盤口線與結算結果（R01-02）。</span></li>
+  <li><span class="n">6</span><span>玩法所屬的運動與投注規則；按投注規則開啟它的規則文件，說明投注項、盤口線與結算結果（R01-02）。</span></li>
   <li><span class="n">7</span><span>投注項的名稱與 ID，每個投注項可單獨結算（R01-06）。主隊（Home）指賽事中列在前面的參賽方，與實際主場無關（R01-25）。</span></li>
   <li><span class="n">8</span><span>玩法以哪些賠率格式顯示，粗體是基準格式（05 的 R05-18）：兩項玩法以馬來盤為準，例如 M-1；三項以上的玩法以歐洲盤為準，例如 1X2（M-10）。其他格式由基準值換算，同一個價格（R05-01）。緬甸讓分（M-13）只顯示緬甸盤（R05-19）。系統支援的格式見 10 的 R10-01。</span></li>
   <li><span class="n">9</span><span>開啟這個玩法的多語系視窗（畫面 3）。</span></li>
@@ -138,14 +139,14 @@
 <h2 id="s2">畫面 2：冠軍盤玩法</h2>
 
 <div lang="en" class="frame">
-  <header class="top"><span>Home › Catalog › Markets</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <header class="top"><span>Home › Catalog › Market Types</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main" style="min-width:1240px">
     <div class="page-head">
-      <div><h3>Markets</h3><div class="sub">Catalog markets per sport</div></div>
+      <div><h3>Market Types</h3><div class="sub">Catalog market types per sport</div></div>
     </div>
     <div class="split">
       <div>
-        <span class="box" style="width:100%;margin-bottom:6px">Find a sport…</span>
+        <span class="box full mb-6">Find a sport…</span>
         <div class="list">
           <div>Soccer <span class="l2">176</span></div>
           <div>Tennis <span class="l2">31</span></div>
@@ -155,25 +156,25 @@
       </div>
       <div>
         <div class="filters">
-          <div class="f"><label>Search</label><span class="box wide">Market name or ID</span></div>
+          <div class="f"><label>Search</label><span class="box wide">Market type name or ID</span></div>
         </div>
         <div class="preview">
           <div>
             <table class="grid">
-              <thead><tr><th>Market <span class="s">/ ID · Type</span></th><th>Last offered</th></tr></thead>
+              <thead><tr><th>Market Type <span class="s">/ ID · Category</span></th><th>Last offered</th></tr></thead>
               <tbody>
                 <tr class="sel"><td><b>Tournament Winner</b> <span class="chip">Outright</span> <span class="n">1</span><div class="l2">M-301 · Outright Winner</div></td><td>2026-11-02</td></tr>
               </tbody>
             </table>
           </div>
           <div class="panel">
-            <div class="ph"><span>Market M-301</span><span><span class="dot on"></span>On</span></div>
+            <div class="ph"><span>Market Type M-301</span><span><span class="dot on"></span>On</span></div>
             <div class="pb">
               <div><b>Tournament Winner</b></div>
               <div class="l2">Golf · <span class="btn">Outright Winner (OTR) ›</span></div>
-              <div class="hint" style="margin-top:10px">Odds formats</div>
+              <div class="hint mt-10">Odds formats</div>
               <div><b>Decimal (base)</b> · HK · Malay · Indo</div>
-              <div style="margin-top:12px"><span class="btn">Edit translations</span></div>
+              <div class="mt-12"><span class="btn">Edit translations</span></div>
             </div>
           </div>
         </div>
@@ -190,20 +191,20 @@
 <h2 id="s3">畫面 3：編輯玩法・多語系</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit translations · Handicap (M-1)</span><span>✕</span></div>
     <div class="mb">
-      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Handicap</span></div>
-      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro full">Handicap</span></div>
+      <div class="hint lead">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
       <div class="form">
-        <div class="f"><label>English</label><span class="box" style="width:100%">Asian Handicap</span></div>
-        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">讓分</span></div>
-        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">让分</span></div>
-        <div class="f"><label>Thai</label><span class="box" style="width:100%">แฮนดิแคป</span></div>
-        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Kèo chấp</span></div>
-        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Voor</span></div>
-        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Korean</label><span class="box" style="width:100%">핸디캡</span></div>
+        <div class="f"><label>English</label><span class="box full">Asian Handicap</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box full" lang="zh-Hant">讓分</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box full" lang="zh-Hans">让分</span></div>
+        <div class="f"><label>Thai</label><span class="box full">แฮนดิแคป</span></div>
+        <div class="f"><label>Vietnamese</label><span class="box full">Kèo chấp</span></div>
+        <div class="f"><label>Indonesian</label><span class="box full">Voor</span></div>
+        <div class="f"><label>Burmese</label><span class="box full"></span></div>
+        <div class="f"><label>Korean</label><span class="box full">핸디캡</span></div>
         <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
     </div>
@@ -218,7 +219,7 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 
 </div>

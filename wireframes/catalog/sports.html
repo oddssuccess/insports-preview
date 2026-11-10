@@ -11,6 +11,7 @@
 
 <h1>運動（Sports）</h1>
 <p class="meta"><b>選單</b>：Catalog › Sports · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 運動清單</a><a href="#s2">2 編輯運動・狀態</a><a href="#s3">3 編輯運動・多語系</a><a href="#s4">4 排序</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 查看 InSports 提供哪些運動，以及各運動的玩法、競賽與參賽方數量；變更運動的營運狀態並查看變更紀錄；修改各語言的運動名稱；調整運動的系統排序</td></tr>
@@ -28,7 +29,7 @@
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>在同一個清單列出所有運動，附營運狀態、排序號與參考數量；不能新增或刪除</td><td>R01-24、R01-08</td><td><a href="#s1">畫面 1</a></td></tr>
@@ -59,7 +60,7 @@
           <th>Sport <span class="s">/ ID</span> <span class="n">1</span></th>
           <th>Status <span class="n">2</span></th>
           <th>Sort order <span class="n">3</span></th>
-          <th>Markets <span class="n">4</span></th>
+          <th>Market Types <span class="n">4</span></th>
           <th>Tournaments</th>
           <th>Competitors</th>
           <th>Actions <span class="n">5</span></th>
@@ -68,7 +69,7 @@
           <tr><td>Soccer<div class="l2">S-1</div></td><td>Active</td><td>1</td><td>176</td><td>1,390</td><td>21,530</td><td><span class="btn">Edit</span></td></tr>
           <tr><td>Futsal<div class="l2">S-29</div></td><td>Active</td><td>2</td><td>18</td><td>96</td><td>1,120</td><td><span class="btn">Edit</span></td></tr>
           <tr><td>Basketball<div class="l2">S-2</div></td><td>Active</td><td>3</td><td>74</td><td>415</td><td>6,215</td><td><span class="btn">Edit</span></td></tr>
-          <tr><td>Tennis<div class="l2">S-5</div></td><td>Active</td><td>4</td><td>31</td><td>530</td><td>4,882</td><td><span class="btn">Edit</span></td></tr>
+          <tr><td>Tennis<div class="l2">S-5</div></td><td>Active</td><td>5</td><td>31</td><td>530</td><td>4,882</td><td><span class="btn">Edit</span></td></tr>
           <tr><td>League of Legends<div class="l2">S-50</div></td><td>Active</td><td>6</td><td>22</td><td>85</td><td>640</td><td><span class="btn">Edit</span></td></tr>
           <tr><td>Golf<div class="l2">S-9</div></td><td>Active</td><td>12</td><td>1<div class="l2">Outrights only</div></td><td>58</td><td>1,940</td><td><span class="btn">Edit</span></td></tr>
           <tr><td>Cricket<div class="l2">S-21</div></td><td><b>Suspended</b></td><td>30</td><td>24</td><td>140</td><td>2,310</td><td><span class="btn">Edit</span></td></tr>
@@ -93,12 +94,12 @@
 <h2 id="s2">畫面 2：編輯運動・狀態</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit sport · Cricket (S-21)</span><span>✕</span></div>
     <div class="tabs"><span class="on">Status</span><span>Translations</span></div>
     <div class="mb">
       <div class="f"><label>Current status</label><span class="box ro">Suspended</span></div>
-      <div class="f" style="margin-top:10px"><label>New status <span class="n">1</span></label>
+      <div class="f mt-10"><label>New status <span class="n">1</span></label>
         <div>● Active: everything runs as usual</div>
         <div>○ Suspended: fixtures are still created, but no odds are produced and no new bets are accepted, including in-play events in progress</div>
         <div>○ Discontinued: everything for this sport stops, including fixture creation; players cannot bet on any of its events, pre-match or in-play</div>
@@ -112,9 +113,9 @@
           <tr><td>Unsettled bets</td><td>1,208</td></tr>
         </tbody>
       </table>
-      <div style="text-align:right;margin-top:10px"><span class="btn pri">Confirm change</span></div>
+      <div class="ta-right mt-10"><span class="btn pri">Confirm change</span></div>
 
-      <p style="margin-top:16px"><b>History</b> <span class="n">3</span></p>
+      <p class="mt-16"><b>History</b> <span class="n">3</span></p>
       <table class="grid">
         <thead><tr><th>Changed at</th><th>From</th><th>To</th><th>Changed by</th></tr></thead>
         <tbody>
@@ -133,28 +134,28 @@
   <li><span class="n">1</span><span>三種營運狀態依 R01-29，任一狀態都可以改成另外兩種，包括從不支援恢復為正常或暫停。暫停通常用於短期的風控原因，不支援通常用於長期不再支援的運動。經銷商只能在正常與暫停之間設定。範例是把暫停中的板球恢復為正常。</span></li>
   <li><span class="n">2</span><span>變更前列出目前受影響的數量（R01-29）：未結算的單場比賽、冠軍盤賽事與注單。運動的賽事很多，因此只列數量，不逐場列出。不論變更成哪一種狀態，已成立的注單都照常結算。按「Confirm change」才生效。</span></li>
   <li><span class="n">3</span><span>這個運動的營運狀態變更紀錄，新的在上；唯讀。每次變更記錄操作者與時間（R01-29），確認變更後新增一筆。</span></li>
-  <li><span class="n">4</span><span>不支援的運動可以恢復（R01-29），例如這筆把板球從不支援恢復為正常。恢復後，系統找出不支援期間沒有建立、且尚未開始的賽事（單場比賽與冠軍盤賽事），全部補建為統一紀錄（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md#9-待確認事項">PRD 01 第 9 節</a>已決定第 1 項）。</span></li>
+  <li><span class="n">4</span><span>不支援的運動可以恢復（R01-29），例如這筆把板球從不支援恢復為正常。恢復後，系統找出不支援期間沒有建立、且尚未開始的賽事（單場比賽與冠軍盤賽事），全部補建為統一紀錄（R01-29；統一紀錄的建立見 04）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
 <h2 id="s3">畫面 3：編輯運動・多語系</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit sport · Cricket (S-21)</span><span>✕</span></div>
     <div class="tabs"><span>Status</span><span class="on">Translations</span></div>
     <div class="mb">
-      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Cricket</span></div>
-      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro full">Cricket</span></div>
+      <div class="hint lead">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
       <div class="form">
-        <div class="f"><label>English</label><span class="box" style="width:100%">Cricket</span></div>
-        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">板球</span></div>
-        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">板球</span></div>
-        <div class="f"><label>Thai</label><span class="box" style="width:100%">คริกเก็ต</span></div>
-        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Cricket</span></div>
-        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Kriket</span></div>
-        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Korean</label><span class="box" style="width:100%">크리켓</span></div>
+        <div class="f"><label>English</label><span class="box full">Cricket</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box full" lang="zh-Hant">板球</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box full" lang="zh-Hans">板球</span></div>
+        <div class="f"><label>Thai</label><span class="box full">คริกเก็ต</span></div>
+        <div class="f"><label>Vietnamese</label><span class="box full">Cricket</span></div>
+        <div class="f"><label>Indonesian</label><span class="box full">Kriket</span></div>
+        <div class="f"><label>Burmese</label><span class="box full"></span></div>
+        <div class="f"><label>Korean</label><span class="box full">크리켓</span></div>
         <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
     </div>
@@ -181,14 +182,14 @@
       <table class="grid" style="width:560px">
         <thead><tr><th style="width:110px">Sort order</th><th>Name</th><th>ID</th><th></th></tr></thead>
         <tbody>
-          <tr><td><span class="box" style="min-width:80px;width:80px">1</span></td><td>Soccer</td><td class="l2">S-1</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">2</span></td><td>Futsal</td><td class="l2">S-29</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">3</span></td><td>Basketball</td><td class="l2">S-2</td><td></td></tr>
-          <tr style="background:var(--fill)"><td><span class="box" style="min-width:80px;width:80px"><b>4</b></span></td><td>Volleyball</td><td class="l2">S-23</td><td><span class="chip">Modified (was 6)</span></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">5</span></td><td>Tennis</td><td class="l2">S-5</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">6</span></td><td>League of Legends</td><td class="l2">S-50</td><td><span class="n">1</span></td></tr>
+          <tr><td><span class="box sm">1</span></td><td>Soccer</td><td class="l2">S-1</td><td></td></tr>
+          <tr><td><span class="box sm">2</span></td><td>Futsal</td><td class="l2">S-29</td><td></td></tr>
+          <tr><td><span class="box sm">3</span></td><td>Basketball</td><td class="l2">S-2</td><td></td></tr>
+          <tr class="changed"><td><span class="box sm"><b>4</b></span></td><td>Volleyball</td><td class="l2">S-23</td><td><span class="chip">Modified (was 7)</span></td></tr>
+          <tr><td><span class="box sm">5</span></td><td>Tennis</td><td class="l2">S-5</td><td></td></tr>
+          <tr><td><span class="box sm">6</span></td><td>League of Legends</td><td class="l2">S-50</td><td><span class="n">1</span></td></tr>
           <tr><td colspan="4" class="l2">…</td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px"></span></td><td>Bandy</td><td class="l2">S-41</td><td><span class="chip">Not set</span> <span class="n">2</span></td></tr>
+          <tr><td><span class="box sm"></span></td><td>Bandy</td><td class="l2">S-41</td><td><span class="chip">Not set</span> <span class="n">2</span></td></tr>
         </tbody>
       </table>
       <div class="savebar"><span>1 unsaved change <span class="n">3</span></span><span><span class="btn">Discard</span> <span class="btn pri">Save</span></span></div>
@@ -202,7 +203,7 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 
 </div>

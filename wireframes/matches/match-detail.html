@@ -10,29 +10,36 @@
 <div class="doc">
 
 <h1>賽事明細（Match Detail）</h1>
-<p class="meta"><b>選單</b>：Matches › Schedule › Match Detail · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<p class="meta"><b>日期</b>：2026-11-09 · <b>選單</b>：Matches › Schedule › Match Detail · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽事明細・States</a><a href="#s2">2 賽事明細・Properties</a><a href="#s3">3 尚無狀態回報</a><a href="#s4">4 賽事明細・計分項目頁籤</a><a href="#s5">5 尚無比分回報</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 查看一場比賽各來源的回報時間。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 查看一場比賽各來源的狀態與屬性回報，追查比分變更如何形成統一滾球比分（Canonical Live Score），並開啟文字轉播（Commentary）歷史。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>本場與已對應來源的識別、名稱及對應者：<a href="match-mapping.html">賽事對應彈出視窗</a>（R04-04、R04-06、R04-08）。</li>
     <li>取消、腰斬、狀態裁定與重掛：<a href="issues.html">賽事問題</a>（R04-12、R04-19、R04-23～24）。</li>
-    <li>來源角色與連接器設定：Provider Settings（03、R04-02）；競賽及參賽方資料：Catalog（01）；玩法模板：Market Settings（12）。</li>
+    <li>文字轉播與事件逐筆紀錄：<a href="match-commentary-history.html">文字轉播歷史</a>；目前滾球訊號及覆蓋狀態：<a href="schedule.html">單場賽程</a>（R04-01、R04-21～22）。</li>
+    <li>賽果確認、更正與結算：Matches › Results、Grades（R04-13～15、R04-19；07）；盤口暫停與恢復的執行：Matches › Odds（R05-07）。本頁只查看統一滾球比分與來源證據，不提供人工改分。</li>
+    <li>來源角色與連接器設定：Provider Settings（03、R04-02）；競賽及參賽方資料：Catalog（01）；玩法模板：Market Type Settings（12）。</li>
   </ul></td></tr>
 </table>
 
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例，時間皆為 UTC。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>顯示單場摘要，切換 States／Properties，從本場開啟賽事對應</td><td>R04-04～06、R04-08</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>1</td><td>顯示單場摘要，切換 States／計分項目／Properties，從本場開啟賽事對應</td><td>R04-04～06、R04-08；見待確認第 1 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s4">畫面 4</a></td></tr>
   <tr><td>2</td><td>依狀態與時段列出最早收到回報的時間，以及各來源的時間差</td><td>R03-08；R04-01、R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>列出各來源開賽時間的首次回報與後續變更，保留新舊值</td><td>R03-08；R04-05</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>4</td><td>依時段列出各來源宣布的傷停補時及其變更</td><td>R03-08；R04-01</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>5</td><td>分開顯示接收時間與來源時間；尚未回報與沒有舊值以「—」表示</td><td>R03-08</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>重新讀取資料；沒有狀態紀錄時顯示空白提示</td><td>R03-08</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>7</td><td>在 States 與 Properties 之間依計分項目分頁，比對各時段的來源與統一比分變更，保留新舊值與採用結果</td><td>R01-17；R03-08；R04-01、R04-13～14；見待確認第 1 項</td><td><a href="#s4">畫面 4</a></td></tr>
+  <tr><td>8</td><td>顯示比分矛盾時維持原值、穩定後更新，以及晚到與停用資料不採用的原因</td><td>R03-13；R04-14、R04-16</td><td><a href="#s4">畫面 4</a></td></tr>
+  <tr><td>9</td><td>保留來源的比分方向與比賽時間，統一主客方向後比對；沒有資料時保留未知狀態</td><td>R03-08；R04-06、R04-08、R04-13～14；見待確認第 2 項</td><td><a href="#s4">畫面 4</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>10</td><td>從本場開啟文字轉播歷史，查看來源事件與文字內容</td><td>R04-01；見待確認第 1 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a>、<a href="#s4">畫面 4</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
@@ -46,16 +53,16 @@
   <main class="main">
     <div class="page-head">
       <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
-      <a class="btn" href="match-mapping.html#s1">Match Mapping <span class="n">1</span></a>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping <span class="n">1</span></a></div>
     </div>
     <div class="match-context">
       <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
       <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
-      <div>2026-11-04 18:00<div class="l2">Creator: Provider A · 3 / 8 providers mapped</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
     </div>
     <section class="panel">
       <div class="ph">
-        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1" aria-current="page">States</a><a href="#s2">Properties</a></nav></div>
+        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1" aria-current="page">States</a><a href="#s4">Goal</a><a href="#s4-corner">Corner</a><a href="#s4-booking">Booking</a><a href="#s4-red-card">Red Card</a><a href="#s2">Properties</a></nav></div>
         <span class="btn">Refresh <span class="n">7</span></span>
       </div>
       <div class="pb">
@@ -63,9 +70,9 @@
           <thead><tr><th>Provider <span class="n">2</span></th><th>Live <span class="n">3</span></th><th>1st Half</th><th>Half Time</th><th>2nd Half</th></tr></thead>
           <tbody>
             <tr class="first-change"><td>First Change <span class="n">4</span></td><td><div class="l2">11-04</div>17:58:08</td><td><div class="l2">11-04</div>18:00:05</td><td><div class="l2">11-04</div>18:49:08</td><td><div class="l2">11-04</div>19:04:10</td></tr>
-            <tr><td>Provider A</td><td class="first-report">00:00 <span class="n">5</span></td><td>+00:02</td><td>+00:03</td><td class="first-report">00:00</td></tr>
-            <tr><td>Provider B</td><td>+00:04</td><td class="first-report">00:00</td><td class="first-report">00:00</td><td>+00:05</td></tr>
-            <tr><td>Provider C <span class="chip">H↔A</span></td><td>— <span class="n">6</span></td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Saba</td><td class="first-report">00:00 <span class="n">5</span></td><td>+00:02</td><td>+00:03</td><td class="first-report">00:00</td></tr>
+            <tr><td>RunningBall</td><td>+00:04</td><td class="first-report">00:00</td><td class="first-report">00:00</td><td>+00:05</td></tr>
+            <tr><td>Sofascore <span class="chip">H↔A</span></td><td>— <span class="n">6</span></td><td>—</td><td>—</td><td>—</td></tr>
           </tbody>
         </table>
       </div>
@@ -74,13 +81,13 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>「Match Mapping」開啟本場的<a href="match-mapping.html">賽事對應彈出視窗</a>，以 Provider、IDs、Names、By 顯示本場與已對應來源的紀錄，內容唯讀。上方比賽摘要與賽程一致，切換 States／Properties 時保留（R04-04～06、R04-08）。</span></li>
-  <li><span class="n">2</span><span>每個已對應來源一列。來源 C 的「H↔A」表示主客方向與本場相反；只標示對應方向，不改變時間差的計算（R04-08）。</span></li>
+  <li><span class="n">1</span><span>「Match Mapping」開啟本場的<a href="match-mapping.html">賽事對應彈出視窗</a>，以 Provider、IDs、Names、By 顯示本場與已對應來源的紀錄，內容唯讀。上方比賽摘要與賽程一致，切換 States／計分項目／Properties 時保留（R04-04～06、R04-08）。「Commentary History」開啟本場的<a href="match-commentary-history.html">文字轉播歷史</a>（見待確認第 1 項）。</span></li>
+  <li><span class="n">2</span><span>每個已對應來源一列。Sofascore 的「H↔A」表示主客方向與本場相反；只標示對應方向，不改變時間差的計算（R04-08）。</span></li>
   <li><span class="n">3</span><span>每欄是一個已收到回報的狀態或時段，依首次收到的時間排列；足球範例為 Live、1st Half、Half Time、2nd Half，之後收到完場回報再出現 Ended。Live 是來源回報的滾球狀態，與上半場開始分欄，不把來源開放滾球的時間當成實際開球時間。各運動的時段依目錄顯示，見下方籃球與網球範例（R04-01、R04-12；R01-17）。</span></li>
-  <li><span class="n">4</span><span>「First Change」是各欄最早收到來源回報的時間，上行日期、下行時間。例如 1st Half 最早在 18:00:05 收到來源 B 的回報；不是每個來源各自的時間，也不是場上事件的官方發生時間（R03-08）。</span></li>
-  <li><span class="n">5</span><span>時間差以該欄的 First Change 為基準：第一個回報的來源顯示粗體「00:00」，其餘顯示「+分:秒」，超過一小時顯示「+時:分:秒」。例如 A 的 1st Half 為 +00:02，表示 18:00:07 收到，比 B 晚兩秒。比較使用 InSports 收到資料的時間，包含取得及傳輸時間，不代表來源本身的純延遲（R03-08）。</span></li>
-  <li><span class="n">6</span><span>「—」表示目前可讀取的紀錄沒有該來源對該欄的回報，不是零秒，也不表示對應已解除。來源 C 仍列在表中（R03-08、R04-10）。</span></li>
-  <li><span class="n">7</span><span>「Refresh」重新讀取本場的來源紀錄，保留目前選取的頁籤；不更改賽事、來源資料或對應。States 預設開啟，Properties 顯示畫面 2 的逐項變更紀錄。</span></li>
+  <li><span class="n">4</span><span>「First Change」是各欄最早收到來源回報的時間，上行日期、下行時間。例如 1st Half 最早在 18:00:05 收到 RunningBall 的回報；不是每個來源各自的時間，也不是場上事件的官方發生時間（R03-08）。</span></li>
+  <li><span class="n">5</span><span>時間差以該欄的 First Change 為基準：第一個回報的來源顯示粗體「00:00」，其餘顯示「+分:秒」，超過一小時顯示「+時:分:秒」。例如 Saba 的 1st Half 為 +00:02，表示 18:00:07 收到，比 RunningBall 晚兩秒。比較使用 InSports 收到資料的時間，包含取得及傳輸時間，不代表來源本身的純延遲（R03-08）。</span></li>
+  <li><span class="n">6</span><span>「—」表示目前可讀取的紀錄沒有該來源對該欄的回報，不是零秒，也不表示對應已解除。Sofascore 仍列在表中（R03-08、R04-10）。</span></li>
+  <li><span class="n">7</span><span>「Refresh」重新讀取本場的來源紀錄，保留目前選取的頁籤；不更改賽事、來源資料或對應。States 預設開啟；足球的 Goal、Corner、Booking、Red Card 頁籤依序放在 States 與 Properties 之間，各自顯示畫面 4 的來源與統一比分變更。Properties 顯示畫面 2 的逐項屬性變更紀錄（見待確認第 1 項）。</span></li>
 </ol>
 
 <h3 class="example" id="s1-basketball">籃球</h3>
@@ -95,11 +102,11 @@
     <div class="match-context">
       <div><div class="l2">AUSTRALIA NBL</div><b>Brisbane Bullets vs Perth Wildcats</b><div class="l2">Home · C-27605 &nbsp; / &nbsp; Away · C-27276</div></div>
       <div><b>88 : 84</b><div class="l2">Q4 5:12 · Live</div></div>
-      <div>2026-11-04 17:00<div class="l2">Creator: Provider A · 3 / 6 providers mapped</div></div>
+      <div>2026-11-04 17:00<div class="l2">Creator: Sbobet · 3 / 6 providers mapped</div></div>
     </div>
     <section class="panel">
       <div class="ph">
-        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1-basketball" aria-current="page">States</a><a href="#s2">Properties</a></nav></div>
+        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1-basketball" aria-current="page">States</a><a href="#s4-basketball">Points</a><a href="#s2">Properties</a></nav></div>
         <span class="btn">Refresh</span>
       </div>
       <div class="pb">
@@ -107,9 +114,9 @@
           <thead><tr><th>Provider</th><th>Live</th><th>Q1 <span class="n">1</span></th><th>Q2</th><th>Half Time</th><th>Q3</th><th>Q4</th></tr></thead>
           <tbody>
             <tr class="first-change"><td>First Change</td><td><div class="l2">11-04</div>16:58:30</td><td><div class="l2">11-04</div>17:00:12</td><td><div class="l2">11-04</div>17:24:40</td><td><div class="l2">11-04</div>17:50:05</td><td><div class="l2">11-04</div>18:05:20</td><td><div class="l2">11-04</div>18:31:44</td></tr>
-            <tr><td>Provider A</td><td class="first-report">00:00</td><td>+00:03</td><td class="first-report">00:00</td><td>+00:02</td><td>+00:04</td><td class="first-report">00:00</td></tr>
-            <tr><td>Provider B</td><td>+00:06</td><td class="first-report">00:00</td><td>+00:05</td><td class="first-report">00:00</td><td class="first-report">00:00</td><td>+00:03</td></tr>
-            <tr><td>Provider C</td><td>—</td><td>+00:41</td><td>+00:38</td><td>+01:02</td><td>+00:45</td><td>+00:40</td></tr>
+            <tr><td>Sbobet</td><td class="first-report">00:00</td><td>+00:03</td><td class="first-report">00:00</td><td>+00:02</td><td>+00:04</td><td class="first-report">00:00</td></tr>
+            <tr><td>RunningBall</td><td>+00:06</td><td class="first-report">00:00</td><td>+00:05</td><td class="first-report">00:00</td><td class="first-report">00:00</td><td>+00:03</td></tr>
+            <tr><td>Sofascore</td><td>—</td><td>+00:41</td><td>+00:38</td><td>+01:02</td><td>+00:45</td><td>+00:40</td></tr>
           </tbody>
         </table>
       </div>
@@ -118,7 +125,7 @@
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>籃球以節為時段：Q1～Q4，第 2、3 節之間是 Half Time；沒有傷停補時。打成平手時，收到加時賽的回報才出現 OT 欄，完場後出現 Ended。本例來源 C 的各欄都比其他來源慢 40 秒至 1 分鐘左右，可據此看出它的回報較慢（R01-17；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">籃球時段</a>）。</span></li>
+  <li><span class="n">1</span><span>籃球以節為時段：Q1～Q4，第 2、3 節之間是 Half Time；沒有傷停補時。打成平手時，收到加時賽的回報才出現 OT 欄，完場後出現 Ended。本例 Sofascore 的各欄都比其他來源慢 40 秒至 1 分鐘左右，可據此看出它的回報較慢（R01-17；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">籃球時段</a>）。</span></li>
 </ol>
 
 <h3 class="example" id="s1-tennis">網球</h3>
@@ -133,11 +140,11 @@
     <div class="match-context">
       <div><div class="l2">ATP - PARIS MASTERS</div><b>Quentin Halys (FRA) vs Frances Tiafoe (USA)</b><div class="l2">Home · C-16797 &nbsp; / &nbsp; Away · C-9193 &nbsp; · &nbsp; Best of 3</div></div>
       <div><b>1 : 1</b><div class="l2">Set 3 · Live</div></div>
-      <div>2026-11-04 18:15<div class="l2">Creator: Provider A · 3 / 5 providers mapped</div></div>
+      <div>2026-11-04 18:15<div class="l2">Creator: Saba · 3 / 5 providers mapped</div></div>
     </div>
     <section class="panel">
       <div class="ph">
-        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1-tennis" aria-current="page">States</a><a href="#s2">Properties</a></nav></div>
+        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s1-tennis" aria-current="page">States</a><a href="#s4-tennis">Games</a><a href="#s2">Properties</a></nav></div>
         <span class="btn">Refresh</span>
       </div>
       <div class="pb">
@@ -145,9 +152,9 @@
           <thead><tr><th>Provider</th><th>Live</th><th>Set 1 <span class="n">1</span></th><th>Set 2</th><th>Set 3</th></tr></thead>
           <tbody>
             <tr class="first-change"><td>First Change</td><td><div class="l2">11-04</div>18:14:02</td><td><div class="l2">11-04</div>18:16:30</td><td><div class="l2">11-04</div>19:08:11</td><td><div class="l2">11-04</div>19:47:55</td></tr>
-            <tr><td>Provider A</td><td class="first-report">00:00</td><td>+00:02</td><td class="first-report">00:00</td><td>+00:06</td></tr>
-            <tr><td>Provider B</td><td>+00:05</td><td class="first-report">00:00</td><td>+00:04</td><td class="first-report">00:00</td></tr>
-            <tr><td>Provider C</td><td>+00:12</td><td>+00:09</td><td>— <span class="n">2</span></td><td>+00:14</td></tr>
+            <tr><td>Saba</td><td class="first-report">00:00</td><td>+00:02</td><td class="first-report">00:00</td><td>+00:06</td></tr>
+            <tr><td>RunningBall</td><td>+00:05</td><td class="first-report">00:00</td><td>+00:04</td><td class="first-report">00:00</td></tr>
+            <tr><td>Sofascore</td><td>+00:12</td><td>+00:09</td><td>— <span class="n">2</span></td><td>+00:14</td></tr>
           </tbody>
         </table>
       </div>
@@ -157,7 +164,7 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>網球以盤為時段，盤與盤之間沒有中場，也沒有 Half Time 欄。盤數依賽制：三盤兩勝最多到 Set 3，五盤三勝才會出現 Set 4、Set 5。局不是時段，不列成欄（R01-17；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/03-tennis.md">網球時段</a>）。</span></li>
-  <li><span class="n">2</span><span>來源 C 沒有 Set 2 開始的回報，但之後仍回報了 Set 3。缺少中間某個時段的回報只顯示「—」，不以下一個時段的時間補值（R03-08）。</span></li>
+  <li><span class="n">2</span><span>Sofascore 沒有 Set 2 開始的回報，但之後仍回報了 Set 3。缺少中間某個時段的回報只顯示「—」，不以下一個時段的時間補值（R03-08）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -168,16 +175,16 @@
   <main class="main">
     <div class="page-head">
       <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
-      <a class="btn" href="match-mapping.html#s1">Match Mapping</a>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping</a></div>
     </div>
     <div class="match-context">
       <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
       <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
-      <div>2026-11-04 18:00<div class="l2">Creator: Provider A · 3 / 8 providers mapped</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
     </div>
     <section class="panel">
       <div class="ph">
-        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a class="on" href="#s2" aria-current="page">Properties</a></nav></div>
+        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a href="#s4">Goal</a><a href="#s4-corner">Corner</a><a href="#s4-booking">Booking</a><a href="#s4-red-card">Red Card</a><a class="on" href="#s2" aria-current="page">Properties</a></nav></div>
         <span class="btn">Refresh</span>
       </div>
       <div class="pb">
@@ -185,22 +192,22 @@
         <table class="grid source-properties">
           <thead><tr><th>Time <span class="n">2</span></th><th>Provider</th><th>Value <span class="n">3</span></th><th>Previous</th><th>Provider Time <span class="n">4</span></th></tr></thead>
           <tbody>
-            <tr><td>11-03 10:00:00</td><td>Provider A</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">11-03 09:59:58</td></tr>
-            <tr><td>11-03 10:00:05</td><td>Provider B</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">11-03 10:00:03</td></tr>
-            <tr><td>11-03 10:00:08</td><td>Provider C</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">—</td></tr>
-            <tr><td>11-04 12:15:00</td><td>Provider A</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">11-04 12:14:58</td></tr>
-            <tr><td>11-04 12:15:04</td><td>Provider B</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">11-04 12:15:02</td></tr>
-            <tr><td>11-04 12:15:09</td><td>Provider C</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">—</td></tr>
+            <tr><td>11-03 10:00:00</td><td>Saba</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">11-03 09:59:58</td></tr>
+            <tr><td>11-03 10:00:05</td><td>RunningBall</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">11-03 10:00:03</td></tr>
+            <tr><td>11-03 10:00:08</td><td>Sofascore</td><td><b>11-04 17:30</b></td><td class="l2">—</td><td class="l2">—</td></tr>
+            <tr><td>11-04 12:15:00</td><td>Saba</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">11-04 12:14:58</td></tr>
+            <tr><td>11-04 12:15:04</td><td>RunningBall</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">11-04 12:15:02</td></tr>
+            <tr><td>11-04 12:15:09</td><td>Sofascore</td><td><b>11-04 18:00</b></td><td class="l2">11-04 17:30</td><td class="l2">—</td></tr>
           </tbody>
         </table>
         <h4 class="property-heading">Stoppage Time <span class="n">5</span></h4>
         <table class="grid source-properties">
           <thead><tr><th>Time</th><th>Provider</th><th>Period <span class="n">6</span></th><th>Value</th><th>Previous</th><th>Provider Time</th></tr></thead>
           <tbody>
-            <tr><td>11-04 18:45:02</td><td>Provider B</td><td>1st Half</td><td><b>+3 min</b></td><td class="l2">—</td><td class="l2">11-04 18:45:00</td></tr>
-            <tr><td>11-04 18:45:05</td><td>Provider A</td><td>1st Half</td><td><b>+3 min</b></td><td class="l2">—</td><td class="l2">11-04 18:45:01</td></tr>
-            <tr><td>11-04 18:46:10</td><td>Provider B</td><td>1st Half</td><td><b>+4 min</b></td><td class="l2">+3 min</td><td class="l2">11-04 18:46:08</td></tr>
-            <tr><td>11-04 18:46:14</td><td>Provider A</td><td>1st Half</td><td><b>+4 min</b></td><td class="l2">+3 min</td><td class="l2">—</td></tr>
+            <tr><td>11-04 18:45:02</td><td>RunningBall</td><td>1st Half</td><td><b>+3 min</b></td><td class="l2">—</td><td class="l2">11-04 18:45:00</td></tr>
+            <tr><td>11-04 18:45:05</td><td>Saba</td><td>1st Half</td><td><b>+3 min</b></td><td class="l2">—</td><td class="l2">11-04 18:45:01</td></tr>
+            <tr><td>11-04 18:46:10</td><td>RunningBall</td><td>1st Half</td><td><b>+4 min</b></td><td class="l2">+3 min</td><td class="l2">11-04 18:46:08</td></tr>
+            <tr><td>11-04 18:46:14</td><td>Saba</td><td>1st Half</td><td><b>+4 min</b></td><td class="l2">+3 min</td><td class="l2">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -211,8 +218,8 @@
 <ol class="notes">
   <li><span class="n">1</span><span>「Start Time」列出各來源第一次提供的開賽時間，以及之後不同的值；相同值重複回報不另列一筆。範例是三個來源原本都報 17:30，後來改報 18:00。賽事的開賽時間仍由建立者更新，其他來源的紀錄只供比較（R03-08、R04-05）。</span></li>
   <li><span class="n">2</span><span>「Time」是 InSports 收到這筆資料的時間，依時間由早到晚排列。兩個表各自排序，不將開賽時間與傷停補時混成同一份變更紀錄（R03-08）。</span></li>
-  <li><span class="n">3</span><span>「Value」是該次回報的新值，粗體顯示；「Previous」是同一來源的上一個值，淡色顯示，不是表格上一列。例如 A 在 12:15:00 的新值為 18:00，舊值是 A 先前回報的 17:30。第一次回報沒有舊值，顯示「—」。</span></li>
-  <li><span class="n">4</span><span>「Provider Time」是來源提供的時間，與接收時間分開。來源未提供時顯示「—」，例如來源 C；不以 Time 補值，避免把接收時間誤當成來源時間（R03-08）。</span></li>
+  <li><span class="n">3</span><span>「Value」是該次回報的新值，粗體顯示；「Previous」是同一來源的上一個值，淡色顯示，不是表格上一列。例如 Saba 在 12:15:00 的新值為 18:00，舊值是 Saba 先前回報的 17:30。第一次回報沒有舊值，顯示「—」。</span></li>
+  <li><span class="n">4</span><span>「Provider Time」是來源提供的時間，與接收時間分開。來源未提供時顯示「—」，例如 Sofascore；不以 Time 補值，避免把接收時間誤當成來源時間（R03-08）。</span></li>
   <li><span class="n">5</span><span>「Stoppage Time」是來源宣布的傷停補時分鐘數，例如 +3 min 改為 +4 min；不是 States 的回報時間差，也不是 InSports 推算的補時。第一次回報及數值變更各列一筆，沒有回報的來源不新增空白列（R03-08、R04-01；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球時段</a>）。</span></li>
   <li><span class="n">6</span><span>「Period」表示這次補時屬於哪個時段，只有 Stoppage Time 有這一欄。Previous 只比較同一來源、同一時段；下半場首次宣布補時時，舊值重新顯示「—」，不沿用上半場的 +4 min（R01-17）。</span></li>
 </ol>
@@ -223,26 +230,289 @@
 <div lang="en" class="frame">
   <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
   <main class="main">
-    <div class="page-head"><div><a href="schedule.html#s2">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-41001 · UTC</div></div><a class="btn" href="issues.html#s2">Review match <span class="n">1</span></a></div>
+    <div class="page-head"><div><a href="schedule.html#s2">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-252412 · UTC</div></div><a class="btn" href="issues.html">Open issue <span class="n">1</span></a></div>
     <div class="match-context">
-      <div><div class="l2">PREMIER LEAGUE</div><b>Team A vs Team B</b><div class="l2">Creator: Provider A</div></div>
-      <div>2026-11-07 20:00<div class="l2">Postponed <span class="chip">Pending cancellation</span></div></div>
+      <div><div class="l2">THAI LEAGUE 1</div><b>Khon Kaen United vs Lamphun Warriors</b><div class="l2">Creator: Saba</div></div>
+      <div>2026-11-04 21:30<div class="l2">Not started <span class="chip">Pending cancellation</span></div></div>
     </div>
     <section class="panel">
-      <div class="ph"><div class="source-heading"><span>Data Sources</span><div class="strip"><span class="on">States</span><span>Properties</span></div></div><span class="btn">Refresh</span></div>
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a class="on" href="#s3" aria-current="page">States</a><a href="#s5">Goal</a><a>Corner</a><a>Booking</a><a>Red Card</a><a>Properties</a></nav></div><span class="btn">Refresh</span></div>
       <div class="pb"><p class="hint">No start, period or end reported yet. <span class="n">2</span></p></div>
     </section>
   </main>
 </div>
 
 <ol class="notes">
-  <li><span class="n">1</span><span>比賽尚未開始，上方保留延後與待取消標記；「Review match」進入本場的<a href="issues.html#s2">賽事問題</a>。States 的時間表沒有紀錄，不影響這些標記的顯示（R04-12、R04-23）。</span></li>
+  <li><span class="n">1</span><span>比賽尚未開始，上方保留待取消標記；「Open issue」進入<a href="issues.html">賽事問題</a>處理本場。States 的時間表沒有紀錄，不影響這些標記的顯示（R04-12、R04-23）。</span></li>
   <li><span class="n">2</span><span>尚未收到開始、時段或結束的回報時，顯示提示，不預先填入所有時段或零秒。若 Properties 已有開賽時間紀錄，仍可切換查看；某個屬性沒有紀錄時只顯示該屬性的空白提示，例如「No stoppage time reported.」。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
-<p>目前沒有。</p>
+<!-- ============================================================ -->
+<h2 id="s4">畫面 4：賽事明細・計分項目頁籤</h2>
+<p>比分變更直接放在 Data Sources 的計分項目頁籤，足球順序為 States → Goal → Corner → Booking → Red Card → Properties。每個項目分成「統一比分的結果」與「各來源回報」兩個表，按各自的接收或更新時間由早到晚排列。以下足球範例選取下半場進球；上半場已記錄為 1：0，因此下半場 0：1 對應全場 1：1。這是滾球比分的追查畫面，賽果確認與結算另見第三階段。</p>
+
+<h3 class="example" id="s4-soccer">足球・Goal：比分不一致、穩定更新與未採用資料</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping</a></div>
+    </div>
+    <div class="match-context">
+      <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
+      <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
+    </div>
+    <section class="panel">
+      <div class="ph">
+        <div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a class="on" href="#s4" aria-current="page">Goal</a><a href="#s4-corner">Corner</a><a href="#s4-booking">Booking</a><a href="#s4-red-card">Red Card</a><a href="#s2">Properties</a></nav></div>
+        <span class="btn">Refresh</span>
+      </div>
+      <div class="pb">
+        <div class="filters">
+          <div class="f"><label>Period <span class="n">1</span></label><span class="box caret">2nd Half</span></div>
+        </div>
+        <div class="match-context">
+          <div>Canonical · 2nd Half Goals <b>0 : 1</b> <span class="chip">Stable</span></div>
+          <div>1st Half <b>1 : 0</b> + 2nd Half <b>0 : 1</b> = Total <b>1 : 1</b> <span class="n">2</span></div>
+        </div>
+        <h4 class="property-heading">Canonical Changes <span class="n">3</span></h4>
+        <table class="grid">
+          <thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead>
+          <tbody>
+            <tr><td>11-04 19:04:17</td><td>—</td><td><b>0 : 0</b></td><td>Stable</td><td>Initial stable value</td></tr>
+            <tr><td>11-04 19:19:02</td><td>0 : 0</td><td><b>0 : 0</b></td><td>Unstable</td><td>Held · A reports 0 : 0; B reports 0 : 1</td></tr>
+            <tr><td>11-04 19:19:05</td><td>0 : 0</td><td><b>0 : 1</b></td><td>Stable</td><td>Updated · eligible evidence agrees; stability requirements met</td></tr>
+          </tbody>
+        </table>
+        <h4 class="property-heading">Provider Reports <span class="n">4</span></h4>
+        <table class="grid">
+          <thead><tr><th>Received at <span class="n">5</span></th><th>Provider</th><th>Period clock <span class="n">6</span></th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>11-04 19:04:15</td><td>RunningBall</td><td>00:00</td><td>—</td><td><b>0 : 0</b></td><td>11-04 19:04:13</td><td>Eligible</td></tr>
+            <tr><td>11-04 19:04:17</td><td>Saba</td><td>00:00</td><td>—</td><td><b>0 : 0</b></td><td>11-04 19:04:14</td><td>Eligible</td></tr>
+            <tr><td>11-04 19:19:02</td><td>RunningBall</td><td>14:50</td><td>0 : 0</td><td><b>0 : 1</b></td><td>11-04 19:19:00</td><td>Eligible · canonical held</td></tr>
+            <tr><td>11-04 19:19:05</td><td>Saba</td><td>14:50</td><td>0 : 0</td><td><b>0 : 1</b></td><td>11-04 19:19:01</td><td>Eligible · canonical updated</td></tr>
+            <tr><td>11-04 19:19:07</td><td>Sofascore <span class="chip">H↔A</span> <span class="n">7</span></td><td>—</td><td>—</td><td><b>0 : 1</b><div class="l2">Provider order: 1 : 0</div></td><td>—</td><td>Excluded · live data disabled</td></tr>
+            <tr><td>11-04 19:19:11</td><td>RunningBall</td><td>14:48</td><td>0 : 1</td><td><b>0 : 0</b></td><td>11-04 19:18:58</td><td>Excluded · late older report <span class="n">8</span></td></tr>
+          </tbody>
+        </table>
+        <p class="hint">Read only · Home: Pohang Steelers / Away: Gamba Osaka. No manual score changes here. <span class="n">9</span></p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>計分項目以頁籤呈現，直接放在 States 與 Properties 之間，沒有額外的 Score Changes 頁籤或 Score item 下拉選單。足球為 Goal、Corner、Booking、Red Card；籃球為 Points，網球為 Games。Period 只篩選目前項目的時段，切換項目仍保留同一場比賽，不改變來源資格或穩定判定（R01-17、R04-02、R04-14；頁籤及紅牌計數呈現見待確認第 1 項）。</span></li>
+  <li><span class="n">2</span><span>選取的是下半場進球，與頁首全場比分分開標示；合計由時段值算出，不採用來源提供的全場合計。未知的時段不能補成 0，無法算出合計時顯示「—」（R04-13）。</span></li>
+  <li><span class="n">3</span><span>統一紀錄同時列出值與穩定狀態的變化。19：19：02 來源不一致，保留 0：0 並標記不穩定；19：19：05 證據一致且符合已設定的穩定條件才更新為 0：1。Saba 是建立者，不享有優先權；範例不是「兩個來源即通過」的固定門檻，也不採多數決（R04-14）。進球屬主計分項目，不穩定期間全場滾球盤口暫停；執行由 05 負責（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/live-quorum-scope.md">影響範圍</a>、R05-07）。</span></li>
+  <li><span class="n">4</span><span>來源回報與統一更新分表，避免把收到資料誤認成已採用。Previous valid 是該來源在同一時段、同一計分項目的前一個有效值；Reported 是這次回報，首次沒有舊值時顯示「—」。本例列出首次回報、值的變動與未採用資料；相同有效值的重複傳送不增列變更（R03-08、R04-14；歷史呈現見待確認第 1、3 項）。</span></li>
+  <li><span class="n">5</span><span>Received at 是 InSports 收到資料的時間；Provider Time 是來源提供的時間，沒有時顯示「—」。統一表的 Updated at 則是 InSports 更新該統一紀錄的時間，三者不可互相補值（R03-08）。</span></li>
+  <li><span class="n">6</span><span>Period clock 保留該筆來源回報的時段內比賽時間，不從接收時間換算，也不據此選定統一時鐘；沒有回報時顯示「—」。比分值相同不表示各來源時鐘一致。跨來源的時鐘取值與校正尚待定義（R03-08；見待確認第 2 項）。</span></li>
+  <li><span class="n">7</span><span>Sofascore 的主客方向相反，原始順序 1：0 換成統一主客方向後為 0：1，頁首主客順序維持不變。Sofascore 的賽況資料已停用，仍可查看回報，但不計入穩定判定；不影響既有對應。它未回報狀態轉換與時鐘，因此 States 與這裡仍分別保留「—」（R04-06、R04-08、R04-16；R03-13）。</span></li>
+  <li><span class="n">8</span><span>RunningBall 在 19：19：11 收到的是較舊資料，僅保留供追查，不把 RunningBall 的有效值或統一比分倒退成 0：0；同一來源以最新有效值為準（R04-14）。與比分值相同的正常重複傳送不同，這一列呈現未採用的原因。</span></li>
+  <li><span class="n">9</span><span>此頁唯讀，不提供指定比分、刪除回報或改用來源的操作。滾球比分不穩定依 R04-14 等待有效證據，不直接送人工改分；最終賽果的裁定與覆核屬 R04-15、R04-19，另在賽果頁處理。</span></li>
+</ol>
+
+<h3 class="example" id="s4-corner">足球・Corner：角球變更</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping</a></div>
+    </div>
+    <div class="match-context">
+      <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
+      <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
+    </div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a href="#s4">Goal</a><a class="on" href="#s4-corner" aria-current="page">Corner</a><a href="#s4-booking">Booking</a><a href="#s4-red-card">Red Card</a><a href="#s2">Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb">
+        <div class="filters"><div class="f"><label>Period</label><span class="box caret">2nd Half</span></div></div>
+        <div class="match-context">
+          <div>Canonical · 2nd Half Corners <b>2 : 1</b> <span class="chip">Stable</span> <span class="n">1</span></div>
+          <div>1st Half <b>3 : 2</b> + 2nd Half <b>2 : 1</b> = Total <b>5 : 3</b></div>
+        </div>
+        <h4 class="property-heading">Canonical Changes</h4>
+        <table class="grid">
+          <thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead>
+          <tbody><tr><td>11-04 19:16:04</td><td>1 : 1</td><td><b>2 : 1</b></td><td>Stable</td><td>Eligible evidence agrees; stability requirements met</td></tr></tbody>
+        </table>
+        <h4 class="property-heading">Provider Reports <span class="n">2</span></h4>
+        <table class="grid">
+          <thead><tr><th>Received at</th><th>Provider</th><th>Period clock</th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>11-04 19:16:02</td><td>RunningBall</td><td>11:50</td><td>1 : 1</td><td><b>2 : 1</b></td><td>11-04 19:16:00</td><td>Eligible · canonical held</td></tr>
+            <tr><td>11-04 19:16:04</td><td>Saba</td><td>11:50</td><td>1 : 1</td><td><b>2 : 1</b></td><td>11-04 19:16:01</td><td>Eligible · canonical updated</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">Excerpt · latest stable change and related reports shown. Read only.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Corner 顯示角球數，與 Goal 的進球分開。下半場由 1：1 變為 2：1，加上上半場 3：2，全場合計為 5：3，與賽程 CR 一致；頁首仍保留全場進球 1：1（R01-17、R04-13）。</span></li>
+  <li><span class="n">2</span><span>此處節錄最後一次穩定變更與相關來源回報，完整紀錄格式同 Goal。RunningBall 先回報時先保留原值，Saba 回報後符合已設定的穩定條件才更新；不是固定的兩來源門檻。接收時間、來源時間與時段內時間分別保留。角球不穩定只影響角球相關盤口（R03-08、R04-14；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/live-quorum-scope.md">影響範圍</a>）。</span></li>
+</ol>
+
+<h3 class="example" id="s4-booking">足球・Booking：罰牌積分變更</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping</a></div>
+    </div>
+    <div class="match-context">
+      <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
+      <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
+    </div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a href="#s4">Goal</a><a href="#s4-corner">Corner</a><a class="on" href="#s4-booking" aria-current="page">Booking</a><a href="#s4-red-card">Red Card</a><a href="#s2">Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb">
+        <div class="filters"><div class="f"><label>Period</label><span class="box caret">2nd Half</span></div></div>
+        <div class="match-context">
+          <div>Canonical · 2nd Half Booking points <b>0 : 2</b> <span class="chip">Stable</span> <span class="n">1</span></div>
+          <div>1st Half <b>0 : 0</b> + 2nd Half <b>0 : 2</b> = Total <b>0 : 2</b></div>
+        </div>
+        <h4 class="property-heading">Canonical Changes</h4>
+        <table class="grid">
+          <thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead>
+          <tbody><tr><td>11-04 19:12:14</td><td>0 : 0</td><td><b>0 : 2</b></td><td>Stable</td><td>Eligible evidence agrees; stability requirements met</td></tr></tbody>
+        </table>
+        <h4 class="property-heading">Provider Reports <span class="n">2</span></h4>
+        <table class="grid">
+          <thead><tr><th>Received at</th><th>Provider</th><th>Period clock</th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>11-04 19:12:12</td><td>RunningBall</td><td>08:00</td><td>0 : 0</td><td><b>0 : 2</b></td><td>11-04 19:12:10</td><td>Eligible · canonical held</td></tr>
+            <tr><td>11-04 19:12:14</td><td>Saba</td><td>08:00</td><td>0 : 0</td><td><b>0 : 2</b></td><td>11-04 19:12:11</td><td>Eligible · canonical updated</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">Excerpt · latest stable change and related reports shown. Read only.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Booking 依足球目錄顯示罰牌積分：黃牌 1 分、紅牌 2 分，每位球員最多 3 分；第二張黃牌本身不再計分，隨後的紅牌計分。它不是黃牌張數，也不是 Red Card 的紅牌張數。本例客隊場上球員直接領紅牌，罰牌積分由 0：0 變為 0：2（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球計分與罰牌規則</a>）。</span></li>
+  <li><span class="n">2</span><span>此處與 Red Card 範例是同一張直接紅牌的兩種計量，故來源、接收時間及比賽時間相同。範例節錄最後一次穩定變更，完整歷史仍保留不穩定與未採用紀錄；來源回報不等於統一值已更新，採用依 R04-14。罰牌積分不穩定的影響限於相關盤口，不能據此推定紅牌事件對訊號的影響（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/live-quorum-scope.md">影響範圍</a>）。</span></li>
+</ol>
+
+<h3 class="example" id="s4-red-card">足球・Red Card：紅牌張數變更</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-commentary-history.html#s1">Commentary History</a><a class="btn" href="match-mapping.html#s1">Match Mapping</a></div>
+    </div>
+    <div class="match-context">
+      <div><div class="l2">AFC CHAMPIONS LEAGUE ELITE</div><b>Pohang Steelers vs Gamba Osaka</b><div class="l2">Home · C-10644 &nbsp; / &nbsp; Away · C-7338</div></div>
+      <div><b>1 : 1</b><div class="l2">2H 18' · Live</div></div>
+      <div>2026-11-04 18:00<div class="l2">Creator: Saba · 3 / 7 providers mapped</div></div>
+    </div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1">States</a><a href="#s4">Goal</a><a href="#s4-corner">Corner</a><a href="#s4-booking">Booking</a><a class="on" href="#s4-red-card" aria-current="page">Red Card</a><a href="#s2">Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb">
+        <div class="filters"><div class="f"><label>Period</label><span class="box caret">2nd Half</span></div></div>
+        <div class="match-context">
+          <div>Canonical · 2nd Half Red cards <b>0 : 1</b> <span class="chip">Stable</span> <span class="n">1</span></div>
+          <div>1st Half <b>0 : 0</b> + 2nd Half <b>0 : 1</b> = Total <b>0 : 1</b></div>
+        </div>
+        <h4 class="property-heading">Canonical Changes</h4>
+        <table class="grid">
+          <thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead>
+          <tbody><tr><td>11-04 19:12:14</td><td>0 : 0</td><td><b>0 : 1</b></td><td>Stable</td><td>Eligible evidence agrees; stability requirements met</td></tr></tbody>
+        </table>
+        <h4 class="property-heading">Provider Reports <span class="n">2</span></h4>
+        <table class="grid">
+          <thead><tr><th>Received at</th><th>Provider</th><th>Period clock</th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead>
+          <tbody>
+            <tr><td>11-04 19:12:12</td><td>RunningBall</td><td>08:00</td><td>0 : 0</td><td><b>0 : 1</b></td><td>11-04 19:12:10</td><td>Eligible · canonical held</td></tr>
+            <tr><td>11-04 19:12:14</td><td>Saba</td><td>08:00</td><td>0 : 0</td><td><b>0 : 1</b></td><td>11-04 19:12:11</td><td>Eligible · canonical updated</td></tr>
+          </tbody>
+        </table>
+        <p class="hint">Excerpt · latest stable change and related reports shown. Read only.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes">
+  <li><span class="n">1</span><span>Red Card 顯示紅牌張數，與賽程 RC 一致。本例客隊一張直接紅牌，使下半場與全場紅牌數由 0：0 變為 0：1；同一事件在 Booking 形成 0：2 罰牌積分。保留此獨立頁籤是本次畫面決定，不代表目錄新增紅牌投注計分項目（R03-08；見待確認第 1 項）。</span></li>
+  <li><span class="n">2</span><span>來源回報與統一變更的比對方式同 Goal；此處只節錄最後一次穩定變更與相關回報，未把來源數量當成固定採用門檻（R04-14）。紅牌紀錄是事實計數，Safe／Danger 等目前訊號仍在賽程呈現，不能從紅牌張數直接推定訊號或覆蓋狀態（R04-21～22）。</span></li>
+</ol>
+
+<h3 class="example" id="s4-basketball">籃球：依節記錄得分</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><a href="schedule.html#s1-basketball">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-248548 · UTC</div></div></div>
+    <div class="match-context"><div><div class="l2">AUSTRALIA NBL</div><b>Brisbane Bullets vs Perth Wildcats</b></div><div><b>88 : 84</b><div class="l2">Q4 5:12 · Live</div></div><div>2026-11-04 17:00<div class="l2">Creator: Sbobet · 3 / 6 providers mapped</div></div></div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1-basketball">States</a><a class="on" href="#s4-basketball" aria-current="page">Points</a><a href="#s2">Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb">
+        <div class="filters"><div class="f"><label>Period</label><span class="box caret">Q4</span></div></div>
+        <p>Canonical · Q4 Points <b>19 : 18</b> <span class="chip">Stable</span> <span class="n">1</span></p>
+        <h4 class="property-heading">Canonical Changes</h4>
+        <table class="grid"><thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead><tbody><tr><td>11-04 18:43:08</td><td>17 : 18</td><td><b>19 : 18</b></td><td>Stable</td><td>Eligible evidence agrees; stability requirements met</td></tr></tbody></table>
+        <h4 class="property-heading">Provider Reports</h4>
+        <table class="grid"><thead><tr><th>Received at</th><th>Provider</th><th>Period clock</th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead><tbody><tr><td>11-04 18:43:08</td><td>RunningBall</td><td>05:12 remaining</td><td>17 : 18</td><td><b>19 : 18</b></td><td>11-04 18:43:06</td><td>Eligible · canonical updated</td></tr></tbody></table>
+        <p class="hint">Excerpt · latest change shown. Read only.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes"><li><span class="n">1</span><span>籃球依節查看得分。此處只節錄最後一次更新與觸發該次評估的 RunningBall 回報，不代表 RunningBall 單一來源即可使比分穩定。Q4 從 17：18 變為 19：18，前三節合計 69：66，因此全場由 86：84 更新為 88：84。來源的比賽時間以該節剩餘時間呈現；不沿用足球的經過分鐘數（R01-17、R04-13～14；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">籃球時段</a>）。</span></li></ol>
+
+<h3 class="example" id="s4-tennis">網球：依盤記錄局數</h3>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><a href="schedule.html#s1-tennis">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-251250 · UTC</div></div></div>
+    <div class="match-context"><div><div class="l2">ATP - PARIS MASTERS</div><b>Quentin Halys (FRA) vs Frances Tiafoe (USA)</b><div class="l2">Best of 3</div></div><div><b>1 : 1</b><div class="l2">Set 3 · Live</div></div><div>2026-11-04 18:15<div class="l2">Creator: Saba · 3 / 5 providers mapped</div></div></div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s1-tennis">States</a><a class="on" href="#s4-tennis" aria-current="page">Games</a><a href="#s2">Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb">
+        <div class="filters"><div class="f"><label>Period</label><span class="box caret">Set 3</span></div></div>
+        <p>Canonical · Set 3 Games <b>2 : 1</b> <span class="chip">Stable</span> <span class="n">1</span></p>
+        <h4 class="property-heading">Canonical Changes</h4>
+        <table class="grid"><thead><tr><th>Updated at</th><th>Previous</th><th>Value</th><th>Stability</th><th>Reason</th></tr></thead><tbody><tr><td>11-04 19:58:24</td><td>1 : 1</td><td><b>2 : 1</b></td><td>Stable</td><td>Eligible evidence agrees; stability requirements met</td></tr></tbody></table>
+        <h4 class="property-heading">Provider Reports</h4>
+        <table class="grid"><thead><tr><th>Received at</th><th>Provider</th><th>Period clock</th><th>Previous valid</th><th>Reported · H : A</th><th>Provider Time</th><th>Use</th></tr></thead><tbody><tr><td>11-04 19:58:24</td><td>Saba</td><td>—</td><td>1 : 1</td><td><b>2 : 1</b></td><td>—</td><td>Eligible · canonical updated</td></tr></tbody></table>
+        <p class="hint">Excerpt · latest change shown. Read only.</p>
+      </div>
+    </section>
+  </main>
+</div>
+<ol class="notes"><li><span class="n">1</span><span>網球第三盤的局數與頁首贏盤數 1：1 分開呈現。此處只節錄最後一次更新與觸發該次評估的來源回報；穩定條件仍依 R04-14。沒有來源時間或時段內時間時顯示「—」，不推算分鐘。局內的 15／30／40／AD 另屬該運動的比分內容，不當成可累加的局數（R01-17、R03-08；<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/03-tennis.md">網球計分</a>）。</span></li></ol>
+
+<!-- ============================================================ -->
+<h2 id="s5">畫面 5：尚無比分回報</h2>
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Detail</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><a href="schedule.html#s2">‹ Back to Schedule</a><h3>Match Detail</h3><div class="sub">Data sources · M-252412 · UTC</div></div><a class="btn" href="issues.html">Open issue</a></div>
+    <div class="match-context"><div><div class="l2">THAI LEAGUE 1</div><b>Khon Kaen United vs Lamphun Warriors</b><div class="l2">Creator: Saba</div></div><div>2026-11-04 21:30<div class="l2">Not started <span class="chip">Pending cancellation</span></div></div></div>
+    <section class="panel">
+      <div class="ph"><div class="source-heading"><span>Data Sources</span><nav class="detail-tabs" aria-label="Data Sources"><a href="#s3">States</a><a class="on" href="#s5" aria-current="page">Goal</a><a>Corner</a><a>Booking</a><a>Red Card</a><a>Properties</a></nav></div><span class="btn">Refresh</span></div>
+      <div class="pb"><p>Canonical goals: <b>—</b> <span class="n">1</span></p><h4 class="property-heading">Canonical Changes</h4><p class="hint">No canonical goal changes yet.</p><h4 class="property-heading">Provider Reports</h4><p class="hint">No goal reports received.</p></div>
+    </section>
+  </main>
+</div>
+<ol class="notes"><li><span class="n">1</span><span>沒有比分回報時，不把統一比分預填為 0：0，也不顯示穩定；來源回報及統一變更各自顯示空白提示。這不改變待取消標記，裁定仍在賽事問題頁（R04-12～14、R04-23）。</span></li></ol>
+
+<h2 id="open">待確認事項</h2>
+<ol>
+  <li><b>已決定（2026-11-09），待寫回 PRD 04、11</b>：第二階段將比分變更放在賽事明細的 Data Sources，計分項目頁籤位於 States 與 Properties 之間（畫面 1～5）。足球依序為 Goal、Corner、Booking、Red Card，籃球為 Points，網球為 Games；不另設 Score Changes 頁籤。Booking 依足球目錄顯示罰牌積分，Red Card 顯示賽程 RC 的紅牌張數，不據此新增紅牌投注計分項目。另提供文字轉播歷史入口（畫面 1、2、4）。來源回報與統一結果分開追查；資料採用仍依 R04-14，不增加人工改分或逐場來源切換。</li>
+  <li><b>待決定：統一比賽時間的取值與更正</b>。PRD 尚未定義跨來源的時鐘選取、時段內時間換算、暫停或倒退的處理。建議先在紀錄保留各來源的原值與來源身分，將統一時鐘的規則補入 PRD 04 後再定稿；畫面 4 的 Period clock 只代表該筆來源回報，頁首時間沿用賽程示意。</li>
+  <li><b>待決定：比分追查紀錄的保存與查詢範圍</b>。R03-11 只說明原始資料短期保存，沒有定義本頁整併後的歷史可查多久。建議至少區分有效變更、晚到與停用等未採用回報，保留接收時間與來源時間；保存期限與查詢範圍由 PRD 03、04、11 及非功能需求補齊，不以本頁範例推定永久保存。</li>
+</ol>
 
 </div>
 </body>

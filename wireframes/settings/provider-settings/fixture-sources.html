@@ -3,26 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>賽程來源 wireframe</title>
+<title>來源設定・賽程來源 wireframe</title>
 <link rel="stylesheet" href="../../wireframe.css">
 </head>
 <body>
 <div class="doc">
-<h1>來源設定・賽程來源（Fixture Sources）</h1>
+<h1>來源設定・賽程來源（Provider Settings › Fixture Sources）</h1>
 <p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings › Fixture Sources · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求與稽核</a> · <a href="../../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 每個運動的賽程來源</a><a href="#s2">2 電子競技的賽程來源</a><a href="#open">待確認事項</a></nav>
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 更換每個運動的賽程來源。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>各類資料的使用開關與取得狀態：<a href="data-usage.html">Data Usage</a>（R03-05、R03-13）。整個連接器的暫停、恢復與影響：<a href="connectors.html">Connectors</a>（R03-07）；個別取得途徑與帳號維護另屬串接維運（R03-04）。</li>
-    <li>逐場指定建立者、競賽審核與賽事對應操作：04 的 R04-02、R04-05、R04-08；本頁只設定運動層的預設來源。</li>
+    <li>逐場指定建立者、競賽審核與賽事對應操作：04 的 R04-02、R04-05、R04-08；本頁只設定運動層的賽程來源。</li>
     <li>賠率、賽況與賽果的來源角色及競賽覆寫：R04-02。經銷商無法查看或設定來源。</li>
     <li>來源是否具備完整賽程能力由 Ops 另行設定，未設定的來源在矩陣中不能選取（R03-05）。</li>
-    <li>虛擬競賽的來源另行指定；方式尚待決定，不套用此處的運動預設（R04-20）。</li>
+    <li>虛擬競賽的來源另行指定；方式尚待決定，不套用此處的運動層設定（R04-20）。</li>
   </ul></td></tr>
 </table>
-<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。來源名稱、能力設定、運動與數字均為範例；能力設定不是對各供應商實際服務的判定。畫面只畫主內容區，側邊主選單見<a href="../../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
+<p class="disclaimer">本頁是需求示意，不約束版面、元件或資料模型。來源名稱、能力設定、運動與數字均為範例；能力設定不是對各來源實際服務的判定。畫面只畫主內容區，側邊主選單見<a href="../../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>以來源與運動矩陣查看每個運動的賽程來源；每個運動恰好一個，電子競技每個遊戲各算一個運動</td><td>R04-02；R01-24</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
@@ -34,7 +35,7 @@
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose one provider to create new fixtures for each sport.</div></div></div>
-    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Market Types</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
     <div class="filters fixture-filters">
       <div class="f"><label>Search</label><span class="box wide">Sport name...</span></div>
       <div class="f"><label>Esports <span class="n">1</span></label><span class="provider-switch off">OFF</span></div>
@@ -138,7 +139,7 @@
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
-        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
@@ -164,7 +165,7 @@
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
-        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
@@ -275,7 +276,7 @@
       </tr>
     </tbody></table></div>
     <section class="fixture-save">
-      <div class="provider-form"><label for="fixture-reason-s2">Reason for changing fixture sources <span class="n">3</span></label><input id="fixture-reason-s2" type="text" value="Planned change to the Soccer fixture source for new events." placeholder="Record why these fixture sources should be used" required></div>
+      <div class="provider-form"><label for="fixture-reason-s1">Reason for changing fixture sources <span class="n">3</span></label><input id="fixture-reason-s1" type="text" value="Planned change to the Soccer fixture source for new events." placeholder="Record why these fixture sources should be used" required></div>
       <div class="fixture-actions"><span class="btn pri">Save fixture sources</span><a class="btn" href="#s1">Discard changes</a><span class="l2">1 unsaved change · Soccer: Saba → Sbobet</span></div>
     </section>
     <p class="hint">All changed sports are saved, including those hidden by filters.</p>
@@ -295,7 +296,7 @@
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Choose one provider to create new fixtures for each sport.</div></div></div>
-    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Markets</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
+    <nav class="provider-settings-tabs" aria-label="Provider settings"><a href="data-usage.html">Data Usage</a><a href="connectors.html">Connectors</a><a href="sports-and-markets.html">Sports &amp; Market Types</a><a class="on" href="fixture-sources.html" aria-current="page">Fixture Sources</a><a href="classification.html">Classification</a></nav>
     <div class="filters fixture-filters">
       <div class="f"><label>Search</label><span class="box wide">Sport name...</span></div>
       <div class="f"><label>Esports <span class="n">1</span></label><span class="provider-switch on">ON</span></div>
@@ -322,8 +323,8 @@
         <td class="fixture-selected"><span class="fixture-choice">Source</span></td>
       </tr>
       <tr data-provider="flashscore"><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th>
-        <td><span class="fixture-choice">Select</span></td>
-        <td><span class="fixture-choice">Select</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
+        <td><span class="fixture-unavailable" title="Full fixture capability is not set">—</span></td>
         <td><span class="fixture-choice">Select</span></td>
         <td><span class="fixture-choice">Select</span></td>
       </tr>
@@ -357,7 +358,7 @@
   <li><span class="n">1</span><span>電子競技的每個遊戲是一個運動，各有一欄、各自恰好一個賽程來源，更換方式同畫面 1。本例 Pinnacle 負責四個遊戲，已儲存（R01-24、R04-02）。</span></li>
 </ol>
 
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 </div>
 </body>

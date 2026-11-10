@@ -10,35 +10,39 @@
 <div class="doc">
 
 <h1>單場賽程（Matches › Schedule）</h1>
-<p class="meta"><b>日期</b>：2026-11-04 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
+<p class="meta"><b>日期</b>：2026-11-09 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 依運動與日期查看統一單場比賽（Match）：依競賽分組，按統一狀態篩選，一眼看到每場的比分、目前時段、建立者與套用的玩法設定模板，並從單場進入賽事對應（Mapping）。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 依運動與日期查看統一單場比賽（Match）：依競賽分組，按統一狀態篩選，一眼看到每場的比分、目前時段、文字轉播（Commentary）、滾球訊號（Signal）、建立者與套用的玩法設定模板，並從單場進入比分變更、文字轉播歷史或賽事對應（Mapping）。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>待取消／待腰斬的裁定、重掛與覆核：<a href="issues.html">賽事問題</a>（R04-19、R04-23～24）。</li>
     <li>來源原始賽程與既有統一關係：<a href="../provider/matches/schedule.html">來源單場賽程</a>，內容唯讀（R03-08、R04-01）。R04-05 的人工指定建立者是從既有來源場次建立統一比賽，操作流程不在目前畫面範圍。</li>
-    <li>競賽、參賽方的名稱、屬性、等級與排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
-    <li>賠率與操盤：Matches › Odds（05）；賽果與結算：Matches › Results、Grades（R04-13～15、07）；玩法設定模板的內容與指定：Settings › Market Settings（R12-01～05）。</li>
+    <li>來源賽況角色、訊號形式與優先順序，以及停用與連接器維運：Provider Settings（R04-02、R04-16；R03-05～08）；訊號事件的危險對應及持續時間由訊號對應表設定（R04-21），不在賽程逐場切換來源（R04-22）。</li>
+    <li>競賽、參賽方的名稱、屬性與等級，以及競賽的排序：<a href="../catalog/tournaments.html">競賽</a>、<a href="../catalog/competitors.html">參賽方</a>頁（R01-30～32）。</li>
+    <li>賠率與操盤：Matches › Odds（05）；賽果與結算：Matches › Results、Grades（R04-13～15、07）；玩法設定模板的內容與指定：Settings › Market Type Settings（R12-01～05）。</li>
   </ul></td></tr>
 </table>
 
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例，時間皆為 UTC。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。</p>
-<p class="disclaimer">即時資料（比賽時間、比分與文字轉播）於第二階段（LIVE DATA）才有資料，目前畫面僅示意欄位位置。</p>
+<p class="disclaimer">第二階段即時資料（LIVE DATA）：在既有賽程加入文字轉播、滾球訊號及歷史入口。訊號以圖示與時間呈現，意義放在畫面下方說明；逐計分項目的判定與計時語意、文字轉播整併及時鐘選源尚待定義，見待確認事項。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動、日期區間、排序與名稱／識別搜尋單場比賽</td><td>R01-24；R04-04</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>依統一狀態分頁籤篩選，各頁籤顯示場數</td><td>R04-12</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>3</td><td>依競賽分組，可展開／收合，可依競賽篩選</td><td>R01-12</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>4</td><td>單場顯示主客方（依建立者順序）、統一識別與開賽時間</td><td>R01-25；R04-04～06</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>5</td><td>依運動的計分項目與時段顯示比分、穩定狀態、目前時段與比賽時間，並開啟比分變更</td><td>R01-17；R04-13～14；見待確認第 4、8 項</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>6</td><td>顯示建立者與已對應的來源數</td><td>R04-05、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>7</td><td>顯示賽事套用的玩法設定模板及其指定層級</td><td>R12-05</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事審核</td><td>R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事問題</td><td>R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>9</td><td>從單場進入明細與唯讀的賽事對應彈出視窗</td><td>R04-04～06、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>10</td><td>滾球中有直播的賽事可開啟直播</td><td>待補</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>10</td><td>滾球中有直播的賽事可開啟直播</td><td>見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>11</td><td>顯示最近收到的來源文字轉播、來源、時段／時鐘與接收時間，並開啟本場歷史</td><td>R03-08；見待確認第 2、3 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>12</td><td>依計分項目排列訊號圖示與時間，於畫面下方說明狀態、覆蓋與來源語意</td><td>R04-02、R04-21～22；見待確認第 2、5～7 項</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
 </table>
 
 <!-- ============================================================ -->
@@ -66,42 +70,58 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time <span class="n">3</span></th><th rowspan="2">Match <span class="n">4</span></th><th colspan="3" class="c">Score <span class="n">5</span></th><th rowspan="2" class="c">Providers <span class="n">6</span></th><th rowspan="2" class="c">Settings <span class="n">7</span></th><th rowspan="2"></th></tr>
-        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
+        <tr><th rowspan="2" class="c">Time <span class="n">3</span></th><th rowspan="2">Match <span class="n">4</span></th><th colspan="3" class="c">Score <span class="n">5</span></th><th colspan="3" class="c">Signal <span class="n">11</span></th><th rowspan="2">Commentary <span class="n">10</span></th><th rowspan="2" class="c">Providers <span class="n">6</span></th><th rowspan="2" class="c">Settings <span class="n">7</span></th><th rowspan="2"></th></tr>
+        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE ELITE</td></tr>
+        <tr class="grp"><td colspan="12">▾ AFC CHAMPIONS LEAGUE ELITE</td></tr>
         <tr>
-          <td class="t"><b>1 : 1</b>2H 18'</td>
+          <td class="t"><b><a href="match-detail.html#s4">1 : 1</a></b>2H 18'<div class="l2">GL stable <span class="n">12</span></div></td>
           <td><div class="match-team"><a href="match-detail.html#s1">Pohang Steelers</a><span class="ids">C-10644</span></div><div class="match-team"><a href="match-detail.html#s1">Gamba Osaka</a><span class="ids">C-7338</span></div><div class="l2"><a href="match-detail.html#s1">M-250356</a> · 2026-11-04 18:00 <span class="play" title="Livestream">▶</span> <span class="n">9</span></div></td>
-          <td class="sc">1<br>1</td><td class="sc">5<br>3</td><td class="sc">0<br>1</td>
-          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="sc"><a href="match-detail.html#s4">1<br>1</a></td><td class="sc"><a href="match-detail.html#s4-corner">5<br>3</a></td><td class="sc"><a href="match-detail.html#s4-red-card">0<br>1</a></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: Danger; 00:30 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">00:30</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: Danger; 00:30 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">00:30</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: Danger; 00:30 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">00:30</span></span></td>
+          <td><a href="match-commentary-history.html#s1">Possible penalty — Pohang Steelers</a><div class="l2">RunningBall · 2H 18:00</div><div class="l2">Received 11-04 19:22:12</div></td>
+          <td class="c">Saba<div class="l2">3 / 7</div></td>
           <td class="c">Template 16<div class="l2">Tournament</div></td>
-          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div><a href="match-mapping.html#s1">Match Mapping</a></div></div></details></td>
+          <td><details class="match-menu" open><summary>⋮ <span class="n">8</span></summary><div class="list"><div><a href="match-mapping.html#s1">Match Mapping</a></div><div><a href="match-detail.html#s4">Score Changes</a></div><div><a href="match-commentary-history.html#s1">Commentary History</a></div></div></details></td>
         </tr>
         <tr>
           <td class="t"><b>0 : 0</b>HT</td>
           <td><div class="match-team"><span>Buriram United</span><span class="ids">C-23211</span></div><div class="match-team"><span>Kashima Antlers</span><span class="ids">C-7331</span></div><div class="l2">M-250357 · 2026-11-04 20:15 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">0<br>0</td><td class="sc">2<br>4</td><td class="sc">1<br>0</td>
-          <td class="c">Provider A<div class="l2">4 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: Safe; 12:08 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">12:08</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: Safe; 12:08 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">12:08</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: Safe; 12:08 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">12:08</span></span></td>
+          <td>Half time<div class="l2">Saba · HT</div><div class="l2">Received 11-04 21:03:05</div></td>
+          <td class="c">Saba<div class="l2">4 / 7</div></td>
           <td class="c">Template 16<div class="l2">Tournament</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="8">▾ AFC CHAMPIONS LEAGUE TWO</td></tr>
+        <tr class="grp"><td colspan="12">▾ AFC CHAMPIONS LEAGUE TWO</td></tr>
         <tr>
-          <td class="t"><b>1 : 2</b>1H 31'</td>
+          <td class="t"><b>1 : 2</b>1H 31'<div class="l2">GL unstable</div><div class="l2">Last stable score</div></td>
           <td><div class="match-team"><span>Melbourne Victory</span><span class="ids">C-11596</span></div><div class="match-team"><span>Persib Bandung</span><span class="ids">C-8800</span></div><div class="l2">M-250699 · 2026-11-04 19:45</div></td>
           <td class="sc">1<br>2</td><td class="sc">1<br>2</td><td class="sc">0<br>0</td>
-          <td class="c">Provider A<div class="l2">2 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: Safe; 02:14 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">02:14</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: Safe; 02:14 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">02:14</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: Safe; 02:14 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">02:14</span></span></td>
+          <td>Goal — Melbourne Victory<div class="l2">Saba · 1H 31:00</div><div class="l2">Received 11-04 20:16:05</div></td>
+          <td class="c">Saba<div class="l2">2 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="8">▾ THAI LEAGUE 1</td></tr>
+        <tr class="grp"><td colspan="12">▾ THAI LEAGUE 1</td></tr>
         <tr>
           <td class="t"><b>0 : 3</b>2H 33'</td>
           <td><div class="match-team"><span>Bangkok United</span><span class="ids">C-25498</span></div><div class="match-team"><span>Port FC</span><span class="ids">C-25722</span></div><div class="l2">M-251907 · 2026-11-04 18:00 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">0<br>3</td><td class="sc">7<br>2</td><td class="sc">1<br>0</td>
-          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: No signal; 03:12 in current state, minutes and seconds"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">03:12</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: No signal; 03:12 in current state, minutes and seconds"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">03:12</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: No signal; 03:12 in current state, minutes and seconds"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">03:12</span></span></td>
+          <td>Corner — Bangkok United<div class="l2">Saba · 2H 32:55</div><div class="l2">Received 11-04 19:38:05</div></td>
+          <td class="c">Saba<div class="l2">3 / 7</div></td>
           <td class="c">Template 30<div class="l2">Match</div></td>
           <td>⋮</td>
         </tr>
@@ -109,16 +129,24 @@
           <td class="t"><b>1 : 0</b>1H 12'</td>
           <td><div class="match-team"><span>BG Pathum United</span><span class="ids">C-25920</span></div><div class="match-team"><span>Muangthong United</span><span class="ids">C-26254</span></div><div class="l2">M-252208 · 2026-11-04 20:00</div></td>
           <td class="sc">1<br>0</td><td class="sc">1<br>0</td><td class="sc">—<br>—</td>
-          <td class="c">Provider C<div class="l2">1 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: Danger; 01:05 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">01:05</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: Danger; 01:05 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">01:05</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: Danger; 01:05 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">01:05</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Pinnacle<div class="l2">1 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="8">▾ VIETNAM NATIONAL CUP</td></tr>
+        <tr class="grp"><td colspan="12">▾ VIETNAM NATIONAL CUP</td></tr>
         <tr>
           <td class="t"><b>2 : 2</b>ET 2H 7'</td>
           <td><div class="match-team"><span>Hanoi FC</span><span class="ids">C-31002</span></div><div class="match-team"><span>Cong An Ha Noi</span><span class="ids">C-31017</span></div><div class="l2">M-252310 · 2026-11-04 18:30</div></td>
           <td class="sc">2<br>2</td><td class="sc">6<br>8</td><td class="sc">0<br>1</td>
-          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td>Equaliser — Hanoi FC<div class="l2">Saba · ET 2H 7:00</div><div class="l2">Received 11-04 20:44:05</div></td>
+          <td class="c">Saba<div class="l2">3 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
@@ -130,13 +158,16 @@
 <ol class="notes">
   <li><span class="n">1</span><span>System sorting 依目錄設定的競賽排序（見<a href="../catalog/tournaments.html">競賽</a>頁），組內依開賽時間；另可改為依開賽時間排序。</span></li>
   <li><span class="n">2</span><span>頁籤對應 R04-12 的八種統一狀態：Live（進行中）、Prematch（未開始）、Postponed（延後）、Interrupted（比賽中斷）、Ended（已結束）、Closed（賽果已確定）、Cancelled（取消）、Abandoned（腰斬）。數字是目前篩選條件下的場數，0 場的頁籤淡化。待取消／待腰斬是疊在狀態上的標記，不是頁籤（見<a href="#s2">畫面 2</a>）。</span></li>
-  <li><span class="n">3</span><span>滾球中顯示全場比分與目前時段及比賽時間：1H／HT／2H／ET 1H／ET 2H／PEN（點球大戰），足球的時段見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">01-soccer</a>。分鐘數在每個時段重新起算，例如 2H 18' 是下半場第 18 分鐘。目前時段與比賽時間直接取自來源的賽況資料，各運動皆同。</span></li>
+  <li><span class="n">3</span><span>滾球中顯示全場比分與目前時段及比賽時間：1H／HT／2H／ET 1H／ET 2H／PEN（點球大戰），足球的時段見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">01-soccer</a>。分鐘數在每個時段重新起算，例如 2H 18' 是下半場第 18 分鐘。此處的時段與時鐘來自賽況資料，不從接收時間倒推；來源選擇、正規化及停錶規則尚待定義，見待確認第 4 項。</span></li>
   <li><span class="n">4</span><span>上方為主隊、下方為客隊，順序以建立者為準且建立後不變（R01-25、R04-06）。右側為參賽方的統一識別，下方為賽事的統一識別與開賽時間（R04-04）。點選賽事開啟<a href="match-detail.html">賽事明細</a>。</span></li>
-  <li><span class="n">5</span><span>足球的比分子欄是計分項目 GL 進球、CR 角球、RC 紅牌（R01-17）；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
+  <li><span class="n">5</span><span>足球的比分子欄是 GL 進球、CR 角球、RC 紅牌張數；進球與角球是目錄的計分項目（R01-17），紅牌張數不在足球目錄的計分項目內，僅供顯示（見待確認第 8 項）；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
   <li><span class="n">6</span><span>上行是建立者（R04-05），下行是已對應到本場的來源數／此運動已接入的來源數（R04-08）。</span></li>
   <li><span class="n">7</span><span>本場實際套用的玩法設定模板，下行是指定在哪一層：Match、Tournament 或 Sport（R12-05，賽事優先於競賽，競賽優先於運動）。</span></li>
-  <li><span class="n">8</span><span>列尾選單只有 <a href="match-mapping.html">Match Mapping</a>：開啟唯讀的賽事對應彈出視窗，查看本場與已對應來源的識別、名稱及對應者（R04-04、R04-06、R04-08）。</span></li>
+  <li><span class="n">8</span><span>列尾選單提供 <a href="match-mapping.html">Match Mapping</a>、<a href="match-detail.html#s4">Score Changes</a> 與<a href="match-commentary-history.html">文字轉播歷史</a>；Score Changes 開啟賽事明細 Data Sources 的 Goal 頁籤，也可在 States 與 Properties 之間切換 Corner、Booking、Red Card。GL／CR／RC 的比分連結直接開啟相應頁籤；都保留同一場比賽，對應視窗仍為唯讀（R04-04、R04-06、R04-08；文字轉播見待確認第 2 項）。</span></li>
   <li><span class="n">9</span><span>僅滾球中且有直播的賽事，在開賽時間右側顯示播放圖示，點擊開啟直播。</span></li>
+  <li><span class="n">10</span><span>文字轉播欄示意最近收到的來源文字，附來源、來源所報的時段／時鐘與 InSports 接收時間（R03-08）。點擊本場文字或列尾選單開啟<a href="match-commentary-history.html">文字轉播歷史</a>。來源時間另於歷史查看；沒有文字時明示尚未收到，不由比分或訊號自動編寫。這是帶來源的查看方式，文字整併及選源仍見待確認第 3 項。</span></li>
+  <li><span class="n">11</span><span>Signal 按 GL／CR／RC 排列，格內只放圓形圖示與時間：綠色「✓」為 Safe、橘色「−」為 Danger、灰色「?」為 No signal，不只靠顏色辨識。圖示下方時間暫以目前訊號狀態持續的分：秒示意，超過一小時仍累計分鐘；起點未知顯示「—」，不是比賽時鐘、資料新鮮度或安全倒數（見待確認第 5～7 項）。R04-21 目前仍定義每場一個統一訊號，因此本稿同場三格同步顯示該值，不代表三個獨立判定。覆蓋另依 R04-22：首場 RunningBall 的事件來源穩定，有覆蓋但因可能點球顯示危險；曼谷一場 RunningBall 不穩定，無訊號且無覆蓋；BG Pathum 一場 Pinnacle 是封盤形式，危險但無覆蓋。不穩定時不切換來源，文字轉播也不能自行決定訊號（R04-02、R04-16、R04-21～22）。</span></li>
+  <li><span class="n">12</span><span>比分穩定狀態獨立於訊號：首場進球比分已穩定，但可能點球仍是 Danger；墨爾本一場的進球比分不穩定，維持上一個穩定值 1:2，訊號仍可為 Safe（R04-14、R04-21）。主計分項目不穩定時全場滾球盤口暫停；次項目只影響該項目（<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/live-quorum-scope.md">影響範圍</a>）。點比分開啟<a href="match-detail.html#s4">比分變更</a>，不提供手動改比分或切換來源。</span></li>
 </ol>
 
 <h3 class="example" id="s1-basketball">籃球</h3>
@@ -157,43 +188,51 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th colspan="1" class="c">Score <span class="n">2</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
-        <tr><th class="c">PTS</th></tr>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th colspan="1" class="c">Score <span class="n">2</span></th><th colspan="1" class="c">Signal <span class="n">4</span></th><th rowspan="2">Commentary <span class="n">3</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">PTS</th><th class="c">PTS</th></tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="6">▾ AUSTRALIA NBL</td></tr>
+        <tr class="grp"><td colspan="8">▾ AUSTRALIA NBL</td></tr>
         <tr>
           <td class="t"><b>88 : 84</b>Q4 5:12</td>
           <td><div class="match-team"><span>Brisbane Bullets</span><span class="ids">C-27605</span></div><div class="match-team"><span>Perth Wildcats</span><span class="ids">C-27276</span></div><div class="l2">M-248548 · 2026-11-04 17:00</div></td>
           <td class="sc">88<br>84</td>
-          <td class="c">Provider A<div class="l2">3 / 6</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Points: Safe; 04:18 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">04:18</span></span></td>
+          <td>Two points — Brisbane Bullets<div class="l2">Sbobet · Q4 5:12</div><div class="l2">Received 11-04 18:41:22</div></td>
+          <td class="c">Sbobet<div class="l2">3 / 6</div></td>
           <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="6">▾ CHINA CBA</td></tr>
+        <tr class="grp"><td colspan="8">▾ CHINA CBA</td></tr>
         <tr>
           <td class="t"><b>108 : 106</b>OT 2:40</td>
           <td><div class="match-team"><span>Shanghai Sharks</span><span class="ids">C-41029</span></div><div class="match-team"><span>Liaoning Flying Leopards</span><span class="ids">C-41056</span></div><div class="l2">M-252203 · 2026-11-04 19:35 <span class="play" title="Livestream">▶</span></div></td>
           <td class="sc">108<br>106</td>
-          <td class="c">Provider A<div class="l2">4 / 6</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Points: Danger; 00:24 in current state, minutes and seconds"><span class="signal-icon signal-danger" aria-hidden="true">−</span><span class="signal-age" aria-hidden="true">00:24</span></span></td>
+          <td>Foul — Shanghai Sharks<div class="l2">RunningBall · OT 2:40</div><div class="l2">Received 11-04 21:35:04</div></td>
+          <td class="c">Sbobet<div class="l2">4 / 6</div></td>
           <td class="c">Template 30<div class="l2">Tournament</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="6">▾ JAPAN B.LEAGUE</td></tr>
+        <tr class="grp"><td colspan="8">▾ JAPAN B.LEAGUE</td></tr>
         <tr>
           <td class="t"><b>45 : 39</b>HT</td>
           <td><div class="match-team"><span>Alvark Tokyo</span><span class="ids">C-8990</span></div><div class="match-team"><span>Chiba Jets</span><span class="ids">C-9199</span></div><div class="l2">M-252277 · 2026-11-04 18:05</div></td>
           <td class="sc">45<br>39</td>
-          <td class="c">Provider A<div class="l2">2 / 6</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Points: Safe; 07:10 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">07:10</span></span></td>
+          <td>Half time<div class="l2">Sbobet · HT</div><div class="l2">Received 11-04 18:55:02</div></td>
+          <td class="c">Sbobet<div class="l2">2 / 6</div></td>
           <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="6">▾ PHILIPPINES PBA</td></tr>
+        <tr class="grp"><td colspan="8">▾ PHILIPPINES PBA</td></tr>
         <tr>
           <td class="t"><b>14 : 9</b>Q1 6:30</td>
           <td><div class="match-team"><span>San Miguel Beermen</span><span class="ids">C-24747</span></div><div class="match-team"><span>Barangay Ginebra</span><span class="ids">C-9118</span></div><div class="l2">M-252290 · 2026-11-04 19:30</div></td>
           <td class="sc">14<br>9</td>
-          <td class="c">Provider A<div class="l2">3 / 6</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Points: No signal; 01:46 in current state, minutes and seconds"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">01:46</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Sbobet<div class="l2">3 / 6</div></td>
           <td class="c">Template 10<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
@@ -205,6 +244,8 @@
 <ol class="notes">
   <li><span class="n">1</span><span>籃球的目前時段為 Q1～Q4、HT（中場）與 OT（加時賽），後接該節剩餘時間（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">02-basketball</a>）。</span></li>
   <li><span class="n">2</span><span>籃球只有得分一個計分項目，因此只有 PTS 一欄，為全場得分（含加時賽）（R01-17、R04-13）。</span></li>
+  <li><span class="n">3</span><span>文字轉播保留來源、時段、節內剩餘時間與接收時間，語意同足球範例；沒有收到文字時不以計分事件補成轉播（R03-08；見待確認第 2、3 項）。</span></li>
+  <li><span class="n">4</span><span>籃球的 Signal 以 PTS 呈現圖示與時間，不按 Q1～Q4 等比賽時段拆訊號。圖示意義與計時假設同足球說明。東京一場的 Sbobet 封盤形式來源已開盤，故圖示為 Safe，但仍無覆蓋；菲律賓一場 RunningBall 在該場不穩定，故為 No signal、無覆蓋，原來源不被替換；同一來源在其他場次仍可正常提供訊號（R04-21～22；見待確認第 5～7 項）。</span></li>
 </ol>
 
 <h3 class="example" id="s1-tennis">網球</h3>
@@ -225,33 +266,39 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match <span class="n">2</span></th><th colspan="2" class="c">Score <span class="n">3</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
-        <tr><th class="c">Sets</th><th class="c">Games</th></tr>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match <span class="n">2</span></th><th colspan="2" class="c">Score <span class="n">3</span></th><th colspan="1" class="c">Signal <span class="n">5</span></th><th rowspan="2">Commentary <span class="n">4</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">Sets</th><th class="c">Games</th><th class="c">Games</th></tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="7">▾ ATP - PARIS MASTERS</td></tr>
-        <tr>
-          <td class="t"><b>1 : 0</b>Set 2</td>
-          <td><div class="match-team"><span>Alexander Zverev (GER)</span><span class="ids">C-11352</span></div><div class="match-team"><span>Lorenzo Musetti (ITA)</span><span class="ids">C-9468</span></div><div class="l2">M-249916 · 2026-11-04 20:30 <span class="play" title="Livestream">▶</span> · Best of 3</div></td>
-          <td class="sc">1<br>0</td><td class="sc">9<br>6</td>
-          <td class="c">Provider A<div class="l2">3 / 5</div></td>
-          <td class="c">Template 1<div class="l2">Sport</div></td>
-          <td>⋮</td>
-        </tr>
+        <tr class="grp"><td colspan="9">▾ ATP - PARIS MASTERS</td></tr>
         <tr>
           <td class="t"><b>1 : 1</b>Set 3</td>
           <td><div class="match-team"><span>Quentin Halys (FRA)</span><span class="ids">C-16797</span></div><div class="match-team"><span>Frances Tiafoe (USA)</span><span class="ids">C-9193</span></div><div class="l2">M-251250 · 2026-11-04 18:15 · Best of 3</div></td>
           <td class="sc">1<br>1</td><td class="sc">12<br>13</td>
-          <td class="c">Provider A<div class="l2">3 / 5</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Games: Safe; 02:09 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">02:09</span></span></td>
+          <td>Game — Quentin Halys<div class="l2">RunningBall · Set 3 · Clock: —</div><div class="l2">Received 11-04 19:58:21</div></td>
+          <td class="c">Saba<div class="l2">3 / 5</div></td>
           <td class="c">Template 1<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="7">▾ EXHIBITION - SEA TENNIS SHOWDOWN</td></tr>
+        <tr>
+          <td class="t"><b>1 : 0</b>Set 2</td>
+          <td><div class="match-team"><span>Alexander Zverev (GER)</span><span class="ids">C-11352</span></div><div class="match-team"><span>Lorenzo Musetti (ITA)</span><span class="ids">C-9468</span></div><div class="l2">M-249916 · 2026-11-04 20:30 <span class="play" title="Livestream">▶</span> · Best of 3</div></td>
+          <td class="sc">1<br>0</td><td class="sc">9<br>6</td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Games: Safe; 03:24 in current state, minutes and seconds"><span class="signal-icon signal-safe" aria-hidden="true">✓</span><span class="signal-age" aria-hidden="true">03:24</span></span></td>
+          <td>Game — Alexander Zverev<div class="l2">Saba · Set 2 · Clock: —</div><div class="l2">Received 11-04 21:35:42</div></td>
+          <td class="c">Saba<div class="l2">3 / 5</div></td>
+          <td class="c">Template 1<div class="l2">Sport</div></td>
+          <td>⋮</td>
+        </tr>
+        <tr class="grp"><td colspan="9">▾ EXHIBITION - SEA TENNIS SHOWDOWN</td></tr>
         <tr>
           <td class="t"><b>2 : 1</b>Set 4</td>
           <td><div class="match-team"><span>Kasidit Samrej (THA)</span><span class="ids">C-16781</span></div><div class="match-team"><span>Francis Alcantara (PHI)</span><span class="ids">C-10392</span></div><div class="l2">M-251253 · 2026-11-04 17:00 · Best of 5</div></td>
           <td class="sc">2<br>1</td><td class="sc">17<br>12</td>
-          <td class="c">Provider C<div class="l2">1 / 5</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Games: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Pinnacle<div class="l2">1 / 5</div></td>
           <td class="c">Template 1<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
@@ -264,6 +311,8 @@
   <li><span class="n">1</span><span>網球的目前時段是正在進行的盤（Set 1～Set 5）；網球沒有比賽時鐘（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/03-tennis.md">03-tennis</a>）。</span></li>
   <li><span class="n">2</span><span>參賽方是球員。賽制（三盤兩勝或五盤三勝）依賽事而定，顯示在賽事識別旁。</span></li>
   <li><span class="n">3</span><span>Sets 是盤數（全場），Games 是全場累計的局數（搶七計為一局）；兩者都是網球的計分項目（R01-17）。</span></li>
+  <li><span class="n">4</span><span>文字轉播保留來源的盤與接收時間；網球不套用足球分鐘或籃球倒數時鐘，因此 Clock 顯示「—」（R01-17；R03-08；見待確認第 2、3 項）。</span></li>
+  <li><span class="n">5</span><span>網球的 Signal 暫以 Games 呈現圖示與時間，不把各盤 S1～S5 當成獨立訊號；訊號項目的細分仍見待確認第 6 項。沒有使用中的來源時顯示灰色「?」、時間「—」，代表無訊號且起點未知；不因仍有比分或賽程來源就推論有訊號。圖示下方時間是訊號狀態的持續時間示意，不是網球比賽時鐘（R04-02、R04-21～22；見待確認第 5、7 項）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -278,18 +327,22 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time</th><th rowspan="2">Match</th><th colspan="3" class="c">Score</th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
-        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
+        <tr><th rowspan="2" class="c">Time</th><th rowspan="2">Match</th><th colspan="3" class="c">Score</th><th colspan="3" class="c">Signal <span class="n">4</span></th><th rowspan="2">Commentary <span class="n">3</span></th><th rowspan="2" class="c">Providers</th><th rowspan="2" class="c">Settings</th><th rowspan="2"></th></tr>
+        <tr><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th><th class="c">GL</th><th class="c">CR</th><th class="c">RC</th></tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="8">▸ AFC CHAMPIONS LEAGUE ELITE <span class="l2">4</span></td></tr>
-        <tr class="grp"><td colspan="8">▸ AFC CHAMPIONS LEAGUE TWO <span class="l2">6</span></td></tr>
-        <tr class="grp"><td colspan="8">▾ THAI LEAGUE 1 <span class="l2">3</span></td></tr>
+        <tr class="grp"><td colspan="12">▸ AFC CHAMPIONS LEAGUE ELITE <span class="l2">4</span></td></tr>
+        <tr class="grp"><td colspan="12">▸ AFC CHAMPIONS LEAGUE TWO <span class="l2">6</span></td></tr>
+        <tr class="grp"><td colspan="12">▾ THAI LEAGUE 1 <span class="l2">3</span></td></tr>
         <tr>
           <td class="t"><b>21:00</b>Not started</td>
           <td><div class="match-team"><span>Chonburi FC</span><span class="ids">C-25510</span></div><div class="match-team"><span>Ratchaburi FC</span><span class="ids">C-25533</span></div><div class="l2">M-252411 · 2026-11-04 21:00</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
-          <td class="c">Provider A<div class="l2">3 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Saba<div class="l2">3 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
@@ -297,7 +350,11 @@
           <td class="t"><b>21:30</b>Not started<div><a class="chip" href="issues.html">Pending cancellation</a> <span class="n">2</span></div></td>
           <td><div class="match-team"><span>Khon Kaen United</span><span class="ids">C-25541</span></div><div class="match-team"><span>Lamphun Warriors</span><span class="ids">C-25548</span></div><div class="l2">M-252412 · 2026-11-04 21:30</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
-          <td class="c">Provider A<div class="l2">2 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Saba<div class="l2">2 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
@@ -305,13 +362,17 @@
           <td class="t"><b>22:00</b>Not started</td>
           <td><div class="match-team"><span>Sukhothai FC</span><span class="ids">C-25560</span></div><div class="match-team"><span>Nakhon Ratchasima</span><span class="ids">C-25571</span></div><div class="l2">M-252413 · 2026-11-04 22:00</div></td>
           <td class="sc">—<br>—</td><td class="sc">—<br>—</td><td class="sc">—<br>—</td>
-          <td class="c">Provider C<div class="l2">1 / 8</div></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Goals: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Corners: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td class="signal-cell"><span class="signal-indicator" role="img" aria-label="Red cards: No signal; duration unavailable"><span class="signal-icon signal-missing" aria-hidden="true">?</span><span class="signal-age" aria-hidden="true">—</span></span></td>
+          <td><span class="l2">No commentary received</span></td>
+          <td class="c">Pinnacle<div class="l2">1 / 7</div></td>
           <td class="c">Template 12<div class="l2">Sport</div></td>
           <td>⋮</td>
         </tr>
-        <tr class="grp"><td colspan="8">▸ VIETNAM NATIONAL CUP <span class="l2">2</span></td></tr>
-        <tr class="grp"><td colspan="8">▸ INDONESIA LIGA 1 <span class="l2">9</span></td></tr>
-        <tr class="grp"><td colspan="8">▸ MALAYSIA SUPER LEAGUE <span class="l2">18</span></td></tr>
+        <tr class="grp"><td colspan="12">▸ VIETNAM NATIONAL CUP <span class="l2">2</span></td></tr>
+        <tr class="grp"><td colspan="12">▸ INDONESIA LIGA 1 <span class="l2">9</span></td></tr>
+        <tr class="grp"><td colspan="12">▸ MALAYSIA SUPER LEAGUE <span class="l2">18</span></td></tr>
       </tbody>
     </table>
   </main>
@@ -320,6 +381,8 @@
 <ol class="notes">
   <li><span class="n">1</span><span>Collapse matches／Show matches 一次收合或展開所有競賽；也可以逐一點競賽列展開。收合時競賽列後顯示場數，「3 / 42 shown」是目前展開的場數／頁籤總場數。</span></li>
   <li><span class="n">2</span><span>待取消（Pending cancellation）或待腰斬（Pending abandonment）標記疊在統一狀態上，本場仍在 Prematch 頁籤；已下架，點擊進入<a href="issues.html">賽事問題</a>處理（R04-12、R04-23）。</span></li>
+  <li><span class="n">3</span><span>賽前保留文字轉播欄，尚未收到時顯示 No commentary received，不預填開球或零分鐘；歷史為本場的來源紀錄，不能從其他比賽補值（R03-08；見待確認第 2 項）。</span></li>
+  <li><span class="n">4</span><span>本例三場尚無使用中的賽況來源，三個 Signal 子欄都顯示灰色「?」，代表 No signal、無覆蓋；時間起點未知，顯示「—」而非 00:00。不是由 Prematch 自動推論訊號，待取消標記仍獨立存在（R04-12、R04-21～23；見待確認第 5～7 項）。</span></li>
 </ol>
 
 <!-- ============================================================ -->
@@ -328,7 +391,7 @@
 <div lang="en" class="frame">
   <div class="backdrop">
     <div class="modal">
-      <div class="mh"><span>Select Tournament <span class="chip">5 / 5</span></span><span>×</span></div>
+      <div class="mh"><span>Select Tournament <span class="chip">4 / 5</span></span><span>×</span></div>
       <div class="mb">
         <div class="list">
           <div class="cat"><label><input type="checkbox" checked> REGULAR TOURNAMENTS · 4</label> <span class="n">1</span></div>
@@ -351,10 +414,17 @@
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
-<ul>
+<h2 id="open">待確認事項</h2>
+<ol>
   <li>直播：PRD 尚未定義直播的來源、與賽事的對應方式及開啟形式（新視窗或內嵌播放器）。</li>
-</ul>
+  <li><b>已決定（2026-11-09），待寫回 PRD 03、04</b>：第二階段在統一賽程加入 Commentary 與 Signal，並提供本場文字轉播歷史入口（畫面 1、2）。Signal 的業務語意依 R04-21～22；文字轉播尚未在 PRD 中明定。</li>
+  <li><b>文字轉播整併與選源待決定</b>：哪些來源能提供統一文字、重複／晚到／更正如何處理、文字與計分事件如何關聯，PRD 尚未定義。建議先保留來源及時間供檢視，清單以最近接收文字作查看摘要，不將它當成已確認的統一事件或訊號；歷史也保留來源各自的紀錄。畫面 1 不代表已採用任何跨來源合併或去重規則。</li>
+  <li><b>統一時鐘待決定</b>：PRD 尚未定義時鐘選源、各來源時段／時間的正規化、停錶及過期時鐘顯示。建議保留來源回報的時段、時鐘與雙時間，未回報者顯示未知，不用本機時間自動補值；本頁沿用既有時段顯示示意，需與明細及歷史一併確認後寫回 PRD 04。</li>
+  <li><b>已決定（2026-11-09），待寫回 PRD 11</b>：Signal 採用參考畫面的精簡樣式，足球分成 GL／CR／RC，格內放狀態圖示與時間，意義移到畫面下方說明，不放多行說明或工具提示（畫面 1、2）。色彩配合不同符號，並保留輔助技術可讀的狀態文字。</li>
+  <li><b>逐計分項目的訊號規則待決定</b>：R04-21 目前仍是每場一個統一訊號。本稿先將同場訊號同步呈現在各計分項目，不自行假定 GL、CR、RC 可以有不同值。各項目能否獨立、事件影響哪些項目、籃球及網球的訊號項目範圍，需於 PRD 04 定義；訊號來源與覆蓋規則仍依 R04-02、R04-22。</li>
+  <li><b>圖示下方時間的語意待決定</b>：參考圖不足以判定是狀態持續時間、最後更新距今或其他計時。本稿暫以「目前狀態已持續多久」示意，來源為狀態變更時間，相同狀態的重複回報不歸零；未知時顯示「—」。這是待確認的顯示假設，不自動解除危險、不據此判斷來源過期，也不新增業務時間門檻，待寫入 PRD 04／11。</li>
+  <li><b>已決定（2026-11-10），待寫回 PRD 01 的運動目錄</b>：賽程的比分欄保留足球的 RC（紅牌張數）與籃球的 OT（加時賽合計）（畫面 1；來源單場賽程相同）。足球目錄的罰牌計分項目是罰牌積分，沒有紅牌張數；籃球目錄沒有獨立的加時賽時段。兩欄僅供 Ops 查看，不據此新增投注用的計分項目或時段；是否列入目錄待 PRD 決定。</li>
+</ol>
 
 </div>
 </body>

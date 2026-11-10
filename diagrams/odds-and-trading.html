@@ -43,7 +43,7 @@
 <path d="M480,92 L775,92 L775,112" class="ln" marker-end="url(#arr)"/>
 <!-- 左：家族 -->
 <rect x="40" y="114" width="580" height="500" rx="6" class="panel"/>
-<text x="330" y="140" text-anchor="middle" class="tb">模型定價玩法（Model-priced Market）</text>
+<text x="330" y="140" text-anchor="middle" class="tb">模型定價玩法（Model-priced Market Type）</text>
 <text x="330" y="158" text-anchor="middle" class="ts">價格由 模型參數 算出；同一 模型範圍 內的玩法互相一致</text>
 <!-- 模型與單位 -->
 <rect x="60" y="176" width="200" height="56" rx="6" class="node"/>
@@ -62,7 +62,7 @@
 <text x="80" y="290" class="ts">一個 模型範圍 一組 模型參數；每場賽事各自一組</text>
 <!-- 輸入玩法 -->
 <rect x="80" y="306" width="200" height="120" rx="6" class="node"/>
-<text x="180" y="328" text-anchor="middle" class="tb">錨定玩法（Anchor Market）</text>
+<text x="180" y="328" text-anchor="middle" class="tb" style="font-size:88%">錨定玩法（Anchor Market Type）</text>
 <text x="180" y="348" text-anchor="middle" class="ts">讀自來源，用來解參數</text>
 <text x="180" y="374" text-anchor="middle">讓分、大小（必要）獨贏（輔助）</text>
 <text x="180" y="398" text-anchor="middle" class="ts">各來源去水後加權平均 → 共識價</text>
@@ -79,13 +79,13 @@
 <text x="296" y="432" text-anchor="middle" class="ts">算出價格（含 錨定玩法 本身）</text>
 <!-- 輸出玩法 -->
 <rect x="80" y="472" width="500" height="108" rx="6" class="node"/>
-<text x="330" y="494" text-anchor="middle" class="tb">衍生玩法（Derived Market）</text>
+<text x="330" y="494" text-anchor="middle" class="tb">衍生玩法（Derived Market Type）</text>
 <text x="330" y="512" text-anchor="middle" class="ts">不讀來源（R03-10）；沒有來源開出也能開盤</text>
 <text x="330" y="538" text-anchor="middle">波膽 ・ 單雙 ・ 雙重機會 ・ 總進球區間 ・ 零失球 ・ 半場／全場 …</text>
 <text x="330" y="562" text-anchor="middle" class="ts">同一組參數算出，因此與讓分、大小、獨贏互相一致</text>
 <!-- 右：獨立 -->
 <rect x="640" y="114" width="280" height="500" rx="6" class="panel"/>
-<text x="780" y="140" text-anchor="middle" class="tb">共識定價玩法（Consensus-priced Market）</text>
+<text x="780" y="140" text-anchor="middle" class="tb" style="font-size:84%">共識定價玩法（Consensus-priced Market Type）</text>
 <text x="780" y="158" text-anchor="middle" class="ts">不在任何 模型範圍 內，各自定價</text>
 <rect x="660" y="180" width="240" height="36" rx="4" class="tag"/><text x="780" y="203" text-anchor="middle">角球大小</text>
 <rect x="660" y="226" width="240" height="36" rx="4" class="tag"/><text x="780" y="249" text-anchor="middle">加時賽讓分</text>
@@ -113,7 +113,7 @@
 <svg viewBox="0 0 960 620" width="100%" role="img" aria-label="定價流程">
 <!-- 上泳道 -->
 <rect x="40" y="20" width="880" height="360" rx="6" class="panel"/>
-<text x="60" y="44" class="tb">模型定價玩法（Model-priced Market）　　模型範圍：足球＋進球＋常規時間</text>
+<text x="60" y="44" class="tb">模型定價玩法（Model-priced Market Type）　　模型範圍：足球＋進球＋常規時間</text>
 <!-- 來源 -->
 <text x="60" y="70" class="ts">來源（連接器只讀 錨定玩法）</text>
 <g>
@@ -184,7 +184,7 @@
 <text x="400" y="361" class="ts">來源的波膽即使開出也不讀，不拿來比對（R05-04）。</text>
 <!-- 下泳道 -->
 <rect x="40" y="400" width="880" height="200" rx="6" class="panel"/>
-<text x="60" y="424" class="tb">共識定價玩法（Consensus-priced Market）　　例：角球大小</text>
+<text x="60" y="424" class="tb">共識定價玩法（Consensus-priced Market Type）　　例：角球大小</text>
 <g>
   <rect x="60" y="444" width="260" height="44" rx="6" class="node"/>
   <text x="76" y="471" class="tb">來源 A</text>

@@ -11,6 +11,7 @@
 
 <h1>競賽（Tournaments）</h1>
 <p class="meta"><b>選單</b>：Catalog › Tournaments · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 運動與玩法目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 競賽清單</a><a href="#s2">2 編輯競賽・基本資料</a><a href="#s3">3 編輯競賽・狀態</a><a href="#s4">4 編輯競賽・多語系</a><a href="#s5">5 等級看板</a><a href="#s6">6 排序</a><a href="#open">待確認事項</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依運動查看競賽；整理由賽程來源建立的競賽，包括修改屬性、設定等級、上傳圖示、修改各語言的名稱；調整競賽的系統排序；停用或恢復競賽</td></tr>
@@ -32,10 +33,10 @@
 <p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。畫面中的名稱與數字都是範例。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。所有時間皆為 UTC。</p>
 
 <!-- ============================================================ -->
-<h2>功能清單</h2>
+<h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依運動列出競賽，可依屬性、等級、停用與否篩選；虛擬競賽以標記區分，包括「未定」與「未分級」</td><td>R01-12、R01-27、R01-31、R01-32、R01-34</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依運動列出競賽，可依屬性、等級、停用與否篩選，包括「未定」與「未分級」；虛擬競賽以標記區分</td><td>R01-12、R01-27、R01-31、R01-32、R01-34</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>停用或恢復競賽</td><td>R01-34</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>3</td><td>修改競賽的國家／地區、性別、年齡層與組別</td><td>R01-31</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>4</td><td>設定競賽的等級，可以逐筆設定，也可以一次設定多筆，也可以改回未分級</td><td>R01-32</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
@@ -83,8 +84,8 @@
           <tr><td>UEFA Champions League<div class="l2">T-10002</div></td><td>Europe</td><td>Men · Senior · —</td><td>1</td><td>2</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td>FIFA World Cup<div class="l2">T-10001</div></td><td>International</td><td>Men · Senior · —</td><td>1</td><td>3</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td>Women's Super League<div class="l2">T-11502</div></td><td>England</td><td>Women · Senior · —</td><td>3</td><td>12</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td>Virtual Soccer League <span class="chip">Virtual</span> <span class="n">3</span><div class="l2">T-20004</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td>40</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr class="off"><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><b>Disabled</b></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td colspan="7" class="l2">… (other soccer tournaments)</td></tr>
         </tbody>
@@ -106,7 +107,7 @@
 <h2 id="s2">畫面 2：編輯競賽・基本資料</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
     <div class="tabs"><span class="on">Details</span><span>Status</span><span>Translations</span></div>
     <div class="mb">
@@ -136,7 +137,7 @@
 <h2 id="s3">畫面 3：編輯競賽・狀態</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
     <div class="tabs"><span>Details</span><span class="on">Status</span><span>Translations</span></div>
     <div class="mb">
@@ -162,21 +163,21 @@
 <h2 id="s4">畫面 4：編輯競賽・多語系</h2>
 
 <div lang="en" class="frame"><div class="backdrop">
-  <div class="modal" style="width:640px">
+  <div class="modal">
     <div class="mh"><span>Edit tournament · Premier League 2 (T-11977)</span><span>✕</span></div>
     <div class="tabs"><span>Details</span><span>Status</span><span class="on">Translations</span></div>
     <div class="mb">
-      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro" style="width:100%">Premier League 2</span></div>
-      <div class="hint" style="margin:8px 0 10px">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
+      <div class="f"><label>Base name <span class="n">1</span></label><span class="box ro full">Premier League 2</span></div>
+      <div class="hint lead">Names shown to players in each language. Blank = falls back to the base name. <span class="n">2</span></div>
       <div class="form">
-        <div class="f"><label>English</label><span class="box" style="width:100%">Premier League 2 (U21)</span></div>
-        <div class="f"><label>Traditional Chinese</label><span class="box" style="width:100%" lang="zh-Hant">英超 U21 聯賽</span></div>
-        <div class="f"><label>Simplified Chinese</label><span class="box" style="width:100%" lang="zh-Hans">英超 U21 联赛</span></div>
-        <div class="f"><label>Thai</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Vietnamese</label><span class="box" style="width:100%">Giải U21 Ngoại hạng Anh</span></div>
-        <div class="f"><label>Indonesian</label><span class="box" style="width:100%">Liga Primer 2</span></div>
-        <div class="f"><label>Burmese</label><span class="box" style="width:100%"></span></div>
-        <div class="f"><label>Korean</label><span class="box" style="width:100%">프리미어리그 2</span></div>
+        <div class="f"><label>English</label><span class="box full">Premier League 2 (U21)</span></div>
+        <div class="f"><label>Traditional Chinese</label><span class="box full" lang="zh-Hant">英超 U21 聯賽</span></div>
+        <div class="f"><label>Simplified Chinese</label><span class="box full" lang="zh-Hans">英超 U21 联赛</span></div>
+        <div class="f"><label>Thai</label><span class="box full"></span></div>
+        <div class="f"><label>Vietnamese</label><span class="box full">Giải U21 Ngoại hạng Anh</span></div>
+        <div class="f"><label>Indonesian</label><span class="box full">Liga Primer 2</span></div>
+        <div class="f"><label>Burmese</label><span class="box full"></span></div>
+        <div class="f"><label>Korean</label><span class="box full">프리미어리그 2</span></div>
         <div class="f full l2">… (other languages) <span class="n">3</span></div>
       </div>
     </div>
@@ -211,9 +212,9 @@
         <thead><tr><th style="width:32px">☐</th><th>Tournament <span class="s">/ ID</span></th><th>Country/Region</th><th style="width:150px">Tier</th><th></th></tr></thead>
         <tbody>
           <tr><td>☐</td><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td><span class="box caret">Untiered</span></td><td></td></tr>
-          <tr style="background:var(--fill)"><td>☑</td><td>Eerste Divisie<div class="l2">T-10522</div></td><td>Netherlands</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr style="background:var(--fill)"><td>☑</td><td>Liga Portugal 2<div class="l2">T-10534</div></td><td>Portugal</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
-          <tr style="background:var(--fill)"><td>☐</td><td>J2 League<div class="l2">T-10871</div></td><td>Japan</td><td><span class="box caret"><b>3</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr class="changed"><td>☑</td><td>Eerste Divisie<div class="l2">T-10522</div></td><td>Netherlands</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr class="changed"><td>☑</td><td>Liga Portugal 2<div class="l2">T-10534</div></td><td>Portugal</td><td><span class="box caret"><b>4</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
+          <tr class="changed"><td>☐</td><td>J2 League<div class="l2">T-10871</div></td><td>Japan</td><td><span class="box caret"><b>3</b></span></td><td><span class="chip">Modified (was Untiered)</span></td></tr>
           <tr><td>☐</td><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td><span class="box caret">Untiered</span></td><td></td></tr>
           <tr><td colspan="5" class="l2">… (other untiered soccer tournaments)</td></tr>
         </tbody>
@@ -246,13 +247,13 @@
       <table class="grid" style="width:560px">
         <thead><tr><th style="width:110px">Sort order</th><th>Tournament</th><th>ID</th><th></th></tr></thead>
         <tbody>
-          <tr><td><span class="box" style="min-width:80px;width:80px">1</span></td><td>Premier League</td><td class="l2">T-10231</td><td></td></tr>
-          <tr style="background:var(--fill)"><td><span class="box" style="min-width:80px;width:80px"><b>2</b></span></td><td>UEFA Champions League</td><td class="l2">T-10002</td><td><span class="chip">Modified (was 5)</span></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">3</span></td><td>FIFA World Cup</td><td class="l2">T-10001</td><td></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px">4</span></td><td>LaLiga</td><td class="l2">T-10388</td><td></td></tr>
+          <tr><td><span class="box sm">1</span></td><td>Premier League</td><td class="l2">T-10231</td><td></td></tr>
+          <tr><td><span class="box sm">2</span></td><td>UEFA Champions League</td><td class="l2">T-10002</td><td></td></tr>
+          <tr><td><span class="box sm">3</span></td><td>FIFA World Cup</td><td class="l2">T-10001</td><td></td></tr>
+          <tr class="changed"><td><span class="box sm"><b>4</b></span></td><td>LaLiga</td><td class="l2">T-10388</td><td><span class="chip">Modified (was 9)</span></td></tr>
           <tr><td colspan="4" class="l2">…</td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px"></span></td><td>Premier League 2</td><td class="l2">T-11977</td><td><span class="chip">Not set</span> <span class="n">2</span></td></tr>
-          <tr><td><span class="box" style="min-width:80px;width:80px"></span></td><td>Regional Amateur League</td><td class="l2">T-12840</td><td><span class="chip">Not set</span></td></tr>
+          <tr><td><span class="box sm"></span></td><td>Premier League 2</td><td class="l2">T-11977</td><td><span class="chip">Not set</span> <span class="n">2</span></td></tr>
+          <tr><td><span class="box sm"></span></td><td>Regional Amateur League</td><td class="l2">T-12840</td><td><span class="chip">Not set</span></td></tr>
         </tbody>
       </table>
       <div class="savebar"><span>1 unsaved change <span class="n">3</span></span><span><span class="btn">Discard</span> <span class="btn pri">Save</span></span></div>
@@ -262,11 +263,11 @@
 <ol class="notes">
   <li><span class="n">1</span><span>排序只在同一運動內調整。顯示的先後只依排序號，不受等級影響（R01-32）；等級只是篩選條件，方便分批整理。</span></li>
   <li><span class="n">2</span><span>新建立的競賽尚未設定排序號，排在最後（R01-28）；填入排序號並儲存後依排序號排列。</span></li>
-  <li><span class="n">3</span><span>競賽的系統排序由 Ops 設定（R01-28）；經銷商可以在此基礎上變更，也可以重置回系統排序（R01-28）。修改後先標示「Modified」，按「Save」才生效，儲存後依新的排序號重新排列；離開頁面前提醒尚未儲存。排序號的具體做法由 SPEC 提出。</span></li>
+  <li><span class="n">3</span><span>競賽的系統排序由 Ops 設定（R01-28）；經銷商可以在此基礎上變更，也可以重置回系統排序（R10-02）。修改後先標示「Modified」，按「Save」才生效，儲存後依新的排序號重新排列；離開頁面前提醒尚未儲存。排序號的具體做法由 SPEC 提出。</span></li>
 </ol>
 
 <!-- ============================================================ -->
-<h2>待確認事項</h2>
+<h2 id="open">待確認事項</h2>
 <p>目前沒有。</p>
 
 </div>
