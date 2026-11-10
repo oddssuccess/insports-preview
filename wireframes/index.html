@@ -20,7 +20,7 @@
   <tr><td><a href="catalog/sports.html">Catalog › Sports</a></td><td>新增</td><td>運動清單、編輯視窗（狀態、多語系）、排序</td></tr>
   <tr><td><a href="catalog/tournaments.html">Catalog › Tournaments</a></td><td>新增</td><td>競賽清單、編輯視窗（基本資料、狀態、多語系）、等級看板、排序</td></tr>
   <tr><td><a href="catalog/competitors.html">Catalog › Competitors</a></td><td>新增</td><td>參賽方清單與競賽篩選、編輯視窗（基本資料、多語系）、等級看板</td></tr>
-  <tr><td><a href="catalog/markets.html">Catalog › Market Types</a></td><td>新增</td><td>依運動的玩法清單與明細、冠軍盤玩法、多語系視窗</td></tr>
+  <tr><td><a href="catalog/market-types.html">Catalog › Market Types</a></td><td>新增</td><td>依運動的玩法清單與明細、冠軍盤玩法、多語系視窗</td></tr>
   <tr><td><a href="matches/schedule.html">Matches › Schedule</a></td><td>新增</td><td>狀態頁籤、競賽分組與收合、比分與時段、競賽篩選、賽事對應入口</td></tr>
   <tr><td><a href="matches/match-detail.html">Matches › Match Detail</a></td><td>新增</td><td>States（各來源回報時間差）、Properties（開賽時間與傷停補時變更紀錄）、Match Mapping 視窗</td></tr>
   <tr><td><a href="matches/issues.html">Matches › Issues</a></td><td>新增</td><td>問題佇列、待取消／待腰斬／狀態未確認案件、來源證據、裁定與覆核</td></tr>
@@ -31,15 +31,6 @@
   <tr><td><a href="provider/matches/schedule.html">Provider › Matches › Schedules</a></td><td>新增</td><td>來源場次清單、賽前頁籤與競賽收合、選擇競賽</td></tr>
   <tr><td><a href="provider/outrights/schedule.html">Provider › Outrights › Schedule</a></td><td>新增</td><td>來源冠軍盤清單、來源明細（投注項與連結狀態）、變更紀錄</td></tr>
   <tr><td><a href="settings/provider-settings/data-usage.html">Settings › Provider Settings</a></td><td>新增</td><td>五個頁籤：資料使用（開關與狀態）、連接器（暫停、恢復與啟用）、運動與玩法收集、賽程來源、名稱分類規則</td></tr>
-</table>
-
-<h3 class="example">第二階段：即時賽況（LIVE DATA）</h3>
-<p class="meta"><b>目標</b>：將來源的比分、時鐘、事件與文字轉播正確匯入統一賽況，並能追查來源。 · <b>期限</b>：2026 年 11 月 17 日</p>
-<table class="doc-t idx-phase">
-  <tr><th>頁面</th><th>異動</th><th>畫面元件</th></tr>
-  <tr><td><a href="matches/schedule.html">Matches › Schedule</a></td><td>更新</td><td>Commentary 與 Signal 欄、文字轉播歷史入口、比分穩定狀態；訊號按計分項目排列圖示與時間，意義置於畫面說明</td></tr>
-  <tr><td><a href="matches/match-detail.html#s4">Matches › Match Detail</a></td><td>更新</td><td>Data Sources 的計分類別頁籤置於 States 與 Properties 之間：足球 Goal／Corner／Booking／Red Card、籃球 Points、網球 Games；顯示來源新舊比分、統一採用紀錄與無資料狀態</td></tr>
-  <tr><td><a href="matches/match-commentary-history.html">Matches › Match Commentary History</a></td><td>新增</td><td>賽事摘要、來源選擇卡、單一來源時間軸（新到舊）、事件代碼與文字、單筆回報與無紀錄狀態</td></tr>
 </table>
 
 <h2>頁面導覽</h2>
@@ -62,28 +53,20 @@
 <li><a href="catalog/competitors.html#s2">Edit Competitor</a><span class="idx-tag">Pop-up</span><span class="idx-desc">基本資料</span></li>
 <li><a href="catalog/competitors.html#s3">Edit Competitor · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
 </ul></li>
-<li><a href="catalog/markets.html">Market Types</a><span class="idx-desc">依運動的玩法清單與明細、冠軍盤玩法</span>
+<li><a href="catalog/market-types.html">Market Types</a><span class="idx-desc">依運動的玩法清單與明細、冠軍盤玩法</span>
 <ul>
-<li><a href="catalog/markets.html#s3">Edit Market Type · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
+<li><a href="catalog/market-types.html#s3">Edit Market Type · Translations</a><span class="idx-tag">Pop-up</span><span class="idx-desc">多語系</span></li>
 </ul></li></ul></details>
 <details open><summary class="group">Matches</summary>
 <ul class="idx-tree">
-<li><a href="matches/schedule.html">Schedule</a><span class="idx-desc">單場清單、競賽篩選、文字轉播、滾球訊號圖示與時間</span>
+<li><a href="matches/schedule.html">Schedule</a><span class="idx-desc">依狀態頁籤與競賽分組的單場清單、競賽篩選</span>
 <ul>
-<li><a href="matches/match-detail.html">Match Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">Data Sources：States、各計分類別、Properties；依類別查看比分變更與採用結果</span>
+<li><a href="matches/match-detail.html">Match Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">Data Sources：States 與 Properties 的逐項變更紀錄</span>
 <ul>
 <li><a href="matches/match-detail.html#s1">Data Sources · States</a><span class="idx-tag">Tab</span><span class="idx-desc">各來源回報狀態與時段的時間差</span></li>
-<li><a href="matches/match-detail.html#s4">Data Sources · Goal</a><span class="idx-tag">Tab</span><span class="idx-desc">足球進球變更，位於 States 之後</span></li>
-<li><a href="matches/match-detail.html#s4-corner">Data Sources · Corner</a><span class="idx-tag">Tab</span><span class="idx-desc">足球角球變更</span></li>
-<li><a href="matches/match-detail.html#s4-booking">Data Sources · Booking</a><span class="idx-tag">Tab</span><span class="idx-desc">足球罰牌紀錄</span></li>
-<li><a href="matches/match-detail.html#s4-red-card">Data Sources · Red Card</a><span class="idx-tag">Tab</span><span class="idx-desc">足球紅牌變更，下一個頁籤為 Properties</span></li>
-<li><a href="matches/match-detail.html#s4-basketball">Data Sources · Points</a><span class="idx-tag">Tab</span><span class="idx-desc">籃球得分變更，位於 States 與 Properties 之間</span></li>
-<li><a href="matches/match-detail.html#s4-tennis">Data Sources · Games</a><span class="idx-tag">Tab</span><span class="idx-desc">網球局數變更，位於 States 與 Properties 之間</span></li>
 <li><a href="matches/match-detail.html#s2">Data Sources · Properties</a><span class="idx-tag">Tab</span><span class="idx-desc">開賽時間與傷停補時的變更紀錄</span></li>
 <li><a href="matches/match-mapping.html">Match Mapping</a><span class="idx-tag">Pop-up</span><span class="idx-desc">已對應來源的識別、名稱與對應紀錄</span></li>
 </ul></li>
-<li><a href="matches/match-commentary-history.html">Match Commentary History</a><span class="idx-tag">Subpage</span><span class="idx-desc">賽事摘要、來源選擇與單一來源時間軸，保留來源及雙時間追溯</span>
-<ul><li><a href="matches/match-commentary-history.html#s2">Commentary Report</a><span class="idx-tag">Pop-up</span><span class="idx-desc">單筆回報、來源場次與目前訊號</span></li></ul></li>
 </ul></li>
 <li><a href="matches/issues.html">Issues</a><span class="idx-desc">待取消、待腰斬與狀態未確認的問題佇列、裁定與覆核</span></li></ul></details>
 <details open><summary class="group">Outrights</summary>
@@ -115,7 +98,7 @@
 <ul>
 <li><a href="settings/provider-settings/data-usage.html">Data Usage</a><span class="idx-tag">Tab</span><span class="idx-desc">各來源的資料使用開關、各類資料狀態與賽程來源保護</span></li>
 <li><a href="settings/provider-settings/connectors.html">Connectors</a><span class="idx-tag">Tab</span><span class="idx-desc">連接器與來源的關係、暫停、恢復與啟用、影響提醒及變更紀錄</span></li>
-<li><a href="settings/provider-settings/sports-and-markets.html">Sports &amp; Market Types</a><span class="idx-tag">Tab</span><span class="idx-desc">依來源開關連接器收集的運動與玩法</span></li>
+<li><a href="settings/provider-settings/sports-and-market-types.html">Sports &amp; Market Types</a><span class="idx-tag">Tab</span><span class="idx-desc">依來源開關連接器收集的運動與玩法</span></li>
 <li><a href="settings/provider-settings/fixture-sources.html">Fixture Sources</a><span class="idx-tag">Tab</span><span class="idx-desc">各運動的賽程來源、頁內更換與儲存</span></li>
 <li><a href="settings/provider-settings/classification.html">Classification</a><span class="idx-tag">Tab</span><span class="idx-desc">競賽與參賽方屬性、電子競技遊戲歸屬的名稱分類規則（新增、編輯、刪除與啟停）</span></li>
 </ul></li></ul></details>

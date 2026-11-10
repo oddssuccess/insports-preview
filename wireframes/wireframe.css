@@ -360,50 +360,6 @@ table.grid.queue th { white-space: normal; }
   font-size: 12px; font-weight: 600; color: var(--ink); background: var(--paper); text-decoration: none; }
 .market-pill.off { border-color: var(--line); border-style: dashed; color: var(--muted); font-weight: 400; text-decoration: line-through; }
 
-/* 單場賽程：精簡訊號圖示與經過時間；狀態以符號及顏色共同區分 */
-table.sched td.signal-cell { min-width: 44px; text-align: center; border-left: 1px solid var(--line-soft); }
-table.sched td.signal-cell .signal-indicator { display: inline-flex; flex-direction: column; align-items: center; gap: 4px; }
-table.sched td.signal-cell .signal-icon { display: inline-flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; border-radius: 50%; color: #fff; font-size: 14px; font-weight: 700; line-height: 1; }
-table.sched td.signal-cell .signal-safe { background: var(--ok); }
-table.sched td.signal-cell .signal-danger { background: var(--warn); }
-table.sched td.signal-cell .signal-missing { background: #777; }
-table.sched td.signal-cell .signal-age { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
-
-/* 文字轉播歷史：賽事摘要、來源選擇與單一來源的事件時間軸 */
-.frame .commentary-summary { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 24px; padding: 20px; margin: 12px 0; border: 1px solid var(--line); background: var(--paper); }
-.frame .commentary-match { min-width: 0; display: flex; flex-direction: column; gap: 6px; }
-.frame .commentary-provider-select { min-width: 0; padding-left: 24px; border-left: 1px solid var(--line-soft); }
-.frame .commentary-provider-options { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.frame .commentary-provider-choice { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px;
-  border: 2px solid var(--line-soft); border-radius: 4px; background: var(--paper); color: var(--ink);
-  font-size: 13px; text-decoration: none; }
-.frame .commentary-provider-choice::before { content: ''; width: 12px; height: 12px; flex-shrink: 0;
-  border: 1px solid var(--mark); border-radius: 50%; background: var(--paper); }
-.frame .commentary-provider-choice.is-selected { border-color: var(--mark); background: var(--fill); font-weight: 700; }
-.frame .commentary-provider-choice.is-selected::before { background: var(--mark); box-shadow: inset 0 0 0 2px var(--paper); }
-.frame .commentary-provider-choice:hover { border-color: var(--mark); }
-.frame .commentary-provider-choice:focus-visible { outline: 2px solid var(--mark); outline-offset: 2px; }
-.frame .commentary-provider-tag { display: inline-block; padding: 1px 6px; border: 1px solid var(--line);
-  color: var(--muted); font-size: 12px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; }
-.frame .commentary-timeline { min-width: 760px; list-style: none; padding: 0; margin: 0; }
-.frame .panel .pb:has(> .commentary-timeline) { overflow-x: auto; }
-.frame .commentary-entry { display: grid; grid-template-columns: 142px 105px 100px 60px minmax(0, 1fr);
-  align-items: start; gap: 10px; padding: 12px; border-bottom: 1px solid var(--line-soft); }
-.frame .commentary-entry:last-child { border-bottom: 0; }
-.frame .commentary-time { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
-.frame .commentary-source { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 700; }
-.frame .commentary-source .dot { flex-shrink: 0; margin-right: 0; }
-.frame .commentary-clock { font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.frame .commentary-code { color: var(--muted); font-size: 12px; overflow-wrap: anywhere; }
-.frame .commentary-text { font-size: 13px; overflow-wrap: anywhere; }
-.frame .commentary-empty { padding: 24px; color: var(--muted); }
-@media (max-width: 850px) {
-  .frame .commentary-summary { grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .frame .commentary-provider-select { padding: 16px 0 0; border-left: 0; border-top: 1px solid var(--line-soft); }
-}
-
 /* 說明文字的行寬：畫面外框維持全寬，畫面外的說明與表格收窄，避免過長的行 */
 .doc > p, .doc > ul, .doc > ol { max-width: var(--prose); }
 .doc > table.doc-t, .doc > .disclaimer { max-width: var(--table); }
