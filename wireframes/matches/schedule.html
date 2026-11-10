@@ -10,8 +10,8 @@
 <div class="doc">
 
 <h1>單場賽程（Matches › Schedule）</h1>
-<p class="meta"><b>日期</b>：2026-11-10 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a><a href="#open">待確認事項</a></nav>
+<p class="meta"><b>日期</b>：2026-11-10 · <b>選單</b>：Matches › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/12-market-settings.md">12 玩法設定</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依運動與日期查看統一單場比賽（Match）：依競賽分組，按統一狀態篩選，一眼看到每場的比分、目前時段、建立者與套用的玩法設定模板，並從單場進入賽事對應（Mapping）。</td></tr>
@@ -34,7 +34,7 @@
   <tr><td>2</td><td>依統一狀態分頁籤篩選，各頁籤顯示場數</td><td>R04-12</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>3</td><td>依競賽分組，可展開／收合，可依競賽篩選</td><td>R01-12</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a></td></tr>
   <tr><td>4</td><td>單場顯示主客方（依建立者順序）、統一識別與開賽時間</td><td>R01-25；R04-04～06</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14；見待確認第 2 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>5</td><td>依運動的計分項目與時段顯示比分，並顯示目前時段與比賽時間</td><td>R01-17；R04-13～14</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>6</td><td>顯示建立者與已對應的來源數</td><td>R04-05、R04-08</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>7</td><td>顯示賽事套用的玩法設定模板及其指定層級</td><td>R12-05</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>8</td><td>顯示待取消／待腰斬標記，連到賽事問題</td><td>R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
@@ -133,7 +133,7 @@
   <li><span class="n">2</span><span>頁籤對應 R04-12 的八種統一狀態：Live（進行中）、Prematch（未開始）、Postponed（延後）、Interrupted（比賽中斷）、Ended（已結束）、Closed（賽果已確定）、Cancelled（取消）、Abandoned（腰斬）。數字是目前篩選條件下的場數，0 場的頁籤淡化。待取消／待腰斬是疊在狀態上的標記，不是頁籤（見<a href="#s2">畫面 2</a>）。</span></li>
   <li><span class="n">3</span><span>滾球中顯示全場比分與目前時段及比賽時間：1H／HT／2H／ET 1H／ET 2H／PEN（點球大戰），足球的時段見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">01-soccer</a>。分鐘數在每個時段重新起算，例如 2H 18' 是下半場第 18 分鐘。目前時段與比賽時間直接取自來源的賽況資料，各運動皆同。</span></li>
   <li><span class="n">4</span><span>上方為主隊、下方為客隊，順序以建立者為準且建立後不變（R01-25、R04-06）。右側為參賽方的統一識別，下方為賽事的統一識別與開賽時間（R04-04）。點選賽事開啟<a href="match-detail.html">賽事明細</a>。</span></li>
-  <li><span class="n">5</span><span>足球的比分子欄是 GL 進球、CR 角球、RC 紅牌張數；進球與角球是目錄的計分項目（R01-17），紅牌張數不在足球目錄的計分項目內，僅供顯示（見待確認第 2 項）；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
+  <li><span class="n">5</span><span>足球的比分子欄是 GL 進球、CR 角球、RC 紅牌張數；進球與角球是目錄的計分項目（R01-17），紅牌張數不在足球目錄的計分項目內，僅供顯示；各欄是全場合計，由各時段算出（R04-13）。來源沒有提供的項目顯示「—」，表示未知而不是 0（R04-13）。</span></li>
   <li><span class="n">6</span><span>上行是建立者（R04-05），下行是已對應到本場的來源數／此運動已接入的來源數（R04-08）。</span></li>
   <li><span class="n">7</span><span>本場實際套用的玩法設定模板，下行是指定在哪一層：Match、Tournament 或 Sport（R12-05，賽事優先於競賽，競賽優先於運動）。</span></li>
   <li><span class="n">8</span><span>列尾選單只有 <a href="match-mapping.html">Match Mapping</a>：開啟唯讀的賽事對應彈出視窗，查看本場與已對應來源的識別、名稱及對應者（R04-04、R04-06、R04-08）。</span></li>
@@ -349,13 +349,6 @@
 <ol class="notes">
   <li><span class="n">1</span><span>列出此運動在目前日期區間有賽事的競賽，後接目前頁籤的場數（本例為畫面 1 足球範例的 Live）。勾選整個類別時，之後新增的競賽自動納入；取消類別勾選後才能逐一勾選競賽。</span></li>
   <li><span class="n">2</span><span>競賽分為真實與虛擬兩類（R01-27、R04-20），各為一個類別。</span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="open">待確認事項</h2>
-<ol>
-  <li>直播：PRD 尚未定義直播的來源、與賽事的對應方式及開啟形式（新視窗或內嵌播放器）。</li>
-  <li><b>已決定（2026-11-10），待寫回 PRD 01 的運動目錄</b>：賽程的比分欄保留足球的 RC（紅牌張數）與籃球的 OT（加時賽合計）（畫面 1；來源單場賽程相同）。足球目錄的罰牌計分項目是罰牌積分，沒有紅牌張數；籃球目錄沒有獨立的加時賽時段。兩欄僅供 Ops 查看，不據此新增投注用的計分項目或時段；是否列入目錄待 PRD 決定。</li>
 </ol>
 
 </div>

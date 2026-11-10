@@ -11,7 +11,7 @@
 
 <h1>賽事問題（Issues）</h1>
 <p class="meta"><b>選單</b>：Matches › Issues · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台與報表</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/05-odds-and-trading.md">05 賠率與操盤</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/06-bet-acceptance.md">06 投注接受</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/07-settlement-and-payout.md">07 結算與派彩</a> · <a href="../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 問題佇列</a><a href="#s2">2 待取消案件（雙重賽候選）</a><a href="#s3">3 待腰斬案件</a><a href="#s4">4 狀態未確認案件</a><a href="#s5">5 待覆核</a><a href="#open">待確認事項</a></nav>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 問題佇列</a><a href="#s2">2 待取消案件（雙重賽候選）</a><a href="#s3">3 待腰斬案件</a><a href="#s4">4 狀態未確認案件</a><a href="#s5">5 待覆核</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 處理狀態可能有問題、系統不會自行決定的單場比賽：賽程來源不再提供的待取消（Pending Cancellation）與待腰斬（Pending Abandonment），以及來源沉默後仍維持較嚴格狀態的賽事。Ops 在此比對各來源的證據與候選（Candidate），提出裁定，需要時由另一人覆核。</td></tr>
@@ -31,15 +31,15 @@
 <h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依問題類型與處理進度列出待處理賽事，並顯示各類數量，可依運動篩選及搜尋，每場以單一按鈕進入案件畫面</td><td>R04-19、R04-23；見待確認第 1 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依問題類型與處理進度列出待處理賽事，並顯示各類數量，可依運動篩選及搜尋，每場以單一按鈕進入案件畫面</td><td>R04-19、R04-23</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>依原定開賽時間排序（Kickoff time，預設）：已過的在前、越久越前，其後由近到遠，同時間依入列先後；另可改選「Longest wait」「Newest first」</td><td>R11-03（預設排序）；另外兩種是畫面提供的檢視方式，R11-03 未規定</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>3</td><td>每場顯示賽程資訊、統一狀態、問題類型與簡述、建議的下一步，以及處理進度與已等待時間；候選與注單數留在案件畫面</td><td>R04-12、R04-23、R04-24</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>4</td><td>逐來源比對回報狀態、開賽時間或最後比分、清單上的有無（依問題類型）、來源時間與收到時間</td><td>R03-08、R04-12、R04-23</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s4">畫面 4</a></td></tr>
   <tr><td>5</td><td>列出候選供人工判斷，含同一候選也列在其他待取消賽事的情況</td><td>R04-05、R04-24</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>待取消的四種裁定：取消並作廢、重掛到候選、暫不處理、解除並上架</td><td>R04-05、R04-23</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>7</td><td>待腰斬的裁定：確認腰斬、確認未腰斬並解除、暫不處理</td><td>R04-23、R05-16</td><td><a href="#s3">畫面 3</a></td></tr>
-  <tr><td>8</td><td>維持較嚴格狀態的賽事，由人工裁定回到較寬鬆的狀態</td><td>R04-12；見待確認第 1 項</td><td><a href="#s4">畫面 4</a></td></tr>
-  <tr><td>9</td><td>會作廢注單或改變結算依據的裁定，由另一人覆核後生效；每項裁定記錄人員、時間與依據</td><td>R04-19；非功能需求「稽核軌跡」；見待確認第 2 項</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>8</td><td>維持較嚴格狀態的賽事，由人工裁定回到較寬鬆的狀態</td><td>R04-12</td><td><a href="#s4">畫面 4</a></td></tr>
+  <tr><td>9</td><td>會作廢注單或改變結算依據的裁定，由另一人覆核後生效；每項裁定記錄人員、時間與依據</td><td>R04-19；非功能需求「稽核軌跡」</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s5">畫面 5</a></td></tr>
   <tr><td>10</td><td>提示標記期間賽事下架、全部盤口關閉</td><td>R04-23、R05-16、R06-20</td><td><a href="#s2">畫面 2</a></td></tr>
 </table>
 
@@ -85,7 +85,7 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>待取消只發生在統一狀態為未開始或延後的賽事；同一類之下依觸發原因再分，見標註 5（R04-23）。</span></li>
-  <li><span class="n">2</span><span>來源報了較嚴格的狀態（例如進行中、比賽中斷），之後沉默或不再提供，系統不視為撤回，交人工判斷（R04-12）。列入本頁是使用者的決定，見待確認第 1 項。</span></li>
+  <li><span class="n">2</span><span>來源報了較嚴格的狀態（例如進行中、比賽中斷），之後沉默或不再提供，系統不視為撤回，交人工判斷（R04-12）。</span></li>
   <li><span class="n">3</span><span>處理進度頁籤：Needs decision 是尚待裁定的案件，包括曾記錄「暫不處理」的；Awaiting approval 是已提案、等另一人覆核的案件（畫面 5）；Resolved 是已裁定生效；All 為全部。篩選與排序適用所有頁籤；搜尋範圍是賽事編號、隊伍與競賽名稱（R04-19）。</span></li>
   <li><span class="n">4</span><span>排序有三種：Kickoff time（預設）依原定開賽時間，不用延期後的時間，已過的在前、越久越前，其後由近到遠，同時間依進入佇列的先後（R11-03）；Longest wait 依進入佇列的時間，最早進入的在前；Newest first 依進入佇列的時間，最晚進入的在前。後兩種是畫面另外提供的檢視方式，R11-03 未規定。排序選項適用所有頁籤。</span></li>
   <li><span class="n">5</span><span>問題類型標籤與簡述。「Match」欄的狀態標籤是統一狀態；待取消與待腰斬是疊在統一狀態上的標記，不是狀態，所以另外標在這一欄。待取消的觸發原因有四種：從清單消失、標為取消、標為延期而沒有新的開賽時間、原定開賽時間已過仍停在賽前狀態（R04-12、R04-23）。來源中斷不會觸發（R04-16）。</span></li>
@@ -307,7 +307,7 @@
   <li><span class="n">2</span><span>人工只能回到較寬鬆的狀態，可選的狀態只列比目前寬鬆者；取消與腰斬經由待取消、待腰斬處理，不在此選（R04-12）。此裁定不作廢、不重算注單，一人即可（R04-19）。
     <ul class="tight">
       <li><b>Update to a looser status</b>（改為較寬鬆的狀態）：Ops 判斷較嚴格的狀態已不成立，例如只有 WBET 報開始但比賽其實沒開打，改回未開始；需填依據，記錄人員與時間。</li>
-      <li><b>Keep current status</b>（維持目前狀態）：證據不足或確認狀態屬實，不改狀態，只留下處理紀錄。此選項為示意，見待確認第 1 項。</li>
+      <li><b>Keep current status</b>（維持目前狀態）：證據不足或確認狀態屬實，不改狀態，只留下處理紀錄。</li>
     </ul>
   </span></li>
 </ol>
@@ -358,44 +358,9 @@
   <li><span class="n">2</span><span>覆核者必須是提案者以外的另一人；核准或駁回都記錄覆核者、時間與依據（R04-19、非功能需求「稽核軌跡」）。
     <ul class="tight">
       <li><b>Approve</b>（核准）：提案生效，這張案件為取消並作廢注單，影響 412 張注單；須填覆核依據。</li>
-      <li><b>Reject</b>（駁回）：提案不生效，賽事維持待取消與下架；駁回後的去向見待確認第 2 項。</li>
+      <li><b>Reject</b>（駁回）：提案不生效，賽事維持待取消與下架。</li>
     </ul>
   </span></li>
-</ol>
-
-<!-- ============================================================ -->
-<h2 id="open">待確認事項</h2>
-<ol>
-  <li><b>狀態未確認列入本頁</b>：已決定（2026-11-07），待寫回 PRD 04、11。
-    <p>R04-12 規定來源沉默時較嚴格狀態「交人工」，但 R04-19 的人工處理清單與 R11-03 的佇列沒有列出。決定列為本頁第三種問題類型，裁定為回到較寬鬆的狀態（畫面 1、畫面 4）。</p>
-    <p><b>情境範例</b>（畫面 4 的 M-52055，羽球）：</p>
-    <ul class="tight">
-      <li>原定 11-07 20:00 開賽，建立者 CMD 與另一個來源 Saba 一直回報「未開始」。</li>
-      <li>另一個來源 WBET 在 12:10 回報「已開始」（比原定時間早了近 8 小時），12:14 後沒有任何資料。</li>
-      <li>依 R04-12，任一來源報開始即為進行中，賽前投注停止；WBET 沉默不算撤回，狀態維持進行中。</li>
-      <li>CMD 仍列出這場比賽，所以不會進入待取消或待腰斬（R04-23）。</li>
-      <li>結果：沒有畫面可以處理，賽事一直停在進行中，賽前投注關閉、滾球也沒有資料。</li>
-    </ul>
-    <p><b>討論問題</b></p>
-    <ul class="tight">
-      <li>R04-12 的「交人工」是否需要處理入口？入口放本頁還是另立？</li>
-      <li>裁定選項是否足夠？畫面 4 提供「改為較寬鬆的狀態」與「維持目前狀態」；PRD 只規定可回到較寬鬆的狀態（R04-12）。</li>
-      <li>來源沉默多久才進入本頁？建議與「原定開賽時間已過仍凍結」同樣在非功能需求定數值。</li>
-    </ul>
-  </li>
-  <li><b>駁回後的去向</b>：R04-19 只規定覆核後才生效，沒有說駁回後的處理（畫面 5）。
-    <p><b>情境範例</b>（畫面 2 的 M-52007，棒球）：</p>
-    <ul class="tight">
-      <li>ops.chen 依球團公告提案「取消並作廢注單」。</li>
-      <li>覆核者 ops.lin 認為公告指的是系列賽的另一場（M-52008），依據不足，駁回。</li>
-      <li>M-52007 仍標記待取消、下架；從原定開賽時間 11-06 18:00 起算，棒球 12 小時的等待上限早已過。</li>
-    </ul>
-    <p><b>討論問題</b></p>
-    <ul class="tight">
-      <li>駁回後回到「Needs decision」，標記維持，提案與駁回理由留在紀錄？（建議）</li>
-      <li>駁回是否重設等待時間？建議不重設，仍從進入佇列起算。</li>
-    </ul>
-  </li>
 </ol>
 
 </div>

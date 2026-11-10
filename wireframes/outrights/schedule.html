@@ -11,7 +11,7 @@
 
 <h1>冠軍盤賽程（Outrights › Schedule）</h1>
 <p class="meta"><b>選單</b>：Outrights › Schedule · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 冠軍盤賽程</a><a href="#open">待確認事項</a></nav>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 冠軍盤賽程</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依運動與統一狀態查看冠軍盤（Outright）：事件、玩法、開始日期與狀態，並從單筆進入<a href="outright-detail.html">冠軍盤明細</a>與唯讀的<a href="outright-mapping.html">冠軍盤對應</a>視窗。</td></tr>
@@ -30,7 +30,7 @@
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動、統一狀態與關鍵字（事件、玩法、識別）篩選冠軍盤，可清除篩選</td><td>R01-24；R04-04、R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>每個玩法一列，顯示事件（競賽加期間）、玩法與開始日期</td><td>R01-12；R04-12、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>3</td><td>顯示四種統一狀態：未開始、進行中、賽果已確定、取消</td><td>R04-12；見待確認第 1、2 項</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>顯示四種統一狀態：未開始、進行中、賽果已確定、取消</td><td>R04-12</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>4</td><td>點選事件進入冠軍盤明細；列尾選單開啟冠軍盤對應視窗</td><td>R04-04、R04-18</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
@@ -91,12 +91,6 @@
   <li><span class="n">5</span><span>由建立者提供，沒有提供時由 Ops 輸入；不需要結束日期，結束由賽果確定決定（R04-12）。取消且沒有開始日期的事件顯示「—」。</span></li>
   <li><span class="n">6</span><span>統一狀態，由已對應來源與人工裁定整理；來源停止報價或從清單消失都不推論取消或結束，取消一律人工裁定（R04-12、R04-18）。</span></li>
   <li><span class="n">7</span><span>列尾選單開啟<a href="outright-mapping.html">冠軍盤對應</a>，唯讀顯示本冠軍盤連結的來源與投注項識別配對（R04-18）。</span></li>
-</ol>
-
-<h2 id="open">待確認事項</h2>
-<ol>
-  <li><b>進行中（Live）的觸發</b>：R04-12 只列出冠軍盤的四種狀態，沒有說明何時轉為進行中：開始日期到達、任一來源回報開始，或人工切換？單場「任一來源報開始即為進行中」是否適用於冠軍盤？OTR-03 依各運動認定「開始競賽」（高爾夫為開球、賽車為暖胎圈的起跑訊號），它與事件進行中的關係為何？</li>
-  <li><b>狀態轉換</b>：四種狀態之間哪些轉換允許，例如進行中回到未開始、取消後恢復？取消一律人工裁定（R04-12），是否需要覆核（R04-19 只明定會使已結算注單重新結算或退款的裁定須覆核）？</li>
 </ol>
 
 </div>

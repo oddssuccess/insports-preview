@@ -9,7 +9,7 @@
 <body><div class="doc">
 <h1>來源單場賽程（Provider › Matches › Schedules）</h1>
 <p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Provider › Matches › Schedules · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 來源單場賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a><a href="#open">待確認事項</a></nav>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 來源單場賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a></nav>
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依來源（Provider）、運動與日期，查看該來源回報的單場賽程：依來源競賽分組，按狀態篩選，一眼看到每場的時間、參賽方、來源識別、比分與文字轉播（Commentary）。清單為唯讀，內容皆為來源回報值。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
@@ -104,7 +104,7 @@
   <li><span class="n">6</span><span>上行為來源回報的目前比分，下行為目前時段與比賽時間，如 1H 11'、HT；分鐘在每個時段重新起算。這是此來源的回報值，不是統一滾球比分（R03-08、R04-13～14）。尚未開賽的場次上行顯示開賽時間（見<a href="#s2">畫面 2</a>）。</span></li>
   <li><span class="n">7</span><span>上方為主隊、下方為客隊，順序依來源回報；右側是來源自己的參賽方識別，不是統一識別（R03-08、R04-04）。下方依序為來源場次識別與開賽時間。來源競賽不必與統一競賽一對一（R04-04）。</span></li>
   <li><span class="n">8</span><span>僅滾球中且有直播的場次顯示播放圖示。</span></li>
-  <li><span class="n">9</span><span>足球的比分子欄是 GL 進球、CR 角球、RC 紅牌張數，每欄上行主隊、下行客隊；進球與角球是目錄的計分項目（R01-17），紅牌張數僅供顯示，見<a href="../../matches/schedule.html">單場賽程</a>的待確認第 8 項。來源沒有提供的項目顯示「—」，表示未知，不是 0（R04-13）。</span></li>
+  <li><span class="n">9</span><span>足球的比分子欄是 GL 進球、CR 角球、RC 紅牌張數，每欄上行主隊、下行客隊；進球與角球是目錄的計分項目（R01-17），紅牌張數僅供顯示。來源沒有提供的項目顯示「—」，表示未知，不是 0（R04-13）。</span></li>
   <li><span class="n">10</span><span>來源最新一則文字轉播，沒有時顯示「—」。</span></li>
 </ol>
 
@@ -178,7 +178,7 @@
         <tr><th class="c">SETS</th><th class="c">GAMES</th></tr>
       </thead>
       <tbody>
-        <tr class="grp"><td colspan="4">▾ ATP - ROLEX PARIS MASTERS</td></tr>
+        <tr class="grp"><td colspan="6">▾ ATP - ROLEX PARIS MASTERS</td></tr>
         <tr>
           <td class="t"><b>1 : 0</b>Set 2</td>
           <td><div class="match-team"><span>Ben Shelton</span><span class="ids">1225262</span></div><div class="match-team"><span>Carlos Alcaraz Garfia</span><span class="ids">1149903</span></div><div class="l2">10858205 / 2026-11-08 22:00</div></td>
@@ -186,7 +186,7 @@
           <td class="sc">1<br>0</td><td class="sc">9<br>6</td>
           <td>Break point: Ben Shelton</td>
         </tr>
-        <tr class="grp"><td colspan="4">▾ WTA - HONG KONG OPEN</td></tr>
+        <tr class="grp"><td colspan="6">▾ WTA - HONG KONG OPEN</td></tr>
         <tr>
           <td class="t"><b>1 : 1</b>Set 3</td>
           <td><div class="match-team"><span>Claire Liu</span><span class="ids">1094750</span></div><div class="match-team"><span>Alexandra Eala</span><span class="ids">1206111</span></div><div class="l2">10856875 / 2026-11-08 16:00</div></td>
@@ -268,6 +268,4 @@
   <li><span class="n">3</span><span>「Show all」勾選所有類別並套用；「Apply」套用目前勾選；「Cancel」關閉視窗，不改變主畫面。</span></li>
 </ol>
 
-<h2 id="open">待確認事項</h2>
-<p>目前沒有。</p>
 </div></body></html>

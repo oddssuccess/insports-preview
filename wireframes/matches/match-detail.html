@@ -11,7 +11,7 @@
 
 <h1>賽事明細（Match Detail）</h1>
 <p class="meta"><b>日期</b>：2026-11-10 · <b>選單</b>：Matches › Schedule › Match Detail · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽事明細・States</a><a href="#s2">2 賽事明細・Properties</a><a href="#s3">3 尚無狀態回報</a><a href="#open">待確認事項</a></nav>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 賽事明細・States</a><a href="#s2">2 賽事明細・Properties</a><a href="#s3">3 尚無狀態回報</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 查看一場比賽各來源的回報時間。</td></tr>
@@ -240,10 +240,6 @@
   <li><span class="n">1</span><span>比賽尚未開始，上方保留待取消標記；「Open issue」進入<a href="issues.html">賽事問題</a>處理本場。States 的時間表沒有紀錄，不影響這些標記的顯示（R04-12、R04-23）。</span></li>
   <li><span class="n">2</span><span>尚未收到開始、時段或結束的回報時，顯示提示，不預先填入所有時段或零秒。若 Properties 已有開賽時間紀錄，仍可切換查看；某個屬性沒有紀錄時只顯示該屬性的空白提示，例如「No stoppage time reported.」。</span></li>
 </ol>
-
-<!-- ============================================================ -->
-<h2 id="open">待確認事項</h2>
-<p>目前沒有。</p>
 
 </div>
 </body>
