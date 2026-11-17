@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>賽事文字轉播歷史 wireframe</title>
+<link rel="stylesheet" href="../wireframe.css">
+</head>
+<body>
+<div class="doc">
+
+<h1>賽事文字轉播歷史（Match Commentary History）</h1>
+<p class="meta"><b>日期</b>：2026-11-09 · <b>選單</b>：Matches › Schedule › Match Commentary History · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 單一來源的文字轉播時間軸</a><a href="#s2">2 單筆回報與訊號來源</a><a href="#s3">3 尚無文字轉播紀錄</a><a href="#s4">4 檢視其他來源</a></nav>
+
+<table class="doc-t">
+  <tr><th>服務的工作</th><td>Ops 從統一賽事追查已對應來源的文字轉播（Commentary）與事件回報，一次選取一個來源查看時間軸，分辨場上時間與資料到達時間，並可開啟單筆回報追查。從賽程的列尾選單或賽事明細開啟，不另設主選單。</td></tr>
+  <tr><th>不在本頁</th><td><ul class="tight">
+    <li>各來源回報比分變更的時間差：<a href="match-detail.html#s4">比分變更</a>（R04-13）；開始、時段與屬性變更：<a href="match-detail.html">賽事明細</a>（R03-08、R04-12）。</li>
+    <li>來源角色、固定優先順序及訊號對應表：來源設定（R04-02、R04-21）；連接器與來源資料開關：<a href="../settings/provider-settings/data-usage.html">來源資料使用</a>（R03-05～07、R03-13～14、R04-16）。</li>
+    <li>賠率、下注與限額（05、06、09）；最終賽果、更正與結算（R04-15、07，第三階段）；取消與腰斬裁定：<a href="issues.html">賽事問題</a>（R04-19、R04-23）。</li>
+    <li>原始封包的重播與除錯（R03-11）：本頁只呈現可讀的來源紀錄，不提供重新處理資料的操作。</li>
+  </ul></td></tr>
+</table>
+
+<p class="disclaimer">本頁是需求示意，用來說明畫面要提供哪些資訊與操作，不約束版面、元件或資料模型（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/README.md#prd-與-spec-的分工">PRD 與 SPEC 的分工</a>）。名稱與數字都是範例，日期時間皆為 UTC。畫面只畫主內容區，側邊主選單見<a href="../layout.html">共用版面</a>。</p>
+
+<h2 id="features">功能清單</h2>
+<table class="doc-t">
+  <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
+  <tr><td>1</td><td>由賽程與明細開啟單場歷史，保留統一賽事識別、主客方、比分與時段，並可切換到賽事明細</td><td>R04-04、R04-06、R04-08</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
+  <tr><td>2</td><td>透過來源選擇卡檢視單一來源的時間軸，依接收時間由新到舊，顯示時段、比賽時間、事件代碼及文字</td><td>R03-08</td><td><a href="#s1">畫面 1</a>、<a href="#s4">畫面 4</a></td></tr>
+  <tr><td>3</td><td>查看單筆回報的來源場次與回報內容，連到賽事對應</td><td>R03-08；R04-08</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>4</td><td>區分檢視來源與訊號所依據的來源；單筆回報可對照目前訊號及原因</td><td>R04-02、R04-21</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
+  <tr><td>5</td><td>缺少時間與所選來源尚無紀錄有明確表示；資料唯讀</td><td>R03-08</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
+</table>
+
+<h2 id="s1">畫面 1：單一來源的文字轉播時間軸</h2>
+
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Commentary History</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Commentary History</h3><div class="sub">Provider timelines · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-detail.html#s1">Detail</a><span class="btn pri" aria-current="page">Commentary</span></div>
+    </div>
+    <section class="commentary-summary">
+      <div class="commentary-match"><h3>Pohang Steelers vs Gamba Osaka <span class="chip">Live</span> <span class="n">1</span></h3><div class="l2">AFC Champions League Elite · Soccer · 2026-11-04 18:00 UTC</div><p><b>1 : 1</b> · 2H 18'</p><div class="l2">M-250356 · Home: C-10644 / Away: C-7338</div></div>
+      <div class="commentary-provider-select"><h4>Commentary provider <span class="n">2</span></h4><nav class="commentary-provider-options" aria-label="Commentary provider"><a class="commentary-provider-choice is-selected" href="#s1" aria-current="page">RunningBall<span class="commentary-provider-tag">Signal source</span></a><a class="commentary-provider-choice" href="#s4">BetGenius<span class="commentary-provider-tag">View only</span></a></nav></div>
+    </section>
+    <section class="panel">
+      <div class="ph"><div>Provider commentary <span class="n">3</span><div class="l2">RunningBall · Newest received first · UTC</div></div><span class="l2">6 events</span></div>
+      <div class="pb"><ol class="commentary-timeline">
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:22:12Z">2026-11-04<br>19:22:12</time> <span class="n">4</span></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 18:00 <span class="n">5</span></div><div class="commentary-code">#210 <span class="n">6</span></div><div class="commentary-text"><a href="#s2">Possible penalty</a> <span class="l2">— Pohang Steelers</span> <span class="n">7</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:19:07Z">19:19:07</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 14:55</div><div class="commentary-code">#45</div><div class="commentary-text"><b>Play resumed</b> <span class="l2">— Play resumed after the goal.</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:19:02Z">19:19:02</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 14:50</div><div class="commentary-code">#100</div><div class="commentary-text"><b>Goal</b> <span class="l2">— Gamba Osaka</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:16:02Z">19:16:02</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 11:50</div><div class="commentary-code">#130</div><div class="commentary-text"><b>Corner</b> <span class="l2">— Pohang Steelers</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:12:12Z">19:12:12</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 08:00</div><div class="commentary-code">#150</div><div class="commentary-text"><b>Red card</b> <span class="l2">— Gamba Osaka</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:04:15Z">19:04:15</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>RunningBall</div><div class="commentary-clock">2H 00:00</div><div class="commentary-code">#20</div><div class="commentary-text"><b>Second half started</b></div></li>
+      </ol></div>
+    </section>
+  </main>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>摘要保留統一賽事、主客方、比分、時段與開賽時間，與<a href="schedule.html#s1">賽程</a>一致（R04-04、R04-06）。</span></li>
+  <li><span class="n">2</span><span>一次選一個來源檢視。Signal source 標示本場訊號所依據的來源（R04-02、R04-21），切換檢視不改變它；View only 是另一個可檢視的來源。</span></li>
+  <li><span class="n">3</span><span>只列出選定來源的時間軸，本例 RunningBall 共六筆，依 InSports 接收時間由新到舊（R03-08）。</span></li>
+  <li><span class="n">4</span><span>左側是 InSports 收到資料的時間（UTC），每天第一筆顯示日期。晚到的資料可能是較早的事件，因此排序不代表場上事件的先後；來源時間在單筆回報查看（R03-08）。</span></li>
+  <li><span class="n">5</span><span>粗體為該筆來源回報的時段與比賽時間，足球為時段內經過時間；未提供時顯示「—」（R01-17、R03-08）。</span></li>
+  <li><span class="n">6</span><span>「#210」等是來源自己的事件代碼，供對照來源回報，不是統一事件識別；未提供時顯示「—」（R03-08）。</span></li>
+  <li><span class="n">7</span><span>來源提供的事件名稱與文字，點選可開啟<a href="#s2">單筆回報</a>。事件前的圓點標示該來源的賽況資料目前啟用（R03-13、R04-16）。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：單筆回報與訊號來源</h2>
+
+<div lang="en" class="frame">
+  <div class="backdrop">
+    <div class="modal">
+      <div class="mh"><span>Commentary Report · M-250356</span><a href="#s1" aria-label="Close report">✕</a></div>
+      <div class="mb">
+        <div class="form">
+          <div class="f full"><label>Match</label><b>Pohang Steelers vs Gamba Osaka</b></div>
+          <div class="f"><label>Provider / Match ID <span class="n">1</span></label><span>RunningBall · FB-88412</span></div>
+          <div class="f"><label>Received at</label><span>2026-11-04 19:22:12 UTC</span></div>
+          <div class="f"><label>Provider time</label><span>2026-11-04 19:22:10 UTC</span></div>
+          <div class="f"><label>Reported period / Clock</label><span>2H · 18:00</span></div>
+          <div class="f"><label>Reported event <span class="n">2</span></label><span>Possible penalty</span></div>
+          <div class="f full"><label>Provider event code</label><span>#210</span></div>
+          <div class="f full"><label>Commentary</label><b>Possible penalty — Pohang Steelers</b></div>
+        </div>
+        <section class="panel">
+          <div class="ph">Signal context <span class="n">3</span></div>
+          <div class="pb">Active signal source: <b>RunningBall</b><br>Current signal: <b>Danger</b><div class="l2">Reason: Possible penalty</div></div>
+        </section>
+      </div>
+      <div class="mf"><a class="btn" href="match-mapping.html#s1">Match Mapping</a><a class="btn" href="#s1">Close</a></div>
+    </div>
+  </div>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>來源自己的場次識別讓本筆回報可追溯到既有對應；示例識別與<a href="match-mapping.html#s1">賽事對應</a>一致。此處不變更對應（R04-01、R04-08）。</span></li>
+  <li><span class="n">2</span><span>可能點球是訊號，並非已確認進球，不改變計分、不用於賽果，也不作為對應依據（R04-21）。</span></li>
+  <li><span class="n">3</span><span>示例選到的是最新一筆、且出自使用中的來源，因此與目前訊號的原因一致；Signal context 明確標示目前狀態，不把目前訊號回填成舊紀錄當時的結果。事件如何轉為危險及何時解除由既有訊號對應表決定，本頁不設定秒數（R04-21～22）。</span></li>
+</ol>
+
+<h2 id="s3">畫面 3：尚無文字轉播紀錄</h2>
+
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Commentary History</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head"><div><a href="match-detail.html#s3">‹ Back to Match Detail</a><h3>Match Commentary History</h3><div class="sub">Provider timelines · M-252412 · UTC</div></div><div class="source-heading"><a class="btn" href="match-detail.html#s3">Detail</a><span class="btn pri" aria-current="page">Commentary</span></div></div>
+    <section class="commentary-summary">
+      <div class="commentary-match"><h3>Khon Kaen United vs Lamphun Warriors <span class="chip">Not started</span></h3><div class="l2">Thai League 1 · Soccer · 2026-11-04 21:30 UTC</div><p><span class="chip">Pending cancellation</span></p><div class="l2">M-252412 · Creator: Saba</div></div>
+      <div class="commentary-provider-select"><h4>Commentary provider</h4><nav class="commentary-provider-options" aria-label="Commentary provider"><a class="commentary-provider-choice is-selected" href="#s3" aria-current="page">RunningBall</a><a class="commentary-provider-choice" href="#s3">BetGenius</a></nav></div>
+    </section>
+    <section class="panel"><div class="ph"><div>Provider commentary<div class="l2">RunningBall · Newest received first · UTC</div></div><span class="l2">0 events</span></div><div class="pb"><p class="commentary-empty">No commentary or events received from RunningBall for this match. <span class="n">1</span></p></div></section>
+  </main>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>所選來源沒有紀錄時顯示空白提示。沒有文字轉播不代表來源中斷或比賽狀態改變，各狀態依自己的資料判定（R03-05、R04-12）。</span></li>
+</ol>
+
+<h2 id="s4">畫面 4：檢視其他來源</h2>
+
+<div lang="en" class="frame">
+  <header class="top"><span>Home › Matches › Schedule › Match Commentary History</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
+  <main class="main">
+    <div class="page-head">
+      <div><a href="schedule.html#s1">‹ Back to Schedule</a><h3>Match Commentary History</h3><div class="sub">Provider timelines · M-250356 · UTC</div></div>
+      <div class="source-heading"><a class="btn" href="match-detail.html#s1">Detail</a><span class="btn pri" aria-current="page">Commentary</span></div>
+    </div>
+    <section class="commentary-summary">
+      <div class="commentary-match"><h3>Pohang Steelers vs Gamba Osaka <span class="chip">Live</span></h3><div class="l2">AFC Champions League Elite · Soccer · 2026-11-04 18:00 UTC</div><p><b>1 : 1</b> · 2H 18'</p><div class="l2">M-250356 · Home: C-10644 / Away: C-7338</div></div>
+      <div class="commentary-provider-select"><h4>Commentary provider <span class="n">1</span></h4><nav class="commentary-provider-options" aria-label="Commentary provider"><a class="commentary-provider-choice" href="#s1">RunningBall<span class="commentary-provider-tag">Signal source</span></a><a class="commentary-provider-choice is-selected" href="#s4" aria-current="page">BetGenius<span class="commentary-provider-tag">View only</span></a></nav></div>
+    </section>
+    <section class="panel">
+      <div class="ph"><div>Provider commentary<div class="l2">BetGenius · Newest received first · UTC</div></div><span class="l2">2 events</span></div>
+      <div class="pb"><ol class="commentary-timeline">
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:22:11Z">2026-11-04<br>19:22:11</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>BetGenius</div><div class="commentary-clock">2H 17:59</div><div class="commentary-code">#10</div><div class="commentary-text"><b>Play continues</b> <span class="l2">— Play continues.</span></div></li>
+        <li class="commentary-entry"><div class="commentary-time"><time datetime="2026-11-04T19:19:04Z">19:19:04</time></div><div class="commentary-source"><span class="dot on" aria-hidden="true"></span>BetGenius</div><div class="commentary-clock">2H 14:50</div><div class="commentary-code">#32</div><div class="commentary-text"><b>Goal</b> <span class="l2">— Gamba Osaka</span></div></li>
+      </ol></div>
+    </section>
+  </main>
+</div>
+
+<ol class="notes">
+  <li><span class="n">1</span><span>選取 BetGenius 後只列出 BetGenius 的兩筆回報；BetGenius 的事件不影響 RunningBall 提供的訊號（R04-21）。</span></li>
+</ol>
+
+</div>
+</body>
+</html>

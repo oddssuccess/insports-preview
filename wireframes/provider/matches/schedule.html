@@ -8,7 +8,7 @@
 </head>
 <body><div class="doc">
 <h1>來源單場賽程（Provider › Matches › Schedules）</h1>
-<p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Provider › Matches › Schedules · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
+<p class="meta"><b>日期</b>：2026-11-17 · <b>選單</b>：Provider › Matches › Schedules · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/01-sports-and-markets-catalog.md">01 目錄</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a> · <a href="../../index.html">畫面索引</a></p>
 <nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 來源單場賽程（滾球中）</a><a href="#s2">2 賽前頁籤與競賽收合</a><a href="#s3">3 選擇競賽</a></nav>
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依來源（Provider）、運動與日期，查看該來源回報的單場賽程：依來源競賽分組，按狀態篩選，一眼看到每場的時間、參賽方、來源識別、比分與文字轉播（Commentary）。清單為唯讀，內容皆為來源回報值。</td></tr>
@@ -32,12 +32,12 @@
   <tr><td>4</td><td>顯示來源回報的開賽時間、目前時段與比賽時間</td><td>R03-08；R04-13</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>5</td><td>顯示來源的參賽方名稱與識別、來源場次識別</td><td>R03-08；R04-04</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>6</td><td>依運動的計分項目顯示來源比分，未提供的項目顯示未知</td><td>R01-17；R04-13</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>7</td><td>顯示來源的文字轉播</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>7</td><td>顯示足球來源的文字轉播；其他運動保留欄位並顯示 No commentary received</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>8</td><td>滾球中有直播的場次顯示直播圖示</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
 <h2 id="s1">畫面 1：來源單場賽程（滾球中）</h2>
-<p>各運動依自己的計分項目與時段有各自的比分欄（R01-17）。以下以足球、籃球、網球為例，其餘欄位與操作各運動相同，說明見足球範例。</p>
+<p>各運動依自己的計分項目與時段有各自的比分欄（R01-17）。以下以足球、籃球、網球為例，其餘欄位與操作各運動相同，說明見足球範例。文字轉播目前僅支援足球；其他運動保留欄位並呈現空白狀態。</p>
 <h3 class="example" id="s1-soccer">足球</h3>
 <div lang="en" class="frame">
   <header class="top"><span>Home › Provider › Matches › Schedules</span><span>Language: English ▾ &nbsp; · &nbsp; ops.user ▾</span></header>
@@ -126,7 +126,7 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th rowspan="2"></th><th colspan="1" class="c">Score <span class="n">2</span></th><th rowspan="2">Commentary</th></tr>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th rowspan="2"></th><th colspan="1" class="c">Score <span class="n">2</span></th><th rowspan="2">Commentary <span class="n">3</span></th></tr>
         <tr><th class="c">PTS</th></tr>
       </thead>
       <tbody>
@@ -136,7 +136,7 @@
           <td><div class="match-team"><span>Chicago Bulls</span><span class="ids">2101</span></div><div class="match-team"><span>Philadelphia 76ers</span><span class="ids">2119</span></div><div class="l2">10470716 / 2026-11-08 04:30</div></td>
           <td class="c"></td>
           <td class="sc">54<br>51</td>
-          <td>Timeout: Philadelphia 76ers</td>
+          <td><span class="l2">No commentary received</span></td>
         </tr>
         <tr class="grp"><td colspan="5">▾ KOREA BASKETBALL LEAGUE</td></tr>
         <tr>
@@ -144,7 +144,7 @@
           <td><div class="match-team"><span>Ulsan Hyundai Mobis Phoebus</span><span class="ids">1004498</span></div><div class="match-team"><span>Anyang Red Boosters</span><span class="ids">1004500</span></div><div class="l2">10840097 / 2026-11-08 13:00</div></td>
           <td class="c"></td>
           <td class="sc">14<br>9</td>
-          <td>—</td>
+          <td><span class="l2">No commentary received</span></td>
         </tr>
       </tbody>
     </table>
@@ -154,6 +154,7 @@
 <ol class="notes">
   <li><span class="n">1</span><span>籃球的目前時段為 Q1～Q4 等，後接該節剩餘時間（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/02-basketball.md">02-basketball</a>）。</span></li>
   <li><span class="n">2</span><span>籃球只有得分一個計分項目，因此只有 PTS 一欄，為全場得分（R01-17）。</span></li>
+  <li><span class="n">3</span><span>文字轉播目前僅支援足球；籃球保留 Commentary 欄，每場均顯示 No commentary received。此運動範圍為第二階段新增決定。</span></li>
 </ol>
 
 <h3 class="example" id="s1-tennis">網球</h3>
@@ -174,7 +175,7 @@
     </div>
     <table class="grid sched schedule-grid">
       <thead>
-        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th rowspan="2"></th><th colspan="2" class="c">Score <span class="n">2</span></th><th rowspan="2">Commentary</th></tr>
+        <tr><th rowspan="2" class="c">Time <span class="n">1</span></th><th rowspan="2">Match</th><th rowspan="2"></th><th colspan="2" class="c">Score <span class="n">2</span></th><th rowspan="2">Commentary <span class="n">3</span></th></tr>
         <tr><th class="c">SETS</th><th class="c">GAMES</th></tr>
       </thead>
       <tbody>
@@ -184,7 +185,7 @@
           <td><div class="match-team"><span>Ben Shelton</span><span class="ids">1225262</span></div><div class="match-team"><span>Carlos Alcaraz Garfia</span><span class="ids">1149903</span></div><div class="l2">10858205 / 2026-11-08 22:00</div></td>
           <td class="c"></td>
           <td class="sc">1<br>0</td><td class="sc">9<br>6</td>
-          <td>Break point: Ben Shelton</td>
+          <td><span class="l2">No commentary received</span></td>
         </tr>
         <tr class="grp"><td colspan="6">▾ WTA - HONG KONG OPEN</td></tr>
         <tr>
@@ -192,7 +193,7 @@
           <td><div class="match-team"><span>Claire Liu</span><span class="ids">1094750</span></div><div class="match-team"><span>Alexandra Eala</span><span class="ids">1206111</span></div><div class="l2">10856875 / 2026-11-08 16:00</div></td>
           <td class="c"></td>
           <td class="sc">1<br>1</td><td class="sc">12<br>13</td>
-          <td>—</td>
+          <td><span class="l2">No commentary received</span></td>
         </tr>
       </tbody>
     </table>
@@ -202,6 +203,7 @@
 <ol class="notes">
   <li><span class="n">1</span><span>網球的目前時段是正在進行的盤（Set 1、Set 2…），沒有比賽時鐘（見 <a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/03-tennis.md">03-tennis</a>）。</span></li>
   <li><span class="n">2</span><span>網球的計分項目是盤數與局數：SETS 是各方贏得的盤數，GAMES 是全場累計的局數，搶七計為一局（R01-17）。</span></li>
+  <li><span class="n">3</span><span>文字轉播目前僅支援足球；網球保留 Commentary 欄，每場均顯示 No commentary received。此運動範圍為第二階段新增決定。</span></li>
 </ol>
 
 <h2 id="s2">畫面 2：賽前頁籤與競賽收合</h2>

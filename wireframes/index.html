@@ -33,6 +33,15 @@
   <tr><td><a href="settings/provider-settings/data-usage.html">Settings › Provider Settings</a></td><td>新增</td><td>五個頁籤：資料使用（開關與狀態）、連接器（暫停、恢復與啟用）、運動與玩法收集、賽程來源、名稱分類規則</td></tr>
 </table>
 
+<h3 class="example">第二階段：即時賽況（LIVE DATA）</h3>
+<p class="meta"><b>目標</b>：將來源的比分、時鐘、事件與文字轉播正確匯入統一賽況，並能追查來源；提供單場賽事的發布開關與狀態示意。 · <b>期限</b>：2026 年 11 月 17 日</p>
+<table class="doc-t idx-phase">
+  <tr><th>頁面</th><th>異動</th><th>畫面元件</th></tr>
+  <tr><td><a href="matches/schedule.html">Matches › Schedule</a></td><td>更新</td><td>Commentary 與 Signal 欄、文字轉播歷史入口；訊號由文字轉播事件得出。新增 Publication 開關</td></tr>
+  <tr><td><a href="matches/match-detail.html#s4">Matches › Match Detail</a></td><td>更新</td><td>Data Sources 新增比分變更：顯示來源新舊比分、統一採用紀錄與無資料狀態；各頁籤及無資料畫面的賽事摘要均提供可切換的 Publication ON／OFF 開關</td></tr>
+  <tr><td><a href="matches/match-commentary-history.html">Matches › Match Commentary History</a></td><td>新增</td><td>賽事摘要、來源選擇卡、單一來源時間軸（新到舊）、事件代碼與文字、單筆回報與無紀錄狀態</td></tr>
+</table>
+
 <h2>頁面導覽</h2>
 <p class="meta">依後台主選單排列；縮排表示子頁（Subpage）與視窗（Pop-up）。尚未畫出的選單項目不列入。</p>
 <div class="idx-nav">
@@ -59,14 +68,14 @@
 </ul></li></ul></details>
 <details open><summary class="group">Matches</summary>
 <ul class="idx-tree">
-<li><a href="matches/schedule.html">Schedule</a><span class="idx-desc">依狀態頁籤與競賽分組的單場清單、競賽篩選</span>
+<li><a href="matches/schedule.html">Schedule</a><span class="idx-desc">單場清單、競賽篩選、文字轉播、滾球訊號圖示與時間、發布開關與 ON／OFF 狀態</span>
 <ul>
-<li><a href="matches/match-detail.html">Match Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">Data Sources：States 與 Properties 的逐項變更紀錄</span>
+<li><a href="matches/match-detail.html">Match Detail</a><span class="idx-tag">Subpage</span><span class="idx-desc">賽事摘要的 Publication 開關；Data Sources：States、各計分類別、Properties；依類別查看比分變更與採用結果</span>
 <ul>
-<li><a href="matches/match-detail.html#s1">Data Sources · States</a><span class="idx-tag">Tab</span><span class="idx-desc">各來源回報狀態與時段的時間差</span></li>
-<li><a href="matches/match-detail.html#s2">Data Sources · Properties</a><span class="idx-tag">Tab</span><span class="idx-desc">開賽時間與傷停補時的變更紀錄</span></li>
 <li><a href="matches/match-mapping.html">Match Mapping</a><span class="idx-tag">Pop-up</span><span class="idx-desc">已對應來源的識別、名稱與對應紀錄</span></li>
 </ul></li>
+<li><a href="matches/match-commentary-history.html">Match Commentary History</a><span class="idx-tag">Subpage</span><span class="idx-desc">賽事摘要、來源選擇與單一來源時間軸，保留來源及雙時間追溯</span>
+<ul><li><a href="matches/match-commentary-history.html#s2">Commentary Report</a><span class="idx-tag">Pop-up</span><span class="idx-desc">單筆回報、來源場次與目前訊號</span></li></ul></li>
 </ul></li>
 <li><a href="matches/issues.html">Issues</a><span class="idx-desc">待取消、待腰斬與狀態未確認的問題佇列、裁定與覆核</span></li></ul></details>
 <details open><summary class="group">Outrights</summary>
