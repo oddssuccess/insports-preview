@@ -749,7 +749,7 @@ svg .th { fill: var(--tag-fill); }
 <line x1="60" y1="188" x2="520" y2="188" class="sep"/>
 <text x="70" y="216">常規時間</text>
 <text x="290" y="216" text-anchor="middle" class="mono">2:1</text>
-<text x="290" y="232" text-anchor="middle" class="ts">由各時段算出</text>
+<text x="290" y="232" text-anchor="middle" class="ts">報出、加總或推算</text>
 <rect x="420" y="198" width="40" height="26" rx="4" class="tagw"/><text x="440" y="216" text-anchor="middle" class="tb tw">？</text>
 <line x1="60" y1="244" x2="520" y2="244" class="sep"/>
 <!-- 順序與時間 -->
@@ -758,9 +758,9 @@ svg .th { fill: var(--tag-fill); }
 <rect x="190" y="282" width="110" height="26" rx="4" class="chip"/><text x="245" y="300" text-anchor="middle" class="ts">客隊 <tspan class="mono">40'</tspan></text>
 <rect x="310" y="282" width="110" height="26" rx="4" class="chip"/><text x="365" y="300" text-anchor="middle" class="ts">主隊 <tspan class="mono">78'</tspan></text>
 <line x1="60" y1="322" x2="560" y2="322" class="sep"/>
-<circle cx="70" cy="344" r="4" class="dot"/><text x="84" y="349" class="ts">保留每次變動；合計（例如常規時間）由各時段算出，不直接採用來源的合計。</text>
+<circle cx="70" cy="344" r="4" class="dot"/><text x="84" y="349" class="ts">保留每次變動；合計可直接報出或由時段加總，也可跨來源推算。</text>
 <circle cx="70" cy="370" r="4" class="dotw"/><text x="84" y="375" class="ts tw">來源沒有提供的項目視為未知（？），不是 0。</text>
-<circle cx="70" cy="396" r="4" class="dot"/><text x="84" y="401" class="ts">落後反勝、第 N 個進球、時間區間需要順序或時間；<tspan x="84" dy="1.3em">來源能否提供由營運團隊 人工判斷（R01-18）。</tspan></text>
+<circle cx="70" cy="396" r="4" class="dot"/><text x="84" y="401" class="ts">落後反勝、第 N 個進球、時間區間需要順序或時間；<tspan x="84" dy="1.3em">來源能否提供由營運團隊人工判斷（R01-18）。</tspan></text>
 <!-- 右：不一致 → 暫停 -->
 <rect x="610" y="24" width="310" height="392" rx="8" class="panel"/>
 <text x="765" y="52" text-anchor="middle" class="tb">多個來源的計分順序或發生時間不一致</text>
@@ -780,7 +780,7 @@ svg .th { fill: var(--tag-fill); }
 <text x="630" y="364" class="ts">第 N 個進球與落後反勝。</text>
 <text x="630" y="396" class="ts">最終計數仍依 R04-14 的門檻與共識。</text>
 </svg>
-<p class="cap"><b>圖說</b>：統一賽果逐時段逐項記錄，合計自行算出，未提供視為未知；順序或時間不一致時暫停依賴它的玩法（R04-13）。</p>
+<p class="cap"><b>圖說</b>：統一賽果逐時段逐項記錄，時段值可直接報出、由時段加總或跨來源推算，都是證據；未提供視為未知；順序或時間不一致時暫停依賴它的玩法（R04-13）。</p>
 </section>
 
 <!-- ============================================================ 圖 04-12 -->

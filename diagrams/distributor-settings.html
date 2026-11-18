@@ -123,7 +123,7 @@ svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: 
 <g>
   <circle cx="84" cy="216" r="12" class="chip"/><text x="84" y="221" text-anchor="middle" class="tb">✓</text>
   <text x="104" y="221" class="tb">自己的玩法設定模板（R10-09、12 的 R12-08）</text>
-  <text x="104" y="239" class="ts">水位、跳水、盤口線數量（最多 7）、盤口限額、淨賠付與最高賠付、</text>
+  <text x="104" y="239" class="ts">水位、跳水、盤口線數量、盤口限額、淨賠付與最高賠付、</text>
   <text x="104" y="255" class="ts">單張最高派彩、可否過關／同場過關、可否提前兌現與兌現折扣、</text>
   <text x="104" y="271" class="ts">價格等級 B 到 J 的水位加成。整份覆寫 InSports 的經銷商欄位。</text>
 </g>
@@ -136,7 +136,7 @@ svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: 
 <g>
   <circle cx="84" cy="372" r="12" class="chip"/><text x="84" y="377" text-anchor="middle" class="tb">✓</text>
   <text x="104" y="377" class="tb">偏移（R10-11）</text>
-  <text x="104" y="395" class="ts">對自己的盤口或盤口線加正負偏移（定價流程第 6 步）；</text>
+  <text x="104" y="395" class="ts">對自己的盤口或盤口線加正負偏移（定價流程第 7 步）；</text>
   <text x="104" y="411" class="ts">只改自己玩家的價格。</text>
 </g>
 <g>
@@ -160,14 +160,14 @@ svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: 
 <g>
   <circle cx="544" cy="162" r="12" class="chipw"/><text x="544" y="167" text-anchor="middle" class="tb tw">✕</text>
   <text x="564" y="167" class="tw">動基礎賠率與 InSports 欄位</text>
-  <text x="564" y="185" class="ts">基礎賠率、InSports 價格、模型；開出、來源權重、校正、</text>
+  <text x="564" y="185" class="ts">基礎賠率、定價模型；開出、來源權重、校正、</text>
   <text x="564" y="201" class="ts">系統單注上限、等待秒數等 InSports 欄位：改不了也看不到。</text>
 </g>
 <g>
   <circle cx="544" cy="232" r="12" class="chipw"/><text x="544" y="237" text-anchor="middle" class="tb tw">✕</text>
   <text x="564" y="237" class="tw">放行 InSports 關掉的</text>
   <text x="564" y="255" class="ts">InSports 暫停、關閉、停用或不支援的，經銷商開不了；</text>
-  <text x="564" y="271" class="ts">也不能增減階段、逐格覆寫模板、開超過 7 條盤口線。</text>
+  <text x="564" y="271" class="ts">也不能增減階段、逐格覆寫模板。</text>
 </g>
 <g>
   <circle cx="544" cy="302" r="12" class="chipw"/><text x="544" y="307" text-anchor="middle" class="tb tw">✕</text>
@@ -311,7 +311,7 @@ svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: 
 <rect x="56" y="108" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="125" class="bt">可否過關、可否同場過關</text><text x="296" y="125" text-anchor="end" class="tiny">模板</text>
 <rect x="56" y="142" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="159" class="bt">水位</text><text x="296" y="159" text-anchor="end" class="tiny">模板</text>
 <rect x="56" y="176" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="193" class="bt">價格等級 B 到 J 的水位加成</text><text x="296" y="193" text-anchor="end" class="tiny">模板</text>
-<rect x="56" y="210" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="227" class="bt">盤口線數量（最多 7 條）</text><text x="296" y="227" text-anchor="end" class="tiny">模板</text>
+<rect x="56" y="210" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="227" class="bt">盤口線數量</text><text x="296" y="227" text-anchor="end" class="tiny">模板</text>
 <rect x="56" y="244" width="248" height="26" rx="4" class="fieldset"/><text x="68" y="261" class="bt">可否提前兌現、兌現折扣</text><text x="296" y="261" text-anchor="end" class="tiny">模板</text>
 <rect x="56" y="278" width="248" height="26" rx="4" class="ext"/><text x="68" y="295" class="bt">偏移</text><text x="296" y="295" text-anchor="end" class="tiny">盤口上的操作</text>
 <text x="56" y="330" class="tiny">提前結算不在這裡：InSports 欄位（07）。</text>
@@ -354,7 +354,7 @@ svg .lock { fill: none; stroke: var(--soft); stroke-width: 1.4; stroke-linecap: 
 <text x="506" y="476" class="ts">提供的賠率格式；另有開關與偏移是盤口上的操作，不是設定值。</text>
 <!-- 底 -->
 <circle cx="52" cy="534" r="4" class="dot"/>
-<text x="66" y="539" class="ts">經銷商欄位都可以比 InSports 的預設值寬鬆或嚴格，InSports 不設上下限；唯一的例外是盤口線數量最多 7 條（05 的 R05-13）。</text>
+<text x="66" y="539" class="ts">經銷商欄位都可以比 InSports 的預設值寬鬆或嚴格，InSports 不設上下限；盤口線數量必須是至少 1 的整數（05 的 R05-13）。</text>
 <text x="880" y="585" text-anchor="end" class="tiny">（R10-09、R10-10、12 的 R12-08）</text>
 </svg>
 <p class="cap"><b>圖說</b>：經銷商可以覆寫的設定分賠率、收注、風控三組；依玩法與階段的放在自己的玩法設定模板（整份覆寫），跨玩法的放在一般設定，開關與偏移是盤口上的操作。提前結算是 InSports 欄位，不在其中（R10-09、R10-10、12 的 R12-08）。</p>

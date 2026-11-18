@@ -38,7 +38,7 @@
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依運動列出競賽，可依屬性、等級、停用與否篩選，包括「未定」與「未分級」；虛擬競賽以標記區分</td><td>R01-12、R01-27、R01-31、R01-32、R01-34</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>停用或恢復競賽</td><td>R01-34</td><td><a href="#s1">畫面 1</a>、<a href="#s3">畫面 3</a></td></tr>
-  <tr><td>3</td><td>修改競賽的國家／地區、性別、年齡層與組別</td><td>R01-31</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>3</td><td>修改競賽的國家／地區、性別與年齡層</td><td>R01-31</td><td><a href="#s2">畫面 2</a></td></tr>
   <tr><td>4</td><td>設定競賽的等級，可以逐筆設定，也可以一次設定多筆，也可以改回未分級</td><td>R01-32</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
   <tr><td>5</td><td>查看競賽是否為虛擬，唯讀</td><td>R01-27</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>6</td><td>上傳、更換或移除競賽的圖示</td><td>R01-33</td><td><a href="#s2">畫面 2</a></td></tr>
@@ -63,7 +63,6 @@
         <div class="f"><label>Country/Region <span class="n">2</span></label><span class="box caret">All</span></div>
         <div class="f"><label>Gender</label><span class="box caret">All</span></div>
         <div class="f"><label>Age group</label><span class="box caret">All</span></div>
-        <div class="f"><label>Class</label><span class="box caret">All</span></div>
         <div class="f"><label>Tier</label><span class="box caret">All</span></div>
         <div class="f"><label>Status <span class="n">5</span></label><span class="box caret">All</span></div>
         <div class="f"><label>Search</label><span class="box wide">Tournament name or ID</span></div>
@@ -73,20 +72,20 @@
         <thead><tr>
           <th>Tournament <span class="s">/ ID</span></th>
           <th>Country/Region</th>
-          <th>Gender <span class="s">· Age group · Class</span></th>
+          <th>Gender <span class="s">· Age group</span></th>
           <th>Tier <span class="n">4</span></th>
           <th>Sort order</th>
           <th>Status <span class="n">5</span></th>
           <th>Actions <span class="n">6</span></th>
         </tr></thead>
         <tbody>
-          <tr><td>Premier League<div class="l2">T-10231</div></td><td>England</td><td>Men · Senior · —</td><td>1</td><td>1</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>UEFA Champions League<div class="l2">T-10002</div></td><td>Europe</td><td>Men · Senior · —</td><td>1</td><td>2</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>FIFA World Cup<div class="l2">T-10001</div></td><td>International</td><td>Men · Senior · —</td><td>1</td><td>3</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Women's Super League<div class="l2">T-11502</div></td><td>England</td><td>Women · Senior · —</td><td>3</td><td>12</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Virtual Soccer League <span class="chip">Virtual</span> <span class="n">3</span><div class="l2">T-20004</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td>5</td><td>40</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21 · Reserve</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
-          <tr class="off"><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset · —</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><b>Disabled</b></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Premier League<div class="l2">T-10231</div></td><td>England</td><td>Men · Senior</td><td>1</td><td>1</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>UEFA Champions League<div class="l2">T-10002</div></td><td>Europe</td><td>Men · Senior</td><td>1</td><td>2</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>FIFA World Cup<div class="l2">T-10001</div></td><td>International</td><td>Men · Senior</td><td>1</td><td>3</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Women's Super League<div class="l2">T-11502</div></td><td>England</td><td>Women · Senior</td><td>3</td><td>12</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Virtual Soccer League <span class="chip">Virtual</span> <span class="n">3</span><div class="l2">T-20004</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset</td><td>5</td><td>40</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr><td>Premier League 2<div class="l2">T-11977</div></td><td>England</td><td>Men · U21</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td>Active</td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
+          <tr class="off"><td>Regional Amateur League<div class="l2">T-12840</div></td><td class="l2">Unset</td><td class="l2">Unset · Unset</td><td class="l2">Untiered</td><td class="l2">(not set)</td><td><b>Disabled</b></td><td><span class="btn">Edit</span> <span class="btn">Competitors</span></td></tr>
           <tr><td colspan="7" class="l2">… (other soccer tournaments)</td></tr>
         </tbody>
       </table>
@@ -96,7 +95,7 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>一次只看一個運動。</span></li>
-  <li><span class="n">2</span><span>競賽第一次建立時，國家／地區、性別、年齡層與組別的初始值從資料來源（Provider）複製；資料來源沒有提供的國家／地區、性別、年齡層為「Unset」（未定），篩選可以選「Unset」，找出尚未整理的競賽；組別沒有填寫表示沒有組別，顯示「—」，不是未定（R01-31）。屬性的值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>；競賽可以用「International」與洲別，例如世界盃與歐冠。</span></li>
+  <li><span class="n">2</span><span>競賽第一次建立時，國家／地區、性別與年齡層的初始值從資料來源（Provider）複製；資料來源沒有提供的國家／地區、性別、年齡層為「Unset」（未定），篩選可以選「Unset」，找出尚未整理的競賽（R01-31）。屬性的值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>；競賽可以用「International」與洲別，例如世界盃與歐冠。</span></li>
   <li><span class="n">3</span><span>虛擬競賽與真實競賽列在同一份清單，以「Virtual」標記區分（R01-27）。虛擬足球的競賽列在「Soccer」之下，因為虛擬足球不是另一個運動。</span></li>
   <li><span class="n">4</span><span>等級分為 1 至 10 級，1 最高；新建立的競賽為「Untiered」（R01-32）。等級不影響顯示的先後，顯示只依排序號（R01-28）；尚未設定排序號的競賽顯示「(not set)」並排在最後。</span></li>
   <li><span class="n">5</span><span>競賽分為正常與停用（R01-34）。停用的競賽仍列在清單中，以「Disabled」標示，可以照常修改屬性、等級、名稱與圖示。停用與恢復在編輯視窗的「Status」分頁（畫面 3）。</span></li>
@@ -117,7 +116,6 @@
         <div class="f"><label>Country/Region <span class="n">2</span></label><span class="box caret">England</span><div class="hint">Countries/regions, International, or a continent</div></div>
         <div class="f"><label>Gender</label><span class="box caret">Men</span><div class="hint">Unset / Men / Women / Mixed</div></div>
         <div class="f"><label>Age group</label><span class="box caret">U21</span><div class="hint">Unset, Senior, U23, U21, U20, U19, U17</div></div>
-        <div class="f"><label>Class</label><span class="box caret">Reserve</span><div class="hint">None, College, High school, Reserve, Amateur, Veterans</div></div>
         <div class="f"><label>Tier <span class="n">3</span></label><span class="box caret">Untiered</span><div class="hint">Untiered, or 1 (highest) to 10 (lowest)</div></div>
         <div class="f"><label>Logo <span class="n">4</span></label><span class="box">(default logo)</span><div class="hint">Upload · Replace · Remove</div></div>
       </div>
@@ -128,7 +126,7 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>虛擬與否在賽程來源建立競賽時，依 InSports 對該來源設定的競賽名稱規則判定，之後不變，Ops 不能修改（R01-27）。</span></li>
-  <li><span class="n">2</span><span>四個屬性只能從清單中選擇（R01-31）：國家／地區見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/regions.md">國家／地區</a>，競賽可用「International」與洲別；年齡層只列該運動的值，範例為足球的年齡層（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球</a>）；組別可選「None」，表示沒有組別。清單的值在另一個 Catalog 頁面維護，經銷商不能修改。</span></li>
+  <li><span class="n">2</span><span>三個屬性只能從清單中選擇（R01-31）：國家／地區見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/regions.md">國家／地區</a>，競賽可用「International」與洲別；年齡層只列該運動的值，範例為足球的年齡層（見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/sports/01-soccer.md">足球</a>）。清單的值在另一個 Catalog 頁面維護，經銷商不能修改。</span></li>
   <li><span class="n">3</span><span>等級由 Ops 設定，經銷商不能修改；已分級的競賽也可以改回「Untiered」（R01-32）。等級與玩法設定模板的關係見 R01-32：第一次設定等級時，競賽指定該等級的模板；之後再改等級，已有的指定不自動改變。</span></li>
   <li><span class="n">4</span><span>Ops 可以上傳、更換或移除圖示。沒有圖示時，經銷商有設定預設圖示就顯示經銷商的，否則顯示 InSports 的系統預設圖示（R01-33）。</span></li>
 </ol>
