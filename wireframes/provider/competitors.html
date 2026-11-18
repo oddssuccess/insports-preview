@@ -31,7 +31,7 @@
   <tr><td>3</td><td>查看參賽方出現的來源競賽、來源場次數與下一場比賽</td><td>R03-08；R04-01</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>4</td><td>查看來源提供的國家／地區、性別與年齡層</td><td>R03-08；R01-31</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>5</td><td>由明細進入該參賽方的來源場次</td><td>R03-08；R04-01</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>R03-08</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>—</td><td><a href="#s3">畫面 3</a></td></tr>
 </table>
 
 <h2 id="s1">畫面 1：來源參賽方清單</h2>
@@ -44,8 +44,8 @@
       <div class="f"><label>Provider <span class="n">2</span></label><span class="box caret">Saba</span></div>
       <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
       <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
-      <div class="f"><label>Age</label><span class="box caret">All Ages</span></div>
       <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Age group</label><span class="box caret">All</span></div>
       <div class="f"><label>Search <span class="n">3</span></label><span class="box wide">Id or name…</span></div>
     </div>
     <table class="grid">
@@ -64,9 +64,9 @@
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」（R03-08）。</span></li>
+  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」。</span></li>
   <li><span class="n">2</span><span>「Provider」與「Sport」每次各選一個，其餘條件只在此範圍內比對。來源以原始供應者區分；不同來源的相同識別或同名隊伍不視為同一筆資料。電子競技依各遊戲選擇運動（R03-01、R04-03、R04-04）。</span></li>
-  <li><span class="n">3</span><span>「Search」比對來源名稱與來源參賽方識別，範圍限於上方選定的來源與運動（R03-08）。</span></li>
+  <li><span class="n">3</span><span>「Search」比對來源名稱與來源參賽方識別；與來源、運動、國家／地區、性別、年齡層等所有條件同時成立才列出。</span></li>
   <li><span class="n">4</span><span>「Competitor / ID」上行是來源名稱，下行是來源自己的參賽方識別，不是統一識別。來源沒有提供識別時顯示「—」，如 Werder Bremen（R03-08、R04-04）。</span></li>
   <li><span class="n">5</span><span>「Tournaments」一次顯示一個該參賽方在來源場次中出現的競賽與來源競賽識別，點擊輪流切換；標籤「1/2」是目前第幾個／共出現在幾個競賽，如 Arsenal 共 2 個。完整清單在明細的 Provider tournaments（R03-08、R04-04）。</span></li>
   <li><span class="n">6</span><span>「Upcoming」是目前來源仍在清單、回報未開始且開賽時間最早的一場，列開賽時間與主客隊，主客順序取自來源。沒有下一場時顯示「—」（R03-08、R04-01、R04-06）。</span></li>
@@ -106,14 +106,23 @@
   <header class="top"><span>Home › Provider › Competitors</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider — Competitors</h3><div class="sub">Per-provider competitor (team / athlete) dictionary, keyed by provider + sport</div></div></div>
-    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">Saba</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">99999999</span></div><a class="btn" href="#s1">Clear search <span class="n">1</span></a></div>
+    <div class="filters">
+      <div class="f"><label>Language</label><span class="box caret">English</span></div>
+      <div class="f"><label>Provider</label><span class="box caret">Saba</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
+      <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Age group</label><span class="box caret">All</span></div>
+      <div class="f"><label>Search</label><span class="box wide">99999999</span></div>
+      <a class="btn" href="#s1">Clear search <span class="n">1</span></a>
+    </div>
     <div class="panel"><div class="pb">No provider competitors found. <span class="n">2</span></div></div>
     <div class="pager"><span></span><span>0 competitors</span></div>
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1（R03-08）。</span></li>
-  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成（R03-08）。</span></li>
+  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1。</span></li>
+  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成。</span></li>
 </ol>
 
 </div>

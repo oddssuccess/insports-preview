@@ -26,12 +26,12 @@
 <h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>依語言、來源、運動、國家／地區、性別與關鍵字檢索競賽</td><td>R03-01、R03-08；R04-03</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>1</td><td>依語言、來源、運動、國家／地區、性別、年齡層與關鍵字檢索競賽</td><td>R03-01、R03-08；R04-03</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>2</td><td>查看來源自己的競賽識別與名稱，缺值顯示「—」</td><td>R03-08；R04-04</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>3</td><td>查看來源場次數與下一場比賽</td><td>R03-08；R04-01</td><td><a href="#s1">畫面 1</a></td></tr>
   <tr><td>4</td><td>查看來源提供的國家／地區、性別與年齡層</td><td>R03-08；R01-31</td><td><a href="#s1">畫面 1</a>、<a href="#s2">畫面 2</a></td></tr>
   <tr><td>5</td><td>由明細進入該競賽的來源場次</td><td>R03-08；R04-01</td><td><a href="#s2">畫面 2</a></td></tr>
-  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>R03-08</td><td><a href="#s3">畫面 3</a></td></tr>
+  <tr><td>6</td><td>無搜尋結果時保留條件，可清除搜尋返回清單</td><td>—</td><td><a href="#s3">畫面 3</a></td></tr>
 </table>
 
 <h2 id="s1">畫面 1：來源競賽清單</h2>
@@ -45,6 +45,7 @@
       <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
       <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
       <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Age group</label><span class="box caret">All</span></div>
       <div class="f"><label>Search <span class="n">3</span></label><span class="box wide">Id or name…</span></div>
     </div>
     <table class="grid">
@@ -62,9 +63,9 @@
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」（R03-08）。</span></li>
+  <li><span class="n">1</span><span>「Language」決定名稱欄顯示哪一種語言的來源名稱；來源沒有該語言時顯示「—」。</span></li>
   <li><span class="n">2</span><span>「Provider」與「Sport」每次各選一個，其餘條件只在此範圍內比對。來源以原始供應者區分，不以轉送商或帳號區分；同一個識別值在不同來源不代表同一競賽。電子競技依各遊戲選擇運動（R03-01、R04-03）。</span></li>
-  <li><span class="n">3</span><span>「Search」比對來源名稱與來源競賽識別，範圍限於上方選定的來源與運動（R03-08）。</span></li>
+  <li><span class="n">3</span><span>「Search」比對來源名稱與來源競賽識別；與來源、運動、國家／地區、性別、年齡層等所有條件同時成立才列出。</span></li>
   <li><span class="n">4</span><span>「Tournament / ID」上行是來源名稱，下行是來源自己的競賽識別。例如 29670 屬於來源 Saba，不是統一識別；來源沒有提供的欄位顯示「—」（R03-08、R04-04）。</span></li>
   <li><span class="n">5</span><span>「Upcoming」是目前來源仍在清單、回報未開始且開賽時間最早的一場，列開賽時間與主客隊。本例 English League Championship 的 8 場都已開賽或結束，顯示「—」（R03-08、R04-01）。</span></li>
   <li><span class="n">6</span><span>「Country / Gender / Age」原樣呈現來源提供的國家／地區、性別與年齡層，來源沒有提供的顯示「—」，如 Germany-Bundesliga I 沒有國家。這些是來源值，與 Catalog 的統一屬性分開（R03-08、R01-31）。</span></li>
@@ -103,14 +104,23 @@
   <header class="top"><span>Home › Provider › Tournaments</span><span>Language: English · ops.user</span></header>
   <main class="main">
     <div class="page-head"><div><h3>Provider — Tournaments</h3><div class="sub">Per-provider tournament dictionary, keyed by provider + sport</div></div></div>
-    <div class="filters"><div class="f"><label>Provider</label><span class="box caret">Saba</span></div><div class="f"><label>Sport</label><span class="box caret">Soccer</span></div><div class="f"><label>Search</label><span class="box wide">Northern Cup</span></div><a class="btn" href="#s1">Clear search <span class="n">1</span></a></div>
+    <div class="filters">
+      <div class="f"><label>Language</label><span class="box caret">English</span></div>
+      <div class="f"><label>Provider</label><span class="box caret">Saba</span></div>
+      <div class="f"><label>Sport</label><span class="box caret">Soccer</span></div>
+      <div class="f"><label>Country</label><span class="box caret">All Countries</span></div>
+      <div class="f"><label>Gender</label><span class="box caret">All Genders</span></div>
+      <div class="f"><label>Age group</label><span class="box caret">All</span></div>
+      <div class="f"><label>Search</label><span class="box wide">Northern Cup</span></div>
+      <a class="btn" href="#s1">Clear search <span class="n">1</span></a>
+    </div>
     <div class="panel"><div class="pb">No provider tournaments found. <span class="n">2</span></div></div>
     <div class="pager"><span></span><span>0 tournaments</span></div>
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1（R03-08）。</span></li>
-  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成（R03-08）。</span></li>
+  <li><span class="n">1</span><span>「Clear search」只清除搜尋字詞，其餘條件保留，回到畫面 1。</span></li>
+  <li><span class="n">2</span><span>表示目前條件下沒有資料，可能是搜尋字詞或其他篩選造成。</span></li>
 </ol>
 
 </div>
