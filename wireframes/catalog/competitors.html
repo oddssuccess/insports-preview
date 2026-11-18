@@ -94,7 +94,7 @@
 <ol class="notes">
   <li><span class="n">1</span><span>每個參賽方屬於一個運動，一次只看一個運動。同名的俱樂部在不同運動是不同的參賽方，例如某俱樂部的足球隊與籃球隊。</span></li>
   <li><span class="n">2</span><span>選擇競賽後，只列在該競賽有至少一場賽事（單場比賽或冠軍盤賽事）的參賽方；同一個參賽方可能出現在多個競賽，例如聯賽與盃賽。從<a href="tournaments.html">競賽清單</a>的「Competitors」進入時，運動與競賽已選好。</span></li>
-  <li><span class="n">3</span><span>類型分為俱樂部、國家隊、個人、組合與其他，初始值為「Unset」（R01-31，值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md#類型">類型</a>）。國家／地區、性別、年齡層的初始值也是「Unset」，篩選可以選「Unset」找出尚未整理的參賽方；組別沒有填寫表示沒有組別，顯示「—」。</span></li>
+  <li><span class="n">3</span><span>類型分為俱樂部、國家隊、個人、組合與其他（R01-31，值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md#類型">類型</a>）。參賽方第一次建立時，類型、國家／地區、性別、年齡層與組別的初始值從資料來源（Provider）複製；資料來源沒有提供的類型、國家／地區、性別、年齡層為「Unset」（未定），篩選可以選「Unset」找出尚未整理的參賽方；組別沒有填寫表示沒有組別，顯示「—」。</span></li>
   <li><span class="n">4</span><span>參賽方在虛擬競賽的賽事中建立時即為虛擬參賽方，以「Virtual」標記區分（R01-27）。虛擬參賽方即使名稱與真實隊伍相同，也是不同的參賽方，例如上表的兩個「Team A」（R04-20）。</span></li>
   <li><span class="n">5</span><span>「Edit」開啟這個參賽方的編輯視窗，分為「Details」（畫面 2）與「Translations」（畫面 3）兩個分頁。</span></li>
 </ol>

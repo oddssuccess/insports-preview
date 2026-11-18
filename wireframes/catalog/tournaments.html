@@ -96,7 +96,7 @@
 
 <ol class="notes">
   <li><span class="n">1</span><span>一次只看一個運動。</span></li>
-  <li><span class="n">2</span><span>國家／地區、性別、年齡層的初始值是「Unset」（未定），篩選可以選「Unset」，找出尚未整理的競賽；組別沒有填寫表示沒有組別，顯示「—」，不是未定（R01-31）。屬性的值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>；競賽可以用「International」與洲別，例如世界盃與歐冠。</span></li>
+  <li><span class="n">2</span><span>競賽第一次建立時，國家／地區、性別、年齡層與組別的初始值從資料來源（Provider）複製；資料來源沒有提供的國家／地區、性別、年齡層為「Unset」（未定），篩選可以選「Unset」，找出尚未整理的競賽；組別沒有填寫表示沒有組別，顯示「—」，不是未定（R01-31）。屬性的值見<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/catalog/attributes/README.md">競賽與參賽方屬性</a>；競賽可以用「International」與洲別，例如世界盃與歐冠。</span></li>
   <li><span class="n">3</span><span>虛擬競賽與真實競賽列在同一份清單，以「Virtual」標記區分（R01-27）。虛擬足球的競賽列在「Soccer」之下，因為虛擬足球不是另一個運動。</span></li>
   <li><span class="n">4</span><span>等級分為 1 至 10 級，1 最高；新建立的競賽為「Untiered」（R01-32）。等級不影響顯示的先後，顯示只依排序號（R01-28）；尚未設定排序號的競賽顯示「(not set)」並排在最後。</span></li>
   <li><span class="n">5</span><span>競賽分為正常與停用（R01-34）。停用的競賽仍列在清單中，以「Disabled」標示，可以照常修改屬性、等級、名稱與圖示。停用與恢復在編輯視窗的「Status」分頁（畫面 3）。</span></li>
