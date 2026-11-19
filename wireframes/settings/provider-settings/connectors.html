@@ -8,10 +8,10 @@
 </head>
 <body><div class="doc">
 <h1>來源設定・連接器（Provider Settings › Connectors）</h1>
-<p class="meta"><b>日期</b>：2026-11-06 · <b>選單</b>：Settings › Provider Settings › Connectors · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求與稽核</a> · <a href="../../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 連接器清單</a><a href="#s2">2 暫停前查看賽程影響</a><a href="#s3">3 恢復已暫停的連接器</a><a href="#s4">4 連接器變更紀錄</a><a href="#s5">5 共用轉送商的暫停影響</a><a href="#s6">6 已暫停與尚未啟用的連接器</a><a href="#s7">7 啟用新連接器</a></nav>
+<p class="meta"><b>日期</b>：2026-11-19 · <b>選單</b>：Settings › Provider Settings › Connectors · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 資料來源與連接器</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 賽事資料與對應</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/11-back-office-and-reports.md">11 後台</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/non-functional-requirements.md">非功能需求與稽核</a> · <a href="../../index.html">畫面索引</a></p>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 連接器清單</a><a href="#s2">2 停用前查看賽程影響</a><a href="#s3">3 重新啟用連接器</a><a href="#s4">4 連接器變更紀錄</a><a href="#s5">5 停用共用連接器</a><a href="#s6">6 停用的連接器</a><a href="#s7">7 啟用新連接器</a></nav>
 <table class="doc-t">
-  <tr><th>服務的工作</th><td>Ops 查看整個連接器的啟用設定、資料取得情況及異常原因；暫停前確認受影響來源與賽程，恢復時填寫原因，並查看變更紀錄。</td></tr>
+  <tr><th>服務的工作</th><td>Ops 查看連接器的人工啟用設定、實際運行狀態及異常原因。變更設定前確認影響，送出時填寫原因，也可回查設定變更紀錄。</td></tr>
   <tr><th>不在本頁</th><td><ul class="tight">
     <li>各來源的資料類別使用開關：<a href="data-usage.html">Data Usage</a>（R03-13）。各運動的賽程來源：<a href="fixture-sources.html">Fixture Sources</a>（R04-02）。</li>
     <li>帳號、憑證、價格等級確認與取得途徑維運，以及逐帳號被拒絕的處理，由串接維運頁負責（R03-04、R03-09、R03-14）。</li>
@@ -23,9 +23,9 @@
 <h2 id="features">功能清單</h2>
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
-  <tr><td>1</td><td>分開顯示人工啟用設定與實際資料取得情況，異常列原因與持續時間</td><td>R03-01～02、R03-05～07、R03-14</td><td><a href="#s1">畫面 1</a>、<a href="#s6">畫面 6</a></td></tr>
-  <tr><td>2</td><td>暫停整個連接器前查看影響，提醒不能停用的賽程將改視為中斷</td><td>R03-07、R03-13；R04-16</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
-  <tr><td>3</td><td>人工恢復已暫停的連接器，重新取得資料</td><td>R03-05～07、R03-10、R03-13</td><td><a href="#s3">畫面 3</a>、<a href="#s6">畫面 6</a></td></tr>
+  <tr><td>1</td><td>分開顯示人工設定 Enabled／Disabled 與實際運行 Running／Stopped／Interrupted，異常列原因與持續時間</td><td>R03-01～02、R03-05～07、R03-14</td><td><a href="#s1">畫面 1</a>、<a href="#s6">畫面 6</a></td></tr>
+  <tr><td>2</td><td>停用整個連接器前查看影響，提醒不能停用的賽程將改視為中斷</td><td>R03-07、R03-13；R04-16</td><td><a href="#s2">畫面 2</a>、<a href="#s5">畫面 5</a></td></tr>
+  <tr><td>3</td><td>人工重新啟用已停用的連接器，重新取得資料</td><td>R03-05～07、R03-10、R03-13</td><td><a href="#s3">畫面 3</a>、<a href="#s6">畫面 6</a></td></tr>
   <tr><td>4</td><td>啟用串接完成但尚未啟用的連接器</td><td>R03-12</td><td><a href="#s6">畫面 6</a>、<a href="#s7">畫面 7</a></td></tr>
   <tr><td>5</td><td>變更必填原因，查看操作者、時間與前後設定</td><td>R03-13；非功能需求：稽核軌跡</td><td><a href="#s2">畫面 2</a>、<a href="#s3">畫面 3</a>、<a href="#s4">畫面 4</a>、<a href="#s5">畫面 5</a>、<a href="#s7">畫面 7</a></td></tr>
 </table>
@@ -34,42 +34,47 @@
 <div lang="en" class="frame">
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
-    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector collection and availability.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector settings and check runtime status.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
     <nav class="provider-settings-tabs" aria-label="Provider settings">
       <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-market-types.html">Sports &amp; Market Types</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
     </nav>
-    <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 17:52 · UTC</span></div>
+    <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 17:52</span></div>
     <table class="grid provider-table">
-      <thead><tr><th>Provider <span class="n">1</span></th><th>Connector <span class="n">2</span></th><th>Collection <span class="n">3</span></th><th>Current issue <span class="n">4</span></th><th>Actions <span class="n">5</span></th></tr></thead>
+      <thead><tr><th>Provider <span class="n">1</span></th><th>Desired state <span class="n">2</span></th><th>Runtime status <span class="n">3</span></th><th>Details <span class="n">4</span></th><th>Actions <span class="n">5</span></th></tr></thead>
       <tbody>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Receiving data</span></td><td>—</td><td><a class="btn" href="#s2">Pause</a></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Receiving data</span></td><td>Odds: 1 of 2 paths available<div class="l2">Backup reduced</div></td><td><span class="btn">Pause</span></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health interrupted">Interrupted</span></td><td>Provider maintenance<div class="l2">No usable data path · Since 17:40 · 12 min</div></td><td><span class="btn">Pause</span></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Receiving data</span><div class="l2">Live Data / Result</div></td><td>Match data: no valid response<div class="l2">Since 17:48 · 4 min</div></td><td><span class="btn">Pause</span></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><span class="provider-icon" aria-hidden="true">S</span><span class="provider-name">Sofascore</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health interrupted">Interrupted</span></td><td>Account rejected by site<div class="l2">Match / Odds / Live Data · login stopped · Since 17:45 · 7 min</div></td><td><span class="btn">Pause</span></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><span class="provider-via">via insportlive</span><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><span class="provider-via">via insportlive</span></th><td><span class="provider-state on">Enabled</span><div class="l2">insportlive</div></td><td><span class="provider-health running">Receiving data</span><div class="l2">Match / Live Data / Result</div></td><td>—</td><td><a class="btn" href="#s5">Pause</a></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Running</span></td><td>—</td><td><a class="btn" href="#s2">Disable</a></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Running</span></td><td>Odds: 1 of 2 paths available<div class="l2">Backup reduced</div></td><td><span class="btn">Disable</span></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/pinnacle.png" alt=""><span class="provider-name">Pinnacle</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health interrupted">Interrupted</span></td><td>Provider maintenance<div class="l2">Trying to recover · Since 17:40 · 12 min</div></td><td><span class="btn">Disable</span></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/flashscore.png" alt=""><span class="provider-name">Flashscore</span></div></th><td><span class="provider-state on">Enabled</span></td><td><span class="provider-health running">Running</span></td><td>Match data: no valid response<div class="l2">Since 17:48 · 4 min</div></td><td><span class="btn">Disable</span></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><span class="provider-icon" aria-hidden="true">S</span><span class="provider-name">Sofascore</span></div></th><td><span class="provider-state off">Disabled</span></td><td><span class="provider-health na">Stopped</span></td><td>Account maintenance<div class="l2">Disabled by ops.user · Since 17:45 · 7 min</div></td><td><span class="btn">Enable</span></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><span class="provider-via">via insportlive</span><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><span class="provider-via">via insportlive</span></th><td><span class="provider-state on">Enabled</span><div class="l2">insportlive</div></td><td><span class="provider-health running">Running</span></td><td>—</td><td><a class="btn" href="#s5">Disable</a></td></tr>
       </tbody>
     </table>
+    <div class="provider-legend" aria-label="Runtime status">
+      <span><span class="provider-health running">Running</span> Operating normally</span>
+      <span><span class="provider-health na">Stopped</span> Normally stopped</span>
+      <span><span class="provider-health interrupted">Interrupted</span> Unexpectedly stopped and attempting to recover.</span>
+    </div>
     <div class="pager"><span>6 connectors · 7 providers</span><span>Data status by category: <a href="data-usage.html">Data Usage</a></span></div>
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>RunningBall 與 BetGenius 各算一個來源，兩者共用 insportlive 連接器，因此合為一列；轉送商不是另一個來源。暫停共用連接器時須一起列出兩個來源（R03-01～02）。</span></li>
-  <li><span class="n">2</span><span>「Enabled」只表示人工設定允許整個連接器運作，不保證每類資料正常。本畫面的連接器都已啟用，暫停與未啟用的顯示見畫面 6。系統判定中斷不會自行關閉此設定（R03-06～07）。</span></li>
-  <li><span class="n">3</span><span>「Receiving data」表示實際收到有效內容，不以心跳或連線存在代替。Flashscore 仍收到賽況與賽果，但賽程中斷；各類資料的使用設定與狀態由 Data Usage 分開顯示。沒有讀取的資料類別不因其他類別收到資料就變成正常（R03-05、R03-08）。</span></li>
-  <li><span class="n">4</span><span>異常顯示原因、開始時間與持續時間；17:40 至 17:52 為十二分鐘。Sbobet 的 Odds 只剩 2 條途徑中的 1 條，仍有可用途徑，來源不算中斷。Sofascore 的帳號被站台拒絕，停止嘗試登入，詳細帳號處理由維運頁負責（R03-06、R03-14）。</span></li>
-  <li><span class="n">5</span><span>「Pause」只暫停整個連接器，先開啟影響與原因視窗。Saba 示意一般連接器，insportlive 示意共用連接器；其餘列沿用相同操作。來源資料類別停用另在 Data Usage（R03-10、R03-13）。</span></li>
+  <li><span class="n">1</span><span>RunningBall 與 BetGenius 各算一個來源，兩者共用 insportlive 連接器，因此合為一列；轉送商不是另一個來源。停用共用連接器時須一起列出兩個來源（R03-01～02）。</span></li>
+  <li><span class="n">2</span><span>Desired state 是人工設定。Enabled 表示要運行，Disabled 表示要停止。運行中斷及恢復期間，Pinnacle 的設定保持 Enabled。Sofascore 經人工停用並正常停止後，顯示 Disabled／Stopped（R03-06～07、R03-12～13）。</span></li>
+  <li><span class="n">3</span><span>Runtime status 由系統顯示。Running 表示正常運行，Stopped 表示正常停止，Interrupted 表示異常中斷且正在嘗試恢復。Pinnacle 恢復正常運行後自動回到 Running。Flashscore 的連接器仍在運行，賽程的回應狀態另見 Data Usage（R03-05～07、R03-14）。</span></li>
+  <li><span class="n">4</span><span>異常顯示原因、開始時間與持續時間；17:40 至 17:52 為十二分鐘。Sbobet 的 Odds 只剩 2 條途徑中的 1 條，仍有可用途徑，來源不算中斷。Sofascore 的帳號遭站台拒絕後停止嘗試登入，Ops 在進行帳號維護前停用連接器（R03-06～07、R03-13～14）。</span></li>
+  <li><span class="n">5</span><span>Disable 開啟影響與原因視窗，確認後將整個連接器的設定改為 Disabled。Saba 示意一般連接器，insportlive 示意共用連接器；其餘列沿用相同操作。來源資料類別停用另在 Data Usage（R03-10、R03-13）。</span></li>
 </ol>
 
-<h2 id="s2">畫面 2：暫停前查看賽程影響</h2>
+<h2 id="s2">畫面 2：停用前查看賽程影響</h2>
 <div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:800px">
-  <div class="mh"><span>Pause connector · Saba</span><a href="#s1" aria-label="Close pause preview">×</a></div>
+  <div class="mh"><span>Disable connector · Saba</span><a href="#s1" aria-label="Close disable preview">×</a></div>
   <div class="mb">
-    <div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span><span class="provider-state on">Enabled → Paused</span></div>
-    <p>All access paths through this connector will stop. <span class="n">1</span></p>
+    <div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span><span class="provider-state on">Desired state · Enabled → Disabled</span></div>
+    <p>All access paths through this connector will stop. Runtime status becomes Stopped after a normal shutdown. <span class="n">1</span></p>
     <div class="provider-warning"><b>Soccer and Tennis fixtures will be interrupted.</b><br>Saba is the fixture source for Soccer and Tennis. New matches and schedule updates from Saba will stop. <span class="n">2</span></div>
     <table class="grid">
-      <thead><tr><th>Data</th><th>Current status</th><th>After pause</th><th>Other available paths</th></tr></thead>
+      <thead><tr><th>Data</th><th>Current data status</th><th>Data status after disabling</th><th>Other available paths</th></tr></thead>
       <tbody>
         <tr><td>Match</td><td>Running</td><td>Interrupted</td><td>None</td></tr>
         <tr><td>Odds</td><td>Running</td><td>Disabled</td><td>None</td></tr>
@@ -77,111 +82,112 @@
         <tr><td>Result</td><td>Running</td><td>Disabled</td><td>None</td></tr>
       </tbody>
     </table>
-    <div class="provider-form"><label for="saba-pause-reason">Reason <span class="n">3</span></label><textarea id="saba-pause-reason" rows="2" required>Scheduled connector maintenance.</textarea></div>
+    <div class="provider-form"><label for="saba-disable-reason">Reason <span class="n">3</span></label><textarea id="saba-disable-reason" rows="2" required>Scheduled connector maintenance.</textarea></div>
   </div>
-  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Pause connector</span></div>
+  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Disable connector</span></div>
 </div></div></div>
 <ol class="notes">
-  <li><span class="n">1</span><span>這是送出前的預覽，尚未變更畫面 1 的設定。暫停影響所有經此連接器的途徑；若同來源仍有其他連接器的可用途徑，該類資料可繼續取得。本例沒有其他可用途徑（R03-02、R03-06～07）。</span></li>
-  <li><span class="n">2</span><span>Saba 是本例足球與網球的賽程來源；這類賽程不能停用，因此失去所有途徑後視為中斷，操作前須提醒。還有未結束賽事的人工指定建立者也適用此提醒。其他類別因人工暫停而無可用途徑，視為停用；已建立的比賽照常（R03-07、R03-13；R04-16）。表內是影響後的資料狀態，不改寫 Data Usage 的開關。</span></li>
+  <li><span class="n">1</span><span>這是送出前的預覽，尚未變更畫面 1 的設定。停用影響所有經此連接器的途徑；若同來源仍有其他連接器的可用途徑，該類資料可繼續取得。本例沒有其他可用途徑（R03-02、R03-06～07）。</span></li>
+  <li><span class="n">2</span><span>Saba 是本例足球與網球的賽程來源；這類賽程不能停用，因此失去所有途徑後視為中斷，操作前須提醒。還有未結束賽事的人工指定建立者也適用此提醒。其他類別因連接器停用而無可用途徑，視為停用；已建立的比賽照常（R03-07、R03-13；R04-16）。表內是影響後的資料狀態，不改寫 Data Usage 的開關。</span></li>
   <li><span class="n">3</span><span>原因必填；確認後記錄操作者、時間、原設定、新設定與原因（R03-13；非功能需求：稽核軌跡）。</span></li>
 </ol>
 
-<h2 id="s3">畫面 3：恢復已暫停的連接器</h2>
+<h2 id="s3">畫面 3：重新啟用連接器</h2>
 <div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:720px">
-  <div class="mh"><span>Resume connector · Saba</span><a href="#s1" aria-label="Close resume preview">×</a></div>
+  <div class="mh"><span>Enable connector · Saba</span><a href="#s6" aria-label="Close enable preview">×</a></div>
   <div class="mb">
-    <div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span><span class="provider-state off">Paused → Enabled</span></div>
-    <p class="hint">2026-11-06 18:10 · UTC</p>
+    <div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span><span class="provider-state off">Desired state · Disabled → Enabled</span></div>
+    <p class="hint">2026-11-06 18:10</p>
     <table class="grid"><tbody>
-      <tr><th>Paused at <span class="n">1</span></th><td>2026-11-06 17:55 · ops.user</td></tr>
-      <tr><th>Pause reason</th><td>Scheduled connector maintenance.</td></tr>
-      <tr><th>After resume <span class="n">2</span></th><td>Collection restarts. Data status updates when valid data is received.</td></tr>
+      <tr><th>Disabled at <span class="n">1</span></th><td>2026-11-06 17:55 · ops.user</td></tr>
+      <tr><th>Reason for disabling</th><td>Scheduled connector maintenance.</td></tr>
+      <tr><th>After enabling <span class="n">2</span></th><td>Collection restarts. Runtime status becomes Running once the connector is operating normally.</td></tr>
     </tbody></table>
     <p class="hint">Data Usage settings stay unchanged.</p>
-    <div class="provider-form"><label for="saba-resume-reason">Reason <span class="n">3</span></label><textarea id="saba-resume-reason" rows="2" required>Maintenance completed; ready to collect.</textarea></div>
+    <div class="provider-form"><label for="saba-enable-reason">Reason <span class="n">3</span></label><textarea id="saba-enable-reason" rows="2" required>Maintenance completed; ready to collect.</textarea></div>
   </div>
-  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Resume connector</span></div>
+  <div class="mf"><a class="btn" href="#s6">Cancel</a><span class="btn pri">Enable connector</span></div>
 </div></div></div>
 <ol class="notes">
-  <li><span class="n">1</span><span>假設 Saba 於 17:55 暫停，18:10 準備恢復，入口見畫面 6。人工暫停必須由人工解除，系統不自行開啟（R03-07）。</span></li>
-  <li><span class="n">2</span><span>恢復連接器後重新取得資料；來源有提供時補取中斷期間的賽程、賽況與賽果，不補過時賠率。Data Usage 中另行停用的類別不因此啟用（R03-07、R03-10、R03-13）。</span></li>
-  <li><span class="n">3</span><span>恢復也必填原因，記錄前後設定、操作者與時間（R03-13；非功能需求：稽核軌跡）。</span></li>
+  <li><span class="n">1</span><span>Saba 於 17:55 設為 Disabled，18:10 準備重新啟用。從畫面 6 選擇 Enable，由人工變更設定（R03-07）。</span></li>
+  <li><span class="n">2</span><span>重新啟用連接器後取得資料，依各類有效回應更新資料狀態；來源有提供時補取中斷期間的賽程、賽況與賽果，不補過時賠率。Data Usage 中另行停用的類別不因此啟用（R03-07、R03-10、R03-13）。</span></li>
+  <li><span class="n">3</span><span>重新啟用也必填原因，記錄前後設定、操作者與時間（R03-13；非功能需求：稽核軌跡）。</span></li>
 </ol>
 
 <h2 id="s4">畫面 4：連接器變更紀錄</h2>
 <div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:900px">
-  <div class="mh"><span>Connector change history</span><a href="#s1" aria-label="Close connector history">×</a></div>
+  <div class="mh"><span>Connector setting history</span><a href="#s1" aria-label="Close connector history">×</a></div>
   <div class="mb">
     <div class="filters"><div class="f"><label>Connector <span class="n">1</span></label><span class="box caret">Saba</span></div><div class="f"><label>Date range</label><span class="box">2026-11-06 – 2026-11-06</span></div></div>
-    <table class="grid"><thead><tr><th>Changed at</th><th>From</th><th>To</th><th>Changed by</th><th>Reason <span class="n">2</span></th></tr></thead><tbody>
-      <tr><td>2026-11-06 09:10</td><td>Paused</td><td>Enabled</td><td>ops.lin</td><td>Maintenance completed.</td></tr>
-      <tr><td>2026-11-06 09:00</td><td>Enabled</td><td>Paused</td><td>ops.lin</td><td>Scheduled connector maintenance.</td></tr>
+    <table class="grid"><thead><tr><th>Changed at</th><th>Previous setting</th><th>New setting</th><th>Changed by</th><th>Reason <span class="n">2</span></th></tr></thead><tbody>
+      <tr><td>2026-11-06 09:10</td><td>Disabled</td><td>Enabled</td><td>ops.lin</td><td>Maintenance completed.</td></tr>
+      <tr><td>2026-11-06 09:00</td><td>Enabled</td><td>Disabled</td><td>ops.lin</td><td>Scheduled connector maintenance.</td></tr>
     </tbody></table>
-    <div class="pager"><span>UTC</span><span>2 changes</span></div>
+    <div class="pager"><span>2 changes</span></div>
   </div>
   <div class="mf"><a class="btn" href="#s1">Close</a></div>
 </div></div></div>
 <ol class="notes">
   <li><span class="n">1</span><span>依連接器與日期查看人工變更，新的在上；Saba 當天已有兩筆紀錄（R03-13）。</span></li>
-  <li><span class="n">2</span><span>每筆列出操作者、時間、改了什麼與原因，唯讀。只記錄人工變更，系統判定的中斷及恢復不列入（R03-08、R03-13；非功能需求：稽核軌跡）。</span></li>
+  <li><span class="n">2</span><span>唯讀紀錄列出操作者、時間、前後設定與原因。實際運行狀態由系統更新，人工紀錄追查 Enabled／Disabled 的變更（R03-08、R03-13；非功能需求：稽核軌跡）。</span></li>
 </ol>
 
-<h2 id="s5">畫面 5：共用轉送商的暫停影響</h2>
+<h2 id="s5">畫面 5：停用共用連接器</h2>
 <div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:800px">
-  <div class="mh"><span>Pause connector · insportlive</span><a href="#s1" aria-label="Close shared connector preview">×</a></div>
+  <div class="mh"><span>Disable connector · insportlive</span><a href="#s1" aria-label="Close shared connector preview">×</a></div>
   <div class="mb">
-    <div class="provider-warning"><b>2 providers use this connector.</b><br>Pausing stops collection through insportlive for both providers. <span class="n">1</span></div>
-    <table class="grid"><thead><tr><th>Provider</th><th>Data affected</th><th>Other available paths</th><th>After pause <span class="n">2</span></th></tr></thead><tbody>
+    <p class="provider-state on">Desired state · Enabled → Disabled</p>
+    <div class="provider-warning"><b>2 providers use this connector.</b><br>Disabling stops collection through insportlive for both providers. <span class="n">1</span></div>
+    <table class="grid"><thead><tr><th>Provider</th><th>Data affected</th><th>Other available paths</th><th>Data status after disabling <span class="n">2</span></th></tr></thead><tbody>
       <tr><td><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/runningball.png" alt=""><span class="provider-name">RunningBall</span></div><span class="provider-via">via insportlive</span></td><td>Match / Live Data / Result</td><td>None</td><td>Disabled</td></tr>
       <tr><td><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/betgenius.png" alt=""><span class="provider-name">BetGenius</span></div><span class="provider-via">via insportlive</span></td><td>Match / Live Data / Result</td><td>None</td><td>Disabled</td></tr>
     </tbody></table>
     <p class="hint">Odds are already disabled for both providers.</p>
-    <div class="provider-form"><label for="carrier-pause-reason">Reason <span class="n">3</span></label><textarea id="carrier-pause-reason" rows="2" required>Scheduled carrier connection maintenance.</textarea></div>
+    <div class="provider-form"><label for="carrier-disable-reason">Reason <span class="n">3</span></label><textarea id="carrier-disable-reason" rows="2" required>Scheduled carrier connection maintenance.</textarea></div>
   </div>
-  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Pause connector</span></div>
+  <div class="mf"><a class="btn" href="#s1">Cancel</a><span class="btn pri">Disable connector</span></div>
 </div></div></div>
 <ol class="notes">
-  <li><span class="n">1</span><span>本例暫停一個 insportlive 連接器，同時影響 RunningBall 與 BetGenius 的取得途徑。兩個來源的資料與使用設定仍各自獨立（R03-01、R03-07）。</span></li>
-  <li><span class="n">2</span><span>本例兩個來源都沒有其他可用途徑，也不是賽程來源或建立者，因此已使用的三類資料在暫停後視為停用，原本停用的賠率不受影響（R03-07、R03-13）。</span></li>
+  <li><span class="n">1</span><span>本例停用一個 insportlive 連接器，同時影響 RunningBall 與 BetGenius 的取得途徑。兩個來源的資料與使用設定仍各自獨立（R03-01、R03-07）。</span></li>
+  <li><span class="n">2</span><span>本例兩個來源都沒有其他可用途徑，也不是賽程來源或建立者，因此已使用的三類資料在連接器停用後視為停用，原本停用的賠率不受影響（R03-07、R03-13）。</span></li>
   <li><span class="n">3</span><span>原因及前後設定記在共用連接器的同一次人工變更，影響範圍保留兩個來源（R03-13；非功能需求：稽核軌跡）。</span></li>
 </ol>
-<h2 id="s6">畫面 6：已暫停與尚未啟用的連接器</h2>
+<h2 id="s6">畫面 6：停用的連接器</h2>
 <div lang="en" class="frame">
   <header class="top"><span>Home › Settings › Provider Settings</span><span>Language: English · ops.user</span></header>
   <main class="main">
-    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector collection and availability.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
+    <div class="page-head"><div><h3>Provider Settings</h3><div class="sub">Manage connector settings and check runtime status.</div></div><div><a class="btn" href="#s4">Change history</a> <span class="btn">Refresh</span></div></div>
     <nav class="provider-settings-tabs" aria-label="Provider settings">
       <a href="data-usage.html">Data Usage</a><a href="connectors.html" class="on" aria-current="page">Connectors</a><a href="sports-and-market-types.html">Sports &amp; Market Types</a><a href="fixture-sources.html">Fixture Sources</a><a href="classification.html">Classification</a>
     </nav>
-    <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 18:05 · UTC</span></div>
+    <div class="bar"><b>Connectors</b><span class="l2">Updated: 2026-11-06 18:05</span></div>
     <table class="grid provider-table">
-      <thead><tr><th>Provider</th><th>Connector</th><th>Collection</th><th>Current issue</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Provider</th><th>Desired state</th><th>Runtime status</th><th>Details</th><th>Actions</th></tr></thead>
       <tbody>
-        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th><td><span class="provider-state off">Paused</span> <span class="n">1</span></td><td><span class="provider-health na">Not collecting</span></td><td>Paused by ops.user<div class="l2">Since 17:55 · 10 min</div></td><td><a class="btn" href="#s3">Resume</a></td></tr>
-        <tr><th scope="row"><div class="provider-identity"><span class="provider-icon" aria-hidden="true">A</span><span class="provider-name">Aiscore</span></div></th><td><span class="provider-state off">Not enabled</span> <span class="n">2</span></td><td><span class="provider-health na">Not collecting</span></td><td>Integration complete<div class="l2">Waiting for manual enable</div></td><td><a class="btn" href="#s7">Enable</a></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></div></th><td><span class="provider-state off">Disabled</span> <span class="n">1</span></td><td><span class="provider-health na">Stopped</span></td><td>Disabled by ops.user<div class="l2">Since 17:55 · 10 min</div></td><td><a class="btn" href="#s3">Enable</a></td></tr>
+        <tr><th scope="row"><div class="provider-identity"><span class="provider-icon" aria-hidden="true">A</span><span class="provider-name">Aiscore</span></div></th><td><span class="provider-state off">Disabled</span> <span class="n">2</span></td><td><span class="provider-health na">Stopped</span></td><td>Integration complete<div class="l2">Waiting for manual enable</div></td><td><a class="btn" href="#s7">Enable</a></td></tr>
       </tbody>
     </table>
     <div class="pager"><span>2 connectors</span><span>Data status by category: <a href="data-usage.html">Data Usage</a></span></div>
   </main>
 </div>
 <ol class="notes">
-  <li><span class="n">1</span><span>畫面 3 的入口。暫停後按鈕改為 Resume；Saba 的 Match 因是賽程來源而視為中斷，其餘類別視為停用，影響見畫面 2（R03-07、R03-13）。</span></li>
-  <li><span class="n">2</span><span>串接完成但尚未啟用的連接器，啟用前該來源各類資料為停用；Enable 開啟畫面 7（R03-12）。Aiscore 是新串接來源的範例，只出現在畫面 6、7；本畫面只節錄兩列，其他頁籤的七個來源不含它。</span></li>
+  <li><span class="n">1</span><span>Saba 的人工設定為 Disabled，連接器已正常停止，實際狀態為 Stopped。Enable 開啟畫面 3。Saba 的 Match 因為是賽程來源而視為資料中斷，其餘類別視為停用，影響見畫面 2（R03-07、R03-13）。</span></li>
+  <li><span class="n">2</span><span>Aiscore 串接完成、等待首次啟用，設定為 Disabled，運行狀態為 Stopped。各類資料啟用前為停用。Enable 開啟畫面 7（R03-12）。本畫面節錄兩列，Aiscore 為首次啟用範例。</span></li>
 </ol>
 
 <h2 id="s7">畫面 7：啟用新連接器</h2>
 <div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:720px">
   <div class="mh"><span>Enable connector · Aiscore</span><a href="#s6" aria-label="Close enable preview">×</a></div>
   <div class="mb">
-    <div class="provider-identity"><span class="provider-icon" aria-hidden="true">A</span><span class="provider-name">Aiscore</span><span class="provider-state off">Not enabled → Enabled</span></div>
+    <div class="provider-identity"><span class="provider-icon" aria-hidden="true">A</span><span class="provider-name">Aiscore</span><span class="provider-state off">Desired state · Disabled → Enabled</span></div>
     <table class="grid"><thead><tr><th>Data</th><th>Usage after enable <span class="n">1</span></th></tr></thead><tbody>
       <tr><td>Match</td><td>ON</td></tr>
       <tr><td>Odds</td><td>ON</td></tr>
       <tr><td>Live Data</td><td>ON</td></tr>
       <tr><td>Result</td><td>ON</td></tr>
     </tbody></table>
-    <p class="hint">Data status updates when valid data is received.</p>
+    <p class="hint">Runtime status becomes Running once the connector is operating normally. Data status updates when valid data is received.</p>
     <div class="provider-form"><label for="aiscore-enable-reason">Reason <span class="n">2</span></label><textarea id="aiscore-enable-reason" rows="2" required>Integration verified; ready to collect.</textarea></div>
   </div>
   <div class="mf"><a class="btn" href="#s6">Cancel</a><span class="btn pri">Enable connector</span></div>
