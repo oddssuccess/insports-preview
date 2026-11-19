@@ -11,7 +11,7 @@
 
 <h1>來源設定・運動與玩法（Provider Settings › Sports &amp; Market Types）</h1>
 <p class="meta"><b>日期</b>：2026-11-08 · <b>選單</b>：Settings › Provider Settings › Sports &amp; Market Types · <b>對應 PRD</b>：<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/03-sources-and-connectors.md">03 來源</a>、<a href="https://github.com/oddssuccess/insports/blob/main/docs/prd/04-event-data-and-mapping.md">04 對應</a> · <a href="../../index.html">畫面索引</a></p>
-<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 運動與玩法開關</a></nav>
+<nav class="jump" aria-label="本頁段落"><a href="#features">功能清單</a><span>畫面</span><a href="#s1">1 運動與玩法開關</a><a href="#s2">2 編輯來源玩法</a></nav>
 
 <table class="doc-t">
   <tr><th>服務的工作</th><td>Ops 依來源開關連接器要收集的運動與玩法。</td></tr>
@@ -28,8 +28,9 @@
 <table class="doc-t">
   <tr><th>#</th><th>功能</th><th>對應規則</th><th>畫面</th></tr>
   <tr><td>1</td><td>依來源與運動開關連接器的收集</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>2</td><td>依來源開關玩法：點玩法名稱切換</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
-  <tr><td>3</td><td>運動的賽程來源不能關閉該運動</td><td>R03-13；R04-02</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>2</td><td>檢視各來源收集與不收集的玩法數量</td><td>—</td><td><a href="#s1">畫面 1</a></td></tr>
+  <tr><td>3</td><td>依來源與運動開關玩法：依運動與名稱篩選後，點玩法名稱切換</td><td>—</td><td><a href="#s2">畫面 2</a></td></tr>
+  <tr><td>4</td><td>運動的賽程來源不能關閉該運動</td><td>R03-13；R04-02</td><td><a href="#s1">畫面 1</a></td></tr>
 </table>
 
 <h2 id="s1">畫面 1：運動與玩法開關</h2>
@@ -55,10 +56,10 @@
     <div class="pager"><span>9 sports shown</span><span>Changes are saved immediately</span></div>
     <p class="hint">Providers that cannot filter market types are not listed. <span class="n">4</span></p>
     <table class="grid" aria-label="Market types collected by each provider">
-      <thead><tr><th>Provider</th><th>Market Types</th><th>Last change <span class="n">5</span></th></tr></thead>
+      <thead><tr><th>Provider</th><th>Market Types</th><th>Last change <span class="n">5</span></th><th></th></tr></thead>
       <tbody>
-        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill on" href="#s1" aria-pressed="true">1X2</a><a class="market-pill on" href="#s1" aria-pressed="true">Moneyline</a><a class="market-pill off" href="#s1" aria-pressed="false">Odd / Even</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
-        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></td><td><a class="market-pill on" href="#s1" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s1" aria-pressed="true">Over / Under</a><a class="market-pill off" href="#s1" aria-pressed="false">Corner Handicap</a></td><td>2026-11-07 17:29 · ops.user</td></tr>
+        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/saba.png" alt=""><span class="provider-name">Saba</span></span></td><td>18 enabled · <span class="l2">4 disabled</span></td><td>2026-11-07 17:29 · ops.user</td><td><a class="btn" href="#s2">Edit</a> <span class="n">6</span></td></tr>
+        <tr><td><span class="provider-identity"><img class="provider-icon" src="../../assets/provider-icons/sbobet.png" alt=""><span class="provider-name">Sbobet</span></span></td><td>9 enabled · <span class="l2">3 disabled</span></td><td>2026-11-07 17:29 · ops.user</td><td><a class="btn" href="#s2">Edit</a></td></tr>
       </tbody>
     </table>
   </main>
@@ -67,8 +68,25 @@
   <li><span class="n">1</span><span>每列一個運動，每欄一個來源。ON 表示連接器收集該來源的該運動，OFF 表示不收集。切換後立即套用，並記錄操作者與時間（非功能需求：稽核軌跡）。</span></li>
   <li><span class="n">2</span><span>N/A 表示該來源的資料線無法依運動篩選，關閉也不會減少收集，因此沒有開關；「—」表示來源沒有該運動。</span></li>
   <li><span class="n">3</span><span>鎖住的 ON 是該運動的賽程來源，例如 Saba 是足球與網球的賽程來源。運動的賽程不能停用，要先在 <a href="fixture-sources.html">Fixture Sources</a> 更換賽程來源（R03-13、R04-02）。</span></li>
-  <li><span class="n">4</span><span>玩法表只列出可依玩法篩選的來源，以來源為單位，套用到該來源收集的所有運動。點玩法名稱切換：實線為收集，刪除線為不收集。</span></li>
+  <li><span class="n">4</span><span>玩法表只列出可依玩法篩選的來源，顯示該來源所有運動中收集（enabled）與不收集（disabled）的玩法數量。</span></li>
   <li><span class="n">5</span><span>每個來源最近一次切換運動或玩法的時間與操作者。</span></li>
+  <li><span class="n">6</span><span>開啟該來源的玩法開關視窗，見<a href="#s2">畫面 2</a>。</span></li>
+</ol>
+
+<h2 id="s2">畫面 2：編輯來源玩法</h2>
+<div lang="en" class="frame"><div class="backdrop"><div class="modal" style="width:720px">
+  <div class="mh"><span>Market types · Saba</span><a href="#s1" aria-label="Close market types">×</a></div>
+  <div class="mb">
+    <div class="filters"><div class="f"><label>Sport <span class="n">1</span></label><span class="box caret">Soccer</span></div><div class="f"><label>Search <span class="n">2</span></label><span class="box wide">Market type name</span></div></div>
+    <p class="hint">Soccer · 6 enabled · 2 disabled</p>
+    <div><a class="market-pill on" href="#s2" aria-pressed="true">Handicap</a><a class="market-pill on" href="#s2" aria-pressed="true">Over / Under</a><a class="market-pill on" href="#s2" aria-pressed="true">1H Handicap</a><a class="market-pill on" href="#s2" aria-pressed="true">1H Over / Under</a><a class="market-pill on" href="#s2" aria-pressed="true">1X2</a><a class="market-pill on" href="#s2" aria-pressed="true">Corner Over / Under</a><a class="market-pill off" href="#s2" aria-pressed="false">Odd / Even</a><a class="market-pill off" href="#s2" aria-pressed="false">Corner Handicap</a> <span class="n">3</span></div>
+  </div>
+  <div class="mf"><span class="l2">Changes are saved immediately</span><a class="btn" href="#s1">Close</a></div>
+</div></div></div>
+<ol class="notes">
+  <li><span class="n">1</span><span>玩法依運動區分，選擇運動後只列出該運動的玩法；選項為此來源提供的運動。</span></li>
+  <li><span class="n">2</span><span>依玩法名稱篩選目前運動的玩法。</span></li>
+  <li><span class="n">3</span><span>點玩法名稱切換：實線為收集，刪除線為不收集。開關只影響此來源在所選運動的玩法，例如關閉足球的讓分不影響籃球的讓分。切換後立即套用，並記錄操作者與時間；畫面 1 的數量隨之更新。</span></li>
 </ol>
 
 </div>
